@@ -7,18 +7,29 @@
 \chapter{Processamento de Dados de Calorimetria}
 \label{chap:msc}
 
-Quando o Primeiro Nível de Filtragem deteta a ocorrência de objetos
-interessantes nos calorímetros, o Segundo Nível deve começar seu processamento
-confirmando esta decisão. Para isso, poderá requisitar aos ROS's dados para
-todas as camadas do calorímetro do ATLAS ao redor da RoI destacada. Entre os
-objetos que podem interessar ao LVL1 estão RoI's que indicam a ocorrência de
-elétrons ou fótons altamente energéticos no evento. O LVL1 não consegue,
-devido a sua baixa granularidade de informação, distinguir elétrons de fótons
-e então chama estes objetos genericamente de ``eletromagnéticos'' ou e.m..
+Redes Neurais Artificiais (RNA's) vêm sendo utilizadas em muitos experimentos
+em Física de Altas Energias \cite{nnet-hera, daq11, nnet-hep, nnet-cdf}. Neste
+capítulo apresenta-se uma técnica para empregar RNA's no Segundo Nível de
+Filtragem do experimento ATLAS, especificamente para o problema da
+discriminação elétron/jato, usando dados dos calorímetros deste detetor. A
+confirmação da ocorrência de elétrons é de suma importância para o
+experimento \cite{trigger-tpr}.
+
+\section{A Cadeia de Processamento no LVL2}
+
+Quando o Primeiro Nível de Filtragem (LVL1) deteta a ocorrência de objetos
+interessantes nos calorímetros, o Segundo Nível de Filtragem deve começar seu
+processamento confirmando esta decisão. Para isso, poderá requisitar aos ROS's
+dados para todas as camadas do calorímetro do ATLAS ao redor da RoI
+destacada. Entre os objetos que podem interessar ao LVL1 estão RoI's que
+indicam a ocorrência de elétrons ou fótons altamente energéticos no evento. O
+LVL1 não consegue, devido a sua baixa granularidade de informação, distinguir
+elétrons de fótons e então chama estes objetos genericamente de
+``eletromagnéticos'' ou e.m..
 
 E\-lé\-trons e fó\-tons, por sua vez, representam canais muito comuns no
-experimento \cite{trigger-tpr}. Estes elementos, no entanto, sofrem
-freqüentemente a contaminação por jatos de partículas bastante colimados, que
+experimento~\cite{trigger-tpr}. Estes elementos, no entanto, sofrem
+freqüentemente a contaminação por jatos de partículas bastante colimadas, que
 podem interagir com os calorímetros imitando assinaturas e.m.. Estes jatos
 colimados confundem o LVL1, pois têm características de deposição e isolamento
 muito semelhantes a de elétrons e fótons, novamente levando-se em consideração
@@ -43,8 +54,11 @@ completa destas variáveis é destacada a seguir;
 filtragem cria uma hipótese sobre um objeto baseando-se nas quantidades
 calculadas. No caso de objetos e.m., as hipóteses podem ser: elétrons, fótons
 ou não-e.m., este último indicando que o objeto foi equivocadamente
-classificado como e.m. pelo LVL1.
+classificado como e.m. pelo LVL1, causando a rejeição do evento por completo.
 \end{enumerate}
+
+%% Observação: seria interessante ter um ou dois parágrafos aqui do que vai
+%% mostrado. Seixas, 28-junho-2004.
 
 \section{O espaço de entrada para os discriminadores de objetos e.m.}
 \label{sec:datainput}
@@ -80,9 +94,10 @@ e.m., hadrônica e total (somando-se o número de células nas duas seções).
 \includegraphics[scale=0.65]{msc/all-granularity}
 \end{center}
 \caption[O número médio de células por RoI's de diversos objetos e.m..]{O número
-médio de células por RoI's de diversos objetos e.m.. A parte superior do gráfico
-representa o número de células nas seções e.m. e hadrônica dos calorímetros. Na
-parte inferior é possível ver o total de células nas duas seções.}
+médio de células por RoI's de diversos objetos e.m.. A parte superior do
+gráfico representa o número de células nas seções e.m. e hadrônica dos
+calorímetros, da esquerda para a direita. Na parte inferior é possível ver o
+total de células nas duas seções.}
 \label{fig:ncell}
 \end{figure}
 
@@ -100,7 +115,7 @@ O número de células na seção e.m. varia menos que o equivalente na seção
 hadrônica. Há uma constância no número de células até aproximadamente
 $|\eta|=1,3$, quando a tampa começa, mostrando um pico que culmina em
 $|\eta|=1,475$, ou seja, no início da terceira camada na tampa. Após
-$|\eta|=1,5$ o número de células cai vertiginosamente com o aumento do módulo
+$|\eta|=1,5$, o número de células cai vertiginosamente com o aumento do módulo
 da pseudo-rapidez, até $|\eta|=2,5$, quando a tampa acaba.
 
 Existem algumas soluções para o problema de granularidade variante de RoI para
@@ -115,8 +130,8 @@ dimensionalidade nos dados de entrada podem tornar o pré-processamento
 genérico o suficiente para atender um grande número de possibilidades, sem
 perdas significativas no desempenho de classificação.
 
-Inicialmente, trabalhar-se-á somente com aquelas RoI's cujo centro possui
-valores de $|\eta_{\text{centro}}|<1,3$. Desta forma não se tem que lidar com
+Inicialmente, trabalhar-se-á somente com RoI's para os quais o centro possui
+valores de $|\eta_{\text{centro}}|<1,3$. Desta forma, não se tem que lidar com
 problemas mais complicados de granularidade e é possível focalizar os estudos
 no método em si. Mais tarde será visto que é possível reduzir estas restrições
 facilmente, considerando-se a relevância dos dados de entrada. Ademais, para

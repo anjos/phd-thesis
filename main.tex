@@ -57,11 +57,16 @@
 %%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, prefacio}
 
 %% capítulo de interesse
-\includeonly{prefacio}
+%%\includeonly{prefacio}
 
 %% Tudo
-%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, prefacio, %
-%introducao, atlas, trigger, msc, futuro, coord-atlas, published, indice}
+%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, prefacio, %
+%%introducao, atlas, trigger, msc, futuro, coord-atlas, published, index}
+
+%% Defesa de Tema 14 de julho de 2004
+\input{title}
+\includeonly{conteudo, prefacio,%
+introducao, atlas, trigger, msc, futuro, coord-atlas, published}
 
 %% Preparando o índice remissivo, que é opcional
 \usepackage{makeidx}
@@ -69,6 +74,8 @@
 
 % O início do documento para o LaTeX2e
 \begin{document}
+
+\maketitle
 
 % Começamos com a página de título
 \include{rosto}
