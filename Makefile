@@ -64,7 +64,7 @@ BIBFILES=$(shell if [ -d biblio ]; then find biblio -name "*.bib"; fi)
 #	thumbpdf $(THUMBPDFOPTS) $@
 	pdflatex $(@:%.pdf=%.tex)
 
-all: $(PSFILE) $(PDFFILE)
+all: $(PDFFILE) #$(PSFILE)
 
 $(PSFILE): $(DVIFILE)
 	dvips $(DVIPSOPTS) $(DVIFILE) -o $(PSFILE)
@@ -117,7 +117,11 @@ web-pack: web-pack-init pack
 GARBAGE = $(shell find . -name "*~")
 
 clean:
-	@echo '[latex.mak] Default clean-up'
+	@rm -vf *.dvi *.ps *.pdf 
+	@rm -vf $(GARBAGE)
+	@rm -rvf html 
+
+deepclean:
 	@rm -vf $(GARBAGE)
 	@rm -vf *.lo[gtfa] *.toc *.i{dx,nc,lg,nd} *.b{bl,lg} 
 	@rm -vf *.aux *.glo *.dvi *.ps *.pdf *.out *.brf
