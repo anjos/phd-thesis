@@ -4,13 +4,6 @@
 \typeout{ Maintained by Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-%% Atalhos
-\newcommand{\etem}{E$^{\text{e.m.}}_{T_{3\times7}}$}
-\newcommand{\ethad}{E$^{\text{HAD}}_{T_{0,2\times0,2}}$}
-\newcommand{\rshape}{R$^{\text{shape}}_{\eta}$}
-\newcommand{\rstrip}{R$^{\text{strip}}_{e.m._1}$}
-\newcommand{\ep}{$\eta\times\phi$}
-
 \chapter{Processamento de Dados de Calorimetria}
 \label{chap:msc}
 
@@ -54,6 +47,7 @@ classificado como e.m. pelo LVL1.
 \end{enumerate}
 
 \section{O espaço de entrada para os discriminadores de objetos e.m.}
+\label{sec:datainput}
 
 Objetos e.m. são analisados normalmente em uma região $0,4\times0,4$ no plano
 $\eta\times\phi$. Isto compreende uma área de $4\times4$ torres de filtragem
@@ -219,6 +213,7 @@ as RoI's.
 \end{description}
 
 \section{O Processamento clássico de objetos e.m.}
+\label{sec:classical}
 
 A colaboração ATRIG (\eng{ATLAS Trigger}) desenvolveu um algoritmo para
 realizar a separa\-ção e\-lé\-tron\-/\-jato nas condições do LHC, comumente
@@ -697,7 +692,7 @@ acompanha a do conjunto de treinamento.
 
 No processamento clássico, as cerca de 1.000 células da RoI na entrada do
 discriminador são reduzidas a quatro quantidades, facilmente processáveis por
-métodos clássicos ou neuronais como foi visto. No entanto, querendo-se
+métodos clássicos ou neurais como foi visto. No entanto, desejando-se
 processar em tempo real estas células, utilizando toda a granularidade
 disponível, há um problema: a dimensionalidade do espaço de entrada torna
 proibitivo qualquer método de discriminação direto, devido ao tempo necessário
@@ -709,7 +704,7 @@ A solução para esta dificuldade pode estar numa compactação eficiente dos
 dados de entrada. Neste trabalho, propõe-se uma versão modificada de
 compactação em anéis descrita em \cite{seixas:sp}, que será adaptada às
 condições de granularidade variante da configuração atual de calorímetros do
-ATLAS.
+ATLAS \cite{aa:nima-2003}.
 
 A compactação em anéis \cite{seixas:perf-loss, seixas:sp} aproveita-se do
 isotropismo na deposição de energia por parte dos objetos que interagem com o

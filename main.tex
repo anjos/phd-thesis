@@ -12,6 +12,8 @@
 \usepackage[french,english,portuges]{babel} % Para hifenação automática.
 \usepackage[latin1]{inputenc} % Para tradução automática de acentos.
 \usepackage{indentfirst}
+\usepackage{tocbibind} % Para a inclusão de bibliografia e índices na ToC
+\renewcommand{\tocbibname}{Referências Bibliográficas}
 
 \input{mycolor} % Para descrever cores.
 \input{ifpdf} % Para a próxima seleção.
@@ -52,14 +54,14 @@
 %% impressão.
 
 %% Parte introdutória
-%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo}
+%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, prefacio}
 
-%% Conteúdo + capítulo de interesse + indice remissivo
-\includeonly{conteudo, msc, indice}
+%% capítulo de interesse
+\includeonly{resumo, prefacio, futuro, published}
 
 %% Tudo
-%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, introducao, atlas,
-%%trigger, msc, indice, coord-atlas}
+%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, prefacio, %
+%%introducao, atlas, trigger, msc, futuro, published, coord-atlas, indice}
 
 %% Preparando o índice remissivo, que é opcional
 \usepackage{makeidx}
@@ -94,18 +96,13 @@
 % procurar seus arquivos em arquivo.tex se você fizer \input{arquivo}
 
 \pagenumbering{arabic}
+\include{prefacio}
 \include{introducao}
 \include{atlas}
 \include{trigger}
 \include{msc}
-%\include{conclusao}
-
-% Aqui começa o apêndice, se você assim quiser.
-\appendix
-\include{coord-atlas}
-
-% Índice remissivo, opcional
-\include{indice}
+\include{futuro}
+\include{published}
 
 % E a listagem bibliográfica, por final. O Babel se encarregará de colocar
 % o nome correto, no caso de você não digitar seu relatório em inglês. O
@@ -114,6 +111,13 @@
 \bibliographystyle{unsrt}
 \bibliography{references}
 % \bibliography{ref2}
+
+% Aqui começa o apêndice, se você assim quiser.
+\appendix
+\include{coord-atlas}
+
+% Índice remissivo, opcional
+\include{indice}
 
 \end{document}
 

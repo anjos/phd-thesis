@@ -1,3 +1,14 @@
+%% Define um ambiente para o resumo, mais compacto e que dá mais texto
+\newenvironment{summary}[1]{%
+\begin{minipage}{\linewidth}%
+\newcommand{\saveparameter}{\baselinestretch}% guarda o valor default
+\renewcommand{\baselinestretch}{#1}%
+\normalsize}%
+{%
+\renewcommand{\baselinestretch}{\saveparameter}% restaura o valor default
+\end{minipage}%
+}
+
 \noindent
 Resumo da Tese apresentada à COPPE/UFRJ como parte dos requisitos necessários
 para a obtenção do grau de Doutor em Ciências (D.Sc.)
@@ -5,7 +16,7 @@ para a obtenção do grau de Doutor em Ciências (D.Sc.)
 \vspace{1.5cm}
 
 \begin{center}
-TÍTULO DA TESE
+SISTEMA ONLINE DE FILTRAGEM EM UM AMBIENTE COM ALTA TAXA DE EVENTOS
 \vspace{1cm}
 
 André Rabello dos Anjos
@@ -23,14 +34,25 @@ Orientador: José Manoel de Seixas
 Programa: Engenharia Elétrica
 \vspace{2cm}
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah.
+\begin{summary}{1.2}
+O experimento ATLAS no CERN, Suíça, contará com um Sistema de Filtragem que
+deverá separar a Física ordinária dos eventos que possam representar
+decaimentos do raro bóson de Higgs. O Segundo Nível deste Sistema de
+Filtragem, em específico, será constituído de cerca de 1.000 computadores
+ligados em rede, processando cada um evento completo aprovado pelo Primeiro
+Nível. Cada evento terá em média 10 milissegundos para ser processado.  Neste
+nível, operará um conjunto de algoritmos descritos em \eng{software} que
+executará a seleção de eventos. Dentre esses, algoritmos de discriminação
+elétron/jato têm papel fundamental na eficiência da aquisição de dados, uma
+vez que a ocorrência de elétrons pode representar a Física de interesse. Neste
+trabalho apresentamos resultados obtidos para sistemas de discriminação mais
+eficientes, baseados em redes neurais artificiais e um sistema de compactação
+de dados que se beneficia do perfil de deposição energético de elétrons e
+jatos com calorímetros para alcançar melhor eficiência de classificação. Os
+resultados sugerem que a utilização de ferramentas de processamento de sinais
+como a Análise de Componentes Principais e Componentes Independentes, poderá
+melhorar ainda mais a qualidade da análise executada neste nível de filtragem.
+\end{summary}
 
 \clearpage
 
@@ -41,7 +63,7 @@ Abstract of Thesis presented to COPPE/UFRJ as a partial fulfillment of the
 \vspace{1.5cm}
 
 \begin{center}
-THESIS TITLE
+ONLINE TRIGGER SYSTEM FOR A HIGH EVENT RATE ENVIRONMENT 
 \vspace{1cm}
 
 André Rabello dos Anjos
@@ -59,12 +81,23 @@ Advisor: José Manoel de Seixas
 Department: Electrical Enginnering
 \vspace{2cm}
 
-Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah. Blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah. Blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah.
+\begin{summary}{1.2}
+(esta tradução já não condiz com o texto original em português...)
+The ATLAS experiment at CERN, Switzerland, will count on a Trigger System that
+separates the ordinary Physics from that which represents decays of the rare
+Higgs boson. This system was initially designed to operate in 3 levels
+cascade-conneted, with higher complexity, detection quality and operation time
+per event. The Second Level Trigger, specifically, will be made out of 1,000
+commodity computers interconnected forming a network, processing each a full
+single event approved by the First Level. Each event shall have an averaged
+processing time of 10 miliseconds.
 
+At the second level of this system, operates a set of algorithms described in
+software, that will execute the event selection. Among those, electron/jet
+discriminators play a fundamental role for the overall efficiency, since
+electrons may represent interesting Physics. This work presents results
+obtained for more efficient discriminating systems, based on artificial neural
+networks. The results suggest that the use of signal processing tools like
+Principal Component Analysis or Independent Components may improve even more
+the analysis quality executed at this trigger level.
+\end{summary}

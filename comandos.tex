@@ -4,13 +4,6 @@
 % Ele consiste de novos comandos que facilitam certas atividades quando se
 % está escrevendo em LaTeX.
 
-%% Este comando inclui uma imagem, no formato EPS. Use o pacote 'graphicx'.
-\newcommand{\epsimage}[3]{
-\begin{center}
-\includegraphics[scale=#1,bb=#2]{#3}
-\end{center}
-}
-
 %% Mudança de linguagem com o Babel. O pacote 'babel' deve ser usado.
 \newcommand{\eng}[1]{\foreignlanguage{english}{\textit{#1\/}}}
 \newcommand{\fr}[1]{\foreignlanguage{french}{\em{#1\/}}}
@@ -25,3 +18,11 @@
 \newcommand{\idx}[1]{#1\index{#1}}
 \newcommand{\idxeng}[1]{\eng{#1}\index{#1}}
 \newcommand{\idxfr}[1]{\fr{#1}\index{#1}}
+
+%% Atalhos
+\newcommand{\etem}{E$^{\text{e.m.}}_{T_{3\times7}}$}
+\newcommand{\ethad}{E$^{\text{HAD}}_{T_{0,2\times0,2}}$}
+\newcommand{\rshape}{R$^{\text{shape}}_{\eta}$}
+\newcommand{\rstrip}{R$^{\text{strip}}_{e.m._1}$}
+\newcommand{\ep}{$\eta\times\phi$}
+
