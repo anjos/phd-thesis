@@ -66,6 +66,8 @@ BIBFILES=$(shell if [ -d biblio ]; then find biblio -name "*.bib"; fi)
 
 all: $(PDFFILE) #$(PSFILE)
 
+$(PDFFILE): $(shell find . -name "*.tex")
+
 $(PSFILE): $(DVIFILE)
 	dvips $(DVIPSOPTS) $(DVIFILE) -o $(PSFILE)
 

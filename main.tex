@@ -9,7 +9,7 @@
 %% -----------------------------------------
 %% Lista de Pacotes que você deverá precisar
 %% -----------------------------------------
-\usepackage[english,portuges]{babel} % Para hifenação automática do português.
+\usepackage[french,english,portuges]{babel} % Para hifenação automática.
 \usepackage[latin1]{inputenc} % Para tradução automática de acentos.
 \usepackage{indentfirst}
 
@@ -22,7 +22,7 @@
 \fi
 \graphicspath{{figures/}} % Aonde encontrar as figuras...
 
-%%\usepackage[T1]{fontenc} % Para fontes mais nítidas
+\usepackage[T1]{fontenc} % Para fontes mais nítidas
 \usepackage[hmargin=3.0cm,vmargin=2.5cm]{geometry} % Para mais espaço no texto
 %% Aumenta espaçamento para 1.5 ao invés de 1.2 para ficarmos de acordo com a
 %% norma COPE
@@ -38,6 +38,8 @@
 %% --------------------------
 \usepackage{amssymb} % Para os símbolos matemáticos. Coloque antes de amsmath
 \usepackage{amsmath} % Para as fórmulas e ambientes.
+\usepackage{multirow} % Para ter múltiplas linhas por coluna
+\usepackage{hhline} % Para linhas mais interessantes em artigos
 %\usepackage{alltt} % Para entrada verbatim com comandos LaTeX
 
 % Algumas coisas já definidas, você deverá ter o fonte comandos.tex no
@@ -51,11 +53,11 @@
 %%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo}
 
 %% Conteúdo + capítulo de interesse + indice remissivo
-\includeonly{conteudo, introducao, atlas, indice}
+\includeonly{conteudo, atlas, coord-atlas, indice}
 
 %% Tudo
 %%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, introducao, atlas,
-%%indice}
+%%indice, coord-atlas}
 
 %% Preparando o índice remissivo, que é opcional
 \usepackage{makeidx}
@@ -95,8 +97,8 @@
 %\include{conclusao}
 
 % Aqui começa o apêndice, se você assim quiser.
-%%\theappendix
-%%\include{apendice_um}
+\appendix
+\include{coord-atlas}
 
 % Índice remissivo, opcional
 \include{indice}
@@ -111,3 +113,4 @@
 
 \end{document}
 
+\typeout{ *************** End of file main.tex *************** }
