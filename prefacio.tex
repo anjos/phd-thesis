@@ -1,0 +1,100 @@
+%% Hello emacs, this is -*- latex -*-
+\typeout{ ====================================================================}
+\typeout{ This is file prefacio.tex, created at 13-Jun-2004 }
+\typeout{ Maintained by Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch> }
+\typeout{ ====================================================================}
+
+\chapter*{Prefácio}
+\addcontentsline{toc}{chapter}{\numberline{}Pref\'acio}
+
+O CERN, na Suíça, é o local onde está sendo desenvolvido o experimento
+ATLAS. O ATLAS pretende investigar a rara física do bóson de Higgs. O
+experimento utilizará colisões próton-próton, numa taxa de 40 milhões por
+segundo para conseguir obter alguns destes bósons por dia de operação. Uma vez
+que cada evento consumirá cerca de 1,5 \eng{megabytes} de espaço em memória,
+um dos problemas do projeto e construção do experimento está na articulação de
+um sistema de filtragem de eventos que seja capaz de selecionar, \eng{online},
+eventos que representem a Física de interesse daqueles processos já bastante
+estudados.
+
+O Sistema de Filtragem do ATLAS foi inicialmente projetado para operar em três
+níveis conectados em cascata com complexidade, qualidade de deteção e tempo de
+operação por evento, crescentes. O Segundo Nível de Filtragem (LVL2), em
+específico, será constituído de cerca de 1.000 computadores ligados em rede,
+processando cada um evento completo aprovado pelo Primeiro Nível. Cada evento
+terá em média 10 milissegundos para ser processado.
+
+O LVL2 coordena um conjunto de algoritmos descritos em \eng{software} que
+executa a seleção de eventos. Dentre esses, algoritmos de discriminação
+elétron/jato têm papel fundamental na eficiência da aquisição de dados, uma
+vez que a ocorrência de elétrons pode representar a Física de interesse. Neste
+trabalho apresentamos resultados obtidos para sistemas de discriminação mais
+eficientes, baseados em redes neurais artificiais e em um esquema de
+compactação do espaço de entrada que explora o perfil de deposição energética
+de elétrons e jatos. Os resultados sugerem que a utilização de ferramentas de
+processamento de sinais como a Análise de Componentes Principais e Componentes
+Independentes poderá melhorar ainda mais a qualidade da análise executada
+neste nível de filtragem.
+
+\section*{Visita Guiada}
+
+O Capítulo~\ref{chap:introducao} traz uma visão geral da Física de Partículas
+atual. Este capítulo inicia-se sumarizando fatos histórios que culminaram na
+formulação do Modelo Padrão para a descrição das interações sub-atômicas. Em
+seguida, é feita uma revisão das técnicas de aceleração e deteção de
+partículas mais comuns em experimentos nesta área. Na
+Seção~\ref{sec:calorimetria} descrevem-se detetores conhecidos como
+\textit{Calorímetros} em maiores detalhes. Aqui, enumeram-se as diversas
+partículas de interesse para o trabalho e a forma como interagem com este tipo
+de detetor. O capítulo termina introduzindo noções gerais sobre os sistemas de
+filtragem que equipam os experimentos modernos.
+
+O Capítulo~\ref{chap:atlas} narra especificidades do experimento ATLAS, que
+investigará a Física do bóson de Higgs. O capítulo começa com um breve
+histório do CERN, adentrando por detalhes operacionais do experimento em
+questão e do colisionador LHC, que gerará as interações próton-próton
+necessárias. A Seção~\ref{sec:atlas-calo} traz um resumo das características
+operacionais dos Calorímetros do ATLAS e um conjunto de referências para
+maiores detalhes.
+
+O Sistema de Filtragem do ATLAS é introduzido no
+Capítulo~\ref{chap:trigger}. Este capítulo descreve todos os sub-sistemas que
+compõe o Sistema de Filtragem do experimento, desde o Primeiro Nível de
+Filtragem até que a gravação de um evento selecionado seja realizada em mídia
+permanente. É neste ambiente que são executados os algoritmos de filtragem
+abordados neste trabalho. O Segundo Nível de Filtragem é detalhado a partir da
+Seção~\ref{sec:lvl2arch}. Resultados obtidos durante simulações do
+comportamento desta parte do sistema são apresentados na
+Seção~\ref{sec:lvl2work}. O final deste capítulo é dedicado ao ambiente de
+processamento de dados Athena e sua interação com o Sistema de Filtragem do
+ATLAS.
+
+O Capítulo~\ref{chap:msc} apresenta os resultados obtidos para variações do
+sistema de discriminação elétron/jato, utilizando redes neurais artificiais e
+um sistema de compactação de informação baseado no perfil de deposição
+energética. A partir Seção~\ref{sec:datainput} descrevem-se as características
+dos dados disponíveis e os conjuntos utilizados durante a fase inicial deste
+trabalho. A Seção~\ref{sec:classical} detalha a técnica de discriminação
+elétron/jato empregada atualmente no ATLAS. As seções seguintes descrevem
+variações da mesma técnica, que otimizam a separação destes dois tipos de
+Física. A partir deste ponto de referência, desenvolvem-se outras técnicas de
+discriminação que utilizam redes neurais artificiais. A Seção~\ref{sec:aneis}
+descreve o Método dos Anéis, que se utiliza do perfil de interação do objeto
+de interesse com os calorímetros para desenvolver uma técnica de separação
+mais eficiente. Na Seção~\ref{sec:relevance}, apresenta-se uma técnica de poda
+dos dados das regiões de interesse do detetor, de tal forma que se maximize a
+capacidade discriminante do Sistema de Filtragem. Estes resultados podem ser
+utilizados para a otimização global deste sistema.
+
+O Capítulo~\ref{chap:future} traz uma breve conclusão dos estudos até o
+momento e apresentam-se extensões para este trabalho.
+
+O Capítulo~\ref{chap:published} traz um resumo dos documentos publicados no
+período e projetos que integram o corpo deste estudo. 
+
+Para a melhor compreensão dos termos utilizados na descrição da geometria dos
+objetos estudados neste trabalho, o Apêndice~\ref{ap:coord} introduz o sistema
+de coordenadas do ATLAS.
+
+
+\typeout{ *************** End of file prefacio.tex *************** }
