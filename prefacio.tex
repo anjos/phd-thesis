@@ -4,11 +4,61 @@
 \typeout{ Maintained by Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter*{Prefácio}
-\addcontentsline{toc}{chapter}{\numberline{}Pref\'acio}
+\chapter{Introdução}
+%%\addcontentsline{toc}{chapter}{\numberline{}Pref\'acio}
 
-O CERN, na Suíça, é o local onde está sendo desenvolvido o experimento
-ATLAS. O ATLAS pretende investigar a rara física do bóson de Higgs. O
+Experimentos em Física de Altas Energias procuram por confirmações
+experimentais dos modelos propostos nos estudos teóricos. Laboratórios deste
+domínio da Física contam com um sistema de colisão, que provoca o aparecimento
+da física de interesse, associado a complexos sistemas de deteção, que
+registram a evolução no tempo de cada evento produzido. Naturalmente
+envolvidos no processo de deteção, encontram-se sistemas eletrônicos que
+automatizam a busca, registro e análise dos resultados obtidos \cite{partadv}.
+
+Dada a natureza complexa e rara dos fenômenos estudados em muitos destes
+experimentos, a física de interesse está normalmente embebida em uma
+gigantesca massa de eventos que representam ora ruído, provocados pelo mal
+funcionamento dos sistemas de deteção e colisão, ora eventos ordinários, já
+bastante estudados no passado. Em específico, em experimentos que buscam a
+confirmação de canais físicos em patamares energéticos elevados, de algumas
+centenas de gigaelétron-volts para cima, a taxa de eventos que representa
+canais desinteressantes contra a de eventos que possam interessar pode estar
+na faixa de 10$^6$ para 1. Desta forma, os eventos de interesse aparecem
+escondidos no meio de milhões de outros eventos ordinários, ou que representam
+apenas ruído \cite{d0, cms, atlas-tp, booth, bock:detector}. Ademais, para que
+se consiga apreciar a Física de interesse, milhões de eventos são gerados por
+base de tempo para que se colete estatística suficiente para a comprovação do
+canal estudado. O volume de dados associados a cada evento vem aumentando
+\cite{trig-review}, junto com a ambição dos experimentos. Novos sistemas de
+deteção exigem alguns \eng{megabytes} para cada evento registrado, o que
+representa uma dificuldade extra na realização destes experimentos.
+
+Para resolver este problema, introduzem-se sistemas eletrônicos de filtragem
+que podem selecionar, \eng{online}, os eventos de interesse dos eventos que
+representam ruído ou física ordinária. Estes sistemas são por vezes tão
+complexos quanto os detetores do experimento e contam com soluções elegantes
+aos diversos problemas de transmissão e seleção de dados. Soluções atuais
+empregam forte paralelização e técnicas modernas de processamento de sinais
+para responder às demandas destes experimentos \cite{cms-trigger, d0-trigger,
+d0-trigger2, hlt-tdr, trig-review}.
+
+Redes Neurais Artificiais vem sendo empregadas como solução em sistemas de
+filtragem em vários experimentos \cite{nnet-hera, daq11, nnet-hep,
+nnet-cdf}. Dada a forte segmentação dos dados nos detetores, os sistemas
+neurais conseguem compactar e extrair as informações vitais para a
+discriminação dos dados, mantendo não só a alta qualidade de classificação
+como também excelentes níveis de desempenho.
+
+\section{O experimento ATLAS e o bóson de Higgs}
+
+A deteção do bóson de Higgs é um dos grandes expoentes da Física de Altas
+Energias atual. Esta partícula, se existir, possui uma massa bastante elevada
+(centenas de gigaelétron-volts) e se apresenta como um canal bastante raro e
+de difícil reprodução laboratorial. A descoberta desta partícula confirmará
+por completo o Modelo Padrão inicialmente proposto em 1954 \cite{partadv}.
+
+O CERN, na Suíça, é o local onde está sendo desenvolvido o experimento ATLAS
+\cite{atlas-tp}, que pretende investigar a rara física do bóson de Higgs. O
 experimento utilizará colisões próton-próton, numa taxa de 40 milhões por
 segundo para conseguir obter alguns destes bósons por dia de operação. Uma vez
 que cada evento consumirá cerca de 1,5 \eng{megabytes} de espaço em memória,
@@ -17,26 +67,82 @@ um sistema de filtragem de eventos que seja capaz de selecionar, \eng{online},
 eventos que representem a Física de interesse daqueles processos já bastante
 estudados.
 
-O Sistema de Filtragem do ATLAS foi inicialmente projetado para operar em três
-níveis conectados em cascata com complexidade, qualidade de deteção e tempo de
-operação por evento, crescentes. O Segundo Nível de Filtragem (LVL2), em
-específico, será constituído de cerca de 1.000 computadores ligados em rede,
-processando cada um evento completo aprovado pelo Primeiro Nível. Cada evento
-terá em média 10 milissegundos para ser processado.
+O Sistema de Filtragem do ATLAS \cite{hlt-tdr} foi inicialmente projetado para
+operar em três níveis conectados em cascata com complexidade, qualidade de
+deteção e tempo de operação por evento, crescentes. O Segundo Nível de
+Filtragem (LVL2), em específico, será constituído de cerca de 1.000
+computadores ligados em rede, processando cada um evento completo aprovado
+pelo Primeiro Nível. Cada evento terá em média 10 milissegundos para ser
+processado.
 
 O LVL2 coordena um conjunto de algoritmos descritos em \eng{software} que
 executa a seleção de eventos. Dentre esses, algoritmos de discriminação
 elétron/jato têm papel fundamental na eficiência da aquisição de dados, uma
-vez que a ocorrência de elétrons pode representar a Física de interesse. Neste
-trabalho apresentamos resultados obtidos para sistemas de discriminação mais
-eficientes, baseados em redes neurais artificiais e em um esquema de
-compactação do espaço de entrada que explora o perfil de deposição energética
-de elétrons e jatos. Os resultados sugerem que a utilização de ferramentas de
-processamento de sinais como a Análise de Componentes Principais e Componentes
-Independentes poderá melhorar ainda mais a qualidade da análise executada
-neste nível de filtragem.
+vez que a ocorrência de elétrons pode representar a Física de interesse
+\cite{trigger-tpr}.
 
-\section*{Visita Guiada}
+Neste trabalho, registram-se os resultados obtidos para sistemas de
+discriminação mais eficientes, baseados em redes neurais artificiais e em um
+esquema de compactação do espaço de entrada que explora o perfil de deposição
+energética de elétrons e jatos. Para um conjunto de testes de cerca de 600
+elétrons e um pouco mais que 2.000 jatos, este sistema apresentou uma
+eficiência de classificação de 97\% para elétrons e 95,1\% para
+jatos. Comparando-se estes resultados com o algoritmo clássico implementado
+atualmente no CERN, observa-se uma melhora de 2\% na classificação de elétrons
+contra quase 10\% na rejeição de jatos. O pré-processamento baseado na
+topologia do evento permite a compactação do espaço de entrada, originalmente
+de 58 características extraídas dos dados de interesse, para apenas 5,
+mantendo bom desempenho.
+
+Os resultados sugerem que a utilização de ferramentas de processamento de
+sinais como a Análise de Componentes Principais e Componentes Independentes
+poderá melhorar ainda mais a qualidade da análise executada neste nível de
+filtragem. Neste caso, estas ferramentas substituirão o mapeamento topológico
+indicado anteriormente para que se encontre um espaço de entrada ainda mais
+propício a discriminação elétron/jato.
+
+\section{O que foi feito}
+
+O Sistema de Filtragem do ATLAS representa o trabalho e esforço de muitos
+profissionais que se dedicaram em tempo parcial ou integral ao
+experimento. Torna-se bastante difícil, em muitos momentos, omitir informações
+sobre outras contribuições que, de alguma forma, são importantes à narrativa,
+e onde sua supressão prejudicará a compreensão do todo. Os frutos deste
+trabalho pertencem a uma cadeia de outros projetos que juntos, compõe a cadeia
+completa do sistema de aquisição.
+
+Por estas razões, optou-se pela narrativa exibindo um contínuo, onde as
+contribuições deste projeto de cooperação internacional se contextualizam de
+uma forma bastante natural e intuitiva. Para guiar o leitor, destacam-se aqui
+as contribuições diretas deste trabalho:
+
+\begin{enumerate}
+\item Desenvolvimento e aplicação da Unidade Central de Processamento no
+LVL2, a L2PU;
+\item Desenvolvimento e aplicação da biblioteca global de formatação de dados
+do ATLAS (\eng{eformat});
+\item Desenvolvimento e aplicação do \eng{Pseudo} Sistema de Leitura (PROS);
+\item Desenvolvimento e aplicação de uma biblioteca para rápido acesso e
+processamento de dados de Calorimetria;
+\item Desenvolvimento e aplicação da camada de \eng{software} que combina a
+L2PU e a suíte de processamento \eng{offline} Athena;
+\item Medidas de desempenho do LVL2 para diferentes cenários, sem a utilização
+de algoritmos de discriminação;
+\item Desenvolvimento e aplicação de um sistema de mapeamento topológico para
+RoI's de objetos e.m. no LVL2. Este sistema é utilizado como etapa de
+pré-processamento para um discriminador neural, que finalmente classifica
+elétrons e jatos;
+\item Estudos comparativos entre os métodos de compactação topológica
+apresentados e o algoritmo atualmente utilizado no CERN para os mesmos fins
+(T2Calo); 
+\item Estudos de compactação utilizando a informação da relevância para se
+distinguirem os canais mais importantes no classificador neural
+desenvolvido. Este item inclui estudos comparativos entre a relevância do
+discriminador neural baseado no mapeamento topológico e o discriminador
+baseado no mapeamento proposto no CERN;
+\end{enumerate}
+
+\section{Visita Guiada}
 
 O Capítulo~\ref{chap:introducao} traz uma visão geral da Física de Partículas
 atual. Este capítulo inicia-se sumarizando fatos histórios que culminaram na
@@ -86,15 +192,15 @@ dos dados das regiões de interesse do detetor, de tal forma que se maximize a
 capacidade discriminante do Sistema de Filtragem. Estes resultados podem ser
 utilizados para a otimização global deste sistema.
 
-O Capítulo~\ref{chap:future} traz uma breve conclusão dos estudos até o
-momento e apresentam-se extensões para este trabalho.
-
-O Capítulo~\ref{chap:published} traz um resumo dos documentos publicados no
-período e projetos que integram o corpo deste estudo. 
+O Capítulo~\ref{chap:future} traz uma breve conclusão dos estudos realizados
+até o momento presente e apresenta extensões de estudo para este trabalho.
 
 Para a melhor compreensão dos termos utilizados na descrição da geometria dos
 objetos estudados neste trabalho, o Apêndice~\ref{ap:coord} introduz o sistema
 de coordenadas do ATLAS.
+
+O Apêndice~\ref{chap:published} traz um resumo dos documentos publicados no
+período e projetos que integram o corpo deste estudo.
 
 
 \typeout{ *************** End of file prefacio.tex *************** }
