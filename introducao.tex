@@ -305,17 +305,18 @@ hadrônicos. Nêutrons somente desenvolvem cascata nos detetores hadrônicos.
 \section{Calorimetria moderna}
 \index{Calorimetria}
 
-\idx{Calorímetros} são detetores compostos utilizando a absorção total de
-partículas para medir a energia e a posição de partículas e jatos. Durante o
-processo de absorção, chuveiros são gerados por cascatas de interações, e daí
-o nome ocasionalmente utilizando "contador de chuveiros". Durante a formação
-do chuveiro, eventualmente, a maior parte da partícula será convertida em
-radiação ou "calor", que explica o nome deste tipo de detetor. É claro,
-nenhuma temperatura é medida, mas as características de interação com a
-matéria (e.g. excitação atômica, ionização) são utilizadas para gerar um
-efeito detetável, atrave de partículas carregadas. A calorimetria é também a
-única forma previsível de medir partículas neutras entre as secundárias
-produzidas em uma colisão de altas energias \cite{bock:detector}.
+Em específico, \idx{Calorímetros} são detetores compostos utilizando a
+absorção total de partículas para medir a energia e a posição de partículas e
+jatos. Durante o processo de absorção, chuveiros são gerados por cascatas de
+interações, e daí o nome ocasionalmente utilizando "contador de
+chuveiros". Durante a formação do chuveiro, eventualmente, a maior parte da
+partícula será convertida em radiação ou "calor", que explica o nome deste
+tipo de detetor. É claro, nenhuma temperatura é medida, mas as características
+de interação com a matéria (e.g. excitação atômica, ionização) são utilizadas
+para gerar um efeito detetável, atrave de partículas carregadas. A
+calorimetria é também a única forma previsível de medir partículas neutras
+entre as secundárias produzidas em uma colisão de altas energias
+\cite{bock:detector, booth}.
 
 Estes detetores são normalmente compostos de diferentes partes e têm seu
 desempenho otimizado para as diferentes partículas que indirão sobre seu
@@ -492,3 +493,62 @@ De forma contrária a chuveiros eletromagnéticos que se desenvolvem num curto
 espaço de tempo, a física de chuveiros hadrônicos é caracterizada por
 diferentes escalas de tempo. Os fenômenos mais lentos podem durar de centenas
 de nanossegundos a um microssegundo.
+
+\section{Sistemas de Filtragem}
+\index{Sistemas de Filtragem}
+
+Um Sistema de Filtragem, ou \idxeng{Trigger}, é um conjunto de dispositivos,
+normalmente uma combinação de componentes eletrônicos e computadores, provendo
+um sinal rápido quando física interessante acontece
+\cite{bock:detector}. Tipicamente, um sistema de filtragem está associado a
+experimento com detetores e o sinal discutido ativa o sistema de gravação de
+eventos a registrar parte ou a totalidade dos sinais captados em mídia
+permanente. O evento tal como visto pelo sistema de filtragem deve permitir a
+caracterização de física interessante. As condições que levam o sistema de
+filtragem a produzir o sinal de aceitação são comumente chamadas de
+\idx{assinaturas de evento}. As condições podem ser tão simples quanto
+identificar um traço gerado por uma partícula carregada passando por
+cintiladores durante um período de tempo, ou tão complexos quanto o critério
+de massa efetiva entre léptons identificados que devem satisfazer colisões de
+altas energias.
+
+Em muitos experimentos, a aquisição de dados, através do \idx{tempo morto} que
+causa, é um fator crítico determinante que limita as estatísticas e o
+potencial físico; um sistema de filtragem eficaz é então o ponto-chave para a
+transmissão de dados que têm alta probabilidade de conter física de interesse
+e rejeitar, com base nas possibilidades de deteção, todo ou a maioria dos
+eventos que representam física ordinária e trivial. Claramente, não somente a
+eletrônica e informática do sistema de filtragem são necessárias ao trabalho,
+mas também os dados carregados pelo sistema de leitura do detetor, que provêm
+as informações que serão averiguadas por este sistema.
+
+Dependendo do acelerador utilizado, sistemas de filtragem podem ser chaveados
+(e.g. por pacotes de partículas chegando ao ponto de colisão) ou
+permanentemente ativados (como para o estudo de raios cósmicos). As
+implementações podem ser síncronas ou operar em tempo real, ou ainda
+comporem-se de vários circuitos assíncronos operando paralelamente,
+respeitando uma unidade de controle central (que também tem a função de
+resincronizar o sistema como um todo). As implementações nos dias de hoje vão
+desde simples portas E/OU até \idxeng{Field-Programmable Gate Arrays} ou
+\idx{FPGA}'s. Os tempos de retardo dependem no volume dos dados a serem
+analisados (e comumente na ocupação de recursos locais). Algoritmos de
+filtragem também podem ter seu tempo de execução dependente do tempo.
+
+Em grandes experimentos, sistemas de filtragem são implementados em múltiplos
+níveis, tipicamente consistindo de um primeiro nível assíncrono que identifica
+candidatos a partir de um subconjunto dos dados colhidos pelos detetores,
+reduzindo a taxa de eventos por algum fator. Subsequentemente, os dados são
+digitalmente transmitidos para \idx{bancos de memória} (do inglês
+\idxeng{buffers}) e para um segundo nível de filtragem, normalmente assíncrono,
+onde algorítmos mais complexos baseados em um conjunto de dados mais completos
+consegue reduzir novamente a taxa de eventos. Eventualmente, depois talvez uma
+terceira ou quarta iteração, o evento é gravado em mídia permanente.
+
+As implementações de sistemas de filtragem não somente dependem no projeto do
+detetor e na forma em que seus dados são lidos, mas também na tecnologia de
+transmissão de dados que se desenvolvem tão rapidamente nos dias de hoje. As
+comparativamente complexas situações de fluxo de dados podem somente ser
+compreendidas utilizando-se programas de modelagem ou \idx{simulações de Monte
+Carlo}. A teoria de filas permite a predição do comportamento à nivel local
+nos nós de processamento do sistema.
+
