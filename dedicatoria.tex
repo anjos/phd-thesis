@@ -1,0 +1,31 @@
+%% Escreva aqui sua dedicatória e/ou agradecimentos
+
+%% Define um ambiente para as dedicatórias e agradecimentos
+\newenvironment{dedicate}[2]{%
+\begin{flushright}%
+\begin{minipage}{#1}%
+\begin{center}
+#2
+\end{center}
+\setlength{\saveparid}{\parindent}% guarda o valor default
+\setlength{\parindent}{0.6cm}}%
+{%
+\setlength{\parindent}{\saveparid}% restaura o valor default
+\end{minipage}%
+\end{flushright}}
+
+\vspace*{\fill}{
+\begin{dedicate}{0.5\textwidth}{}
+Ao grande amor de minha vida, Aninha: você é meu sol.
+\end{dedicate}}
+
+\clearpage
+% Agradecimentos
+
+\vspace*{\fill}{
+\begin{dedicate}{0.7\textwidth}{Agradecimentos:}
+Blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+blah blah blah blah blah blah blah blah blah blah blah blah blah. Blah blah
+blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+blah blah blah blah blah blah blah blah blah blah.
+\end{dedicate}}

@@ -1,0 +1,43 @@
+% André DOS ANJOS <Andre.dos.Anjos@cern.ch>
+% $Id: pdfheader.tex,v 1.1 2002/04/01 19:44:54 andre Exp $
+
+% Entries that are specific to process the document with PDFLATEX
+
+% Ligações coloridas
+%% \usepackage[pdftex,%
+%% 	    colorlinks=true,%
+%%             urlcolor=blue,% \href{...}{...}
+%%             anchorcolor=brightblue,%
+%%             filecolor=green,% \href*{...}
+%%             linkcolor=red,% \ref{...} and \pageref{...}
+%%             menucolor=darkblue,%
+%%             citecolor=darkgreen,%
+%%             pdftitle={Tese de Doutorado de André Rabello dos Anjos},%
+%%             pdfauthor={Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch>},%
+%%             pdfsubject={Tese},%
+%%             pdfkeywords={tese doutorado andre rabello anjos},%
+%%             pagebackref,%
+%%             pdfpagemode=None,%
+%%             bookmarksopen=true]{hyperref}
+
+% Ligações em preto e branco para impressão
+\usepackage[pdftex,%
+	    colorlinks=true,%
+            urlcolor=black,% \href{...}{...}
+            anchorcolor=black,%
+            filecolor=black,% \href*{...}
+            linkcolor=black,% \ref{...} and \pageref{...}
+            menucolor=black,%
+            citecolor=black,%
+            pdftitle={Tese de Doutorado de André Rabello dos Anjos},%
+            pdfauthor={Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch>},%
+            pdfsubject={Tese},%
+            pdfkeywords={tese doutorado andre rabello anjos},%
+            pagebackref,%
+            pdfpagemode=None,%
+            bookmarksopen=true]{hyperref}
+\pdfcompresslevel=9
+\usepackage[pdftex]{graphicx}
+%%\usepackage{thumbpdf}
+%%\usepackage{palatino} % try to get closer to adobe tools output
+

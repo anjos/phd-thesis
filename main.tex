@@ -1,0 +1,115 @@
+%% $Id: main.tex,v 1.6 2002/04/18 10:00:40 rabello Exp $
+
+\typeout{ Este e um modelo para um documento LaTeX2e. Alguns pacotes e}
+\typeout{ comandos sao incluidos por default. Voce deve editar este arquivo}
+\typeout{ para ajusta-lo a suas necessidades.}
+\typeout{ $Id: main.tex,v 1.6 2002/04/18 10:00:40 rabello Exp $}
+\typeout{ Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch>}
+\typeout{--}
+
+\documentclass[a4paper,12pt]{report}
+
+%% -----------------------------------------
+%% Lista de Pacotes que você deverá precisar
+%% -----------------------------------------
+\usepackage[english,portuges]{babel} % Para hifenação automática do português.
+\usepackage[latin1]{inputenc} % Para tradução automática de acentos.
+\usepackage{indentfirst}
+
+\input{mycolor} % Para descrever cores.
+\input{ifpdf} % Para a próxima seleção.
+\ifpdf % Gráficos, thumbnails e hiper-referências
+\input{pdfheader}
+\else
+\input{texheader}
+\fi
+\graphicspath{{figures/}} % Aonde encontrar as figuras...
+
+%%\usepackage[T1]{fontenc} % Para fontes mais nítidas
+\usepackage[hmargin=3.0cm,vmargin=2.5cm]{geometry} % Para mais espaço no texto
+%% Aumenta espaçamento para 1.5 ao invés de 1.2 para ficarmos de acordo com a
+%% norma COPE
+\renewcommand{\baselinestretch}{1.5}
+
+%% --------------------------
+%% Ajustando a saída HTML
+%% --------------------------
+%\usepackage{html} % Para usar os comandos pre-definidos por latex2html
+
+%% --------------------------
+%% Lista de Pacotes Opcionais (descomente o que for preciso)
+%% --------------------------
+\usepackage{amssymb} % Para os símbolos matemáticos. Coloque antes de amsmath
+\usepackage{amsmath} % Para as fórmulas e ambientes.
+%\usepackage{alltt} % Para entrada verbatim com comandos LaTeX
+
+% Algumas coisas já definidas, você deverá ter o fonte comandos.tex no
+% diretório atual para poder usar estes comandos.
+\input{comandos}
+
+%% Selecione aqui o que você deseja incluir na próxima
+%% impressão.
+
+%% Parte introdutória
+%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, glossario}
+
+%% Conteúdo + capítulos + indice remissivo
+\includeonly{conteudo, introducao, indice}
+
+%% Tudo
+%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, introducao, indice}
+
+%% Preparando o índice remissivo, que é opcional
+\usepackage{makeidx}
+\makeindex
+
+% O início do documento para o LaTeX2e
+\begin{document}
+
+% Começamos com a página de título
+\include{rosto}
+
+% A numeração aqui começa à partir de 2, em
+% romano. A ficha catalográfica é obrigatória!
+\pagenumbering{roman} \setcounter{page}{2}
+\include{ficha}
+
+% Agradecimentos e dedicatórias
+\include{dedicatoria}
+
+% Os resumos
+\include{resumo}
+
+% Aqui você poderá anexar a lista de
+% conteúdos, lista de figuras e tabelas
+% do documento. 
+\include{conteudo}
+
+% Normalmente, eu uso o arquivo principal somente para os detalhes de
+% apresentação, deixando o conteúdo em arquivos isolados. Se você quiser
+% fazer o mesmo, descomente as linhas abaixo e troque o nome dos arquivos
+% contendo as seções ou capítulos. Lembre-se, o processador LaTeX vai
+% procurar seus arquivos em arquivo.tex se você fizer \input{arquivo}
+
+\pagenumbering{arabic}
+\include{introducao}
+%\include{trabalho}
+%\include{conclusao}
+
+% Aqui começa o apêndice, se você assim quiser.
+%%\theappendix
+%%\include{apendice_um}
+
+% Índice remissivo, opcional
+\include{indice}
+
+% E a listagem bibliográfica, por final. O Babel se encarregará de colocar
+% o nome correto, no caso de você não digitar seu relatório em inglês. O
+% nome dos arquivos contendo as referências bibliográficas são ref1.bib,
+% ref2.bib,...
+\bibliographystyle{unsrt}
+\bibliography{references}
+% \bibliography{ref2}
+
+\end{document}
+

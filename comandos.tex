@@ -1,0 +1,26 @@
+% $Id: comandos.tex,v 1.3 2002/04/01 19:43:59 andre Exp $
+
+% Este fonte LaTeX deve ser incluído com um \input{} em outro fonte LaTeX.
+% Ele consiste de novos comandos que facilitam certas atividades quando se
+% está escrevendo em LaTeX.
+
+%% Este comando inclui uma imagem, no formato EPS. Use o pacote 'graphicx'.
+\newcommand{\epsimage}[3]{
+\begin{center}
+\includegraphics[scale=#1,bb=#2]{#3}
+\end{center}
+}
+
+%% Mudança de linguagem com o Babel. O pacote 'babel' deve ser usado.
+\newcommand{\eng}[1]{\foreignlanguage{english}{\textit{#1\/}}}
+%%\newcommand{\fr}[1]{\foreignlanguage{french}{\em{#1\/}}}
+
+%% Alguns atalhos
+\newcommand{\eiro}{$^{\underline{o}}$} % Desenha o 'o.' do 1o.
+\newcommand{\eira}{$^{\underline{a}}$} % Desenha o 'a.' de 1a.
+\newcommand{\expo}[2]{$#1^{#2}\/$} % exponencia o 1o. arg com o 2o.
+\newcommand{\raw}[1]{{\tt #1}} % Vai para modo truetype (raw text)
+
+%% Mais atalhos para índices remissivos e glossários
+\newcommand{\idx}[1]{#1\index{#1}}
+\newcommand{\idxeng}[1]{\eng{#1}\index{#1}}
