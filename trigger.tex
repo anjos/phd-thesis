@@ -1,0 +1,175 @@
+%% Hello emacs, this is -*- latex -*-
+\typeout{ ====================================================================}
+\typeout{ This is file trigger.tex, created at 28-Feb-2004 }
+\typeout{ Maintained by Andre dos Anjos <Andre.dos.Anjos@cern.ch> }
+\typeout{ ====================================================================}
+
+\chapter{O Sistema de Filtragem e Aquisição de dados do ATLAS}
+\label{chap:trigger}
+
+O \idx{sistema de filtragem} do experimento ATLAS tem o encargo de separar, em
+tempo real, física considerada ordinária para o experimento da rara física de
+interesse. A taxa de eventos produzida pelo LHC é da ordem 40 milhões por
+segundo, ou 40 MHz em bateladas que durarão cerca de 10 horas (este período é
+comumente referido como \eng{run}). Cada evento poderá produzir uma colisão
+favorável a física de interesse, embora a grande maioria, mais de 99,9999\%,
+represente física já bastante estudada em experimentos anteriores ainda que a
+luminosidade do sistema seja tão elevada. Ademais, cada evento detetado pelo
+ATLAS produzirá cerca de 1,5 Megabytes em dados, o que torna o problema da
+filtragem bastante difícil, já que o fluxo de dados que deve ser analisado por
+base de tempo está acima da capacidade de qualquer tecnologia de transporte
+(de dados) atual.
+
+Para o experimento ATLAS, o sistema de filtragem será construído em 3 níveis
+seqüênciais (veja a Figura~\ref{fig:trigger-sketch}). Cada nível que sucede
+refina a decisão do nível anterior através da aquisição de mais dados do
+sistema de deteção. O \idx{Primeiro Nível} de filtragem (do inglês
+\idxeng{First-Level Trigger}, L1) deverá reduzir a taxa de eventos do LHC para
+cerca de 100 kHz apenas, através de técnicas simples de filtragem codificadas
+em hardware personalizado. O \idx{Segundo Nível} de filtragem (do inglês
+\idxeng{Second-Level Trigger}, L2) reduzirá a taxa de saída do L1 para
+aproximadamente 1 kHz utlizando aplicações codificadas em software em
+computadores do tipo PC. O \idx{Terceiro Nível} de filtragem ou
+\idx{Filtro de Eventos} (do inglês \idxeng{Event Filter}, EF) estará baseado
+na mesma tecnologia escolhida para o L2, reduzindo a taxa de entrada de
+eventos para aproximadamente 100 Hz através de algoritmos de filtragem mais
+eficientes porém com menor desempenho.
+
+\begin{figure}
+\begin{center}
+\includegraphics[angle=-90,scale=0.8]{trigger-sketch}
+\end{center}
+\caption{Visão funcional simplificada do sistema de filtragem do experimento
+ATLAS.} 
+\label{fig:trigger-sketch}
+\end{figure}
+
+\section{O Primeiro Nível de Filtragem}
+
+O Primeiro Nível de Filtragem (L1) realiza uma seleção inicial de candidatos à
+física de interesse baseado em informações com segmentação reduzida de um
+subconjunto dos detetores do ATLAS, os calorímetros e o detetores de múons
+\cite{l1-tdr}. Múons com altos valores de \idx{momento transverso} ($p_T$) são
+identificados à partir das câmaras de trigger conectadas ao Spectrômetro de
+Múons (veja a Seção~\ref{sec:atlas-muon}) na região do barril e da tampa. As
+seleções baseadas em calorimetria utilizam uma segmentação reduzida das seções
+e.m. e hadrônica, no barril e na tampa. Os objetos procurados usando-se
+calorímetros no L1 são elétrons com altos valores de $p_T$ e fótons, jatos,
+taus decaindo em cascatas hadrônicas, grandes quantidades de energia faltante
+ou energia transversa total. No caso da seleção de elétrons e fótons ou
+hádrons e taus, isolamento em energia pode ser requisitado.
+
+Para gerar os sinais de filtragem necessários ao L1, o sistema de leitura de
+dados dos calorímetros é equipado com somadores rápidos que aglomeram o sinal
+de 1 ou mais células destes detetores para gerar macrocélulas de filtragem
+denominadas \idx{torres de filtragem} (do inglês \idxeng{Trigger Towers},
+TT). O sistema de múons também possuem circuitos equivalentes que determinam a
+ocorrência de traços com altos valores de $p_T$. 
+
+Os eventos selecionados pelo L1 são lidos pela eletrônica primária dos
+detetores por \eng{drivers} denominados \idxeng{ReadOut Drivers} ou
+\idx{ROD}'s. Cerca de 1.600 ROD's serão necessários para ler todos os dados do
+detetor, ou seja, aproximadamente $10^7$ canais independentes. Vários canais
+de leitura são multiplexados em cada ROD. Bancos de memória primários,
+chamados de \idxeng{derandomizers} garante um fluxo contínuo dos dados aos
+ROD's apesar da irregularidade da aceitação de eventos proporcionado pelo L1.
+
+Os dados completos de eventos selecionados são guardados em bancos de memória
+denominados \idxeng{ReadOut Buffers} (ROB's) até que o evento seja rejeitado
+pelo L2 ou, no caso de ser aceito por este nível, até que os dados sejam
+transferidos para o terceiro nível de filtragem (EF). O processo de mover os
+dados dos ROB's para of EF é chamado de \idx{construção do evento} (do inglês,
+\idxeng{Event Building}, EB). Enquanto até a fase de construção do evento os
+dados estão segmentados em ROB's, após esta etapa o evento completo estará
+guardado em um único banco de memória e acessível a um processador do EF.
+
+\paragraph{Regiões de Interesse} Além do disparo dado pelo L1 à eletrônica de
+leitura, este nível de filtragem deve enviar ao L2 um mapa dos objetos de
+interesse encontrados no detetor durante a avaliação do evento. Este mapa
+indica, na precisão do L1, as \idx{regiões de interesse} no detetor (do inglês
+\idxeng{Region of Interest}, RoI) que contribuíram para a seleção, os tipos
+de objetos encontrados e o valor mínimo (\eng{threshold}) de $p_T$ que
+satisfazem. Informações de RoI's secundárias (que não contribuíram para a
+decisão do L1, mas que excitaram notavelmente o detetor) também podem ser
+transmitidas ao L2, provendo uma maior capacidade de decisão a este nível.
+
+A Figura~\ref{fig:l1-context} mostra um diagrama do tipo ``caixa-preta''
+indicando os sinais de entrada e saída do L1. A este sistema são injetados os
+sinais provenientes da eletrônica de leitura, dos sistemas de filtragem
+diretamente acoplados aos detetores e do LHC (\eng{clock} de 40 MHz) e
+colhidos sinais que são encaminhados para o L2, para a eletrônica de aquisição
+e para o sistema de monitoração central.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.75,angle=-90]{l1-blackbox}
+\end{center}
+\caption{Diagrama simplificado dos sinais de entrada e saída do L1.}
+\label{fig:l1-context}
+\end{figure}
+
+A Figura~\ref{fig:l1-functional} mostra um diagrama funcional simplificado do
+L1. Nesta figura é possível identificar processadores específicos para os
+sinais provenientes dos detetores. Um \idx{processador central de filtragem}
+(marcado na figura como \idxeng{Central Trigger Processor}) é responsável pela
+decisão final e pela emissão do sinal para o L2 e para o sistema de
+distribuição de tempo, disparo e controle (indicado como \idxeng{Timming,
+Trigger and Control distribution}, ou TTC), que gera finalmente o sinal para a
+leitura dos dados do detetor. Dentre os componentes do TTC está o
+\idx{construtor de RoI's} (do inglês \idxeng{RoI Builder}, RoIB) que monta o
+mapa de RoI's destacada pelo L1 e comunica, através de uma conexão serial
+rápida tipo S-Link, estes dados ao L2.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.8]{l1-functional}
+\end{center}
+\caption{Diagrama em blocos indicando as principais funções do L1.}
+\label{fig:l1-functional}
+\end{figure}
+
+\section{Os Altos Níveis de Filtragem e Aquisição de Dados}
+\label{sec:hlt-daq}
+
+O \idx{sistema de aquisição de dados} do ATLAS (do inglês \idxeng{Data
+Acquisition System}, \idx{DAQ}) é composto pelos componentes que estão
+encarregados da transmissão e manipulação dos dados produzidos pelo detetor. O
+DAQ trabalha em cooperação com os diversos níveis de filtragem no experimento
+de forma a garantir a correção dos dados transmitidos e a minimização do
+tempo-morto despendido na transferência de informação do sistema. A cadeia de
+operação do DAQ é iniciada por um disparo do L1 para a leitura de dados
+executada nos ROD's. Cada ROD é ligado, através de uma conexão
+S-Link\footnote{Conexão ponto-a-ponto com taxa máxima de transferência de 160
+megabits por segundo.}, a somente um ROB. Cada ROB pode receber dados de um ou
+no máximo 3 ROD's, dependendo da configuração final do experimento.
+
+Cabe aos \idx{Altos Níveis de Filtragem} (do inglês \idxeng{High-Level
+Triggers}, \idx{HLT}), analisando de forma ótima os dados presentes nos ROB's,
+decidir, disparando mais uma vez o DAQ sobre o futuro de cada evento aceito
+pelo L1. O conjunto HLT/DAQ funcionará harmoniosamente sobre uma mesma base
+computacional e utilizando o mesmo conjunto de ferramentas para a codificação,
+análise e depuração de problemas que possam ocorrer. Por esta razão, o HLT/DAQ
+é considerado um macro-sistema do experimento. O sistema HLT/DAQ pode ser
+subdividido em 4 partes:
+
+\begin{itemize}
+\item \textbf{\idx{fluxo de dados} ou \idxeng{Dataflow}}: este sistema é
+responsável por receber os dados do detetor, servir um subconjunto destes
+dados ao HLT e transportar os dados de eventos selecionados em última
+instância para armazenagem em mídia permanente;
+
+\item \textbf{\idx{filtros de alto nível} ou \idx{HLT}}: são responsáveis pela
+seleção de eventos após o L1, envolvendo a redução da taxa de eventos e a
+classificação de todos os eventos aceitos;
+
+\item \textbf{\idxeng{online}}: é responsável por todos os aspectos de
+operação e controle durante a aquisição de dados do experimento e durante
+\eng{runs} de teste e calibração;
+
+\item \textbf{\idx{sistema de controle do detetor} ou \idxeng{Detector Control
+System}, \idx{DCS}}: responsável pela operação coerente e segura (no que tange
+radiação, controle de altas tensões, etc.) do detetor ATLAS e pelo
+interfaceamento com sistemas externos e serviços incluindo o acelerador LHC.
+\end{itemize}
+
+\typeout{ *************** End of file trigger.tex *************** }
