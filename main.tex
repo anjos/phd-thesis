@@ -21,6 +21,8 @@
 \input{texheader}
 \fi
 \graphicspath{{figures/}} % Aonde encontrar as figuras...
+\usepackage{rotating} % para rotacionar alguns flutuantes
+\usepackage{tabularx} % para tabelas mais legais
 
 \usepackage[T1]{fontenc} % Para fontes mais nítidas
 \usepackage[hmargin=3.0cm,vmargin=2.5cm]{geometry} % Para mais espaço no texto
@@ -53,11 +55,11 @@
 %%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo}
 
 %% Conteúdo + capítulo de interesse + indice remissivo
-\includeonly{conteudo, trigger, indice}
+\includeonly{conteudo, msc, indice}
 
 %% Tudo
 %%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, introducao, atlas,
-%%trigger, indice, coord-atlas}
+%%trigger, msc, indice, coord-atlas}
 
 %% Preparando o índice remissivo, que é opcional
 \usepackage{makeidx}
@@ -95,6 +97,7 @@
 \include{introducao}
 \include{atlas}
 \include{trigger}
+\include{msc}
 %\include{conclusao}
 
 % Aqui começa o apêndice, se você assim quiser.
