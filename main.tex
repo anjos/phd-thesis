@@ -51,13 +51,14 @@
 %% impressão.
 
 %% Parte introdutória
-%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, glossario}
+%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo}
 
-%% Conteúdo + capítulos + indice remissivo
-\includeonly{conteudo, introducao, indice}
+%% Conteúdo + capítulo de interesse + indice remissivo
+\includeonly{conteudo, atlas, indice}
 
 %% Tudo
-%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, introducao, indice}
+%%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, introducao, atlas,
+%%indice}
 
 %% Preparando o índice remissivo, que é opcional
 \usepackage{makeidx}
@@ -93,7 +94,7 @@
 
 \pagenumbering{arabic}
 \include{introducao}
-%\include{trabalho}
+\include{atlas}
 %\include{conclusao}
 
 % Aqui começa o apêndice, se você assim quiser.
