@@ -128,31 +128,44 @@ rápida tipo S-Link, estes dados ao L2.
 \label{fig:l1-functional}
 \end{figure}
 
-\section{Os Altos Níveis de Filtragem e Aquisição de Dados}
+\section{Os Altos Níveis de Filtragem, Aquisição de Dados e Controle}
 \label{sec:hlt-daq}
 
 O \idx{sistema de aquisição de dados} do ATLAS (do inglês \idxeng{Data
 Acquisition System}, \idx{DAQ}) é composto pelos componentes que estão
-encarregados da transmissão e manipulação dos dados produzidos pelo detetor. O
-DAQ trabalha em cooperação com os diversos níveis de filtragem no experimento
-de forma a garantir a correção dos dados transmitidos e a minimização do
-tempo-morto despendido na transferência de informação do sistema. A cadeia de
-operação do DAQ é iniciada por um disparo do L1 para a leitura de dados
-executada nos ROD's. Cada ROD é ligado, através de uma conexão
-S-Link\footnote{Conexão ponto-a-ponto com taxa máxima de transferência de 160
-megabits por segundo.}, a somente um ROB. Cada ROB pode receber dados de um ou
-no máximo 3 ROD's, dependendo da configuração final do experimento.
+encarregados da transmissão e manipulação dos dados produzidos pelo detetor
+\cite{hlt-tdr}. O DAQ trabalha em cooperação com os diversos níveis de
+filtragem e controle no experimento de forma a garantir a correção dos dados
+transmitidos e a minimização do tempo-morto despendido na transferência de
+informação do sistema. A cadeia de operação do DAQ é iniciada por um disparo
+do L1 para a leitura de dados executada nos ROD's. Cada ROD é ligado, através
+de uma conexão S-Link\footnote{Conexão ponto-a-ponto com taxa máxima de
+transferência de 160 megabits por segundo.}, a somente um ROB. Cada ROB pode
+receber dados de um ou no máximo 3 ROD's, dependendo da configuração final do
+experimento.
 
 Cabe aos \idx{Altos Níveis de Filtragem} (do inglês \idxeng{High-Level
 Triggers}, \idx{HLT}), analisando de forma ótima os dados presentes nos ROB's,
 decidir, disparando mais uma vez o DAQ sobre o futuro de cada evento aceito
-pelo L1. O conjunto HLT/DAQ funcionará harmoniosamente sobre uma mesma base
-computacional e utilizando o mesmo conjunto de ferramentas para a codificação,
-análise e depuração de problemas que possam ocorrer. Por esta razão, o HLT/DAQ
-é considerado um macro-sistema do experimento. O sistema HLT/DAQ pode ser
-subdividido em 4 partes:
+pelo L1. O conjunto HLT-DAQ-Controle deverá funcionar harmoniosamente sobre
+uma mesma base computacional e utilizando o mesmo conjunto de ferramentas para
+a codificação, análise e depuração de problemas que possam ocorrer. Por esta
+razão, esta união de produtos de \eng{hardware} e \eng{software} é considerado
+um macro-sistema do experimento. Este sistema pode ser subdividido em 4
+partes:
 
 \begin{itemize}
+\item \textbf{\idx{sistema de controle do detetor} ou \idxeng{Detector Control
+System}, \idx{DCS}}: responsável pela operação coerente e segura (no que tange
+radiação, controle de altas tensões, etc.) do detetor ATLAS e pelo
+interfaceamento com sistemas externos e serviços incluindo o acelerador
+LHC. Uma vez que este tópico não está diretamente envolvido neste trabalho, o
+abordaremos somente em caráter introdutório;
+
+\item \textbf{\idxeng{online}}: é responsável por todos os aspectos de
+operação e controle durante a aquisição de dados do experimento e durante
+\eng{runs} de teste e calibração;
+
 \item \textbf{\idx{fluxo de dados} ou \idxeng{Dataflow}}: este sistema é
 responsável por receber os dados do detetor, servir um subconjunto destes
 dados ao HLT e transportar os dados de eventos selecionados em última
@@ -160,16 +173,132 @@ instância para armazenagem em mídia permanente;
 
 \item \textbf{\idx{filtros de alto nível} ou \idx{HLT}}: são responsáveis pela
 seleção de eventos após o L1, envolvendo a redução da taxa de eventos e a
-classificação de todos os eventos aceitos;
+classificação de todos os eventos aceitos.
 
-\item \textbf{\idxeng{online}}: é responsável por todos os aspectos de
-operação e controle durante a aquisição de dados do experimento e durante
-\eng{runs} de teste e calibração;
-
-\item \textbf{\idx{sistema de controle do detetor} ou \idxeng{Detector Control
-System}, \idx{DCS}}: responsável pela operação coerente e segura (no que tange
-radiação, controle de altas tensões, etc.) do detetor ATLAS e pelo
-interfaceamento com sistemas externos e serviços incluindo o acelerador LHC.
 \end{itemize}
+
+\subsection{O Sistema de Controle do Detetor}
+\label{sec:dcs}
+
+O DCS supervisa todos os componentes de \eng{hardware} do arranjo
+experimental, incluindo todos os sistemas de deteção do ATLAS e a
+infraestrutura experimental comum a todos os outros sistemas. O DCS também se
+comunica com sistemas externos como a infraestrutura de serviços do CERN e,
+mais notavelmente, com o acelerador LHC.
+
+Aspectos de seguranção são tratados pelo DCS somente no nível de menor
+severidade. Este trabalho tange principalmente questões ligadas ao
+seqüenciamento de operações ou a requisição que condições específicas
+prevaleçam antes de permitir que outros procedimentos sejam
+executados. Ferramentas para a construção de interdependências, tanto em
+\eng{hardware} quanto em \eng{software} são providas pelo DCS. Monitoração e
+prevenção de situações que poderiam causar danos maiores ao detetor e a vida
+das pessoas são de responsabilidade de sistemas dedicados - o \idx{Sistema de
+Segurança do Detetor} (do inglês \idxeng{Detetor Safety System}, \idx{DSS}) e
+do sistema de segurança e alarme do CERN respectivamente. O DCS interagem com
+ambos os sistemas.
+
+Todas as ações iniciadas pelo operador e todos os erros, avisos e alarmes que
+implicam em falha de \eng{hardware} do detetor são gerenciadas pelo DCS. Este
+sistema provê informação \eng{online} da situação presente, com a
+granularidade necessária para uma operação centralizada do sistema. A
+interação dos \eng{experts} em detetores com suas máquinas também é feita
+através do DCS, que continuamente monitora todos os parâmetros operacionais,
+guiando o operador e sinalizando comportamento anormal no maquinário. O DCS
+também será capaz de acionar procedimentos automáticos para trazer o sistema
+de deteção para um estado seguro, se necessário for.
+
+No que tange a operação do experimento, a interação com o sistema de aquisição
+de dados é de importância primária. A boa qualidade da física gravada em mídia
+permanente depende de uma sincronização absoluta entre o DAQ e o DCS; ambos os
+sistemas são complementares. O DAQ lida com eventos caracterizados por um
+número, enquanto que o DCS guarda o estado operacional do detetor enquanto os
+dados estão sendo adquiridos, correlacionando os números dos eventos com a
+qualidade da aquisição, que finalmente é avaliada \eng{offline}.
+
+Algumas partes do detetor operarão continuamente pois qualquer interrupção
+pode ser custosa em tempo, fundos ou na performance do sistema
+global. Portanto, a supervisão do sistema de deteção é necessária
+constantemente. Por outro lado, o DAQ é somente necessário durante a aquisiçào
+de dados ou durante \eng{runs} de monitoração, calibração ou teste. Assim
+sendo, o DCS precisa ter completa independência funcional, ainda que, ao mesmo
+tempo, este quesito não deva imperativamente acarretar em limites operacionais
+com o DAQ.
+
+\subsection{O Sistema \textit{Online}}
+\label{sec:online}
+
+O sistema \idxeng{online} engloba os programas para configurar, controlar e
+monitorar o sistema de filtragem e aquisição de dados do ATLAS (do inglês
+\eng{Trigger and Data Acquisition}, TDAQ), excluindo o gerenciamento,
+processamento e transporte de dados físicos. É um conjunto de ferramentas
+personalizável que provê a ``cola'' que une entradas e saídas dos outros
+sistemas. O sistema \eng{online} não contém elementos que são específicos a
+detetores pois é também utilizado por todos os sistemas de instrumentação da
+aquisição de dados de forma transparente. Ele coopera com outros sub-sistemas
+e interfaces para a leitura do detetor, DCS, L1,
+\eng{Dataflow}, HLT, \eng{Offline} e o interfaceamento com operadores dos
+\eng{runs}.
+
+Um dos papéis importantes do sistema \eng{online} é prover serviços para guiar
+o TDAQ na sua inicialização e finalização de forma que executem de maneira
+ordenada. Este sistema é responsável pela sincronização dos estados de um
+\eng{run} para todo o sistema de filtragem, aquisição e supervisão. Estes
+procedimentos são projetados para levar o menor tempo possível a serem
+executados reduzindo tempos-mortos pois isto afeta diretamente a quantidade de
+dados que pode ser adquirida em um período do LHC. Ferramentas de verificação
+e diagnóstico ajudam a detetar problemas de maneira precoce e
+eficiente. Bancos de dados com a configuração do sistema são fornecidos
+contendo um grande número de parâmetros que descrevem a topologia do sistema,
+os componentes de \eng{hardware} e \eng{software} assim como os modos e ordem
+de execução. Durante a aquisição, componentes especilizados capturam e servem
+informação ligada a monitoração dos diversos processos do experimento como
+dados estatísticos, histogramas ou parâmetros de rejeição, assim como
+mensagens de erro e diagnóstico enviadas pelas diversas aplicações. Interfaces
+(gráficas) aos operadores os permitem configurar e controlar diversas
+funcionalidades do experimento. Estas interfaces fornecem visões simplificadas
+de vários sub-sistemas durante um \eng{run}.
+
+\subsubsection{Arquitetura do Sistema \eng{Online}}
+\label{sec:online-arch}
+
+O projeto do sistema \eng{online} é baseado numa arquitetura de componentes,
+que respeitam o modelo cliente-servidor. Os componentes podem ser dividos em 3
+grupos que incluem cada, um conjunto de pacotes. Cada um dos pacotes está
+associado a um grupo de funções para este sistema e provê um conjunto definido
+de serviços. Os serviços possuem interfaces bem definidas e são desacoplados
+entre si.
+
+\paragraph{Controle} contém pacotes para o controle do sistema de
+aquisição, filtragem e deteção. Os pacotes de controle existem para propiciar
+ao TDAQ capacidades de inicialização e finalização, distribuição de comandos,
+sincronização, manuseio de erros e verificação do sistema.
+
+O sistema de controle de dispositivos e aplicações do \eng{online} é baseado
+em uma máquina de estados finitos global mostrada na
+figura~\ref{fig:online-fsm}. Todos os dispositivos do sistema devem
+obedecê-la, enviando avisos e erros caso falhem em cumprir as ordens do
+operador.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.7]{online-fsm}
+\end{center}
+\caption{A máquina de estados finitos utilizada por todos os componentes do
+TDAQ e detetores do ATLAS.}
+\label{fig:online-fsm}
+\end{figure}
+
+\paragraph{Bancos de dados} contém pacotes para a configuração do TDAQ e
+detetores. Os pacotes de configuração existem para propiciar parâmetros de
+configuração do sistema, sua descrição e acesso e registro operacional de
+informações durante a aquisição de dados. Há também componentes que provêm
+acesso de leitura e escrita a bancos de dados que descrevem as condições do
+feixe provido pelo LHC e do detetor.
+
+\paragraph{Compartilhamento de informação} contém pacotes para o
+compartilhamento de informação no TDAQ. Os componentes destes pacotes podem
+anunciar erros, publicar estados, estatística e histogramas construídos pelos
+sub-sistemas do TDAQ e pelos detetores.
 
 \typeout{ *************** End of file trigger.tex *************** }
