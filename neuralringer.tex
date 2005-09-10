@@ -1,0 +1,179 @@
+%% Hello emacs, this is -*- latex -*-
+\typeout{ ====================================================================}
+\typeout{ This is file nnet.tex, created at 27-Aug-2005 }
+\typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
+\typeout{ ====================================================================}
+
+\chapter{Sistema neural de deteção elétron/jato baseado em Calorimetria}
+\label{chap:neural}
+
+Sistemas de calorimetria são normalmente construídos com forma e leitura
+segmentada de maneira que possam ser usados diretamente na deteção de
+partículas. Isto é possível uma vez que muitos processos interessantes são
+distingüíveis pela forma com que depositam energia à medida que interagem com
+estes detetores, tanto de forma radial quanto em penetração
+\cite{knoll,leo}. Cada segmento ou célula de um calorímetro contém a
+informação de energia depositada por uma partícula ou conjunto de partículas
+que interagiu com o detetor naquela área específica. A segmentação destes
+instrumentos dependerá da física do experimento e também, normalmente, do eixo
+de dispersão das partículas de interesse.
+
+Algoritmos de deteção são normalmente concebidos por especialistas em
+Calorimetria que entendam os diferentes perfis de interação para a física de
+interesse. O primeiro passo é definir um processo de redução de
+dimensionalidade, de acordo com a velocidade requerida na deteção. Este
+pré-processamento ou Extração de Características (do inglês, \eng{Feature
+Extraction} ou FEx) é em geral feito com perda de informação do perfil de
+deposição, mas atentivamente de forma que as principais características ainda
+sejam bem distingüíveis. Em seguida, tendo por base simulações ou dados reais
+da física de interesse, define-se um conjunto de cortes por métodos bayesianos
+tradicionais que maximizem a probabilidade de deteção das partículas
+interessantes.
+
+Neste capítulo define-se um sistema de extração de característica em anéis de
+deposição energética, associado a um sistema de discriminação neural para
+definir um classificador de partículas ótimo para o Segundo Nível de Filtragem
+do experimento ATLAS. Este classificador supera significativamente, em
+desempenho, um sistema clássico (bayesiano) de deteção, é modular, rápido e de
+simples manutenção.
+
+\section{Calorimetria em outros experimentos}
+
+Introduzir um histórico de das diversas técnicas até hoje. Hera, D0, LEP.
+
+\section{Importância da Calorimetria no Experimento ATLAS}
+
+Foi visto no Capítulo~\ref{chap:trigger} que o LVL1 define, para objetos
+encontrados seja nos Calorímetros ou nos Detetores de Múons, regiões de
+interesse onde objetos interessantes tenham sido observados. De fato, dado a
+luminosidade do feixe provido pelo LHC, múltiplas RoIs serão detetadas a cada
+evento. Quando uma ou mais das RoI's no evento ativam a aceitação do evento, o
+LVL1 marca o dado de forma especial, distingüindo a região de interesse como
+RoI primária, em contraste com aquelas que foram detetadas, mas não fizeram
+objeto da aceitação deste nível de filtragem. A Tabela~\ref{tab:l1-rates}
+apresenta as taxas (simuladas) para as diferentes assinaturas de interesse que
+serão entregues pelo Primeiro Nível de Filtragem~\cite{hlt-tdr} aos Altos
+Níveis de Filtragem, encabeçados pelo LVL2, para a luminosidade inicial de
+$2\times10^{33}cm^{-2}s^{-1}$.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Assinatura do LVL1} & 
+	\textbf{Taxa de Eventos (kHz)} \\ \hline
+e.m., 25 GeV, com isolamento & 12 \\ \hline
+2 $\times$ e.m., 15 GeV, com isolamento & 4 \\ \hline
+Múon, 20 GeV & 0.8 \\ \hline
+2 $\times$ múon, 6 GeV & 0.2 \\ \hline
+Jato, 200 GeV & 0.2 \\ \hline
+3 $\times$ jato, 90 GeV & 0.2 \\ \hline
+4 $\times$ jato, 65 GeV & 0.2 \\ \hline
+Jato, 60 GeV $+$ \textit{Missing Energy}, 60 GeV & 0.4 \\ \hline
+$\tau$, 25 GeV, com isolamento $+$ \textit{Missing Energy}, 30 GeV & 2 \\
+\hline
+Múon, 10 GeV $+$ e.m., 15 GeV, com isolamento & 0.1 \\ \hline
+Outros disparos (pre-escalonados, aleatórios, monitoração, calibração) & 5 \\
+\hline
+Total & $\sim$25 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Taxas de saídas para as assinaturas reconhecidas pelo LVL1,
+para a luminosidade inicial de $2\times10^{33}cm^{-2}s^{-1}$. Dados baseados
+em uma simulação do LVL1.}
+\label{tab:l1-rates}
+\end{table}
+
+Nota-se que, aproximadamente 16 dos 25 kHz (i.e. $\sim$65\% das assinaturas)
+entregues pelo LVL1 conterão objetos tipo e.m.. Estes objetos são assim
+classificados por representarem elétrons \textbf{ou} fótons, que interagem com
+os detetores à partir de interações eletromagnéticas ao invés das componentes
+hadrônicas presentes em outros casos. 
+
+\subsection{Análise do Sistema de Filtragem com relação à Física}
+
+A Figura~\ref{fig:trigger-physics} apresenta um diagrama esquemático que
+despreza as interfaces em \eng{hardware} propostas pela construção do Sistema
+de Filtragem e tenta enfocar melhor o problema do ponto de vista da análise
+dos canais físicos \eng{per se}.
+
+
+
+\subsection{Técnicas de discriminação}
+
+Falar da forma de discriminação padrão para elétrons e jatos no
+LVL2. Explicitar o modelo: compressão/discriminação que será utilizado mais a
+frente.
+
+\subsection{Compressão ad-hoc}
+
+Falar dos diversos tipos de compressão \emph{ad-hoc}, adotados até o dia de
+hoje. Tentar enfatizar que existem técnicas mais interessantes para fazê-lo,
+sem ser muito evidente, uma vez que este trabalho também propõe algo nestas
+linhas. Citar PCA e ICA.
+
+Talvez, falar de mapeamento topológico (material do Bruce) e das diferenças de
+granularidade, e porque o processamento de imagens não se aplica diretamente
+sobre o problema (de forma sutil).
+
+\section{Métodos Neurais de Discriminação}
+
+Deixar uma mini-introdução para o final.
+
+\subsection{Introdução a redes neurais}
+
+Fazer uma introdução a Redes Neurais Artificiais. Neste momento o leitor já
+deve ter uma visão razoável do problema e deve entender a necessidade de se
+ter um sistema capaz de discriminar multi-dimensionalmente.
+
+\subsection{Discriminador de Fischer}
+
+\subsection{PCA}
+
+\section{Mapeamento topológico e discriminação neural: o \emph{neuralringer}}
+
+Fazer uma descrição detalhada do sistema que mapeia em anéis, a informação da
+RoI. Aplicação de uma rede neural como discriminador (hipótese).
+
+\subsection{Implementação inicial}
+
+Explicação da escolha da linguagem C++. Técnicas de programação concorrente,
+fazer referência ao sistema de filtragem multi-tarefas, explicitado
+anteriormente. Mostrar trechos de código e explicar a portabilidade do
+sistema. Dar ao leitor, um visual de como é possível gerar os dados (arquivos
+RFD) e depois usá-los para fazer testes.
+
+\subsection{Análise física}
+
+Esta seção vai falar do desempenho "físico" do neuralringer. Quão melhor é que
+o T2Calo na deteção de elétrons e jatos. As divergências nos cálculos podem
+ser restaurandas usando-se combinações de aneis, tais como a energia total,
+etc.
+
+Colocar os diversos tipos de análise que temos até agora.
+
+\subsection{Análise de relevância}
+
+Nesta seção vamos fazer a análise da relevância. Uma coisa que me vem a cabeça
+seria um gráfico mostrando quais anéis são mantidos a cada iteração de
+cortes. Explicar que não tem muito sentido ficar cortando sem parar, uma vez
+que dificulta o método.
+
+\subsection{Análise comportamental}
+
+Nesta seção (vc pode mudar o título se quiser), devemos fazer uma estimativa,
+no mínimo, do que se ganharia dividindo o sistema usando-se camadas, como é o
+caso do T2Calo.
+
+\subsection{Outras implementações}
+
+\subsubsection{Athena}
+
+Como portar o algoritmo para o Athena. Dificuldades, linhas gerais.
+
+\subsubsection{Implementação com DSPs}
+
+Perguntar ao Seixas/Torres antes de incluir este material. A abordagem aqui é
+para indicar a portabilidade do sistema.
+
+\typeout{ *************** End of file nnet.tex *************** }
