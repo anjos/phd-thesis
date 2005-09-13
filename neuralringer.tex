@@ -1,6 +1,6 @@
 %% Hello emacs, this is -*- latex -*-
 \typeout{ ====================================================================}
-\typeout{ This is file nnet.tex, created at 27-Aug-2005 }
+\typeout{ This is file neuralringer.tex, created at 27-Aug-2005 }
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
@@ -12,7 +12,7 @@ segmentada de maneira que possam ser usados diretamente na deteção de
 partículas. Isto é possível uma vez que muitos processos interessantes são
 distingüíveis pela forma com que depositam energia à medida que interagem com
 estes detetores, tanto de forma radial quanto em penetração
-\cite{knoll,leo}. Cada segmento ou célula de um calorímetro contém a
+\cite{wigmans-book}. Cada segmento ou célula de um calorímetro contém a
 informação de energia depositada por uma partícula ou conjunto de partículas
 que interagiu com o detetor naquela área específica. A segmentação destes
 instrumentos dependerá da física do experimento e também, normalmente, do eixo
@@ -43,21 +43,54 @@ Introduzir um histórico de das diversas técnicas até hoje. Hera, D0, LEP.
 
 \section{Importância da Calorimetria no Experimento ATLAS}
 
+O Sistema de Filtragem \eng{online} do experimento ATLAS deverá prover uma
+seleção de eventos muito eficiente e desprovida de tendências, mantendo o
+potencial de descoberta do detetor. Deve ser extremamente flexível de forma a
+operar no ambiente desafiador do LHC, com até 23 colisões inelásticas por
+interação, 14~TeV no centro de impacto e apenas 25~ns (40~MHz) apenas entre
+colisões sucessivas. Além disso, deve prover critérios de seleção robustos e,
+onde possível, redundantes. É altamente desejável a rejeição de canais
+ruidosos, não interessantes ou falsos o mais rápido possível de forma a
+otimizar o uso dos recursos computacionais disponíveis.
+
+Para trazer uma eficiência compatível com este árduo ambiente, o Sistema de
+Filtragem fará uso de um enfoque baseado na \textbf{inclusão} para a seleção
+\eng{online}, garantindo assim um conjunto de
+\eng{triggers} ótimo para a nova Física. O critério da inclusão tem por
+objetivo selecionar um conjunto de fenômenos físicos baseados no ``mínimo
+denominador comum" entre eles, que ainda seja claramente distingüível dentro
+do ruidoso ambiente proposto pelo acelerador. Com este objetivo, o Sistema de
+Filtragem estará sendo disparado para eventos que contenham assinaturas
+baseadas em objetos simples ou duplos com alto valor de momento
+transverso. Neste contexto, ``objetos com alto valor de momento transverso"
+refere-se, entre outros, a leptons com carga e com momento transverso acima de
+$\sim$10 GeV \cite{hlt-tdr}.
+
+\subsection{Objetos de interesse e RoI's}
+
 Foi visto no Capítulo~\ref{chap:trigger} que o LVL1 define, para objetos
 encontrados seja nos Calorímetros ou nos Detetores de Múons, regiões de
-interesse onde objetos interessantes tenham sido observados. De fato, dado a
-luminosidade do feixe provido pelo LHC, múltiplas RoIs serão detetadas a cada
-evento. Quando uma ou mais das RoI's no evento ativam a aceitação do evento, o
-LVL1 marca o dado de forma especial, distingüindo a região de interesse como
-RoI primária, em contraste com aquelas que foram detetadas, mas não fizeram
-objeto da aceitação deste nível de filtragem. A Tabela~\ref{tab:l1-rates}
-apresenta as taxas (simuladas) para as diferentes assinaturas de interesse que
-serão entregues pelo Primeiro Nível de Filtragem~\cite{hlt-tdr} aos Altos
-Níveis de Filtragem, encabeçados pelo LVL2, para a luminosidade inicial de
+interesse onde objetos relevantes tenham sido observados. Para cada objeto
+interessante, a região aproximada de interação do objeto com o detetor é
+anotada e repassada aos demais níveis de filtragem, no caso da aprovação do
+evento. Este processo define as Regiões de Interesse ou RoI's (do inglês
+\eng{Regions of Interest}), que guiarão o processo de seleção nos Altos Níveis
+de Filtragem (do inglês, \eng{High-Level Triggers} ou HLT).
+
+De fato, dado as condições do feixe provido pelo LHC, múltiplos objetos
+poderão ser detetados a cada evento. Porém, quando um ou mais objetos
+detetados ativam a aceitação do evento, o LVL1 marca o dado de forma especial,
+distingüindo este objeto como primário, em contraste com aqueles que também
+foram detetados, mas não fizeram objeto da aceitação deste nível de
+filtragem. A Tabela~\ref{tab:l1-rates} apresenta as taxas (simuladas) para as
+diferentes assinaturas de interesse, ou conjuntos de objetos primários, que
+serão entregues pelo Primeiro Nível de Filtragem~\cite{hlt-tdr} ao HLT,
+encabeçados pelo LVL2, para a luminosidade inicial de
 $2\times10^{33}cm^{-2}s^{-1}$.
 
 \begin{table}
 \begin{center}
+\begin{sideways}
 \begin{tabular}{|l|r|}
 \hline
 \textbf{Assinatura do LVL1} & 
@@ -77,10 +110,11 @@ Outros disparos (pre-escalonados, aleatórios, monitoração, calibração) & 5 \\
 \hline
 Total & $\sim$25 \\ \hline
 \end{tabular}
+\end{sideways}
 \end{center}
 \caption{Taxas de saídas para as assinaturas reconhecidas pelo LVL1,
-para a luminosidade inicial de $2\times10^{33}cm^{-2}s^{-1}$. Dados baseados
-em uma simulação do LVL1.}
+para a luminosidade de pico inicial de $2\times10^{33}cm^{-2}s^{-1}$. Dados
+baseados em uma simulação do LVL1.}
 \label{tab:l1-rates}
 \end{table}
 
@@ -95,15 +129,173 @@ hadrônicas presentes em outros casos.
 A Figura~\ref{fig:trigger-physics} apresenta um diagrama esquemático que
 despreza as interfaces em \eng{hardware} propostas pela construção do Sistema
 de Filtragem e tenta enfocar melhor o problema do ponto de vista da análise
-dos canais físicos \eng{per se}.
+dos canais físicos \eng{per se}. Da esquerda para a direita, observa-se a
+seqüência de eventos que indicam a completa aceitação de um evento por parte
+do Sistema de Filtragem. O caso de estudo é um evento que será aprovado por
+conter um elétron com isolamento, e uma energia mínima de 25 GeV. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.9]{trigger-physics}
+\end{center}
+\caption{Diagrama esquemático do Sistema de Filtragem do Experimento ATLAS
+segundo suas funções de filtragem.}
+\label{fig:trigger-physics}
+\end{figure}
+
+O processamento começa à medida que o LVL1 recebe o sinal do LHC acusando o
+iminente cruzamento de pacotes (do inglês \eng{Bunch Crossing}) no ponto de
+impacto. Uma janela de aquisição de alguns nanossegundos fará com que o
+Sistema de Leitura do Detetor registre o evento. Os sistemas de
+pré-processamento do LVL1 são ativados paralelamente. No caso dos
+Calorímetros, somadores rápidos \cite{seixas:adder} agrupam as informações das
+células dos calorímetros e.m. e hadrônicos, formando 2 planos com
+granularidade reduzida \cite{l1-tdr}. Na seção e.m. este pré-processamento
+forma macro-células de filtragem ou ``torres" de filtragem (do inglês,
+\eng{Trigger Towers}, ou TT) com tamanho $0,1\times0,1$ e, na seção hadrônica,
+torres com tamanho $0,2\times0,2$ no plano $\eta\times\phi$. As diversas
+sub-camadas de cada seção do calorímetro são colapsadas em um único plano por
+seção. Estes planos com granularidade minimizada são varridos pelos diversos
+processadores do LVL1 e os objetos de interesse localizados no detetor. Para a
+deteção de um objeto tipo e.m. requer-se normalmente que perceba-se pouca (ou
+nenhuma) energia na seção hadrônica e que grande parte da energia do objeto
+esteja concentrada numa região $0,2\times0,2$ ao redor do ponto estimado de
+impacto (isolamento). A energia deste núcleo deve ser maior que o corte
+imposto pelo sistema de filtragem; no atual caso de estudo, 25 GeV ao
+menos. Os valores de corte e isolamento são configuráveis.
+
+É interessante perceber que múltiplas assinaturas podem ser detetadas em um
+único evento para além do fato de que múltiplas RoI's secundárias possam estar
+presentes. Uma lista das assinaturas encontradas e das diversas RoI's
+averigüadas pelo LVL1 são repassadas para o LVL2, no formato de uma única
+mensagem conhecida como o ``Resultado do Primeiro Nível de Filtragem", ou L1R,
+como visto na Seção~\ref{sec:lvl2arch}. No caso da assinatura sendo estudada,
+ao menos uma RoI primária, indicando um objeto tipo e.m., com ao menos 25 GeV
+estará presente no L1R.
+
+O processamento no LVL2 é seqüencial. Ao receber um L1R, o Guia de Execução do
+LVL2 (do inglês, \eng{Steering}) chamará um componente para a confirmação do
+disparo do LVL1. O componente em questão poderá transferir do Sistema de
+Leitura do Detetor, a quantidade de dados que achar necessária, ao redor da
+RoI, para processá-la. Se não for possível rejeitar a assinatura do LVL1, o
+\eng{Steering} poderá chamar mais e mais componentes até que o evento seja
+rejeitado ou definitivamente aprovado ao Terceiro Nível de Filtragem ou Filtro
+de Eventos (do inglês \eng{Event Filter} ou EF). Neste último caso, de forma
+equivalente a relação entre o LVL1 e o LVL2, o LVL2 enviará um sumário
+indicando a razão da aceitação do evento, e valores refinados de energia,
+momento e localização dos objetos explorados em seu contexto ao EF. Espera-se
+que o LVL2 atinja uma redução da taxa de eventos, dos 25~kHz inicialmente
+cedidos pelo LVL1 para não mais que alguns (1 ou 2) kHz. O tempo médio de
+processamento deve estar na ordem dos 10~ms. Note que este valor representa a
+média de processamento por evento. De fato espera-se que eventos de interesse
+utilizem mais tempo de processamento enquanto que eventos pouco ou nada
+interessantes sejam rapidamente descartados.
+
+Neste contexto entende-se que, quanto menor o tempo necessário e maior a
+qualidade da deteção dos diversos componentes do sistema de filtragem, mais
+tempo computacional será despendido com a Física de interesse e menos recursos
+com eventos que representem Física ordinária ou incorretamente detetada.
+
+No EF a análise do evento começa com 100\% dos dados do evento e os resultados
+dos nível precedentes (L1R e L2R). Neste nível de filtragem, correlações mais
+complexas podem ser feitas entre as diferentes RoI's, e uma análise mais
+depurada do evento poderá ser conduzida. Por exemplo, é possível se fazer uso
+das RoI's secundárias para atingir maior redução da taxa de eventos a ser
+registrada em mídia permanente. Se aprovado, o evento é guardado, devidamente
+``etiquetado" e re-passado às fazendas de processamento \eng{offline} para
+posterior reconstrução.
+
+\paragraph{Contaminação} O \eng{trigger} de elétrons ou fótons conterá forte
+contaminação de jatos com poucas componentes hadrônicas, difícil de deteção
+observando-se a granularidade disponível no LVL1. Somente no LVL2, o Sistema
+de Filtragem, disporá do tempo e da completa granularidade do detetor para
+executar uma seleção mais criteriosa. Estima-se em \cite{daqnote00-02}, que a
+cada 25.000 objetos do tipo e.m., aprovados pelo LVL1, apenas 1 será um
+elétron ou fóton.
+
+\section{Deteção de elétrons baseada em Calorimetria}
+
+A Figura~\ref{fig:e-shower} mostra a interação de um elétron com um detetor de
+traços (\eng{Cloud Chambers}) e absorvedores de chumbo. Nesta figura é
+possível observar a formação de um chuveiro de partículas que diverge
+aproximadamente isotropicamente do eixo de penetração do elétron. No caso de
+elétrons \cite{wigmans-book}, a dispersão é menor que no caso de jatos de
+partículas, já que há uma grande probabilidade e espalhamento múltiplo (do
+inglês \eng{Multiple Scattering}) causado pelas componentes hadrônicas do
+conjunto de partículas. A distância de penetração é diretamente propocional a
+energia do objeto em análise \cite{leo, knoll}, ainda que, para os mesmos
+valores energéticos, jatos tendam a penetrar mais profundamente nos aparatos.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.4]{e-cloud-chamber}
+\end{center}
+\caption{Interação de um elétron com um detetor de traços com absorvedores em
+chumbo.} 
+\label{fig:e-shower}
+\end{figure}
+
+CONSEGUIR FOTO DE UMA ROI COM O DÊNIS: ELECTRON, JET?
+
+A deteção de elétrons beneficia-se deste conhecimento básico para
+distingüí-los de sua contaminação natural de jatos (e píons). Numa primeira
+fase, chamada de Extração de Características, avalia-se para uma região do
+detetor, normalmente centralizada em um ponto pré-determinado, um conjunto de
+valores que representem, o melhor possível, os perfis de deposição lateral (ou
+radial) do objeto sendo estudado e sua penetração no aparato. Este processo
+compacta a informação de entrada (O(100)-O(1000)), que normalmente possui
+dimensionalidade bastante elevada, para um conjunto pequeno (O(10)) de
+varíaveis que possam ser analisadas mais facilmente.
+
+A questão da dimensionalidade da entrada está intimamente correlacionada com a
+capacidade discriminante do calorímetro. Quanto mais granular, maior precisão
+pode ser obtida na definição de pontos de impacto e deteção de partículas. O
+revés é o custo - detetores multi-segmentados são mais difíceis e caros de
+serem construídos.
+
+No caso do experimento ATLAS (veja a Seção~\ref{sec:atlas-calo} para mais
+detalhes), os calorímetros são segmentados em diversas camadas, e, camada a
+camada, granularizados em células de deposição energética. A granularidade
+varia camada a camada pois cada uma delas possui um objetivo distinto de
+emprego: as camadas iniciais tem por objetivo a discriminação de elétrons e
+fótons e estimativa de posicionamento, as mais traseiras a deteção de
+hádrons. As camadas da seção e.m. tem profundidade variante, sendo que a
+segunda (EM2, a contar do zero, ou seja o pré-irradiador), tem a maior
+profundidade de todas, ocupando mais de 80\% do volume total desta seção.
+
+No caso de elétrons com valores energéticos até algumas dezenas de
+gigaelétron-volts, espera-se que a maior parte da energia do objeto esteja
+depositada nesta camada. A granurilade é bastante regular e semelhante tanto
+ao longo do eixo $\eta$ quanto ao longo de $\phi$, como é possível observar na
+Tabela~\ref{tab:lar}. Esta tabela também mostra o fator de compressão (ou
+tamanho da torre de filtragem) $N_{\eta} \times N_{\phi}$ aplicado ao processo
+de agrupamento necessário ao préprocessamento antes da análise encaminhada
+pelo LVL1.
+
+A seção hadrônica dos calorímetro é bastante menos granular. O tamanho padrão
+da célula é $0,1\times0,1$ no espaço $\eta\times\phi$ uma vez que seja
+otimizado para detetar hádrons. Esta classe de partículas penetra mais
+profundamente na matéria e desenvolve complexas cascatas ao longo da
+penetração, normalmente pouco interessantes, mais que devam ser contidas no
+espaço do detetor. O agrupamento padrão (torre de filtragem) para LVL1 é de
+$2\times2$ células.
+
+A Figura~\ref{fig:e-jet-deposit} mostra histogramas da relação da deposição
+energética entre a segunda camada da seção e.m. e a energia total do objeto
+considerando-se uma área $0,4\times0,4$ no plano $\eta\times\phi$. Os eventos
+considerados são simulações de elétrons e jatos cobrindo um campo energético
+de algumas dezenas de GeV até 90 GeV e interagindo com os calorímetros do
+ATLAS. Observa-se que para elétrons, a percentagem da energia total é
+naturalmente maior que para jatos.
+
+PEDIR AO THIAGO UMA PLOT E X JATO DA ENERGIA DEPOSITADA NA 2A. CAMADA/ETOTAL
+
+\paragraph{Classificação -} A fase seguinte à compactação do espaço original
+de entrada é a discriminação da Física de interesse. Tipicamente
+\cite{hlt-tdr, zeus-neural} a deteção é realizada por meio de classificadores
+bayesianos, por 
 
 
-
-\subsection{Técnicas de discriminação}
-
-Falar da forma de discriminação padrão para elétrons e jatos no
-LVL2. Explicitar o modelo: compressão/discriminação que será utilizado mais a
-frente.
 
 \subsection{Compressão ad-hoc}
 
@@ -176,4 +368,4 @@ Como portar o algoritmo para o Athena. Dificuldades, linhas gerais.
 Perguntar ao Seixas/Torres antes de incluir este material. A abordagem aqui é
 para indicar a portabilidade do sistema.
 
-\typeout{ *************** End of file nnet.tex *************** }
+\typeout{ *************** End of file neuralringer.tex *************** }
