@@ -26,16 +26,16 @@ pré-processamento ou Extração de Características (do inglês, \eng{Feature
 Extraction} ou FEx) é em geral feito com perda de informação do perfil de
 deposição, mas atentivamente de forma que as principais características ainda
 sejam bem distingüíveis. Em seguida, tendo por base simulações ou dados reais
-da física de interesse, define-se um conjunto de cortes por métodos bayesianos
-tradicionais que maximizem a probabilidade de deteção das partículas
-interessantes.
+da física de interesse, define-se um conjunto de cortes por métodos com
+conhecimento da informação \eng{a priori} que maximizem a probabilidade de
+deteção das partículas interessantes.
 
 Neste capítulo define-se um sistema de extração de característica em anéis de
 deposição energética, associado a um sistema de discriminação neural para
 definir um classificador de partículas ótimo para o Segundo Nível de Filtragem
 do experimento ATLAS. Este classificador supera significativamente, em
-desempenho, um sistema clássico (bayesiano) de deteção, é modular, rápido e de
-simples manutenção.
+desempenho, um sistema clássico de deteção, é modular, rápido e de simples
+manutenção.
 
 \section{Calorimetria em outros experimentos}
 
@@ -220,7 +220,7 @@ traços (\eng{Cloud Chambers}) e absorvedores de chumbo. Nesta figura é
 possível observar a formação de um chuveiro de partículas que diverge
 aproximadamente isotropicamente do eixo de penetração do elétron. No caso de
 elétrons \cite{wigmans-book}, a dispersão é menor que no caso de jatos de
-partículas, já que há uma grande probabilidade e espalhamento múltiplo (do
+partículas, já que há uma grande probabilidade de espalhamento múltiplo (do
 inglês \eng{Multiple Scattering}) causado pelas componentes hadrônicas do
 conjunto de partículas. A distância de penetração é diretamente propocional a
 energia do objeto em análise \cite{leo, knoll}, ainda que, para os mesmos
@@ -243,9 +243,14 @@ fase, chamada de Extração de Características, avalia-se para uma região do
 detetor, normalmente centralizada em um ponto pré-determinado, um conjunto de
 valores que representem, o melhor possível, os perfis de deposição lateral (ou
 radial) do objeto sendo estudado e sua penetração no aparato. Este processo
-compacta a informação de entrada (O(100)-O(1000)), que normalmente possui
-dimensionalidade bastante elevada, para um conjunto pequeno (O(10)) de
-varíaveis que possam ser analisadas mais facilmente.
+comprime\footnote{Define-se ``compressão" a técnica pelo qual reduz-se a
+dimensionalidade de um sinal em um espaço bem definido, preservando ou
+tentando preservar a informação relevante que caracteriza este sinal de
+interesse. A transformação do espaço original para o espaço ``comprimido" é
+irreversível. A ``compressão" de sinais é muitas vezes denominada
+``compactação com perdas".} a informação de entrada, que normalmente possui
+dimensionalidade bastante elevada (O(100)-O(1000)), para um conjunto pequeno
+(O(10)) de varíaveis que possam ser analisadas mais facilmente.
 
 A questão da dimensionalidade da entrada está intimamente correlacionada com a
 capacidade discriminante do calorímetro. Quanto mais granular, maior precisão
@@ -263,7 +268,7 @@ hádrons. As camadas da seção e.m. tem profundidade variante, sendo que a
 segunda (EM2, a contar do zero, ou seja o pré-irradiador), tem a maior
 profundidade de todas, ocupando mais de 80\% do volume total desta seção.
 
-No caso de elétrons com valores energéticos até algumas dezenas de
+Para elétrons com valores energéticos até algumas dezenas de
 gigaelétron-volts, espera-se que a maior parte da energia do objeto esteja
 depositada nesta camada. A granurilade é bastante regular e semelhante tanto
 ao longo do eixo $\eta$ quanto ao longo de $\phi$, como é possível observar na
@@ -281,42 +286,139 @@ espaço do detetor. O agrupamento padrão (torre de filtragem) para LVL1 é de
 $2\times2$ células.
 
 A Figura~\ref{fig:e-jet-deposit} mostra histogramas da relação da deposição
-energética entre a segunda camada da seção e.m. e a energia total do objeto
-considerando-se uma área $0,4\times0,4$ no plano $\eta\times\phi$. Os eventos
-considerados são simulações de elétrons e jatos cobrindo um campo energético
-de algumas dezenas de GeV até 90 GeV e interagindo com os calorímetros do
-ATLAS. Observa-se que para elétrons, a percentagem da energia total é
-naturalmente maior que para jatos.
+energética na seção hadrônica e a energia total do objeto considerando-se uma
+área $0,4\times0,4$ no plano $\eta\times\phi$. Os eventos considerados são
+simulações de elétrons e jatos cobrindo um campo energético de algumas dezenas
+de GeV até 90 GeV interagindo com os calorímetros do ATLAS. Os eventos
+selecionados passaram uma simulação realística do LVL1 e portanto representam,
+todos, eventos que seriam classificados como elétrons por este nível de
+filtragem. Observa-se que para jatos há uma probabilidade maior de depósito na
+seção hadrônica que na seção e.m..
 
-PEDIR AO THIAGO UMA PLOT E X JATO DA ENERGIA DEPOSITADA NA 2A. CAMADA/ETOTAL
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.95]{em-had-percent}
+\end{center}
+\caption{A relação energética da deposição na seção hadrônica e energia total para
+elétrons (topo) e jatos (baixo).}
+\label{fig:e-jet-deposit}
+\end{figure}
 
-\paragraph{Classificação -} A fase seguinte à compactação do espaço original
+\paragraph{Classificação -} A fase seguinte à compressão do espaço original
 de entrada é a discriminação da Física de interesse. Tipicamente
-\cite{hlt-tdr, zeus-neural} a deteção é realizada por meio de classificadores
-bayesianos, por 
+\cite{hlt-tdr, zeus-neural} a deteção é realizada por meio da definição de
+patamares de separação (também ditos \emph{cortes}) com informação \emph{a
+priori} \cite{vantrees}. Este trabalho é normalmente realizado por um físico
+experiente, de acordo com a importância da física de interesse analisada. 
 
+É importante salientar que o melhor classificador baseado em cortes cortes com
+informação \emph{a priori} também pode ser atingido iterativamente através de
+utilização de Discriminadores de Fisher \cite{haykin-adaptative},
+opcionalmente com atribuição de pesos para cada classe de partículas,
+definindo importâncias diferentes aos diferentes tipos de objetos estudados.
 
+A Figura~\ref{fig:basic-discriminator} mostra um diagrama esquemático do
+processo clássico de deteção descrito. No centro lógico do processo
+encontra-se o físico experiente, que controla o grau de compressão e
+capacidade discriminante do sistema. Este sistema possui um conjunto de
+problemas inerentes a intervenção humana na otimização, dentre eles a
+dependência no operador (aqui representado pela figura do "físico
+experiente"). O procedimento de compressão e discriminação deve ser bem
+documentado para que seja possível a reprodução dos resultados em todos os
+momentos. Ademais, o ajuste fino poderá ser bastante tedioso e polarizado. 
 
-\subsection{Compressão ad-hoc}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{basic-discriminator}
+\end{center}
+\caption{Um sistema \eng{ad-hoc} de deteção com uma entrada com alta
+dimensionalidade.}
+\label{fig:basic-discriminator}
+\end{figure}
 
-Falar dos diversos tipos de compressão \emph{ad-hoc}, adotados até o dia de
-hoje. Tentar enfatizar que existem técnicas mais interessantes para fazê-lo,
-sem ser muito evidente, uma vez que este trabalho também propõe algo nestas
-linhas. Citar PCA e ICA.
+\subsection{Compressão minimizada}
 
-Talvez, falar de mapeamento topológico (material do Bruce) e das diferenças de
-granularidade, e porque o processamento de imagens não se aplica diretamente
-sobre o problema (de forma sutil).
+Em um sistema com a dimensionalidade de entrada tão elevada como se apresenta
+o problema da discriminação elétron/jato para o Detetor ATLAS, é mais
+interessante a proposição de um sistema onde a otimização seja conduzida por
+bases matemáticas mais automáticas e maximamente livres de
+polarização. Idealmente este sistema utilizaria todas as entradas para definir
+as regras de compressão e relevância de cada componente na discriminação dos
+alvos. Infelizmente, com o aumento da dimensionalidade da entrada diminui-se
+exponencialmente as chances de convergência na procura de uma função que
+defina otimamente ou de forma aproximada, uma separação das classes a serem
+discriminadas \cite{haykin}. É razoável supor que, quanto maior a
+dimensionalidade da entrada, mais dados serão necessários para atingir-se uma
+discriminação suficientemente boa. 
+
+Desta forma um sistema de compressão mínima dos dados se faz necessária. Este
+sistema de compressão deve tentar minimizar a perda de informação e maximizar
+o potencial discriminativo do sistema. Um discriminador capaz de definir um
+plano de separação em um espaço de entrada com dimensionalidade elevada também
+será necessário, uma vez que deseja-se compressão mínima dos dados de
+entrada. A Figura~\ref{fig:advanced-discriminator} mostra uma idealização de
+tal sistema discriminante. A primeira etapa é uma compressão mínima da
+entrada, que seja compatível com um sistema de deteção que aceite sinais com
+alta-dimensionalidade na entrada. Idealmente, um sub-sistema de ``otimização"
+dos parâmetros de compressão e discriminação, também automatizado, controlaria
+a compressão da entrada melhorando a relação custo computacional \eng{versus}
+qualidade de deteção.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{advanced-discriminator}
+\end{center}
+\caption{Um sistema \eng{ad-hoc} de deteção sub-ótimo com uma entrada com alta
+dimensionalidade.}
+\label{fig:advanced-discriminator}
+\end{figure}
 
 \section{Métodos Neurais de Discriminação}
 
-Deixar uma mini-introdução para o final.
+Redes neurais artificiais (RNA) vem sendo atualmente utilizadas com sucesso em
+problemas de otimização, controle e reconhecimento de padrões
+\cite{haykin}. RNA's são modelos matemáticos inspirados no
+conhecimento limitado que temos do cérebro animal. Neste contexto, entende-se
+que uma rede neural pode aprender através do contato com os elementos de
+interesse de um determinado espaço de entrada e que este conhecimento é
+armazenado através das conexões sinápticas que conectam os elementos
+processadores (neurônios) da rede. Dentre as características de uma RNA
+podemos destacar:
 
-\subsection{Introdução a redes neurais}
+\begin{description}
+\item[Robustez] Em ambientes extremamente \emph{agressivos} (sujeitos a falhas
+e a radiotividade), como é o caso da operação do LVL2, RNA's podem manter um
+excelente desempenho, mesmo quando parte dos dados (canais de aquisição) de
+entrada são perdidos;
 
-Fazer uma introdução a Redes Neurais Artificiais. Neste momento o leitor já
-deve ter uma visão razoável do problema e deve entender a necessidade de se
-ter um sistema capaz de discriminar multi-dimensionalmente.
+\item[Generalização] RNA's podem extrair a informação relevante escondida sob
+uma grande quantidade de ruído;
+
+\item[Deteção de novos fenômenos] RNA's podem detetar a ocorrência de novos
+objetos de forma bastante eficaz. Isto é \underline{extremamente} importante em
+ambientes que podem revelar resultados inesperados (nova física);
+
+\item[Simples implementação] RNA's podem ser facilmente descritas em
+linguagens de programação convencionais, atingindo desempenhos satifatórios
+para um grande conjunto de aplicações em tempo real.
+\end{description}
+
+\subsection{Definição de uma rede neural artificial}
+
+Um neurônio de uma RNA pode ser modelado por um grafo de fluxo como mostrado
+na Figura~\ref{fig:neuron}.
+
+\begin{figure}
+\begin{center}
+\includegraphics{neuron}
+\end{center}
+\caption{Um grafo de fluxo de sinal de um neurônio artificial.}
+\label{fig:neuron}
+\end{figure}
+
+Este estudo está focado na utilização de RNA's completamente conectadas, sem
+realimentação e com treinamento baseado na retropropagação de erros. RNA's
+completamente conectadas são aquelas onde os neurônios estão compartiment
 
 \subsection{Discriminador de Fischer}
 
