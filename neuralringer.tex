@@ -214,6 +214,7 @@ cada 25.000 objetos do tipo e.m., aprovados pelo LVL1, apenas 1 será um
 elétron ou fóton.
 
 \section{Deteção de elétrons baseada em Calorimetria}
+\label{sec:e-detection}
 
 A Figura~\ref{fig:e-shower} mostra a interação de um elétron com um detetor de
 traços (\eng{Cloud Chambers}) e absorvedores de chumbo. Nesta figura é
@@ -325,7 +326,10 @@ problemas inerentes a intervenção humana na otimização, dentre eles a
 dependência no operador (aqui representado pela figura do "físico
 experiente"). O procedimento de compressão e discriminação deve ser bem
 documentado para que seja possível a reprodução dos resultados em todos os
-momentos. Ademais, o ajuste fino poderá ser bastante tedioso e polarizado. 
+momentos. Ademais, o ajuste fino poderá ser bastante tedioso e dependente da
+quantidade de dados analisados, uma vez que o processo realizado será
+semi-automático - i.e., seleção dos dados de interesse seguido de análise
+manual.
 
 \begin{figure}
 \begin{center}
@@ -373,6 +377,203 @@ dimensionalidade.}
 \label{fig:advanced-discriminator}
 \end{figure}
 
+\section{Deteção de Elétrons no LVL2}
+
+O LVL1 (Seção~\ref{sec:lvl1}) executa seu procedimento de filtragem procurando
+elementos nos calorímetros e detetores de múons que obedeçam a certos
+critérios de classificação. A Tabela~\ref{tab:l1-rates} mostrada anteriormente
+indica os principais objetos interessantes neste nível de filtragem. No caso
+de objetos e.m. (elétrons e fótons), o algoritmo pode ser resumido da seguinte
+forma:
+
+\begin{enumerate}
+\item Os sinais analógicos provenientes das células do detetor são agrupados
+em macro-células chamadas Torres de Filtragem (do inglês \eng{Trigger Towers},
+TT). A taxa de agrupamento não é uniforme, mas num geral forma TT's com
+$0,1\times0,1$ no plano $\eta\times\phi$ para a seção eletromagnética do
+calorímetro e $0,2\times0,2$ na seção hadrônica.
+
+\item Os sinais somados das TT's são digitalizados e disponibilizados para a
+lógica de leitura do LVL1;
+
+\item Processadores especializados (4 no total) cobrem diferentes áreas do
+detetor e utilizam um algoritmo de agrupamento baseado em uma janela
+deslizante \cite{l1-tdr} para detetar objetos: Uma região de $4\times4$ TTs
+(16 no total) são consideradas a cada janela. Se o núcleo de $2\times2$ TTs
+contiver energia maior que a periferia e não houver energia na seção hadrônica
+de mesma dimensão (neste caso $2\times2$ TTs), então o objeto é classificado
+como e.m., uma estimativa da energia é feita tendo-se por base a informação
+das torres. Os valores de isolamento e.m., ou seja a diferença mínima de
+deposição energética entre núcleo a periferia, e hadrônico, ou seja da
+quantidade máxima de energia depositada nesta seção do detetor, são parâmetros
+de configuração do LVL1. Este algoritmo está representado na
+Figura~\ref{fig:l1-calo}.
+\end{enumerate}
+
+\begin{figure}
+\begin{center}
+\includegraphics{l1-calo}
+\end{center}
+\caption{Representação gráfica do algoritmo de deteção de objetos e.m. no LVL1.}
+\label{fig:l1-calo}
+\end{figure}
+
+Os diversos sub-módulos do LVL1 irão detetar e pré-classificar os elementos de
+interesse para jatos, múons e energia faltante. Em seguida:
+
+\begin{enumerate}
+\item Os objetos detetados e seus pontos \textbf{centrais} de impacto
+aproximados no plano $\eta\times\phi$, ou seja, as RoIs, são encaminhados ao
+Processador Central do Sistema de Filtragem do LVL1 (do inglês \eng{Central
+Trigger Processor}, CTP) e uma decisão é feita levando-se em consideração as
+assinaturas de interesse e resultados dos processamentos de outros módulos
+(jatos, energia faltante e múons). A decisão de aprovar um evento é tomada
+baseando-se em RoI's de acordo com critérios de preferência estipulados \eng{a
+priori}. As RoI's que são utilizadas para a decisão de aprovação são rotuladas
+``primárias" ao passo que as demais, ``secundárias";
+
+\item Um sumário do resultado e das RoI's encontradas, já rotuladas (primárias
+e secundárias) é repassado, através do \eng{RoI Builder} ao LVL2.
+\end{enumerate}
+
+O Segundo Nível de Filtragem do experimento ATLAS é a primeira vez onde o
+evento será analisado tendo por base a granularidade máxima do detetor. O
+objetivo deste nível de filtragem, de uma forma geral, é a confirmação das
+informações do LVL1 e eventual depuramento e extensão. Aproveitando-se de toda
+a granularidade disponibilizada pelo sistema de leitura do detetor, o LVL2
+começa analisando o evento através das RoI's classificadas como primárias pelo
+LVL1.
+
+Ao receber as informações das RoI's o \eng{Steering} ativará o passo de
+decodificação do resultado do LVL1 e, em seguida, selecionará a próxima fase
+de análise, que dependerá diretamente do tipo RoI's primárias do evento. No
+caso de RoI's do tipo e.m., um algoritmo de deteção de elétrons (e fótons)
+será ativado.
+
+\subsection{Deteção de elétrons no LVL2: O T2Calo e EGammaHypho}
+
+Como discutido anteriormente na Seção~\ref{sec:e-detection}, o processo de
+deteção veloz baseado em calorimetria pode ser sub-dividido em passos distintos:
+
+\begin{enumerate}
+\item Compressão do sinal de entrada;
+\item Deteção da física de interesse baseada no espaço comprimido.
+\end{enumerate}
+
+Para o ATLAS, a fase 1 irá comprimir o espaço de entrada definido pelas
+células da RoI em questão em 4 variáveis com alto poder discriminante, baseado
+na percepção da física de interesse e da contaminação esperada. No caso de
+elétrons, espera-se que haja forte contaminação de jatos com muitas
+componentes e.m.. Desta forma, a compressão do sinal de entrada tentará
+realçar informações como a dispersão do objeto na RoI ou a profundidade de
+interação do objeto com as diversas camadas do detetor. 
+
+O nome do algoritmo usado para a FEx de RoI's primárias tipo e.m. é
+\emph{T2Calo}, uma variação das palavras \eng{Trigger}, LVL2 e
+Calorimetria. Este algoritmo calcula os seguintes valores para cada RoI
+analisada:
+
+\begin{enumerate}
+\item[Centro de Impacto] O primeiro passo do algoritmo é um refinamento do
+centro da RoI. Isto é feito encontrando-se o pico de deposição energética na
+segunda camada da seção eletromagnética do calorímetro, que é também a mais
+profunda (veja uma discussão mais detalhada na Seção~\ref{sec:atlas-calo})
+desta seção. O valor do centro da célula é tomado como nova estimativa de
+posicionamento da RoI e será utilizado para os cálculos seguintes;
+
+\item[Energia ``$3\times7$"] O segundo passo é calcular as somas dos valores de
+deposição energética, para a segunda camada e.m., numa região de tamanho
+$\eta=0,075\times\phi=0,175$ ao redor do centro de impacto definido
+anteriormente. Esta soma é também chamada $E^{2}_{3\times7$} devido à
+granularidade de base da segunda camada e.m., para cada célula, de
+$0,025\times0,025$;
+
+\item[Energia ``$7\times7$"] Em seguida calcula-se as somas dos valores de
+deposição energética, para a segunda camada e.m., numa região de tamanho
+$\eta=0,175\times\phi=0,175$ ao redor do centro de impacto definido no
+primeiro passo. Esta soma é também chamada $E^{2}_{7\times7$} por razões
+similares ao ítem anterior;
+
+\item[Máximos em E.M.1] Os dois maiores picos de energia na primeira camada da
+seção e.m. são detetados;
+
+\item[Energia E.M. ``$3\times7$"] Calcula-se a energia total num espaço
+$\eta=0,175\times\phi=0,175$ tomando-se os valores das células cujo o centro
+recai sobre a região definida na seção e.m.;
+
+\item[Energia Hadrônica``$2\times2$"] Calcula-se a energia total num espaço
+$\eta=0,2\times\phi=0,2$ tomando-se os valores das células cujo o centro
+recai sobre a região definida na primeira camada da seção hadrônica;
+
+\item[Outros valores] Outros valores não utilizados para o processo
+discriminante também são calculados para monitoração, tais como os valores
+parciais das energias em cada camada do detetor e o espalhamento da energia na
+segunda camada e.m..
+\end{enumerate}
+
+FIGURA SOBRE AS VARIÁVEIS DO T2CALO
+
+O algoritmo de deteção propriamento dito segue a execução do T2Calo e é
+chamado \emph{EGammaHypho}. Este algoritmo tem a função exclusiva de combinar
+as informações dos diversos algoritmos de FEx relacionados à deteção de
+elétrons e fótons e tomar uma decisão simples baseada nas propriedades físicas
+das partículas de interesse. No caso de RoI's tipo e.m., o EGammaHypho é
+executado logo após a execução do T2Calo visando uma rejeição rápida da física
+responsável pelo ``ruído" (ou \eng{background}), ou seja, jatos. As vantagens
+deste processo de rejeição ``antecipada" foram discutidas no
+Capítulo~\ref{chap:trigger}.
+
+Uma vez que a quantidade de informações disponível neste momento encontra-se
+somente nos parâmetros pré-definidos pelo T2Calo, o EGammaHypho definirá uma
+seqüência simples discriminadores baseados em combinações lineares e
+não-lineares destas quantidades. O ``Físico Experiente" assumirá seu papel
+definindo a seqüência de análises e patamares de corte relevantes.
+
+DESCRIÇÃO DO ALGORITMO DE FILTRAGEM
+
+\begin{description}
+\item[\etem] Esta quantidade representa a soma das energias das células da
+seção e.m. dos calorímetros, cujo centro recai sobre uma região de
+0,075$\times$0,175 no plano \ep, ao redor do centro da célula da segunda camada
+e.m. que apresenta o maior valor de energia depositada. A janela é irregular
+por motivos da física de interesse \cite{hlt-tdr}. A região na qual esta
+quantidade é extraída equivale, usando-se a granularidade da segunda camada
+e.m., a uma região de 3 células na direção $\eta$ por 7 células na direção de
+$\phi$. Espera-se que a energia de elétrons esteja totalmente contida nesta
+janela; por seu turno, jatos devem apresentar, hipoteticamente, uma fração
+menor de sua energia depositada nesta área;
+
+\item[\ethad] Esta quantidade representa a soma das células da seção hadrônica
+do calorímetro dentro de uma região de 0,2$\times$0,2 no plano \ep, ao redor
+do centro da célula na segunda camada e.m. que apresenta o maior valor de
+energia depositada. Para elétrons, a quantidade de energia depositada na
+camada hadrônica deve ser próxima de zero, enquanto que, para jatos, espera-se
+que seja bem elevada;
+
+\item[\rcore] Representa a razão entre a soma das células na segunda camada
+e.m., numa área de $3\times7$ células por $7\times7$ células ao redor da célula
+na segunda camada que apresenta o maior valor de energia depositado. Esta
+quantidade mede o espalhamento da cascata formada pelo decaimento do objeto de
+estudo. No caso do objeto ser um jato, espera-se que a cascata tenha um
+espalhamento maior que no caso de elétrons, resultando em um valor menor que 1
+para esta quantidade;
+
+\item[\eratio] Uma vez que jatos de par\-tí\-culas interagem de forma mais
+espalhada do que e\-lé\-trons, espera-se que na primeira camada e.m. sejam
+observados vários picos. Definindo um pico ($E$) como sendo a ocorrência de um
+máximo registrado pela célula central de um agrupamento de três células
+adjacentes, então, a quantidade \eratio\ representa a razão de energias
+\eratio$=\frac{E_1-E_2}{E_1+E_2}$. Ou seja, a razão da subtração pela soma dos
+valores de energia dos dois picos mais energéticos na primeira camada e.m..
+
+Se o objeto for um elétron (objeto único), espera-se que $E_2=0$, já que a
+cascata de partículas que o elétron forma na sua interação com o calorímetro é,
+tipicamente, bastante estreita, e portanto \eratio=1. Para jatos, normalmente,
+\eratio\ será menor que 1, já que $E_2\neq0$.
+\end{description}
+
+
+
 \section{Métodos Neurais de Discriminação}
 
 Redes neurais artificiais (RNA) vem sendo atualmente utilizadas com sucesso em
@@ -406,7 +607,7 @@ para um grande conjunto de aplicações em tempo real.
 \subsection{Definição de uma rede neural artificial}
 
 Um neurônio de uma RNA pode ser modelado por um grafo de fluxo como mostrado
-na Figura~\ref{fig:neuron}.
+na Figura~\ref{fig:neuron}. 
 
 \begin{figure}
 \begin{center}
