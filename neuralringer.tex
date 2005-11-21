@@ -704,26 +704,27 @@ Para a caracterização de operação do T2Calo e do algoritmo de hipótese
 associado, os seguintes grupamentos de dados foram considerados:
 
 \begin{itemize}
-\item Elétrons simulados via Monte Carlo, com energia transversa fixa em 25
-GeV. Os elétrons de cada evento simulado interagem com diferentes regiões do detetor;
-\item Jatos simulados via Monte Carlo, com energia transversa variante, à
-partir de 17 GeV;
+\item Cerca de 23.000 elétrons simulados via Monte Carlo, proveniente de
+interações tipo $H (130 \text{GeV})\rightarrow ZZ \rightarrow 4e^-$ e 
+$H (130 \text{GeV})\rightarrow ZZ \rightarrow 2e^- + 2\mu$. Os elétrons de
+cada evento simulado interagem com diferentes regiões do detetor;
+\item Cerca de 250.000 jatos simulados via Monte Carlo, com energia total,
+fixa em 25 GeV. 
 \end{itemize}
 
 Nos dois casos, considerou-se simulações com ruído, proveniente da eletrônica
 e uma planta de detetor compatível com o que está sendo instalado atualmente
-na caverna do experimento. Um \eng{background} com a luminosidade inicial do
-experimento ($10^{33}cm^{-2}s^{-1}$) também está adicionado aos dados,
-provendo um ambiente bastante acurado dentro do que se é possível prever em
-termos de operação e exequível em um ambiente de simulação. 
+na caverna do experimento, provendo um ambiente bastante acurado dentro do que
+se é possível prever em termos de operação, mas ainda exequível em um ambiente
+de simulação.
 
 Esta massa original de dados foi submetida a uma simulação do LVL1, que
 implementa o algoritmo discutido na Seção~\ref{sec:lvl2-detect-electron},
-aceitando todos os eventos com apenas 1 objeto tipo EM com as seguintes
-características: 
+aceitando todos os eventos com objetos tipo EM com as seguintes
+características:
 
 \begin{itemize}
-\item ao menos 20 GeV numa região de $2\times2$ torres de filtragem na seção
+\item ao menos 10 GeV numa região de $2\times2$ torres de filtragem na seção
 e.m.;
 \item no máximo 4 GeV na região periféria ao núcleo de $2\times2$ torres de
 filtragem; 
@@ -732,11 +733,10 @@ filtragem;
 \item $\eta$ variando de $-2,5$ a $+2,5$;
 \end{itemize}
 
-Um total 
-
-PERGUNTAR AO THIAGO QUAIS SÃO AS CARACTERÍSTICAS ATUAIS DE FILTRAGEM DO LVL1
-
-
+Um total de cerca de 22.000 elétrons e 7.000 jatos que passariam a um corte
+como o proposto acima fazem parte da massa de dados remanescente após estes
+cortes. A Figura~\ref{fig:
+}
 
 \section{Métodos Neurais de Discriminação}
 
