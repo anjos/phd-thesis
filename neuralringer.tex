@@ -466,6 +466,7 @@ caso de RoI's do tipo e.m., um algoritmo de deteção de elétrons (e fótons)
 será ativado.
 
 \subsection{Deteção de elétrons no LVL2: O T2Calo e EGammaHypho}
+\label{sec:classic-detection}
 
 Como discutido anteriormente na Seção~\ref{sec:e-detection}, o processo de
 deteção veloz baseado em calorimetria pode ser sub-dividido em passos distintos:
@@ -693,10 +694,10 @@ Tabela~\ref{tab:l1-rates}) \texttt{EM25i} e \texttt{EM15i}, os cortes impostos
 pelo algoritmo de hipótese serão otimizados para estas categorias de
 energia. 
 
-Neste trabalho estaremos comparando os diversos algoritmos de deteção
-utilizando um conjunto de eventos destinado ao estudo da discriminação
-elétron/jato no contexto da assinatura mais freqüente do experimento:
-\texttt{EM25i}.
+%Neste trabalho estaremos comparando os diversos algoritmos de deteção
+%utilizando um conjunto de eventos destinado ao estudo da discriminação
+%elétron/jato no contexto da assinatura mais freqüente do experimento:
+%\texttt{EM25i}.
 
 \subsection{Caracterização do T2Calo e do EGammaHypho}
 
@@ -735,8 +736,101 @@ filtragem;
 
 Um total de cerca de 22.000 elétrons e 7.000 jatos que passariam a um corte
 como o proposto acima fazem parte da massa de dados remanescente após estes
-cortes. A Figura~\ref{fig:
-}
+cortes. A Figura~\ref{fig:transverse-energy} contém os histogramas de deposição
+energética total transversa de elétrons (em cima) e jatos (embaixo), em uma
+janela de $0,4 \times 0,4$ no plano $\eta\times\phi$, considerando-se as duas
+seções do calorímetro (e.m. e hadrônica). É possível distinguir um corte
+acentuado nas redondezas de aproximadamente 20~GeV, que equivale à ação da
+simulação do LVL1, como esperado. A cauda e cabeça da distribuição são
+influenciadas pela qualidade da calibração rudimentar disponível ao primeiro de
+filtragem do experimento. A média da distribuição é polarizada pela qualidade
+da calibração disponível no LVL2. Para o histograma de jatos a média
+aproxima-se ao valor esperado de 25 GeV, exibindo um pico pronunciado ao redor
+da média. Como é possível observar, grande parte dos jatos encontram-se com
+valor de energia transversa entre 10 e 40~GeV, enquanto que para elétrons, a
+distribuição decai suavemente até cerca depois 90~GeV (massa do bóson Z em
+repouso).
+
+\begin{figure}
+\begin{center}
+\includegraphics{transverse-energy}
+\end{center}
+\caption{A deposição total de energia em uma região $0,4 \times 0,4$ no plano
+$\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para a massa de
+dados disponível para o estudo.}
+\label{fig:transverse-energy}
+\end{figure}
+
+Nas Figuras~\ref{fig:em-tenergy} e \ref{fig:had-tenergy} é possível observar
+histogramas para elétrons (em cima) e jatos (em baixo) da energia transversa
+total por seção dos calorímetros. Nota-se que para elétrons quase 100\% da
+energia total do objeto é retida na seção e.m., enquanto que para jatos
+observa-se vazamento na seção hadrônica. Embora o corte realizado pelo
+LVL1 tenha sido em 2~GeV para o vazamento de energia nesta seção, observa-se
+que logo após este valor a energia total na seção decai rapidamente donde
+conclui-se que a cauda estaria possivelmente relacionada a qualidade da
+calibração dos dados para este nível de filtragem.
+
+\begin{figure}
+\begin{center}
+\includegraphics{em-tenergy}
+\end{center}
+\caption{A deposição total de energia na seção e.m. em uma região $0,4 \times
+0,4$ no plano $\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para
+a massa de dados disponível para o estudo.}
+\label{fig:em-tenergy}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics{had-tenergy}
+\end{center}
+\caption{A deposição total de energia na seção hadrônica em uma região $0,4 \times
+0,4$ no plano $\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para
+a massa de dados disponível para o estudo.}
+\label{fig:had-tenergy}
+\end{figure}
+
+As Figuras~\ref{fig:rcore} e \ref{fig:eratio} mostram respectivamente a fração
+\rcore e \eratio tal como utilizada pelo EGammaHypo para definir a eficiência
+de deteção de elétrons e jatos. Na Figura~\ref{fig:rcore} observa-se que a
+distribuição para elétrons tem média bastante próxima a 1 e baixíssima
+variância. Para jatos a média é mais baixa e a distribuição apresenta longa
+cauda em direção à origem. No caso da variável \eratio, que tem por objetivo
+detetar picos de deposição energética na primeira camada e.m., para elétrons
+observa-se um pico dominante em 1 ao passo que para jatos, uma distribuição
+mais uniforme, indicando uma separabilidade linear.
+
+As Figuras~\ref{fig:eta} e \ref{fig:phi} contém histogramas para elétrons (em
+cima) e jatos (embaixo) dos centros refinados pelo T2Calo das RoI's em
+questão, tanto em relação à variável $\eta$ quanto à variavel $\phi$. É
+possível distinguir uma uniformidade na distribuição em $\phi$ e uma tendência
+a concentração de eventos nas proximidades de $\eta=0$, como espera-se no
+experimento. 
+
+Exceto por eventuais problemas na lógica de simulação (Monte Carlo) e filtragem
+(pelo LVL1), espera-se que a massa de dados seja representativa do problema da
+separação entre jatos e elétrons. Deve ser levado em consideração que, para
+jatos, o pico ao redor de 25~GeV poderá introduzir imprecisões na definição da
+capacidade de deteção de elétrons bastante energéticos, presentes na massa de
+estudo. Sempre que possível, tentar-se-á levar estas restrições em
+consideração.
+
+\subsubsection{Deteção de elétrons com o EGammaHypo e sua otimização}
+
+Para que a qualidade deteção do algoritmo proposto pelo EGammaHypo seja
+estimada, deve-se passar a massa de dados de estudo por um processo de
+otimização que ajude o especialista a selecionar os patamares de corte que
+definem o algoritmo, como exposto na Seção~\ref{sec:classic-detection}. Para
+tal dividiu-se o conjunto de dados em 2 metades com aproximadamente o mesmo
+número de RoI's. A primeira metade será utilizada para o ``treinamento'' ou
+otimização dos cortes enquanto que a segunda será utilizada para o teste dos
+cortes, garantindo a imparcialidade do processo.
+
+O algoritmo de otimização não será exaustivo, varrendo todo o espaço de dados,
+mas partirá de patamares pré-fixados em valores intuitivos e definirá uma
+sub-área de variação por onde testará exaustivamente as combinações dos 4
+cortes necessários.
 
 \section{Métodos Neurais de Discriminação}
 
