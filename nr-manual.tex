@@ -1,0 +1,69 @@
+%% Hello emacs, this is -*- latex -*-
+\typeout{ ====================================================================}
+\typeout{ This is file nr-manual.tex, created at 22-Nov-2005 }
+\typeout{ Maintained by Andre DOS ANJOS <Andre.dos.Anjos@cern.ch> }
+\typeout{ ====================================================================}
+
+\chapter{NeuralRinger, projeto e manual de uso}
+
+O pacote \texttt{neuralringer}, atualmente na versão 0.7, inclui um conjunto de
+ferramentas, em sua maior parte escrita em C++, constituindo-se de um
+laboratório de métodos neurais de deteção usando dados de calorimetria do
+experimento ATLAS. Ao longo da vida do projeto, diversas utilidades foram
+adicionadas e melhoradas respeitando-se os seguintes critérios:
+
+\begin{itemize}
+\item Padronização da codificação e boa qualidade de
+documentação~\cite{cpp-codingstd};
+\item Desempenho otimizado para emprego no ambiente do Sistema de Filtragem do
+ATLAS~\cite{hlt-tdr};
+\item Adaptabilidade ao ambiente de análise Athena~\cite{atlas-workbook}.
+\end{itemize}
+
+Principalmente devido à escolha da linguagem de codificação padrão por parte da
+colaboração do experimento, a grande parte do conjunto de ferramentas foi
+escrito em C++. A linguagem também permite a utilização de construções
+orientadas à objeto (OO), o que torna mais fácil a manutenção e abstração
+necessárias a um projeto de longa vida.
+
+\section{Projeto do sistema}
+
+Para o desenvolvimento do laboratório, compartimentalizou-se o conjunto de
+ferramentas em 7 categorias relacionadas a funcionalidade e abstração com
+relação a uma das interfaces do sistema. São elas:
+
+\begin{enumerate}
+\item \textbf{sys}: Este conjunto de primitivas contém funcionalidade que
+define o relatório de erros pelas aplicações do \texttt{neuralringer}, e
+abstrações para a utilização de \eng{parsers} XML, obtenção de datas e nomes de
+arquivos;
+\item \textbf{data}: Contém primitivas para o manuseio de dados em geral,
+extração de parâmetros e normalização;
+\item \textbf{roiformat}: Contém primitivas que permitem o carregamento e
+análise da dados em um formato texto utilizado para transportar dados do
+ambiente Athena para aplicações desconectadas deste ambiente;
+\item \textbf{rbuild}: Contém primitivas para a configuração, criação e
+normalização de anéis, também conhecida como \textit{anelamento};
+\item \textbf{config}: Primitivas para a configuração de redes neurais
+artificiais baseadas em uma descrição XML;
+\item \textbf{network}: Primitivas e abstrações para a construção de redes
+neurais artificiais;
+\item \textbf{lvl1}: Agentes emuladores do Primeiro Nível de Filtragem do
+experimento ATLAS~\cite{l1-tdr}.
+\end{enumerate}
+
+\subsection{Pacote \texttt{sys}}
+
+\subsection{Pacote \texttt{data}}
+
+\subsection{Pacote \texttt{roiformat}}
+
+\subsection{Pacote \texttt{rbuild}}
+
+\subsection{Pacote \texttt{config}}
+
+\subsection{Pacote \texttt{network}}
+
+\subsection{Pacote \texttt{lvl1}}
+
+\typeout{ *************** End of file nr-manual.tex *************** }
