@@ -18,9 +18,9 @@ que interagiu com o detetor naquela área específica. A segmentação destes
 instrumentos dependerá da física do experimento e também, normalmente, do eixo
 de dispersão das partículas de interesse.
 
-Algoritmos de deteção são normalmente concebidos por especialistas em
-Calorimetria que entendam os diferentes perfis de interação para a física de
-interesse. O primeiro passo é definir um processo de redução de
+Algoritmos de dete\-ção são normalmente concebidos por especialistas em
+Calorimetria que compreendam os diferentes perfis de intera\-ção para a Fí\-sica
+de interesse. O primeiro passo é definir um processo de redu\-ção de
 dimensionalidade, de acordo com a velocidade requerida na deteção. Este
 pré-processamento ou Extração de Características (do inglês, \eng{Feature
 Extraction} ou FEx) é em geral feito com perda de informação do perfil de
@@ -37,9 +37,9 @@ do experimento ATLAS. Este classificador supera significativamente, em
 desempenho, um sistema clássico de deteção, é modular, rápido e de simples
 manutenção.
 
-\section{Calorimetria em outros experimentos}
+%\section{Calorimetria em outros experimentos}
 
-Introduzir um histórico de das diversas técnicas até hoje. Hera, D0, LEP.
+%Introduzir um histórico de das diversas técnicas até hoje. Hera, D0, LEP.
 
 \section{Importância da Calorimetria no Experimento ATLAS}
 
@@ -91,10 +91,9 @@ $2\times10^{33}cm^{-2}s^{-1}$.
 \begin{table}
 \begin{center}
 \begin{sideways}
-\begin{tabular}{|l|r|}
+\begin{tabular}{|l|l|r|}
 \hline
-\textbf{Assinatura do LVL1} & \textbf{Codinome} &
-	\textbf{Taxa de Eventos (kHz)} \\ \hline
+\textbf{Assinatura do LVL1} & \textbf{Codinome} & \textbf{Taxa (kHz)} \\ \hline
 e.m., 25 GeV, com isolamento & \texttt{EM25i} & 12 \\ \hline
 2 $\times$ e.m., 15 GeV, com isolamento & \texttt{2EM15i} & 4 \\ \hline
 Múon, 20 GeV & \texttt{MU20} & 0.8 \\ \hline
@@ -105,12 +104,12 @@ Jato, 200 GeV & \texttt{J200} & 0.2 \\ \hline
 Jato, 60 GeV $+$ \textit{Missing Energy}, 60 GeV & \texttt{J60} $+$
 \texttt{XE60} & 0.4 \\ \hline
 $\tau$, 25 GeV, com isolamento $+$ \textit{Missing Energy}, 30 GeV &
-\texttt{TAU25i} $+$ \textt{XE30} & 2 \\
+\texttt{TAU25i} $+$ \texttt{XE30} & 2 \\
 \hline
 Múon, 10 GeV $+$ e.m., 15 GeV, com isolamento & \texttt{MU10} $+$ \texttt{EM15i} & 0.1 \\ \hline
-Outros disparos (pre-escalonados, aleatórios, monitoração, calibração) & -- & 5 \\
+Outros disparos (pre-escalonados, aleatórios, calibração, monitoração) & -- & 5 \\
 \hline
-Total & $\sim$25 \\ \hline
+Total & -- & $\sim$25 \\ \hline
 \end{tabular}
 \end{sideways}
 \end{center}
@@ -238,7 +237,7 @@ chumbo.}
 \label{fig:e-shower}
 \end{figure}
 
-CONSEGUIR FOTO DE UMA ROI COM O DÊNIS: ELECTRON, JET?
+%%CONSEGUIR FOTO DE UMA ROI COM O DÊNIS: ELECTRON, JET?
 
 A deteção de elétrons beneficia-se deste conhecimento básico para
 distingüí-los de sua contaminação natural de jatos (e píons). Numa primeira
@@ -492,11 +491,11 @@ LVL1, por este algoritmo, são, em ordem:
 \begin{enumerate}
 \item \textbf{Centro de Impacto Refinado}, Figura~\ref{fig:t2calo-1}: O
 primeiro passo do algoritmo é um refinamento do centro da RoI. Isto é feito
-encontrando-se o pico de deposição energética na segunda camada da seção
-eletromagnética do calorímetro, que é também a mais profunda (veja uma
-discussão mais detalhada na Seção~\ref{sec:atlas-calo}) desta seção. O valor
-do centro da célula é tomado como nova estimativa de posicionamento da RoI e
-será utilizado para os cálculos seguintes;
+encontrando-se o pico de deposi\-ção ener\-gé\-tica na segunda camada da
+se\-ção eletroma\-gné\-tica do calo\-rí\-metro, que é tam\-bém a mais profunda
+(veja uma discus\-são mais detalhada em~\ref{sec:atlas-calo}) desta se\-ção. O
+valor do centro da cé\-lula é tomado como nova estimativa de posicionamento da
+RoI e será utilizado para os cál\-culos seguintes;
 
 \item \textbf{$\text{Energia}^{e.m.2}_{3 \times 7}$},
 Figura~\ref{fig:t2calo-1}: O segundo passo é calcular as somas dos valores de
@@ -735,25 +734,25 @@ filtragem;
 \end{itemize}
 
 Um total de cerca de 22.000 elétrons e 7.000 jatos que passariam a um corte
-como o proposto acima fazem parte da massa de dados remanescente após estes
-cortes. A Figura~\ref{fig:transverse-energy} contém os histogramas de deposição
-energética total transversa de elétrons (em cima) e jatos (embaixo), em uma
-janela de $0,4 \times 0,4$ no plano $\eta\times\phi$, considerando-se as duas
-seções do calorímetro (e.m. e hadrônica). É possível distinguir um corte
-acentuado nas redondezas de aproximadamente 20~GeV, que equivale à ação da
-simulação do LVL1, como esperado. A cauda e cabeça da distribuição são
-influenciadas pela qualidade da calibração rudimentar disponível ao primeiro de
-filtragem do experimento. A média da distribuição é polarizada pela qualidade
-da calibração disponível no LVL2. Para o histograma de jatos a média
-aproxima-se ao valor esperado de 25 GeV, exibindo um pico pronunciado ao redor
-da média. Como é possível observar, grande parte dos jatos encontram-se com
-valor de energia transversa entre 10 e 40~GeV, enquanto que para elétrons, a
-distribuição decai suavemente até cerca depois 90~GeV (massa do bóson Z em
-repouso).
+como o proposto acima fazem parte da massa de dados remanescente após as
+sanções da simulação do LVL1. A Figura~\ref{fig:transverse-energy} contém os
+histogramas de deposição energética total transversa de elétrons (em cima) e
+jatos (embaixo), em uma janela de $0,4 \times 0,4$ no plano $\eta\times\phi$,
+considerando-se as duas seções do calorímetro (e.m. e hadrônica). É possível
+distinguir um corte acentuado nas redondezas de aproximadamente 20~GeV, que
+equivale à ação da simulação do LVL1, como esperado. A cauda e cabeça da
+distribuição são influenciadas pela qualidade da calibração rudimentar
+disponível ao primeiro de filtragem do experimento. A média da distribuição é
+polarizada pela qualidade da calibração disponível no LVL2. Para o histograma
+de jatos a média aproxima-se ao valor esperado de 25 GeV, exibindo um pico
+pronunciado ao redor da média. Como é possível observar, grande parte dos jatos
+encontram-se com valor de energia transversa entre 10 e 40~GeV, enquanto que
+para elétrons, a distribuição decai suavemente até cerca depois $\cong$91~GeV
+(aproximadamente a massa de repouso do bóson Z).
 
 \begin{figure}
 \begin{center}
-\includegraphics{transverse-energy}
+\includegraphics[scale=0.95]{transverse-energy}
 \end{center}
 \caption{A deposição total de energia em uma região $0,4 \times 0,4$ no plano
 $\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para a massa de
@@ -761,11 +760,11 @@ dados disponível para o estudo.}
 \label{fig:transverse-energy}
 \end{figure}
 
-Nas Figuras~\ref{fig:em-tenergy} e \ref{fig:had-tenergy} é possível observar
-histogramas para elétrons (em cima) e jatos (em baixo) da energia transversa
-total por seção dos calorímetros. Nota-se que para elétrons quase 100\% da
-energia total do objeto é retida na seção e.m., enquanto que para jatos
-observa-se vazamento na seção hadrônica. Embora o corte realizado pelo
+Nas Figuras~\ref{fig:em-tenergy} e \ref{fig:had-tenergy} é pos\-sí\-vel
+observar histogramas para e\-lé\-trons (em cima) e jatos (em baixo) da energia
+transversa total por seção dos calorímetros. Nota-se que para elétrons quase
+100\% da energia total do objeto é retida na seção e.m., enquanto que para
+jatos observa-se vazamento na seção hadrônica. Embora o corte realizado pelo
 LVL1 tenha sido em 2~GeV para o vazamento de energia nesta seção, observa-se
 que logo após este valor a energia total na seção decai rapidamente donde
 conclui-se que a cauda estaria possivelmente relacionada a qualidade da
@@ -773,21 +772,21 @@ calibração dos dados para este nível de filtragem.
 
 \begin{figure}
 \begin{center}
-\includegraphics{em-tenergy}
+\includegraphics[scale=0.95]{em-tenergy}
 \end{center}
 \caption{A deposição total de energia na seção e.m. em uma região $0,4 \times
 0,4$ no plano $\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para
-a massa de dados disponível para o estudo.}
+a massa de dados disponível para o estudo. As contagens estão normalizadas.}
 \label{fig:em-tenergy}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics{had-tenergy}
+\includegraphics[scale=0.95]{had-tenergy}
 \end{center}
 \caption{A deposição total de energia na seção hadrônica em uma região $0,4 \times
 0,4$ no plano $\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para
-a massa de dados disponível para o estudo.}
+a massa de dados disponível para o estudo. As contagens estão normalizadas.}
 \label{fig:had-tenergy}
 \end{figure}
 
@@ -801,12 +800,48 @@ detetar picos de deposição energética na primeira camada e.m., para elétrons
 observa-se um pico dominante em 1 ao passo que para jatos, uma distribuição
 mais uniforme, indicando uma separabilidade linear.
 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.95]{rcore}
+\end{center}
+\caption{Distribuição da variável \rcore para elétrons (em cima) e jatos
+(embaixo). As contagens estão normalizadas.}
+\label{fig:rcore}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.95]{eratio}
+\end{center}
+\caption{Distribuição da variável \eratio para elétrons (em cima) e jatos
+(embaixo). As contagens estão normalizadas.}
+\label{fig:eratio}
+\end{figure}
+
 As Figuras~\ref{fig:eta} e \ref{fig:phi} contém histogramas para elétrons (em
-cima) e jatos (embaixo) dos centros refinados pelo T2Calo das RoI's em
-questão, tanto em relação à variável $\eta$ quanto à variavel $\phi$. É
-possível distinguir uma uniformidade na distribuição em $\phi$ e uma tendência
-a concentração de eventos nas proximidades de $\eta=0$, como espera-se no
-experimento. 
+cima) e jatos (embaixo) dos centros refinados pelo T2Calo das RoI's em questão,
+tanto em relação à variável $\eta$ quanto à variavel $\phi$. É possível
+distinguir uma uniformidade na distribuição em $\phi$ e uma tendência a
+concentração de eventos nas proximidades de $\eta=0$, como espera-se no
+experimento.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.95]{eta}
+\end{center}
+\caption{Distribuição em $\eta$ dos centros refinados das RoI's para elétrons
+(em cima) e jatos (embaixo). As contagens estão normalizadas.}
+\label{fig:eta}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.95]{phi}
+\end{center}
+\caption{Distribuição em $\phi$ dos centros refinados das RoI's para elétrons
+(em cima) e jatos (embaixo). As contagens estão normalizadas.}
+\label{fig:phi}
+\end{figure}
 
 Exceto por eventuais problemas na lógica de simulação (Monte Carlo) e filtragem
 (pelo LVL1), espera-se que a massa de dados seja representativa do problema da
@@ -830,7 +865,35 @@ cortes, garantindo a imparcialidade do processo.
 O algoritmo de otimização não será exaustivo, varrendo todo o espaço de dados,
 mas partirá de patamares pré-fixados em valores intuitivos e definirá uma
 sub-área de variação por onde testará exaustivamente as combinações dos 4
-cortes necessários.
+cortes necessários. Eis aqui os patamares e passos de busca utilizados:
+
+\begin{enumerate}
+\item Corte em \rcore: de 0,6 a 1,0, em passos de 0,01 (41 possibilidades);
+\item Corte em \eratio: de 0,6 a 1,0, em passos de 0,01 (41 possibilidades);
+\item Corte em \etem: de 5000 a 30000 MeV em passos de 500 MeV (51
+possibilidades);
+\item Corte em \ethad: de 0 a 4000 MeV em passos de 500 MeV (9
+possibilidades). 
+\end{enumerate}
+
+Para cada corte, a totalidade da massa de dados de treinamento do método é
+avaliada e as RoI's que \textit{sobrevivam} ao corte são levadas à proxima
+etapa. As eficiências relativas e a quantidade de dados utilizadas para o teste
+da fase seguinte são acumulados para posterior análise. Levando-se em
+consideração o número combinações dadas as possibilidades do problema de
+otimização e considerando-se que a superfície de erro não possua um único
+mínimo, há de se tentar $41 \times 41 \times 51 \times 9 = 771579$ diferentes
+combinações neste caso antes que alguma conclusão possa ser definida. Dada a
+massa de dados a ser analisada e uma estimativa de aproximadamente $0,5$
+segundos de processamento por teste, o tempo total do programa de otimização
+dos cortes será de quase \textbf{4,5 dias}!
+
+Esta claro que uma otimização não-polarizada estaria fora de questão para uma
+utilização em condições que possam variar em questão de horas, como é o caso do
+experimento ATLAS. Desta forma, seja uma antecipação para o cortes seria
+necessária ou uma redução do espaço de busca permitindo uma otimização mais
+rápida. A utilização de programas especialmente codificados para a tarefa
+também poderia diminuir o tempo de teste, tornando o método mais atraente para 
 
 \section{Métodos Neurais de Discriminação}
 
