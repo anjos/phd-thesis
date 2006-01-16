@@ -7,17 +7,17 @@
 \documentclass[a4paper,12pt]{report}
 
 %% -----------------------------------------
-%% Lista de Pacotes que você deverá precisar
+%% Lista de Pacotes que vocÃª deverÃ¡ precisar
 %% -----------------------------------------
-\usepackage[french,english,portuges]{babel} % Para hifenação automática.
-\usepackage[latin1]{inputenc} % Para tradução automática de acentos.
+\usepackage[french,english,portuges]{babel} % Para hifenaÃ§Ã£o automÃ¡tica.
+\usepackage[latin1]{inputenc} % Para traduÃ§Ã£o automÃ¡tica de acentos.
 \usepackage{indentfirst}
-\usepackage{tocbibind} % Para a inclusão de bibliografia e índices na ToC
-\renewcommand{\tocbibname}{Referências Bibliográficas}
+\usepackage{tocbibind} % Para a inclusÃ£o de bibliografia e Ã­ndices na ToC
+\renewcommand{\tocbibname}{ReferÃªncias BibliogrÃ¡ficas}
 
 \input{mycolor} % Para descrever cores.
-\input{ifpdf} % Para a próxima seleção.
-\ifpdf % Gráficos, thumbnails e hiper-referências
+\input{ifpdf} % Para a prÃ³xima seleÃ§Ã£o.
+\ifpdf % GrÃ¡ficos, thumbnails e hiper-referÃªncias
 \input{pdfheader}
 \else
 \input{texheader}
@@ -26,37 +26,37 @@
 \usepackage{rotating} % para rotacionar alguns flutuantes
 \usepackage{tabularx} % para tabelas mais legais
 
-%\usepackage[T1]{fontenc} % Para fontes mais nítidas
-\usepackage[hmargin=3.0cm,vmargin=2.5cm]{geometry} % Para mais espaço no texto
-%% Aumenta espaçamento para 1.5 ao invés de 1.2 para ficarmos de acordo com a
+%\usepackage[T1]{fontenc} % Para fontes mais nÃ­tidas
+\usepackage[hmargin=3.0cm,vmargin=2.5cm]{geometry} % Para mais espaÃ§o no texto
+%% Aumenta espaÃ§amento para 1.5 ao invÃ©s de 1.2 para ficarmos de acordo com a
 %% norma COPE
 \renewcommand{\baselinestretch}{1.5}
 
 %% --------------------------
-%% Ajustando a saída HTML
+%% Ajustando a saÃ­da HTML
 %% --------------------------
 %\usepackage{html} % Para usar os comandos pre-definidos por latex2html
 
 %% --------------------------
 %% Lista de Pacotes Opcionais (descomente o que for preciso)
 %% --------------------------
-\usepackage{amssymb} % Para os símbolos matemáticos. Coloque antes de amsmath
-\usepackage{amsmath} % Para as fórmulas e ambientes.
-\usepackage{multirow} % Para ter múltiplas linhas por coluna
+\usepackage{amssymb} % Para os sÃ­mbolos matemÃ¡ticos. Coloque antes de amsmath
+\usepackage{amsmath} % Para as fÃ³rmulas e ambientes.
+\usepackage{multirow} % Para ter mÃºltiplas linhas por coluna
 \usepackage{hhline} % Para linhas mais interessantes em artigos
 \usepackage{alltt} % Para entrada verbatim com comandos LaTeX
 
-% Algumas coisas já definidas, você deverá ter o fonte comandos.tex no
-% diretório atual para poder usar estes comandos.
+% Algumas coisas jÃ¡ definidas, vocÃª deverÃ¡ ter o fonte comandos.tex no
+% diretÃ³rio atual para poder usar estes comandos.
 \input{comandos}
 
-%% Selecione aqui o que você deseja incluir na próxima
-%% impressão.
+%% Selecione aqui o que vocÃª deseja incluir na prÃ³xima
+%% impressÃ£o.
 
-%% Parte introdutória
+%% Parte introdutÃ³ria
 %%\includeonly{rosto, ficha, dedicatoria, resumo, conteudo, prefacio}
 
-%% capítulo de interesse
+%% capÃ­tulo de interesse
 %%\includeonly{prefacio}
 
 %% Tudo
@@ -69,39 +69,39 @@
 %introducao, atlas, trigger, neuralringer, futuro, coord-atlas, published}
 \includeonly{neuralringer}
 
-%% Preparando o índice remissivo, que é opcional
+%% Preparando o Ã­ndice remissivo, que Ã© opcional
 \usepackage{makeidx}
 \makeindex
 
-% O início do documento para o LaTeX2e
+% O inÃ­cio do documento para o LaTeX2e
 \begin{document}
 
 \maketitle
 
-% Começamos com a página de título
+% ComeÃ§amos com a pÃ¡gina de tÃ­tulo
 \include{rosto}
 
-% A numeração aqui começa à partir de 2, em
-% romano. A ficha catalográfica é obrigatória!
+% A numeraÃ§Ã£o aqui comeÃ§a Ã  partir de 2, em
+% romano. A ficha catalogrÃ¡fica Ã© obrigatÃ³ria!
 \pagenumbering{roman} \setcounter{page}{2}
 \include{ficha}
 
-% Agradecimentos e dedicatórias
+% Agradecimentos e dedicatÃ³rias
 \include{dedicatoria}
 
 % Os resumos
 \include{resumo}
 
-% Aqui você poderá anexar a lista de
-% conteúdos, lista de figuras e tabelas
+% Aqui vocÃª poderÃ¡ anexar a lista de
+% conteÃºdos, lista de figuras e tabelas
 % do documento. 
 \include{conteudo}
 
 % Normalmente, eu uso o arquivo principal somente para os detalhes de
-% apresentação, deixando o conteúdo em arquivos isolados. Se você quiser
+% apresentaÃ§Ã£o, deixando o conteÃºdo em arquivos isolados. Se vocÃª quiser
 % fazer o mesmo, descomente as linhas abaixo e troque o nome dos arquivos
-% contendo as seções ou capítulos. Lembre-se, o processador LaTeX vai
-% procurar seus arquivos em arquivo.tex se você fizer \input{arquivo}
+% contendo as seÃ§Ãµes ou capÃ­tulos. Lembre-se, o processador LaTeX vai
+% procurar seus arquivos em arquivo.tex se vocÃª fizer \input{arquivo}
 
 \pagenumbering{arabic}
 \include{prefacio}
@@ -111,20 +111,20 @@
 \include{neuralringer}
 \include{futuro}
 
-% E a listagem bibliográfica, por final. O Babel se encarregará de colocar
-% o nome correto, no caso de você não digitar seu relatório em inglês. O
-% nome dos arquivos contendo as referências bibliográficas são ref1.bib,
+% E a listagem bibliogrÃ¡fica, por final. O Babel se encarregarÃ¡ de colocar
+% o nome correto, no caso de vocÃª nÃ£o digitar seu relatÃ³rio em inglÃªs. O
+% nome dos arquivos contendo as referÃªncias bibliogrÃ¡ficas sÃ£o ref1.bib,
 % ref2.bib,...
 \bibliographystyle{unsrt}
 \bibliography{references}
 % \bibliography{ref2}
 
-% Aqui começa o apêndice, se você assim quiser.
+% Aqui comeÃ§a o apÃªndice, se vocÃª assim quiser.
 \appendix
 \include{coord-atlas}
 \include{published}
 
-% Índice remissivo, opcional
+% Ãndice remissivo, opcional
 \include{indice}
 
 \end{document}

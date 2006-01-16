@@ -4,63 +4,63 @@
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{Sistema neural de deteção elétron/jato baseado em Calorimetria}
+\chapter{Sistema neural de deteÃ§Ã£o elÃ©tron/jato baseado em Calorimetria}
 \label{chap:neural}
 
-Sistemas de calorimetria são normalmente construídos com forma e leitura
-segmentada de maneira que possam ser usados diretamente na deteção de
-partículas. Isto é possível uma vez que muitos processos interessantes são
-distingüíveis pela forma com que depositam energia à medida que interagem com
-estes detetores, tanto de forma radial quanto em penetração
-\cite{wigmans-book}. Cada segmento ou célula de um calorímetro contém a
-informação de energia depositada por uma partícula ou conjunto de partículas
-que interagiu com o detetor naquela área específica. A segmentação destes
-instrumentos dependerá da física do experimento e também, normalmente, do eixo
-de dispersão das partículas de interesse.
+Sistemas de calorimetria sÃ£o normalmente construÃ­dos com forma e leitura
+segmentada de maneira que possam ser usados diretamente na deteÃ§Ã£o de
+partÃ­culas. Isto Ã© possÃ­vel uma vez que muitos processos interessantes sÃ£o
+distingÃ¼Ã­veis pela forma com que depositam energia Ã  medida que interagem com
+estes detetores, tanto de forma radial quanto em penetraÃ§Ã£o
+\cite{wigmans-book}. Cada segmento ou cÃ©lula de um calorÃ­metro contÃ©m a
+informaÃ§Ã£o de energia depositada por uma partÃ­cula ou conjunto de partÃ­culas
+que interagiu com o detetor naquela Ã¡rea especÃ­fica. A segmentaÃ§Ã£o destes
+instrumentos dependerÃ¡ da fÃ­sica do experimento e tambÃ©m, normalmente, do eixo
+de dispersÃ£o das partÃ­culas de interesse.
 
-Algoritmos de dete\-ção são normalmente concebidos por especialistas em
-Calorimetria que compreendam os diferentes perfis de intera\-ção para a Fí\-sica
-de interesse. O primeiro passo é definir um processo de redu\-ção de
-dimensionalidade, de acordo com a velocidade requerida na deteção. Este
-pré-processamento ou Extração de Características (do inglês, \eng{Feature
-Extraction} ou FEx) é em geral feito com perda de informação do perfil de
-deposição, mas atentivamente de forma que as principais características ainda
-sejam bem distingüíveis. Em seguida, tendo por base simulações ou dados reais
-da física de interesse, define-se um conjunto de cortes por métodos com
-conhecimento da informação \eng{a priori} que maximizem a probabilidade de
-deteção das partículas interessantes.
+Algoritmos de dete\-Ã§Ã£o sÃ£o normalmente concebidos por especialistas em
+Calorimetria que compreendam os diferentes perfis de intera\-Ã§Ã£o para a FÃ­\-sica
+de interesse. O primeiro passo Ã© definir um processo de redu\-Ã§Ã£o de
+dimensionalidade, de acordo com a velocidade requerida na deteÃ§Ã£o. Este
+prÃ©-processamento ou ExtraÃ§Ã£o de CaracterÃ­sticas (do inglÃªs, \eng{Feature
+Extraction} ou FEx) Ã© em geral feito com perda de informaÃ§Ã£o do perfil de
+deposiÃ§Ã£o, mas atentivamente de forma que as principais caracterÃ­sticas ainda
+sejam bem distingÃ¼Ã­veis. Em seguida, tendo por base simulaÃ§Ãµes ou dados reais
+da fÃ­sica de interesse, define-se um conjunto de cortes por mÃ©todos com
+conhecimento da informaÃ§Ã£o \eng{a priori} que maximizem a probabilidade de
+deteÃ§Ã£o das partÃ­culas interessantes.
 
-Neste capítulo define-se um sistema de extração de característica em anéis de
-deposição energética, associado a um sistema de discriminação neural para
-definir um classificador de partículas ótimo para o Segundo Nível de Filtragem
+Neste capÃ­tulo define-se um sistema de extraÃ§Ã£o de caracterÃ­stica em anÃ©is de
+deposiÃ§Ã£o energÃ©tica, associado a um sistema de discriminaÃ§Ã£o neural para
+definir um classificador de partÃ­culas Ã³timo para o Segundo NÃ­vel de Filtragem
 do experimento ATLAS. Este classificador supera significativamente, em
-desempenho, um sistema clássico de deteção, é modular, rápido e de simples
-manutenção.
+desempenho, um sistema clÃ¡ssico de deteÃ§Ã£o, Ã© modular, rÃ¡pido e de simples
+manutenÃ§Ã£o.
 
 %\section{Calorimetria em outros experimentos}
 
-%Introduzir um histórico de das diversas técnicas até hoje. Hera, D0, LEP.
+%Introduzir um histÃ³rico de das diversas tÃ©cnicas atÃ© hoje. Hera, D0, LEP.
 
-\section{Importância da Calorimetria no Experimento ATLAS}
+\section{ImportÃ¢ncia da Calorimetria no Experimento ATLAS}
 
-O Sistema de Filtragem \eng{online} do experimento ATLAS deverá prover uma
-seleção de eventos muito eficiente e desprovida de tendências, mantendo o
-potencial de descoberta do detetor. Deve ser extremamente flexível de forma a
-operar no ambiente desafiador do LHC, com até 23 colisões inelásticas por
-interação, 14~TeV no centro de impacto e apenas 25~ns (40~MHz) apenas entre
-colisões sucessivas. Além disso, deve prover critérios de seleção robustos e,
-onde possível, redundantes. É altamente desejável a rejeição de canais
-ruidosos, não interessantes ou falsos o mais rápido possível de forma a
-otimizar o uso dos recursos computacionais disponíveis.
+O Sistema de Filtragem \eng{online} do experimento ATLAS deverÃ¡ prover uma
+seleÃ§Ã£o de eventos muito eficiente e desprovida de tendÃªncias, mantendo o
+potencial de descoberta do detetor. Deve ser extremamente flexÃ­vel de forma a
+operar no ambiente desafiador do LHC, com atÃ© 23 colisÃµes inelÃ¡sticas por
+interaÃ§Ã£o, 14~TeV no centro de impacto e apenas 25~ns (40~MHz) apenas entre
+colisÃµes sucessivas. AlÃ©m disso, deve prover critÃ©rios de seleÃ§Ã£o robustos e,
+onde possÃ­vel, redundantes. Ã‰ altamente desejÃ¡vel a rejeiÃ§Ã£o de canais
+ruidosos, nÃ£o interessantes ou falsos o mais rÃ¡pido possÃ­vel de forma a
+otimizar o uso dos recursos computacionais disponÃ­veis.
 
-Para trazer uma eficiência compatível com este árduo ambiente, o Sistema de
-Filtragem fará uso de um enfoque baseado na \textbf{inclusão} para a seleção
+Para trazer uma eficiÃªncia compatÃ­vel com este Ã¡rduo ambiente, o Sistema de
+Filtragem farÃ¡ uso de um enfoque baseado na \textbf{inclusÃ£o} para a seleÃ§Ã£o
 \eng{online}, garantindo assim um conjunto de
-\eng{triggers} ótimo para a nova Física. O critério da inclusão tem por
-objetivo selecionar um conjunto de fenômenos físicos baseados no ``mínimo
-denominador comum" entre eles, que ainda seja claramente distingüível dentro
+\eng{triggers} Ã³timo para a nova FÃ­sica. O critÃ©rio da inclusÃ£o tem por
+objetivo selecionar um conjunto de fenÃ´menos fÃ­sicos baseados no ``mÃ­nimo
+denominador comum" entre eles, que ainda seja claramente distingÃ¼Ã­vel dentro
 do ruidoso ambiente proposto pelo acelerador. Com este objetivo, o Sistema de
-Filtragem estará sendo disparado para eventos que contenham assinaturas
+Filtragem estarÃ¡ sendo disparado para eventos que contenham assinaturas
 baseadas em objetos simples ou duplos com alto valor de momento
 transverso. Neste contexto, ``objetos com alto valor de momento transverso"
 refere-se, entre outros, a leptons com carga e com momento transverso acima de
@@ -68,24 +68,24 @@ $\sim$10 GeV \cite{hlt-tdr}.
 
 \subsection{Objetos de interesse e RoI's}
 
-Foi visto no Capítulo~\ref{chap:trigger} que o LVL1 define, para objetos
-encontrados seja nos Calorímetros ou nos Detetores de Múons, regiões de
+Foi visto no CapÃ­tulo~\ref{chap:trigger} que o LVL1 define, para objetos
+encontrados seja nos CalorÃ­metros ou nos Detetores de MÃºons, regiÃµes de
 interesse onde objetos relevantes tenham sido observados. Para cada objeto
-interessante, a região aproximada de interação do objeto com o detetor é
-anotada e repassada aos demais níveis de filtragem, no caso da aprovação do
-evento. Este processo define as Regiões de Interesse ou RoI's (do inglês
-\eng{Regions of Interest}), que guiarão o processo de seleção nos Altos Níveis
-de Filtragem (do inglês, \eng{High-Level Triggers} ou HLT).
+interessante, a regiÃ£o aproximada de interaÃ§Ã£o do objeto com o detetor Ã©
+anotada e repassada aos demais nÃ­veis de filtragem, no caso da aprovaÃ§Ã£o do
+evento. Este processo define as RegiÃµes de Interesse ou RoI's (do inglÃªs
+\eng{Regions of Interest}), que guiarÃ£o o processo de seleÃ§Ã£o nos Altos NÃ­veis
+de Filtragem (do inglÃªs, \eng{High-Level Triggers} ou HLT).
 
-De fato, dado as condições do feixe provido pelo LHC, múltiplos objetos
-poderão ser detetados a cada evento. Porém, quando um ou mais objetos
-detetados ativam a aceitação do evento, o LVL1 marca o dado de forma especial,
-distingüindo este objeto como primário, em contraste com aqueles que também
-foram detetados, mas não fizeram objeto da aceitação deste nível de
+De fato, dado as condiÃ§Ãµes do feixe provido pelo LHC, mÃºltiplos objetos
+poderÃ£o ser detetados a cada evento. PorÃ©m, quando um ou mais objetos
+detetados ativam a aceitaÃ§Ã£o do evento, o LVL1 marca o dado de forma especial,
+distingÃ¼indo este objeto como primÃ¡rio, em contraste com aqueles que tambÃ©m
+foram detetados, mas nÃ£o fizeram objeto da aceitaÃ§Ã£o deste nÃ­vel de
 filtragem. A Tabela~\ref{tab:l1-rates} apresenta as taxas (simuladas) para as
-diferentes assinaturas de interesse, ou conjuntos de objetos primários, que
-serão entregues pelo Primeiro Nível de Filtragem~\cite{hlt-tdr} ao HLT,
-encabeçados pelo LVL2, para a luminosidade inicial de
+diferentes assinaturas de interesse, ou conjuntos de objetos primÃ¡rios, que
+serÃ£o entregues pelo Primeiro NÃ­vel de Filtragem~\cite{hlt-tdr} ao HLT,
+encabeÃ§ados pelo LVL2, para a luminosidade inicial de
 $2\times10^{33}cm^{-2}s^{-1}$.
 
 \begin{table}
@@ -96,8 +96,8 @@ $2\times10^{33}cm^{-2}s^{-1}$.
 \textbf{Assinatura do LVL1} & \textbf{Codinome} & \textbf{Taxa (kHz)} \\ \hline
 e.m., 25 GeV, com isolamento & \texttt{EM25i} & 12 \\ \hline
 2 $\times$ e.m., 15 GeV, com isolamento & \texttt{2EM15i} & 4 \\ \hline
-Múon, 20 GeV & \texttt{MU20} & 0.8 \\ \hline
-2 $\times$ múon, 6 GeV & \texttt{2MU6} & 0.2 \\ \hline
+MÃºon, 20 GeV & \texttt{MU20} & 0.8 \\ \hline
+2 $\times$ mÃºon, 6 GeV & \texttt{2MU6} & 0.2 \\ \hline
 Jato, 200 GeV & \texttt{J200} & 0.2 \\ \hline
 3 $\times$ jato, 90 GeV & \texttt{3J90} & 0.2 \\ \hline
 4 $\times$ jato, 65 GeV & \texttt{4J65} & 0.2 \\ \hline
@@ -106,321 +106,321 @@ Jato, 60 GeV $+$ \textit{Missing Energy}, 60 GeV & \texttt{J60} $+$
 $\tau$, 25 GeV, com isolamento $+$ \textit{Missing Energy}, 30 GeV &
 \texttt{TAU25i} $+$ \texttt{XE30} & 2 \\
 \hline
-Múon, 10 GeV $+$ e.m., 15 GeV, com isolamento & \texttt{MU10} $+$ \texttt{EM15i} & 0.1 \\ \hline
-Outros disparos (pre-escalonados, aleatórios, calibração, monitoração) & -- & 5 \\
+MÃºon, 10 GeV $+$ e.m., 15 GeV, com isolamento & \texttt{MU10} $+$ \texttt{EM15i} & 0.1 \\ \hline
+Outros disparos (pre-escalonados, aleatÃ³rios, calibraÃ§Ã£o, monitoraÃ§Ã£o) & -- & 5 \\
 \hline
 Total & -- & $\sim$25 \\ \hline
 \end{tabular}
 \end{sideways}
 \end{center}
-\caption{Taxas de saídas para as assinaturas reconhecidas pelo LVL1,
+\caption{Taxas de saÃ­das para as assinaturas reconhecidas pelo LVL1,
 para a luminosidade de pico inicial de $2\times10^{33}cm^{-2}s^{-1}$. Dados
-baseados em uma simulação do LVL1.}
+baseados em uma simulaÃ§Ã£o do LVL1.}
 \label{tab:l1-rates}
 \end{table}
 
 Nota-se que, aproximadamente 16 dos 25 kHz (i.e. $\sim$65\% das assinaturas)
-entregues pelo LVL1 conterão objetos tipo e.m.. Estes objetos são assim
-classificados por representarem elétrons \textbf{ou} fótons, que interagem com
-os detetores à partir de interações eletromagnéticas ao invés das componentes
-hadrônicas presentes em outros casos. 
+entregues pelo LVL1 conterÃ£o objetos tipo e.m.. Estes objetos sÃ£o assim
+classificados por representarem elÃ©trons \textbf{ou} fÃ³tons, que interagem com
+os detetores Ã  partir de interaÃ§Ãµes eletromagnÃ©ticas ao invÃ©s das componentes
+hadrÃ´nicas presentes em outros casos. 
 
-\subsection{Análise do Sistema de Filtragem com relação à Física}
+\subsection{AnÃ¡lise do Sistema de Filtragem com relaÃ§Ã£o Ã  FÃ­sica}
 
-A Figura~\ref{fig:trigger-physics} apresenta um diagrama esquemático que
-despreza as interfaces em \eng{hardware} propostas pela construção do Sistema
-de Filtragem e tenta enfocar melhor o problema do ponto de vista da análise
-dos canais físicos \eng{per se}. Da esquerda para a direita, observa-se a
-seqüência de eventos que indicam a completa aceitação de um evento por parte
-do Sistema de Filtragem. O caso de estudo é um evento que será aprovado por
-conter um elétron com isolamento, e uma energia mínima de 25 GeV. 
+A Figura~\ref{fig:trigger-physics} apresenta um diagrama esquemÃ¡tico que
+despreza as interfaces em \eng{hardware} propostas pela construÃ§Ã£o do Sistema
+de Filtragem e tenta enfocar melhor o problema do ponto de vista da anÃ¡lise
+dos canais fÃ­sicos \eng{per se}. Da esquerda para a direita, observa-se a
+seqÃ¼Ãªncia de eventos que indicam a completa aceitaÃ§Ã£o de um evento por parte
+do Sistema de Filtragem. O caso de estudo Ã© um evento que serÃ¡ aprovado por
+conter um elÃ©tron com isolamento, e uma energia mÃ­nima de 25 GeV. 
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.9]{trigger-physics}
 \end{center}
-\caption{Diagrama esquemático do Sistema de Filtragem do Experimento ATLAS
-segundo suas funções de filtragem.}
+\caption{Diagrama esquemÃ¡tico do Sistema de Filtragem do Experimento ATLAS
+segundo suas funÃ§Ãµes de filtragem.}
 \label{fig:trigger-physics}
 \end{figure}
 
-O processamento começa à medida que o LVL1 recebe o sinal do LHC acusando o
-iminente cruzamento de pacotes (do inglês \eng{Bunch Crossing}) no ponto de
-impacto. Uma janela de aquisição de alguns nanossegundos fará com que o
+O processamento comeÃ§a Ã  medida que o LVL1 recebe o sinal do LHC acusando o
+iminente cruzamento de pacotes (do inglÃªs \eng{Bunch Crossing}) no ponto de
+impacto. Uma janela de aquisiÃ§Ã£o de alguns nanossegundos farÃ¡ com que o
 Sistema de Leitura do Detetor registre o evento. Os sistemas de
-pré-processamento do LVL1 são ativados paralelamente. No caso dos
-Calorímetros, somadores rápidos \cite{seixas:adder} agrupam as informações das
-células dos calorímetros e.m. e hadrônicos, formando 2 planos com
-granularidade reduzida \cite{l1-tdr}. Em ambas seções do calorímetro (e.m. e
-hadrônica) este pré-processamento forma macro-células de filtragem ou
-``torres" de filtragem (do inglês, \eng{Trigger Towers}, ou TT) com tamanho
+prÃ©-processamento do LVL1 sÃ£o ativados paralelamente. No caso dos
+CalorÃ­metros, somadores rÃ¡pidos \cite{seixas:adder} agrupam as informaÃ§Ãµes das
+cÃ©lulas dos calorÃ­metros e.m. e hadrÃ´nicos, formando 2 planos com
+granularidade reduzida \cite{l1-tdr}. Em ambas seÃ§Ãµes do calorÃ­metro (e.m. e
+hadrÃ´nica) este prÃ©-processamento forma macro-cÃ©lulas de filtragem ou
+``torres" de filtragem (do inglÃªs, \eng{Trigger Towers}, ou TT) com tamanho
 $0,1\times0,1$ no plano $\eta\times\phi$. As diversas sub-camadas de cada
-seção do calorímetro são colapsadas em um único plano por seção. Estes planos
-com granularidade minimizada são varridos pelos diversos processadores do LVL1
-e os objetos de interesse localizados no detetor. Para a deteção de um objeto
+seÃ§Ã£o do calorÃ­metro sÃ£o colapsadas em um Ãºnico plano por seÃ§Ã£o. Estes planos
+com granularidade minimizada sÃ£o varridos pelos diversos processadores do LVL1
+e os objetos de interesse localizados no detetor. Para a deteÃ§Ã£o de um objeto
 tipo e.m. requer-se normalmente que perceba-se pouca (ou nenhuma) energia na
-seção hadrônica e que grande parte da energia do objeto esteja concentrada
-numa região $0,2\times0,2$ ao redor do ponto estimado de impacto
-(isolamento). A energia deste núcleo deve ser maior que o corte imposto pelo
+seÃ§Ã£o hadrÃ´nica e que grande parte da energia do objeto esteja concentrada
+numa regiÃ£o $0,2\times0,2$ ao redor do ponto estimado de impacto
+(isolamento). A energia deste nÃºcleo deve ser maior que o corte imposto pelo
 sistema de filtragem; no atual caso de estudo, 25 GeV ao menos. Os valores de
-corte e isolamento são configuráveis.
+corte e isolamento sÃ£o configurÃ¡veis.
 
-É interessante perceber que múltiplas assinaturas podem ser detetadas em um
-único evento para além do fato de que múltiplas RoI's secundárias possam estar
+Ã‰ interessante perceber que mÃºltiplas assinaturas podem ser detetadas em um
+Ãºnico evento para alÃ©m do fato de que mÃºltiplas RoI's secundÃ¡rias possam estar
 presentes. Uma lista das assinaturas encontradas e das diversas RoI's
-averigüadas pelo LVL1 são repassadas para o LVL2, no formato de uma única
-mensagem conhecida como o ``Resultado do Primeiro Nível de Filtragem", ou L1R,
-como visto na Seção~\ref{sec:lvl2arch}. No caso da assinatura sendo estudada,
-ao menos uma RoI primária, indicando um objeto tipo e.m., com ao menos 25 GeV
-estará presente no L1R.
+averigÃ¼adas pelo LVL1 sÃ£o repassadas para o LVL2, no formato de uma Ãºnica
+mensagem conhecida como o ``Resultado do Primeiro NÃ­vel de Filtragem", ou L1R,
+como visto na SeÃ§Ã£o~\ref{sec:lvl2arch}. No caso da assinatura sendo estudada,
+ao menos uma RoI primÃ¡ria, indicando um objeto tipo e.m., com ao menos 25 GeV
+estarÃ¡ presente no L1R.
 
-O processamento no LVL2 é seqüencial. Ao receber um L1R, o Guia de Execução do
-LVL2 (do inglês, \eng{Steering}) chamará um componente para a confirmação do
-disparo do LVL1. O componente em questão poderá transferir do Sistema de
-Leitura do Detetor, a quantidade de dados que achar necessária, ao redor da
-RoI, para processá-la. Se não for possível rejeitar a assinatura do LVL1, o
-\eng{Steering} poderá chamar mais e mais componentes até que o evento seja
-rejeitado ou definitivamente aprovado ao Terceiro Nível de Filtragem ou Filtro
-de Eventos (do inglês \eng{Event Filter} ou EF). Neste último caso, de forma
-equivalente a relação entre o LVL1 e o LVL2, o LVL2 enviará um sumário
-indicando a razão da aceitação do evento, e valores refinados de energia,
-momento e localização dos objetos explorados em seu contexto ao EF. Espera-se
-que o LVL2 atinja uma redução da taxa de eventos, dos 25~kHz inicialmente
-cedidos pelo LVL1 para não mais que alguns (1 ou 2) kHz. O tempo médio de
+O processamento no LVL2 Ã© seqÃ¼encial. Ao receber um L1R, o Guia de ExecuÃ§Ã£o do
+LVL2 (do inglÃªs, \eng{Steering}) chamarÃ¡ um componente para a confirmaÃ§Ã£o do
+disparo do LVL1. O componente em questÃ£o poderÃ¡ transferir do Sistema de
+Leitura do Detetor, a quantidade de dados que achar necessÃ¡ria, ao redor da
+RoI, para processÃ¡-la. Se nÃ£o for possÃ­vel rejeitar a assinatura do LVL1, o
+\eng{Steering} poderÃ¡ chamar mais e mais componentes atÃ© que o evento seja
+rejeitado ou definitivamente aprovado ao Terceiro NÃ­vel de Filtragem ou Filtro
+de Eventos (do inglÃªs \eng{Event Filter} ou EF). Neste Ãºltimo caso, de forma
+equivalente a relaÃ§Ã£o entre o LVL1 e o LVL2, o LVL2 enviarÃ¡ um sumÃ¡rio
+indicando a razÃ£o da aceitaÃ§Ã£o do evento, e valores refinados de energia,
+momento e localizaÃ§Ã£o dos objetos explorados em seu contexto ao EF. Espera-se
+que o LVL2 atinja uma reduÃ§Ã£o da taxa de eventos, dos 25~kHz inicialmente
+cedidos pelo LVL1 para nÃ£o mais que alguns (1 ou 2) kHz. O tempo mÃ©dio de
 processamento deve estar na ordem dos 10~ms. Note que este valor representa a
-média de processamento por evento. De fato espera-se que eventos de interesse
+mÃ©dia de processamento por evento. De fato espera-se que eventos de interesse
 utilizem mais tempo de processamento enquanto que eventos pouco ou nada
 interessantes sejam rapidamente descartados.
 
-Neste contexto entende-se que, quanto menor o tempo necessário e maior a
-qualidade da deteção dos diversos componentes do sistema de filtragem, mais
-tempo computacional será despendido com a Física de interesse e menos recursos
-com eventos que representem Física ordinária ou incorretamente detetada.
+Neste contexto entende-se que, quanto menor o tempo necessÃ¡rio e maior a
+qualidade da deteÃ§Ã£o dos diversos componentes do sistema de filtragem, mais
+tempo computacional serÃ¡ despendido com a FÃ­sica de interesse e menos recursos
+com eventos que representem FÃ­sica ordinÃ¡ria ou incorretamente detetada.
 
-No EF a análise do evento começa com 100\% dos dados do evento e os resultados
-dos nível precedentes (L1R e L2R). Neste nível de filtragem, correlações mais
-complexas podem ser feitas entre as diferentes RoI's, e uma análise mais
-depurada do evento poderá ser conduzida. Por exemplo, é possível se fazer uso
-das RoI's secundárias para atingir maior redução da taxa de eventos a ser
-registrada em mídia permanente. Se aprovado, o evento é guardado, devidamente
-``etiquetado" e re-passado às fazendas de processamento \eng{offline} para
-posterior reconstrução.
+No EF a anÃ¡lise do evento comeÃ§a com 100\% dos dados do evento e os resultados
+dos nÃ­vel precedentes (L1R e L2R). Neste nÃ­vel de filtragem, correlaÃ§Ãµes mais
+complexas podem ser feitas entre as diferentes RoI's, e uma anÃ¡lise mais
+depurada do evento poderÃ¡ ser conduzida. Por exemplo, Ã© possÃ­vel se fazer uso
+das RoI's secundÃ¡rias para atingir maior reduÃ§Ã£o da taxa de eventos a ser
+registrada em mÃ­dia permanente. Se aprovado, o evento Ã© guardado, devidamente
+``etiquetado" e re-passado Ã s fazendas de processamento \eng{offline} para
+posterior reconstruÃ§Ã£o.
 
-\paragraph{Contaminação} O \eng{trigger} de elétrons ou fótons conterá forte
-contaminação de jatos com poucas componentes hadrônicas, difícil de deteção
-observando-se a granularidade disponível no LVL1. Somente no LVL2, o Sistema
-de Filtragem, disporá do tempo e da completa granularidade do detetor para
-executar uma seleção mais criteriosa. Estima-se em \cite{daqnote00-02}, que a
-cada 25.000 objetos do tipo e.m., aprovados pelo LVL1, apenas 1 será um
-elétron ou fóton.
+\paragraph{ContaminaÃ§Ã£o} O \eng{trigger} de elÃ©trons ou fÃ³tons conterÃ¡ forte
+contaminaÃ§Ã£o de jatos com poucas componentes hadrÃ´nicas, difÃ­cil de deteÃ§Ã£o
+observando-se a granularidade disponÃ­vel no LVL1. Somente no LVL2, o Sistema
+de Filtragem, disporÃ¡ do tempo e da completa granularidade do detetor para
+executar uma seleÃ§Ã£o mais criteriosa. Estima-se em \cite{daqnote00-02}, que a
+cada 25.000 objetos do tipo e.m., aprovados pelo LVL1, apenas 1 serÃ¡ um
+elÃ©tron ou fÃ³ton.
 
-\section{Deteção de elétrons baseada em Calorimetria}
+\section{DeteÃ§Ã£o de elÃ©trons baseada em Calorimetria}
 \label{sec:e-detection}
 
-A Figura~\ref{fig:e-shower} mostra a interação de um elétron com um detetor de
-traços (\eng{Cloud Chambers}) e absorvedores de chumbo. Nesta figura é
-possível observar a formação de um chuveiro de partículas que diverge
-aproximadamente isotropicamente do eixo de penetração do elétron. No caso de
-elétrons \cite{wigmans-book}, a dispersão é menor que no caso de jatos de
-partículas, já que há uma grande probabilidade de espalhamento múltiplo (do
-inglês \eng{Multiple Scattering}) causado pelas componentes hadrônicas do
-conjunto de partículas. A distância de penetração é diretamente propocional a
-energia do objeto em análise \cite{leo, knoll}, ainda que, para os mesmos
-valores energéticos, jatos tendam a penetrar mais profundamente nos aparatos.
+A Figura~\ref{fig:e-shower} mostra a interaÃ§Ã£o de um elÃ©tron com um detetor de
+traÃ§os (\eng{Cloud Chambers}) e absorvedores de chumbo. Nesta figura Ã©
+possÃ­vel observar a formaÃ§Ã£o de um chuveiro de partÃ­culas que diverge
+aproximadamente isotropicamente do eixo de penetraÃ§Ã£o do elÃ©tron. No caso de
+elÃ©trons \cite{wigmans-book}, a dispersÃ£o Ã© menor que no caso de jatos de
+partÃ­culas, jÃ¡ que hÃ¡ uma grande probabilidade de espalhamento mÃºltiplo (do
+inglÃªs \eng{Multiple Scattering}) causado pelas componentes hadrÃ´nicas do
+conjunto de partÃ­culas. A distÃ¢ncia de penetraÃ§Ã£o Ã© diretamente propocional a
+energia do objeto em anÃ¡lise \cite{leo, knoll}, ainda que, para os mesmos
+valores energÃ©ticos, jatos tendam a penetrar mais profundamente nos aparatos.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.4]{e-cloud-chamber}
 \end{center}
-\caption{Interação de um elétron com um detetor de traços com absorvedores em
+\caption{InteraÃ§Ã£o de um elÃ©tron com um detetor de traÃ§os com absorvedores em
 chumbo.} 
 \label{fig:e-shower}
 \end{figure}
 
-%%CONSEGUIR FOTO DE UMA ROI COM O DÊNIS: ELECTRON, JET?
+%%CONSEGUIR FOTO DE UMA ROI COM O DÃŠNIS: ELECTRON, JET?
 
-A deteção de elétrons beneficia-se deste conhecimento básico para
-distingüí-los de sua contaminação natural de jatos (e píons). Numa primeira
-fase, chamada de Extração de Características, avalia-se para uma região do
-detetor, normalmente centralizada em um ponto pré-determinado, um conjunto de
-valores que representem, o melhor possível, os perfis de deposição lateral (ou
-radial) do objeto sendo estudado e sua penetração no aparato. Este processo
-comprime\footnote{Define-se ``compressão" a técnica pelo qual reduz-se a
-dimensionalidade de um sinal em um espaço bem definido, preservando ou
-tentando preservar a informação relevante que caracteriza este sinal de
-interesse. A transformação do espaço original para o espaço ``comprimido" é
-irreversível. A ``compressão" de sinais é muitas vezes denominada
-``compactação com perdas".} a informação de entrada, que normalmente possui
+A deteÃ§Ã£o de elÃ©trons beneficia-se deste conhecimento bÃ¡sico para
+distingÃ¼Ã­-los de sua contaminaÃ§Ã£o natural de jatos (e pÃ­ons). Numa primeira
+fase, chamada de ExtraÃ§Ã£o de CaracterÃ­sticas, avalia-se para uma regiÃ£o do
+detetor, normalmente centralizada em um ponto prÃ©-determinado, um conjunto de
+valores que representem, o melhor possÃ­vel, os perfis de deposiÃ§Ã£o lateral (ou
+radial) do objeto sendo estudado e sua penetraÃ§Ã£o no aparato. Este processo
+comprime\footnote{Define-se ``compressÃ£o" a tÃ©cnica pelo qual reduz-se a
+dimensionalidade de um sinal em um espaÃ§o bem definido, preservando ou
+tentando preservar a informaÃ§Ã£o relevante que caracteriza este sinal de
+interesse. A transformaÃ§Ã£o do espaÃ§o original para o espaÃ§o ``comprimido" Ã©
+irreversÃ­vel. A ``compressÃ£o" de sinais Ã© muitas vezes denominada
+``compactaÃ§Ã£o com perdas".} a informaÃ§Ã£o de entrada, que normalmente possui
 dimensionalidade bastante elevada (O(100)-O(1000)), para um conjunto pequeno
-(O(10)) de varíaveis que possam ser analisadas mais facilmente.
+(O(10)) de varÃ­aveis que possam ser analisadas mais facilmente.
 
-A questão da dimensionalidade da entrada está intimamente correlacionada com a
-capacidade discriminante do calorímetro. Quanto mais granular, maior precisão
-pode ser obtida na definição de pontos de impacto e deteção de partículas. O
-revés é o custo - detetores multi-segmentados são mais difíceis e caros de
-serem construídos.
+A questÃ£o da dimensionalidade da entrada estÃ¡ intimamente correlacionada com a
+capacidade discriminante do calorÃ­metro. Quanto mais granular, maior precisÃ£o
+pode ser obtida na definiÃ§Ã£o de pontos de impacto e deteÃ§Ã£o de partÃ­culas. O
+revÃ©s Ã© o custo - detetores multi-segmentados sÃ£o mais difÃ­ceis e caros de
+serem construÃ­dos.
 
-No caso do experimento ATLAS (veja a Seção~\ref{sec:atlas-calo} para mais
-detalhes), os calorímetros são segmentados em diversas camadas, e, camada a
-camada, granularizados em células de deposição energética. A granularidade
+No caso do experimento ATLAS (veja a SeÃ§Ã£o~\ref{sec:atlas-calo} para mais
+detalhes), os calorÃ­metros sÃ£o segmentados em diversas camadas, e, camada a
+camada, granularizados em cÃ©lulas de deposiÃ§Ã£o energÃ©tica. A granularidade
 varia camada a camada pois cada uma delas possui um objetivo distinto de
-emprego: as camadas iniciais tem por objetivo a discriminação de elétrons e
-fótons e estimativa de posicionamento, as mais traseiras a deteção de
-hádrons. As camadas da seção e.m. tem profundidade variante, sendo que a
-segunda (EM2, a contar do zero, ou seja o pré-irradiador), tem a maior
-profundidade de todas, ocupando mais de 80\% do volume total desta seção.
+emprego: as camadas iniciais tem por objetivo a discriminaÃ§Ã£o de elÃ©trons e
+fÃ³tons e estimativa de posicionamento, as mais traseiras a deteÃ§Ã£o de
+hÃ¡drons. As camadas da seÃ§Ã£o e.m. tem profundidade variante, sendo que a
+segunda (EM2, a contar do zero, ou seja o prÃ©-irradiador), tem a maior
+profundidade de todas, ocupando mais de 80\% do volume total desta seÃ§Ã£o.
 
-Para elétrons com valores energéticos até algumas dezenas de
-gigaelétron-volts, espera-se que a maior parte da energia do objeto esteja
-depositada nesta camada. A granurilade é bastante regular e semelhante tanto
-ao longo do eixo $\eta$ quanto ao longo de $\phi$, como é possível observar na
-Tabela~\ref{tab:lar}. Esta tabela também mostra o fator de compressão (ou
+Para elÃ©trons com valores energÃ©ticos atÃ© algumas dezenas de
+gigaelÃ©tron-volts, espera-se que a maior parte da energia do objeto esteja
+depositada nesta camada. A granurilade Ã© bastante regular e semelhante tanto
+ao longo do eixo $\eta$ quanto ao longo de $\phi$, como Ã© possÃ­vel observar na
+Tabela~\ref{tab:lar}. Esta tabela tambÃ©m mostra o fator de compressÃ£o (ou
 tamanho da torre de filtragem) $N_{\eta} \times N_{\phi}$ aplicado ao processo
-de agrupamento necessário ao préprocessamento antes da análise encaminhada
+de agrupamento necessÃ¡rio ao prÃ©processamento antes da anÃ¡lise encaminhada
 pelo LVL1.
 
-A seção hadrônica dos calorímetro é bastante menos granular. O tamanho padrão
-da célula é $0,1\times0,1$ no espaço $\eta\times\phi$ uma vez que seja
-otimizado para detetar hádrons. Esta classe de partículas penetra mais
-profundamente na matéria e desenvolve complexas cascatas ao longo da
-penetração, normalmente pouco interessantes, mais que devam ser contidas no
-espaço do detetor. O agrupamento padrão (torre de filtragem) para LVL1 é de
-$2\times2$ células.
+A seÃ§Ã£o hadrÃ´nica dos calorÃ­metro Ã© bastante menos granular. O tamanho padrÃ£o
+da cÃ©lula Ã© $0,1\times0,1$ no espaÃ§o $\eta\times\phi$ uma vez que seja
+otimizado para detetar hÃ¡drons. Esta classe de partÃ­culas penetra mais
+profundamente na matÃ©ria e desenvolve complexas cascatas ao longo da
+penetraÃ§Ã£o, normalmente pouco interessantes, mais que devam ser contidas no
+espaÃ§o do detetor. O agrupamento padrÃ£o (torre de filtragem) para LVL1 Ã© de
+$2\times2$ cÃ©lulas.
 
-A Figura~\ref{fig:e-jet-deposit} mostra histogramas da relação da deposição
-energética na seção hadrônica e a energia total do objeto considerando-se uma
-área $0,4\times0,4$ no plano $\eta\times\phi$. Os eventos considerados são
-simulações de elétrons e jatos cobrindo um campo energético de algumas dezenas
-de GeV até 90 GeV interagindo com os calorímetros do ATLAS. Os eventos
-selecionados passaram uma simulação realística do LVL1 e portanto representam,
-todos, eventos que seriam classificados como elétrons por este nível de
-filtragem. Observa-se que para jatos há uma probabilidade maior de depósito na
-seção hadrônica que na seção e.m..
+A Figura~\ref{fig:e-jet-deposit} mostra histogramas da relaÃ§Ã£o da deposiÃ§Ã£o
+energÃ©tica na seÃ§Ã£o hadrÃ´nica e a energia total do objeto considerando-se uma
+Ã¡rea $0,4\times0,4$ no plano $\eta\times\phi$. Os eventos considerados sÃ£o
+simulaÃ§Ãµes de elÃ©trons e jatos cobrindo um campo energÃ©tico de algumas dezenas
+de GeV atÃ© 90 GeV interagindo com os calorÃ­metros do ATLAS. Os eventos
+selecionados passaram uma simulaÃ§Ã£o realÃ­stica do LVL1 e portanto representam,
+todos, eventos que seriam classificados como elÃ©trons por este nÃ­vel de
+filtragem. Observa-se que para jatos hÃ¡ uma probabilidade maior de depÃ³sito na
+seÃ§Ã£o hadrÃ´nica que na seÃ§Ã£o e.m..
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.95]{em-had-percent}
 \end{center}
-\caption{A relação energética da deposição na seção hadrônica e energia total para
-elétrons (topo) e jatos (baixo).}
+\caption{A relaÃ§Ã£o energÃ©tica da deposiÃ§Ã£o na seÃ§Ã£o hadrÃ´nica e energia total para
+elÃ©trons (topo) e jatos (baixo).}
 \label{fig:e-jet-deposit}
 \end{figure}
 
-\paragraph{Classificação -} A fase seguinte à compressão do espaço original
-de entrada é a discriminação da Física de interesse. Tipicamente
-\cite{hlt-tdr, zeus-neural} a deteção é realizada por meio da definição de
-patamares de separação (também ditos \emph{cortes}) com informação \emph{a
-priori} \cite{vantrees}. Este trabalho é normalmente realizado por um físico
-experiente, de acordo com a importância da física de interesse analisada. 
+\paragraph{ClassificaÃ§Ã£o -} A fase seguinte Ã  compressÃ£o do espaÃ§o original
+de entrada Ã© a discriminaÃ§Ã£o da FÃ­sica de interesse. Tipicamente
+\cite{hlt-tdr, zeus-neural} a deteÃ§Ã£o Ã© realizada por meio da definiÃ§Ã£o de
+patamares de separaÃ§Ã£o (tambÃ©m ditos \emph{cortes}) com informaÃ§Ã£o \emph{a
+priori} \cite{vantrees}. Este trabalho Ã© normalmente realizado por um fÃ­sico
+experiente, de acordo com a importÃ¢ncia da fÃ­sica de interesse analisada. 
 
-É importante salientar que o melhor classificador baseado em cortes cortes com
-informação \emph{a priori} também pode ser atingido iterativamente através de
-utilização de Discriminadores de Fisher \cite{haykin-adaptative},
-opcionalmente com atribuição de pesos para cada classe de partículas,
-definindo importâncias diferentes aos diferentes tipos de objetos estudados.
+Ã‰ importante salientar que o melhor classificador baseado em cortes cortes com
+informaÃ§Ã£o \emph{a priori} tambÃ©m pode ser atingido iterativamente atravÃ©s de
+utilizaÃ§Ã£o de Discriminadores de Fisher \cite{haykin-adaptative},
+opcionalmente com atribuiÃ§Ã£o de pesos para cada classe de partÃ­culas,
+definindo importÃ¢ncias diferentes aos diferentes tipos de objetos estudados.
 
-A Figura~\ref{fig:basic-discriminator} mostra um diagrama esquemático do
-processo clássico de deteção descrito. No centro lógico do processo
-encontra-se o físico experiente, que controla o grau de compressão e
+A Figura~\ref{fig:basic-discriminator} mostra um diagrama esquemÃ¡tico do
+processo clÃ¡ssico de deteÃ§Ã£o descrito. No centro lÃ³gico do processo
+encontra-se o fÃ­sico experiente, que controla o grau de compressÃ£o e
 capacidade discriminante do sistema. Este sistema possui um conjunto de
-problemas inerentes a intervenção humana na otimização, dentre eles a
-dependência no operador (aqui representado pela figura do "físico
-experiente"). O procedimento de compressão e discriminação deve ser bem
-documentado para que seja possível a reprodução dos resultados em todos os
-momentos. Ademais, o ajuste fino poderá ser bastante tedioso e dependente da
-quantidade de dados analisados, uma vez que o processo realizado será
-semi-automático - i.e., seleção dos dados de interesse seguido de análise
+problemas inerentes a intervenÃ§Ã£o humana na otimizaÃ§Ã£o, dentre eles a
+dependÃªncia no operador (aqui representado pela figura do "fÃ­sico
+experiente"). O procedimento de compressÃ£o e discriminaÃ§Ã£o deve ser bem
+documentado para que seja possÃ­vel a reproduÃ§Ã£o dos resultados em todos os
+momentos. Ademais, o ajuste fino poderÃ¡ ser bastante tedioso e dependente da
+quantidade de dados analisados, uma vez que o processo realizado serÃ¡
+semi-automÃ¡tico - i.e., seleÃ§Ã£o dos dados de interesse seguido de anÃ¡lise
 manual.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{basic-discriminator}
 \end{center}
-\caption{Um sistema \eng{ad-hoc} de deteção com uma entrada com alta
+\caption{Um sistema \eng{ad-hoc} de deteÃ§Ã£o com uma entrada com alta
 dimensionalidade.}
 \label{fig:basic-discriminator}
 \end{figure}
 
-\subsection{Compressão minimizada}
+\subsection{CompressÃ£o minimizada}
 
-Em um sistema com a dimensionalidade de entrada tão elevada como se apresenta
-o problema da discriminação elétron/jato para o Detetor ATLAS, é mais
-interessante a proposição de um sistema onde a otimização seja conduzida por
-bases matemáticas mais automáticas e maximamente livres de
-polarização. Idealmente este sistema utilizaria todas as entradas para definir
-as regras de compressão e relevância de cada componente na discriminação dos
+Em um sistema com a dimensionalidade de entrada tÃ£o elevada como se apresenta
+o problema da discriminaÃ§Ã£o elÃ©tron/jato para o Detetor ATLAS, Ã© mais
+interessante a proposiÃ§Ã£o de um sistema onde a otimizaÃ§Ã£o seja conduzida por
+bases matemÃ¡ticas mais automÃ¡ticas e maximamente livres de
+polarizaÃ§Ã£o. Idealmente este sistema utilizaria todas as entradas para definir
+as regras de compressÃ£o e relevÃ¢ncia de cada componente na discriminaÃ§Ã£o dos
 alvos. Infelizmente, com o aumento da dimensionalidade da entrada diminui-se
-exponencialmente as chances de convergência na procura de uma função que
-defina otimamente ou de forma aproximada, uma separação das classes a serem
-discriminadas \cite{haykin}. É razoável supor que, quanto maior a
-dimensionalidade da entrada, mais dados serão necessários para atingir-se uma
-discriminação suficientemente boa. 
+exponencialmente as chances de convergÃªncia na procura de uma funÃ§Ã£o que
+defina otimamente ou de forma aproximada, uma separaÃ§Ã£o das classes a serem
+discriminadas \cite{haykin}. Ã‰ razoÃ¡vel supor que, quanto maior a
+dimensionalidade da entrada, mais dados serÃ£o necessÃ¡rios para atingir-se uma
+discriminaÃ§Ã£o suficientemente boa. 
 
-Desta forma um sistema de compressão mínima dos dados se faz necessária. Este
-sistema de compressão deve tentar minimizar a perda de informação e maximizar
+Desta forma um sistema de compressÃ£o mÃ­nima dos dados se faz necessÃ¡ria. Este
+sistema de compressÃ£o deve tentar minimizar a perda de informaÃ§Ã£o e maximizar
 o potencial discriminativo do sistema. Um discriminador capaz de definir um
-plano de separação em um espaço de entrada com dimensionalidade elevada também
-será necessário, uma vez que deseja-se compressão mínima dos dados de
-entrada. A Figura~\ref{fig:advanced-discriminator} mostra uma idealização de
-tal sistema discriminante. A primeira etapa é uma compressão mínima da
-entrada, que seja compatível com um sistema de deteção que aceite sinais com
-alta-dimensionalidade na entrada. Idealmente, um sub-sistema de ``otimização"
-dos parâmetros de compressão e discriminação, também automatizado, controlaria
-a compressão da entrada melhorando a relação custo computacional \eng{versus}
-qualidade de deteção.
+plano de separaÃ§Ã£o em um espaÃ§o de entrada com dimensionalidade elevada tambÃ©m
+serÃ¡ necessÃ¡rio, uma vez que deseja-se compressÃ£o mÃ­nima dos dados de
+entrada. A Figura~\ref{fig:advanced-discriminator} mostra uma idealizaÃ§Ã£o de
+tal sistema discriminante. A primeira etapa Ã© uma compressÃ£o mÃ­nima da
+entrada, que seja compatÃ­vel com um sistema de deteÃ§Ã£o que aceite sinais com
+alta-dimensionalidade na entrada. Idealmente, um sub-sistema de ``otimizaÃ§Ã£o"
+dos parÃ¢metros de compressÃ£o e discriminaÃ§Ã£o, tambÃ©m automatizado, controlaria
+a compressÃ£o da entrada melhorando a relaÃ§Ã£o custo computacional \eng{versus}
+qualidade de deteÃ§Ã£o.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{advanced-discriminator}
 \end{center}
-\caption{Um sistema \eng{ad-hoc} de deteção sub-ótimo com uma entrada com alta
+\caption{Um sistema \eng{ad-hoc} de deteÃ§Ã£o sub-Ã³timo com uma entrada com alta
 dimensionalidade.}
 \label{fig:advanced-discriminator}
 \end{figure}
 
-\section{Deteção de Elétrons no LVL2}
+\section{DeteÃ§Ã£o de ElÃ©trons no LVL2}
 \label{sec:lvl2-detect-electron}
 
-O LVL1 (Seção~\ref{sec:lvl1}) executa seu procedimento de filtragem procurando
-elementos nos calorímetros e detetores de múons que obedeçam a certos
-critérios de classificação. A Tabela~\ref{tab:l1-rates} mostrada anteriormente
-indica os principais objetos interessantes neste nível de filtragem. No caso
-de objetos e.m. (elétrons e fótons), o algoritmo pode ser resumido da seguinte
+O LVL1 (SeÃ§Ã£o~\ref{sec:lvl1}) executa seu procedimento de filtragem procurando
+elementos nos calorÃ­metros e detetores de mÃºons que obedeÃ§am a certos
+critÃ©rios de classificaÃ§Ã£o. A Tabela~\ref{tab:l1-rates} mostrada anteriormente
+indica os principais objetos interessantes neste nÃ­vel de filtragem. No caso
+de objetos e.m. (elÃ©trons e fÃ³tons), o algoritmo pode ser resumido da seguinte
 forma:
 
 \begin{enumerate}
-\item Os sinais analógicos provenientes das células do detetor são agrupados
-em macro-células chamadas Torres de Filtragem (do inglês \eng{Trigger Towers},
-TT). A taxa de agrupamento não é uniforme, mas num geral forma TT's com
-$0,1\times0,1$ no plano $\eta\times\phi$ para a seção eletromagnética do
-calorímetro e $0,2\times0,2$ na seção hadrônica.
+\item Os sinais analÃ³gicos provenientes das cÃ©lulas do detetor sÃ£o agrupados
+em macro-cÃ©lulas chamadas Torres de Filtragem (do inglÃªs \eng{Trigger Towers},
+TT). A taxa de agrupamento nÃ£o Ã© uniforme, mas num geral forma TT's com
+$0,1\times0,1$ no plano $\eta\times\phi$ para a seÃ§Ã£o eletromagnÃ©tica do
+calorÃ­metro e $0,2\times0,2$ na seÃ§Ã£o hadrÃ´nica.
 
-\item Os sinais somados das TT's são digitalizados e disponibilizados para a
-lógica de leitura do LVL1;
+\item Os sinais somados das TT's sÃ£o digitalizados e disponibilizados para a
+lÃ³gica de leitura do LVL1;
 
-\item Processadores especializados (4 no total) cobrem diferentes áreas do
+\item Processadores especializados (4 no total) cobrem diferentes Ã¡reas do
 detetor e utilizam um algoritmo de agrupamento baseado em uma janela
-deslizante \cite{l1-tdr} cobrindo uma região de $4\times4$ TT's (16 no
+deslizante \cite{l1-tdr} cobrindo uma regiÃ£o de $4\times4$ TT's (16 no
 total) aqui resumido:
 
 \begin{enumerate}
-\item Se o núcleo de $2\times2$ TT's contiver energia maior que a
-periferia, para um determinado patamar programável, um candidato a RoI é
+\item Se o nÃºcleo de $2\times2$ TT's contiver energia maior que a
+periferia, para um determinado patamar programÃ¡vel, um candidato a RoI Ã©
 definido;
 
 \item Em seguida soma-se, duas a duas, as enegias transversas das TT's do
-núcleo de $2\times2$ TT's e utiliza-se a maior das somas em uma comparação com
+nÃºcleo de $2\times2$ TT's e utiliza-se a maior das somas em uma comparaÃ§Ã£o com
 um patamar de energia EM;
 
-\item Caso passe a este critério, a energia na periferia da RoI-candidata é
+\item Caso passe a este critÃ©rio, a energia na periferia da RoI-candidata Ã©
 verificada para assegurar o isolamento do objeto; 
 
-\item O último critério é o isolamento hadrônico onde o LVL1 verifica se não
-há grande depósito de energia (transversa) na seção hadrônica.
+\item O Ãºltimo critÃ©rio Ã© o isolamento hadrÃ´nico onde o LVL1 verifica se nÃ£o
+hÃ¡ grande depÃ³sito de energia (transversa) na seÃ§Ã£o hadrÃ´nica.
 \end{enumerate}  
 
-No caso de atender a todos os pré-requisitos, o objeto candidato é promovido a
-uma RoI tipo e.m.. Este algoritmo está representado na
+No caso de atender a todos os prÃ©-requisitos, o objeto candidato Ã© promovido a
+uma RoI tipo e.m.. Este algoritmo estÃ¡ representado na
 Figura~\ref{fig:l1-calo}.
 \end{enumerate}
 
@@ -428,86 +428,86 @@ Figura~\ref{fig:l1-calo}.
 \begin{center}
 \includegraphics[scale=0.78]{l1-calo}
 \end{center}
-\caption{Representação gráfica do algoritmo de deteção de objetos e.m. no LVL1.}
+\caption{RepresentaÃ§Ã£o grÃ¡fica do algoritmo de deteÃ§Ã£o de objetos e.m. no LVL1.}
 \label{fig:l1-calo}
 \end{figure}
 
-Os diversos sub-módulos do LVL1 irão detetar e pré-classificar os elementos de
-interesse para jatos, múons e energia faltante. Em seguida:
+Os diversos sub-mÃ³dulos do LVL1 irÃ£o detetar e prÃ©-classificar os elementos de
+interesse para jatos, mÃºons e energia faltante. Em seguida:
 
 \begin{enumerate}
 \item Os objetos detetados e seus pontos \textbf{centrais} de impacto
-estimados no plano $\eta\times\phi$, ou seja, as RoIs, são encaminhados ao
-Processador Central do Sistema de Filtragem do LVL1 (do inglês \eng{Central
-Trigger Processor}, CTP) e uma decisão é feita levando-se em consideração as
-assinaturas de interesse e resultados dos processamentos de outros módulos
-(jatos, energia faltante e múons). A decisão de aprovar um evento é tomada
-baseando-se em RoI's de acordo com critérios de preferência estipulados \eng{a
-priori}. As RoI's que são utilizadas para a decisão de aprovação são rotuladas
-``primárias" ao passo que as demais, ``secundárias";
+estimados no plano $\eta\times\phi$, ou seja, as RoIs, sÃ£o encaminhados ao
+Processador Central do Sistema de Filtragem do LVL1 (do inglÃªs \eng{Central
+Trigger Processor}, CTP) e uma decisÃ£o Ã© feita levando-se em consideraÃ§Ã£o as
+assinaturas de interesse e resultados dos processamentos de outros mÃ³dulos
+(jatos, energia faltante e mÃºons). A decisÃ£o de aprovar um evento Ã© tomada
+baseando-se em RoI's de acordo com critÃ©rios de preferÃªncia estipulados \eng{a
+priori}. As RoI's que sÃ£o utilizadas para a decisÃ£o de aprovaÃ§Ã£o sÃ£o rotuladas
+``primÃ¡rias" ao passo que as demais, ``secundÃ¡rias";
 
-\item Um sumário do resultado e das RoI's encontradas, já rotuladas (primárias
-e secundárias) é repassado, através do \eng{RoI Builder} ao LVL2.
+\item Um sumÃ¡rio do resultado e das RoI's encontradas, jÃ¡ rotuladas (primÃ¡rias
+e secundÃ¡rias) Ã© repassado, atravÃ©s do \eng{RoI Builder} ao LVL2.
 \end{enumerate}
 
-O Segundo Nível de Filtragem do experimento ATLAS é a primeira vez onde o
-evento será analisado tendo por base a granularidade máxima do detetor. O
-objetivo deste nível de filtragem, de uma forma geral, é a confirmação das
-informações do LVL1 e eventual depuramento e extensão. Aproveitando-se de toda
+O Segundo NÃ­vel de Filtragem do experimento ATLAS Ã© a primeira vez onde o
+evento serÃ¡ analisado tendo por base a granularidade mÃ¡xima do detetor. O
+objetivo deste nÃ­vel de filtragem, de uma forma geral, Ã© a confirmaÃ§Ã£o das
+informaÃ§Ãµes do LVL1 e eventual depuramento e extensÃ£o. Aproveitando-se de toda
 a granularidade disponibilizada pelo sistema de leitura do detetor, o LVL2
-começa analisando o evento através das RoI's classificadas como primárias pelo
+comeÃ§a analisando o evento atravÃ©s das RoI's classificadas como primÃ¡rias pelo
 LVL1.
 
-Ao receber as informações das RoI's o \eng{Steering} ativará o passo de
-decodificação do resultado do LVL1 e, em seguida, selecionará a próxima fase
-de análise, que dependerá diretamente do tipo RoI's primárias do evento. No
-caso de RoI's do tipo e.m., um algoritmo de deteção de elétrons (e fótons)
-será ativado.
+Ao receber as informaÃ§Ãµes das RoI's o \eng{Steering} ativarÃ¡ o passo de
+decodificaÃ§Ã£o do resultado do LVL1 e, em seguida, selecionarÃ¡ a prÃ³xima fase
+de anÃ¡lise, que dependerÃ¡ diretamente do tipo RoI's primÃ¡rias do evento. No
+caso de RoI's do tipo e.m., um algoritmo de deteÃ§Ã£o de elÃ©trons (e fÃ³tons)
+serÃ¡ ativado.
 
-\subsection{Deteção de elétrons no LVL2: O T2Calo e EGammaHypho}
+\subsection{DeteÃ§Ã£o de elÃ©trons no LVL2: O T2Calo e EGammaHypho}
 \label{sec:classic-detection}
 
-Como discutido anteriormente na Seção~\ref{sec:e-detection}, o processo de
-deteção veloz baseado em calorimetria pode ser sub-dividido em passos distintos:
+Como discutido anteriormente na SeÃ§Ã£o~\ref{sec:e-detection}, o processo de
+deteÃ§Ã£o veloz baseado em calorimetria pode ser sub-dividido em passos distintos:
 
 \begin{enumerate}
-\item Compressão do sinal de entrada;
-\item Deteção da física de interesse baseada no espaço comprimido.
+\item CompressÃ£o do sinal de entrada;
+\item DeteÃ§Ã£o da fÃ­sica de interesse baseada no espaÃ§o comprimido.
 \end{enumerate}
 
-Para o ATLAS, a fase 1 irá comprimir o espaço de entrada definido pelas
-células da RoI em questão em 4 variáveis com alto poder discriminante, baseado
-na percepção da física de interesse e da contaminação esperada. No caso de
-elétrons, espera-se que haja forte contaminação de jatos com muitas
-componentes e.m.. Desta forma, a compressão do sinal de entrada tentará
-realçar informações como a dispersão do objeto na RoI ou a profundidade de
-interação do objeto com as diversas camadas do detetor. 
+Para o ATLAS, a fase 1 irÃ¡ comprimir o espaÃ§o de entrada definido pelas
+cÃ©lulas da RoI em questÃ£o em 4 variÃ¡veis com alto poder discriminante, baseado
+na percepÃ§Ã£o da fÃ­sica de interesse e da contaminaÃ§Ã£o esperada. No caso de
+elÃ©trons, espera-se que haja forte contaminaÃ§Ã£o de jatos com muitas
+componentes e.m.. Desta forma, a compressÃ£o do sinal de entrada tentarÃ¡
+realÃ§ar informaÃ§Ãµes como a dispersÃ£o do objeto na RoI ou a profundidade de
+interaÃ§Ã£o do objeto com as diversas camadas do detetor. 
 
-O nome do algoritmo usado para a FEx de RoI's primárias tipo e.m. é
-\emph{T2Calo}, uma variação das palavras \eng{Trigger}, LVL2 e
-Calorimetria. As variávies extraídas do \eng{cluster} definido pela RoI do
-LVL1, por este algoritmo, são, em ordem:
+O nome do algoritmo usado para a FEx de RoI's primÃ¡rias tipo e.m. Ã©
+\emph{T2Calo}, uma variaÃ§Ã£o das palavras \eng{Trigger}, LVL2 e
+Calorimetria. As variÃ¡vies extraÃ­das do \eng{cluster} definido pela RoI do
+LVL1, por este algoritmo, sÃ£o, em ordem:
 
 \begin{enumerate}
 \item \textbf{Centro de Impacto Refinado}, Figura~\ref{fig:t2calo-1}: O
-primeiro passo do algoritmo é um refinamento do centro da RoI. Isto é feito
-encontrando-se o pico de deposi\-ção ener\-gé\-tica na segunda camada da
-se\-ção eletroma\-gné\-tica do calo\-rí\-metro, que é tam\-bém a mais profunda
-(veja uma discus\-são mais detalhada em~\ref{sec:atlas-calo}) desta se\-ção. O
-valor do centro da cé\-lula é tomado como nova estimativa de posicionamento da
-RoI e será utilizado para os cál\-culos seguintes;
+primeiro passo do algoritmo Ã© um refinamento do centro da RoI. Isto Ã© feito
+encontrando-se o pico de deposi\-Ã§Ã£o ener\-gÃ©\-tica na segunda camada da
+se\-Ã§Ã£o eletroma\-gnÃ©\-tica do calo\-rÃ­\-metro, que Ã© tam\-bÃ©m a mais profunda
+(veja uma discus\-sÃ£o mais detalhada em~\ref{sec:atlas-calo}) desta se\-Ã§Ã£o. O
+valor do centro da cÃ©\-lula Ã© tomado como nova estimativa de posicionamento da
+RoI e serÃ¡ utilizado para os cÃ¡l\-culos seguintes;
 
 \item \textbf{$\text{Energia}^{e.m.2}_{3 \times 7}$},
-Figura~\ref{fig:t2calo-1}: O segundo passo é calcular as somas dos valores de
-deposição energética, para a segunda camada e.m., numa região de tamanho
+Figura~\ref{fig:t2calo-1}: O segundo passo Ã© calcular as somas dos valores de
+deposiÃ§Ã£o energÃ©tica, para a segunda camada e.m., numa regiÃ£o de tamanho
 $\eta=0,075 \times \phi=0,175$ ao redor do centro de impacto definido
-anteriormente. Esta soma é assim designada devido à granularidade de base da
-segunda camada e.m., para cada célula, de aproximadamente $0,025 \times
+anteriormente. Esta soma Ã© assim designada devido Ã  granularidade de base da
+segunda camada e.m., para cada cÃ©lula, de aproximadamente $0,025 \times
 0,025$;
 
 \item \textbf{$\text{Energia}^{e.m.2}_{3 \times 7}$},
 Figura~\ref{fig:t2calo-1}: Em seguida calcula-se as somas dos valores de
-deposi\-ção ener\-gé\-tica, para a segunda camada e.m., numa região de tamanho
+deposi\-Ã§Ã£o ener\-gÃ©\-tica, para a segunda camada e.m., numa regiÃ£o de tamanho
 $\eta=0,175 \times \phi=0,175$ ao redor do centro de impacto definido no
 primeiro passo;
 
@@ -515,14 +515,14 @@ primeiro passo;
 \begin{center}
 \includegraphics[scale=0.8]{t2calo-1}
 \end{center}
-\caption{T2Calo, Etapa 1: Cálculo do centro refinado e deposições de
-energia na segunda camada e.m., para regiões $3\times7$ e $7\times7$ no plano 
+\caption{T2Calo, Etapa 1: CÃ¡lculo do centro refinado e deposiÃ§Ãµes de
+energia na segunda camada e.m., para regiÃµes $3\times7$ e $7\times7$ no plano 
 $\eta\times\phi$.}
 \label{fig:t2calo-1}
 \end{figure}
 
-\item \textbf{Máximos em e.m.1}, Figura~\ref{fig:t2calo-2}: Os dois maiores
-picos de energia na primeira camada da seção e.m. são detetados;
+\item \textbf{MÃ¡ximos em e.m.1}, Figura~\ref{fig:t2calo-2}: Os dois maiores
+picos de energia na primeira camada da seÃ§Ã£o e.m. sÃ£o detetados;
 
 \begin{figure}
 \begin{center}
@@ -532,109 +532,109 @@ picos de energia na primeira camada da seção e.m. são detetados;
 \label{fig:t2calo-2}
 \end{figure}
 
-\item \textbf{Energia e.m.}, Figura~\ref{fig:t2calo-3}: Embora não utilizados
-diretamente para o processo discriminativo, os valores parciais de deposição
-energética para cada camada da seção e.m., numa região de $\eta=0,075 \times
-\phi=0,175$, também são calculados;
+\item \textbf{Energia e.m.}, Figura~\ref{fig:t2calo-3}: Embora nÃ£o utilizados
+diretamente para o processo discriminativo, os valores parciais de deposiÃ§Ã£o
+energÃ©tica para cada camada da seÃ§Ã£o e.m., numa regiÃ£o de $\eta=0,075 \times
+\phi=0,175$, tambÃ©m sÃ£o calculados;
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.6]{t2calo-3}
 \end{center}
-\caption{T2Calo, Etapa 3: Valores parciais e somatório das energias, em uma
-área equivalente a $3\times7$ células na segunda camada e.m., para as demais
-camadas da seção e.m..}
+\caption{T2Calo, Etapa 3: Valores parciais e somatÃ³rio das energias, em uma
+Ã¡rea equivalente a $3\times7$ cÃ©lulas na segunda camada e.m., para as demais
+camadas da seÃ§Ã£o e.m..}
 \label{fig:t2calo-3}
 \end{figure}
 
-\item \textbf{$\text{Energia Hadrônica}_{2 \times 2}$}: Calcula-se a energia
-total num espaço $\eta=0,2 \times \phi=0,2$ tomando-se os valores das células
-cujo o centro recai sobre a região definida em cada camada da seção hadrônica;
+\item \textbf{$\text{Energia HadrÃ´nica}_{2 \times 2}$}: Calcula-se a energia
+total num espaÃ§o $\eta=0,2 \times \phi=0,2$ tomando-se os valores das cÃ©lulas
+cujo o centro recai sobre a regiÃ£o definida em cada camada da seÃ§Ã£o hadrÃ´nica;
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.6]{t2calo-4}
 \end{center}
-\caption{T2Calo, Etapa 4: Valores parciais e somatório das energias, em uma
-área equivalente a $0,2\times0,2$ no plano $\eta\times\phi$, para as camadas
-da seção hadrônica.} 
+\caption{T2Calo, Etapa 4: Valores parciais e somatÃ³rio das energias, em uma
+Ã¡rea equivalente a $0,2\times0,2$ no plano $\eta\times\phi$, para as camadas
+da seÃ§Ã£o hadrÃ´nica.} 
 \label{fig:t2calo-4}
 \end{figure}
 
 \end{enumerate}
 
-O algoritmo de deteção propriamento dito segue a execução do T2Calo e é
-chamado \emph{EGammaHypho}. Este algoritmo tem a função exclusiva de combinar
-as informações disponíveis dos diversos algoritmos de FEx relacionados à
-deteção de elétrons e fótons e tomar uma decisão simples baseada nas
-propriedades físicas das partículas de interesse. No caso de RoI's tipo e.m.,
-o EGammaHypho é também executado logo após a execução do T2Calo visando uma
-rejeição rápida da física responsável pelo ``ruído" (ou \eng{background}), ou
-seja, jatos. As vantagens deste processo de rejeição ``antecipada" foram
-discutidas no Capítulo~\ref{chap:trigger}.
+O algoritmo de deteÃ§Ã£o propriamento dito segue a execuÃ§Ã£o do T2Calo e Ã©
+chamado \emph{EGammaHypho}. Este algoritmo tem a funÃ§Ã£o exclusiva de combinar
+as informaÃ§Ãµes disponÃ­veis dos diversos algoritmos de FEx relacionados Ã 
+deteÃ§Ã£o de elÃ©trons e fÃ³tons e tomar uma decisÃ£o simples baseada nas
+propriedades fÃ­sicas das partÃ­culas de interesse. No caso de RoI's tipo e.m.,
+o EGammaHypho Ã© tambÃ©m executado logo apÃ³s a execuÃ§Ã£o do T2Calo visando uma
+rejeiÃ§Ã£o rÃ¡pida da fÃ­sica responsÃ¡vel pelo ``ruÃ­do" (ou \eng{background}), ou
+seja, jatos. As vantagens deste processo de rejeiÃ§Ã£o ``antecipada" foram
+discutidas no CapÃ­tulo~\ref{chap:trigger}.
 
-Uma vez que a quantidade de informações disponível neste momento encontra-se
-somente nos parâmetros pré-definidos pelo T2Calo, o EGammaHypho definirá uma
-seqüência simples de discriminadores baseados em combinações lineares e
-não-lineares destas quantidades. As quantidades de interesse do EGammaHypho
-são: 
+Uma vez que a quantidade de informaÃ§Ãµes disponÃ­vel neste momento encontra-se
+somente nos parÃ¢metros prÃ©-definidos pelo T2Calo, o EGammaHypho definirÃ¡ uma
+seqÃ¼Ãªncia simples de discriminadores baseados em combinaÃ§Ãµes lineares e
+nÃ£o-lineares destas quantidades. As quantidades de interesse do EGammaHypho
+sÃ£o: 
 
 \begin{enumerate}
-\item \textbf{Centros refinados da RoI}: Procurando-se o pico de deposição
-energética na segunda camada e.m., utilizando a granularidade máxima do
-detetor, é possível refinar o ponto de impacto do objeto. Estes valores serão
-utilizados para o cálculo das demais variáveis do T2Calo;
+\item \textbf{Centros refinados da RoI}: Procurando-se o pico de deposiÃ§Ã£o
+energÃ©tica na segunda camada e.m., utilizando a granularidade mÃ¡xima do
+detetor, Ã© possÃ­vel refinar o ponto de impacto do objeto. Estes valores serÃ£o
+utilizados para o cÃ¡lculo das demais variÃ¡veis do T2Calo;
 
-\item \textbf{\rcore}: Representa a razão entre a soma das células na segunda
-camada e.m., numa área de $3 \times 7$ células por $7 \times 7$ células ao
-redor da célula na segunda camada que apresenta o maior valor de energia
+\item \textbf{\rcore}: Representa a razÃ£o entre a soma das cÃ©lulas na segunda
+camada e.m., numa Ã¡rea de $3 \times 7$ cÃ©lulas por $7 \times 7$ cÃ©lulas ao
+redor da cÃ©lula na segunda camada que apresenta o maior valor de energia
 depositado, como calculado na Etapa~1 do T2Calo. Esta quantidade mede o
 espalhamento da cascata formada pelo decaimento do objeto de estudo. No caso
 do objeto ser um jato, espera-se que a cascata tenha um espalhamento maior que
-no caso de elétrons, resultando em um valor menor que 1 para esta quantidade;
+no caso de elÃ©trons, resultando em um valor menor que 1 para esta quantidade;
 
-\item Cálculo de \textbf{\eratio}: Uma vez que jatos de par\-tí\-culas
-interagem de forma mais espalhada do que e\-lé\-trons, espera-se que na
-primeira camada e.m. sejam observados vários picos. Definindo um pico ($E$)
-como sendo a ocorrência de um máximo registrado pela célula central de um
-agrupamento de três células adjacentes, então, a quantidade \eratio\
-representa a razão de energias \eratio$=\frac{E_1-E_2}{E_1+E_2}$. Ou seja, a
-razão da subtração pela soma dos valores de energia dos dois picos mais
-energéticos na primeira camada e.m., como calculado na Etapa~2 do T2Calo.
+\item CÃ¡lculo de \textbf{\eratio}: Uma vez que jatos de par\-tÃ­\-culas
+interagem de forma mais espalhada do que e\-lÃ©\-trons, espera-se que na
+primeira camada e.m. sejam observados vÃ¡rios picos. Definindo um pico ($E$)
+como sendo a ocorrÃªncia de um mÃ¡ximo registrado pela cÃ©lula central de um
+agrupamento de trÃªs cÃ©lulas adjacentes, entÃ£o, a quantidade \eratio\
+representa a razÃ£o de energias \eratio$=\frac{E_1-E_2}{E_1+E_2}$. Ou seja, a
+razÃ£o da subtraÃ§Ã£o pela soma dos valores de energia dos dois picos mais
+energÃ©ticos na primeira camada e.m., como calculado na Etapa~2 do T2Calo.
 
-Se o objeto for um elétron (objeto único), espera-se que $E_2=0$, já que a
-cascata de partículas que o elétron forma na sua interação com o calorímetro
-é, tipicamente, bastante estreita, e portanto \eratio=1. Para jatos,
-normalmente, \eratio\ será menor que 1, já que $E_2 \neq 0$;
+Se o objeto for um elÃ©tron (objeto Ãºnico), espera-se que $E_2=0$, jÃ¡ que a
+cascata de partÃ­culas que o elÃ©tron forma na sua interaÃ§Ã£o com o calorÃ­metro
+Ã©, tipicamente, bastante estreita, e portanto \eratio=1. Para jatos,
+normalmente, \eratio\ serÃ¡ menor que 1, jÃ¡ que $E_2 \neq 0$;
 
 \item \textbf{\etem}: Esta quantidade representa a soma das energias das
-células da seção e.m. dos calorímetros, cujo centro recai sobre uma região de
-$0,075 \times 0,175$ no plano \ep, ao redor do centro da célula da segunda
+cÃ©lulas da seÃ§Ã£o e.m. dos calorÃ­metros, cujo centro recai sobre uma regiÃ£o de
+$0,075 \times 0,175$ no plano \ep, ao redor do centro da cÃ©lula da segunda
 camada e.m. que apresenta o maior valor de energia depositada, como calculado
-na Etapa~3 do T2Calo. O valor original calculado é dividido pelo
+na Etapa~3 do T2Calo. O valor original calculado Ã© dividido pelo
 $\cosh{|\eta|}$ para que obtenha-se a energia tranversa\footnote{O termo
-``transverso" neste contexto refere-se ao feixe de partículas.} (projetada no
-plano $x \times y$ do detetor). A região na qual esta quantidade é extraída
-equivale, usando-se a granularidade da segunda camada e.m., a uma região de 3
-células na direção $\eta$ por 7 células na direção de $\phi$. Espera-se que a
-energia de elétrons esteja totalmente contida nesta janela; por seu turno,
-jatos devem apresentar, hipoteticamente, uma fração menor de sua energia
-depositada nesta área;
+``transverso" neste contexto refere-se ao feixe de partÃ­culas.} (projetada no
+plano $x \times y$ do detetor). A regiÃ£o na qual esta quantidade Ã© extraÃ­da
+equivale, usando-se a granularidade da segunda camada e.m., a uma regiÃ£o de 3
+cÃ©lulas na direÃ§Ã£o $\eta$ por 7 cÃ©lulas na direÃ§Ã£o de $\phi$. Espera-se que a
+energia de elÃ©trons esteja totalmente contida nesta janela; por seu turno,
+jatos devem apresentar, hipoteticamente, uma fraÃ§Ã£o menor de sua energia
+depositada nesta Ã¡rea;
 
-\item \textbf{\ethad}: Esta quantidade representa a soma das células na
-primeira camada da seção hadrônica do calorímetro dentro de uma região de $0,2
-\times 0,2$ no plano \ep, ao redor do centro da célula na segunda camada
+\item \textbf{\ethad}: Esta quantidade representa a soma das cÃ©lulas na
+primeira camada da seÃ§Ã£o hadrÃ´nica do calorÃ­metro dentro de uma regiÃ£o de $0,2
+\times 0,2$ no plano \ep, ao redor do centro da cÃ©lula na segunda camada
 e.m. que apresenta o maior valor de energia depositada, como calculado na
-Etapa~4 do T2Calo. O valor também é divido por $\cosh{|\eta|}$ para que
-obtenha-se o valor de energia tranversa. Para elétrons, a quantidade de
-energia depositada na camada hadrônica deve ser próxima de zero, enquanto que,
+Etapa~4 do T2Calo. O valor tambÃ©m Ã© divido por $\cosh{|\eta|}$ para que
+obtenha-se o valor de energia tranversa. Para elÃ©trons, a quantidade de
+energia depositada na camada hadrÃ´nica deve ser prÃ³xima de zero, enquanto que,
 para jatos, espera-se que seja diferente de zero.
 \end{enumerate}
 
-A seqüência discriminativa está representada a seguir, em pseudo-código:
+A seqÃ¼Ãªncia discriminativa estÃ¡ representada a seguir, em pseudo-cÃ³digo:
 
 \newcommand{\textbu}[1]{\textbf{\underline{#1}}}
-\newcommand{\IF}[1]{\textbu{se} #1, \textbu{então}}
+\newcommand{\IF}[1]{\textbu{se} #1, \textbu{entÃ£o}}
 \newcommand{\RETURN}[1]{\\ \textbu{retornar} #1\textbf{;}}
 \newcommand{\EVALTWO}[3]{\textbu{calcular} #1(#2, #3)\textbf{;}}
 \newcommand{\lumihi}{\ensuremath{10^{33} \text{cm}^{-2}\text{s}^{-1}}}
@@ -647,136 +647,136 @@ A seqüência discriminativa está representada a seguir, em pseudo-código:
 
 \item[\ding{186}] \IF{centro da RoI em e.m.2 distante ($\gtrapprox 0,1$) do
 definido pelo LVL1}
-	\RETURN{\textbf{não é} elétron}
+	\RETURN{\textbf{nÃ£o Ã©} elÃ©tron}
 
 \item[\ding{187}] \IF{$\rcore \lessapprox 0,9$}
-	\RETURN{\textbf{não é} elétron}
+	\RETURN{\textbf{nÃ£o Ã©} elÃ©tron}
 
 \item[\ding{188}] \IF{$\eratio \lessapprox 0,75$}
-	\RETURN{\textbf{não é} elétron}
+	\RETURN{\textbf{nÃ£o Ã©} elÃ©tron}
 
 \item[\ding{189}] \IF{$\etem \lessapprox 25$ GeV, L = \lumihi}
-	\RETURN{\textbf{não é} elétron}
+	\RETURN{\textbf{nÃ£o Ã©} elÃ©tron}
 
 \item[\ding{190}] \IF{$\ethad \gtrapprox 1$ GeV, L = \lumihi}
-	\RETURN{\textbf{não é} elétron}
+	\RETURN{\textbf{nÃ£o Ã©} elÃ©tron}
 
 \end{description}
 
-Se o objeto definido pelo LVL1 conseguir passar todos os critérios definidos
-neste procedimento, é promovido a ``candidato à elétron" dentro do LVL2. As
-fases seguintes de discriminação tentarão encontrar um traço, com momento
-equivalente a energia do \eng{cluster}, e uma nova rodada de hipóteses
-confirmará (ou não) o elétron. A procura de traços nos detetores internos é um
+Se o objeto definido pelo LVL1 conseguir passar todos os critÃ©rios definidos
+neste procedimento, Ã© promovido a ``candidato Ã  elÃ©tron" dentro do LVL2. As
+fases seguintes de discriminaÃ§Ã£o tentarÃ£o encontrar um traÃ§o, com momento
+equivalente a energia do \eng{cluster}, e uma nova rodada de hipÃ³teses
+confirmarÃ¡ (ou nÃ£o) o elÃ©tron. A procura de traÃ§os nos detetores internos Ã© um
 procedimento tipicamente lento (na ordem de dezenas, dependendo centenas de
-milissegundos \cite{hlt-tdr}), e deve ser evitada tanto quanto possível. Por
-outro lado, deseja-se que o sistema de deteção preliminar, baseado em
-calorimetria seja o mais rápido possível, mas mantendo bons níveis de
-discriminação como já discutido.
+milissegundos \cite{hlt-tdr}), e deve ser evitada tanto quanto possÃ­vel. Por
+outro lado, deseja-se que o sistema de deteÃ§Ã£o preliminar, baseado em
+calorimetria seja o mais rÃ¡pido possÃ­vel, mas mantendo bons nÃ­veis de
+discriminaÃ§Ã£o como jÃ¡ discutido.
 
-Uma das estratégias em consideração atualmente, pondera sobre a utilização dos
-diversos estágios de hipótese de forma seqüencial, durante a extração de
-característica. Neste caso, após interagir com a segunda camada e.m., o T2Calo
-seria brevemente parado e a primeira das hipóteses verificada, criando
-recursos para uma rejeição ainda mais antecipada. Em seguida, os dados da RoI
+Uma das estratÃ©gias em consideraÃ§Ã£o atualmente, pondera sobre a utilizaÃ§Ã£o dos
+diversos estÃ¡gios de hipÃ³tese de forma seqÃ¼encial, durante a extraÃ§Ã£o de
+caracterÃ­stica. Neste caso, apÃ³s interagir com a segunda camada e.m., o T2Calo
+seria brevemente parado e a primeira das hipÃ³teses verificada, criando
+recursos para uma rejeiÃ§Ã£o ainda mais antecipada. Em seguida, os dados da RoI
 para a primeira camada e.m. seriam carregados no processador, a segunda
-variável seria calculada e mais uma rodada de decisão seria tomada. As
-próximas etapas seriam a carga dos dados da terceira camada e.m. e do
-pré-irradiador, seguindo-se da análise de dados na seção hadrônica. 
+variÃ¡vel seria calculada e mais uma rodada de decisÃ£o seria tomada. As
+prÃ³ximas etapas seriam a carga dos dados da terceira camada e.m. e do
+prÃ©-irradiador, seguindo-se da anÃ¡lise de dados na seÃ§Ã£o hadrÃ´nica. 
 
 \subsubsection{Ajuste fino para cada canal}
 
 Para cada uma das assinaturas de interesse aprovadas pelo LVL1, o segundo
-nível contará com algoritmos e sistemas de hipótese adequados àquela física. É
+nÃ­vel contarÃ¡ com algoritmos e sistemas de hipÃ³tese adequados Ã quela fÃ­sica. Ã‰
 interessante notar que mesmo para os canais similares, e.g. (vide a
 Tabela~\ref{tab:l1-rates}) \texttt{EM25i} e \texttt{EM15i}, os cortes impostos
-pelo algoritmo de hipótese serão otimizados para estas categorias de
+pelo algoritmo de hipÃ³tese serÃ£o otimizados para estas categorias de
 energia. 
 
-%Neste trabalho estaremos comparando os diversos algoritmos de deteção
-%utilizando um conjunto de eventos destinado ao estudo da discriminação
-%elétron/jato no contexto da assinatura mais freqüente do experimento:
+%Neste trabalho estaremos comparando os diversos algoritmos de deteÃ§Ã£o
+%utilizando um conjunto de eventos destinado ao estudo da discriminaÃ§Ã£o
+%elÃ©tron/jato no contexto da assinatura mais freqÃ¼ente do experimento:
 %\texttt{EM25i}.
 
-\subsection{Caracterização do T2Calo e do EGammaHypho}
+\subsection{CaracterizaÃ§Ã£o do T2Calo e do EGammaHypho}
 
-Para a caracterização de operação do T2Calo e do algoritmo de hipótese
+Para a caracterizaÃ§Ã£o de operaÃ§Ã£o do T2Calo e do algoritmo de hipÃ³tese
 associado, os seguintes grupamentos de dados foram considerados:
 
 \begin{itemize}
-\item Cerca de 23.000 elétrons simulados via Monte Carlo, proveniente de
-interações tipo $H (130 \text{GeV})\rightarrow ZZ \rightarrow 4e^-$ e 
-$H (130 \text{GeV})\rightarrow ZZ \rightarrow 2e^- + 2\mu$. Os elétrons de
-cada evento simulado interagem com diferentes regiões do detetor;
+\item Cerca de 23.000 elÃ©trons simulados via Monte Carlo, proveniente de
+interaÃ§Ãµes tipo $H (130 \text{GeV})\rightarrow ZZ \rightarrow 4e^-$ e 
+$H (130 \text{GeV})\rightarrow ZZ \rightarrow 2e^- + 2\mu$. Os elÃ©trons de
+cada evento simulado interagem com diferentes regiÃµes do detetor;
 \item Cerca de 250.000 jatos simulados via Monte Carlo, com energia total,
 fixa em 25 GeV. 
 \end{itemize}
 
-Nos dois casos, considerou-se simulações com ruído, proveniente da eletrônica
-e uma planta de detetor compatível com o que está sendo instalado atualmente
+Nos dois casos, considerou-se simulaÃ§Ãµes com ruÃ­do, proveniente da eletrÃ´nica
+e uma planta de detetor compatÃ­vel com o que estÃ¡ sendo instalado atualmente
 na caverna do experimento, provendo um ambiente bastante acurado dentro do que
-se é possível prever em termos de operação, mas ainda exequível em um ambiente
-de simulação.
+se Ã© possÃ­vel prever em termos de operaÃ§Ã£o, mas ainda exequÃ­vel em um ambiente
+de simulaÃ§Ã£o.
 
-Esta massa original de dados foi submetida a uma simulação do LVL1, que
-implementa o algoritmo discutido na Seção~\ref{sec:lvl2-detect-electron},
+Esta massa original de dados foi submetida a uma simulaÃ§Ã£o do LVL1, que
+implementa o algoritmo discutido na SeÃ§Ã£o~\ref{sec:lvl2-detect-electron},
 aceitando todos os eventos com objetos tipo EM com as seguintes
-características:
+caracterÃ­sticas:
 
 \begin{itemize}
-\item ao menos 10 GeV numa região de $2\times2$ torres de filtragem na seção
+\item ao menos 10 GeV numa regiÃ£o de $2\times2$ torres de filtragem na seÃ§Ã£o
 e.m.;
-\item no máximo 4 GeV na região periféria ao núcleo de $2\times2$ torres de
+\item no mÃ¡ximo 4 GeV na regiÃ£o perifÃ©ria ao nÃºcleo de $2\times2$ torres de
 filtragem; 
-\item no máximo 2 GeV de depósito na seção hadrônica;
+\item no mÃ¡ximo 2 GeV de depÃ³sito na seÃ§Ã£o hadrÃ´nica;
 \item qualquer valor para o centro em $\phi$;
 \item $\eta$ variando de $-2,5$ a $+2,5$;
 \end{itemize}
 
-Um total de cerca de 22.000 elétrons e 7.000 jatos que passariam a um corte
-como o proposto acima fazem parte da massa de dados remanescente após as
-sanções da simulação do LVL1. A Figura~\ref{fig:transverse-energy} contém os
-histogramas de deposição energética total transversa de elétrons (em cima) e
+Um total de cerca de 22.000 elÃ©trons e 7.000 jatos que passariam a um corte
+como o proposto acima fazem parte da massa de dados remanescente apÃ³s as
+sanÃ§Ãµes da simulaÃ§Ã£o do LVL1. A Figura~\ref{fig:transverse-energy} contÃ©m os
+histogramas de deposiÃ§Ã£o energÃ©tica total transversa de elÃ©trons (em cima) e
 jatos (embaixo), em uma janela de $0,4 \times 0,4$ no plano $\eta\times\phi$,
-considerando-se as duas seções do calorímetro (e.m. e hadrônica). É possível
+considerando-se as duas seÃ§Ãµes do calorÃ­metro (e.m. e hadrÃ´nica). Ã‰ possÃ­vel
 distinguir um corte acentuado nas redondezas de aproximadamente 20~GeV, que
-equivale à ação da simulação do LVL1, como esperado. A cauda e cabeça da
-distribuição são influenciadas pela qualidade da calibração rudimentar
-disponível ao primeiro de filtragem do experimento. A média da distribuição é
-polarizada pela qualidade da calibração disponível no LVL2. Para o histograma
-de jatos a média aproxima-se ao valor esperado de 25 GeV, exibindo um pico
-pronunciado ao redor da média. Como é possível observar, grande parte dos jatos
+equivale Ã  aÃ§Ã£o da simulaÃ§Ã£o do LVL1, como esperado. A cauda e cabeÃ§a da
+distribuiÃ§Ã£o sÃ£o influenciadas pela qualidade da calibraÃ§Ã£o rudimentar
+disponÃ­vel ao primeiro de filtragem do experimento. A mÃ©dia da distribuiÃ§Ã£o Ã©
+polarizada pela qualidade da calibraÃ§Ã£o disponÃ­vel no LVL2. Para o histograma
+de jatos a mÃ©dia aproxima-se ao valor esperado de 25 GeV, exibindo um pico
+pronunciado ao redor da mÃ©dia. Como Ã© possÃ­vel observar, grande parte dos jatos
 encontram-se com valor de energia transversa entre 10 e 40~GeV, enquanto que
-para elétrons, a distribuição decai suavemente até cerca depois $\cong$91~GeV
-(aproximadamente a massa de repouso do bóson Z).
+para elÃ©trons, a distribuiÃ§Ã£o decai suavemente atÃ© cerca depois $\cong$91~GeV
+(aproximadamente a massa de repouso do bÃ³son Z).
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.95]{transverse-energy}
 \end{center}
-\caption{A deposição total de energia em uma região $0,4 \times 0,4$ no plano
-$\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para a massa de
-dados disponível para o estudo.}
+\caption{A deposiÃ§Ã£o total de energia em uma regiÃ£o $0,4 \times 0,4$ no plano
+$\eta\times\phi$ para elÃ©trons (em cima) e jatos (em baixo) para a massa de
+dados disponÃ­vel para o estudo.}
 \label{fig:transverse-energy}
 \end{figure}
 
-Nas Figuras~\ref{fig:em-tenergy} e \ref{fig:had-tenergy} é pos\-sí\-vel
-observar histogramas para e\-lé\-trons (em cima) e jatos (em baixo) da energia
-transversa total por seção dos calorímetros. Nota-se que para elétrons quase
-100\% da energia total do objeto é retida na seção e.m., enquanto que para
-jatos observa-se vazamento na seção hadrônica. Embora o corte realizado pelo
-LVL1 tenha sido em 2~GeV para o vazamento de energia nesta seção, observa-se
-que logo após este valor a energia total na seção decai rapidamente donde
+Nas Figuras~\ref{fig:em-tenergy} e \ref{fig:had-tenergy} Ã© pos\-sÃ­\-vel
+observar histogramas para e\-lÃ©\-trons (em cima) e jatos (em baixo) da energia
+transversa total por seÃ§Ã£o dos calorÃ­metros. Nota-se que para elÃ©trons quase
+100\% da energia total do objeto Ã© retida na seÃ§Ã£o e.m., enquanto que para
+jatos observa-se vazamento na seÃ§Ã£o hadrÃ´nica. Embora o corte realizado pelo
+LVL1 tenha sido em 2~GeV para o vazamento de energia nesta seÃ§Ã£o, observa-se
+que logo apÃ³s este valor a energia total na seÃ§Ã£o decai rapidamente donde
 conclui-se que a cauda estaria possivelmente relacionada a qualidade da
-calibração dos dados para este nível de filtragem.
+calibraÃ§Ã£o dos dados para este nÃ­vel de filtragem.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.95]{em-tenergy}
 \end{center}
-\caption{A deposição total de energia na seção e.m. em uma região $0,4 \times
-0,4$ no plano $\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para
-a massa de dados disponível para o estudo. As contagens estão normalizadas.}
+\caption{A deposiÃ§Ã£o total de energia na seÃ§Ã£o e.m. em uma regiÃ£o $0,4 \times
+0,4$ no plano $\eta\times\phi$ para elÃ©trons (em cima) e jatos (em baixo) para
+a massa de dados disponÃ­vel para o estudo. As contagens estÃ£o normalizadas.}
 \label{fig:em-tenergy}
 \end{figure}
 
@@ -784,28 +784,28 @@ a massa de dados disponível para o estudo. As contagens estão normalizadas.}
 \begin{center}
 \includegraphics[scale=0.95]{had-tenergy}
 \end{center}
-\caption{A deposição total de energia na seção hadrônica em uma região $0,4 \times
-0,4$ no plano $\eta\times\phi$ para elétrons (em cima) e jatos (em baixo) para
-a massa de dados disponível para o estudo. As contagens estão normalizadas.}
+\caption{A deposiÃ§Ã£o total de energia na seÃ§Ã£o hadrÃ´nica em uma regiÃ£o $0,4 \times
+0,4$ no plano $\eta\times\phi$ para elÃ©trons (em cima) e jatos (em baixo) para
+a massa de dados disponÃ­vel para o estudo. As contagens estÃ£o normalizadas.}
 \label{fig:had-tenergy}
 \end{figure}
 
-As Figuras~\ref{fig:rcore} e \ref{fig:eratio} mostram respectivamente a fração
-\rcore e \eratio tal como utilizada pelo EGammaHypo para definir a eficiência
-de deteção de elétrons e jatos. Na Figura~\ref{fig:rcore} observa-se que a
-distribuição para elétrons tem média bastante próxima a 1 e baixíssima
-variância. Para jatos a média é mais baixa e a distribuição apresenta longa
-cauda em direção à origem. No caso da variável \eratio, que tem por objetivo
-detetar picos de deposição energética na primeira camada e.m., para elétrons
-observa-se um pico dominante em 1 ao passo que para jatos, uma distribuição
+As Figuras~\ref{fig:rcore} e \ref{fig:eratio} mostram respectivamente a fraÃ§Ã£o
+\rcore e \eratio tal como utilizada pelo EGammaHypo para definir a eficiÃªncia
+de deteÃ§Ã£o de elÃ©trons e jatos. Na Figura~\ref{fig:rcore} observa-se que a
+distribuiÃ§Ã£o para elÃ©trons tem mÃ©dia bastante prÃ³xima a 1 e baixÃ­ssima
+variÃ¢ncia. Para jatos a mÃ©dia Ã© mais baixa e a distribuiÃ§Ã£o apresenta longa
+cauda em direÃ§Ã£o Ã  origem. No caso da variÃ¡vel \eratio, que tem por objetivo
+detetar picos de deposiÃ§Ã£o energÃ©tica na primeira camada e.m., para elÃ©trons
+observa-se um pico dominante em 1 ao passo que para jatos, uma distribuiÃ§Ã£o
 mais uniforme, indicando uma separabilidade linear.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.95]{rcore}
 \end{center}
-\caption{Distribuição da variável \rcore para elétrons (em cima) e jatos
-(embaixo). As contagens estão normalizadas.}
+\caption{DistribuiÃ§Ã£o da variÃ¡vel \rcore para elÃ©trons (em cima) e jatos
+(embaixo). As contagens estÃ£o normalizadas.}
 \label{fig:rcore}
 \end{figure}
 
@@ -813,24 +813,24 @@ mais uniforme, indicando uma separabilidade linear.
 \begin{center}
 \includegraphics[scale=0.95]{eratio}
 \end{center}
-\caption{Distribuição da variável \eratio para elétrons (em cima) e jatos
-(embaixo). As contagens estão normalizadas.}
+\caption{DistribuiÃ§Ã£o da variÃ¡vel \eratio para elÃ©trons (em cima) e jatos
+(embaixo). As contagens estÃ£o normalizadas.}
 \label{fig:eratio}
 \end{figure}
 
-As Figuras~\ref{fig:eta} e \ref{fig:phi} contém histogramas para elétrons (em
-cima) e jatos (embaixo) dos centros refinados pelo T2Calo das RoI's em questão,
-tanto em relação à variável $\eta$ quanto à variavel $\phi$. É possível
-distinguir uma uniformidade na distribuição em $\phi$ e uma tendência a
-concentração de eventos nas proximidades de $\eta=0$, como espera-se no
+As Figuras~\ref{fig:eta} e \ref{fig:phi} contÃ©m histogramas para elÃ©trons (em
+cima) e jatos (embaixo) dos centros refinados pelo T2Calo das RoI's em questÃ£o,
+tanto em relaÃ§Ã£o Ã  variÃ¡vel $\eta$ quanto Ã  variavel $\phi$. Ã‰ possÃ­vel
+distinguir uma uniformidade na distribuiÃ§Ã£o em $\phi$ e uma tendÃªncia a
+concentraÃ§Ã£o de eventos nas proximidades de $\eta=0$, como espera-se no
 experimento.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.95]{eta}
 \end{center}
-\caption{Distribuição em $\eta$ dos centros refinados das RoI's para elétrons
-(em cima) e jatos (embaixo). As contagens estão normalizadas.}
+\caption{DistribuiÃ§Ã£o em $\eta$ dos centros refinados das RoI's para elÃ©trons
+(em cima) e jatos (embaixo). As contagens estÃ£o normalizadas.}
 \label{fig:eta}
 \end{figure}
 
@@ -838,34 +838,34 @@ experimento.
 \begin{center}
 \includegraphics[scale=0.95]{phi}
 \end{center}
-\caption{Distribuição em $\phi$ dos centros refinados das RoI's para elétrons
-(em cima) e jatos (embaixo). As contagens estão normalizadas.}
+\caption{DistribuiÃ§Ã£o em $\phi$ dos centros refinados das RoI's para elÃ©trons
+(em cima) e jatos (embaixo). As contagens estÃ£o normalizadas.}
 \label{fig:phi}
 \end{figure}
 
-Exceto por eventuais problemas na lógica de simulação (Monte Carlo) e filtragem
+Exceto por eventuais problemas na lÃ³gica de simulaÃ§Ã£o (Monte Carlo) e filtragem
 (pelo LVL1), espera-se que a massa de dados seja representativa do problema da
-separação entre jatos e elétrons. Deve ser levado em consideração que, para
-jatos, o pico ao redor de 25~GeV poderá introduzir imprecisões na definição da
-capacidade de deteção de elétrons bastante energéticos, presentes na massa de
-estudo. Sempre que possível, tentar-se-á levar estas restrições em
-consideração.
+separaÃ§Ã£o entre jatos e elÃ©trons. Deve ser levado em consideraÃ§Ã£o que, para
+jatos, o pico ao redor de 25~GeV poderÃ¡ introduzir imprecisÃµes na definiÃ§Ã£o da
+capacidade de deteÃ§Ã£o de elÃ©trons bastante energÃ©ticos, presentes na massa de
+estudo. Sempre que possÃ­vel, tentar-se-Ã¡ levar estas restriÃ§Ãµes em
+consideraÃ§Ã£o.
 
-\subsubsection{Deteção de elétrons com o EGammaHypo e sua otimização}
+\subsubsection{DeteÃ§Ã£o de elÃ©trons com o EGammaHypo e sua otimizaÃ§Ã£o}
 
-Para que a qualidade deteção do algoritmo proposto pelo EGammaHypo seja
+Para que a qualidade deteÃ§Ã£o do algoritmo proposto pelo EGammaHypo seja
 estimada, deve-se passar a massa de dados de estudo por um processo de
-otimização que ajude o especialista a selecionar os patamares de corte que
-definem o algoritmo, como exposto na Seção~\ref{sec:classic-detection}. Para
+otimizaÃ§Ã£o que ajude o especialista a selecionar os patamares de corte que
+definem o algoritmo, como exposto na SeÃ§Ã£o~\ref{sec:classic-detection}. Para
 tal dividiu-se o conjunto de dados em 2 metades com aproximadamente o mesmo
-número de RoI's. A primeira metade será utilizada para o ``treinamento'' ou
-otimização dos cortes enquanto que a segunda será utilizada para o teste dos
+nÃºmero de RoI's. A primeira metade serÃ¡ utilizada para o ``treinamento'' ou
+otimizaÃ§Ã£o dos cortes enquanto que a segunda serÃ¡ utilizada para o teste dos
 cortes, garantindo a imparcialidade do processo.
 
-O algoritmo de otimização não será exaustivo, varrendo todo o espaço de dados,
-mas partirá de patamares pré-fixados em valores intuitivos e definirá uma
-sub-área de variação por onde testará exaustivamente as combinações dos 4
-cortes necessários. Eis aqui os patamares e passos de busca utilizados:
+O algoritmo de otimizaÃ§Ã£o nÃ£o serÃ¡ exaustivo, varrendo todo o espaÃ§o de dados,
+mas partirÃ¡ de patamares prÃ©-fixados em valores intuitivos e definirÃ¡ uma
+sub-Ã¡rea de variaÃ§Ã£o por onde testarÃ¡ exaustivamente as combinaÃ§Ãµes dos 4
+cortes necessÃ¡rios. Eis aqui os patamares e passos de busca utilizados:
 
 \begin{enumerate}
 \item Corte em \rcore: de 0,6 a 1,0, em passos de 0,01 (41 possibilidades);
@@ -876,120 +876,120 @@ possibilidades);
 possibilidades). 
 \end{enumerate}
 
-Para cada corte, a totalidade da massa de dados de treinamento do método é
-avaliada e as RoI's que \textit{sobrevivam} ao corte são levadas à proxima
-etapa. As eficiências relativas e a quantidade de dados utilizadas para o teste
-da fase seguinte são acumulados para posterior análise. Levando-se em
-consideração o número combinações dadas as possibilidades do problema de
-otimização e considerando-se que a superfície de erro não possua um único
-mínimo, há de se tentar $41 \times 41 \times 51 \times 9 = 771579$ diferentes
-combinações neste caso antes que alguma conclusão possa ser definida. Dada a
+Para cada corte, a totalidade da massa de dados de treinamento do mÃ©todo Ã©
+avaliada e as RoI's que \textit{sobrevivam} ao corte sÃ£o levadas Ã  proxima
+etapa. As eficiÃªncias relativas e a quantidade de dados utilizadas para o teste
+da fase seguinte sÃ£o acumulados para posterior anÃ¡lise. Levando-se em
+consideraÃ§Ã£o o nÃºmero combinaÃ§Ãµes dadas as possibilidades do problema de
+otimizaÃ§Ã£o e considerando-se que a superfÃ­cie de erro nÃ£o possua um Ãºnico
+mÃ­nimo, hÃ¡ de se tentar $41 \times 41 \times 51 \times 9 = 771579$ diferentes
+combinaÃ§Ãµes neste caso antes que alguma conclusÃ£o possa ser definida. Dada a
 massa de dados a ser analisada e uma estimativa de aproximadamente $0,5$
-segundos de processamento por teste, o tempo total do programa de otimização
-dos cortes será de quase \textbf{4,5 dias}!
+segundos de processamento por teste, o tempo total do programa de otimizaÃ§Ã£o
+dos cortes serÃ¡ de quase \textbf{4,5 dias}!
 
-Esta claro que uma otimização não-polarizada estaria fora de questão para uma
-utilização em condições que possam variar em questão de horas, como é o caso do
-experimento ATLAS. Desta forma, seja uma antecipação para o cortes seria
-necessária ou uma redução do espaço de busca permitindo uma otimização mais
-rápida. A utilização de programas especialmente codificados para a tarefa
-também poderia diminuir o tempo de teste, tornando o método mais atraente para 
+Esta claro que uma otimizaÃ§Ã£o nÃ£o-polarizada estaria fora de questÃ£o para uma
+utilizaÃ§Ã£o em condiÃ§Ãµes que possam variar em questÃ£o de horas, como Ã© o caso do
+experimento ATLAS. Desta forma, seja uma antecipaÃ§Ã£o para o cortes seria
+necessÃ¡ria ou uma reduÃ§Ã£o do espaÃ§o de busca permitindo uma otimizaÃ§Ã£o mais
+rÃ¡pida. A utilizaÃ§Ã£o de programas especialmente codificados para a tarefa
+tambÃ©m poderia diminuir o tempo de teste, tornando o mÃ©todo mais atraente para 
 
-\section{Métodos Neurais de Discriminação}
+\section{MÃ©todos Neurais de DiscriminaÃ§Ã£o}
 
 Redes neurais artificiais (RNA) vem sendo atualmente utilizadas com sucesso em
-problemas de otimização, controle e reconhecimento de padrões
-\cite{haykin}. RNA's são modelos matemáticos inspirados no
-conhecimento limitado que temos do cérebro animal. Neste contexto, entende-se
-que uma rede neural pode aprender através do contato com os elementos de
-interesse de um determinado espaço de entrada e que este conhecimento é
-armazenado através das conexões sinápticas que conectam os elementos
-processadores (neurônios) da rede. Dentre as características de uma RNA
+problemas de otimizaÃ§Ã£o, controle e reconhecimento de padrÃµes
+\cite{haykin}. RNA's sÃ£o modelos matemÃ¡ticos inspirados no
+conhecimento limitado que temos do cÃ©rebro animal. Neste contexto, entende-se
+que uma rede neural pode aprender atravÃ©s do contato com os elementos de
+interesse de um determinado espaÃ§o de entrada e que este conhecimento Ã©
+armazenado atravÃ©s das conexÃµes sinÃ¡pticas que conectam os elementos
+processadores (neurÃ´nios) da rede. Dentre as caracterÃ­sticas de uma RNA
 podemos destacar:
 
 \begin{description}
 \item[Robustez] Em ambientes extremamente \emph{agressivos} (sujeitos a falhas
-e a radiotividade), como é o caso da operação do LVL2, RNA's podem manter um
-excelente desempenho, mesmo quando parte dos dados (canais de aquisição) de
-entrada são perdidos;
+e a radiotividade), como Ã© o caso da operaÃ§Ã£o do LVL2, RNA's podem manter um
+excelente desempenho, mesmo quando parte dos dados (canais de aquisiÃ§Ã£o) de
+entrada sÃ£o perdidos;
 
-\item[Generalização] RNA's podem extrair a informação relevante escondida sob
-uma grande quantidade de ruído;
+\item[GeneralizaÃ§Ã£o] RNA's podem extrair a informaÃ§Ã£o relevante escondida sob
+uma grande quantidade de ruÃ­do;
 
-\item[Deteção de novos fenômenos] RNA's podem detetar a ocorrência de novos
-objetos de forma bastante eficaz. Isto é \underline{extremamente} importante
-em ambientes que podem revelar resultados inesperados (nova física);
+\item[DeteÃ§Ã£o de novos fenÃ´menos] RNA's podem detetar a ocorrÃªncia de novos
+objetos de forma bastante eficaz. Isto Ã© \underline{extremamente} importante
+em ambientes que podem revelar resultados inesperados (nova fÃ­sica);
 
-\item[Simples implementação] RNA's podem ser facilmente descritas em
-linguagens de programação convencionais, atingindo desempenhos satifatórios
-para um grande conjunto de aplicações em tempo real.
+\item[Simples implementaÃ§Ã£o] RNA's podem ser facilmente descritas em
+linguagens de programaÃ§Ã£o convencionais, atingindo desempenhos satifatÃ³rios
+para um grande conjunto de aplicaÃ§Ãµes em tempo real.
 \end{description}
 
-\subsection{Definição de uma rede neural artificial}
+\subsection{DefiniÃ§Ã£o de uma rede neural artificial}
 
-Um neurônio de uma RNA pode ser modelado por um grafo de fluxo como mostrado
+Um neurÃ´nio de uma RNA pode ser modelado por um grafo de fluxo como mostrado
 na Figura~\ref{fig:neuron}. 
 
 \begin{figure}
 \begin{center}
 \includegraphics{neuron}
 \end{center}
-\caption{Um grafo de fluxo de sinal de um neurônio artificial.}
+\caption{Um grafo de fluxo de sinal de um neurÃ´nio artificial.}
 \label{fig:neuron}
 \end{figure}
 
-Este estudo está focado na utilização de RNA's completamente conectadas, sem
-realimentação e com treinamento baseado na retropropagação de erros. RNA's
-completamente conectadas são aquelas onde os neurônios estão compartiment
+Este estudo estÃ¡ focado na utilizaÃ§Ã£o de RNA's completamente conectadas, sem
+realimentaÃ§Ã£o e com treinamento baseado na retropropagaÃ§Ã£o de erros. RNA's
+completamente conectadas sÃ£o aquelas onde os neurÃ´nios estÃ£o compartiment
 
 \subsection{Discriminador de Fischer}
 
 \subsection{PCA}
 
-\section{Mapeamento topológico e discriminação neural: o \emph{neuralringer}}
+\section{Mapeamento topolÃ³gico e discriminaÃ§Ã£o neural: o \emph{neuralringer}}
 
-Fazer uma descrição detalhada do sistema que mapeia em anéis, a informação da
-RoI. Aplicação de uma rede neural como discriminador (hipótese).
+Fazer uma descriÃ§Ã£o detalhada do sistema que mapeia em anÃ©is, a informaÃ§Ã£o da
+RoI. AplicaÃ§Ã£o de uma rede neural como discriminador (hipÃ³tese).
 
-\subsection{Implementação inicial}
+\subsection{ImplementaÃ§Ã£o inicial}
 
-Explicação da escolha da linguagem C++. Técnicas de programação concorrente,
-fazer referência ao sistema de filtragem multi-tarefas, explicitado
-anteriormente. Mostrar trechos de código e explicar a portabilidade do
-sistema. Dar ao leitor, um visual de como é possível gerar os dados (arquivos
-RFD) e depois usá-los para fazer testes.
+ExplicaÃ§Ã£o da escolha da linguagem C++. TÃ©cnicas de programaÃ§Ã£o concorrente,
+fazer referÃªncia ao sistema de filtragem multi-tarefas, explicitado
+anteriormente. Mostrar trechos de cÃ³digo e explicar a portabilidade do
+sistema. Dar ao leitor, um visual de como Ã© possÃ­vel gerar os dados (arquivos
+RFD) e depois usÃ¡-los para fazer testes.
 
-\subsection{Análise física}
+\subsection{AnÃ¡lise fÃ­sica}
 
-Esta seção vai falar do desempenho "físico" do neuralringer. Quão melhor é que
-o T2Calo na deteção de elétrons e jatos. As divergências nos cálculos podem
-ser restaurandas usando-se combinações de aneis, tais como a energia total,
+Esta seÃ§Ã£o vai falar do desempenho "fÃ­sico" do neuralringer. QuÃ£o melhor Ã© que
+o T2Calo na deteÃ§Ã£o de elÃ©trons e jatos. As divergÃªncias nos cÃ¡lculos podem
+ser restaurandas usando-se combinaÃ§Ãµes de aneis, tais como a energia total,
 etc.
 
-Colocar os diversos tipos de análise que temos até agora.
+Colocar os diversos tipos de anÃ¡lise que temos atÃ© agora.
 
-\subsection{Análise de relevância}
+\subsection{AnÃ¡lise de relevÃ¢ncia}
 
-Nesta seção vamos fazer a análise da relevância. Uma coisa que me vem a cabeça
-seria um gráfico mostrando quais anéis são mantidos a cada iteração de
-cortes. Explicar que não tem muito sentido ficar cortando sem parar, uma vez
-que dificulta o método.
+Nesta seÃ§Ã£o vamos fazer a anÃ¡lise da relevÃ¢ncia. Uma coisa que me vem a cabeÃ§a
+seria um grÃ¡fico mostrando quais anÃ©is sÃ£o mantidos a cada iteraÃ§Ã£o de
+cortes. Explicar que nÃ£o tem muito sentido ficar cortando sem parar, uma vez
+que dificulta o mÃ©todo.
 
-\subsection{Análise comportamental}
+\subsection{AnÃ¡lise comportamental}
 
-Nesta seção (vc pode mudar o título se quiser), devemos fazer uma estimativa,
-no mínimo, do que se ganharia dividindo o sistema usando-se camadas, como é o
+Nesta seÃ§Ã£o (vc pode mudar o tÃ­tulo se quiser), devemos fazer uma estimativa,
+no mÃ­nimo, do que se ganharia dividindo o sistema usando-se camadas, como Ã© o
 caso do T2Calo.
 
-\subsection{Outras implementações}
+\subsection{Outras implementaÃ§Ãµes}
 
 \subsubsection{Athena}
 
 Como portar o algoritmo para o Athena. Dificuldades, linhas gerais.
 
-\subsubsection{Implementação com DSPs}
+\subsubsection{ImplementaÃ§Ã£o com DSPs}
 
-Perguntar ao Seixas/Torres antes de incluir este material. A abordagem aqui é
+Perguntar ao Seixas/Torres antes de incluir este material. A abordagem aqui Ã©
 para indicar a portabilidade do sistema.
 
 \typeout{ *************** End of file neuralringer.tex *************** }

@@ -4,253 +4,253 @@
 \typeout{ Maintained by Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{Introdução}
+\chapter{IntroduÃ§Ã£o}
 %%\addcontentsline{toc}{chapter}{\numberline{}Pref\'acio}
 
-Sistemas eletrônicos de aquisição de dados são comumente empregados em muitos
-campos da engenharia. Exemplos podem ser encontrados na captura de áudio,
-vídeo, sinais de satélite, rádio, biológicos e cartográficos dentre outros.
+Sistemas eletrÃ´nicos de aquisiÃ§Ã£o de dados sÃ£o comumente empregados em muitos
+campos da engenharia. Exemplos podem ser encontrados na captura de Ã¡udio,
+vÃ­deo, sinais de satÃ©lite, rÃ¡dio, biolÃ³gicos e cartogrÃ¡ficos dentre outros.
 
-Atualmente, em vários dos problemas, o sistema de deteção de sinais é bastante
-complexo, impingindo complexidades também ao sistema de aquisição de dados. O
-sistema de deteção captando o sinal de interesse pode estar distribuído em
-múltiplas localidades ou requisitar uma velocidade de processamento que torne
-impraticável a utilização direta dos produtos disponíveis no mercado. Nestes
-casos, é comum também distribuir o sistema de aquisição, combinando-o
-posteriormente através módulos centralizados.
+Atualmente, em vÃ¡rios dos problemas, o sistema de deteÃ§Ã£o de sinais Ã© bastante
+complexo, impingindo complexidades tambÃ©m ao sistema de aquisiÃ§Ã£o de dados. O
+sistema de deteÃ§Ã£o captando o sinal de interesse pode estar distribuÃ­do em
+mÃºltiplas localidades ou requisitar uma velocidade de processamento que torne
+impraticÃ¡vel a utilizaÃ§Ã£o direta dos produtos disponÃ­veis no mercado. Nestes
+casos, Ã© comum tambÃ©m distribuir o sistema de aquisiÃ§Ã£o, combinando-o
+posteriormente atravÃ©s mÃ³dulos centralizados.
 
-Dependendo do domínio do problema, o sinal adquirido deve ser registrado em
-mídia permanente. Em muitos dos casos, porém, nem todos os sinais coletados
-são suficientemente interessantes para que sejam registrados. Para estas
-situações, sistemas de filtragem \eng{online} podem ser empregados para
-disparar o processo de gravação no momento em que se disponibilizam os sinais
-de interesse. Da mesma forma, dependendo do sistema de deteção e aquisição,
-estes sistemas podem ter que enfrentar parâmetros de operação bastante
-rigorosos. O volume dos dados a ser discriminado poderá ser grande o
+Dependendo do domÃ­nio do problema, o sinal adquirido deve ser registrado em
+mÃ­dia permanente. Em muitos dos casos, porÃ©m, nem todos os sinais coletados
+sÃ£o suficientemente interessantes para que sejam registrados. Para estas
+situaÃ§Ãµes, sistemas de filtragem \eng{online} podem ser empregados para
+disparar o processo de gravaÃ§Ã£o no momento em que se disponibilizam os sinais
+de interesse. Da mesma forma, dependendo do sistema de deteÃ§Ã£o e aquisiÃ§Ã£o,
+estes sistemas podem ter que enfrentar parÃ¢metros de operaÃ§Ã£o bastante
+rigorosos. O volume dos dados a ser discriminado poderÃ¡ ser grande o
 suficiente, ou ocorrer em intervalos de tempo curtos o suficiente, que exijam
-a distribuição do processamento também no sistema de filtragem.
+a distribuiÃ§Ã£o do processamento tambÃ©m no sistema de filtragem.
 
-O processo de discriminação empregado no sistema de filtragem está diretamente
+O processo de discriminaÃ§Ã£o empregado no sistema de filtragem estÃ¡ diretamente
 relacionado aos dados sendo adquiridos: os sinais interessantes podem ser
-identificáveis através de operações simples sobre sinal coletado ou poderão
-exigir um pré-processamento para que seja extraído um conjunto de parâmetros
-que simplifiquem o processo de classificação. Nestes casos, é comum empregar
-compressão ou compactação dos sinais de entrada do sistema de filtragem para
-que se reduza a dimensionalidade do espaço de dados a ser analisado. A
-informação a cada análise poderá ainda estar segmentada, o que traz
-complexidade adicional ao sistema de processamento de dados. Após a
-compactação, compressão ou ambos, é possível que o problema ainda se encontre
-em um espaço com dimensionalidade bastante elevada. 
+identificÃ¡veis atravÃ©s de operaÃ§Ãµes simples sobre sinal coletado ou poderÃ£o
+exigir um prÃ©-processamento para que seja extraÃ­do um conjunto de parÃ¢metros
+que simplifiquem o processo de classificaÃ§Ã£o. Nestes casos, Ã© comum empregar
+compressÃ£o ou compactaÃ§Ã£o dos sinais de entrada do sistema de filtragem para
+que se reduza a dimensionalidade do espaÃ§o de dados a ser analisado. A
+informaÃ§Ã£o a cada anÃ¡lise poderÃ¡ ainda estar segmentada, o que traz
+complexidade adicional ao sistema de processamento de dados. ApÃ³s a
+compactaÃ§Ã£o, compressÃ£o ou ambos, Ã© possÃ­vel que o problema ainda se encontre
+em um espaÃ§o com dimensionalidade bastante elevada. 
 
-Em situações deste gênero, a classificação exigirá técnicas avançadas para a
-identificação dos sinais. Redes Neurais Artificiais vem sendo utilizadas em
-muitos problemas nesta área, tanto como forma de compressão dos sinais de
-entrada como classificadores, atingindo excelentes níveis de classificação
-para igualmente ótimos patamares de desempenho. Redes Neurais são mecanismos
-de simples implementação e possuem eficiência comprovada em vários domínios
+Em situaÃ§Ãµes deste gÃªnero, a classificaÃ§Ã£o exigirÃ¡ tÃ©cnicas avanÃ§adas para a
+identificaÃ§Ã£o dos sinais. Redes Neurais Artificiais vem sendo utilizadas em
+muitos problemas nesta Ã¡rea, tanto como forma de compressÃ£o dos sinais de
+entrada como classificadores, atingindo excelentes nÃ­veis de classificaÃ§Ã£o
+para igualmente Ã³timos patamares de desempenho. Redes Neurais sÃ£o mecanismos
+de simples implementaÃ§Ã£o e possuem eficiÃªncia comprovada em vÃ¡rios domÃ­nios
 distintos.
 
-Neste trabalho, apresenta-se uma aplicação onde todos os níveis de
-complexidade descritos anteriormente serão exigidos. Neste caso, o sistema de
-deteção produzirá eventos em pulsos separados por 25 nanossegundos, a massa de
-dados a cada evento estará na ordem de alguns \eng{megabytes} e, a taxa de
-eventos de interesse será de apenas alguns para dezenas de milhões.
+Neste trabalho, apresenta-se uma aplicaÃ§Ã£o onde todos os nÃ­veis de
+complexidade descritos anteriormente serÃ£o exigidos. Neste caso, o sistema de
+deteÃ§Ã£o produzirÃ¡ eventos em pulsos separados por 25 nanossegundos, a massa de
+dados a cada evento estarÃ¡ na ordem de alguns \eng{megabytes} e, a taxa de
+eventos de interesse serÃ¡ de apenas alguns para dezenas de milhÃµes.
 
-\section{Motivação}
+\section{MotivaÃ§Ã£o}
 
-Experimentos em Física de Altas Energias procuram por confirmações
-experimentais dos modelos propostos nos estudos teóricos. Laboratórios deste
-domínio da Física contam com um sistema de colisão, que provoca o aparecimento
-da física de interesse, associado a complexos sistemas de deteção, que
-registram a evolução no tempo de cada evento produzido. Naturalmente
-envolvidos no processo de deteção, encontram-se sistemas eletrônicos que
-automatizam a busca, registro e análise dos resultados obtidos.
+Experimentos em FÃ­sica de Altas Energias procuram por confirmaÃ§Ãµes
+experimentais dos modelos propostos nos estudos teÃ³ricos. LaboratÃ³rios deste
+domÃ­nio da FÃ­sica contam com um sistema de colisÃ£o, que provoca o aparecimento
+da fÃ­sica de interesse, associado a complexos sistemas de deteÃ§Ã£o, que
+registram a evoluÃ§Ã£o no tempo de cada evento produzido. Naturalmente
+envolvidos no processo de deteÃ§Ã£o, encontram-se sistemas eletrÃ´nicos que
+automatizam a busca, registro e anÃ¡lise dos resultados obtidos.
 
-Dada a natureza complexa e rara dos fenômenos estudados em muitos destes
-experimentos, a física de interesse está normalmente submersa em uma
-gigantesca massa de eventos que representam ora ruído, provocados pelo mal
-funcionamento dos sistemas de deteção e colisão, ora eventos ordinários, já
-bastante estudados no passado. Em específico, em experimentos que buscam a
-confirmação de canais físicos em patamares energéticos elevados, de alguns
-gigaelétron-volts para cima, a taxa de eventos que representa canais
+Dada a natureza complexa e rara dos fenÃ´menos estudados em muitos destes
+experimentos, a fÃ­sica de interesse estÃ¡ normalmente submersa em uma
+gigantesca massa de eventos que representam ora ruÃ­do, provocados pelo mal
+funcionamento dos sistemas de deteÃ§Ã£o e colisÃ£o, ora eventos ordinÃ¡rios, jÃ¡
+bastante estudados no passado. Em especÃ­fico, em experimentos que buscam a
+confirmaÃ§Ã£o de canais fÃ­sicos em patamares energÃ©ticos elevados, de alguns
+gigaelÃ©tron-volts para cima, a taxa de eventos que representa canais
 desinteressantes contra a de eventos que possam interessar pode estar na faixa
 de 10$^6$ para 1. Desta forma, os eventos de interesse aparecem escondidos no
-meio de milhões de outros eventos ordinários, ou que representam apenas
-ruído. Ademais, para que se consiga apreciar a Física de interesse, milhões de
-eventos são gerados por base de tempo para que se colete estatística
-suficiente para a comprovação do canal estudado. O volume de dados associados
-a cada evento vem aumentando, junto com a ambição dos experimentos. Novos
-sistemas de deteção exigem alguns \eng{megabytes} para cada evento registrado,
-o que representa uma dificuldade extra na realização destes experimentos.
+meio de milhÃµes de outros eventos ordinÃ¡rios, ou que representam apenas
+ruÃ­do. Ademais, para que se consiga apreciar a FÃ­sica de interesse, milhÃµes de
+eventos sÃ£o gerados por base de tempo para que se colete estatÃ­stica
+suficiente para a comprovaÃ§Ã£o do canal estudado. O volume de dados associados
+a cada evento vem aumentando, junto com a ambiÃ§Ã£o dos experimentos. Novos
+sistemas de deteÃ§Ã£o exigem alguns \eng{megabytes} para cada evento registrado,
+o que representa uma dificuldade extra na realizaÃ§Ã£o destes experimentos.
 
-Para resolver este problema, introduzem-se sistemas eletrônicos de filtragem
+Para resolver este problema, introduzem-se sistemas eletrÃ´nicos de filtragem
 que podem selecionar, de forma \eng{online}, os eventos de interesse dos
-eventos que representam ruído ou física ordinária. Estes sistemas são por
-vezes tão complexos quanto os detetores do experimento e contam com soluções
-elegantes para os diversos problemas de transmissão e seleção de
-dados. Soluções atuais empregam forte paralelização e técnicas modernas de
-processamento de sinais para responder às demandas destes experimentos.
+eventos que representam ruÃ­do ou fÃ­sica ordinÃ¡ria. Estes sistemas sÃ£o por
+vezes tÃ£o complexos quanto os detetores do experimento e contam com soluÃ§Ãµes
+elegantes para os diversos problemas de transmissÃ£o e seleÃ§Ã£o de
+dados. SoluÃ§Ãµes atuais empregam forte paralelizaÃ§Ã£o e tÃ©cnicas modernas de
+processamento de sinais para responder Ã s demandas destes experimentos.
 
-Redes Neurais Artificiais vem sendo empregadas como solução em sistemas de
-filtragem em vários experimentos. Dada a forte segmentação dos dados nos
-detetores, os sistemas neurais conseguem compactar e extrair as informações
-vitais para a discriminação dos dados, mantendo não só a alta qualidade de
-classificação como também excelentes níveis de desempenho.
+Redes Neurais Artificiais vem sendo empregadas como soluÃ§Ã£o em sistemas de
+filtragem em vÃ¡rios experimentos. Dada a forte segmentaÃ§Ã£o dos dados nos
+detetores, os sistemas neurais conseguem compactar e extrair as informaÃ§Ãµes
+vitais para a discriminaÃ§Ã£o dos dados, mantendo nÃ£o sÃ³ a alta qualidade de
+classificaÃ§Ã£o como tambÃ©m excelentes nÃ­veis de desempenho.
 
-\section{O experimento ATLAS e o bóson de Higgs}
+\section{O experimento ATLAS e o bÃ³son de Higgs}
 
-A deteção do bóson de Higgs é um dos grandes expoentes da Física de Altas
-Energias atual. Esta partícula, se existir, possui uma massa bastante elevada
-(centenas de gigaelétron-volts) e se apresenta como um canal bastante raro e
-de difícil reprodução laboratorial. A descoberta desta partícula confirmará
-mais uma vez o Modelo Padrão, já bastante testado, inicialmente proposto em
+A deteÃ§Ã£o do bÃ³son de Higgs Ã© um dos grandes expoentes da FÃ­sica de Altas
+Energias atual. Esta partÃ­cula, se existir, possui uma massa bastante elevada
+(centenas de gigaelÃ©tron-volts) e se apresenta como um canal bastante raro e
+de difÃ­cil reproduÃ§Ã£o laboratorial. A descoberta desta partÃ­cula confirmarÃ¡
+mais uma vez o Modelo PadrÃ£o, jÃ¡ bastante testado, inicialmente proposto em
 1954.
 
-O CERN, na Suíça, é o local onde está sendo desenvolvido o experimento ATLAS,
-que pretende investigar a rara física do bóson de Higgs. O experimento
-utilizará colisões próton-próton, numa taxa de 40 milhões por segundo para
-conseguir obter alguns destes bósons por dia de operação. As colisões serão
-providas pelo Grande Colisionador de Hádrons (do inglês \eng{Large Hadron
-Collider}, LHC), que será, quando estiver operacional, o mais potente no
-mundo, podendo colidir prótons com 14 TeV no centro de massa.
+O CERN, na SuÃ­Ã§a, Ã© o local onde estÃ¡ sendo desenvolvido o experimento ATLAS,
+que pretende investigar a rara fÃ­sica do bÃ³son de Higgs. O experimento
+utilizarÃ¡ colisÃµes prÃ³ton-prÃ³ton, numa taxa de 40 milhÃµes por segundo para
+conseguir obter alguns destes bÃ³sons por dia de operaÃ§Ã£o. As colisÃµes serÃ£o
+providas pelo Grande Colisionador de HÃ¡drons (do inglÃªs \eng{Large Hadron
+Collider}, LHC), que serÃ¡, quando estiver operacional, o mais potente no
+mundo, podendo colidir prÃ³tons com 14 TeV no centro de massa.
 
-Uma vez que cada evento no ATLAS consumirá cerca de 1,5 \eng{megabytes} de
-espaço em memória, um dos problemas do projeto e construção do experimento
-está na articulação de um sistema de filtragem de eventos que seja capaz de
-fazer um seleção \eng{online} dos eventos que representem a Física de
+Uma vez que cada evento no ATLAS consumirÃ¡ cerca de 1,5 \eng{megabytes} de
+espaÃ§o em memÃ³ria, um dos problemas do projeto e construÃ§Ã£o do experimento
+estÃ¡ na articulaÃ§Ã£o de um sistema de filtragem de eventos que seja capaz de
+fazer um seleÃ§Ã£o \eng{online} dos eventos que representem a FÃ­sica de
 interesse.
 
-O Sistema de Filtragem do ATLAS foi inicialmente projetado para operar em três
-níveis conectados em cascata com complexidade, qualidade de deteção e tempo de
-operação por evento, crescentes. O Segundo Nível de Filtragem (LVL2), em
-específico, será constituído de cerca de 1.000 computadores ligados em rede,
-processando cada um evento completo aprovado pelo Primeiro Nível. Cada evento
-terá em média 10 milissegundos para ser processado.
+O Sistema de Filtragem do ATLAS foi inicialmente projetado para operar em trÃªs
+nÃ­veis conectados em cascata com complexidade, qualidade de deteÃ§Ã£o e tempo de
+operaÃ§Ã£o por evento, crescentes. O Segundo NÃ­vel de Filtragem (LVL2), em
+especÃ­fico, serÃ¡ constituÃ­do de cerca de 1.000 computadores ligados em rede,
+processando cada um evento completo aprovado pelo Primeiro NÃ­vel. Cada evento
+terÃ¡ em mÃ©dia 10 milissegundos para ser processado.
 
 O LVL2 coordena um conjunto de algoritmos descritos em \eng{software} que
-executa a seleção de eventos. Dentre esses, algoritmos de discriminação
-elétron/jato têm papel fundamental na eficiência da aquisição de dados, uma
-vez que a ocorrência de elétrons pode representar a Física de interesse.
+executa a seleÃ§Ã£o de eventos. Dentre esses, algoritmos de discriminaÃ§Ã£o
+elÃ©tron/jato tÃªm papel fundamental na eficiÃªncia da aquisiÃ§Ã£o de dados, uma
+vez que a ocorrÃªncia de elÃ©trons pode representar a FÃ­sica de interesse.
 
 Neste trabalho, registram-se os resultados obtidos para sistemas de
-discriminação mais eficientes, baseados em redes neurais artificiais e em um
-esquema de compactação do espaço de entrada que explora o perfil de deposição
-energética de elétrons e jatos. Para um conjunto de testes de cerca de 600
-elétrons e um pouco mais que 2.000 jatos, este sistema apresentou uma
-eficiência de classificação de 97\% para elétrons e 95,1\% para
-jatos. Comparando-se estes resultados com o algoritmo clássico implementado
+discriminaÃ§Ã£o mais eficientes, baseados em redes neurais artificiais e em um
+esquema de compactaÃ§Ã£o do espaÃ§o de entrada que explora o perfil de deposiÃ§Ã£o
+energÃ©tica de elÃ©trons e jatos. Para um conjunto de testes de cerca de 600
+elÃ©trons e um pouco mais que 2.000 jatos, este sistema apresentou uma
+eficiÃªncia de classificaÃ§Ã£o de 97\% para elÃ©trons e 95,1\% para
+jatos. Comparando-se estes resultados com o algoritmo clÃ¡ssico implementado
 atualmente no CERN, observa-se uma melhora de 2 pontos percentuais na
-classificação de elétrons contra quase 10 pontos na rejeição de jatos. O
-pré-processamento baseado na topologia do evento permite a compactação do
-espaço de entrada, originalmente de 58 características extraídas dos dados de
+classificaÃ§Ã£o de elÃ©trons contra quase 10 pontos na rejeiÃ§Ã£o de jatos. O
+prÃ©-processamento baseado na topologia do evento permite a compactaÃ§Ã£o do
+espaÃ§o de entrada, originalmente de 58 caracterÃ­sticas extraÃ­das dos dados de
 interesse, para apenas 5, mantendo bom desempenho.
 
-Os resultados sugerem que a utilização de ferramentas de processamento de
-sinais como a Análise de Componentes Principais e Componentes Independentes
-poderá melhorar ainda mais a qualidade da análise executada neste nível de
-filtragem. Neste caso, estas ferramentas substituirão o mapeamento topológico
-indicado anteriormente para que se encontre um espaço de entrada ainda mais
-propício a discriminação elétron/jato.
+Os resultados sugerem que a utilizaÃ§Ã£o de ferramentas de processamento de
+sinais como a AnÃ¡lise de Componentes Principais e Componentes Independentes
+poderÃ¡ melhorar ainda mais a qualidade da anÃ¡lise executada neste nÃ­vel de
+filtragem. Neste caso, estas ferramentas substituirÃ£o o mapeamento topolÃ³gico
+indicado anteriormente para que se encontre um espaÃ§o de entrada ainda mais
+propÃ­cio a discriminaÃ§Ã£o elÃ©tron/jato.
 
 \section{O que foi feito}
 
-O Sistema de Filtragem do ATLAS representa o trabalho e esforço de muitos
+O Sistema de Filtragem do ATLAS representa o trabalho e esforÃ§o de muitos
 profissionais que se dedicaram em tempo parcial ou integral ao
-experimento. Torna-se bastante difícil, em muitos momentos, omitir informações
-sobre outras contribuições que, de alguma forma, são importantes à narrativa,
-e onde sua supressão prejudicará a compreensão do todo. Os frutos deste
-trabalho pertencem a uma cadeia de outros projetos que juntos, compõe a cadeia
-completa do sistema de aquisição.
+experimento. Torna-se bastante difÃ­cil, em muitos momentos, omitir informaÃ§Ãµes
+sobre outras contribuiÃ§Ãµes que, de alguma forma, sÃ£o importantes Ã  narrativa,
+e onde sua supressÃ£o prejudicarÃ¡ a compreensÃ£o do todo. Os frutos deste
+trabalho pertencem a uma cadeia de outros projetos que juntos, compÃµe a cadeia
+completa do sistema de aquisiÃ§Ã£o.
 
-Por estas razões, optou-se pela narrativa exibindo um contínuo, onde as
-contribuições deste projeto de cooperação internacional se contextualizam de
+Por estas razÃµes, optou-se pela narrativa exibindo um contÃ­nuo, onde as
+contribuiÃ§Ãµes deste projeto de cooperaÃ§Ã£o internacional se contextualizam de
 uma forma bastante natural e intuitiva. Para guiar o leitor, destacam-se aqui
-as contribuições diretas deste trabalho:
+as contribuiÃ§Ãµes diretas deste trabalho:
 
 \begin{enumerate}
-\item Desenvolvimento e aplicação da Unidade Central de Processamento no
+\item Desenvolvimento e aplicaÃ§Ã£o da Unidade Central de Processamento no
 LVL2, a L2PU;
-\item Desenvolvimento e aplicação da biblioteca global de formatação de dados
+\item Desenvolvimento e aplicaÃ§Ã£o da biblioteca global de formataÃ§Ã£o de dados
 do ATLAS (\eng{eformat});
-\item Desenvolvimento e aplicação do \eng{Pseudo} Sistema de Leitura (PROS);
-\item Desenvolvimento e aplicação de uma biblioteca para rápido acesso e
+\item Desenvolvimento e aplicaÃ§Ã£o do \eng{Pseudo} Sistema de Leitura (PROS);
+\item Desenvolvimento e aplicaÃ§Ã£o de uma biblioteca para rÃ¡pido acesso e
 processamento de dados de calorimetria;
-\item Desenvolvimento e aplicação da camada de \eng{software} que combina a
-L2PU e a suíte de processamento \eng{offline} Athena;
-\item Medidas de desempenho do LVL2 para diferentes cenários, sem a utilização
-de algoritmos de discriminação;
-\item Desenvolvimento e aplicação de um sistema de mapeamento topológico para
-RoI's de objetos ditos eletromagnéticos (e.m.) no LVL2. Este sistema é
-utilizado como etapa de pré-processamento para um discriminador neural, que
-finalmente classifica elétrons e jatos;
-\item Estudos comparativos entre os métodos de compactação topológica
+\item Desenvolvimento e aplicaÃ§Ã£o da camada de \eng{software} que combina a
+L2PU e a suÃ­te de processamento \eng{offline} Athena;
+\item Medidas de desempenho do LVL2 para diferentes cenÃ¡rios, sem a utilizaÃ§Ã£o
+de algoritmos de discriminaÃ§Ã£o;
+\item Desenvolvimento e aplicaÃ§Ã£o de um sistema de mapeamento topolÃ³gico para
+RoI's de objetos ditos eletromagnÃ©ticos (e.m.) no LVL2. Este sistema Ã©
+utilizado como etapa de prÃ©-processamento para um discriminador neural, que
+finalmente classifica elÃ©trons e jatos;
+\item Estudos comparativos entre os mÃ©todos de compactaÃ§Ã£o topolÃ³gica
 apresentados e o algoritmo atualmente utilizado no CERN para os mesmos fins
 (T2Calo); 
-\item Estudos de compactação utilizando a informação da relevância para se
+\item Estudos de compactaÃ§Ã£o utilizando a informaÃ§Ã£o da relevÃ¢ncia para se
 distinguirem os canais mais importantes no classificador neural
-desenvolvido. Este item inclui estudos comparativos entre a relevância do
-discriminador neural baseado no mapeamento topológico e o discriminador
+desenvolvido. Este item inclui estudos comparativos entre a relevÃ¢ncia do
+discriminador neural baseado no mapeamento topolÃ³gico e o discriminador
 baseado no mapeamento proposto no CERN;
 \end{enumerate}
 
-\section{Organização do Texto}
+\section{OrganizaÃ§Ã£o do Texto}
 
-O Capítulo~\ref{chap:introducao} traz uma visão geral da Física de Partículas
-atual. Este capítulo inicia-se sumarizando fatos histórios que culminaram na
-formulação do Modelo Padrão para a descrição das interações sub-atômicas. Em
-seguida, é feita uma revisão das técnicas de aceleração e deteção de
-partículas mais comuns em experimentos nesta área. Na
-Seção~\ref{sec:calorimetria} descrevem-se detetores conhecidos como
-\textit{calorímetros} em maiores detalhes. Aqui, enumeram-se as diversas
-partículas de interesse para o trabalho e a forma como interagem com este tipo
-de detetor. O capítulo termina introduzindo noções gerais sobre os sistemas de
+O CapÃ­tulo~\ref{chap:introducao} traz uma visÃ£o geral da FÃ­sica de PartÃ­culas
+atual. Este capÃ­tulo inicia-se sumarizando fatos histÃ³rios que culminaram na
+formulaÃ§Ã£o do Modelo PadrÃ£o para a descriÃ§Ã£o das interaÃ§Ãµes sub-atÃ´micas. Em
+seguida, Ã© feita uma revisÃ£o das tÃ©cnicas de aceleraÃ§Ã£o e deteÃ§Ã£o de
+partÃ­culas mais comuns em experimentos nesta Ã¡rea. Na
+SeÃ§Ã£o~\ref{sec:calorimetria} descrevem-se detetores conhecidos como
+\textit{calorÃ­metros} em maiores detalhes. Aqui, enumeram-se as diversas
+partÃ­culas de interesse para o trabalho e a forma como interagem com este tipo
+de detetor. O capÃ­tulo termina introduzindo noÃ§Ãµes gerais sobre os sistemas de
 filtragem que equipam os experimentos modernos.
 
-O Capítulo~\ref{chap:atlas} narra especificidades do experimento ATLAS, que
-investigará a Física do bóson de Higgs. O capítulo começa com um breve
-histório do CERN, adentrando por detalhes operacionais do experimento em
-questão e do colisionador LHC, que gerará as interações próton-próton
-necessárias. A Seção~\ref{sec:atlas-calo} traz um resumo das características
-operacionais dos Calorímetros do ATLAS e um conjunto de referências para
+O CapÃ­tulo~\ref{chap:atlas} narra especificidades do experimento ATLAS, que
+investigarÃ¡ a FÃ­sica do bÃ³son de Higgs. O capÃ­tulo comeÃ§a com um breve
+histÃ³rio do CERN, adentrando por detalhes operacionais do experimento em
+questÃ£o e do colisionador LHC, que gerarÃ¡ as interaÃ§Ãµes prÃ³ton-prÃ³ton
+necessÃ¡rias. A SeÃ§Ã£o~\ref{sec:atlas-calo} traz um resumo das caracterÃ­sticas
+operacionais dos CalorÃ­metros do ATLAS e um conjunto de referÃªncias para
 maiores detalhes.
 
-O Sistema de Filtragem do ATLAS é introduzido no
-Capítulo~\ref{chap:trigger}. Este capítulo descreve todos os sub-sistemas que
-compõem o Sistema de Filtragem do experimento, desde o Primeiro Nível de
-Filtragem até chegar à gravação de um evento selecionado em mídia
-permanente. É neste ambiente que são executados os algoritmos de filtragem
-abordados neste trabalho. O Segundo Nível de Filtragem é detalhado a partir da
-Seção~\ref{sec:lvl2arch}. Resultados obtidos durante simulações do
-comportamento desta parte do sistema são apresentados na
-Seção~\ref{sec:lvl2work}. O final deste capítulo é dedicado ao ambiente de
-processamento de dados Athena e sua interação com o Sistema de Filtragem do
+O Sistema de Filtragem do ATLAS Ã© introduzido no
+CapÃ­tulo~\ref{chap:trigger}. Este capÃ­tulo descreve todos os sub-sistemas que
+compÃµem o Sistema de Filtragem do experimento, desde o Primeiro NÃ­vel de
+Filtragem atÃ© chegar Ã  gravaÃ§Ã£o de um evento selecionado em mÃ­dia
+permanente. Ã‰ neste ambiente que sÃ£o executados os algoritmos de filtragem
+abordados neste trabalho. O Segundo NÃ­vel de Filtragem Ã© detalhado a partir da
+SeÃ§Ã£o~\ref{sec:lvl2arch}. Resultados obtidos durante simulaÃ§Ãµes do
+comportamento desta parte do sistema sÃ£o apresentados na
+SeÃ§Ã£o~\ref{sec:lvl2work}. O final deste capÃ­tulo Ã© dedicado ao ambiente de
+processamento de dados Athena e sua interaÃ§Ã£o com o Sistema de Filtragem do
 ATLAS.
 
-O Capítulo~\ref{chap:msc} apresenta os resultados obtidos para variações do
-sistema de discriminação elétron/jato, utilizando redes neurais artificiais e
-um sistema de compactação de informação baseado no perfil de deposição
-energética. A partir Seção~\ref{sec:datainput} descrevem-se as características
-dos dados disponíveis e os conjuntos utilizados durante a fase inicial deste
-trabalho. A Seção~\ref{sec:classical} detalha a técnica de discriminação
-elétron/jato empregada atualmente no ATLAS. As seções seguintes descrevem
-variações da mesma técnica, que otimizam a separação destes dois tipos de
-Física. A partir deste ponto de referência, desenvolvem-se outras técnicas de
-discriminação que utilizam redes neurais artificiais. A Seção~\ref{sec:aneis}
-descreve o Método dos Anéis, que se utiliza do perfil de interação do objeto
-de interesse com os calorímetros para desenvolver uma técnica de separação
-mais eficiente. Na Seção~\ref{sec:relevance}, apresenta-se uma técnica de poda
-dos dados das regiões de interesse do detetor, de tal forma que se maximize a
+O CapÃ­tulo~\ref{chap:msc} apresenta os resultados obtidos para variaÃ§Ãµes do
+sistema de discriminaÃ§Ã£o elÃ©tron/jato, utilizando redes neurais artificiais e
+um sistema de compactaÃ§Ã£o de informaÃ§Ã£o baseado no perfil de deposiÃ§Ã£o
+energÃ©tica. A partir SeÃ§Ã£o~\ref{sec:datainput} descrevem-se as caracterÃ­sticas
+dos dados disponÃ­veis e os conjuntos utilizados durante a fase inicial deste
+trabalho. A SeÃ§Ã£o~\ref{sec:classical} detalha a tÃ©cnica de discriminaÃ§Ã£o
+elÃ©tron/jato empregada atualmente no ATLAS. As seÃ§Ãµes seguintes descrevem
+variaÃ§Ãµes da mesma tÃ©cnica, que otimizam a separaÃ§Ã£o destes dois tipos de
+FÃ­sica. A partir deste ponto de referÃªncia, desenvolvem-se outras tÃ©cnicas de
+discriminaÃ§Ã£o que utilizam redes neurais artificiais. A SeÃ§Ã£o~\ref{sec:aneis}
+descreve o MÃ©todo dos AnÃ©is, que se utiliza do perfil de interaÃ§Ã£o do objeto
+de interesse com os calorÃ­metros para desenvolver uma tÃ©cnica de separaÃ§Ã£o
+mais eficiente. Na SeÃ§Ã£o~\ref{sec:relevance}, apresenta-se uma tÃ©cnica de poda
+dos dados das regiÃµes de interesse do detetor, de tal forma que se maximize a
 capacidade discriminante do Sistema de Filtragem. Estes resultados podem ser
-utilizados para a otimização global deste sistema.
+utilizados para a otimizaÃ§Ã£o global deste sistema.
 
-O Capítulo~\ref{chap:future} traz uma breve conclusão dos estudos realizados
-até o momento presente e apresenta extensões de estudo para este trabalho.
+O CapÃ­tulo~\ref{chap:future} traz uma breve conclusÃ£o dos estudos realizados
+atÃ© o momento presente e apresenta extensÃµes de estudo para este trabalho.
 
-Para a melhor compreensão dos termos utilizados na descrição da geometria dos
-objetos estudados neste trabalho, o Apêndice~\ref{ap:coord} introduz o sistema
+Para a melhor compreensÃ£o dos termos utilizados na descriÃ§Ã£o da geometria dos
+objetos estudados neste trabalho, o ApÃªndice~\ref{ap:coord} introduz o sistema
 de coordenadas do ATLAS.
 
-O Apêndice~\ref{chap:published} traz um resumo da produção científica no
-período e projetos que integram o corpo deste estudo.
+O ApÃªndice~\ref{chap:published} traz um resumo da produÃ§Ã£o cientÃ­fica no
+perÃ­odo e projetos que integram o corpo deste estudo.
 
 \typeout{ *************** End of file prefacio.tex *************** }
