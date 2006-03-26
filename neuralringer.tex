@@ -750,6 +750,10 @@ encontram-se com valor de energia transversa entre 10 e 40~GeV, enquanto que
 para elétrons, a distribuição decai suavemente até cerca depois $\cong$91~GeV
 (aproximadamente a massa de repouso do bóson Z).
 
+% Interessante observar que isto poderá e deverá influenciar nos resultados
+% disponíveis, mas o que deseja-se demonstrar é a técnica e não uma solução
+% pronta para o problema.
+
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.95]{transverse-energy}
@@ -852,6 +856,7 @@ estudo. Sempre que possível, tentar-se-á levar estas restrições em
 consideração.
 
 \subsubsection{Deteção de elétrons com o EGammaHypo e sua otimização}
+\label{sec:eghypo}
 
 Para que a qualidade deteção do algoritmo proposto pelo EGammaHypo seja
 estimada, deve-se passar a massa de dados de estudo por um processo de
@@ -883,19 +888,251 @@ da fase seguinte são acumulados para posterior análise. Levando-se em
 consideração o número combinações dadas as possibilidades do problema de
 otimização e considerando-se que a superfície de erro não possua um único
 mínimo, há de se tentar $41 \times 41 \times 51 \times 9 = 771579$ diferentes
-combinações neste caso antes que alguma conclusão possa ser definida. Dada a
-massa de dados a ser analisada e uma estimativa de aproximadamente $0,5$
-segundos de processamento por teste, o tempo total do programa de otimização
-dos cortes será de quase \textbf{4,5 dias}!
+combinações neste caso antes que alguma conclusão possa ser definida. 
 
 Esta claro que uma otimização não-polarizada estaria fora de questão para uma
 utilização em condições que possam variar em questão de horas, como é o caso do
-experimento ATLAS. Desta forma, seja uma antecipação para o cortes seria
+experimento ATLAS. Desta forma, seja uma antecipação para os cortes seria
 necessária ou uma redução do espaço de busca permitindo uma otimização mais
 rápida. A utilização de programas especialmente codificados para a tarefa
-também poderia diminuir o tempo de teste, tornando o método mais atraente para 
+também poderia diminuir o tempo de teste, tornando o método mais atraente para
+uma utilização prática.
+
+A Figura~\ref{fig:eghypo-best-sp-train} mostra os resultados da busca
+exaustiva definida anteriormente. Esta figura de mérito, normalmente
+chamada de \textit{Característica Operacional do Receptor} (do inglês,
+\eng{Receiver Operator Characteristics}, ROC \cite{vantrees}), contém os
+resultados de cada ponto de operação do algoritmo EGammaHypo. Observa-se
+que, para o conjunto de intervalos testado, a massa de resultados assume uma
+forma angulada. Ao redor do ponto de flexão, na parte exterior da massa de
+resultados, encontraremos as melhores relações de eficiência \textit{versus}
+falso-alarme para este discriminador. O ponto destacado nesta figura
+representa o conjunto de cortes que maximiza a multiplicação da soma eficiências
+de deteção pelo produto entre elas, ou seja:
+
+\begin{equation}
+SP = (\text{efic.}_{classe_1} + \text{efic.}_{classe_2}) \times (\text{efic.}_{classe_1} \times \text{efic.}_{classe_2})
+\end{equation}
+
+Este produto, de agora em diante chamado de produto SP, será usado como figura
+de mérito, junto a curva ROC, para a determinação da qualidade discriminativa
+dos algoritmos que serão estudados. Neste caso específico, o ponto de SP
+máximo determina uma eficiência de deteção de elétrons de 91,85 \% contra
+10,19 \% de falso alarme na deteção de jatos, ou 2,55 kHz, levando-se em
+consideração a contaminação do canal de elétrons na saída do LVL1.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{eghypo-best-sp-train.pdf}
+\end{center}
+\caption{A curva ROC para 771.579 combinações de valores de corte para o
+algoritmo EGammaHypo.}
+\label{fig:eghypo-best-sp-train}
+\end{figure}
+
+Os seguintes valores de corte determinam o detetor marcado na
+Figura~\ref{fig:eghypo-best-sp-train}:
+\begin{enumerate}
+\item \rcore: 0.93;
+\item \eratio: 0.82;
+\item \etem: 14.500 MeV;
+\item \ethad: 500 MeV.
+\end{enumerate}
+
+Aplicando-se estes cortes ao conjunto de treinamento, de forma análoga,
+obtém-se 91,62 \% de eficiência na deteção de elétrons contra 10,45 \% de
+falso-alarme. Este resultado indica também que os dois sub-conjuntos de dados
+são estatisticamente semelhantes. Durante a busca exaustiva deste resultado,
+acumulou-se os resultados de eficiência e falso-alarme parciais entre cada
+operação de corte. Estes valores podem ser vistos na
+Tabela~\ref{tab:eghypo-partials}. Como é possível avaliar à partir desta
+tabela, as variáveis \rcore e \eratio são as mais discriminantes, deixando
+passar apenas cerca de 30 \% e 45 \% dos jatos avaliados, respectivamente. O
+corte em \etem não reduz a taxa de eventos, sendo portanto irrelevante ao
+processo discriminativo, como seria possível antever. O vazamento de energia
+na seção hadrônica (último corte), ainda conseguirá diminuir a taxa de
+falsos-positivos na saída do detetor.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|r|r|}
+\hline
+\textbf{Ordem} & \textbf{Variável} & \textbf{Eficiência (\%)} &
+\textbf{Falso-alarme (\%)} \\ \hline
+1 & \rcore & 96,4 & 30,5 \\ \hline
+2 & \eratio & 95,7 & 43,6 \\ \hline
+3 & \etem & 99,9 & \textbf{98,9} \\ \hline
+4 & \ethad & 91.8 & 77.4 \\ \hline
+\end{tabular}
+\end{center}
+\caption{Valores parciais de deteção e falso-alarme para o detetor baseado no
+algoritmo EGammaHypo.}
+\label{tab:eghypo-partials}
+\end{table}
+
+As Figuras~\ref{fig:eghypo-eta-scan-test}, \ref{fig:eghypo-phi-scan-test} e
+\ref{fig:eghypo-emet-scan-test} contém os valores parciais de eficiência e
+falso-alarme considerando-se uma divisão dos dados por $\eta$, $\phi$ e por
+energia total transversa na seção e.m. dos calorímetros. No caso da varredura
+em $\eta$, é possível notar que a eficiência de deteção do método apresenta
+uma queda abrupta próximo ao vão entre a seção do barril e da tampa ($\eta
+\approx 1,5$). Para a varredura em $\phi$, observa-se uma distribuição
+bastante homogênea para a eficiência de deteção de elétrons e maior variação
+na taxa de falso-alarme para jatos, possivelmente devido à baixa estatística
+(muitos canais possuem apenas 30 a 40 jatos, como é possível observar na
+Figura~\ref{fig:phi}). A varredura por \etem indica que o método seja bastante
+robusto na deteção de elétrons, aumentando sua eficiência suavemente com o
+valor de energia da RoI. O falso-alarme em jatos também aumenta com a energia
+do objeto analisado, embora seja difícil estimar com precisão a qualidade do
+valor de falso-alarme determinado, uma vez que a estatística para jatos acima
+de 50 GeV seja praticamente inexistente.
+
+\begin{figure}
+\begin{center}
+%\includegraphics[angle=90,width=15cm,height=20cm]{eghypo-eta-scan-test.pdf}
+\includegraphics[scale=0.98]{eghypo-eta-scan-test.pdf}
+\end{center}
+\caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
+falso-alarme (em cinza-claro/amarelo) por $\eta$.}
+\label{fig:eghypo-eta-scan-test}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{eghypo-phi-scan-test.pdf}
+\end{center}
+\caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
+falso-alarme (em cinza-claro/amarelo) por $\phi$.}
+\label{fig:eghypo-phi-scan-test}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{eghypo-emet-scan-test.pdf}
+\end{center}
+\caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
+falso-alarme (em cinza-claro/amarelo) por \etem.}
+\label{fig:eghypo-emet-scan-test}
+\end{figure}
+
+%\subsubsection{Análise de Componentes Principais}
+
+%Isto não é óbvio que melhorará a análise do método já que temos poucas
+%variáveis a a informação contida nelas traz bastante informação, mas não
+%informação discriminante.
+
+%Levando-se em consideração os dados da Tabela~\ref{tab:eghypo-partials}, é
+%possível intuir que exista uma grande correlação entre as 4 variáveis
+%definidas pelo T2Calo e utilizados pelo EGammaHypo para a deteção de
+%elétrons. A técnica de Análise de Componentes Principais \cite{vantrees}
+%define uma transformação linear que, quando aplicada a massa de dados de onde
+%é originalmente extraída, completamente a descorrelaciona. Esta transformada
+%é comumente conhecida como KLT (do inglês \eng{Karhunen-Loève Transform}).
+
+%Uma das técnicas para o cálculo da KLT utiliza a matriz de covariância C do
+%conjunto de dados de analisados para calcular 
+
+%\cite{vantrees}, é possível calcular a transformação , que
+%completamente descorrelacionará os dados disponíveis. 
+
+\subsection{Discriminação Linear}
+
+O discriminador de Fisher \cite{fisher} ou a Análise de Discriminação Linear
+\cite{duda} descrevem algoritmos bem definidos para que se maximize a
+capacidade discriminante de um corte no plano com N dimensões, que separa duas
+classes de amostras. Esta técnica requer que determinadas características nas
+amostras estejam presentes, entre elas, que os dados apresentem uma
+distribuição gaussiana e que as matrizes de covariância para ambas as classes
+em separado sejam idênticas\footnote{A Análise de Discriminação Quadrática
+\cite{duda} demonstra que esta característica pode ser relaxada
+considerando-se que seja sempre possível projetar, através de uma
+transformação linear, o espaço de entrada em um outro espaço onde as matrizes
+de covariância sejam iguais e portanto recaindo no caso simples.}. Muitas
+vezes, na prática, os valores de média e a covariância não estão disponíveis e
+devem ser estimados, o que normalmente leva a falhas no cálculo do ponto ótimo
+de de discriminação. Dentre as técnicas de estimação da média e covariância
+pode-se destacar a estimação por máxima verosimilhança ou por máximo a
+\textit{posteriori}.
+
+Em posse dos valores de média e covariância das classes, o plano de separação
+será definido da seguinte forma:
+
+\begin{equation}
+\overrightarrow{w} = \Sigma^{-1}(\overrightarrow{\mu}_0 -
+\overrightarrow{\mu}_1) 
+\end{equation}
+
+Onde $\Sigma$ é a covariância ou \textit{variância cruzada} das observações do
+universo de entrada e $\mu$ as médias das duas classes de eventos que se
+deseja separar. Um problema que se segue é da invertibilidade de $\Sigma$, que
+dependerá de quão bem o conjunto de amostras representa as classes a serem
+discriminadas. Por exemplo, se $\Sigma$ possui combinações lineares dos dados
+disponíveis, o ranque desta matriz será inferior ao número de amostras e
+portanto a matrix não será invertível. Embora existam técnicas para superar o
+problema, mas como veremos mais adiante, é possível utilizarmos outras
+técnicas derivadas deste sistema primário para maximizarmos a discriminação
+das classes dado um conjunto de amostras.
+
+Por causa das dificuldades discutidas, muitas técnicas iterativas surgiram
+para que seja possível a definição de um plano ótimo de separação linear à
+partir de amostras de dados reais \cite{haykin}. Entre elas, o algoritmo do
+Mínimo Médio Quadrático (do inglês \eng{Least Mean Square} ou LMS) está dentre
+os mais utilizados. Este método pode ser considerado um caso especial de uma
+rede neural totalmente conectada e sem realimentação (veja
+Seção~\ref{sec:neural} para maiores referências), com as seguintes ressalvas:
+
+\begin{itemize}
+\item Há somente um neurônio conectando todas as entradas;
+\item A função de ativação deste neurônio ($\phi(\dot)$) é a função identidade
+$f(x) = x$.
+\end{itemize}
+
+Para o treinamento, define-se alvos para as duas classes de eventos e a função
+de erro:
+
+\begin{equation}
+E(\overrightarrow{w}) = \frac{1}{2} e^2(n)
+\end{equation}
+
+Onde $\overrightarrow{w}$ é o vetor de pesos que define o plano de separação
+linear e $e(n)$ é o erro na saída da rede com relação ao alvo para a classe
+escolhida com relação a amostra $n$, ou seja $e(n) = d(n)-y(n)$ ($d(n)$ é o
+alvo). Desta forma, derivando-se esta função de erro com relação aos pesos
+sinápticos $\overrightarrow{w}$, mostra-se que o gradiente de $E$ será:
+
+\begin{equation}
+\frac{\partial E(\overrightarrow{w})}{\partial \overrightarrow{w}} =
+-x(n)e(n) 
+\end{equation}
+
+Onde $x(n)$ é a n-ésima entrada que leva o neurônio linear a uma saída
+$y(n)$. E, com este resultado, define-se a fórmula de treinamento do LMS:
+
+\begin{equation}
+\hat{w}(n+1) = \hat{w}(n) + \eta x(n)e(n)
+\label{eq:lms}
+\end{equation}
+
+Onde $\eta$ representa a taxa de aprendizagem, um parâmetro para a suavização
+da trajetória do treinamento no espaço da função de erro
+$E(\overrightarrow{w})$. Na prática, é possível ainda definir técnicas de
+treinamento em bateladas para se obter uma suavização do treinamento em
+direção ao mínimo global, garantido devido à superfície bem-definida do erro
+(quadrático).
+
+\subsubsection{Implementação do LMS na separação elétron/jato}
+
+Levando-se em consideração as 4 variáveis definidas pelo T2Calo, é possível
+encontrar o plano quadri-dimensional que define um discriminador linear ótimo,
+usando-se o algoritmo LMS, como descrito anteriormente. A separação em classes
+de treinamento e teste como apresentada na Seção~\ref{sec:eghypo}, dos dados
+disponíveis, será re-aproveitada aqui, para seja possível a comparação dos
+resultados nos dois casos.
+
+
 
 \section{Métodos Neurais de Discriminação}
+\label{sec:neural}
 
 Redes neurais artificiais (RNA) vem sendo atualmente utilizadas com sucesso em
 problemas de otimização, controle e reconhecimento de padrões
@@ -910,6 +1147,7 @@ podemos destacar:
 \begin{description}
 \item[Robustez] Em ambientes extremamente \emph{agressivos} (sujeitos a falhas
 e a radiotividade), como é o caso da operação do LVL2, RNA's podem manter um
+
 excelente desempenho, mesmo quando parte dos dados (canais de aquisição) de
 entrada são perdidos;
 
@@ -928,7 +1166,7 @@ para um grande conjunto de aplicações em tempo real.
 \subsection{Definição de uma rede neural artificial}
 
 Um neurônio de uma RNA pode ser modelado por um grafo de fluxo como mostrado
-na Figura~\ref{fig:neuron}. 
+na Figura~\ref{fig:neuron}.
 
 \begin{figure}
 \begin{center}
@@ -939,10 +1177,7 @@ na Figura~\ref{fig:neuron}.
 \end{figure}
 
 Este estudo está focado na utilização de RNA's completamente conectadas, sem
-realimentação e com treinamento baseado na retropropagação de erros. RNA's
-completamente conectadas são aquelas onde os neurônios estão compartiment
-
-\subsection{Discriminador de Fischer}
+realimentação e com treinamento baseado na retropropagação de erros.
 
 \subsection{PCA}
 
