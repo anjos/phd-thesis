@@ -902,13 +902,21 @@ A Figura~\ref{fig:eghypo-best-sp-train} mostra os resultados da busca
 exaustiva definida anteriormente. Esta figura de mérito, normalmente
 chamada de \textit{Característica Operacional do Receptor} (do inglês,
 \eng{Receiver Operator Characteristics}, ROC \cite{vantrees}), contém os
-resultados de cada ponto de operação do algoritmo EGammaHypo. Observa-se
-que, para o conjunto de intervalos testado, a massa de resultados assume uma
-forma angulada. Ao redor do ponto de flexão, na parte exterior da massa de
-resultados, encontraremos as melhores relações de eficiência \textit{versus}
-falso-alarme para este discriminador. O ponto destacado nesta figura
-representa o conjunto de cortes que maximiza a multiplicação da soma eficiências
-de deteção pelo produto entre elas, ou seja:
+resultados de cada ponto de operação do algoritmo EGammaHypo. O eixo vertical
+denota a eficiência na deteção do sinal de interesse (elétrons), enquanto o
+eixo horizontal, a taxa de falso-alarme (erro em jatos) naquele ponto de
+operação. A taxa de falso alarme é escalonada em 25~kHz, que é a taxa de ruído
+de fundo esperada, máxima. O valor do eixo horizontal portanto, denota a
+quantidade de jatos que serão aprovados pelo LVL2, como elétrons e portanto
+representa uma medida direta da taxa de eventos descarregados no Filtro de
+Eventos.
+
+Observa-se que, para o conjunto de intervalos testado, a massa de resultados
+assume uma forma angulada. Ao redor do ponto de flexão, na parte exterior da
+massa de resultados, encontraremos as melhores relações de eficiência
+\textit{versus} falso-alarme para este discriminador. O ponto destacado nesta
+figura representa o conjunto de cortes que maximiza a multiplicação da soma
+eficiências de deteção pelo produto entre elas, ou seja:
 
 \begin{equation}
 SP = (\text{efic.}_{classe_1} + \text{efic.}_{classe_2}) \times (\text{efic.}_{classe_1} \times \text{efic.}_{classe_2})
@@ -919,11 +927,12 @@ de mérito, junto a curva ROC, para a determinação da qualidade discriminativa
 dos algoritmos que serão estudados. Neste caso específico, o ponto de SP
 máximo determina uma eficiência de deteção de elétrons de 91,85 \% contra
 10,19 \% de falso alarme na deteção de jatos, ou 2,55 kHz, levando-se em
-consideração a contaminação do canal de elétrons na saída do LVL1.
+consideração a contaminação do canal de elétrons na saída do LVL1. O valor do
+produto SP no ponto em questão é de $1,50$.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{eghypo-best-sp-train.pdf}
+\includegraphics[scale=0.98]{eghypo/eghypo-best-sp-train.pdf}
 \end{center}
 \caption{A curva ROC para 771.579 combinações de valores de corte para o
 algoritmo EGammaHypo.}
@@ -941,17 +950,21 @@ Figura~\ref{fig:eghypo-best-sp-train}:
 
 Aplicando-se estes cortes ao conjunto de treinamento, de forma análoga,
 obtém-se 91,62 \% de eficiência na deteção de elétrons contra 10,45 \% de
-falso-alarme. Este resultado indica também que os dois sub-conjuntos de dados
-são estatisticamente semelhantes. Durante a busca exaustiva deste resultado,
-acumulou-se os resultados de eficiência e falso-alarme parciais entre cada
-operação de corte. Estes valores podem ser vistos na
+falso-alarme ($SP = 1,49$). Este resultado indica também que os dois
+sub-conjuntos de dados (treino e teste) são estatisticamente
+semelhantes. Durante a busca exaustiva deste resultado, acumulou-se os
+resultados de eficiência e falso-alarme parciais entre cada operação de
+corte. Estes valores podem ser vistos na
 Tabela~\ref{tab:eghypo-partials}. Como é possível avaliar à partir desta
 tabela, as variáveis \rcore e \eratio são as mais discriminantes, deixando
 passar apenas cerca de 30 \% e 45 \% dos jatos avaliados, respectivamente. O
-corte em \etem não reduz a taxa de eventos, sendo portanto irrelevante ao
-processo discriminativo, como seria possível antever. O vazamento de energia
-na seção hadrônica (último corte), ainda conseguirá diminuir a taxa de
-falsos-positivos na saída do detetor.
+corte em \etem não reduz a taxa de eventos, sendo praticamente irrelevante ao
+processo discriminativo. O vazamento de energia na seção hadrônica (último
+corte), ainda conseguirá diminuir a taxa de falsos-positivos na saída do
+detetor.
+
+%% COMENTÁRIO: SERIA BOM DIZER PORQUE O CORTE EM EM_ET NÃO É TÃO RELEVANTE...
+%% IDÉIAS: ALTA CORRELAÇÃO COM RCORE E ERATIO => PCA?
 
 \begin{table}
 \begin{center}
@@ -990,7 +1003,7 @@ de 50 GeV seja praticamente inexistente.
 \begin{figure}
 \begin{center}
 %\includegraphics[angle=90,width=15cm,height=20cm]{eghypo-eta-scan-test.pdf}
-\includegraphics[scale=0.98]{eghypo-eta-scan-test.pdf}
+\includegraphics[scale=0.98]{eghypo/eghypo-eta-scan-test.pdf}
 \end{center}
 \caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
 falso-alarme (em cinza-claro/amarelo) por $\eta$.}
@@ -999,7 +1012,7 @@ falso-alarme (em cinza-claro/amarelo) por $\eta$.}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{eghypo-phi-scan-test.pdf}
+\includegraphics[scale=0.98]{eghypo/eghypo-phi-scan-test.pdf}
 \end{center}
 \caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
 falso-alarme (em cinza-claro/amarelo) por $\phi$.}
@@ -1008,7 +1021,7 @@ falso-alarme (em cinza-claro/amarelo) por $\phi$.}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{eghypo-emet-scan-test.pdf}
+\includegraphics[scale=0.98]{eghypo/eghypo-emet-scan-test.pdf}
 \end{center}
 \caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
 falso-alarme (em cinza-claro/amarelo) por \etem.}
@@ -1035,7 +1048,7 @@ falso-alarme (em cinza-claro/amarelo) por \etem.}
 %\cite{vantrees}, é possível calcular a transformação , que
 %completamente descorrelacionará os dados disponíveis. 
 
-\subsection{Discriminação Linear}
+\section{Discriminação Linear}
 
 O discriminador de Fisher \cite{fisher} ou a Análise de Discriminação Linear
 \cite{duda} descrevem algoritmos bem definidos para que se maximize a
@@ -1044,7 +1057,7 @@ classes de amostras. Esta técnica requer que determinadas características nas
 amostras estejam presentes, entre elas, que os dados apresentem uma
 distribuição gaussiana e que as matrizes de covariância para ambas as classes
 em separado sejam idênticas\footnote{A Análise de Discriminação Quadrática
-\cite{duda} demonstra que esta característica pode ser relaxada
+\cite{duda}, no entanto, demonstra que esta característica pode ser relaxada
 considerando-se que seja sempre possível projetar, através de uma
 transformação linear, o espaço de entrada em um outro espaço onde as matrizes
 de covariância sejam iguais e portanto recaindo no caso simples.}. Muitas
@@ -1079,10 +1092,11 @@ partir de amostras de dados reais \cite{haykin}. Entre elas, o algoritmo do
 Mínimo Médio Quadrático (do inglês \eng{Least Mean Square} ou LMS) está dentre
 os mais utilizados. Este método pode ser considerado um caso especial de uma
 rede neural totalmente conectada e sem realimentação (veja
-Seção~\ref{sec:neural} para maiores referências), com as seguintes ressalvas:
+Seção~\ref{sec:neural} para uma discussão mais detalhada), com as seguintes
+ressalvas:
 
 \begin{itemize}
-\item Há somente um neurônio conectando todas as entradas;
+\item Há somente um neurônio conectando todas as entradas com a saída da rede;
 \item A função de ativação deste neurônio ($\phi(\dot)$) é a função identidade
 $f(x) = x$.
 \end{itemize}
@@ -1118,18 +1132,392 @@ da trajetória do treinamento no espaço da função de erro
 $E(\overrightarrow{w})$. Na prática, é possível ainda definir técnicas de
 treinamento em bateladas para se obter uma suavização do treinamento em
 direção ao mínimo global, garantido devido à superfície bem-definida do erro
-(quadrático).
+(quadrático). No treinamento em bateladas ou épocas, os pesos sinápticos são
+corrijidos tendo por base a média dos erros para todos os eventos de uma
+época, ao invés de individualmente. Para eliminar polarizações no processo de
+treinameno devido a magnitude das componentes da entrada, enquanto comparadas
+entre si, é também prática que cada entrada seja subtraída da sua média e
+dividida pela sua variância. A Figura~\ref{fig:lms-flow} mostra o diagrama de
+blocos do discriminador LMS que será empregado neste estudo. O valor da saída
+$y$ é utilizado para definir a R.O.C. do discriminador e escolher, ao invés de
+quatro, apenas um corte que maximize a capacidade discriminante do
+sistema. Alvos para cada uma das classes são escolhidos e o sinal de erro é
+utilizado para corrigir os pesos sinápticos, até que o sistema convirja para o
+erro mínimo.
 
-\subsubsection{Implementação do LMS na separação elétron/jato}
+\begin{figure}
+\begin{center}
+\includegraphics{lms-flow}
+\end{center}
+\caption{O diagrama de fluxo do discriminador LMS que será empregado na
+discriminação elétron-jato.}
+\label{fig:lms-flow}
+\end{figure}
+
+\subsection{Implementação do LMS na separação e\-lé\-tron-jato}
 
 Levando-se em consideração as 4 variáveis definidas pelo T2Calo, é possível
 encontrar o plano quadri-dimensional que define um discriminador linear ótimo,
 usando-se o algoritmo LMS, como descrito anteriormente. A separação em classes
 de treinamento e teste como apresentada na Seção~\ref{sec:eghypo}, dos dados
 disponíveis, será re-aproveitada aqui, para seja possível a comparação dos
-resultados nos dois casos.
+resultados nos dois casos. O algoritmo do LMS aplicado no treinamento dos
+pesos sinápticos está representado no diagrama de fluxo da
+Figura~\ref{fig:train-flow}.
 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.3]{train-flow}
+\end{center}
+\caption{Diagrama de fluxo de um sistema de treinamento baseado no algoritmo
+LMS.}
+\label{fig:train-flow}
+\end{figure}
 
+O sistema de treinamento e teste foi implementado em ambiente de trabalho C++,
+seguindo o paradigma da orientação à objetos (OO). Este ambiente, que será
+re-utilizado em várias partes deste trabalho, é discutido em detalhes na
+Seção~\ref{sec:framework}. A Figura~\ref{fig:train-flow} contém um diagrama de
+fluxo com os diversos passos do sistema de treinamento
+implementando. Inicialmente, os bancos de dados usados para o treinamento e
+teste da rede são carregados. Os valores de média e variância dos dados são
+extraídos do conjunto de treinamento e guardados juntos aos valores
+sinápticos, para que sejam aplicados durante o treinamento\footnote{De fato,
+seria mais eficiente que os fatores de normalização fossem aplicados
+previamente ao treinamento. No entanto, uma vez que deseja-se re-aproveitar a
+base de código para rodar o discriminador em uma etapa seguinte, é mais
+simples do ponto de vista implementacional que a normalização seja aplicada
+como parte do passo de execução do discriminador.}. Os pesos sinápticos são
+aleatoriamente inicializados (entre $-1$ e $+1$. Valores-alvo para cada uma
+das classes são pré-fixado: $-1$ para elétrons e $+1$ para jatos. O processo
+de treinamento é então disparado. Para cada época ou batelada de treinamento,
+um conjunto de elétrons e jatos é escolhido aleatóriamente à partir dos
+bancos-de-dados disponíveis. Os valores de erro são calculados e sua média é
+aplicada para a correção dos pesos sinápticos considerando a taxa de
+aprendizagem $\eta$. As melhores redes, tomando-se o valor do produto SP como
+referência, são guardadas a cada passo de treinamento. Um sistema configurável
+é utilizado para detetar a estagnação do treinamento. Quando o sistema atinge
+um estado no qual as alterações sinápticas não modifiquem significativamente o
+valor do produto SP do discriminador (levando-se em consideração uma margem de
+erro) por um número de iterações, o treinamento é automaticamente parado. O
+melhor discriminador até então é recarregado. Um estudo dos valores de Erro
+Médio Quadrático (EMQ, do inglês \eng{Mean-square error}, MSE) e produto SP é
+conduzido levando-se em consideração o corte que maximiza o valor do produto
+SP para a rede considerando-se a massa de dados disponível para treinamento.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.35]{train-flow}
+\end{center}
+\caption{O fluxo implementado para o treinamento do discriminador LMS.}
+\label{fig:train-flow}
+\end{figure}
+
+\subsection{Resultados da aplicação do LMS na separação e\-lé\-tron-jato}
+
+Utilizando o sistema descrito anteriormente, e a separação dos dados (em
+classes de treinamento e teste) proposta no início do estudo, realizou-se um
+conjunto de testes para a determinação de um discriminador linear ótimo
+baseado nas variáveis extraídas pelo T2Calo. Dois parâmetros foram
+considerados neste exercício:
+
+\begin{itemize}
+\item O número de elementos na batelada ($N$);
+\item O valor da taxa de treinamento ($\eta$).
+\end{itemize}
+
+Embora seja possível assumir que o sistema convergirá em todas as condições,
+valores muito grandes para a taxa de treinamento (ou pequenos para a
+quantidade de eventos na batelada) poderão fazer o processo de convergência ao
+mínimo parecer instável e disparar erros no sistema de parada automática do
+treinamento. Conduziu-se um conjunto de testes para a determinação dos
+parâmetros de treinamento que acarretem em uma migração suave ao erro mínimo
+do discriminador, no menor tempo possível. Os resultados podem ser vistos nas
+Figuras~\ref{fig:lms-lr-analysis} e \ref{fig:lms-esize-analysis}. Cada ponto
+nestas figuras representa a média sobre dez treinamentos realizados à partir
+de um conjunto de pesos iniciais sorteados (uniformemente) aleatoriamente no
+intervalo $[-1, +1]$. Como é possível observar através das figuras, para o
+problema em questão, o sistema responde melhor a baixos valores de taxa de
+treinamento e valores intermediários para o tamanho da batelada. Durante o
+experimento, limitou-se o número máximo de passos de treinamento em $1.000$,
+de forma que instabilidades durante o processo de convergência não impedissem
+o final da fase de treinamento. Desta forma, pontos nas curvas próximos a este
+valor no eixo vertical indicam provável instabilidade e que o treinamento foi
+interrompido bruscamente pelo programa ao invés de convergir suavemente a um
+mínimo.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{lms/lms-lr-analysis}
+\end{center}
+\caption{Número de passos de treinamento médio em função da taxa de
+treinamento para a discriminação elétron/jato.}
+\label{fig:lms-lr-analysis}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{lms/lms-esize-analysis}
+\end{center}
+\caption{Número de passos de treinamento médio em função do tamanho da
+época para a discriminação elétron/jato.}
+\label{fig:lms-esize-analysis}
+\end{figure}
+
+Uma análise visual nestes gráficos indicam que valores de taxa de treinamento
+aconselháveis estão na faixa $\eta < 0.02$, enquanto que um tamanho da época
+favorável pareça ser $N > 200$. Escolhe-se $N = 500$ e $\eta = 0.01$. Desta
+forma, depois de cerca de 10 passos, cerca de 35\% do conjunto de treinamento
+já foi usado. Com 30 passos, a rede já terá ``visto'' todos os dados de
+treinamento ao menos uma vez.
+
+A Figura~\ref{fig:lms-mse-evo} mostra a evolução do EMQ para uma das 10 redes
+com $N = 500$ e $\eta = 0.01$, tanto para o conjunto de treinamento (no alto)
+quanto para o conjunto de teste (embaixo). A Figura~\ref{fig:lms-sp-evo}
+mostra um gráfico equivalente, mas para o produto SP ao invés do EMQ. Como é
+possível verificar, o sistema converge depois de um pouco menos que 100 passos
+de treinamento. A evolução do produto SP é compatível com a minização do EMQ,
+aumentando rapidamente no início do treinamento, por cerca de 20 passos e
+depois permanecendo constante, em aproximadamente 1,5 para o restante do
+treinamento. O mesmo não ocorre para o EMQ que ainda continuará a diminuir,
+significativamente, por mais 60 a 80 passos antes da deteção automática da
+parada. O perfil de evolução do produto SP e minização do EMQ é seguido
+pelo conjunto de teste, de forma bastante semelhante.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/mse-evolution}
+\end{center}
+\caption{Evolução dos valores do E.M.Q. ao longo do treinamento, para o
+conjunto de treinamento (topo) e de teste (embaixo).}
+\label{fig:lms-mse-evo}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/sp-evolution}
+\end{center}
+\caption{Evolução dos valores do produto SP ao longo do treinamento, para o
+conjunto de treinamento (topo) e de teste (embaixo).}
+\label{fig:lms-sp-evo}
+\end{figure}
+
+A Figura~\ref{fig:lms-test-output} contém os histogramas da saída da rede para
+os elétrons (alto) e jatos (embaixo), para o conjunto de teste. O ponto ótimo
+de corte, determinado para que se maximize o produto SP da rede para o
+conjunto de treinamento para este sistema é $-0.0473$. Nestas condições, o
+máximo produto SP para o conjunto de teste é 1.51, definido no ponto da curva
+R.O.C. (veja Figura~\ref{fig:lms-test-roc}) onde a eficiência para a deteção
+de elétrons é 91,64\% enquanto que a eficiência para a deteção de jatos é de
+90,35\%. A Figura~\ref{fig:lms-vs-egamma-roc} mostra uma comparativo entre o
+resultado da otimização proposta atualmente no experimento ATLAS contra os
+resultados obtidos para este classificador. Através desta figura é possível
+observar que o discriminador LMS tangencia a parte exterior dos pontos da
+otimização proposta atualmente no experimento. O resultado obtido com o
+algoritmo LMS, ao invés do longo processo de otimização proposto
+originalmente, é atingido depois de apenas 1 minuto e 30 segundos de
+treinamento, embora já apresente uma capacidade discriminativa praticamente
+ótima após apenas 20 passos de treinamentos ($\approx 25$ segundos).
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/test-output}
+\end{center}
+\caption{Saída do detetor LMS para o conjunto de treino.}
+\label{fig:lms-test-output}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/test-roc}
+\end{center}
+\caption{Curva R.O.C. para um detetor elétron/jato baseado no algoritmo LMS.}
+\label{fig:lms-test-roc}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/lms-vs-egamma-roc}
+\end{center}
+\caption{R.O.Cs comparativas entre a otimização atual para o EGammaHypo e um
+detetor baseado no LMS.}
+\label{fig:lms-vs-egamma-roc}
+\end{figure}
+
+As Figuras~\ref{fig:lms-test-sp-eta}, \ref{fig:lms-test-sp-phi} e
+\ref{fig:lms-test-sp-emet} mostram, respectivamente, o valor do produto SP segundo
+a distribuição dos dados em $\eta$, $\phi$ e $\etem$. O número anexo ao topo
+de cada barra indica a quantidade de eventos dentro do limite em questão e é
+útil para que se considere a relevância de um valor parcial no desempenho do
+discriminador. Nota-se que na distribuição por $\eta$, há uma clara perda de
+eficiência na região onde $|\eta| \approx 1,5$. Esta queda no desempenho do
+detetor é devido à passagem existente na região para a passagem dos cabos dos
+detetores internos do ATLAS. A eficiência é recuperada logo após esta regão e
+recai suavemente nas bordas. O gráfico de barras para a distribuição $\phi$
+mostra-se corretamente uniforme, indicando que o detetor não está polarizado e
+funciona coerentemente para todos os valores deta variável. Este resultado é
+esperado já que o detetor é simétrico neste eixo. A análise por $\etem$
+demonstra uma predominante qualidade de deteção para valores maix baixos de
+energia que valores mais altos. Deve-se levar em conta que, embora a
+eficiência de deteção de elétrons ainda seja máxima nesta última região, como
+mostra a Figura~\ref{fig:lms-test-efficiency-emet}, o falso alarme na deteção
+de jatos também apresenta-se máximo. Uma vez que o produto SP é uma figura de
+mérito da eficiência agregada de ambas as classes de eventos do discriminador,
+ela quantificar-se-á em zero nesta região, o que é esperado. Possivelmente
+este resultado está associado a baixa estatística disponível na região e
+portanto não sendo considerado apropriadamente para determinação do ponto de
+corte ótimo.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/test-sp-eta}
+\end{center}
+\caption{Análise do produto SP ao longo de $\eta$.}
+\label{fig:lms-test-sp-eta}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/test-sp-phi}
+\end{center}
+\caption{Análise do produto SP ao longo de $\phi$.}
+\label{fig:lms-test-sp-phi}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/test-sp-emet}
+\end{center}
+\caption{Análise do produto SP por $\etem$.}
+\label{fig:lms-test-sp-emet}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/test-efficiency-emet}
+\end{center}
+\caption{Análise da eficiência de deteção de elétrons e falso alarme em jatos
+para um detetor LMS, por $\etem$.}
+\label{fig:lms-test-efficiency-emet}
+\end{figure}
+
+A Figura~\ref{fig:lms-vs-egamma} mostra um comparativo entre as duas técnicas
+de deteção, por energia transversa na seção e.m.. Distingue-se que os dois
+sistemas possuem resposta bastante próximas. Na primeira (mais à esquerda)
+faixa de energia considerada, o EGammaHypo possui uma resposta melhor enquanto
+que com o aumento da energia transversa o LMS apresenta-se mais eficiente, e
+segue este padrão para quase todas as faixas consideradas, inclusive onde há
+maior concentração de eventos de teste, como é possível determinar à partir da
+Figura~\ref{fig:lms-test-sp-emet}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/lms-vs-egamma}
+\end{center}
+\caption{Comparação do produto SP para um classificador baseado no LMS e o
+EGammaHypo por energia transversa na seção e.m..}
+\label{fig:lms-vs-egamma}
+\end{figure}
+
+\subsection{A relevância das características do T2Calo}
+
+A técnica da análise de relevância \cite{relevance} tem por objetivo medir a
+importância de cada uma das variáveis de entrada para um classificador. Nesta
+técnica suprime-se a contribuição variável à saída substituindo-se seu valor a
+cada evento por sua média, para todos os eventos disponíveis na entrada do
+sistema de discriminação. Observando-se a variação da saída, é possível
+estimar a contribuição daquela variável ao processo discriminativo. A
+referência supracitada define a equação para a estimativa da relevância da
+seguinte forma:
+
+\begin{equation}
+R_i = \frac{1}{N} \text{ } \overset{N}{\underset{j=1}{\sum}} \text{ }
+[\text{saída}(\overrightarrow{x_j}) -
+\text{saída}(\overrightarrow{x_j}\mid_{x_{j,i} = \overline{x}_i})]^2 
+\label{eq:relevance-mse}
+\end{equation}
+
+Em outras palavras, é possível definir a relevância da variável $x_i$, $R_i$,
+como o EMQ da saída de um discriminador comparado a mesma saída quando faz-se
+a variável assumir o valor de sua média. Nessa equação, $N$ representa o
+número total de eventos (padrões) disponíveis para o classificador, e $x_j$ um
+evento particular. A Figura~\ref{fig:relevance-mse} mostra os valores de
+relevância para cada uma das variáveis do classificador em análise. Esta
+figura mostra mais uma vez que os conjuntos de teste e treino são
+estatisticamente semelhantes, apresentando valores de relevância, para cada
+uma de suas variáveis, bastante próximos. Ela também mostra que a variável
+$\rcore$ é de extrema importância na determinação da saída do detetor. Quando
+substituímo-la por sua média, o erro na saída aumenta de mais de 3 pontos
+enquanto que para as demais variáveis, o impacto é bastante reduzido.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/relevance-mse}
+\end{center}
+\caption{Os valores de relevância para os conjunto de treino (cinza claro) e
+teste (em cinza escuro), para as 4 variáveis do T2Calo e considerando-se o
+classificador LMS em estudo.}
+\label{fig:relevance-mse}
+\end{figure}
+
+A importância destas variáveis ao sistema LMS poderia ser utilizada para
+simplificá-lo. Por exemplo, seria possível ``podar'' a variável menos
+relevante e retreinar o sistema para obter um classificador mais rápido. Por
+outro lado, como foi visto nas análises de evolução do EMQ
+(Figura~\ref{fig:lms-mse-evo}) e do produto SP (Figura~\ref{fig:lms-sp-evo}),
+a capacidade discriminativa da rede reage de forma correlacionada, mas
+\textbf{não necessariamente} idêntica ao processo de mapeamento da entrada na
+saída proposto pelo LMS. Observa-se que, apesar de notarmos uma contínua
+migração ao mínimo EMQ durante cerca de 100 passos de treinamento, após cerca
+de apenas 20 passos, a capacidade discriminativa do sistema já atinge seu
+máximo e ali permanece até o final do treinamento. Este comportamento indica
+que existe uma diferença fundamental entre estes dois parâmetros. Portanto,
+seria de pouca prudência considerarmos apenas o valor de relevância proposto
+para a avaliação da importância de cada variável \underline{ao processo
+discrimativo}. Desta forma, propõe-se uma variação do cálculo da relevância,
+mas agora baseando-se no impacto da substituição do valor da variável pela sua
+média à capacidade discriminativa da rede. Naturalmente utilizaremos do
+produto SP para o cálculo da relevância de discriminação do LMS, da seguinte
+forma:
+
+\begin{equation}
+R_{d_i} = \max(\text{SP}) - \max(\text{SP}(\overrightarrow{x_j}\mid_{x_{j,i} = \overline{x}_i}))
+\label{eq:relevance-sp}
+\end{equation}
+
+Neste caso define-se a \textit{Relevância de Discriminação da variável $i$},
+ou $R_{d_i}$, de uma variável $i$ como a diferença no produto SP máximo
+causado pela substituição desta variável pela sua média. De fato, espera-se
+que a maior parte dos valores de relevância sejam positivos, indicando uma
+degradação do desempenho do classificador seguindo a neutralização de uma
+variável. Ainda sim, seria possível encontramos valores de relevância
+negativos, o que indicaria que uma variável está, na verdade, atrapalhando o
+processo de classificação ao invés de melhorá-lo. A
+Figura~\ref{fig:relevance-sp} mostra os valores de $R_d$ para o classificador
+LMS em estudo. Como é possível ver nesta figura, o quadro é marginalmente
+diferente daquele mostrado pela Figura~\ref{fig:relevance-mse}. A variável
+mais importante para o processo discriminativo é ainda $\rcore$, seguindo-se
+de $\eratio$ e $\ethad$. A variável $\etem$ é a menos relevante para o
+processo de classificação de elétrons e jatos, o que já era esperado
+observando-se as tendências anteriores. Observa-se também que, embora haja
+concordância nos resultados para dentro de um mesmo subconjunto de dados
+(treino \textit{versus} teste), os resultados apresentam-se ligeiramente mais
+discrepantes que para outras figuras de mérito, principalmente para a
+variável $\eratio$. Como é possível definir à partir deste gráfico, seria
+preferencial uma poda da variável $\etem$ que da variável $\ethad$, como
+sugeriria a Figura~\ref{fig:relevance-mse}. No mais, as duas figuras são
+bastante compatíveis e indicam uma tendência importante: a minimização do EMQ
+também maximizará o produto SP.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{lms/relevance-sp}
+\end{center}
+\caption{Os valores de Relevância de Discriminação para os conjunto de treino
+(cinza claro) e teste (em cinza escuro), para as 4 variáveis do T2Calo e
+considerando-se o classificador LMS em estudo.}
+\label{fig:relevance-sp}
+\end{figure}
 
 \section{Métodos Neurais de Discriminação}
 \label{sec:neural}
@@ -1146,8 +1534,7 @@ podemos destacar:
 
 \begin{description}
 \item[Robustez] Em ambientes extremamente \emph{agressivos} (sujeitos a falhas
-e a radiotividade), como é o caso da operação do LVL2, RNA's podem manter um
-
+e a radiotividade), como é o caso da operação do ATLAS, RNA's podem manter um
 excelente desempenho, mesmo quando parte dos dados (canais de aquisição) de
 entrada são perdidos;
 
@@ -1179,20 +1566,21 @@ na Figura~\ref{fig:neuron}.
 Este estudo está focado na utilização de RNA's completamente conectadas, sem
 realimentação e com treinamento baseado na retropropagação de erros.
 
-\subsection{PCA}
-
-\section{Mapeamento topológico e discriminação neural: o \emph{neuralringer}}
-
-Fazer uma descrição detalhada do sistema que mapeia em anéis, a informação da
-RoI. Aplicação de uma rede neural como discriminador (hipótese).
-
-\subsection{Implementação inicial}
+\subsection{Implementação inicial: Neuralringer}
+\label{sec:framework}
 
 Explicação da escolha da linguagem C++. Técnicas de programação concorrente,
 fazer referência ao sistema de filtragem multi-tarefas, explicitado
 anteriormente. Mostrar trechos de código e explicar a portabilidade do
 sistema. Dar ao leitor, um visual de como é possível gerar os dados (arquivos
 RFD) e depois usá-los para fazer testes.
+
+\subsection{PCA}
+
+\section{Mapeamento topológico e discriminação neural: o \emph{neuralringer}}
+
+Fazer uma descrição detalhada do sistema que mapeia em anéis, a informação da
+RoI. Aplicação de uma rede neural como discriminador (hipótese).
 
 \subsection{Análise física}
 
