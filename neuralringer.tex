@@ -10,7 +10,7 @@
 Sistemas de calorimetria são normalmente construídos com forma e leitura
 segmentada de maneira que possam ser usados diretamente na deteção de
 partículas. Isto é possível uma vez que muitos processos interessantes são
-distingüíveis pela forma com que depositam energia à medida que interagem com
+distinguíveis pela forma com que depositam energia à medida que interagem com
 estes detetores, tanto de forma radial quanto em penetração
 \cite{wigmans-book}. Cada segmento ou célula de um calorímetro contém a
 informação de energia depositada por uma partícula ou conjunto de partículas
@@ -24,8 +24,8 @@ de interesse. O primeiro passo é definir um processo de redu\-ção de
 dimensionalidade, de acordo com a velocidade requerida na deteção. Este
 pré-processamento ou Extração de Características (do inglês, \eng{Feature
 Extraction} ou FEx) é em geral feito com perda de informação do perfil de
-deposição, mas atentivamente de forma que as principais características ainda
-sejam bem distingüíveis. Em seguida, tendo por base simulações ou dados reais
+deposição, mas atentamente de forma que as principais características ainda
+sejam bem distinguíveis. Em seguida, tendo por base simulações ou dados reais
 da física de interesse, define-se um conjunto de cortes por métodos com
 conhecimento da informação \eng{a priori} que maximizem a probabilidade de
 deteção das partículas interessantes.
@@ -58,12 +58,12 @@ Filtragem fará uso de um enfoque baseado na \textbf{inclusão} para a seleção
 \eng{online}, garantindo assim um conjunto de
 \eng{triggers} ótimo para a nova Física. O critério da inclusão tem por
 objetivo selecionar um conjunto de fenômenos físicos baseados no ``mínimo
-denominador comum" entre eles, que ainda seja claramente distingüível dentro
+denominador comum" entre eles, que ainda seja claramente distinguível dentro
 do ruidoso ambiente proposto pelo acelerador. Com este objetivo, o Sistema de
 Filtragem estará sendo disparado para eventos que contenham assinaturas
 baseadas em objetos simples ou duplos com alto valor de momento
 transverso. Neste contexto, ``objetos com alto valor de momento transverso"
-refere-se, entre outros, a leptons com carga e com momento transverso acima de
+refere-se, entre outros, a \eng{leptons} com carga e com momento transverso acima de
 $\sim$10 GeV \cite{hlt-tdr}.
 
 \subsection{Objetos de interesse e RoI's}
@@ -80,7 +80,7 @@ de Filtragem (do inglês, \eng{High-Level Triggers} ou HLT).
 De fato, dado as condições do feixe provido pelo LHC, múltiplos objetos
 poderão ser detetados a cada evento. Porém, quando um ou mais objetos
 detetados ativam a aceitação do evento, o LVL1 marca o dado de forma especial,
-distingüindo este objeto como primário, em contraste com aqueles que também
+distinguindo este objeto como primário, em contraste com aqueles que também
 foram detetados, mas não fizeram objeto da aceitação deste nível de
 filtragem. A Tabela~\ref{tab:l1-rates} apresenta as taxas (simuladas) para as
 diferentes assinaturas de interesse, ou conjuntos de objetos primários, que
@@ -107,7 +107,7 @@ $\tau$, 25 GeV, com isolamento $+$ \textit{Missing Energy}, 30 GeV &
 \texttt{TAU25i} $+$ \texttt{XE30} & 2 \\
 \hline
 Múon, 10 GeV $+$ e.m., 15 GeV, com isolamento & \texttt{MU10} $+$ \texttt{EM15i} & 0.1 \\ \hline
-Outros disparos (pre-escalonados, aleatórios, calibração, monitoração) & -- & 5 \\
+Outros disparos (pré-escalonados, aleatórios, calibração, monitoração) & -- & 5 \\
 \hline
 Total & -- & $\sim$25 \\ \hline
 \end{tabular}
@@ -168,7 +168,7 @@ corte e isolamento são configuráveis.
 É interessante perceber que múltiplas assinaturas podem ser detetadas em um
 único evento para além do fato de que múltiplas RoI's secundárias possam estar
 presentes. Uma lista das assinaturas encontradas e das diversas RoI's
-averigüadas pelo LVL1 são repassadas para o LVL2, no formato de uma única
+averiguadas pelo LVL1 são repassadas para o LVL2, no formato de uma única
 mensagem conhecida como o ``Resultado do Primeiro Nível de Filtragem", ou L1R,
 como visto na Seção~\ref{sec:lvl2arch}. No caso da assinatura sendo estudada,
 ao menos uma RoI primária, indicando um objeto tipo e.m., com ao menos 25 GeV
@@ -203,7 +203,7 @@ complexas podem ser feitas entre as diferentes RoI's, e uma análise mais
 depurada do evento poderá ser conduzida. Por exemplo, é possível se fazer uso
 das RoI's secundárias para atingir maior redução da taxa de eventos a ser
 registrada em mídia permanente. Se aprovado, o evento é guardado, devidamente
-``etiquetado" e re-passado às fazendas de processamento \eng{offline} para
+``etiquetado" e repassado às fazendas de processamento \eng{offline} para
 posterior reconstrução.
 
 \paragraph{Contaminação} O \eng{trigger} de elétrons ou fótons conterá forte
@@ -224,7 +224,7 @@ aproximadamente isotropicamente do eixo de penetração do elétron. No caso de
 elétrons \cite{wigmans-book}, a dispersão é menor que no caso de jatos de
 partículas, já que há uma grande probabilidade de espalhamento múltiplo (do
 inglês \eng{Multiple Scattering}) causado pelas componentes hadrônicas do
-conjunto de partículas. A distância de penetração é diretamente propocional a
+conjunto de partículas. A distância de penetração é diretamente proporcional a
 energia do objeto em análise \cite{leo, knoll}, ainda que, para os mesmos
 valores energéticos, jatos tendam a penetrar mais profundamente nos aparatos.
 
@@ -240,7 +240,7 @@ chumbo.}
 %%CONSEGUIR FOTO DE UMA ROI COM O DÊNIS: ELECTRON, JET?
 
 A deteção de elétrons beneficia-se deste conhecimento básico para
-distingüí-los de sua contaminação natural de jatos (e píons). Numa primeira
+distingui-los de sua contaminação natural de jatos (e píons). Numa primeira
 fase, chamada de Extração de Características, avalia-se para uma região do
 detetor, normalmente centralizada em um ponto pré-determinado, um conjunto de
 valores que representem, o melhor possível, os perfis de deposição lateral (ou
@@ -252,10 +252,10 @@ interesse. A transformação do espaço original para o espaço ``comprimido" é
 irreversível. A ``compressão" de sinais é muitas vezes denominada
 ``compactação com perdas".} a informação de entrada, que normalmente possui
 dimensionalidade bastante elevada (O(100)-O(1000)), para um conjunto pequeno
-(O(10)) de varíaveis que possam ser analisadas mais facilmente.
+(O(10)) de variáveis que possam ser analisadas mais facilmente.
 
 A questão da dimensionalidade da entrada está intimamente correlacionada com a
-capacidade discriminante do calorímetro. Quanto mais granular, maior precisão
+capacidade discriminatória do calorímetro. Quanto mais granular, maior precisão
 pode ser obtida na definição de pontos de impacto e deteção de partículas. O
 revés é o custo - detetores multi-segmentados são mais difíceis e caros de
 serem construídos.
@@ -272,11 +272,11 @@ profundidade de todas, ocupando mais de 80\% do volume total desta seção.
 
 Para elétrons com valores energéticos até algumas dezenas de
 gigaelétron-volts, espera-se que a maior parte da energia do objeto esteja
-depositada nesta camada. A granurilade é bastante regular e semelhante tanto
+depositada nesta camada. A granularidade é bastante regular e semelhante tanto
 ao longo do eixo $\eta$ quanto ao longo de $\phi$, como é possível observar na
 Tabela~\ref{tab:lar}. Esta tabela também mostra o fator de compressão (ou
 tamanho da torre de filtragem) $N_{\eta} \times N_{\phi}$ aplicado ao processo
-de agrupamento necessário ao préprocessamento antes da análise encaminhada
+de agrupamento necessário ao pré-processamento antes da análise encaminhada
 pelo LVL1.
 
 A seção hadrônica dos calorímetro é bastante menos granular. O tamanho padrão
@@ -322,7 +322,7 @@ definindo importâncias diferentes aos diferentes tipos de objetos estudados.
 A Figura~\ref{fig:basic-discriminator} mostra um diagrama esquemático do
 processo clássico de deteção descrito. No centro lógico do processo
 encontra-se o físico experiente, que controla o grau de compressão e
-capacidade discriminante do sistema. Este sistema possui um conjunto de
+capacidade discriminatória do sistema. Este sistema possui um conjunto de
 problemas inerentes a intervenção humana na otimização, dentre eles a
 dependência no operador (aqui representado pela figura do "físico
 experiente"). O procedimento de compressão e discriminação deve ser bem
@@ -358,11 +358,11 @@ discriminação suficientemente boa.
 
 Desta forma um sistema de compressão mínima dos dados se faz necessária. Este
 sistema de compressão deve tentar minimizar a perda de informação e maximizar
-o potencial discriminativo do sistema. Um discriminador capaz de definir um
+o potencial discriminatório do sistema. Um discriminador capaz de definir um
 plano de separação em um espaço de entrada com dimensionalidade elevada também
 será necessário, uma vez que deseja-se compressão mínima dos dados de
 entrada. A Figura~\ref{fig:advanced-discriminator} mostra uma idealização de
-tal sistema discriminante. A primeira etapa é uma compressão mínima da
+tal sistema de discriminação. A primeira etapa é uma compressão mínima da
 entrada, que seja compatível com um sistema de deteção que aceite sinais com
 alta-dimensionalidade na entrada. Idealmente, um sub-sistema de ``otimização"
 dos parâmetros de compressão e discriminação, também automatizado, controlaria
@@ -408,7 +408,7 @@ total) aqui resumido:
 periferia, para um determinado patamar programável, um candidato a RoI é
 definido;
 
-\item Em seguida soma-se, duas a duas, as enegias transversas das TT's do
+\item Em seguida soma-se, duas a duas, as energias transversas das TT's do
 núcleo de $2\times2$ TT's e utiliza-se a maior das somas em uma comparação com
 um patamar de energia EM;
 
@@ -453,7 +453,7 @@ e secundárias) é repassado, através do \eng{RoI Builder} ao LVL2.
 O Segundo Nível de Filtragem do experimento ATLAS é a primeira vez onde o
 evento será analisado tendo por base a granularidade máxima do detetor. O
 objetivo deste nível de filtragem, de uma forma geral, é a confirmação das
-informações do LVL1 e eventual depuramento e extensão. Aproveitando-se de toda
+informações do LVL1 e eventual depuração e extensão. Aproveitando-se de toda
 a granularidade disponibilizada pelo sistema de leitura do detetor, o LVL2
 começa analisando o evento através das RoI's classificadas como primárias pelo
 LVL1.
@@ -476,7 +476,7 @@ deteção veloz baseado em calorimetria pode ser sub-dividido em passos distinto
 \end{enumerate}
 
 Para o ATLAS, a fase 1 irá comprimir o espaço de entrada definido pelas
-células da RoI em questão em 4 variáveis com alto poder discriminante, baseado
+células da RoI em questão em 4 variáveis com alto poder discriminatório, baseado
 na percepção da física de interesse e da contaminação esperada. No caso de
 elétrons, espera-se que haja forte contaminação de jatos com muitas
 componentes e.m.. Desta forma, a compressão do sinal de entrada tentará
@@ -485,7 +485,7 @@ interação do objeto com as diversas camadas do detetor.
 
 O nome do algoritmo usado para a FEx de RoI's primárias tipo e.m. é
 \emph{T2Calo}, uma variação das palavras \eng{Trigger}, LVL2 e
-Calorimetria. As variávies extraídas do \eng{cluster} definido pela RoI do
+Calorimetria. As variáveis extraídas do \eng{cluster} definido pela RoI do
 LVL1, por este algoritmo, são, em ordem:
 
 \begin{enumerate}
@@ -533,7 +533,7 @@ picos de energia na primeira camada da seção e.m. são detetados;
 \end{figure}
 
 \item \textbf{Energia e.m.}, Figura~\ref{fig:t2calo-3}: Embora não utilizados
-diretamente para o processo discriminativo, os valores parciais de deposição
+diretamente para o processo discriminatório, os valores parciais de deposição
 energética para cada camada da seção e.m., numa região de $\eta=0,075 \times
 \phi=0,175$, também são calculados;
 
@@ -563,7 +563,7 @@ da seção hadrônica.}
 
 \end{enumerate}
 
-O algoritmo de deteção propriamento dito segue a execução do T2Calo e é
+O algoritmo de deteção propriamente dito segue a execução do T2Calo e é
 chamado \emph{EGammaHypho}. Este algoritmo tem a função exclusiva de combinar
 as informações disponíveis dos diversos algoritmos de FEx relacionados à
 deteção de elétrons e fótons e tomar uma decisão simples baseada nas
@@ -612,7 +612,7 @@ células da seção e.m. dos calorímetros, cujo centro recai sobre uma região 
 $0,075 \times 0,175$ no plano \ep, ao redor do centro da célula da segunda
 camada e.m. que apresenta o maior valor de energia depositada, como calculado
 na Etapa~3 do T2Calo. O valor original calculado é dividido pelo
-$\cosh{|\eta|}$ para que obtenha-se a energia tranversa\footnote{O termo
+$\cosh{|\eta|}$ para que obtenha-se a energia transversa\footnote{O termo
 ``transverso" neste contexto refere-se ao feixe de partículas.} (projetada no
 plano $x \times y$ do detetor). A região na qual esta quantidade é extraída
 equivale, usando-se a granularidade da segunda camada e.m., a uma região de 3
@@ -626,12 +626,12 @@ primeira camada da seção hadrônica do calorímetro dentro de uma região de $
 \times 0,2$ no plano \ep, ao redor do centro da célula na segunda camada
 e.m. que apresenta o maior valor de energia depositada, como calculado na
 Etapa~4 do T2Calo. O valor também é divido por $\cosh{|\eta|}$ para que
-obtenha-se o valor de energia tranversa. Para elétrons, a quantidade de
+obtenha-se o valor de energia transversa. Para elétrons, a quantidade de
 energia depositada na camada hadrônica deve ser próxima de zero, enquanto que,
 para jatos, espera-se que seja diferente de zero.
 \end{enumerate}
 
-A seqüência discriminativa está representada a seguir, em pseudo-código:
+A seqüência discriminatória está representada a seguir, em pseudo-código:
 
 \newcommand{\textbu}[1]{\textbf{\underline{#1}}}
 \newcommand{\IF}[1]{\textbu{se} #1, \textbu{então}}
@@ -688,7 +688,7 @@ pré-irradiador, seguindo-se da análise de dados na seção hadrônica.
 
 Para cada uma das assinaturas de interesse aprovadas pelo LVL1, o segundo
 nível contará com algoritmos e sistemas de hipótese adequados àquela física. É
-interessante notar que mesmo para os canais similares, e.g. (vide a
+interessante notar que mesmo para os canais similares, e.g. (veja a
 Tabela~\ref{tab:l1-rates}) \texttt{EM25i} e \texttt{EM15i}, os cortes impostos
 pelo algoritmo de hipótese serão otimizados para estas categorias de
 energia. 
@@ -699,23 +699,25 @@ energia.
 %\texttt{EM25i}.
 
 \subsection{Caracterização do T2Calo e do EGammaHypho}
+\label{sec:def-eghypo}
 
 Para a caracterização de operação do T2Calo e do algoritmo de hipótese
-associado, os seguintes grupamentos de dados foram considerados:
+associado, o EGammaHypho, os seguintes grupamentos de dados foram
+considerados:
 
 \begin{itemize}
 \item Cerca de 23.000 elétrons simulados via Monte Carlo, proveniente de
 interações tipo $H (130 \text{GeV})\rightarrow ZZ \rightarrow 4e^-$ e 
 $H (130 \text{GeV})\rightarrow ZZ \rightarrow 2e^- + 2\mu$. Os elétrons de
 cada evento simulado interagem com diferentes regiões do detetor;
-\item Cerca de 250.000 jatos simulados via Monte Carlo, com energia total,
-fixa em 25 GeV. 
+\item Cerca de 250.000 jatos-duplos, simulados via Monte Carlo, com energia total,
+fixa em 25 GeV, também interagindo com várias partes do detetor.
 \end{itemize}
 
 Nos dois casos, considerou-se simulações com ruído, proveniente da eletrônica
 e uma planta de detetor compatível com o que está sendo instalado atualmente
 na caverna do experimento, provendo um ambiente bastante acurado dentro do que
-se é possível prever em termos de operação, mas ainda exequível em um ambiente
+se é possível prever em termos de operação, mas ainda exeqüível em um ambiente
 de simulação.
 
 Esta massa original de dados foi submetida a uma simulação do LVL1, que
@@ -726,7 +728,7 @@ características:
 \begin{itemize}
 \item ao menos 10 GeV numa região de $2\times2$ torres de filtragem na seção
 e.m.;
-\item no máximo 4 GeV na região periféria ao núcleo de $2\times2$ torres de
+\item no máximo 4 GeV na região periférica ao núcleo de $2\times2$ torres de
 filtragem; 
 \item no máximo 2 GeV de depósito na seção hadrônica;
 \item qualquer valor para o centro em $\phi$;
@@ -740,15 +742,16 @@ histogramas de deposição energética total transversa de elétrons (em cima) e
 jatos (embaixo), em uma janela de $0,4 \times 0,4$ no plano $\eta\times\phi$,
 considerando-se as duas seções do calorímetro (e.m. e hadrônica). É possível
 distinguir um corte acentuado nas redondezas de aproximadamente 20~GeV, que
-equivale à ação da simulação do LVL1, como esperado. A cauda e cabeça da
-distribuição são influenciadas pela qualidade da calibração rudimentar
-disponível ao primeiro de filtragem do experimento. A média da distribuição é
-polarizada pela qualidade da calibração disponível no LVL2. Para o histograma
-de jatos a média aproxima-se ao valor esperado de 25 GeV, exibindo um pico
-pronunciado ao redor da média. Como é possível observar, grande parte dos jatos
-encontram-se com valor de energia transversa entre 10 e 40~GeV, enquanto que
-para elétrons, a distribuição decai suavemente até cerca depois $\cong$91~GeV
-(aproximadamente a massa de repouso do bóson Z).
+equivale à ação da simulação do LVL1, como esperado. Antes do corte, é
+possível distinguir uma cauda, se estendendo até a origem. Este fenômeno pode
+ser observado no LVL2 já que os valores de calibração de energia aplicados às
+células do calorímetro neste nível de filtragem não estão disponíveis ao nível
+de filtragem anterior. Para o histograma de jatos a média aproxima-se ao valor
+esperado de 25 GeV, exibindo um pico pronunciado ao redor deste valor. Como é
+observa-se, grande parte dos jatos encontram-se com valor de energia
+transversa entre 10 e 40~GeV, enquanto que para elétrons, a distribuição decai
+suavemente até cerca depois $\approx$ 91~GeV (aproximadamente a massa de
+repouso do bóson Z).
 
 % Interessante observar que isto poderá e deverá influenciar nos resultados
 % disponíveis, mas o que deseja-se demonstrar é a técnica e não uma solução
@@ -764,15 +767,16 @@ dados disponível para o estudo.}
 \label{fig:transverse-energy}
 \end{figure}
 
-Nas Figuras~\ref{fig:em-tenergy} e \ref{fig:had-tenergy} é pos\-sí\-vel
-observar histogramas para e\-lé\-trons (em cima) e jatos (em baixo) da energia
-transversa total por seção dos calorímetros. Nota-se que para elétrons quase
+Nas Figuras~\ref{fig:em-tenergy} e \ref{fig:had-tenergy} observa-se
+histogramas da energia transversa total por seção dos calorímetros para
+e\-lé\-trons (em cima) e jatos (em baixo). Nota-se que para elétrons, quase
 100\% da energia total do objeto é retida na seção e.m., enquanto que para
-jatos observa-se vazamento na seção hadrônica. Embora o corte realizado pelo
-LVL1 tenha sido em 2~GeV para o vazamento de energia nesta seção, observa-se
-que logo após este valor a energia total na seção decai rapidamente donde
-conclui-se que a cauda estaria possivelmente relacionada a qualidade da
-calibração dos dados para este nível de filtragem.
+jatos, nota-se vazamento de energia na seção hadrônica. Embora o corte
+realizado pelo LVL1 tenha sido em 2~GeV para o vazamento de energia nesta
+seção, observa-se uma quantidade não desprezível de eventos logo após este
+valor. Ainda sim, a energia total na seção decai rapidamente e assume-se que a
+cauda esteja, mais uma vez, relacionada a qualidade da calibração dos dados
+para este nível de filtragem.
 
 \begin{figure}
 \begin{center}
@@ -794,15 +798,15 @@ a massa de dados disponível para o estudo. As contagens estão normalizadas.}
 \label{fig:had-tenergy}
 \end{figure}
 
-As Figuras~\ref{fig:rcore} e \ref{fig:eratio} mostram respectivamente a fração
-\rcore e \eratio tal como utilizada pelo EGammaHypo para definir a eficiência
-de deteção de elétrons e jatos. Na Figura~\ref{fig:rcore} observa-se que a
-distribuição para elétrons tem média bastante próxima a 1 e baixíssima
-variância. Para jatos a média é mais baixa e a distribuição apresenta longa
-cauda em direção à origem. No caso da variável \eratio, que tem por objetivo
-detetar picos de deposição energética na primeira camada e.m., para elétrons
-observa-se um pico dominante em 1 ao passo que para jatos, uma distribuição
-mais uniforme, indicando uma separabilidade linear.
+As Figuras~\ref{fig:rcore} e \ref{fig:eratio} mostram, respectivamente, a
+fração \rcore e \eratio tal como utilizada pelo EGammaHypo para definir a
+eficiência de deteção de elétrons e jatos. Na Figura~\ref{fig:rcore}
+observa-se que a distribuição para elétrons tem média bastante próxima a 1 e
+baixíssima variância. Para jatos a média é mais baixa e a distribuição
+apresenta longa cauda em direção à origem. No caso da variável \eratio, que
+tem por objetivo detetar picos de deposição energética na primeira camada
+e.m., para elétrons observa-se um pico dominante em 1 ao passo que para jatos,
+uma distribuição mais uniforme, indicando uma separabilidade linear.
 
 \begin{figure}
 \begin{center}
@@ -823,10 +827,10 @@ mais uniforme, indicando uma separabilidade linear.
 \end{figure}
 
 As Figuras~\ref{fig:eta} e \ref{fig:phi} contém histogramas para elétrons (em
-cima) e jatos (embaixo) dos centros refinados pelo T2Calo das RoI's em questão,
-tanto em relação à variável $\eta$ quanto à variavel $\phi$. É possível
-distinguir uma uniformidade na distribuição em $\phi$ e uma tendência a
-concentração de eventos nas proximidades de $\eta=0$, como espera-se no
+cima) e jatos (embaixo) dos centros refinados pelo T2Calo das RoI's em
+questão, tanto em relação à variável $\eta$ quanto à variável $\phi$. É
+possível distinguir uma uniformidade na distribuição em $\phi$ e uma tendência
+a concentração de eventos nas proximidades de $\eta=0$, como é aguardado no
 experimento.
 
 \begin{figure}
@@ -847,12 +851,12 @@ experimento.
 \label{fig:phi}
 \end{figure}
 
-Exceto por eventuais problemas na lógica de simulação (Monte Carlo) e filtragem
-(pelo LVL1), espera-se que a massa de dados seja representativa do problema da
-separação entre jatos e elétrons. Deve ser levado em consideração que, para
-jatos, o pico ao redor de 25~GeV poderá introduzir imprecisões na definição da
-capacidade de deteção de elétrons bastante energéticos, presentes na massa de
-estudo. Sempre que possível, tentar-se-á levar estas restrições em
+Exceto por eventuais problemas na lógica de simulação (Monte Carlo) e
+filtragem (pelo LVL1), estima-se que a massa de dados seja representativa do
+problema da separação entre jatos e elétrons. Deve ser levado em consideração
+que, para jatos, o pico ao redor de 25~GeV poderá introduzir imprecisões na
+definição da capacidade de deteção de elétrons bastante energéticos, presentes
+na massa de estudo. Sempre que possível, tentar-se-á levar estas restrições em
 consideração.
 
 \subsubsection{Deteção de elétrons com o EGammaHypo e sua otimização}
@@ -862,7 +866,7 @@ Para que a qualidade deteção do algoritmo proposto pelo EGammaHypo seja
 estimada, deve-se passar a massa de dados de estudo por um processo de
 otimização que ajude o especialista a selecionar os patamares de corte que
 definem o algoritmo, como exposto na Seção~\ref{sec:classic-detection}. Para
-tal dividiu-se o conjunto de dados em 2 metades com aproximadamente o mesmo
+tal, dividiu-se o conjunto de dados em 2 metades com aproximadamente o mesmo
 número de RoI's. A primeira metade será utilizada para o ``treinamento'' ou
 otimização dos cortes enquanto que a segunda será utilizada para o teste dos
 cortes, garantindo a imparcialidade do processo.
@@ -870,7 +874,8 @@ cortes, garantindo a imparcialidade do processo.
 O algoritmo de otimização não será exaustivo, varrendo todo o espaço de dados,
 mas partirá de patamares pré-fixados em valores intuitivos e definirá uma
 sub-área de variação por onde testará exaustivamente as combinações dos 4
-cortes necessários. Eis aqui os patamares e passos de busca utilizados:
+cortes necessários, como é normalmente feito atualmente. Eis aqui os patamares
+e passos de busca utilizados:
 
 \begin{enumerate}
 \item Corte em \rcore: de 0,6 a 1,0, em passos de 0,01 (41 possibilidades);
@@ -882,13 +887,13 @@ possibilidades).
 \end{enumerate}
 
 Para cada corte, a totalidade da massa de dados de treinamento do método é
-avaliada e as RoI's que \textit{sobrevivam} ao corte são levadas à proxima
+avaliada e as RoI's que \textit{sobrevivam} ao corte são levadas à próxima
 etapa. As eficiências relativas e a quantidade de dados utilizadas para o teste
 da fase seguinte são acumulados para posterior análise. Levando-se em
 consideração o número combinações dadas as possibilidades do problema de
 otimização e considerando-se que a superfície de erro não possua um único
 mínimo, há de se tentar $41 \times 41 \times 51 \times 9 = 771579$ diferentes
-combinações neste caso antes que alguma conclusão possa ser definida. 
+combinações, neste caso, antes de qualquer conclusão.
 
 Esta claro que uma otimização não-polarizada estaria fora de questão para uma
 utilização em condições que possam variar em questão de horas, como é o caso do
@@ -923,12 +928,12 @@ SP = (\text{efic.}_{classe_1} + \text{efic.}_{classe_2}) \times (\text{efic.}_{c
 \end{equation}
 
 Este produto, de agora em diante chamado de produto SP, será usado como figura
-de mérito, junto a curva ROC, para a determinação da qualidade discriminativa
-dos algoritmos que serão estudados. Neste caso específico, o ponto de SP
-máximo determina uma eficiência de deteção de elétrons de 91,85 \% contra
-10,19 \% de falso alarme na deteção de jatos, ou 2,55 kHz, levando-se em
-consideração a contaminação do canal de elétrons na saída do LVL1. O valor do
-produto SP no ponto em questão é de $1,50$.
+de mérito, junto a curva ROC, para a determinação da qualidade discriminatória
+dos algoritmos que serão estudados. Neste caso específico, o ponto onde
+produto SP atinge seu máximo determina uma eficiência de deteção de elétrons
+de 91,85 \% contra 10,19 \% de falso alarme na deteção de jatos, ou 2,55 kHz,
+levando-se em consideração a contaminação do canal de elétrons na saída do
+LVL1. O valor do produto SP no ponto em questão é de $1,50$.
 
 \begin{figure}
 \begin{center}
@@ -956,10 +961,10 @@ semelhantes. Durante a busca exaustiva deste resultado, acumulou-se os
 resultados de eficiência e falso-alarme parciais entre cada operação de
 corte. Estes valores podem ser vistos na
 Tabela~\ref{tab:eghypo-partials}. Como é possível avaliar à partir desta
-tabela, as variáveis \rcore e \eratio são as mais discriminantes, deixando
+tabela, as variáveis \rcore e \eratio são as mais discriminatórias, deixando
 passar apenas cerca de 30 \% e 45 \% dos jatos avaliados, respectivamente. O
 corte em \etem não reduz a taxa de eventos, sendo praticamente irrelevante ao
-processo discriminativo. O vazamento de energia na seção hadrônica (último
+processo de discriminação. O vazamento de energia na seção hadrônica (último
 corte), ainda conseguirá diminuir a taxa de falsos-positivos na saída do
 detetor.
 
@@ -993,20 +998,20 @@ uma queda abrupta próximo ao vão entre a seção do barril e da tampa ($\eta
 bastante homogênea para a eficiência de deteção de elétrons e maior variação
 na taxa de falso-alarme para jatos, possivelmente devido à baixa estatística
 (muitos canais possuem apenas 30 a 40 jatos, como é possível observar na
-Figura~\ref{fig:phi}). A varredura por \etem indica que o método seja bastante
-robusto na deteção de elétrons, aumentando sua eficiência suavemente com o
-valor de energia da RoI. O falso-alarme em jatos também aumenta com a energia
-do objeto analisado, embora seja difícil estimar com precisão a qualidade do
-valor de falso-alarme determinado, uma vez que a estatística para jatos acima
-de 50 GeV seja praticamente inexistente.
+Figura~\ref{fig:transverse-energy}). A varredura por \etem indica que o método
+seja bastante robusto na deteção de elétrons, aumentando sua eficiência
+suavemente com o valor de energia da RoI. O falso-alarme em jatos também
+aumenta com a energia do objeto analisado, embora seja difícil estimar com
+precisão a qualidade do valor de falso-alarme determinado, uma vez que a
+estatística para jatos acima de 50 GeV seja praticamente inexistente.
 
 \begin{figure}
 \begin{center}
 %\includegraphics[angle=90,width=15cm,height=20cm]{eghypo-eta-scan-test.pdf}
 \includegraphics[scale=0.98]{eghypo/eghypo-eta-scan-test.pdf}
 \end{center}
-\caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
-falso-alarme (em cinza-claro/amarelo) por $\eta$.}
+\caption{Eficiência de deteção (em preto) contra
+falso-alarme (em cinza-claro/vermelho) por $\eta$.}
 \label{fig:eghypo-eta-scan-test}
 \end{figure}
 
@@ -1014,8 +1019,8 @@ falso-alarme (em cinza-claro/amarelo) por $\eta$.}
 \begin{center}
 \includegraphics[scale=0.98]{eghypo/eghypo-phi-scan-test.pdf}
 \end{center}
-\caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
-falso-alarme (em cinza-claro/amarelo) por $\phi$.}
+\caption{Eficiência de deteção (em preto) contra
+falso-alarme (em cinza-claro/vermelho) por $\phi$.}
 \label{fig:eghypo-phi-scan-test}
 \end{figure}
 
@@ -1023,8 +1028,8 @@ falso-alarme (em cinza-claro/amarelo) por $\phi$.}
 \begin{center}
 \includegraphics[scale=0.98]{eghypo/eghypo-emet-scan-test.pdf}
 \end{center}
-\caption{Eficiência de deteção (em cinza-escuro/vermelho) contra
-falso-alarme (em cinza-claro/amarelo) por \etem.}
+\caption{Eficiência de deteção (em preto) contra falso-alarme (em
+cinza-claro/vermelho) por \etem.}
 \label{fig:eghypo-emet-scan-test}
 \end{figure}
 
@@ -1063,12 +1068,12 @@ transformação linear, o espaço de entrada em um outro espaço onde as matrize
 de covariância sejam iguais e portanto recaindo no caso simples.}. Muitas
 vezes, na prática, os valores de média e a covariância não estão disponíveis e
 devem ser estimados, o que normalmente leva a falhas no cálculo do ponto ótimo
-de de discriminação. Dentre as técnicas de estimação da média e covariância
-pode-se destacar a estimação por máxima verosimilhança ou por máximo a
+de discriminação. Dentre as técnicas de estimação da média e covariância
+pode-se destacar a estimação por máxima verossimilhança ou por máximo a
 \textit{posteriori}.
 
 Em posse dos valores de média e covariância das classes, o plano de separação
-será definido da seguinte forma:
+seria definido da seguinte forma:
 
 \begin{equation}
 \overrightarrow{w} = \Sigma^{-1}(\overrightarrow{\mu}_0 -
@@ -1081,10 +1086,10 @@ deseja separar. Um problema que se segue é da invertibilidade de $\Sigma$, que
 dependerá de quão bem o conjunto de amostras representa as classes a serem
 discriminadas. Por exemplo, se $\Sigma$ possui combinações lineares dos dados
 disponíveis, o ranque desta matriz será inferior ao número de amostras e
-portanto a matrix não será invertível. Embora existam técnicas para superar o
-problema, mas como veremos mais adiante, é possível utilizarmos outras
-técnicas derivadas deste sistema primário para maximizarmos a discriminação
-das classes dado um conjunto de amostras.
+portanto a matriz não será invertível. Embora existam técnicas para superar o
+problema, é possível fazer uso de outras técnicas derivadas deste sistema
+primário para maximizarmos a discriminação das classes dado um conjunto de
+amostras.
 
 Por causa das dificuldades discutidas, muitas técnicas iterativas surgiram
 para que seja possível a definição de um plano ótimo de separação linear à
@@ -1123,27 +1128,31 @@ Onde $x(n)$ é a n-ésima entrada que leva o neurônio linear a uma saída
 $y(n)$. E, com este resultado, define-se a fórmula de treinamento do LMS:
 
 \begin{equation}
-\hat{w}(n+1) = \hat{w}(n) + \eta x(n)e(n)
+\hat{w}(n+1) = \hat{w}(n) + \alpha x(n)e(n)
 \label{eq:lms}
 \end{equation}
 
-Onde $\eta$ representa a taxa de aprendizagem, um parâmetro para a suavização
+Onde $\alpha$ representa a taxa de aprendizagem, um parâmetro para a suavização
 da trajetória do treinamento no espaço da função de erro
-$E(\overrightarrow{w})$. Na prática, é possível ainda definir técnicas de
-treinamento em bateladas para se obter uma suavização do treinamento em
-direção ao mínimo global, garantido devido à superfície bem-definida do erro
-(quadrático). No treinamento em bateladas ou épocas, os pesos sinápticos são
-corrijidos tendo por base a média dos erros para todos os eventos de uma
-época, ao invés de individualmente. Para eliminar polarizações no processo de
-treinameno devido a magnitude das componentes da entrada, enquanto comparadas
-entre si, é também prática que cada entrada seja subtraída da sua média e
-dividida pela sua variância. A Figura~\ref{fig:lms-flow} mostra o diagrama de
-blocos do discriminador LMS que será empregado neste estudo. O valor da saída
-$y$ é utilizado para definir a R.O.C. do discriminador e escolher, ao invés de
-quatro, apenas um corte que maximize a capacidade discriminante do
-sistema. Alvos para cada uma das classes são escolhidos e o sinal de erro é
-utilizado para corrigir os pesos sinápticos, até que o sistema convirja para o
-erro mínimo.
+$E(\overrightarrow{w})$. A Equação~\ref{eq:lms} representa a fórmula clássica
+do treinamento de um classificador LMS, indicando um método bem-definido de
+atualização dos pesos da rede para que se convirja a um erro mínimo. Na
+prática, é possível ainda definir técnicas de treinamento em bateladas para se
+obter uma suavização do treinamento em direção ao mínimo global, ainda que
+garantido devido à superfície bem-definida do erro (quadrático). No
+treinamento em bateladas ou épocas, os pesos sinápticos são corrigidos 
+tendo por base a média dos erros para todos os eventos de uma época, ao invés
+de individualmente. 
+
+Para eliminar polarizações no processo de treinamento devido a magnitude das
+componentes da entrada, enquanto comparadas entre si, é também prática que
+cada entrada seja subtraída da sua média e dividida pela sua variância. A
+Figura~\ref{fig:lms-flow} mostra o diagrama de blocos do discriminador LMS que
+será empregado neste estudo. O valor da saída $y$ é utilizado para definir a
+R.O.C. do discriminador e escolher, ao invés de quatro, apenas um corte que
+maximize a capacidade discriminante do sistema. Alvos para cada uma das
+classes são escolhidos e o sinal de erro é utilizado para corrigir os pesos
+sinápticos, até que o sistema convirja para o erro mínimo.
 
 \begin{figure}
 \begin{center}
@@ -1159,51 +1168,41 @@ discriminação elétron-jato.}
 Levando-se em consideração as 4 variáveis definidas pelo T2Calo, é possível
 encontrar o plano quadri-dimensional que define um discriminador linear ótimo,
 usando-se o algoritmo LMS, como descrito anteriormente. A separação em classes
-de treinamento e teste como apresentada na Seção~\ref{sec:eghypo}, dos dados
-disponíveis, será re-aproveitada aqui, para seja possível a comparação dos
-resultados nos dois casos. O algoritmo do LMS aplicado no treinamento dos
-pesos sinápticos está representado no diagrama de fluxo da
-Figura~\ref{fig:train-flow}.
+de treinamento e teste como apresentada na Seção~\ref{sec:eghypo} será
+re-aproveitada aqui, para seja possível a comparação dos resultados nos dois
+casos.
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.3]{train-flow}
-\end{center}
-\caption{Diagrama de fluxo de um sistema de treinamento baseado no algoritmo
-LMS.}
-\label{fig:train-flow}
-\end{figure}
-
-O sistema de treinamento e teste foi implementado em ambiente de trabalho C++,
-seguindo o paradigma da orientação à objetos (OO). Este ambiente, que será
-re-utilizado em várias partes deste trabalho, é discutido em detalhes na
-Seção~\ref{sec:framework}. A Figura~\ref{fig:train-flow} contém um diagrama de
-fluxo com os diversos passos do sistema de treinamento
+O sistema de treinamento e teste foi implementado em um ambiente de trabalho
+C++, seguindo o paradigma da orientação à objetos (OO). Este ambiente, que
+será re-utilizado em várias partes deste trabalho, será discutido em detalhes
+na Seção~\ref{sec:framework}. A Figura~\ref{fig:train-flow} contém um diagrama
+de fluxo com os diversos passos do sistema de treinamento
 implementando. Inicialmente, os bancos de dados usados para o treinamento e
 teste da rede são carregados. Os valores de média e variância dos dados são
-extraídos do conjunto de treinamento e guardados juntos aos valores
-sinápticos, para que sejam aplicados durante o treinamento\footnote{De fato,
+extraídos do conjunto de treinamento e guardados juntos aos pesos
+$\hat{w}(n)$, para que sejam aplicados durante o treinamento\footnote{De fato,
 seria mais eficiente que os fatores de normalização fossem aplicados
 previamente ao treinamento. No entanto, uma vez que deseja-se re-aproveitar a
 base de código para rodar o discriminador em uma etapa seguinte, é mais
-simples do ponto de vista implementacional que a normalização seja aplicada
+simples do ponto de vista da implementação que a normalização seja aplicada
 como parte do passo de execução do discriminador.}. Os pesos sinápticos são
 aleatoriamente inicializados (entre $-1$ e $+1$. Valores-alvo para cada uma
-das classes são pré-fixado: $-1$ para elétrons e $+1$ para jatos. O processo
+das classes são pré-fixados: $-1$ para elétrons e $+1$ para jatos. O processo
 de treinamento é então disparado. Para cada época ou batelada de treinamento,
-um conjunto de elétrons e jatos é escolhido aleatóriamente à partir dos
+um conjunto de elétrons e jatos é escolhido aleatoriamente à partir dos
 bancos-de-dados disponíveis. Os valores de erro são calculados e sua média é
 aplicada para a correção dos pesos sinápticos considerando a taxa de
-aprendizagem $\eta$. As melhores redes, tomando-se o valor do produto SP como
-referência, são guardadas a cada passo de treinamento. Um sistema configurável
-é utilizado para detetar a estagnação do treinamento. Quando o sistema atinge
-um estado no qual as alterações sinápticas não modifiquem significativamente o
-valor do produto SP do discriminador (levando-se em consideração uma margem de
-erro) por um número de iterações, o treinamento é automaticamente parado. O
-melhor discriminador até então é recarregado. Um estudo dos valores de Erro
-Médio Quadrático (EMQ, do inglês \eng{Mean-square error}, MSE) e produto SP é
-conduzido levando-se em consideração o corte que maximiza o valor do produto
-SP para a rede considerando-se a massa de dados disponível para treinamento.
+aprendizagem $\alpha$. As melhores redes, tomando-se o valor do produto SP
+como referência, são guardadas a cada passo de treinamento. Um sistema
+configurável é utilizado para detetar a estagnação do treinamento. Quando o
+sistema atinge um estado no qual as alterações sinápticas não modifiquem
+significativamente o valor do produto SP do discriminador (levando-se em
+consideração uma margem de erro) por um número de iterações, o treinamento é
+automaticamente parado. O melhor discriminador até então é recarregado. Um
+estudo dos valores de Erro Médio Quadrático (EMQ, do inglês \eng{Mean-square
+error}, MSE) e produto SP é conduzido levando-se em consideração o corte que
+maximiza o valor do produto SP para a rede considerando-se a massa de dados
+disponível para teste.
 
 \begin{figure}
 \begin{center}
@@ -1223,35 +1222,35 @@ considerados neste exercício:
 
 \begin{itemize}
 \item O número de elementos na batelada ($N$);
-\item O valor da taxa de treinamento ($\eta$).
+\item O valor da taxa de treinamento ($\alpha$).
 \end{itemize}
 
 Embora seja possível assumir que o sistema convergirá em todas as condições,
 valores muito grandes para a taxa de treinamento (ou pequenos para a
 quantidade de eventos na batelada) poderão fazer o processo de convergência ao
 mínimo parecer instável e disparar erros no sistema de parada automática do
-treinamento. Conduziu-se um conjunto de testes para a determinação dos
-parâmetros de treinamento que acarretem em uma migração suave ao erro mínimo
-do discriminador, no menor tempo possível. Os resultados podem ser vistos nas
-Figuras~\ref{fig:lms-lr-analysis} e \ref{fig:lms-esize-analysis}. Cada ponto
-nestas figuras representa a média sobre dez treinamentos realizados à partir
-de um conjunto de pesos iniciais sorteados (uniformemente) aleatoriamente no
-intervalo $[-1, +1]$. Como é possível observar através das figuras, para o
-problema em questão, o sistema responde melhor a baixos valores de taxa de
-treinamento e valores intermediários para o tamanho da batelada. Durante o
-experimento, limitou-se o número máximo de passos de treinamento em $1.000$,
-de forma que instabilidades durante o processo de convergência não impedissem
-o final da fase de treinamento. Desta forma, pontos nas curvas próximos a este
-valor no eixo vertical indicam provável instabilidade e que o treinamento foi
-interrompido bruscamente pelo programa ao invés de convergir suavemente a um
-mínimo.
+treinamento. Desta forma, conduziu-se um conjunto de testes para a
+determinação dos parâmetros de treinamento que acarretem em uma migração suave
+ao erro mínimo do discriminador, no menor tempo possível. Os resultados podem
+ser vistos nas Figuras~\ref{fig:lms-lr-analysis} e
+\ref{fig:lms-esize-analysis}. Cada ponto nestas figuras representa a média
+sobre dez treinamentos realizados à partir de um conjunto de pesos iniciais
+sorteados (uniformemente) aleatoriamente no intervalo $[-1, +1]$. Como é
+possível observar através das figuras, para o problema em questão, o sistema
+responde melhor a baixos valores de taxa de treinamento e valores
+intermediários para o tamanho da batelada. Durante o experimento, limitou-se o
+número máximo de passos de treinamento em $1.000$, de forma que instabilidades
+durante o processo de convergência não impedissem o final da fase de
+treinamento. Desta forma, pontos nas curvas próximos a este valor no eixo
+vertical indicam provável instabilidade e que o treinamento foi interrompido
+bruscamente pelo programa ao invés de convergir suavemente a um mínimo.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{lms/lms-lr-analysis}
 \end{center}
-\caption{Número de passos de treinamento médio em função da taxa de
-treinamento para a discriminação elétron/jato.}
+\caption{Número de passos de treinamento médio (para 10 tentativas) em função
+da taxa de treinamento para a discriminação elétron/jato.}
 \label{fig:lms-lr-analysis}
 \end{figure}
 
@@ -1259,30 +1258,34 @@ treinamento para a discriminação elétron/jato.}
 \begin{center}
 \includegraphics[scale=0.5]{lms/lms-esize-analysis}
 \end{center}
-\caption{Número de passos de treinamento médio em função do tamanho da
-época para a discriminação elétron/jato.}
+\caption{Número de passos de treinamento médio (para 10 tentativas) em função
+do tamanho da época para a discriminação elétron/jato.}
 \label{fig:lms-esize-analysis}
 \end{figure}
 
 Uma análise visual nestes gráficos indicam que valores de taxa de treinamento
-aconselháveis estão na faixa $\eta < 0.02$, enquanto que um tamanho da época
-favorável pareça ser $N > 200$. Escolhe-se $N = 500$ e $\eta = 0.01$. Desta
+aconselháveis estão na faixa $\alpha < 0.02$, enquanto que um tamanho da época
+favorável pareça ser $N > 200$. Escolhe-se $N = 500$ e $\alpha = 0.01$. Desta
 forma, depois de cerca de 10 passos, cerca de 35\% do conjunto de treinamento
-já foi usado. Com 30 passos, a rede já terá ``visto'' todos os dados de
-treinamento ao menos uma vez.
+já foi usado. Com 30 a 40 passos, a rede já terá ``visto'' todos os dados de
+treinamento ao menos uma vez, em média\footnote{O sorteio dos eventos de uma
+batelada é feito de forma aleatória (distribuição uniforme) e não há garantias
+que todos os eventos sejam utilizados ao longo do treinamento, embora seja
+estatisticamente provável que isto aconteça.}.
 
 A Figura~\ref{fig:lms-mse-evo} mostra a evolução do EMQ para uma das 10 redes
 com $N = 500$ e $\eta = 0.01$, tanto para o conjunto de treinamento (no alto)
 quanto para o conjunto de teste (embaixo). A Figura~\ref{fig:lms-sp-evo}
 mostra um gráfico equivalente, mas para o produto SP ao invés do EMQ. Como é
 possível verificar, o sistema converge depois de um pouco menos que 100 passos
-de treinamento. A evolução do produto SP é compatível com a minização do EMQ,
+de treinamento. A evolução do produto SP é compatível com a minimização do EMQ,
 aumentando rapidamente no início do treinamento, por cerca de 20 passos e
 depois permanecendo constante, em aproximadamente 1,5 para o restante do
 treinamento. O mesmo não ocorre para o EMQ que ainda continuará a diminuir,
 significativamente, por mais 60 a 80 passos antes da deteção automática da
-parada. O perfil de evolução do produto SP e minização do EMQ é seguido
-pelo conjunto de teste, de forma bastante semelhante.
+parada. O perfil de evolução do produto SP e minimização do EMQ é seguido pelo
+conjunto de teste, de forma bastante semelhante, indicando mais uma vez forte
+semelhança estatística entre os dois grupos de dados.
 
 \begin{figure}
 \begin{center}
@@ -1303,20 +1306,20 @@ conjunto de treinamento (topo) e de teste (embaixo).}
 \end{figure}
 
 A Figura~\ref{fig:lms-test-output} contém os histogramas da saída da rede para
-os elétrons (alto) e jatos (embaixo), para o conjunto de teste. O ponto ótimo
-de corte, determinado para que se maximize o produto SP da rede para o
-conjunto de treinamento para este sistema é $-0.0473$. Nestas condições, o
-máximo produto SP para o conjunto de teste é 1.51, definido no ponto da curva
-R.O.C. (veja Figura~\ref{fig:lms-test-roc}) onde a eficiência para a deteção
-de elétrons é 91,64\% enquanto que a eficiência para a deteção de jatos é de
-90,35\%. A Figura~\ref{fig:lms-vs-egamma-roc} mostra uma comparativo entre o
-resultado da otimização proposta atualmente no experimento ATLAS contra os
-resultados obtidos para este classificador. Através desta figura é possível
-observar que o discriminador LMS tangencia a parte exterior dos pontos da
-otimização proposta atualmente no experimento. O resultado obtido com o
-algoritmo LMS, ao invés do longo processo de otimização proposto
+elétrons (alto) e jatos (embaixo), considerando-se o conjunto de teste. O
+ponto ótimo de corte, determinado para que se maximize o produto SP da rede
+para o conjunto de treinamento para este sistema é $-0,0473$. Nestas
+condições, o máximo produto SP para o conjunto de teste é 1.51, definido no
+ponto da curva R.O.C. (veja Figura~\ref{fig:lms-test-roc}) onde a eficiência
+para a deteção de elétrons é 91,64\% enquanto que a eficiência para a deteção
+de jatos é de 90,35\%. A Figura~\ref{fig:lms-vs-egamma-roc} mostra uma
+comparativo entre o resultado da otimização proposta atualmente no experimento
+ATLAS contra os resultados obtidos para este classificador. Através desta
+figura é possível observar que o discriminador LMS tangencia a parte exterior
+dos pontos da otimização proposta atualmente no experimento. O resultado
+obtido com o algoritmo LMS, ao invés do longo processo de otimização proposto
 originalmente, é atingido depois de apenas 1 minuto e 30 segundos de
-treinamento, embora já apresente uma capacidade discriminativa praticamente
+treinamento, embora já apresente uma capacidade discriminatória praticamente
 ótima após apenas 20 passos de treinamentos ($\approx 25$ segundos).
 
 \begin{figure}
@@ -1350,23 +1353,23 @@ a distribuição dos dados em $\eta$, $\phi$ e $\etem$. O número anexo ao topo
 de cada barra indica a quantidade de eventos dentro do limite em questão e é
 útil para que se considere a relevância de um valor parcial no desempenho do
 discriminador. Nota-se que na distribuição por $\eta$, há uma clara perda de
-eficiência na região onde $|\eta| \approx 1,5$. Esta queda no desempenho do
-detetor é devido à passagem existente na região para a passagem dos cabos dos
-detetores internos do ATLAS. A eficiência é recuperada logo após esta regão e
-recai suavemente nas bordas. O gráfico de barras para a distribuição $\phi$
-mostra-se corretamente uniforme, indicando que o detetor não está polarizado e
-funciona coerentemente para todos os valores deta variável. Este resultado é
-esperado já que o detetor é simétrico neste eixo. A análise por $\etem$
-demonstra uma predominante qualidade de deteção para valores maix baixos de
-energia que valores mais altos. Deve-se levar em conta que, embora a
-eficiência de deteção de elétrons ainda seja máxima nesta última região, como
-mostra a Figura~\ref{fig:lms-test-efficiency-emet}, o falso alarme na deteção
-de jatos também apresenta-se máximo. Uma vez que o produto SP é uma figura de
-mérito da eficiência agregada de ambas as classes de eventos do discriminador,
-ela quantificar-se-á em zero nesta região, o que é esperado. Possivelmente
-este resultado está associado a baixa estatística disponível na região e
-portanto não sendo considerado apropriadamente para determinação do ponto de
-corte ótimo.
+eficiência na região onde $|\eta| \approx 1,5$. Esta notável queda no
+desempenho do classificador é devido a um espaço sem elementos de deteção
+nesta área (também conhecido como \eng{gap} ou \eng{crack} dos calorímetros),
+por onde passam os cabos de leitura e manutenção dos detetores internos. A
+eficiência é recuperada logo após esta região e recai suavemente nas bordas. O
+gráfico de barras para a distribuição $\phi$ mostra-se corretamente uniforme,
+indicando que o sistema não está polarizado e funciona coerentemente para
+todos os valores desta variável. Este resultado é esperado já que o detetor é
+simétrico neste eixo. A análise por $\etem$ demonstra uma predominante
+qualidade de deteção para valores mais baixos de energia que valores mais
+altos. Deve-se levar em conta que, embora a eficiência de deteção de elétrons
+ainda seja máxima nesta última região, como mostra a
+Figura~\ref{fig:lms-test-efficiency-emet}, o falso alarme na deteção de jatos
+também apresenta-se máximo. Uma vez que o produto SP é uma figura de mérito da
+eficiência agregada de ambas as classes de eventos do discriminador, ela
+quantificar-se-á em zero nesta região, o que é razoável. Este resultado está
+notavelmente associado a baixa estatística disponível na região.
 
 \begin{figure}
 \begin{center}
@@ -1403,12 +1406,12 @@ para um detetor LMS, por $\etem$.}
 
 A Figura~\ref{fig:lms-vs-egamma} mostra um comparativo entre as duas técnicas
 de deteção, por energia transversa na seção e.m.. Distingue-se que os dois
-sistemas possuem resposta bastante próximas. Na primeira (mais à esquerda)
+sistemas possuem respostas bastante próximas. Na primeira (mais à esquerda)
 faixa de energia considerada, o EGammaHypo possui uma resposta melhor enquanto
 que com o aumento da energia transversa o LMS apresenta-se mais eficiente, e
-segue este padrão para quase todas as faixas consideradas, inclusive onde há
-maior concentração de eventos de teste, como é possível determinar à partir da
-Figura~\ref{fig:lms-test-sp-emet}.
+segue este padrão para quase todas as faixas consideradas, principalmente onde
+há maior concentração de eventos de teste, como é possível determinar à partir
+da Figura~\ref{fig:lms-test-sp-emet}.
 
 \begin{figure}
 \begin{center}
@@ -1423,12 +1426,12 @@ EGammaHypo por energia transversa na seção e.m..}
 
 A técnica da análise de relevância \cite{relevance} tem por objetivo medir a
 importância de cada uma das variáveis de entrada para um classificador. Nesta
-técnica suprime-se a contribuição variável à saída substituindo-se seu valor a
-cada evento por sua média, para todos os eventos disponíveis na entrada do
-sistema de discriminação. Observando-se a variação da saída, é possível
-estimar a contribuição daquela variável ao processo discriminativo. A
-referência supracitada define a equação para a estimativa da relevância da
-seguinte forma:
+técnica suprime-se a contribuição da variável à composição da saída
+substituindo-se seu valor a cada evento por sua média, para todos os eventos
+disponíveis na entrada do sistema de discriminação. Observando-se a variação
+da saída, é possível estimar a contribuição daquela variável ao processo
+discriminatório. A referência supracitada define a equação para a estimativa da
+relevância da seguinte forma:
 
 \begin{equation}
 R_i = \frac{1}{N} \text{ } \overset{N}{\underset{j=1}{\sum}} \text{ }
@@ -1448,7 +1451,14 @@ estatisticamente semelhantes, apresentando valores de relevância, para cada
 uma de suas variáveis, bastante próximos. Ela também mostra que a variável
 $\rcore$ é de extrema importância na determinação da saída do detetor. Quando
 substituímo-la por sua média, o erro na saída aumenta de mais de 3 pontos
-enquanto que para as demais variáveis, o impacto é bastante reduzido.
+enquanto que para as demais variáveis, o impacto é nitidamente menor. Esta
+figura também indica que a ordem de separação proposta pelo EGammaHypo está em
+acordo com o processo de filtragem definido automaticamente pelo LMS,
+levando-se em consideração a ordem onde os cortes são aplicados por aquele
+algoritmo e a importância das variáveis nesse processo de classificação. A
+importância destas variáveis ao sistema LMS poderia ser utilizada para
+simplificá-lo. Por exemplo, seria possível ``podar'' a variável menos
+relevante e re-treinar o sistema para obter um classificador mais rápido.
 
 \begin{figure}
 \begin{center}
@@ -1460,23 +1470,20 @@ classificador LMS em estudo.}
 \label{fig:relevance-mse}
 \end{figure}
 
-A importância destas variáveis ao sistema LMS poderia ser utilizada para
-simplificá-lo. Por exemplo, seria possível ``podar'' a variável menos
-relevante e retreinar o sistema para obter um classificador mais rápido. Por
-outro lado, como foi visto nas análises de evolução do EMQ
+Por outro lado, como foi visto nas análises de evolução do EMQ
 (Figura~\ref{fig:lms-mse-evo}) e do produto SP (Figura~\ref{fig:lms-sp-evo}),
-a capacidade discriminativa da rede reage de forma correlacionada, mas
+a capacidade discriminatória da rede reage de forma correlacionada, mas
 \textbf{não necessariamente} idêntica ao processo de mapeamento da entrada na
 saída proposto pelo LMS. Observa-se que, apesar de notarmos uma contínua
 migração ao mínimo EMQ durante cerca de 100 passos de treinamento, após cerca
-de apenas 20 passos, a capacidade discriminativa do sistema já atinge seu
+de apenas 20 passos, a capacidade discriminatória do sistema já atinge seu
 máximo e ali permanece até o final do treinamento. Este comportamento indica
-que existe uma diferença fundamental entre estes dois parâmetros. Portanto,
+que exista uma diferença fundamental entre estes dois parâmetros. Portanto,
 seria de pouca prudência considerarmos apenas o valor de relevância proposto
 para a avaliação da importância de cada variável \underline{ao processo
-discrimativo}. Desta forma, propõe-se uma variação do cálculo da relevância,
+discriminatório}. Desta forma, propõe-se uma variação do cálculo da relevância,
 mas agora baseando-se no impacto da substituição do valor da variável pela sua
-média à capacidade discriminativa da rede. Naturalmente utilizaremos do
+média à capacidade discriminatória da rede. Naturalmente nos utilizaremos do
 produto SP para o cálculo da relevância de discriminação do LMS, da seguinte
 forma:
 
@@ -1490,24 +1497,29 @@ ou $R_{d_i}$, de uma variável $i$ como a diferença no produto SP máximo
 causado pela substituição desta variável pela sua média. De fato, espera-se
 que a maior parte dos valores de relevância sejam positivos, indicando uma
 degradação do desempenho do classificador seguindo a neutralização de uma
-variável. Ainda sim, seria possível encontramos valores de relevância
-negativos, o que indicaria que uma variável está, na verdade, atrapalhando o
-processo de classificação ao invés de melhorá-lo. A
-Figura~\ref{fig:relevance-sp} mostra os valores de $R_d$ para o classificador
-LMS em estudo. Como é possível ver nesta figura, o quadro é marginalmente
-diferente daquele mostrado pela Figura~\ref{fig:relevance-mse}. A variável
-mais importante para o processo discriminativo é ainda $\rcore$, seguindo-se
-de $\eratio$ e $\ethad$. A variável $\etem$ é a menos relevante para o
-processo de classificação de elétrons e jatos, o que já era esperado
-observando-se as tendências anteriores. Observa-se também que, embora haja
-concordância nos resultados para dentro de um mesmo subconjunto de dados
-(treino \textit{versus} teste), os resultados apresentam-se ligeiramente mais
-discrepantes que para outras figuras de mérito, principalmente para a
-variável $\eratio$. Como é possível definir à partir deste gráfico, seria
-preferencial uma poda da variável $\etem$ que da variável $\ethad$, como
-sugeriria a Figura~\ref{fig:relevance-mse}. No mais, as duas figuras são
-bastante compatíveis e indicam uma tendência importante: a minimização do EMQ
-também maximizará o produto SP.
+variável. Embora improvável no caso corrente, seria, num geral, possível
+encontramos valores de relevância negativos, o que indicaria que uma variável
+está, na verdade, atrapalhando o processo de classificação ao invés de
+melhorá-lo. A Figura~\ref{fig:relevance-sp} mostra os valores de $R_d$ para o
+classificador LMS em estudo. Como é possível ver nesta figura, o quadro é
+marginalmente diferente daquele mostrado pela
+Figura~\ref{fig:relevance-mse}. A variável mais importante para o processo
+discriminatório é ainda $\rcore$, seguindo-se de $\eratio$ e $\ethad$. A
+variável $\etem$ é a menos relevante para o processo de classificação de
+elétrons e jatos, o que já era esperado observando-se as tendências
+anteriores. Observa-se também que, embora haja concordância nos resultados
+para dentro de um mesmo subconjunto de dados (treino \textit{versus} teste),
+os resultados apresentam-se ligeiramente mais discrepantes que para outras
+figuras de mérito, principalmente para a variável $\eratio$. Como é possível
+definir à partir deste gráfico, seria preferencial uma poda da variável
+$\etem$ que da variável $\ethad$, como sugeriria a
+Figura~\ref{fig:relevance-mse}. No mais, as duas figuras são bastante
+compatíveis e indicam uma tendência importante: a minimização do EMQ também
+maximizará o produto SP. Esta figura também indicaria que a ordem na qual o
+EGammaHypo considera as variáveis de corte (i.e. $\rcore \rightarrow
+\eratio \rightarrow \etem \rightarrow \ethad$) seja não-ótima, mesmo que
+marginalmente. Observa-se que seria mais interessante que o corte em $\etem$
+fosse realizado por último ao invés do corte em $\ethad$.
 
 \begin{figure}
 \begin{center}
@@ -1524,17 +1536,16 @@ considerando-se o classificador LMS em estudo.}
 
 Redes neurais artificiais (RNA) vem sendo atualmente utilizadas com sucesso em
 problemas de otimização, controle e reconhecimento de padrões
-\cite{haykin}. RNA's são modelos matemáticos inspirados no
-conhecimento limitado que temos do cérebro animal. Neste contexto, entende-se
-que uma rede neural pode aprender através do contato com os elementos de
-interesse de um determinado espaço de entrada e que este conhecimento é
-armazenado através das conexões sinápticas que conectam os elementos
-processadores (neurônios) da rede. Dentre as características de uma RNA
-podemos destacar:
+\cite{haykin}. RNA's são modelos matemáticos inspirados no conhecimento
+limitado que temos do cérebro animal. Neste contexto, entende-se que uma rede
+neural pode aprender através do contato com os elementos de interesse de um
+determinado espaço de entrada e que este conhecimento é armazenado através das
+conexões sinápticas que conectam os elementos processadores (neurônios) da
+rede. Dentre as características de uma RNA podemos destacar:
 
 \begin{description}
 \item[Robustez] Em ambientes extremamente \emph{agressivos} (sujeitos a falhas
-e a radiotividade), como é o caso da operação do ATLAS, RNA's podem manter um
+e a radioatividade), como é o caso da operação do ATLAS, RNA's podem manter um
 excelente desempenho, mesmo quando parte dos dados (canais de aquisição) de
 entrada são perdidos;
 
@@ -1546,9 +1557,20 @@ objetos de forma bastante eficaz. Isto é \underline{extremamente} importante
 em ambientes que podem revelar resultados inesperados (nova física);
 
 \item[Simples implementação] RNA's podem ser facilmente descritas em
-linguagens de programação convencionais, atingindo desempenhos satifatórios
+linguagens de programação convencionais, atingindo desempenhos satisfatórios
 para um grande conjunto de aplicações em tempo real.
 \end{description}
+
+A utilização de RNA's em experimentos em Física de Altas Energias também vem
+se popularizando ao longo das últimas década, principalmente na área de
+calorimetria, tanto especificamente em sistemas de filtragem \cite{badgett92,
+koehne96} quanto para análise pós-reconstrução \cite{altherr90}. Isto se deve
+principalmente ao fato que RNA's consigam definir uma superfície de separação
+não-linear no espaço de dados sendo considerado, normalmente atingindo
+resultados bastante acurados na determinação do \eng{background} e ainda
+retendo um desempenho satisfatório quando comparadas às técnicas de deteção
+por cortes como as discutidas anteriormente (veja a
+Seção~\ref{sec:def-eghypo}).
 
 \subsection{Definição de uma rede neural artificial}
 
@@ -1586,7 +1608,7 @@ RoI. Aplicação de uma rede neural como discriminador (hipótese).
 
 Esta seção vai falar do desempenho "físico" do neuralringer. Quão melhor é que
 o T2Calo na deteção de elétrons e jatos. As divergências nos cálculos podem
-ser restaurandas usando-se combinações de aneis, tais como a energia total,
+ser restauradas usando-se combinações de anéis, tais como a energia total,
 etc.
 
 Colocar os diversos tipos de análise que temos até agora.
