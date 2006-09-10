@@ -4,7 +4,7 @@
 \typeout{ Maintained by Andre dos Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{O Sistema de Filtragem e Aquisição de dados do ATLAS}
+\chapter{O Sistema de filtragem e aquisição de dados do ATLAS}
 \label{chap:trigger}
 
 O \idx{sistema de filtragem} do experimento ATLAS tem o encargo de separar, de
@@ -48,7 +48,7 @@ ATLAS. Extraído de \cite{hlt-tdr}.}
 \label{fig:trigger-sketch}
 \end{figure}
 
-\section{O Primeiro Nível de Filtragem}
+\section{O primeiro nível de filtragem}
 \label{sec:lvl1}
 
 O Primeiro Nível de Filtragem (LVL1) realiza uma seleção inicial de candidatos
@@ -143,7 +143,7 @@ em blocos indicando as principais funções do LVL1. Extraído de \cite{hlt-tdr}
 \label{fig:l1-functional}
 \end{figure}
 
-\section{Os Altos Níveis de Filtragem, Aquisição de Dados e Controle}
+\section{Os altos níveis de filtragem, aquisição de dados e controle}
 \label{sec:hlt-daq}
 
 %% Observação: falta referência para S-Links
@@ -194,7 +194,7 @@ classificação de todos os eventos aceitos.
 
 \end{itemize}
 
-\subsection{O Sistema de Controle do Detetor}
+\subsection{O sistema de controle do detetor}
 \label{sec:dcs}
 
 O DCS supervisa todos os componentes de \eng{hardware} do arranjo
@@ -241,7 +241,7 @@ de monitoração, calibração ou teste. Assim sendo, o DCS precisa ter completa
 independência funcional, ainda que, ao mesmo tempo, este quesito não deva
 imperativamente acarretar em limites operacionais com o DAQ.
 
-\subsection{O Sistema \textit{Online}}
+\subsection{O sistema \textit{online}}
 \label{sec:online}
 
 O sistema \idxeng{online} engloba o conjunto de aplicações para configurar,
@@ -276,7 +276,7 @@ mensagens de erro e diagnóstico enviadas pelas diversas aplicações. Interface
 funcionalidades do experimento. Estas interfaces fornecem visões simplificadas
 de vários sub-sistemas durante um \eng{run}.
 
-\subsubsection{Arquitetura do Sistema \eng{Online}}
+\subsubsection{Arquitetura do sistema \eng{online}}
 \label{sec:online-arch}
 \index{online}
 
@@ -363,7 +363,7 @@ através da linha de comando em ambientes apropriadamente configurados.
 %\label{fig:daqmonitor}
 %\end{figure}
 
-\subsection{O Sistema de Fluxo de Dados}
+\subsection{O sistema de fluxo de dados}
 \label{sec:dataflow}
 
 O Sistema de Fluxo de Dados (do inglês \eng{Dataflow}, DF) do DAQ é
@@ -444,7 +444,7 @@ plenamente, o \eng{Dataflow} está montado sobre as bases do Sistema
 \eng{Online}, que provê as ferramentas de controle e configuração necessárias
 para operar uma cadeia de aquisição completa.
 
-\subsubsection{Ferramentas do \eng{Dataflow}}
+\subsubsection{Ferramentas do \eng{dataflow}}
 \label{sec:dftools}
 
 Para se projetar um conjunto de aplicações que funcionem coerentemente é
@@ -632,7 +632,7 @@ O L2R juntamente com a decisão do LVL2 são enviados diretamente das tarefas
 processadoras ao L2SV e ao PROS sem a intervenção de outros componentes dentro
 da L2PU.
 
-\subsubsection{Parâmetros de \eng{Hardware} do DAQ}
+\subsubsection{Parâmetros de \eng{hardware} do DAQ}
 
 A escolha da tecnologia de processamento, tal qual aquela empregada para a
 rede de interconexão destes nós, é um parâmetro vital para viabilização do
@@ -685,7 +685,7 @@ disponível para o tráfego de dados, a utilização de mais tarefas para esta
 atividade torna-se desnecessária. O número de tarefas processadoras, no
 entanto, deve ser otimizado para que o sistema atinja o seu desempenho máximo.
 
-\subsection{Análise Funcional do Fluxo de Dados no LVL2}
+\subsection{Análise funcional do fluxo de dados no LVL2}
 \label{sec:lvl2work}
 
 Para avaliar a correta operação dos diversos processos que compõem o LVL2, é
@@ -717,7 +717,7 @@ RoI's e até o tempo de processamento entre cada tomada de dados, possivelmente
 em múltiplos passos. Este bloco emulador é sintonizado para caracterizar os
 parâmetros normais de operação do LVL2.
 
-\subsubsection{Parâmetros Críticos do Sistema de Leitura}
+\subsubsection{Parâmetros críticos do sistema de leitura}
 
 Um dos parâmetros que se deseja investigar é a capacidade da L2PU de coletar
 dados do sistema de leitura, neste caso representado pelos diversos
@@ -943,7 +943,7 @@ filtragem. Um conjunto de procedimentos ineficaz e lento será mais oneroso
 economicamente e também tecnicamente, já que a qualidade dos eventos
 finalmente aprovados se torna duvidosa.
 
-\subsection{Altos Níveis de Filtragem e seus algoritmos}
+\subsection{Altos níveis de filtragem e seus algoritmos}
 \label{sec:hlt}
 
 A infraestrutura de seleção de eventos dos Altos Níveis de Filtragem constitui
@@ -1043,7 +1043,7 @@ evento é automaticamente retornado como resultado do LVL2 para a L2PU. O
 comando \textit{Término} termina a execução dos algoritmos e produz um sumário
 do período de execução.
 
-\subsubsection{Modelo de Desenvolvimento do L2SC}
+\subsubsection{Modelo de desenvolvimento do L2SC}
 
 Uma vez que as mesmas interfaces estão disponíveis no LVL2 e no EF, o código
 desenvolvido no ambiente \eng{offline} pode ser diretamente carregado em seu
