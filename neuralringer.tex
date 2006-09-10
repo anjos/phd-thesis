@@ -39,16 +39,141 @@ rápido e de simples manutenção.
 Os primeiros sistemas de deteção baseados em redes neurais artificiais,
 aplicados à Física de altas energias, surgiram em 1987, na reconstrução de
 partículas carregadas e píons neutros \cite{denby-nim-1997}. Hoje em dia
-\cite{denby-nim-2004}, cerca de 20 anos passados, tais sistemas são
-empregados em praticamente todas as áreas desta ciência, desde da concepção de
-detetores \cite{wilk-nim-2006}, filtragem e aquisição de dados
+\cite{denby-nim-2004}, cerca de 20 anos passados, tais sistemas são empregados
+em praticamente todas as áreas neste campo, desde da concepção de detetores
+\cite{wilk-nim-2006}, filtragem e aquisição de dados
 \cite{denby-nim-2003, kohne-nim-1997, varela-cms-1998},
-passando pela reconstrução \eng{offline} e análise
-\cite{kiesling-nim-2004}. [\textit{Missing references, seixas tracking!}].
+passando pela reconstrução \eng{offline} \cite{peterson-nim-1988} e análise
+\cite{kiesling-nim-2004}. Nestes ambientes, o reconhecimento de padrões pode
+ocorrer tanto num plano mais elementar, onde deseja-se identificar os
+parâmetros de cada partícula que surge de uma reação sub-atômica, quanto num
+plano mais avançado, onde combina-se as informações detetadas para se tentar
+definir as características globais de um evento.
 
-A razão da aplicação de métodos estocásticos 
+\subsection{Redes neurais para análise e reconstrução \eng{offline}}
 
+\subsection{Reconstrução de agrupamentos em calorímetros}
 
+\subsection{Redes neurais em sistemas de filtragem}
+
+A taxa de falsos-positivos em um experimento em física de altas energias pode
+ser bastante grande, chegando muitas vezes a ser ordens de magnitude mais
+elevadas que o sinal que se deseja detetar. Somado a este fator, incluem-se as
+restrições de tempo de processamento de um sistema de filtragem que deva
+operar em tempo real, processando, milhões de eventos por segundo.
+
+O primeiro sistema de filtragem baseado em redes neurais foi construído e
+testado em 1992, no Fermilab, Estados-Unidos, para o experimento $D0$ no
+Tevatron \cite{lindsey-nim-1992}. Este sistema pode determinar os parâmetros
+da trajetória de múons levando em consideração valores de tensão digitalmente
+amostrados de uma câmara dividida em três planos, cada um contendo várias
+células de deteção. Cada célula é equipada com placas coletoras de tensão que
+permitem a amostragem da distância relativa da partícula com relação aos
+dipolos através do atraso do sinal de avalanche disparado pela interação do
+múon com a célula de deteção.
+
+Levando-se em consideração os valores de atraso em cada célula e que a
+partícula atravessará todas as camadas do detetor, é possível calcular o ponto
+de impacto aproximado e ângulo da trajetória da partícula. Para tal, uma
+rede neural tipo MLP com 64 neurônios escondidos e 64 saídas, baseada em
+\eng{hardware} especializado (chip Intel ETANN), é treinada levando-se em
+consideração os sinais de interação de cerca de 10.000 múons com este
+detetor. Estes eventos foram simulados através de processos de Monte-Carlo. O
+treinamento em si ocorre em um PC que emula o sistema em \eng{hardware}. Os
+pesos podem então ser descarregados no processador e utilizados
+\eng{online}.
+
+Os resultados encontrados por este sistema são surpreendentemente positivos em
+comparação com métodos de reconstrução \eng{offline}. Considerando-se um
+conjunto de testes de alguns milhares de traços, o sistema baseado no
+processador neural obtém um erro menor que 5 mm no ponto de impacto na
+primeira camada de 96\% (contra 98\% de um sistema de \eng{fitting}
+\eng{offline}). Para o coeficiente angular, este sistema possui um erro menor
+que $5,7^{o}$ para 93\% (contra 97\% \eng{offline}) para os padrões de
+teste. O tempo total de processamento do sistema é de apenas 8~$\mu$s.
+
+O experimento H1, que utiliza o acelerador HERA no laboratório Desy em
+Hamburgo, Alemanha, estuda a distribuição do momento dos constituentes de
+prótons e mede a força de acoplamento do glúon aos diferentes quarks. Devido à
+interações tais como as que ocorrem entre o feixe e resíduos no tubo do
+acelerador, a taxa de eventos que constituem ruído de fundo chega a uma ordem
+de $10^5$ comparada à ocorrência de física interessante. Para filtrar a taxa
+de eventos inicial de cerca 10 milhões por segundo para apenas 100, este
+experimento utiliza um sistema de filtragem divido em 4 níveis. O primeiro
+nível de filtragem reduz a taxa de eventos em cerca de 100 vezes. Desta forma,
+o segundo nível de filtragem tem apenas cerca de 10~$\mu$s para tomar uma
+decisão. Este nível deve reduzir a taxa de eventos aproximadamente 10
+vezes. Uma rede neural foi utilizada para resolver este problema
+\cite{kohne-nim-1997}. 
+
+No primeiro nível de filtragem, 16 variáveis são calculadas tais como a
+energia total, transversal e na parte centrais do calorímetro, dentre
+outras. Este nível de filtragem ignora, no entanto, quaisquer relações entre
+estas variáveis. Cortes mais sofisticados podem ser executados no segundo
+nível adicionado-se à estas variáveis, outras quantidades que somente estão
+disponíveis após o tempo de decisão do primeiro nível e alimentando-se uma
+rede neural tipo MLP. 
+
+As variáveis selecionadas (somas de energias, número de partículas com carga
+detetadas, etc.) são utilisadas para determinar se o evento em questão advem
+de uma interação elétron-próton (física de interessante), de uma interação do
+feixe com uma molécula no tubo do acelerador ou qualquer outro fenômeno a ser
+desprezado. O sistema é implementado em \eng{hardware}, utilizando o
+processador CNAPS 1064, da empresa Adaptive Solutions, executando em um tempo
+total de 20~$\mu$s. Cada canal de decaimento é estudado separadamente e uma
+rede especialista utilizada para detetar sua ocorrência.
+
+A eficiência do sistema é variável conforme o canal em análise e apresentada
+neste trabalho levando-se em consideração a taxa de redução de eventos
+representando falso-alarme com relação ao primeiro nível de filtragem. Esta
+taxa chega a valores entre 40 e 160 para eventos tipo $\gamma p \rightarrow X
++ J/\Psi$ e de 10 a 20 para eventos tipo $\gamma p \rightarrow \text{jatos}$,
+o que está acima das especificações originais para o sistema de
+filtragem. Nestes casos, o sistema neural permitiu que se elimine
+complementamente pré-escalonamento no primeiro nível, aumentando
+substancialmente o número de eventos interessantes registrados em mídia
+permanente.
+
+\subsection{Redes neurais e calorimetria em sistemas de filtragem}
+
+Em \cite{varela-cms-1998}, descreve-se um sistema de deteção neural de
+elétrons em tempo real que utiliza-se das informações dos calorímetros e.m. do
+CMS \cite{cms-trigger}. O primeiro nível de filtragem deste experimento não
+exaure a informação provida pelo calorímetro e.m. e portanto há oportunidade
+para que um segundo nível de filtragem, apoiando-se na informação não
+aproveitada pelo LVL1, consiga atingir alguma redução na taxa de eventos que
+será repassado ao terceiro nível de filtragem.
+
+A informação utilizada para a deteção de elétrons são os valores de energia de
+um conjunto de células provenientes dos cristais do calorímetro e.m.. Este
+conjunto define um ``quadrado'' de aproximadamente 7 por 7 células deste
+detetor, cobrindo uma área de aproximadamente $0,1 \times 0,1$ no plano $\eta
+\times \phi$. O algoritmo escolhido inicia o processamento localizando o pico
+de deposição energética na região. Em seguida, de forma a tornar o processo de
+deteção independente da energia, normaliza-se o valor de deposição energética
+em cada célula pelo valor de energia na célula mais energética. Para
+amplificar os valores de deposição energética nas bordas da região em análise,
+tira-se a raíz quadrada do valor normalizado das células.
+
+Cada região analisada, composta de 49 valores de energia normalizada, é
+disponibilizada como entrada a uma rede neural tipo MLP, com 8 neurônios
+escondidos, treinada para detetar jatos e elétrons. A base de dados inicial
+consistia de 50.000 jatos e 15.000 elétrons simulados com energia entre 5 e
+225 GeV. Estes eventos são submetidos a uma filtragem por um sistema de
+simulação do LVL1 do CMS, definindo-se a base de dados disponível para
+treinamento: 1.500 jatos e por volta de 13.000 elétrons. Para uma taxa
+constante de deteção de elétrons de 98\%, obteve-se uma taxa de deteção de
+jatos de 71\% para eventos com ruído de fundo equivalente a um ambiente
+simulado de alta luminosidade ($10^{34}\text{cm}^{-2}\text{s}^{-1}$) e 78\%,
+para um ambiente em baixa luminosidade ($10^{33}\text{cm}^{-2}\text{s}^{-1}$).
+
+\subsection{Tendências}
+
+%Palavras-chave: pré-processamento, baixa latência, encapsulamento de ruído,
+%determinação de parâmetros, MLP
+
+%Describe stuff for ATLAS, like \cite{daq11}, \cite{daqnote00-02} and
+%\cite{abramowicz-nim-2004}. 
 
 \section{Discriminação linear}
 \label{sec:lms}
