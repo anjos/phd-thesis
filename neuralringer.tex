@@ -4,7 +4,7 @@
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{Sistema neural de deteção elétron/jato baseado em Calorimetria}
+\chapter{Sistema neural de deteção elétron/jato baseado em calorimetria}
 \label{chap:neural}
 
 Neste capítulo, define-se um sistema de extração de característica em anéis de
@@ -15,27 +15,42 @@ em desempenho o sistema clássico de deteção que é usado como base no
 experimento ATLAS. O sistema proposto tem ainda as vantagens de ser modular,
 rápido e de simples manutenção.
 
-\section{Revisão da Literatura}
+\section{Revisão da literatura}
+\label{sec:review}
 
-\textit{Introduzir um histórico de das diversas técnicas até hoje, emprego de
-RN em HEP, Hera, D0, LEP. Faltando...}
+%\textit{Introduzir um histórico de das diversas técnicas até hoje, emprego de
+%RN em HEP, Hera, D0, LEP. Faltando...}
 
-Perfil:
+%Perfil:
 
-\begin{itemize}
-\item Entre 10-15 páginas máximo;
-\item[OK] Bruce Demby escreveu um review completo na NIM;
-\item[OK] Chrss Kiesling implementou RN no Trigger do H1, autor do processo de
-relevância? 
-\item Verificar publicações no CERN, Fermilab e Desy (\eng{via} SPIRES?);
-\item Verificar publicações nos congressos (IEEE, ACAT, ISCAS, de 2000 para
-cá); 
-\item[OK] Redes Neurais e mapeamento topológico em calorimetria (Wisconsin);
-\item Por alto como se fazia no LEP;
-\item \textbf{Seixas}: coloque aqui outras idéias...
-\end{itemize}
+%\begin{itemize}
+%\item Entre 10-15 páginas máximo;
+%\item[OK] Bruce Demby escreveu um review completo na NIM;
+%\item[OK] Chrss Kiesling implementou RN no Trigger do H1, autor do processo de
+%relevância? 
+%\item Verificar publicações no CERN, Fermilab e Desy (\eng{via} SPIRES?);
+%\item Verificar publicações nos congressos (IEEE, ACAT, ISCAS, de 2000 para
+%cá); 
+%\item[OK] Redes Neurais e mapeamento topológico em calorimetria (Wisconsin);
+%\item Por alto como se fazia no LEP;
+%\item \textbf{Seixas}: coloque aqui outras idéias...
+%\end{itemize}
 
-\section{Discriminação Linear}
+Os primeiros sistemas de deteção baseados em redes neurais artificiais,
+aplicados à Física de altas energias, surgiram em 1987, na reconstrução de
+partículas carregadas e píons neutros \cite{denby-nim-1997}. Hoje em dia
+\cite{denby-nim-2004}, cerca de 20 anos passados, tais sistemas são
+empregados em praticamente todas as áreas desta ciência, desde da concepção de
+detetores \cite{wilk-nim-2006}, filtragem e aquisição de dados
+\cite{denby-nim-2003, kohne-nim-1997, varela-cms-1998},
+passando pela reconstrução \eng{offline} e análise
+\cite{kiesling-nim-2004}. [\textit{Missing references, seixas tracking!}].
+
+A razão da aplicação de métodos estocásticos 
+
+
+
+\section{Discriminação linear}
 \label{sec:lms}
 
 O discriminador de Fisher \cite{fisher} ou a Análise de Discriminação Linear
@@ -537,7 +552,7 @@ EGammaHypo por energia transversa na seção e.m..}
 \label{fig:lms-vs-egamma}
 \end{figure}
 
-\subsection{A relevância das características do T2Calo}
+\subsection{Relevância das características do T2Calo}
 
 A técnica da análise de relevância \cite{relevance} tem por objetivo medir a
 importância de cada uma das variáveis de entrada para um classificador. Nesta
@@ -641,7 +656,7 @@ considerando-se o classificador LMS em estudo.}
 \label{fig:relevance-sp}
 \end{figure}
 
-\section{Métodos Neurais de Discriminação}
+\section{Métodos neurais de discriminação}
 \label{sec:neural}
 
 Redes neurais artificiais (RNA) vêm sendo atualmente utilizadas com sucesso em
@@ -1467,7 +1482,7 @@ do detetor neural. A utilização de momento será necessária, \textbf{se e
 somente se} o treinamento neural se mostrar excessivamente ruidoso.
 \end{enumerate}
 
-\subsubsection{Otimização da Taxa de Aprendizado}
+\subsubsection{Otimização da taxa de aprendizado}
 
 O primeiro parâmetro a ser otimizado, seguindo a heurística proposta é a taxa
 de treinamento. Neste caso, 8 valores estão sendo considerados. Para cada um
@@ -1796,7 +1811,7 @@ utiliza a topologia do evento para gerar um conjunto de características que
 pode ser usado para atingir maiores eficiências de deteção de elétrons e
 menores valores de falso-alarme.
 
-\subsection{Topologia de uma RoI e Anelamento}
+\subsection{Topologia de uma RoI e anelamento}
 
 Observando-se a interação de elétrons e jatos (enquanto falsos-elétrons) com
 os calorímetros, é possível assumir que estes objetos interagirão de forma
@@ -2369,7 +2384,7 @@ de entrada ao sistema de deteção neural.}
 \label{tab:ringer-position}
 \end{table}
 
-\subsection{Compressão baseada na Relevância}
+\subsection{Compressão baseada na relevância}
 
 A informação de relevância estudada até aqui pode ser aproveitada para que
 aplique-se sobre as entradas do discriminador neural, uma poda baseada na
@@ -2768,7 +2783,7 @@ teste foi executado na plataforma Opteron/250 (pré-serie).}
 \label{fig:p1-full-histos}
 \end{figure}
 
-\subsection{Migração para o Sistema de Filtragem do ATLAS}
+\subsection{Migração para o sistema de filtragem do ATLAS}
 
 O projeto do \eng{NeuralRinger} evoluiu ao longo de 2 anos de desenvolvimento
 de forma que se tornasse facilmente integrável ao ambiente de funcionamento
@@ -3059,7 +3074,7 @@ características no ambiente Athena.}
 \label{fig:timings-phi-dep}
 \end{figure}
 
-\subsubsection{\eng{NeuralRinger} e o Sistema de Aquisição}
+\subsubsection{\eng{NeuralRinger} e o sistema de aquisição}
 
 O último passo da integração é demonstração da viabilidade do sistema de
 filtragem em um protótipo do sistema de aquisição, junto à outros algoritmos
