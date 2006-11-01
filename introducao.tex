@@ -1,680 +1,428 @@
 %% Hello emacs, this is -*- latex -*-
 \typeout{ ====================================================================}
-\typeout{ This is file introducao.tex, created at 01-Feb-2004 }
-\typeout{ Maintained by Andre DOS ANJOS <Andre.dos.Anjos@cern.ch> }
+\typeout{ This is file prefacio.tex, created at 13-Jun-2004 }
+\typeout{ Maintained by Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{A Física de Altas Energias}
-\label{chap:introducao}
+\chapter{Introdução}
+%%\addcontentsline{toc}{chapter}{\numberline{}Pref\'acio}
 
-\idx{Física de Partículas} ou \idx{Física de Altas Energias} (do inglês,
-\idxeng{High Energy Physics}, comumente abreviado por \eng{HEP}) denomina o
-ramo da física que estuda a matéria enquanto formada por partículas
-subatômicas como elétrons, quarks e prótons, e suas propriedades.
+Sistemas eletrônicos de aquisição de dados são comumente empregados em muitos
+campos da engenharia. Exemplos podem ser encontrados na captura de áudio,
+vídeo, sinais de satélite, rádio, biológicos e cartográficos dentre
+outros. Estes sistemas estão normalmente acoplados à sistemas de deteção, que
+buscam pela informação de interesse normalmente embebida em ruído, que deve
+ser desconsiderado.
 
-Neste capítulo, introduzimos seus conceitos fundamentais, iniciando com um
-breve histórico desta área. O material desta seção encontra-se detalhado em
-\cite{partadv}.
+Atualmente, em vários dos problemas, o sistema de deteção de sinais é bastante
+complexo, impingindo complexidades também ao sistema de aquisição de dados. O
+sistema de deteção captando o sinal de interesse pode estar distribuído em
+múltiplas localidades ou requisitar uma velocidade de processamento que torne
+impraticável a utilização direta dos produtos disponíveis no mercado. Nestes
+casos, é comum também distribuir o sistema de aquisição, combinando-o
+posteriormente através módulos de processamento centralizados.
 
-%% Advocate: necessário para o leitor entender porquê fala-se que o CERN é
-%% o topo de gama neste campo!
+Dependendo do domínio do problema, o sinal adquirido deve ser registrado em
+mídia permanente. Em muitos dos casos, porém, nem todos os sinais coletados
+são suficientemente interessantes para que sejam registrados. Nestas
+situações, sistemas de filtragem \eng{online} podem ser empregados para
+disparar o processo de gravação no momento em que se disponibilizam os sinais
+de interesse. Da mesma forma, dependendo do sistema de deteção e aquisição,
+estes sistemas podem ter que enfrentar parâmetros de operação bastante
+rigorosos. O volume dos dados a ser discriminado poderá ser grande o
+suficiente, ou ocorrer em intervalos de tempo curtos o suficiente, que exijam
+a distribuição do processamento também no sistema de filtragem.
 
-\section{Um Pouco de História}
+O processo de discriminação empregado no sistema de filtragem está diretamente
+relacionado aos dados sendo adquiridos: os sinais interessantes podem ser
+identificáveis através de operações simples sobre sinal coletado ou poderão
+exigir um pré-processamento para que seja extraído um conjunto de parâmetros
+que simplifiquem o processo de classificação. Nestes casos, é comum empregar
+compressão ou compactação dos sinais de entrada do sistema de filtragem para
+que se reduza a dimensionalidade do espaço de dados a ser analisado. A
+informação a cada análise poderá ainda estar segmentada, o que traz
+complexidade adicional ao sistema de processamento de dados. Após a
+compactação, compressão ou ambos, é possível que o problema ainda se encontre
+em um espaço com dimensionalidade bastante elevada. 
 
-Desde a Antiguidade, as pessoas têm buscado entender o comportamento da
-matéria: \textit{- Porque objetos soltos no espaço caem no chão?}, \textit{-
-Porque materiais diferentes tem propriedades diferentes?}, e assim por
-diante. Outros mistérios incluem a característica do próprio universo onde
-habitamos e o comportamento dos corpos celestes. Muitas teorias foram
-propostas desde então, a maior parte errada, embora este seja um efeito
-colateral da empreitada científica. As teorías físicas na Antiguidade eram
-baseadas somente em termos filosóficos e raramente verificadas por testes
-experimentais sistemáticos.
+Em situações deste gênero, a classificação exigirá técnicas avançadas para a
+identificação dos sinais. Redes Neurais Artificiais vem sendo utilizadas em
+muitos problemas nesta área, tanto como forma de compressão dos sinais de
+entrada como classificadores, atingindo excelentes níveis de classificação
+para igualmente ótimos patamares de desempenho. Redes Neurais são mecanismos
+de simples implementação e possuem eficiência comprovada em vários domínios
+distintos.
 
-Já no início do século XVII, Kepler formulou um modelo do sistema solar
-baseado em cinco sólidos platônicos, em uma tentativa de explicar porque as
-órbitas dos planetas tinham os tamanhos relativos observados. Seu acesso às
-observações acuradas realizadas por outro cientista da época o capacitou
-determinar que seu modelo estava inconsistente com as órbitas
-observadas. Depois de um esforço heróico de 7 anos, Kepler concluiu que os
-planetas não descrevem uma órbita circular, mas elíptica, tendo o Sol em um de
-seus focos. Kepler também sugeriu que uma ``força'' emanada do Sol afastaria
-os planetas de suas órbitas naturais, levando-os a perseguir uma órbita
-elíptica.
+Neste trabalho, apresenta-se uma aplicação onde todos os níveis de
+complexidade descritos anteriormente serão exigidos. Neste caso, o sistema de
+deteção produzirá eventos em pulsos separados por 25 nanossegundos, a massa de
+dados a cada evento estará na ordem de alguns \eng{megabytes} e, a taxa de
+eventos de interesse será de apenas alguns para dezenas de milhões.
 
-Durante este mesmo século, Galileu fez uso, pela primeira vez, de um
-``experimento'' no sentido acadêmico da palavra, para validar teorias físicas,
-uma idéia-chave no método científico atual. O uso do experimento por Galileu e
-sua insistência de que os resultados observados terão sempre que anteceder os
-resultados teóricos eliminaram a aceitação de ``dogmas'' e fizeram nascer uma
-nova era, onde as idéias científicas eram abertamente discutidas e
-rigorosamente testadas.
+\section{Motivação}
 
-Dentre outros grandes momentos, em 1687, \idx{Isaac Newton} publicou o
-\eng{Principia Mathematica}, detalhando dois compreensivos e bem sucedidos
-modelos físicos: a lei do movimento, de onde parte a mecânica clássica; e a
-lei da gravidade, que descreve esta força fundamental. Ambas as teorias
-concordavam bastante bem com experimentos executados na época. A mecânica
-clássica foi exaustivamente estendida por vários outros cientistas que
-produziram novas formulações, princípios e resultados.
+Experimentos em Física de Altas Energias procuram por confirmações
+experimentais dos modelos propostos nos estudos teóricos. Laboratórios deste
+domínio da Física contam com um sistema de colisão, que provoca o aparecimento
+da física de interesse, associado a complexos sistemas de deteção, que
+registram a evolução no tempo de cada evento produzido. Naturalmente
+envolvidos no processo de deteção, encontram-se sistemas eletrônicos que
+automatizam a busca, registro e análise dos resultados obtidos.
 
-O início do século XX iniciou uma revolução na Física. As aclamadas teorias
-newtonianas mostraram-se incorretas em várias circunstâncias. Não somente a
-\idx{Mecânica Quântica} mostrou que as leis do movimento não se confirmavam em
-pequenas escalas como, ainda mais inquietante, a relatividade geral mostrou
-que o fundo fixo do espaço-tempo, no qual a mecânica newtoniana e a
-relatividade especial dependiam, não poderia existir.
+Dada a natureza complexa e rara dos fenômenos estudados em muitos destes
+experimentos, a física de interesse está normalmente submersa em uma
+gigantesca massa de eventos que representam ora ruído, provocados pelo mal
+funcionamento dos sistemas de deteção e colisão, ora eventos ordinários, já
+bastante estudados no passado. Em específico, em experimentos que buscam a
+confirmação de canais físicos em patamares energéticos elevados, de alguns
+gigaelétron-volts para cima, a taxa de eventos que representa canais
+desinteressantes contra a de eventos que possam interessar pode estar na faixa
+de 10$^6$ para 1. Desta forma, os eventos de interesse aparecem escondidos no
+meio de milhões de outros eventos ordinários, ou que representam apenas
+ruído. Ademais, para que se consiga apreciar a Física de interesse, milhões de
+eventos são gerados por base de tempo para que se colete estatística
+suficiente para a comprovação do canal estudado. O volume de dados associados
+a cada evento vem aumentando, junto com a ambição dos experimentos. Novos
+sistemas de deteção exigem alguns \eng{megabytes} para cada evento registrado,
+o que representa uma dificuldade extra na realização destes experimentos.
 
-Em 1904, Thomson propôs o primeiro modelo atômico, conhecido como
-\idx{``Pudim de Ameixas''}\footnote{A existência do átomo tinha sido proposta
-em 1808 por Dalton.}. Já em 1905, apenas um ano depois, Einstein formulou a
-``Teoria de Relatividade Especial'', unificando espaço e tempo em uma entidade
-singular, chamada de espaço-tempo. Em 1915, o próprio estendeu sua teoria de
-relatividade especial com a ``Teoria de Relatividade Geral'', substituindo a
-lei newtoniana sobre a gravidade. As teorias de Newton e Einstein concordam
-para regimes de pouca massa e energia.
+Para resolver este problema, introduzem-se sistemas eletrônicos de filtragem
+que podem selecionar, de forma \eng{online}, os eventos de interesse dos
+eventos que representam ruído ou física ordinária. Estes sistemas são por
+vezes tão complexos quanto os detetores do experimento e contam com soluções
+elegantes para os diversos problemas de transmissão e seleção de
+dados. Soluções atuais empregam forte paralelização e técnicas modernas de
+processamento de sinais para responder às demandas destes experimentos.
 
-Ainda em 1911, Rutherford deduziu a existência de um \idx{núcleo atômico}
-compacto, consistindo de cargas positivas chamadas de \idx{prótons}. Para tal,
-utilizou-se de um feixe de partículas alfa, emitido por uma fonte radioativa,
-uma folha de ouro e um simples detetor feito de Sulfeto de Zinco para testar
-sua teoria \cite{halliday}. As partículas alfa, ao baterem no detetor,
-marcavam-no (veja a configuração do experimento de Rutherford na
-Figura~\ref{fig:rutherford}). Embora não pudesse ver o que ocorria no mundo
-sub-atômico, Rutherford podia teorizar, testar sua hipótese e então analisar
-os dados experimentais para verificar se seus cálculos estavam corretos. A
-única teoria cabível, após seus experimentos, é que o átomo teria que ser
-composto por um núcleo compacto e positivo e uma periferia negativamente
-carregada de partículas mais leves e menores que aquelas no núcleo.
+Redes Neurais Artificiais vem sendo empregadas como solução em sistemas de
+filtragem em vários experimentos. Dada a forte segmentação dos dados nos
+detetores, os sistemas neurais conseguem compactar e extrair as informações
+vitais para a discriminação dos dados, mantendo não só a alta qualidade de
+classificação como também excelentes níveis de desempenho.
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.9,angle=-90]{rutherford}
-\end{center}
-\caption[O \eng{setup} de Rutherford.]{A configuração do experimento de
-Rutherford para a constatação de que o núcleo atômico era denso e
-positivo. Extraída de \cite{partadv}.}
-\label{fig:rutherford}
-\end{figure}
+\section{O experimento ATLAS e o bóson de Higgs}
 
-Os \idx{nêutrons}, os constituintes nucleares de carga neutra, foram
-descobertos em 1932 por Chadwick. Planck e Bohr entre outros físicos
-desenvolveram as teorias quânticas para explicar várias anomalias
-experimentais, introduzindo o conceito de níveis (ou \idxeng{quanta}) de
-energia. Em 1925, Heisenberg e Schrödinger formularam a \idx{Mecânica
-Quântica}, que explica as teorias quânticas anteriores. Nesta área, os
-resultados de medidas físicas são de natureza inerentemente probabilística. A
-teoria modela o cálculo destas probabilidades e, de forma bem-sucedida,
-descreve o comportamento da matéria em pequenas escalas.
+A deteção do bóson de Higgs é um dos grandes expoentes da Física de Altas
+Energias atual. Esta partícula, se existir, possui uma massa bastante elevada
+(centenas de gigaelétron-volts) e se apresenta como um canal bastante raro e
+de difícil reprodução laboratorial. A descoberta desta partícula confirmará
+mais uma vez o Modelo Padrão, já bastante testado, inicialmente proposto em
+1954.
 
-A mecânica quântica tam\-bém fornece ferramentas te\-ó\-ri\-cas para a
-fí\-si\-ca de ma\-té\-ria condensada, que estuda o comportamento físico de
-sólidos e líquidos, incluindo fenômenos de cristalização, semi-condutividade e
-super-condutividade.
+O CERN, na Suíça, é o local onde está sendo desenvolvido o experimento ATLAS,
+que pretende investigar a rara física do bóson de Higgs. O experimento
+utilizará colisões próton-próton, numa taxa de 40 milhões por segundo para
+conseguir obter alguns destes bósons por dia de operação. As colisões serão
+providas pelo Grande Colisionador de Hádrons (do inglês \eng{Large Hadron
+Collider}, LHC), que será, quando estiver operacional, o mais potente no
+mundo, podendo colidir prótons com 14 TeV no centro de massa.
 
-A \idx{Teoria Quântica dos Campos} foi formulada para estender a mecanica
-quântica fazendo-a consistente com a relatividade especial, atingindo sua
-forma moderna no final dos anos 40 com o trabalho de Feynman, Schwinger,
-Tomonaga e Dyson. Eles formularam a \idx{Eletrodinâmica Quântica}, que
-descreve a interação eletromagnética.
+Uma vez que cada evento no ATLAS consumirá cerca de 1,5 \eng{megabytes} de
+espaço em memória, um dos problemas do projeto e construção do experimento
+está na articulação de um sistema de filtragem de eventos que seja capaz de
+fazer uma seleção \eng{online} dos eventos que representem a Física de
+interesse.
 
-A teoria quântica dos campos fornece o ferramental de fundo para a fí\-si\-ca
-de par\-tí\-cu\-las moderna, que estuda primordialmente as forças elementares
-entre as partículas. Em 1954, Yang e Mills desenvolveram uma classe de teorias
-de Gauge, introduzindo o \idx{Modelo Atômico Padrão} ou simplesmente
-\idx{Modelo Padrão}, que foi completado nos anos 70. O Modelo Padrão descreve
-de forma bem-sucedida quase todas as partículas elementares observadas até
-hoje e abrange as \idx{forças fundamentais} ``forte'', ``fraca'' e
-``eletromagnética'' assim como as partículas de que se compõe toda a matéria
-conhecida. O Modelo Padrão não é, no entanto, uma teoria fundamental de todas
-a interações existentes na natureza, primariamente por não descrever a
-gravidade.
+O Sistema de Filtragem do ATLAS foi inicialmente projetado para operar em três
+níveis conectados em cascata com complexidade, qualidade de deteção e tempo de
+operação por evento, crescentes. O Segundo Nível de Filtragem (LVL2), em
+específico, será constituído de cerca de 1.000 unidades de processamento
+ligadas em rede, processando cada um evento completo aprovado pelo Primeiro
+Nível (LVL1). Cada evento terá, em média, aproximadamente 10 milissegundos
+para ser processado.
 
-\section{Física de Partículas Moderna}
+O LVL2 coordena um conjunto de algoritmos descritos em \eng{software} que
+executa a seleção de eventos. Dentre esses, algoritmos de discriminação
+elétron/jato têm papel fundamental na eficiência da aquisição de dados, uma
+vez que a ocorrência de elétrons pode representar a Física de interesse. Neste
+caso, elétrons representam o sinal de interesse a ser detetado. Estima-se que,
+a cada 25.000 candidatos à elétrons definidos pelo LVL1, apenas 1 será
+verdadeiramente um elétron. Cabe ao LVL2 a redução deste ruído de fundo na
+deteção de elétrons.
 
-Embora de grande sucesso, modelando resultados encontrados
-ex\-pe\-ri\-men\-tal\-men\-te, o Modelo Pa\-drão nunca foi aceito como uma
-teoria completa de física fundamental. Isto acontece por causa de dois
-aspectos:
+A informação para a deteção pode ser obtida do sistema de leitura do detetor
+usando-se as primitivas do complexo \eng{software} de base do sistema de
+filtragem, disponível em cada unidade de processamento dentro do LVL2. Os
+dados para cada candidato à elétron são formados por células de deteção
+segmentadas tanto da direção de penetração da partícula, quanto no plano de
+interseção. Este sistema forma uma malha de elementos que contém amostras da
+energia de interação do objeto com o sistema de deteção, ao longo de sua
+trajetória. No total, cada objeto a ser avaliado pelo LVL2, disporá de cerca
+de 1.300 células de deteção.
 
-\begin{enumerate}
-\item O modelo contém 19 parâmetros livres, como a massa das partículas, que
-  precisam ser determinados experimentalmente (e mais outros 10 para massas de
-  neutrinos). Estes parâmetros não podem ser calculados independentemente;
+O processo de discriminação é dividido em duas etapas bem definidas: a
+extração de características ou pré-processamento e a deteção propriamente
+dita. A extração de características visa a compactação do sinal a ser detetado
+de forma que se realcem as propriedades necessárias a deteção e reduza-se o
+espaço de entrada. A deteção propriamente dita, neste caso, deverá ser simples
+e robusta de forma que o canal de interesse se exprima claramente mesmo que
+embebido no rúido de fundo. 
 
-\item O modelo não descreve a interação gravitacional;
-\end{enumerate}
+\section{Sobre as origens deste trabalho}
 
-Desde o complemento do Modelo Padrão, muitos esforços foram travados para
-resolver ambos os pontos. Um deles é conhecido como a \idx{Grande Unificação},
-do qual muitos aspectos estão bastante longe de serem observados em
-laboratório. O bóson de Higgs\index{bóson de Higgs}, que é previsto pelo
-modelo padrão, ainda não foi observado até os dias de hoje. Alguns
-experimentos, dentre os quais o experimento \idx{ATLAS} (do inglês, \eng{A
-Toroidal LHC Apparatus}) no \idx{CERN}, Suíça, estão sendo construído para o
-estudo desta física.
+Este trabalho teve seu início em 1995 com o Projeto Final de gradução
+``Sistema de classificação baseado em uma máquina com sistema distribuído'',
+por este autor, apresentado em setembro de 1997. O experimento ainda estava
+sendo desenvolvido e havia pouca ou quase nenhuma informação disponível do
+sistema de deteção, que provê os dados para a deteção das
+partículas. Tampouco, do Sistema de Filtragem, que estava em vias de
+desenvolvimento. A arquitetura final deste sistema ainda não havia sido
+escolhida.
 
-\subsection{Aceleradores e Detetores}
+Com base nas escolhas disponíveis na época, desenvolveu-se um sistema de
+filtragem para o LVL2 baseado em um processamento distribuído, comandado por
+um nó central de processamento, chamado Supervisor. As unidades de
+processamento ou nós-escravos eram pré-carregadas com um sistema de deteção
+neural. Estes nós analisavam os dados de cada evento atribuído pelo Supervisor
+e distingüia, \eng{online}, se o evento era interessante e deveria ser
+aprovado por este nível de filtragem. No conjunto de dados disponível na
+época, as características (após compactação) de cada objeto analisado já
+haviam sido calculadas e portanto o sistema desenvolvido limitava-se ao papel
+de \textit{deteção propriamente dita}, como colocado anteriormente.
 
-De forma parecida a Rutherford, os físicos atuais usam um feixe de partículas
-aceleradas para recriar em laboratório condições que permitam o estudo das
-interações sub-atômicas que se deseja averiguar. Este feixes podem colidir com
-um alvo fixo ou com um outro feixe de partículas, que é acelerado em direção
-contrária ao feixe primário. Para visualizar eletronicamente os sub-produtos
-de tais interações físicas, utilizam-se múltiplos detetores.
+Neste caso, o Supervisor alocava, em \eng{round-robin}, os eventos a cada uma
+das unidades de processamento, que utilizavam o sistema neural para avaliar as
+características de um objeto, determinando se o evento deveria ser aprovado ou
+rejeitado. A resposta era enviada de volta ao Supervisor, que simplesmente a
+registrava em um arquivo de saída. No final do processamento, a saída
+registrada pelo Supervisor era comparada aos valores obtidos com um programa
+\eng{offline} para que se determinasse se o sistema estava operando
+corretamente.
 
-A aceleração das partículas resolve dois problemas que os físicos de hoje
-encontram em seus experimentos:
+Este modelo foi implementado em um máquina como 16 nós de processamento tipo
+\eng{INMOS Transputer T-9000@40~MHz}, da companhia Telmat. Estes nós eram assim
+chamados pois cada um continha uma unidade rápida de processamento acoplada
+uma interface de rede especializada, com 4 canais independentes de
+comunicação. O formato da interconexão entre os nós era configurável e foi
+adapatado ao problema da distribuição dos dados entre o Supervisor e as
+Unidades de Processamento. Para executar o \eng{boot} desta máquina, a
+configuração de interconexão era carregada através de um sistema hospedeiro,
+em seguida um \eng{micro-kernel} e, por final, um programa a ser
+executado. Este programa podia ser codificado em C e compilado em um PC de
+forma cruzada, para que fosse executado nos \eng{transputers}.
 
-\begin{enumerate}
-\item Comprimento de Onda - O comprimento de onda determina a acurácia do que
-é possível observar \cite{partadv}.
+Para esta implementação, o menor tempo de processamento para cada evento foi
+390 microssegundos. O sistema de distribuição de eventos em
+\eng{round-robin} garantia que 9 dos 15 nós de processamento estaria
+executando uma tarefa dada um instante tempo, o que era apenas sub-ótimo tendo
+em vistas as capacidades da máquina.
 
-Uma vez que as par\-tí\-culas tam\-bém apresentam caracte\-rís\-ticas de onda,
-não é pos\-sí\-vel obter uma medida acurada usando-se partículas comuns, como
-um e\-lé\-tron, na observação de partículas muito pequenas. Um elétron não
-serve, nem mesmo, para observar outro elétron. A aceleração da partícula, no
-entanto, aumenta seu momento, diminuindo\footnote{O comprimento de onda e o
-momento de um corpo são inversamente proporcionais.} seu comprimento de onda e
-permitindo que medidas acuradas possam ser tomadas, usando-se partículas
-maiores, como léptons.
+Com o passar dos anos, os diversos sistemas de deteção do experimento
+começaram a se definir de forma mais concreta e os programas de simulação de
+eventos físicos a ganhar detalhes e se aproximar, cada vez mais, de sua forma
+atual. De posse de dados simulados de calorimetria relativos ao processamento
+no LVL2, desenvolveu-se, de 1999 a 2000, o trabalho que culminou na
+dissertação de mestrado entitulada ``Sistema neuronal rápido de decisão
+baseado em calorimetria de altas energias''.
 
-\item Energia Cinética - Deseja-se, nos experimentos modernos, que o impacto
-seja o mais aniquilador possível. Isto é interessante, pois ao se aniquilar
-matéria, liberando muita energia, partículas mais massivas e menos estáveis são
-geradas. Ao se acelerar uma partícula, aumenta-se sua energia cinética,
-tornando a colisão com o alvo mais eficiente (melhor aniquilação).
-\end{enumerate}
+Os dados disponíveis nesta época representavam cerca de 270 elétrons e 3600
+jatos simulados através de interações simples com o detetor. O conjunto de
+dados foi obtido à partir de uma simulação primitiva do sistema de deteção do
+ATLAS e não continha diversos dos elementos que estarão presentes no sistema
+de deteção final, tais como efeitos de ruído, empilhamento, variação de
+granularidade e variação de energia.
 
-\subsection{A Aceleração das Partículas}
+A partir deste conjunto de dados, desenvolveu-se um sistema de discriminação
+neural que pudesse operar dentro do Segundo Nível de Filtragem do ATLAS. Este
+discriminador utilizava um pré-processamento em forma de anéis que se
+aproveita do padrão de interação de elétrons com o detetor. Ao invés de
+compactar o sinal da interação de elétrons com o detetor formando apenas 4
+variáveis, como sugeria o sistema empregado no CERN àquela época, 58 variáveis
+(anéis) eram produzidas. Um sistema de normalização simplificado, baseado na
+energia total do objeto, foi empregado de forma que se removesse qualquer
+polarização provocada pelas pequenas variações de energia total observadas nos
+dados.
 
-A aceleração de partículas \index{aceleração de partículas} é um processo
-bastante simples: inicialmente devem-se escolher partículas eletricamente
-carregadas para um experimento - e\-lé\-trons, pó\-sitrons, pró\-tons,
-anti-\-pró\-tons ou íons são utilizados normalmente. As par\-tí\-culas
-eletricamente carregadas são posicionadas no interior de um túnel e
-aceleraradas por pulsos eletromagnéticos\index{pulsos eletromagnéticos}
-(e.m). A Figura~\ref{fig:acelera} exemplifica como elétrons possam ser
-acelerados: as ondas e.m. aceleram as partículas, pois elementos eletricamente
-carregados adquirem força (aceleração) quando envoltos por um campo
-eletromagnético.
+O resultado da extração de anéis, normalizado, era utilizado como entrada para
+uma detetor neural com 58 neurônios de entrada, 5 neurônios na camada
+escondida e apenas uma saída que indicava se o objeto na entrada era um
+elétron ou não. A rede neural era treinada de forma supervisionada,
+utilizando-se metade do conjunto de dados disponível. Neste caso, obteve-se
+95\% de eficiência na deteção de jatos contra 97\% para a deteção de
+elétrons. Este resultado foi comparado com uma análise simplificada do sistema
+de deteção desenvolvido no CERN, que apontava uma capacidade de discriminação
+de 95\% para elétrons para um falso-alarme de 11,6\% para jatos.
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.7]{static-wave}
-\end{center}
-\caption[A aceleração de partículas.]{A aceleração de partículas eletricamente
-carregadas usando-se de pulsos e.m.. Extraído de \cite{partadv}.}
-\label{fig:acelera}
-\end{figure}
+Uma análise baseada no impacto de cada um dos 58 anéis na saída da rede neural
+(análise de relevância) revelou que era possível utilizar apenas 20 dos 58
+anéis iniciais para uma deteção marginalmente inferior apenas àquela
+utilizando todos os anéis, mas ainda muito superior à análise proposta no
+CERN. Uma implementação simplificada do algoritmo foi executada, indicando a
+possibilidade de ser utilizado no LVL2.
 
-Os aceleradores podem ter dois formatos\index{acelerador!tipos}: linear e
-circular. Num acelerador linear\index{acelerador!linear}, as partículas são
-injetadas em uma extremidade e percorrem uma reta até que colidam com outras
-partículas ou com um alvo fixo. A outra possibilidade é ter um acelerador
-circular ou
-síncrotron\index{acelerador!circular}\index{acelerador!síncrotron|see{acelerador
-circular}}. Num acelerador circular, as partículas são injetadas em um ponto
-do anel de aceleração e lá permanecem até que tenham adquirido velocidade
-suficiente ao experimento a que se destinam. A aceleração circular exige que
-imãs poderosos curvem a trajetória das partículas injetadas. Aceleradores
-circulares também permitem que vários experimentos sejam conduzidos em pontos
-de sua circunferência, de forma simultânea. Aceleradores circulares possuem
-uma desvantagem: quanto maior a energia necessária no centro de impacto, maior
-deve ser o perímetro de sua circunferência.
-
-\subsection{Deteção: Vendo o que ocorreu a\-pós a coli\-são}
-
-Depois de um acelerador ter ``bombeado''\ energia suficiente para suas
-par\-tí\-culas, estas são colocadas em rota de colisão com um alvo fixo ou,
-então, com as partículas de um outro feixe acelerado. Cada uma dessas colisões
-forma um \emph{evento} físico. O objetivo dos físicos é isolar cada evento,
-coletar dados a seu respeito e verificar se o processo do qual a partícula
-participou está de acordo com a teoria que está sendo testada no experimento
-em questão.
-
-A análise de cada evento pode ser bastante complexa, já que muitas (sub)
-par\-tí\-cu\-las podem ser produzidas. A maioria dessas partículas têm tempo
-de vida tão diminuto que viajam por distâncias extremamente curtas, antes de
-decaírem em outras partículas, sem deixarem pistas aparentemente detetáveis.
-
-Para procurar esses vários objetos e os produtos de seus decaimentos, os
-físicos projetam detetores com multi-componentes, que testam diferentes
-aspectos de um evento \cite{d0, cms, atlas-tp, booth}. Cada componente de um
-detetor moderno é usado para medir vários parâmetros das partículas
-provenientes de um evento, e/ou distinguir os diferentes tipos de objetos
-gerados.  Quando todos esses componentes funcionam juntos para detetar um
-evento, partículas individuais podem ser distinguidas da multidão para efeito
-de análise e o evento original pode ser reconstruído.
-
-Seguindo cada evento, os sistemas de processamento coletam e interpretam a
-vasta quantidade de dados dos detetores e apresentam os resultados extrapolados
-aos físicos.
-
-Os físicos interessam-se pelos eventos que ocorrem durante ou mesmo depois da
-colisão das partículas. Por essa razão, colocam detetores em regiões nas quais
-os objetos resultantes daquela interação passarão. Os detetores são construídos
-de diferentes maneiras, dependendo do tipo de colisão analisada:
-
-\begin{description}
-\item[Alvo fixo] Num experimento envolvendo um alvo fixo, as partículas
-produzidas geralmente projetam-se para frente; por isso, os detetores são na
-forma de cones e são colocados ao longo da direção do feixe;
-
-\item[Feixes de colisão] Durante um experimento envolvendo feixes em
-co\-li\-são, as par\-tí\-cu\-las são espalhadas em todas as direções; assim, o
-detetor mais adequado é esférico ou, mais comumente, cilíndrico.
-\end{description}
-
-\subsubsection{Composição dos Detetores}
-
-Os detetores modernos são feitos de peças distintas, que testam diferentes
-aspectos de um evento. Esses vários componentes são organizados de tal maneira
-que os físicos possam obter o máximo de informação sobre as partículas geradas
-durante um evento. A Figura~\ref{fig:modern-detect} mostra um diagrama
-esquemático de um pequeno detetor cilíndrico moderno. Uma figura humana é
-mostrada em escala, indicando a enormidade dos detetores típicos de altas
-energias.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.7]{modern_detect}
-\end{center}
-\caption{O diagrama de um detetor cilíndrico moderno.}
-\label{fig:modern-detect}
-\end{figure}
-
-Na Figura~\ref{fig:modern-detect}, é possível observar que um detetor moderno
-é composto, basicamente, de 4 sub-detetores principais. O primeiro detetor, de
-dentro para fora (tomando o feixe de partículas como origem), tem a função de
-determinar a rota e curvatura de partículas, por isto é chamado de detetor de
-trajetória, arrasto ou, mais comumumente, traços. A curvatura das partículas
-sobre o campo magnético a que são expostas no detetor dá informações sobre a
-carga da partícula e seu momento. O segundo detetor é chamado calorímetro
-eletromagnético (e.m.) e tem a função de determinar a energia total de
-elétrons, pósitrons e fótons (raios $\gamma$). Estas partículas interagem com
-este detetor, originando chuveiros compostos de outros elétrons, pósitrons e
-fótons. O terceiro detetor, o calorímetro hadrônico, mede a energia total de
-chuveiros originados por hádrons (prótons, nêutrons ou mésons). No caso de
-partículas hadrônicas, este chuveiro é bastante mais largo e profundo que o
-equivalente para partículas como elétrons e fótons. O quarto detetor é um
-detetor de múons. Somente estas partículas e neutrinos escapam dos outros
-sistemas de deteção. Neutrinos, infelizmente, nem por este último são
-detetados. Sua massa pode ser estimada, no entanto, através da energia
-faltante no evento \cite{atlas-tp}. A Figura~\ref{fig:decay} mostra como
-alguns tipos de partículas interagem com estes detetores. Fótons, por exemplo,
-têm carga nula e não são detetados pelos detetores de traços, mas interagem
-com os calorímetros e.m.. Elétrons e pósitrons interagem tanto com os
-detetores de traços quanto com o calorímetro e.m., desenvolvendo cascata
-e.m. neste último. Prótons são detetáveis pelos detetores de traços, mas
-desenvolvem cascata somente nos calorímetros hadrônicos. Nêutrons somente
-desenvolvem cascata nos detetores hadrônicos.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.6]{decay_chart}
-\end{center}
-\caption{A interação de partículas com os detetores modernos.}
-\label{fig:decay}
-\end{figure}
-
-\section{Calorimetria Moderna}
-\index{Calorimetria}
-\label{sec:calorimetria}
-
-Geralmente, \idx{calorímetros} são detetores compostos utilizando a absorção
-total de partículas para medir a energia e a posição de partículas e
-jatos. Durante o processo de absorção, chuveiros são gerados por cascatas de
-interações. Durante a formação do chuveiro, eventualmente, a maior parte da
-massa da partícula será convertida em radiação ionizante, o que explica o nome
-deste tipo de detetor. É claro, nenhuma temperatura é medida, mas as
-características de interação com a matéria (e.g. excitação atômica, ionização)
-são utilizadas para gerar um efeito detetável, através de partículas
-carregadas. A calorimetria é também uma forma previsível de medir partículas
-neutras entre as secundárias produzidas em uma colisão de altas energias
-\cite{bock:detector, booth}.
-
-Estes detetores são normalmente compostos de diferentes partes e têm seu
-desempenho otimizado para as diferentes partículas que incidirão sobre seu
-corpo. Cada calorímetro é feito de múltiplas \idx{células} individuais, sobre
-o qual o volume, a energia absorvida, é integrada. As células são alinhadas
-para formar torres tipicamente na direção de incidência. A análise da energia
-depositada nas células e torres permite medir o perfil lateral e longitudinal
-das cascatas e daí sua geometria ser otimizada para este propósito.
-
-Tipicamente, \idx{partículas eletromagnéticas} incidentes (i.e. elétrons e
-fótons) são completamente absorvidos em calorímetros eletromagnéticos, a
-primeira das camadas de calorímetros compostos. Sua construção aproveita-se da
-geometria de chuveiros eletromagnéticos que são compactos e curtos para medir
-a energia e posição com precisão ótima para estas partículas, que incluem
-$\pi^{0}$'s, decaindo eletromagneticamente.
-
-\idx{Hádrons} incidentes (prótons, nêutrons, etc.), diferentemente,
-podem começar seu decaimento no calorímetro eletromagnético, mas quase sempre
-somente serão completamente absorvidos em camadas posteriores, i.e. em
-\idx{calorímetros hadrônicos}, construídos exatamente para conterem estes
-chuveiros. Chuveiros hadrônicos têm formato bastante diversificado.
-
-A discriminação, comumente executada no sistema de filtragem do experimento
-(veja a Seção~\ref{sec:trigger}), entre chuveiros eletromagnéticos e
-hadrônicos, é um critério importante para um calorímetro. Portanto, é
-importante conter chuveiros eletromagnéticos em um espaço mais curto, sem que
-se inicie um grande número de chuveiros hadrônicos.
-
-Calorímetros também provêm assinaturas para partículas que não são absorvidas:
-\idx{múons} e \idx{neutrinos}. Múons não formam chuveiro na matéria, mas sua
-carga deixa um signal de ionização, que pode ser identificado em um
-calorímetro se a partícula está suficientemente isolada (e a eletrônica
-associada permitir), e então pode ser associada a um traço detetado nos
-detetores de traço ou no detetor de múons. Neutrinos, por outro lado, não
-deixam sinais em um calorímetro, mas sua existência pode ser algumas vezes
-inferida através do princípio da conservação de energia: num calorímetro
-hermeticamente fechado, ao menos um neutrino suficientemente energético ou
-grupo desbalanceado de neutrinos pode ser observado formando-se a soma
-vetorial de todos os outros momentos medidos, tomando a energia observada em
-cada célula do calorímetro. A precisão de tais métodos, usualmente limitada à
-direção transversal, requer um vazamento mínimo de energia em todas as
-direções e daí o desafio para o projeto de calorímetros na prática.
-
-\subsection{Tipos de Calorímetros}
-
-Quanto à construção, é possível distinguirem-se os seguintes tipos de
-calorímetro \cite{bock:detector, hadcal}:
+Atualmente dispõe-se de um sistema muito mais elaborado para a simulação do
+detetor ATLAS, e das colisões que acontecerão quando o acelerador for
+finalmente ligado, em meados de 2008. Dentre os novos elementos presentes, se
+encontram:
 
 \begin{itemize}
-  \item \textbf{Homogêneos:}\index{Calorímetro!Homogêneo} Em calorímetros
-  deste tipo, as funções de absorção e geração e leitura de sinais são
-  combinadas em um único tipo de material. Estes materiais são quase que
-  exclusivamente usados para calorímetros eletromagnéticos, por exemplo
-  cristais, materiais compostos ou gases nobres em estado líquido;
+\item Dimensão flutuante para os dados utilizados para a deteção. No caso do
+estudo para a dissertação de mestrado, limitou-se o escopo da análise a dados
+com granularidade constante. Uma simulação muito mais realística do sistema de
+deteção do ATLAS está presente na nova massa de dados;
 
-  \item \textbf{Heterogêneos:}\index{Calorímetro!Heterogêneo} Tam\-bém
-  conhecidos como \idx{ca\-lo\-rí\-me\-tros de amostragem}. Neste tipo de
-  detetor, as fun\-ções de ab\-sor\-ção de energia e leitura do sinal são
-  separadas. Isto permite uma escolha ótima do material de absorção e
-  liberdade no tratamento do sinal. Calorímetros heterogêneos são, em sua
-  maior parte, construídos como sanduíches (e.g. aço, ferro e urânio),
-  alternando estes materias com camadas de material ativo (e.g. cintiladores
-  líquidos, sólidos ou contadores proporcionais). Somente parte da energia do
-  chuveiro absorvida pelo material ativo é medida. Calorímetros hadrônicos,
-  necessitando de uma profundidade considerável e largura para criar e
-  absorver os chuveiros, são necessariamente deste tipo (veja a
-  Seção\ref{sec:calohad}).
+\item Introdução de ruído relativo ao sistema de deteção. Este efeito não
+estava presente nos dados obtidos anteriormente, mas estará certamente
+presente quando o experimento estiver operacional. A adição de ruído aos
+sistemas de deteção diminui a acuidade das medidas introduzindo uma
+perturbação não desprezível aos algoritmos de deteção;
 
-  Ainda que o desempenho não dependa fortemente da orientação, a espessura não
-  pode variar em demasiado para assegurar uma resolução independente da
-  direção e da posição dos chuveiros.
+\item Um volume maior de dados está disponível para este trabalho, o que
+possibilita uma análise muito mais detalhada e acurada do problema de deteção
+elétron/jato. Enquanto que para os trabalhos anteriores dispunha-se de uma
+massa muito limitada de dados, para este trabalho dispõe-se de aproximadamente
+30.000 objetos (cerca de 22.500 elétrons e 7.500 jatos) para análise, o que
+diminui a margem para possíveis erros estatísticos introduzidos por uma
+análise sobre um conjunto de dados limitado;
+
+\item A infrastrutura de suporte para o sistema de filtragem está
+disponível. Todos os resultados, tanto de desempenho físico quanto velocidade
+de processamento devem ser mencionados com relação a uma implementação
+compatível e estável dentro deste ambiente. Desta forma é possível fazer o
+sistema de deteção operar tal qual um algoritmo de deteção operaria no sistema
+de filtragem e comparar seu desempenho tendo em vistas todos os parâmetros
+funcionais deste complexo ambiente;
+
+\item O algoritmo empregado atualmente no CERN está também disponível em um
+formato em que seja possível uma comparação direta em termos de eficiência e
+desempenho com um sistema alternativo. De posse dos resultados de cada um dos
+algoritmos é possível conduzir uma análise mais detalhada das diferenças entre
+os dois sistemas.
 \end{itemize}
 
-A calorimetria moderna é a arte de escolher entre duas restrições
-conflitantes; a principal é normalmente formulada em termos da resolução em
-energia, coodernadas espaciais, capacidade de filtragem, dureza à radiação dos
-materiais usados e em parâmetros eletrônicos como a faixa de operação e a
-extração de sinais. Na maior parte dos casos, o custo final de produção, a
-segunda restrição, é o parâmetro mais limitante. O número de soluções em
-calorimetria é maior para calorímetros do que para detetores de traços, e
-soluções bastante engenhosas foram encontradas nos últimos 15 anos
-\cite{hadcal}.
+\section{A contribuição deste trabalho}
 
-\subsection{A Física da Calorimetria}
+Enquanto que durante os estudos que culminaram na dissertação de mestrado
+indicada anteriormente tenha sido baseado em uma massa de dados menos
+realística com relação às condições finais do experimento, desenvolveu-se a
+base de um sistema de deteção bastante eficaz que foi re-utilizado neste
+trabalho para propor um sistema completo de discriminação elétron/jato que
+atendesse a todos os pré-requisitos do complexo sistema de filtragem do
+ATLAS. Neste duro ambiente, os recursos computacionais são extremamente
+limitados, pois cada evento no LVL2 deve ser executado em média, em um tempo
+inferior a 10~milissegundos. Este tempo de processamento encompassa tanto o
+acesso aos dados localizados do outro lado de uma rede Ethernet, no sistema de
+leitura do detetor, quanto o processamento dos dados em si, incluindo o
+pré-processamento dos elementos de deteção (calibração e organização dos
+dados), a extração de características e a deteção propriamente dita. Múltiplos
+algoritmos serão executados neste espaço de tempo, caso o evento seja aprovado
+e, portanto, o tempo disponível para cada algoritmo é normalmente definido
+como ``o menor possível''. O sistema deve ainda ser programado em uma
+linguagem de alto-nível (C++), o que torna o problema ainda mais complexo,
+tendo em vistas os tempos de processamento-alvos.
 
-A acurácia das medidas de energia em calorímetros aumenta com o aumento da
-energia de partículas incidentes \cite{hadcal}, de acordo com a fórmula
-empírica:
-
-\begin{equation}
-  \frac{\sigma_{E}}{E} \approx \frac{a}{\sqrt{E}} + b
-\end{equation}
-
-Onde $E$ é a energia da partícula incidente e $\sigma_{E}$ representa o desvio
-padrão da medida de energia e $a$ e $b$ são constantes que dependem do tipo de
-detetor, e.g. sua espessura e características das camadas ativas e passivas.
-
-\subsubsection{Calorimetria eletromagnética}
-\index{Calorimetria!eletromagnética}
-
-Partículas eletromagnéticas perdem energia através de dois processos durante a
-interação com calorímetros:
-
-\begin{itemize}
-\item {\bf radiação:} através do fenômeno conhecido como
-  \idxeng{Bremsstrahlung}, onde a partícula incidente muda de rota, perdendo
-  energia e gerando um fóton. Este fóton seguirá um caminho de interação
-  independente do elétron original, possivelmente através de espalhamento
-  Compton, efeito foto-elétrico ou produção de pares elétron-pósitron,
-  dependendo diretamente da energia com o qual foi gerado. Os elétrons
-  remanescentes deste processo, se tiverem energia, poderão repetir este
-  processo até que as partículas formadas não possam mais irradiar. Esta
-  energia limite é conhecida como \idx{Energia Crítica} ($\varepsilon_{c}$) e
-  depende do peso atômico (Z) do material por onde se desenvolve a cascata
-  eletromagnética. Valores típicos de $\varepsilon_{c}$ estão na faixa de
-  dezenas de MeV (exemplo: $\varepsilon_{c}(Cu) = 25$ MeV). Quanto maior o
-  número atômico, maiores as chances de perda por radiação\cite{knoll, leo}.
-
-\item {\bf ionização:} interagindo com o núcleo do material em que viaja a
-  partícula, ionizando-o e desta forma perdendo energia. Este fenômeno é mais
-  contido longitudinalmente se comparado ao anterior.
-\end{itemize}
-
-Por estas razões, chuveiros eletromagnéticos são curtos e bem contidos em
-calorímetros pouco espessos. A cascata desenvolve-se do traço gerado pela
-par\-tí\-cu\-la que penetra no calorímetro de forma aproximadamente
-isotrópica, num espaço de tempo extremamente curto, na ordem de centenas de
-picossegundos.
-
-A Figura~\ref{fig:cms-ecal} mostra um diagrama esquemático em três dimensões
-da seção eletromagnética do calorímetro do experimento \idx{CMS} (do inglês
-\idxeng{Compact Muon Solenoid}) no CERN, Suíça. Este calorímetro em formato
-cilindrico é feito de cristais compostos. Na cavidade central deste aparato
-encaixam-se os detetores de traço do experimento. A segmentação do detetor é
-indispensável para a localização de objetos no espaço.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.8]{cms-ecal}
-\end{center}
-\caption{Diagrama da seção eletromagnética do calorímetro do experimento CMS.}
-\label{fig:cms-ecal}
-\end{figure}
-
-\subsubsection{Calorimetria hadrônica}
-\index{Calorimetria!hadrônica}
-\label{sec:calohad}
-
-O chuveiro hadrônico é dominado por uma sucessão de interações hadrônicas
-inelásticas. Em altas energias, estas são caracterizadas pela produção de
-partículas múltiplas e pela emissão de partículas originárias de decaimentos
-nucleares do material excitado. Devido a freqüente geração de $\pi^{0}$'s
-(diz-se ``pi-zeros'', ou seja, píons que não possuem carga elétrica),
-chuveiros hadrônicos têm também componentes eletromagnéticas.
-
-Quando um hádron altamente ener\-gé\-tico penetra num bloco de ma\-té\-ria,
-ele, em algum ponto, interagi\-rá com algum nú\-cleo atômico. Neste processo,
-mésons são usualmente gerados (píons, káons, etc.). Outra fração da energia
-inicial da partícula é transferida para o núcleo com o qual o hádron
-interagiu. Este núcleo excitado, liberará esta energia emitindo um certo
-nú\-mero de nú\-cleons (prótons ou nêutrons) e num estado posterior,
-$\gamma$'s de baixa energia, perdendo sua energia cinética por ionização. As
-partículas produzidas nesta reação (mésons, núcleons e $\gamma$'s), por sua
-vez, podem perder sua energia cinética por ionização ou induzir novas reações
-formando uma cascata ou chuveiro \cite{hadcal}.
-
-Limites intrínsecos na resolução em energia de calorímetros hadrônicos são
-\cite{hadcal}:
-
-\begin{itemize}
-  \item Uma componente $\pi^{0}$, flutuante dentre os chuveiros secundários, que
-  interaja eletromagneticamente sem qualquer outra interação nuclear ($\pi^{0}
-  \rightarrow \gamma\gamma$). A fração de $\pi^{0}$'s é dada por
-  $\frac{\pi^{0}}{all} \approx 0,10 \log{E}$, $E$ em GeV. Chuveiros hadrônicos
-  podem desenvolver uma componente eletromagnética dominante;
-
-\item Uma boa parte da energia disponível é convertida em excitação e quebra
-  de núcleos atômicos. Somente uma pequena fração desta energia aparecerá como
-  sinal detetável, havendo largas flutuações evento-a-evento. Estas flutuações
-  podem ser compensadas com a boas escolhas dos materias ativos e absorvedores
-  do detetor;
-
-\item Uma fração considerável da energia da partícula incidente é despendida
-  em reações que não resultarão em sinal observável, tais como vazamento de
-  energia em várias formas (evaporação ou quebra nuclear, excitação nuclear,
-  etc.).
-\end{itemize}
-
-De forma contrária a chuveiros eletromagnéticos, que se desenvolvem num curto
-espaço de tempo, a física de chuveiros hadrônicos é caracterizada por
-diferentes escalas de tempo. Os fenômenos mais lentos podem durar de centenas
-de nanossegundos a um microssegundo.
-
-Resumindo as razões pelas quais os calorímetros emergiram como detetores-chave
-em praticamente todos os experimentos em física de partículas encontramos:
+O trabalho foi desenvolvido tanto CERN e na UFRJ, no contexto da colaboração
+internacional entre estes dois centros de pesquisa. Dentro desta colaboração,
+contribuiu-se com o desenvolvimento e construção de boa parte do Segundo Nível
+de Filtragem e sua infrastrutura. Dentre as contribuições mais significativas,
+podemos destacar:
 
 \begin{enumerate}
-\item Calorímetros são sensíveis a partículas neutras e carregadas;
-
-\item Devido a diferenças na forma de deposição de energia das partículas, a
-identificação de partículas com alta eficiência pode ser atingida usando-se
-calorímetros;
-
-\item Quanto maior a energia da partícula, mais acurado é o resultado. Isto não
-acontece com outros tipos de detetores;
-
-\item Para conter o desenvolvimento de cascatas dos objetos a serem medidos, a
-profundidade dos calorímetros aumenta logaritmicamente com a energia, o que
-permite o projeto de detetores mais compactos;
-
-\item Não precisam de campos magnéticos (como os detetores de traços);
-
-\item Podem ser segmentados, o que permite acurada medida da energia e a
-visualização da tra\-je\-tó\-ria das par\-tí\-cu\-las;
-
-\item Resposta rápida (melhor que 50 ns) pode ser atingida, o que é importante
-num ambiente com alta taxa de eventos;
-
-\item A informação de energia pode ser usada para filtrar eventos interessantes
-com alta seletividade;
+\item Desenvolvimento e aplicação da Unidade Central de Processamento no
+LVL2, a L2PU;
+\item Desenvolvimento e aplicação da biblioteca global de formatação de dados
+do ATLAS (\eng{eformat});
+\item Desenvolvimento e aplicação do \eng{Pseudo} Sistema de Leitura (PROS);
+\item Desenvolvimento e aplicação de uma biblioteca para rápido acesso e
+processamento de dados de calorimetria;
+\item Desenvolvimento e aplicação da camada de \eng{software} que combina a
+L2PU e a suíte de processamento \eng{offline} Athena;
+\item Medidas de desempenho do sistema de filtragem para diferentes cenários,
+com ou sem a utilização de algoritmos de discriminação.
 \end{enumerate}
 
-\section{Sistemas de Filtragem}
-\index{Sistemas de Filtragem}
-\label{sec:trigger}
+O sistema de deteção propriamente dito foi desenvolvido em seguida. Para tal,
+utilizou-se o conjunto de dados de perfil complexo descrito anteriormente. Com
+base nesta massa, conduziu-se uma análise detalhada do comportamento dos
+algoritmos de extração de características (compactação da informação de
+entrada) e de deteção propriamente dita, atualmente empregado no LVL2 para a
+análise elétron/jato. Este algoritmo de compactação e deteção é baseado no
+conhecimento especialista, que determina variáveis altamente discriminantes
+tendo por base a Física de interesse que se deseja observar.
 
-Os sinais detetados por calorimetria são normalmente utilizados como fonte de
-discriminação rápida de eventos interessantes em experimentos modernos. Um
-Sistema de Filtragem, ou \idxeng{Trigger}, é um conjunto de dispositivos,
-normalmente uma combinação de componentes eletrônicos e computadores, provendo
-um sinal rápido quando a física interessante acontece
-\cite{cms-trigger, d0-trigger, d0-trigger2, hlt-tdr, trig-review,
-bock:detector}. Tipicamente, um sistema de filtragem está associado a
-experimentos com detetores e seus sinais ativam o sistema de gravação de
-eventos para registrar parte ou a totalidade dos impulsos captados em mídia
-permanente. As condições que levam o sistema de filtragem a produzir o sinal
-de aceitação são comumente chamadas de
-\idx{assinaturas do evento}. As condições podem ser tão simples quanto
-identificar um traço gerado por uma partícula carregada passando por
-cintiladores durante um período de tempo, ou tão complexos quanto o critério
-de massa efetiva entre léptons identificados que devam satisfazer colisões de
-altas energias.
+Nesta análise, e levando-se em conta a massa de dados disponível,
+determinou-se a eficiência de discriminação em 91,85\% para elétrons para um
+falso-alarme de 10,19\% em jatos. Uma análise mais apurada das variáveis
+produzidas por este sistema indica que as variáveis especialistas são
+altamente descorrelacionadas e altamente relevantes à deteção. Com base no
+valor canônico de deteção observado com a análise do sistema atual de
+discriminação, desenvolve-se um detetor neural para as variáveis
+especialistas. Este detetor neural tem um resultado equivalente ao sistema de
+deteção atualmente empregado no ATLAS. Uma análise de componentes
+independentes também mostra que as variáveis usadas para discriminação são,
+praticamente, ortogonais entre si.
 
-Em muitos experimentos, a aquisição de dados, através do \idx{tempo morto} que
-causa, é um fator crítico determinante, que limita as estatísticas e o
-potencial físico. Um sistema de filtragem eficaz é então o ponto-chave para a
-transmissão de dados que têm alta probabilidade de conter física de interesse
-e rejeição, com base nas possibilidades de deteção, de todos ou da maioria dos
-eventos que representem física ordinária e trivial. Claramente, não somente a
-eletrônica e informática do sistema de filtragem são necessárias ao trabalho,
-mas também os dados carregados pelo sistema de leitura do detetor, que provêm
-as informações que serão averiguadas pelo primeiro.
+Conduz-se então uma análise baseada no pré-processamento em anéis. Para esta
+análise, um novo sistema de mapeamento das informações do detetor em anéis foi
+elaborado, levando-se em consideração dois aspectos que ainda não haviam sido
+abordados: a problemática dos dados faltantes e a introdução de ruído
+proveniente da eletrônica. Com base neste pré-processamento, 100 variáveis
+correspondentes aos anéis são extraídas de cada objeto a ser analisado. Um
+detetor neural é elaborado para a fase de deteção propriamente dita,
+levando-se em consideração uma otimização do espaço de parâmetros para seu
+treinamento. Este novo sistema obtém uma eficiência de classificação de
+elétrons de $96,55$\% contra apenas $3,12$\% de falso-alarme. Uma análise de
+relevância baseada das variáveis de entrada (anéis) ao detetor neural é
+conduzida tendo em vistas seu poder discriminante ao invés de baseado em
+variações do erro médio quadrático, como em trabalhos anteriores.
 
-Dependendo do acelerador utilizado, sistemas de filtragem podem ser chaveados
-(e.g. por pacotes de partículas chegando ao ponto de colisão) ou
-permanentemente ativados (como para o estudo de raios cósmicos). As
-implementações podem ser síncronas ou operar em tempo real, ou ainda
-se comporem de vários circuitos assíncronos operando paralelamente,
-respeitando uma unidade de controle central (que também tem a função de
-re-sincronizar o sistema como um todo). As implementações nos dias de hoje vão
-desde simples portas E/OU até \idxeng{Field-Programmable Gate Arrays} ou
-\idx{FPGA}'s. Os tempos de retardo dependem do volume dos dados a serem
-analisados (e comumente na ocupação de recursos locais). Algoritmos de
-filtragem também podem ter seu tempo de execução dependente do tempo já que
-variam com a complexidade dos cálculos envolvidos.
+Finalmente, e para que possa ser operado dentro do sistema de filtragem do
+ATLAS, descreve-se uma implementação completamente compatível com a atual
+infra-estrutura. Testes de performance e exatidão são conduzidos em várias
+plataformas, donde se conclui que o sistema baseado em anelamento e deteção
+neural seja viável para implementação no segundo nível de filtragem do
+experimento. Enquanto o sistema atual empregado no CERN consome cerca de 3,64
+milissegundos para ser executado, o sistema baseado na extração em anéis e
+deteção neural, mais que 3 vezes mais eficiente na rejeição de
+falsos-positivos, é executado em 3,8 milissegundos dentro da mesma
+infraestrutura de base, apenas cerca de 150 microssegundos de diferença em
+média.
 
-Em grandes experimentos, sistemas de filtragem são implementados em múltiplos
-níveis, tipicamente consistindo de um primeiro nível assíncrono, que identifica
-candidatos a partir de um subconjunto dos dados colhidos pelos detetores,
-reduzindo a taxa de eventos por algum fator. Subseqüentemente, os dados são
-digitalmente transmitidos para \idx{bancos de memória} (do inglês
-\idxeng{buffers}) e para um segundo nível de filtragem, normalmente assíncrono,
-onde algorítmos mais complexos, baseados em um conjunto de dados mais completo
-conseguem reduzir novamente a taxa de eventos. Eventualmente, depois, talvez,
-de uma terceira ou quarta iteração, o evento é gravado em mídia permanente.
+\section{Organização do Texto}
 
-As implementações de sistemas de filtragem não somente dependem do projeto do
-detetor e da forma com que seus dados são lidos, mas também da tecnologia de
-transmissão de dados que se desenvolve tão rapidamente nos dias de hoje. As
-comparativamente complexas situações de fluxo de dados podem somente ser
-compreendidas utilizando-se programas de modelagem ou \idx{simulações de Monte
-Carlo}. A teoria de filas permite a predição do comportamento a nivel local
-nos nós de processamento do sistema.
+O Capítulo~\ref{chap:introducao} traz uma visão geral da Física de Partículas
+atual. Este capítulo inicia-se sumarizando fatos histórios que culminaram na
+formulação do Modelo Padrão para a descrição das interações sub-atômicas. Em
+seguida, é feita uma revisão das técnicas de aceleração e deteção de
+partículas mais comuns em experimentos nesta área. Na
+Seção~\ref{sec:calorimetria} descrevem-se detetores conhecidos como
+\textit{calorímetros} em maiores detalhes. Aqui, discutem-se as partículas de
+interesse para o trabalho e a forma como interagem com este tipo de detetor. O
+capítulo termina introduzindo noções gerais sobre os sistemas de filtragem que
+equipam os experimentos modernos.
 
-\subsection{Sistemas de filtragem em experimentos modernos}
+O Capítulo~\ref{chap:atlas} narra especificidades do experimento ATLAS, que
+investigará a Física do bóson de Higgs. O capítulo é encabeçado por um breve
+histório do CERN, adentrando por detalhes operacionais do experimento e do
+colisionador LHC, que gerará as interações próton-próton necessárias. A
+Seção~\ref{sec:atlas-calo} traz um resumo das características operacionais dos
+Calorímetros do ATLAS e um conjunto de referências para maiores detalhes.
 
-Um experimento em Física de Altas Energias como o DZERO \cite{d0}, localizado
-no FermiLab, próximo a Chicago nos Estados Unidos, faz um bom exemplo de um
-experimento com um sistema de filtragem moderno. O cruzamento de pacotes de
-prótons e anti-prótons que geram as colisões a serem estudadas ocorrem numa
-taxa de 2,5 MHz (ou seja, 2,5 milhões de colisões por segundo). Cada colisão
-poderá produzir um evento que possui 0,25 \eng{megabytes} em dados. Se a taxa
-total fosse escrita em fitas magnéticas, assumindo um custo de 40 centavos de
-dólar por \eng{Gigabyte}, o custo total seria de 10,5 milhões de dólares por
-ano. No entanto, a maior parte das colisões de pacotes contém interações
-fracas ou até mesmo nulas. Para tirar proveito desta natureza, o experimento
-DZERO emprega um sistema de filtragem em múltiplos níveis para reduzir a taxa
-de eventos registrada a 50 Hz, implicando em um custo aproximado de 75.000
-dólares por ano em fitas magnéticas.
+O Sistema de Filtragem do ATLAS é introduzido no
+Capítulo~\ref{chap:trigger}. Este capítulo descreve todos os sub-sistemas que
+compõem o Sistema de Filtragem do experimento, desde o Primeiro Nível de
+Filtragem até chegar à gravação de um evento selecionado em mídia
+permanente. É neste ambiente que são executados os algoritmos de filtragem
+abordados neste trabalho. O Segundo Nível de Filtragem é detalhado a partir da
+Seção~\ref{sec:lvl2arch}. Resultados obtidos durante simulações do
+comportamento desta parte do sistema são apresentados na
+Seção~\ref{sec:lvl2work}. O final deste capítulo é dedicado ao ambiente de
+processamento de dados Athena e sua interação com o Sistema de Filtragem do
+ATLAS. Neste capítulo descreve-se em detalhes os componentes de infraestrutura
+produzidos no contexto da colaboração entre o CERN e a UFRJ.
 
-É claro que a economia em fitas magnéticas não são a única razão da existência
-de um sistema de filtragem. Planejar e projetar um sistema de aquisição de
-dados com uma banda passante de 600 \eng{gigabytes} por segundo seria
-proibitivo economicamente, especialmente considerando-se o valor relativo dos
-dados coletados. Os programas de reconstrução de eventos atuais também
-consomem mais e mais poder de processamento e, se a entrada puder ser
-sensivelmente reduzida em volume, menor a quantidade de recursos
-computacionais serão necessários.
+\textit{[ Faltando material relativo à re-organização dos capítulos 5, 6 (e futuro) 7 ]}
 
-O enfoque usado para projetar e implementar um sistema de filtragem depende
-fortemente do domínio do problema. Um experimento moderno em Física de Altas
-Energias deve estar apto a responder a um novo evento, num geral, a cada
-dezena ou dezenas de nanossegundos. O \idx{tamanho do evento} para grandes
-experimentos (veja a Figura~\ref{fig:eventsize}) também tende a ser grande,
-chegando a alguns
-\eng{megabytes} por evento em alguns dos experimentos do \idx{LHC}
-(\idxeng{Large Hadron Collider}).
+O Capítulo~\ref{chap:future} traz uma conclusão dos estudos realizados
+até o momento presente e apresenta extensões de estudo para este trabalho.
 
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.6]{eventsize}
-\end{center}
-\caption{O tamanho do evento \eng{versus} a taxa de produção em experimentos
-atuais.}
-\label{fig:eventsize}
-\end{figure}
+Para a melhor compreensão dos termos utilizados na descrição da geometria dos
+objetos estudados neste trabalho, o Apêndice~\ref{ap:coord} introduz o sistema
+de coordenadas do ATLAS. O Apêndice~\ref{chap:published} traz um resumo da
+produção científica no período e projetos que integram o corpo deste estudo. O
+Apêndice~\ref{chap:neuralringer} sumariza os detalhes de implementação do
+pacote de \eng{software} \texttt{Neuralringer}, utilizado para as medidas de
+eficiência, relevância e que foi transplantado para operação dentro do sistema
+de filtragem do experimento.
 
-Experimentos modernos usam um sistema de filtragem dividido em múltiplos
-níveis para endereçar o problema das taxas de entrada. Os níveis mais baixos
-implementam algorítmos simples e rápidos, normalmente usando FPGA's e
-\eng{hardware} personalizado, que removam \eng{backgrounds} mais simples e
-abundantes. Os níveis mais altos são progressivamente mais sofisticados e
-também requerem mais tempo para atingir níveis de rejeição
-aceitáveis. Ademais, carregando uma menor quantidade ou qualidade de dados nos
-níveis iniciais de filtragem, estes experimentos conseguem reduzir o fluxo de
-informação no sistema de leitura: tão pronto um evento seja rejeitado, seus
-dados são descartados.
-
-Classicamente, o nível em \eng{hardware} é chamado de \idx{Primeiro Nível}. O
-seguinte, compondo de partes personalizadas em \eng{hardware} e computadores,
-é chamado de \idx{Segundo Nível}. O último estágio, chamado de
-\idx{Terceiro Nível}, composto normalmente de redes de computadores
-domésticos, realiza a classificação final. Comumente o segundo e terceiro
-níveis de filtragem são conhecidos como \idx{Filtros de Alto Nível} ou
-\idxeng{High-Level Triggers}, \idx{HLT}.
+\typeout{ *************** End of file prefacio.tex *************** }
