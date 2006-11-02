@@ -1,6 +1,6 @@
 %% Hello emacs, this is -*- latex -*-
 \typeout{ ====================================================================}
-\typeout{ This is file neuralringer.tex, created at 27-Aug-2005 }
+\typeout{ This is file neural.tex, created at 27-Aug-2005 }
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
@@ -138,11 +138,11 @@ permanente.
 
 Em \cite{varela-cms-1998}, descreve-se um sistema de deteção neural de
 elétrons em tempo real que utiliza-se das informações dos calorímetros e.m. do
-CMS \cite{cms-trigger}. O primeiro nível de filtragem deste experimento não
-exaure a informação provida pelo calorímetro e.m. e portanto há oportunidade
-para que um segundo nível de filtragem, apoiando-se na informação não
-aproveitada pelo LVL1, consiga atingir alguma redução na taxa de eventos que
-será repassado ao terceiro nível de filtragem.
+experimento CMS \cite{cms-trigger}. O primeiro nível de filtragem desta
+experiência não exaure a informação provida pelo calorímetro e.m. e portanto
+há oportunidade para que um segundo nível de filtragem, apoiando-se na
+informação não aproveitada pelo LVL1, consiga atingir alguma redução na taxa
+de eventos que será repassado ao terceiro nível de filtragem.
 
 A informação utilizada para a deteção de elétrons são os valores de energia de
 um conjunto de células provenientes dos cristais do calorímetro e.m.. Este
@@ -1072,9 +1072,9 @@ estará sujeito a mínimos locais.
 
 É possível substituir o discriminador LMS definido na Seção{sec:lms} por um
 discriminador baseado em uma rede neural tipo MLP como a da
-Figura~\ref{fig:simple-mlp}. A implementação desta rede neural foi detalhada
-ao longo do capítulo e é facilmente implementável usando o pacote
-\eng{NeuralRinger} e o fluxo de treinamento detalhado na
+Figura~\ref{fig:simple-mlp}. A implementação desta rede neural encontra-se bem
+detalhada no Apêndice\ref{ap:framework} e é facilmente implementável usando
+o pacote \eng{NeuralRinger} e o fluxo de treinamento detalhado na
 Figura~\ref{fig:train-flow}. A Figura~\ref{fig:t2calo-neural} contém um
 diagrama de blocos que ilustra, de forma simplificada, tal sistema. Os fatores
 de normalização empregados para o sistema de deteção baseado no algoritmo LMS
@@ -1757,21 +1757,21 @@ algoritmo T2Calo.}
 
 O formato deste arquivo é legível pelo sub-pacote \texttt{roiformat} do
 \eng{NeuralRinger} e pode ser transformado em uma base de dados de anéis
-utilizando-se o programa \texttt{ringer}, descrito anteriormente. Desta forma,
-criou-se uma base de dados à partir do mesmo conjunto de eventos analisados na
-caracterização do desempenho físico do T2Calo. Esta nova base de dados tem
-cerca de $30000$ eventos com a mesma proveniência e características dos
-eventos analisados até o momento.
+utilizando-se o programa \texttt{ringer}, descrito no
+Apêndice~\ref{ap:framework}. Desta forma, criou-se uma base de dados à partir
+do mesmo conjunto de eventos analisados na caracterização do desempenho físico
+do T2Calo. Esta nova base de dados tem cerca de $30000$ eventos com a mesma
+proveniência e características dos eventos analisados até o momento.
 
 \subsection{Discriminação baseada em anelamento}
 
-O processo de anelamento reduz o espaço de dados de entrada em uma RoI (cerca de
-1300 células) para 100 valores correspondes aos anéis formados com os dados
+O processo de anelamento reduz o espaço de dados de entrada em uma RoI (cerca
+de 1300 células) para 100 valores correspondes aos anéis formados com os dados
 das 7 camadas dos calorímetros. Sería difícil conceber um sistema de
 discriminação simples como o proposto para o EGammaHypo neste caso, uma vez
 que a possibilidade de combinações é muito grande. Neste caso, adota-se um
-sistema de discriminação neural, conectado à saída do sistema de anelamento que
-executará o processo de deteção.
+sistema de discriminação neural, conectado à saída do sistema de anelamento
+que executará o processo de deteção.
 
 Tal qual nos sistemas anteriores, executou-se uma rápida análise do espaço dos
 parâmetros de treinamento neural. A Tabela~\ref{tab:ringer-param-optimization}
@@ -2272,4 +2272,4 @@ apenas 14 (dos 100) anéis.}
 \label{tab:ringer-position-relevance-cut2}
 \end{table}
 
-\typeout{ *************** End of file neuralringer.tex *************** }
+\typeout{ *************** End of file neural.tex *************** }
