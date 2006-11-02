@@ -49,7 +49,7 @@ BIBFILES=$(shell if [ -d biblio ]; then find biblio -name "*.bib"; fi)
 	 bibtex $(@:%.dvi=%); \
 	 latex $(@:%.dvi=%.tex); \
 	fi
-	makeindex $(MAKEINDEXOPTS) $(@:%.dvi=%.idx)
+#	makeindex $(MAKEINDEXOPTS) $(@:%.dvi=%.idx)
 	latex $(@:%.dvi=%.tex)
 
 %.pdf: %.tex
@@ -60,7 +60,7 @@ BIBFILES=$(shell if [ -d biblio ]; then find biblio -name "*.bib"; fi)
 	 bibtex $(@:%.pdf=%); \
 	 pdflatex $(@:%.pdf=%.tex); \
 	fi
-	makeindex $(MAKEINDEXOPTS) $(@:%.pdf=%.idx)
+#	makeindex $(MAKEINDEXOPTS) $(@:%.pdf=%.idx)
 #	thumbpdf $(THUMBPDFOPTS) $@
 	pdflatex $(@:%.pdf=%.tex)
 
@@ -125,13 +125,11 @@ clean:
 
 deepclean:
 	@rm -vf $(GARBAGE)
-	@rm -vf *.lo[gtfa] *.toc *.i{dx,nc,lg,nd} *.b{bl,lg} 
+	@rm -vf *.lo[gtfa] *.toc *.idx *.inc *.ilg *.ind *.bbl *.blg
 	@rm -vf *.aux *.glo *.dvi *.ps *.pdf *.out *.brf
 	@rm -rvf html
 	@if [ -d biblio ]; then rm -fv references.bib; fi
-	@if [ -d figures ]; then \
-	 $(MAKE) -C figures clean; \
-	 fi
+	@if [ -d figures ]; then $(MAKE) -C figures clean; fi
 
 web-clean: 
 	@rm -rvf web
