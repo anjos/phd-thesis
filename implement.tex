@@ -4,43 +4,43 @@
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{Desempenho do sistema de discriminação}
+\chapter{Desempenho do sistema de discriminaÃ§Ã£o}
 \label{chap:implement}
 
-O algoritmo apresentado nesta seção deve respeitar as normas de operação do
-Segundo Nível de Filtragem do experimento. Neste nível de filtragem, espera-se
-que o tempo médio de processamento para cada evento, incluindo acesso aos
+O algoritmo apresentado nesta seÃ§Ã£o deve respeitar as normas de operaÃ§Ã£o do
+Segundo NÃ­vel de Filtragem do experimento. Neste nÃ­vel de filtragem, espera-se
+que o tempo mÃ©dio de processamento para cada evento, incluindo acesso aos
 dados no sistema de leitura, seja de 10 milissegundos. No entanto, espera-se
-que o sistema opere rejeitando eventos ordinários o mais rápido possível, de
+que o sistema opere rejeitando eventos ordinÃ¡rios o mais rÃ¡pido possÃ­vel, de
 tal forma que, estatisticamente, a maior parte do tempo despendida nos
-processadores do LVL2 seja dedicada à eventos interessantes.
+processadores do LVL2 seja dedicada Ã  eventos interessantes.
 
-Levando-se em consideração que o tempo de acesso aos dados no sistema de
-leitura está na ordem de 1~ms, como descrito no Capítulo~\ref{chap:trigger},
+Levando-se em consideraÃ§Ã£o que o tempo de acesso aos dados no sistema de
+leitura estÃ¡ na ordem de 1~ms, como descrito no CapÃ­tulo~\ref{chap:trigger},
 deseja-se minimizar o tempo de processamento despendido no algoritmo. Desta
-forma, medidas de desempenho são normalmente executadas nos candidatos à
-algoritmos ao sistema de filtragem, de modo a determinar seu tempo de execução
-e possíveis pontos a serem otimizados.
+forma, medidas de desempenho sÃ£o normalmente executadas nos candidatos Ã 
+algoritmos ao sistema de filtragem, de modo a determinar seu tempo de execuÃ§Ã£o
+e possÃ­veis pontos a serem otimizados.
 
-Nossa referência, o algoritmo do T2Calo, foi completamente descrita na
-Seção~\ref{sec:lvl2-detect-electron}. Neste algoritmo, inicia-se o
+Nossa referÃªncia, o algoritmo do T2Calo, foi completamente descrita na
+SeÃ§Ã£o~\ref{sec:lvl2-detect-electron}. Neste algoritmo, inicia-se o
 processamento detetando-se o pico na segunda camada e.m., seguindo-se do
-cálculo da variável $\rcore$. A variável $\eratio$ é calculada em seguida,
+cÃ¡lculo da variÃ¡vel $\rcore$. A variÃ¡vel $\eratio$ Ã© calculada em seguida,
 utilizando-se dos dados da primeira camada e.m.. De posse dos valores parciais
-de energia nestas duas camadas, os dados do pré-irradiador e da terceira
-camada e.m. são utilizados para definir o valor da variável $\etem$. Na última
-parte do processamento define-se o valor da variável $\ethad$, acessando-se os
-dados da parte hadrônica. A Tabela~\ref{tab:t2calo-performance} contém as mais
-recentes medidas realizadas na avaliação do desempenho do T2Calo
-\cite{denis-presentation}. Os valores nesta tabela representam o tempo médio
+de energia nestas duas camadas, os dados do prÃ©-irradiador e da terceira
+camada e.m. sÃ£o utilizados para definir o valor da variÃ¡vel $\etem$. Na Ãºltima
+parte do processamento define-se o valor da variÃ¡vel $\ethad$, acessando-se os
+dados da parte hadrÃ´nica. A Tabela~\ref{tab:t2calo-performance} contÃ©m as mais
+recentes medidas realizadas na avaliaÃ§Ã£o do desempenho do T2Calo
+\cite{denis-presentation}. Os valores nesta tabela representam o tempo mÃ©dio
 de processamento, em milissegundos, para cada uma das fases. Estes tempos
-também desconsideram a execução do algoritmo de hipótese EGammaHypo. Assume-se
-no entanto, que seja desprezível, dado sua simplicidade.
+tambÃ©m desconsideram a execuÃ§Ã£o do algoritmo de hipÃ³tese EGammaHypo. Assume-se
+no entanto, que seja desprezÃ­vel, dado sua simplicidade.
 
 \begin{table}
 \begin{center}
 \begin{tabular}{|l|r|r|r|} \hline
-\textbf{Fase} & \textbf{Calib. e Localização} & 
+\textbf{Fase} & \textbf{Calib. e LocalizaÃ§Ã£o} & 
 \textbf{Algoritmo} & \textbf{Tot. parcial}\\ \hline
 $\rcore$ & 0,45 & 0,49 & 0,94 \\ 
 $\eratio$ & 0,48 & 0,57 & 1,05 \\ 
@@ -49,101 +49,101 @@ $\ethad$ & 0,59 & 0,33 & 0,92 \\ \hline
 \textbf{Total} & \textbf{2,08} & \textbf{1,56} & \textbf{3,64} \\ \hline
 \end{tabular}
 \end{center}
-\caption{Tempo de processamento médio das diversas fases do algoritmo T2Calo
-em uma máquina com processadores Intel Xeon de 2,4 GHz e 1~Gb de memória RAM.}
+\caption{Tempo de processamento mÃ©dio das diversas fases do algoritmo T2Calo
+em uma mÃ¡quina com processadores Intel Xeon de 2,4 GHz e 1~Gb de memÃ³ria RAM.}
 \label{tab:t2calo-performance}
 \end{table}
 
-Tomando-se por base que um sistema baseado no anelamento e deteção neural terá
+Tomando-se por base que um sistema baseado no anelamento e deteÃ§Ã£o neural terÃ¡
 que acessar os mesmos dados que o T2Calo acessa, a primeira parte do tempo
-torna-se uma constante para os propósitos deste trabalho. A segunda parte, no
-entanto, é completamente dependente do algoritmo e devemos compará-la ao tempo
-de execução do \eng{NeuralRinger}.
+torna-se uma constante para os propÃ³sitos deste trabalho. A segunda parte, no
+entanto, Ã© completamente dependente do algoritmo e devemos comparÃ¡-la ao tempo
+de execuÃ§Ã£o do \eng{NeuralRinger}.
 
-A complexidade de execução do método baseado no anelador e deteção neural é
-variável de acordo com dois parâmetros principais:
+A complexidade de execuÃ§Ã£o do mÃ©todo baseado no anelador e deteÃ§Ã£o neural Ã©
+variÃ¡vel de acordo com dois parÃ¢metros principais:
 
 \begin{enumerate}
-\item Com o número de aneís que se deseja extrair: neste caso, quanto mais
-anéis deseja-se extrair dos dados, maior o tempo de execução que será
-necessário para cumprir o processo de anelamento. Ademais, com o aumento do
-número de anéis aumenta-se igualmente o tamanho da entrada do discriminador
-neural e, portanto, o número de operações aritméticas para esta última fase do
+\item Com o nÃºmero de aneÃ­s que se deseja extrair: neste caso, quanto mais
+anÃ©is deseja-se extrair dos dados, maior o tempo de execuÃ§Ã£o que serÃ¡
+necessÃ¡rio para cumprir o processo de anelamento. Ademais, com o aumento do
+nÃºmero de anÃ©is aumenta-se igualmente o tamanho da entrada do discriminador
+neural e, portanto, o nÃºmero de operaÃ§Ãµes aritmÃ©ticas para esta Ãºltima fase do
 processamento;
-\item O número de neurônios escondidos na rede neural também influenciará o
-tempo de execução do discriminador.
+\item O nÃºmero de neurÃ´nios escondidos na rede neural tambÃ©m influenciarÃ¡ o
+tempo de execuÃ§Ã£o do discriminador.
 \end{enumerate}
 
 Para determinar a viabilidade em termos desempenho, para algoritmo proposto
-por este trabalho, executou-se a aplicação \texttt{ringer-run} em um conjunto
-de máquinas de refência ao experimento ATLAS. A
-Tabela~\ref{tab:machine-comparison} resume as características destas
-máquinas. A primeira das máquinas listadas está sendo utilizada em uma
-avaliação de arquiteturas para o sistema de filtragem e aquisição de dados do
-ATLAS, conhecido como \textit{pré-série}, (do inglês, \eng{preseries})
-\cite{gokhan-chep06}. Esta é a máquina de referência máxima para estudos de
-desempenho no ATLAS. A segunda máquina de teste é um modelo com dois núcleos
-(do inglês, \eng{dual-core}). A arquitetura desta máquina está sendo
-considerada como opção às máquinas atualmente empregadas nas pré-séries, sendo
+por este trabalho, executou-se a aplicaÃ§Ã£o \texttt{ringer-run} em um conjunto
+de mÃ¡quinas de refÃªncia ao experimento ATLAS. A
+Tabela~\ref{tab:machine-comparison} resume as caracterÃ­sticas destas
+mÃ¡quinas. A primeira das mÃ¡quinas listadas estÃ¡ sendo utilizada em uma
+avaliaÃ§Ã£o de arquiteturas para o sistema de filtragem e aquisiÃ§Ã£o de dados do
+ATLAS, conhecido como \textit{prÃ©-sÃ©rie}, (do inglÃªs, \eng{preseries})
+\cite{gokhan-chep06}. Esta Ã© a mÃ¡quina de referÃªncia mÃ¡xima para estudos de
+desempenho no ATLAS. A segunda mÃ¡quina de teste Ã© um modelo com dois nÃºcleos
+(do inglÃªs, \eng{dual-core}). A arquitetura desta mÃ¡quina estÃ¡ sendo
+considerada como opÃ§Ã£o Ã s mÃ¡quinas atualmente empregadas nas prÃ©-sÃ©ries, sendo
 este modelo de processador o mais recente disponibilizado pelo fabricante. A
-terceira e última máquina faz parte de um conjunto de máquinas dedicada a
+terceira e Ãºltima mÃ¡quina faz parte de um conjunto de mÃ¡quinas dedicada a
 estudos do sistema de filtragem. Embora possua uma arquitetura mais antiga,
-ainda é usada como referência em muitos trabalhos, sendo este o caso das
+ainda Ã© usada como referÃªncia em muitos trabalhos, sendo este o caso das
 medidas do T2Calo apresentadas acima.
 
 \begin{table}
 \begin{center}
 \begin{tabular}{|l|l|r|r|} \hline
-Processador & \eng{Clock} & \eng{Cache} de L2 & Memória RAM \\ \hline
+Processador & \eng{Clock} & \eng{Cache} de L2 & MemÃ³ria RAM \\ \hline
 AMD Opteron (250) & 2,4~GHz & 1~Mb & 4~Gb \\
 AMD Opteron (275) & 2,2~GHz & 1~Mb & 4~Gb \\
 Intel Xeon & 2,4~GHz & 512~kb & 1~Gb \\ \hline
 \end{tabular}
 \end{center}
-\caption{Configurações das máquinas utilizadas para o teste de desempenho do
+\caption{ConfiguraÃ§Ãµes das mÃ¡quinas utilizadas para o teste de desempenho do
 \eng{NeuralRinger}.}
 \label{tab:machine-comparison}
 \end{table}
 
-Estas máquinas contém uma instalação completamente funcional do sistema
+Estas mÃ¡quinas contÃ©m uma instalaÃ§Ã£o completamente funcional do sistema
 operacional atualmente empregado no CERN, o SLC3 \cite{cern-linx}. Embora
 alguns dos processadores possam operar em 64-bits (assim como o
-\eng{NeuralRinger}), estas máquinas são operadas em modo de compatibilidade
-para 32-bits, já que grande parte do \eng{software} do ATLAS ainda não opera
+\eng{NeuralRinger}), estas mÃ¡quinas sÃ£o operadas em modo de compatibilidade
+para 32-bits, jÃ¡ que grande parte do \eng{software} do ATLAS ainda nÃ£o opera
 corretamente nesta plataforma.
 
-Um conjunto idêntico, composto de três diferentes testes foram executados em
-cada uma das máquinas, utilizando todos os dados disponíveis (cerca de 22.600
-elétrons e 7500 jatos) para este estudo. Para estes testes utilizou-se o
+Um conjunto idÃªntico, composto de trÃªs diferentes testes foram executados em
+cada uma das mÃ¡quinas, utilizando todos os dados disponÃ­veis (cerca de 22.600
+elÃ©trons e 7500 jatos) para este estudo. Para estes testes utilizou-se o
 programa \texttt{ringer-run}, que executa as fases de anelamento e
-discriminação em seqüência, como aconteceria num sistema \eng{online}.  Os
-testes realizados em uma mesma máquina diferem entre si somente pela
-configuração da anelamento e da rede neural que discriminará os dados após a
-extração dos anéis. As combinações utilizadas equivalem àquelas dos testes
-mostrados anteriormente neste capítulo, para o sistema com 100 anéis, o
-sistema podado com 34 anéis e o último, utilizando apenas os 14 mais
-relevantes anéis. Durante os testes, observou-se a quantidade de memória RAM
-disponível na máquina de tal forma que o carregamento dos dados não ativasse o
-mecanismo de troca de disco (do inglês, \eng{swap}), já que isso faria com que
-a aplicação tivesse um desempenho abaixo do esperado para o experimento.
+discriminaÃ§Ã£o em seqÃ¼Ãªncia, como aconteceria num sistema \eng{online}.  Os
+testes realizados em uma mesma mÃ¡quina diferem entre si somente pela
+configuraÃ§Ã£o da anelamento e da rede neural que discriminarÃ¡ os dados apÃ³s a
+extraÃ§Ã£o dos anÃ©is. As combinaÃ§Ãµes utilizadas equivalem Ã quelas dos testes
+mostrados anteriormente neste capÃ­tulo, para o sistema com 100 anÃ©is, o
+sistema podado com 34 anÃ©is e o Ãºltimo, utilizando apenas os 14 mais
+relevantes anÃ©is. Durante os testes, observou-se a quantidade de memÃ³ria RAM
+disponÃ­vel na mÃ¡quina de tal forma que o carregamento dos dados nÃ£o ativasse o
+mecanismo de troca de disco (do inglÃªs, \eng{swap}), jÃ¡ que isso faria com que
+a aplicaÃ§Ã£o tivesse um desempenho abaixo do esperado para o experimento.
 
 As Figuras~\ref{fig:timings-histo-full}, \ref{fig:timings-histo-cut1} e
-\ref{fig:timings-histo-cut2} contém os resultados dos 3 testes com 100, 34 e
-14 anéis respectivamente nas três arquitecturas. Das três arquiteturas
-escolhidas, a máquina da pré-série parece ser a mais rápida, apresentando um
+\ref{fig:timings-histo-cut2} contÃ©m os resultados dos 3 testes com 100, 34 e
+14 anÃ©is respectivamente nas trÃªs arquitecturas. Das trÃªs arquiteturas
+escolhidas, a mÃ¡quina da prÃ©-sÃ©rie parece ser a mais rÃ¡pida, apresentando um
 tempo de processamento de apenas $445$ microssegundos para o mais complexo dos
-testes, utilizando 100 anéis. Em seguida, o sistema baseado no processor
-Opteron-275, cerca de 8\% mais lento para o mesmo teste. A máquina de testes
-do sistema de filtragem é a mais lenta de todas as plataformas, apresentando
-um tempo médio de processamento de $542$ microssegundos para cada RoI. O
-desvio padrão está na faixa dos 10\% indicando uniformidade nos resultados.
+testes, utilizando 100 anÃ©is. Em seguida, o sistema baseado no processor
+Opteron-275, cerca de 8\% mais lento para o mesmo teste. A mÃ¡quina de testes
+do sistema de filtragem Ã© a mais lenta de todas as plataformas, apresentando
+um tempo mÃ©dio de processamento de $542$ microssegundos para cada RoI. O
+desvio padrÃ£o estÃ¡ na faixa dos 10\% indicando uniformidade nos resultados.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{ringer-mlp/compare-test-full-rings}
 \end{center}
-\caption{Tempos totais de executação do \eng{NeuralRinger} em três plataformas
-distintas, utilizando 100 anéis.}
+\caption{Tempos totais de executaÃ§Ã£o do \eng{NeuralRinger} em trÃªs plataformas
+distintas, utilizando 100 anÃ©is.}
 \label{fig:timings-histo-full}
 \end{figure}
 
@@ -151,8 +151,8 @@ distintas, utilizando 100 anéis.}
 \begin{center}
 \includegraphics[scale=0.98]{ringer-mlp/compare-test-cut1-rings}
 \end{center}
-\caption{Tempos totais de executação do \eng{NeuralRinger} em três plataformas
-distintas, utilizando 34 anéis.}
+\caption{Tempos totais de executaÃ§Ã£o do \eng{NeuralRinger} em trÃªs plataformas
+distintas, utilizando 34 anÃ©is.}
 \label{fig:timings-histo-cut1}
 \end{figure}
 
@@ -160,330 +160,330 @@ distintas, utilizando 34 anéis.}
 \begin{center}
 \includegraphics[scale=0.98]{ringer-mlp/compare-test-cut2-rings}
 \end{center}
-\caption{Tempos totais de executação do \eng{NeuralRinger} em três plataformas
-distintas, utilizando apenas 14 anéis.}
+\caption{Tempos totais de executaÃ§Ã£o do \eng{NeuralRinger} em trÃªs plataformas
+distintas, utilizando apenas 14 anÃ©is.}
 \label{fig:timings-histo-cut2}
 \end{figure}
 
-Nos testes seguintes, a relação entre o desempenho das máquinas se
-mantém. Para o teste com 34 anéis o tempo de processamento médio na máquina
-mais rápida é de $215$ microssegundos, tendo caído aproximadamente a metade do
-valor para os 100 anéis. Para o teste com apenas 14 dos 100 anéis originais, o
-tempo médio de processamento é de apenas $125$ microssegundos para a máquina
+Nos testes seguintes, a relaÃ§Ã£o entre o desempenho das mÃ¡quinas se
+mantÃ©m. Para o teste com 34 anÃ©is o tempo de processamento mÃ©dio na mÃ¡quina
+mais rÃ¡pida Ã© de $215$ microssegundos, tendo caÃ­do aproximadamente a metade do
+valor para os 100 anÃ©is. Para o teste com apenas 14 dos 100 anÃ©is originais, o
+tempo mÃ©dio de processamento Ã© de apenas $125$ microssegundos para a mÃ¡quina
 mais veloz, representando quase um-quarto do tempo de processamento para o
 sistema de anelamento completo.
 
-Ao compararmos o mais complexo dos exercícios com o tempo de referência do
+Ao compararmos o mais complexo dos exercÃ­cios com o tempo de referÃªncia do
 T2Calo (1,56~ms) para a mesma plataforma, observa-se que o sistema proposto
-executa em apenas um-terço do tempo requerido para o T2Calo nesta
-arquitetura. Esta análise não leva em conta o acesso aos dados e sua
-calibração e localização dentro das bibliotecas de infrastrutura do LVL2. Pela
+executa em apenas um-terÃ§o do tempo requerido para o T2Calo nesta
+arquitetura. Esta anÃ¡lise nÃ£o leva em conta o acesso aos dados e sua
+calibraÃ§Ã£o e localizaÃ§Ã£o dentro das bibliotecas de infrastrutura do LVL2. Pela
 Tabela~\ref{tab:t2calo-performance}, nota-se que cerca de 57\% do tempo total
-do processamento de uma RoI, isto é, aproximadamente 2,1~ms é devido a esta
+do processamento de uma RoI, isto Ã©, aproximadamente 2,1~ms Ã© devido a esta
 parte dos dados. Desta forma conclui-se que o sistema proposto pelo anelador
-está dentro das especificações de desempenho para o sistema de filtragem do
+estÃ¡ dentro das especificaÃ§Ãµes de desempenho para o sistema de filtragem do
 ATLAS.
 
 A Figura~\ref{fig:p1-full-histos} mostra os histogramas individuais para cada
-uma das fases de processamento, para o teste usando 100 anéis rodando na
-máquina mais rápida (Opteron/250, 2,4~GHz). Desta figura conclui-se que, no
+uma das fases de processamento, para o teste usando 100 anÃ©is rodando na
+mÃ¡quina mais rÃ¡pida (Opteron/250, 2,4~GHz). Desta figura conclui-se que, no
 caso de tempos de processamento menores se tornarem imperativos, uma
-implementação dedicada do processo de anelamento (originalmente implementado
-na biblioteca \texttt{rbuild}) poderá ser realizada de forma que o tempo total
-de deste algoritmo seja otimizado. Junto à discriminação neural as duas fases
-representam mais de 90\% do tempo de processamento total. Otimizações na fase
-de procura do pico de deposição energética na segunda camada e.m. ou na fase
-de normalização dos anéis teriam quase ou nenhum impacto considerando-se a
+implementaÃ§Ã£o dedicada do processo de anelamento (originalmente implementado
+na biblioteca \texttt{rbuild}) poderÃ¡ ser realizada de forma que o tempo total
+de deste algoritmo seja otimizado. Junto Ã  discriminaÃ§Ã£o neural as duas fases
+representam mais de 90\% do tempo de processamento total. OtimizaÃ§Ãµes na fase
+de procura do pico de deposiÃ§Ã£o energÃ©tica na segunda camada e.m. ou na fase
+de normalizaÃ§Ã£o dos anÃ©is teriam quase ou nenhum impacto considerando-se a
 arquitetura atual do \eng{NeuralRinger}.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{ringer-mlp/full-histos-opteron-250}
 \end{center}
-\caption{Tempos individuais para cada fase de execução do \eng{NeuralRinger},
-levando-se em consideração a extração e discriminação baseada em 100 anéis. O
-teste foi executado na plataforma Opteron/250 (pré-serie).}
+\caption{Tempos individuais para cada fase de execuÃ§Ã£o do \eng{NeuralRinger},
+levando-se em consideraÃ§Ã£o a extraÃ§Ã£o e discriminaÃ§Ã£o baseada em 100 anÃ©is. O
+teste foi executado na plataforma Opteron/250 (prÃ©-serie).}
 \label{fig:p1-full-histos}
 \end{figure}
 
-\section{Migração para o sistema de filtragem do ATLAS}
+\section{MigraÃ§Ã£o para o sistema de filtragem do ATLAS}
 
 O projeto do \eng{NeuralRinger} evoluiu ao longo de 2 anos de desenvolvimento
-de forma que se tornasse facilmente integrável ao ambiente de funcionamento
-\eng{online}, que é baseado no \eng{framework} Athena
-\cite{athena:home-page, athena:devel-guide}. Neste âmbito, o projeto de um
-detetor neural baseado na técnica de anelamento deve seguir os seguintes
+de forma que se tornasse facilmente integrÃ¡vel ao ambiente de funcionamento
+\eng{online}, que Ã© baseado no \eng{framework} Athena
+\cite{athena:home-page, athena:devel-guide}. Neste Ã¢mbito, o projeto de um
+detetor neural baseado na tÃ©cnica de anelamento deve seguir os seguintes
 passos:
 
 \begin{enumerate}
-\item Encontrar os dados que serão utilizados para treino e teste do
+\item Encontrar os dados que serÃ£o utilizados para treino e teste do
 discriminador neural. Rodar o programa \texttt{athena}, de forma a extrair
 dados no formato nativo do \eng{NeuralRinger};
 \item Projetar e treinar o sistema de anelamento e detetor neural no ambiente
 do \eng{NeuralRinger};
-\item Aplicar as configurações de anelamento e deteção neural no sistema
+\item Aplicar as configuraÃ§Ãµes de anelamento e deteÃ§Ã£o neural no sistema
 \eng{online}.
 \end{enumerate}
 
-Desta forma, é possível desacoplar o desenvolvimento de detetores ao uso do
-ambiente Athena, o que é uma vantagem considerável: diminui-se o tempo de
-desenvolvimento e permite-se que o usuário foque sua atenção ao problema da
-classificação sem se importar com os detalhes, muitas vezes complexos, deste
-ambiente. Os resultados da aplicação de um detetor específico, dentro e fora
-do ambiente Athena devem ser idênticos.
+Desta forma, Ã© possÃ­vel desacoplar o desenvolvimento de detetores ao uso do
+ambiente Athena, o que Ã© uma vantagem considerÃ¡vel: diminui-se o tempo de
+desenvolvimento e permite-se que o usuÃ¡rio foque sua atenÃ§Ã£o ao problema da
+classificaÃ§Ã£o sem se importar com os detalhes, muitas vezes complexos, deste
+ambiente. Os resultados da aplicaÃ§Ã£o de um detetor especÃ­fico, dentro e fora
+do ambiente Athena devem ser idÃªnticos.
 
 \subsection{\eng{NeuralRinger} e o Athena}
 
-Para que seja facilmente integrável dentro do ambiente Athena, o
+Para que seja facilmente integrÃ¡vel dentro do ambiente Athena, o
 \eng{NeuralRinger} segue a filosofia de funcionamento deste ambiente. Cada uma
-das fases de processamento, i.e., a criação dos anéis de energia e a
-classificação neural estão codificadas em bibliotecas individualizadas e podem
+das fases de processamento, i.e., a criaÃ§Ã£o dos anÃ©is de energia e a
+classificaÃ§Ã£o neural estÃ£o codificadas em bibliotecas individualizadas e podem
 ser utilizadas tanto conjunta quanto separadamente. No ambiente
-\eng{online}, a extração de características e deteção são normalmente
+\eng{online}, a extraÃ§Ã£o de caracterÃ­sticas e deteÃ§Ã£o sÃ£o normalmente
 separadas de forma que possam ser desenvolvidas independentemente.
 
 O processamento do evento dentro do sistema filtragem ocorre de forma
-seqüencial, como explicado na Seção~\ref{sec:hlt}. Para cada objeto ou RoI
-destacado pelo nível de filtragem antecedente, o componente do HLT conhecido
+seqÃ¼encial, como explicado na SeÃ§Ã£o~\ref{sec:hlt}. Para cada objeto ou RoI
+destacado pelo nÃ­vel de filtragem antecedente, o componente do HLT conhecido
 como \eng{Steering} (que poderia ser traduzido, neste contexto, como
-Coordenador ou Agendador) irá definir o algoritmo que será chamado para
-tratá-lo. O algoritmo poderá realizar um conjunto de operações no objeto em
-questão, aumentando a quantidade de informações disponíveis para análise deste
-ítem ou interrompendo o processamento.
+Coordenador ou Agendador) irÃ¡ definir o algoritmo que serÃ¡ chamado para
+tratÃ¡-lo. O algoritmo poderÃ¡ realizar um conjunto de operaÃ§Ãµes no objeto em
+questÃ£o, aumentando a quantidade de informaÃ§Ãµes disponÃ­veis para anÃ¡lise deste
+Ã­tem ou interrompendo o processamento.
 
-Desta forma, é possível definir duas classes de algoritmos:
+Desta forma, Ã© possÃ­vel definir duas classes de algoritmos:
 
 \begin{itemize}
-\item \textbf{Extração}: Algoritmos que apenas adicionam informação a um
-objeto no evento, através da extração de características nos dados do detetor;
-\item \textbf{Hipótese}: Algoritmos que interrompem o processamento de um
-objeto por o considerarem como física ordinária que não deve ser registrada em
-mídia permanente.
+\item \textbf{ExtraÃ§Ã£o}: Algoritmos que apenas adicionam informaÃ§Ã£o a um
+objeto no evento, atravÃ©s da extraÃ§Ã£o de caracterÃ­sticas nos dados do detetor;
+\item \textbf{HipÃ³tese}: Algoritmos que interrompem o processamento de um
+objeto por o considerarem como fÃ­sica ordinÃ¡ria que nÃ£o deve ser registrada em
+mÃ­dia permanente.
 \end{itemize}
 
-Sendo, o processo de hipótese, separado do processo de extração, é possível
-desenvolver sistemas de decisão mais e mais complexos conforme se avance
-dentro da análise do evento. A Figura~\ref{fig:simple-menu} exemplifica este
-cenário para uma configuração fictícia para o \eng{Steering}. Este é um
-exemplo que pode ser reproduzido no LVL2: um objeto tipo e.m. é encontrado no
+Sendo, o processo de hipÃ³tese, separado do processo de extraÃ§Ã£o, Ã© possÃ­vel
+desenvolver sistemas de decisÃ£o mais e mais complexos conforme se avance
+dentro da anÃ¡lise do evento. A Figura~\ref{fig:simple-menu} exemplifica este
+cenÃ¡rio para uma configuraÃ§Ã£o fictÃ­cia para o \eng{Steering}. Este Ã© um
+exemplo que pode ser reproduzido no LVL2: um objeto tipo e.m. Ã© encontrado no
 resultado do LVL1 passado ao \eng{Steering}. Este objeto causa o agendamento
-de um algoritmo que possa tratá-lo. A primeira fase do processamento é a
-extração de características do objeto. Neste exemplo, a primeira extração de
-característica considerada é a extração dos anéis. O passo seguinte a extração
-é a hipótese. Se o objeto atender às características de um elétron, o
-\eng{Steering} irá agendar o passo seguinte. Caso, não, a hipótese de que o
-objeto seja um objeto tipo e.m. é rejeitada e o processamento é parado,
-causando a rejeição do evento pelo sistema de filtragem. Caso a hipótese seja
-afirmativa, neste exemplo, tentar-se-á encontrar um traço relativo ao objeto
-nos detetores de traço. Caso isto falhe, o objeto será rejeitado como indica a
+de um algoritmo que possa tratÃ¡-lo. A primeira fase do processamento Ã© a
+extraÃ§Ã£o de caracterÃ­sticas do objeto. Neste exemplo, a primeira extraÃ§Ã£o de
+caracterÃ­stica considerada Ã© a extraÃ§Ã£o dos anÃ©is. O passo seguinte a extraÃ§Ã£o
+Ã© a hipÃ³tese. Se o objeto atender Ã s caracterÃ­sticas de um elÃ©tron, o
+\eng{Steering} irÃ¡ agendar o passo seguinte. Caso, nÃ£o, a hipÃ³tese de que o
+objeto seja um objeto tipo e.m. Ã© rejeitada e o processamento Ã© parado,
+causando a rejeiÃ§Ã£o do evento pelo sistema de filtragem. Caso a hipÃ³tese seja
+afirmativa, neste exemplo, tentar-se-Ã¡ encontrar um traÃ§o relativo ao objeto
+nos detetores de traÃ§o. Caso isto falhe, o objeto serÃ¡ rejeitado como indica a
 figura. Se, finalmente, nenhuma das fases de processamento conseguir rejeitar
-o objeto, ele será rotulado como um elétron, os valores extraídos das
-características do objeto serão apendicionadas a este novo elemento e o evento
-será aprovado.
+o objeto, ele serÃ¡ rotulado como um elÃ©tron, os valores extraÃ­dos das
+caracterÃ­sticas do objeto serÃ£o apendicionadas a este novo elemento e o evento
+serÃ¡ aprovado.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.40]{simple-menu}
 \end{center}
-\caption{Exemplo de um cenário de seleção simples para o \eng{Steering}
+\caption{Exemplo de um cenÃ¡rio de seleÃ§Ã£o simples para o \eng{Steering}
 operando no LVL2, baseado em uma RoI tipo E.M..}
 \label{fig:simple-menu}
 \end{figure}
 
-Para atender à alta complexidade do experimento, muitas seqüências como a
+Para atender Ã  alta complexidade do experimento, muitas seqÃ¼Ãªncias como a
 descrita na Figura~\ref{fig:simple-menu} podem co-existir dentro do
 \eng{Steering}. Cabe a este sistema de agendamento escolher apropriadamente
-a seqüência de passos e combinações de objetos apropriadas para que se possa
+a seqÃ¼Ãªncia de passos e combinaÃ§Ãµes de objetos apropriadas para que se possa
 analisar o evento adequadamente.
 
-Para a integração do \eng{NeuralRinger} e observando-se a estrutura de
-processamento \eng{online}, divide-se o anelamento e a decisão neural em dois
+Para a integraÃ§Ã£o do \eng{NeuralRinger} e observando-se a estrutura de
+processamento \eng{online}, divide-se o anelamento e a decisÃ£o neural em dois
 passos distintos, que podem ser executados independentemente. Para evitar a
-dispersão de código, criou-se 3 pacotes assim denominados:
+dispersÃ£o de cÃ³digo, criou-se 3 pacotes assim denominados:
 
 \begin{itemize}
-\item \textbf{TrigRingerTools}: Este pacote contém as bibliotecas 
-originais do \eng{NeuralRinger} e é usado como base funcional dos outros
+\item \textbf{TrigRingerTools}: Este pacote contÃ©m as bibliotecas 
+originais do \eng{NeuralRinger} e Ã© usado como base funcional dos outros
 pacotes;
 \item \textbf{TrigCaloRinger}: Este pacote implementa um algoritmo de 
-extração de características. As características neste caso são os valores
-energéticos dos anéis;
+extraÃ§Ã£o de caracterÃ­sticas. As caracterÃ­sticas neste caso sÃ£o os valores
+energÃ©ticos dos anÃ©is;
 \item \textbf{TrigMultiVarHypo}: Este pacote implementa um algoritmo de
-hipótese baseada em redes neurais. Nele encontra-se a implementação do
-algoritmo de hipótese baseada em redes neurais. 
+hipÃ³tese baseada em redes neurais. Nele encontra-se a implementaÃ§Ã£o do
+algoritmo de hipÃ³tese baseada em redes neurais. 
 \end{itemize}
 
-Com esta configuração é possível manter o conjunto de bibliotecas do
-\eng{NeuralRinger} coeso em um único pacote (\texttt{TrigRingerTools}) e
+Com esta configuraÃ§Ã£o Ã© possÃ­vel manter o conjunto de bibliotecas do
+\eng{NeuralRinger} coeso em um Ãºnico pacote (\texttt{TrigRingerTools}) e
 apenas implementar um conjunto de algoritmos que usam a funcionalidade de base
-deste pacote. Os algoritmos de extração de características e hipótese são
-configuráveis em todos os aspectos da sua versão desacoplada e podem escrever
-em disco os resultados parciais de suas operações para verificação externa ao
+deste pacote. Os algoritmos de extraÃ§Ã£o de caracterÃ­sticas e hipÃ³tese sÃ£o
+configurÃ¡veis em todos os aspectos da sua versÃ£o desacoplada e podem escrever
+em disco os resultados parciais de suas operaÃ§Ãµes para verificaÃ§Ã£o externa ao
 Athena.
 
-Para determinar o correto funcionamento deste sistema, é necessário testar,
-baseado na entrada, a saída de cada passo, para um conjunto de eventos. Para
+Para determinar o correto funcionamento deste sistema, Ã© necessÃ¡rio testar,
+baseado na entrada, a saÃ­da de cada passo, para um conjunto de eventos. Para
 tal, utilizou-se uma base de dados com eventos simulados tipo $Z \rightarrow
-e^- + e^-$ que estava disponível no formato adequado. Uma configuração de
-anelamento utilizando 100 anéis como descritos anteriormente e uma rede neural
-com 100 entradas, 8 neurônios escondidos e um neurónio na camada de
-saída. Cerca de 850 RoI's foram selecionadas pela simulação do LVL1 indicando
+e^- + e^-$ que estava disponÃ­vel no formato adequado. Uma configuraÃ§Ã£o de
+anelamento utilizando 100 anÃ©is como descritos anteriormente e uma rede neural
+com 100 entradas, 8 neurÃ´nios escondidos e um neurÃ³nio na camada de
+saÃ­da. Cerca de 850 RoI's foram selecionadas pela simulaÃ§Ã£o do LVL1 indicando
 objetos a serem averiguados no LVL2. Roda-se o sistema Athena, configurado
-para utilizar os algoritmos de anelamento e deteção neural extraindo-se 3
+para utilizar os algoritmos de anelamento e deteÃ§Ã£o neural extraindo-se 3
 tipos de dados:
 
 \begin{enumerate}
-\item O valores de energia e posicionamento das células utilizadas para o
-cálculo dos anéis, num formato compatível com o padrão do \eng{NeuralRinger}; 
-\item Uma base de dados de anéis já processados e normalizados, em formato
+\item O valores de energia e posicionamento das cÃ©lulas utilizadas para o
+cÃ¡lculo dos anÃ©is, num formato compatÃ­vel com o padrÃ£o do \eng{NeuralRinger}; 
+\item Uma base de dados de anÃ©is jÃ¡ processados e normalizados, em formato
 XML;
-\item Uma base de dados com as saídas do processamento neural, também no
+\item Uma base de dados com as saÃ­das do processamento neural, tambÃ©m no
 formato XML.
 \end{enumerate}
 
-Com base na versão desacoplada do \eng{NeuralRinger}, executa-se os mesmos
+Com base na versÃ£o desacoplada do \eng{NeuralRinger}, executa-se os mesmos
 processos:
 
 \begin{enumerate}
-\item Basedo nos valores originais das células provida pelo Athena, calcula-se
-os anéis; 
-\item Baseado na saída dos anéis provida pelo Athena, calcula-se a saída da
+\item Basedo nos valores originais das cÃ©lulas provida pelo Athena, calcula-se
+os anÃ©is; 
+\item Baseado na saÃ­da dos anÃ©is provida pelo Athena, calcula-se a saÃ­da da
 rede neural.
 \end{enumerate}
 
-A Figura~\ref{fig:athena-vs-nr} mostra as diferenças, RoI a RoI, nos cenários
-1 e 2 descritos anteriormente. Como é possível observar no primeiro histograma
-desta figura, os resultados são idênticos com uma precisão melhor que $1
+A Figura~\ref{fig:athena-vs-nr} mostra as diferenÃ§as, RoI a RoI, nos cenÃ¡rios
+1 e 2 descritos anteriormente. Como Ã© possÃ­vel observar no primeiro histograma
+desta figura, os resultados sÃ£o idÃªnticos com uma precisÃ£o melhor que $1
 \times 10^{-7}$ no caso do Teste~1. Este erro existe pois os valores relativos
-às energias das células, escritos em disco para a análise pelo
-\eng{NeuralRinger}, são truncados na décima casa decimal.
+Ã s energias das cÃ©lulas, escritos em disco para a anÃ¡lise pelo
+\eng{NeuralRinger}, sÃ£o truncados na dÃ©cima casa decimal.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{athena-vs-nr-error}
 \end{center}
-\caption{Erros entre os processos de extração de características e hipótese
+\caption{Erros entre os processos de extraÃ§Ã£o de caracterÃ­sticas e hipÃ³tese
 neural entre o Athena e o \eng{NeuralRinger} rodando em modo desacoplado.}
 \label{fig:athena-vs-nr}
 \end{figure}
 
 Para o Teste~2, no histograma na parte inferior da
-Figura~\ref{fig:athena-vs-nr}, o resultados são idênticos para uma precisão
-melhor que $2 \times 10^{-6}$. Este erro existe pois os valores relativos às
-energias dos anéis, escritos em disco para a análise pelo \eng{NeuralRinger},
-são truncados à partir da sexta casa decimal.
+Figura~\ref{fig:athena-vs-nr}, o resultados sÃ£o idÃªnticos para uma precisÃ£o
+melhor que $2 \times 10^{-6}$. Este erro existe pois os valores relativos Ã s
+energias dos anÃ©is, escritos em disco para a anÃ¡lise pelo \eng{NeuralRinger},
+sÃ£o truncados Ã  partir da sexta casa decimal.
 
-Para completar a análise, roda-se o processo completo de extração e
-classificação neural, baseando-se nos valores das células, comparando a saída
-deste procecedimento à saída provida pelo sistema neural acoplado ao ambiente
-Athena. A Figura~\ref{fig:athena-vs-nr-full} mostra um gráfico de dispersão
-das saídas dos dois sistemas para as configurações de anelamento e rede neural
-descritas anteriormente. Neste caso, onde não há escrita em disco entre os
-dois passos do processamento, o erro observado é literalmente zero entre os
-dois sistemas. Estes resultados, portanto, indicam que a precisão de escrita é
-suficiente para a reprodução desacoplada e que o sistema migrado funciona
+Para completar a anÃ¡lise, roda-se o processo completo de extraÃ§Ã£o e
+classificaÃ§Ã£o neural, baseando-se nos valores das cÃ©lulas, comparando a saÃ­da
+deste procecedimento Ã  saÃ­da provida pelo sistema neural acoplado ao ambiente
+Athena. A Figura~\ref{fig:athena-vs-nr-full} mostra um grÃ¡fico de dispersÃ£o
+das saÃ­das dos dois sistemas para as configuraÃ§Ãµes de anelamento e rede neural
+descritas anteriormente. Neste caso, onde nÃ£o hÃ¡ escrita em disco entre os
+dois passos do processamento, o erro observado Ã© literalmente zero entre os
+dois sistemas. Estes resultados, portanto, indicam que a precisÃ£o de escrita Ã©
+suficiente para a reproduÃ§Ã£o desacoplada e que o sistema migrado funciona
 adequadamente.
-% Cabe-se notar que a rede neural utilizada para este teste não
-%havia sido treinada para a deteção eficiente de dados com empilhamento, sendo
-%esta a razão da distribuição tão homegênea da saída do detetor neural.
+% Cabe-se notar que a rede neural utilizada para este teste nÃ£o
+%havia sido treinada para a deteÃ§Ã£o eficiente de dados com empilhamento, sendo
+%esta a razÃ£o da distribuiÃ§Ã£o tÃ£o homegÃªnea da saÃ­da do detetor neural.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{athena-vs-nr-error-full-chain}
 \end{center}
-\caption{Gráfico de dispersão entre a saída final do Athena e de uma versão do
+\caption{GrÃ¡fico de dispersÃ£o entre a saÃ­da final do Athena e de uma versÃ£o do
 \eng{NeuralRinger} rodando em modo desacoplado.}
 \label{fig:athena-vs-nr-full}
 \end{figure}
 
-O segundo passo é a confirmação dos tempos de operação destacados ao longo do
-texto. Neste caso deseja-se averiguar se a migração não acarretou algum
-impacto ao desempenho do sistema. Por outro lado, obtém-se com este estudo um
-conjunto de valores comparativos mais justos a outros métodos. Por questões de
-praticidade ligadas à disponibilidade dos dados e quantidade de memória
-disponível, escolhe-se a máquina baseada no processador AMD Opteron $275$
+O segundo passo Ã© a confirmaÃ§Ã£o dos tempos de operaÃ§Ã£o destacados ao longo do
+texto. Neste caso deseja-se averiguar se a migraÃ§Ã£o nÃ£o acarretou algum
+impacto ao desempenho do sistema. Por outro lado, obtÃ©m-se com este estudo um
+conjunto de valores comparativos mais justos a outros mÃ©todos. Por questÃµes de
+praticidade ligadas Ã  disponibilidade dos dados e quantidade de memÃ³ria
+disponÃ­vel, escolhe-se a mÃ¡quina baseada no processador AMD Opteron $275$
 utilizada anteriormente, para realizar-se os testes.
 
-\paragraph{Serviço de Temporização do Athena:} O serviço de temporização do
-Athena (no pacote \eng{TrigTimeSvc}) utiliza a função \texttt{gettimeofday}
-\cite{web:gcc-libc} para executar a operação de medida de tempo entre dois
-pontos quaisquer dentro do código. A utilização de um relógio em tempo-real é
-benéfica quando deseja medir tempos de processamento com uma precisão menor
-que 10~milissegundos (fornecida pela função \texttt{clock}). 
+\paragraph{ServiÃ§o de TemporizaÃ§Ã£o do Athena:} O serviÃ§o de temporizaÃ§Ã£o do
+Athena (no pacote \eng{TrigTimeSvc}) utiliza a funÃ§Ã£o \texttt{gettimeofday}
+\cite{web:gcc-libc} para executar a operaÃ§Ã£o de medida de tempo entre dois
+pontos quaisquer dentro do cÃ³digo. A utilizaÃ§Ã£o de um relÃ³gio em tempo-real Ã©
+benÃ©fica quando deseja medir tempos de processamento com uma precisÃ£o menor
+que 10~milissegundos (fornecida pela funÃ§Ã£o \texttt{clock}). 
 
-Um dos inconvenientes da função \texttt{gettimeofday} é que o valor obtido em
-uma chamada é uma medida absoluta do tempo. Como um processo unix está sujeito
-à interrompimentos de sua execução, o tempo parado também será contado
-eventualmente. Ademais, máquinas modernas possuem normalmente mais de um
-processador. É portanto provável que processos que estejam parados, neste
+Um dos inconvenientes da funÃ§Ã£o \texttt{gettimeofday} Ã© que o valor obtido em
+uma chamada Ã© uma medida absoluta do tempo. Como um processo unix estÃ¡ sujeito
+Ã  interrompimentos de sua execuÃ§Ã£o, o tempo parado tambÃ©m serÃ¡ contado
+eventualmente. Ademais, mÃ¡quinas modernas possuem normalmente mais de um
+processador. Ã‰ portanto provÃ¡vel que processos que estejam parados, neste
 contexto, sejam mais rapidamente agendados. Desta forma, o tempo final
-observado será uma mistura de tempos de execução reais, somados aos tempos de
-parada e re-agendamento. Estes tempos não são normalmente significativos para
-longos processos, mas pode facilmente afetar a percepção de processos mais
-curtos. Para evitar que estes tipos de evento ocorram com freqüência durante
-a medida de tempo, ajustou-se a prioridade de execução do processo Athena de
-forma a minimizar o tempo que o processo estaria parado ou em transição de
+observado serÃ¡ uma mistura de tempos de execuÃ§Ã£o reais, somados aos tempos de
+parada e re-agendamento. Estes tempos nÃ£o sÃ£o normalmente significativos para
+longos processos, mas pode facilmente afetar a percepÃ§Ã£o de processos mais
+curtos. Para evitar que estes tipos de evento ocorram com freqÃ¼Ãªncia durante
+a medida de tempo, ajustou-se a prioridade de execuÃ§Ã£o do processo Athena de
+forma a minimizar o tempo que o processo estaria parado ou em transiÃ§Ã£o de
 processador.
 
-A Figura~\ref{fig:timings-athena} mostra 7 histogramas correspondentes às
+A Figura~\ref{fig:timings-athena} mostra 7 histogramas correspondentes Ã s
 diversas fases do processamento do \eng{NeuralRinger} integrado ao ambiente
 Athena. Na parte superior da figura, observa-se o tempo de acesso aos
-dados. Este tempo de acesso é partilhado por todos os algoritmos de
-calorimetria, e apresenta neste caso uma média de 2,2~milissegundos por
-RoI. No ambiente Athena, este valor inclui o tempo de formatação dos dados no
-padrão dos detetores do ATLAS. Os quatro histogramas que seguem representam
-histogramas equivalentes aos da Figura~\ref{fig:p1-full-histos}, onde é
-possível observar os tempos individuais de cada uma das fases do processo de
-extração de características e classificação neural. Os dois histogramas no
+dados. Este tempo de acesso Ã© partilhado por todos os algoritmos de
+calorimetria, e apresenta neste caso uma mÃ©dia de 2,2~milissegundos por
+RoI. No ambiente Athena, este valor inclui o tempo de formataÃ§Ã£o dos dados no
+padrÃ£o dos detetores do ATLAS. Os quatro histogramas que seguem representam
+histogramas equivalentes aos da Figura~\ref{fig:p1-full-histos}, onde Ã©
+possÃ­vel observar os tempos individuais de cada uma das fases do processo de
+extraÃ§Ã£o de caracterÃ­sticas e classificaÃ§Ã£o neural. Os dois histogramas no
 final da figura mostram os tempos de processamento totais, por algoritmo.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{timings-pcuwtr1}
 \end{center}
-\caption{Tempos de execução do \eng{NeuralRinger} funcionando integrado no
+\caption{Tempos de execuÃ§Ã£o do \eng{NeuralRinger} funcionando integrado no
 ambiente Athena.}
 \label{fig:timings-athena}
 \end{figure}
 
-Removendo-se a contribuição do tempo de acesso aos dados, o processo de
-extração leva em média $2720-2194=526$ microssegundos. O tempo médio de
-classificação baseado em uma rede neural leva $259$ microssegundos. Desta
-forma, o tempo total, comparável àquele da
-Figura~\ref{fig:timings-histo-full}, é de $526+259=785$ microssegundos. Este
-valor representa um acréscimo de cerca de 56\% do tempo total calculado
-anteriormente. Uma parte do tempo adicional é gasto na criação de estruturas
-de dados que sejam repassáveis entre os algoritmos, passo necessário no
-ambiente Athena e que foi suprimido na execução desacoplada. Uma outra parte
-advém da utilização da infrastrutura de acesso à dados e reportagem de erros
-disponível no ambiente Athena, que é mais lenta que no ambiente desacoplado.
+Removendo-se a contribuiÃ§Ã£o do tempo de acesso aos dados, o processo de
+extraÃ§Ã£o leva em mÃ©dia $2720-2194=526$ microssegundos. O tempo mÃ©dio de
+classificaÃ§Ã£o baseado em uma rede neural leva $259$ microssegundos. Desta
+forma, o tempo total, comparÃ¡vel Ã quele da
+Figura~\ref{fig:timings-histo-full}, Ã© de $526+259=785$ microssegundos. Este
+valor representa um acrÃ©scimo de cerca de 56\% do tempo total calculado
+anteriormente. Uma parte do tempo adicional Ã© gasto na criaÃ§Ã£o de estruturas
+de dados que sejam repassÃ¡veis entre os algoritmos, passo necessÃ¡rio no
+ambiente Athena e que foi suprimido na execuÃ§Ã£o desacoplada. Uma outra parte
+advÃ©m da utilizaÃ§Ã£o da infrastrutura de acesso Ã  dados e reportagem de erros
+disponÃ­vel no ambiente Athena, que Ã© mais lenta que no ambiente desacoplado.
 
-O tempo total de processamento do algoritmo integrado é de cerca de
+O tempo total de processamento do algoritmo integrado Ã© de cerca de
 3,2~milissegundos. Comparando-se os tempos relativos de processamento para
-diversas configurações de anéis e detetores neurais das
+diversas configuraÃ§Ãµes de anÃ©is e detetores neurais das
 Figuras~\ref{fig:timings-histo-full}, \ref{fig:timings-histo-cut1} e
-\ref{fig:timings-histo-cut2} observa-se uma relação aproximadamente constante
-de cerca de 10 a 15\% de diferença entre as plataformas AMD Opteron-275 e
-Intel Xeon, dependendo do número de aneís utilizados. Escalando o valor de
-tempo observado considerando-se a diferença máxima de 15\%, chega-se a um
-valor de $\approx 3,8$ milissegundos. Este valor é comparável ao tempo total
+\ref{fig:timings-histo-cut2} observa-se uma relaÃ§Ã£o aproximadamente constante
+de cerca de 10 a 15\% de diferenÃ§a entre as plataformas AMD Opteron-275 e
+Intel Xeon, dependendo do nÃºmero de aneÃ­s utilizados. Escalando o valor de
+tempo observado considerando-se a diferenÃ§a mÃ¡xima de 15\%, chega-se a um
+valor de $\approx 3,8$ milissegundos. Este valor Ã© comparÃ¡vel ao tempo total
 na Tabela~\ref{tab:t2calo-performance}, de $3,64$ milissegundos. Portanto, com
-este exercício, demonstra-se a viabilidade deste sistema de deteção para que
+este exercÃ­cio, demonstra-se a viabilidade deste sistema de deteÃ§Ã£o para que
 seja empregado \eng{online}.
 
-A Figura~\ref{fig:timings-eta-dep} ilustra a dependência dos tempos parciais
-de processamento com a localização da região de interesse, por $\eta$. A
-Figura~\ref{fig:timings-phi-dep} mostra a relação com a variável
-$\phi$. Naturalemente, o processo é tendencioso com relação à variável $\eta$,
-devido às variações da granularidade e independente da localização em $\phi$.
+A Figura~\ref{fig:timings-eta-dep} ilustra a dependÃªncia dos tempos parciais
+de processamento com a localizaÃ§Ã£o da regiÃ£o de interesse, por $\eta$. A
+Figura~\ref{fig:timings-phi-dep} mostra a relaÃ§Ã£o com a variÃ¡vel
+$\phi$. Naturalemente, o processo Ã© tendencioso com relaÃ§Ã£o Ã  variÃ¡vel $\eta$,
+devido Ã s variaÃ§Ãµes da granularidade e independente da localizaÃ§Ã£o em $\phi$.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{timings-eta-dep}
 \end{center}
-\caption{Relação entre o posicionamento da RoI em $\eta$ e os tempos de
-processamento do \eng{NeuralRinger} em diversas das fases da extração de
-características no ambiente Athena.}
+\caption{RelaÃ§Ã£o entre o posicionamento da RoI em $\eta$ e os tempos de
+processamento do \eng{NeuralRinger} em diversas das fases da extraÃ§Ã£o de
+caracterÃ­sticas no ambiente Athena.}
 \label{fig:timings-eta-dep}
 \end{figure}
 
@@ -491,79 +491,79 @@ características no ambiente Athena.}
 \begin{center}
 \includegraphics[scale=0.98]{timings-phi-dep}
 \end{center}
-\caption{Relação entre o posicionamento da RoI em $\phi$ e os tempos de
-processamento do \eng{NeuralRinger} em diversas das fases da extração de
-características no ambiente Athena.}
+\caption{RelaÃ§Ã£o entre o posicionamento da RoI em $\phi$ e os tempos de
+processamento do \eng{NeuralRinger} em diversas das fases da extraÃ§Ã£o de
+caracterÃ­sticas no ambiente Athena.}
 \label{fig:timings-phi-dep}
 \end{figure}
 
-\subsection{\eng{NeuralRinger} e o sistema de aquisição}
+\subsection{\eng{NeuralRinger} e o sistema de aquisiÃ§Ã£o}
 
-O último passo da integração é demonstração da viabilidade do sistema de
-filtragem em um protótipo do sistema de aquisição, junto à outros algoritmos
+O Ãºltimo passo da integraÃ§Ã£o Ã© demonstraÃ§Ã£o da viabilidade do sistema de
+filtragem em um protÃ³tipo do sistema de aquisiÃ§Ã£o, junto Ã  outros algoritmos
 de filtragem. Neste caso, inicialmente validamos o funcionamento do algoritmo
-no contexto de uma configuração mais complexa baseada na aplicação AthenaMT
-\cite{aa:tns-2004-2}, que simula, ainda \eng{offline}, o ambiente de aquisição
-tal qual será encontrado pelos algoritmos do HLT \eng{online}. Este é um passo
+no contexto de uma configuraÃ§Ã£o mais complexa baseada na aplicaÃ§Ã£o AthenaMT
+\cite{aa:tns-2004-2}, que simula, ainda \eng{offline}, o ambiente de aquisiÃ§Ã£o
+tal qual serÃ¡ encontrado pelos algoritmos do HLT \eng{online}. Este Ã© um passo
 simples, dado que re-utiliza-se o mesmo conjunto de bibliotecas usadas para o
-ambiente Athena, sem necessitar que se recompilem-nas. A vantagem é que o
-sistema já encontra-se depurado e a única verificação a ser feita é se a
-utilização dos novos algoritmos não introduz erros para os demais.
+ambiente Athena, sem necessitar que se recompilem-nas. A vantagem Ã© que o
+sistema jÃ¡ encontra-se depurado e a Ãºnica verificaÃ§Ã£o a ser feita Ã© se a
+utilizaÃ§Ã£o dos novos algoritmos nÃ£o introduz erros para os demais.
 
-Executou-se a aplicação AthenaMT incluindo uma configuração para a deteção de
-objetos tipo e.m. (T2Calo e algoritmos de deteteção de traços) junto ao
-sistema baseado no anelamento e deteção neural. Observou-se o consumo de
-memória enquanto executava-se a aplicação para que se rastreie possíveis
-vazamentos. Não foram observados problemas em nenhum aspecto.
+Executou-se a aplicaÃ§Ã£o AthenaMT incluindo uma configuraÃ§Ã£o para a deteÃ§Ã£o de
+objetos tipo e.m. (T2Calo e algoritmos de deteteÃ§Ã£o de traÃ§os) junto ao
+sistema baseado no anelamento e deteÃ§Ã£o neural. Observou-se o consumo de
+memÃ³ria enquanto executava-se a aplicaÃ§Ã£o para que se rastreie possÃ­veis
+vazamentos. NÃ£o foram observados problemas em nenhum aspecto.
 
-O passo final é a configuração de uma bancada de testes para executar os
+O passo final Ã© a configuraÃ§Ã£o de uma bancada de testes para executar os
 algoritmos dentro do ambiente do Sistema de Filtragem do ATLAS. Para tal
-utilizou-se 7 máquinas conectadas via \eng{gigabit} ethernet e uma máquina
+utilizou-se 7 mÃ¡quinas conectadas via \eng{gigabit} ethernet e uma mÃ¡quina
 adicional para controlar o sistema remotamente.  A
 Figura~\ref{fig:online-schema} esquematiza o sistema utilizado para o teste e
-o mapeamento das diversas aplicações nas máquinas. Esta bancada é,
-naturalmente, uma versão bastante reduzida do sistema que estará disponível no
-experimento. Para emular as condições de funcionamento do ATLAS, carregam-se
-dados de elétrons simulados nos nós nomeados \texttt{ROS-*} e
-\texttt{L2SV-*}. Desta forma, para as L2PU's, as condições de operação são
-idênticas ao do sistema final. A bancada consiste de 8 L2PU's, 8 Emuladores do
-Sistema de Leitura do detetor (ROS) e 1 L2SV. Estes sistemas estão conectados
-através de uma chave \eng{Gigabit ethernet} e conectados ao sistema
-controlador através da rede do CERN.
+o mapeamento das diversas aplicaÃ§Ãµes nas mÃ¡quinas. Esta bancada Ã©,
+naturalmente, uma versÃ£o bastante reduzida do sistema que estarÃ¡ disponÃ­vel no
+experimento. Para emular as condiÃ§Ãµes de funcionamento do ATLAS, carregam-se
+dados de elÃ©trons simulados nos nÃ³s nomeados \texttt{ROS-*} e
+\texttt{L2SV-*}. Desta forma, para as L2PU's, as condiÃ§Ãµes de operaÃ§Ã£o sÃ£o
+idÃªnticas ao do sistema final. A bancada consiste de 8 L2PU's, 8 Emuladores do
+Sistema de Leitura do detetor (ROS) e 1 L2SV. Estes sistemas estÃ£o conectados
+atravÃ©s de uma chave \eng{Gigabit ethernet} e conectados ao sistema
+controlador atravÃ©s da rede do CERN.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.5]{online-schema}
 \end{center}
-\caption{Esquema de bancada de testes para a verificação do funcionamento do
-NeuralRinger dentro do ambiente de aquisição de dados do ATLAS.}
+\caption{Esquema de bancada de testes para a verificaÃ§Ã£o do funcionamento do
+NeuralRinger dentro do ambiente de aquisiÃ§Ã£o de dados do ATLAS.}
 \label{fig:online-schema}
 \end{figure}
 
-O sistema de filtragem e aquisição do ATLAS provê um conjunto de ferramentas
-que podem ser utilizadas para monitorar a execução do sistema. A
-Figura~\ref{fig:ringer-screenshot} mostra uma captura de tela na máquina
-controladora, mostrando algumas destas ferramentas em atuação durante o
-teste. A luz verde na maior das janelas indica que o sistema está operante e
-nenhum erro foi detetado. O número de eventos processado, no total, pelas oito
-unidades de processamento é de aproximadamente meio milhão. O valor está
+O sistema de filtragem e aquisiÃ§Ã£o do ATLAS provÃª um conjunto de ferramentas
+que podem ser utilizadas para monitorar a execuÃ§Ã£o do sistema. A
+Figura~\ref{fig:ringer-screenshot} mostra uma captura de tela na mÃ¡quina
+controladora, mostrando algumas destas ferramentas em atuaÃ§Ã£o durante o
+teste. A luz verde na maior das janelas indica que o sistema estÃ¡ operante e
+nenhum erro foi detetado. O nÃºmero de eventos processado, no total, pelas oito
+unidades de processamento Ã© de aproximadamente meio milhÃ£o. O valor estÃ¡
 marcado em vermelho na parte inferior esquerda da figura. A taxa de
-funcionamento do sistema parece estável em cerca de 245~Hz, como indica o
-gráfico na parte inferior direita da figura. Na parte superior direita, uma
-janela do sistema de monitoração \eng{online} mostra um histograma, preenchido
-durante a execução do sistema e atualizado durante a operação com o tempo de
-processamento de um dos algoritmos de anelamento rodando na L2PU número 2. O
-tempo de processamento médio deste algoritmo nesta L2PU é de cerca de
-3,8~ms. Este tempo inclui o tempo de acesso aos dados através da rede
-\eng{Gigabit ethernet} levando-se em conta a configuração da bancada.
+funcionamento do sistema parece estÃ¡vel em cerca de 245~Hz, como indica o
+grÃ¡fico na parte inferior direita da figura. Na parte superior direita, uma
+janela do sistema de monitoraÃ§Ã£o \eng{online} mostra um histograma, preenchido
+durante a execuÃ§Ã£o do sistema e atualizado durante a operaÃ§Ã£o com o tempo de
+processamento de um dos algoritmos de anelamento rodando na L2PU nÃºmero 2. O
+tempo de processamento mÃ©dio deste algoritmo nesta L2PU Ã© de cerca de
+3,8~ms. Este tempo inclui o tempo de acesso aos dados atravÃ©s da rede
+\eng{Gigabit ethernet} levando-se em conta a configuraÃ§Ã£o da bancada.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.33]{ringer-online-3}
 \end{center}
-\caption{Captura de tela mostrando a operação do sistema de extração de
-características baseado em anéis rodando dentro de uma banca de testes do
-sistema de filtragem e aquisição do ATLAS.}
+\caption{Captura de tela mostrando a operaÃ§Ã£o do sistema de extraÃ§Ã£o de
+caracterÃ­sticas baseado em anÃ©is rodando dentro de uma banca de testes do
+sistema de filtragem e aquisiÃ§Ã£o do ATLAS.}
 \label{fig:ringer-screenshot}
 \end{figure}
 
