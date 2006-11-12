@@ -317,77 +317,17 @@ energia total para elétrons (topo) e jatos (baixo).}
 \label{fig:e-jet-deposit}
 \end{figure}
 
-\paragraph{Classificação -} A fase seguinte à compressão do espaço original
-de entrada é a discriminação da física de interesse. Tipicamente
-\cite{hlt-tdr, zeus-neural}, a deteção é realizada por meio da definição de
+Em seguida, aplica-se a discriminação da física de interesse. Tipicamente
+\cite{hlt-tdr, zeus-neural}, a deteção é realizada por meio da definição de 
 patamares de separação (também ditos \emph{cortes}) com informação \emph{a
 priori}. Este trabalho é normalmente realizado por um físico experiente, de
 acordo com os canais físicos de maior interesse para o experimento.
 
-É importante salientar que o melhor classificador baseado em cortes com
-informação \emph{a priori} também pode ser atingido iterativamente através de
-utilização de discriminadores lineares \cite{haykin-adaptative}, opcionalmente
-com atribuição de pesos para cada classe de partículas, definindo importâncias
-diferentes aos diferentes tipos de objetos estudados.
-
-A Figura~\ref{fig:basic-discriminator} mostra um diagrama esquemático do
-processo clássico de deteção descrito. No centro lógico do processo
-encontra-se o especialista, que controla o grau de compactação dos sinais de
-entrada e capacidade discriminatória do sistema. Este método possui um
-conjunto de problemas inerentes à intervenção humana na otimização, dentre
-eles a dependência no operador (aqui representado pela figura do
-``especialista''). O procedimento de compressão e discriminação deve ser bem
-documentado para que seja possível a reprodução dos resultados em todos os
-momentos. Ademais, o ajuste fino poderá ser bastante tedioso e dependente da
-quantidade de dados analisados, uma vez que o processo realizado será
-semi-automático - i.e., seleção dos dados de interesse seguido de análise
-manual.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.5]{basic-discriminator}
-\end{center}
-\caption{Um sistema \eng{ad-hoc} de deteção com uma entrada com alta
-dimensionalidade.}
-\label{fig:basic-discriminator}
-\end{figure}
-
-\section{Compressão dos sinais de entrada}
-
-Em um sistema com a dimensionalidade de entrada tão elevada, conforme se
-apresenta o problema da discriminação elétron/jato para o Detetor ATLAS, é
-mais interessante a proposição de um sistema onde a otimização seja conduzida
-por bases matemáticas mais automáticas e maximamente livres de tendências
-estatísticas. Idealmente, este sistema utilizaria todas as entradas para
-definir as regras de compressão e relevância de cada componente na
-discriminação dos alvos. Infelizmente, com o aumento da dimensionalidade de
-entrada, diminuem-se exponencialmente as chances de convergência na procura de
-uma função que defina otimamente (ou de forma aproximada) uma separação das
-classes a serem discriminadas \cite{haykin}. 
-
-Desta forma um sistema de compressão do espaço de entrada se faz
-necessária. Este sistema deve tentar minimizar a perda de informação e
-maximizar o potencial discriminatório do sistema. Um discriminador capaz de
-definir um plano de separação em um espaço de entrada com dimensionalidade
-elevada também será necessário, uma vez que deseja-se atingir o menor nível de
-compressão possível para estes dados. 
-
-A Figura~\ref{fig:advanced-discriminator} esquematiza tal sistema de
-deteção. A primeira etapa é uma compressão da entrada, que otimize o potencial
-discriminatório dos dados, que seja compatível com um sistema de deteção que
-aceite sinais com alta-dimensionalidade na entrada. Um sub-sistema de
-``otimização'' dos parâmetros de compressão e discriminação, também
-automatizado, controlaria a compressão da entrada melhorando a relação custo
-computacional \eng{versus} qualidade de deteção.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.5]{advanced-discriminator}
-\end{center}
-\caption{Um sistema \eng{ad-hoc} de deteção sub-ótimo com uma entrada com alta
-dimensionalidade.}
-\label{fig:advanced-discriminator}
-\end{figure}
+%É importante salientar que o melhor classificador baseado em cortes com
+%informação \emph{a priori} também pode ser atingido iterativamente através de
+%utilização de discriminadores lineares \cite{haykin-adaptative}, opcionalmente
+%com atribuição de pesos para cada classe de partículas, definindo importâncias
+%diferentes aos diferentes tipos de objetos estudados.
 
 \section{Deteção de elétrons no LVL2}
 \label{sec:lvl2-detect-electron}
@@ -712,7 +652,7 @@ esperado. Para o histograma de jatos a média aproxima-se ao valor esperado de
 25~GeV, exibindo um pico pronunciado ao redor deste valor. Como observa-se,
 grande parte dos jatos encontram-se com valor de energia transversa entre 10 e
 40~GeV, enquanto que para elétrons, a distribuição decai suavemente até
-$\approx$ 91~GeV (aproximadamente a massa de repouso do bóson Z). 
+$\approx$ 91~GeV (aproximadamente a massa de repouso do bóson Z).
 %Antes do corte, é possível distinguir uma cauda, se estendendo até a
 %origem. Este fenômeno pode ser observado no LVL2 já que os valores de
 %calibração de energia aplicados às células do calorímetro neste nível de

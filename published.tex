@@ -4,396 +4,556 @@
 \typeout{ Maintained by Andre Rabello dos Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\newcommand{\sectioneng}[1]{\foreignlanguage{english}{#1\/}}
+% 2006
+%\cite{aa:tns-06}
+%\cite{aa:jinst-06}
+%\cite{aa:chep-06-01}
+%\cite{aa:nim-06}
+
+% 2005
+%\cite{aa:rt-05}
+%\cite{aa:rt-05-01}
+%\cite{aa:enfpc-05}
+%\cite{aa:enfpc-05a}
+
+% 2004
+%\cite{aa:tns-2004}
+%\cite{aa:tns-2004-2}
+%\cite{aa:tns-2004-3}
+%\cite{aa:tns-04-04}
+%\cite{aa:tns-04-05}
+%\cite{aa:chep-04-01}
+%\cite{aa:enfpc-04}
+
+% 2003
+%\cite{aa:rt-2003}
+%\cite{aa:chep-2003}
+%\cite{aa:chep-2003-2}
+%\cite{aa:nima-2003}
+%\cite{aa:como-2003}
+%\cite{aa:chep-2003-3}
+
+% 2001
+%\cite{aa:enfpc-01}
+
+% 2000
+%\cite{aa:enfpc-00}
+
+% 1999
+%\cite{aa:enfpc-99}
+
+% 1998
+%\cite{aa:tns-1998}
+%\cite{aa:enfpc-98}
+%\cite{aa:vecpar-1998}
+
+% 1997
+%\cite{aa:acat-1997} *
+
+% 1996
+%\cite{aa:cba-1996} % Esse aqui não precisa mencionar...
+
+%Technical notes
+%\cite{aa:lvl2-coding}
+%\cite{aa:ef-urd}
+%\cite{aa:ef-ooad}
+%\cite{aa:ttn8-98}
+%\cite{aa:ttn17-98}
+%\cite{aa:ttn20-98}
+%\cite{aa:ttn25-98}
 
 \chapter{Publicações}
 \label{chap:published}
 
 Durante a execução deste estudo, um conjunto de trabalhos foi publicados na
 forma de artigos e notas técnicas. Este apêndice traz uma descrição deste
-material em ordem cronológica reversa.
+material em ordem cronológica reversa. Os artigos mais recentes incluem a
+atuação durante o estudo culminando nesta tese de doutoramente, enquanto que
+os mais antigos (anteriores ao ano de 2001), foram publicados durante a
+elaboração da dissertação do mestrado e da tese de graduação.
 
-\paragraph{Agosto de 2006: \sectioneng{Deployment of the ATLAS High-Level
-Trigger}}, IEEE Transactions on Nuclear Science. Referência~\cite{aa:tns-06}
-
-\begin{quotation}
-The ATLAS combined test beam in the second half of 2004 saw the first
-deployment of the ATLAS High-Level Trigger (HLT). The next steps are
-deployment on the pre-series farms in the experimental area during 2005,
-commissioning and cosmics tests with the full detector in 2006 and collisions
-in 2007. This paper reviews the experience gained in the test beam, describes
-the current status and discusses the further enhancements to be made. We
-address issues related to the dataflow, integration of selection algorithms,
-testing, software distribution, installation and improvements.
-\end{quotation}
-
-\paragraph{Maio de 2006: \sectioneng{A configuration system for the ATLAS
-trigger}}, Journal of Instrumentation, Maio de
-2006. Referência~\cite{aa:jinst-06}
+\paragraph{Agosto de 2006: \eng{Deployment of the ATLAS High-Level
+Trigger}} Publicado na \eng{IEEE Transactions on Nuclear
+Science}. Referência~\cite{aa:tns-06}.
 
 \begin{quotation}
-The ATLAS detector at CERN's Large Hadron Collider will be exposed to
-proton-proton collisions from beams crossing at 40 MHz that have to be
-reduced to the few hundreds of Hz allowed by the storage systems. A
-three-level trigger system has been designed to achieve this goal. We describe
-the configuration system under construction for the ATLAS trigger chain. It
-provides the trigger system with all the parameters required for decision
-taking and to record its history. The same system configures the event
-reconstruction, Monte Carlo simulation and data analysis, and provides tools
-for accessing and manipulating the configuration data in all contexts.
+O teste combinado com feixe do ATLAS na segunda metade de 2004 contou com o
+primeiro emprego dos Filtros de Alto-Nível do ATLAS (HLT). Este artigo revê a
+experiência adquirida durante este exercício, o estado atual e melhorias que
+deverão ser executadas antes do início do experimento. O artigo inclui
+discussões sobre o sistema de fluxo de dados, a integração de algoritmos de
+seleção, procedimentos de teste, distribuição de \eng{software} e instalação.
 \end{quotation}
 
-\paragraph{Abril de 2006: \sectioneng{Neural triggering system operating on
-high resolution calorimetry information}} na Nuclear Instruments and Methods
-in Physics Research. Referência~\cite{aa:nim-06}
+\paragraph{Maio de 2006: \eng{A configuration system for the ATLAS
+trigger}} Publicado no \eng{Journal of
+Instrumentation}. Referência~\cite{aa:jinst-06}.
 
 \begin{quotation}
-This paper presents an electron/jet discriminator system for operating at the
-Second Level Trigger of ATLAS. The system processes calorimetry data and
-organizes the regions of interest in the calorimeter in the form of concentric
-ring sums of energy deposition, so that both signal compaction and high
-performance can be achieved. The ring information is fed into a feed forward
-neural discriminator. This implementation resulted on a 97\% electron
-detection efficiency for a false alarm of 3\%. The full discrimination chain
-could still be executed in less than 500 us.
+Este artigo descreve o sistema a ser empregado para a configuração dos Filtros
+de Alto Nível do experimento ATLAS. Tal sistema provê ao Sistema de Filtragem
+toso os parâmetros necessários a tomada de decisões e para a salva-guarda de
+seu histórico. O mesmo sistema reconfigura a reconstrução de eventos, a
+simulações de Monte Carlo e a análise de dados. Ferramentas para acessar e
+manipular este sistema também são discutidas.
 \end{quotation}
 
-\paragraph{Fevereiro de 2006: \sectioneng{Testing on a Large Scale : running
+\paragraph{Abril de 2006: \eng{Neural triggering system operating on
+high resolution calorimetry information}} Publicado na \eng{Nuclear
+Instruments and Methods in Physics Research}. Referência~\cite{aa:nim-06}.
+
+\begin{quotation}
+Este artigo apresenta um sistema de discriminação elétron/jato para operar no
+Segundo Nível de Filtragem do experimento ATLAS. De forma a manipular a grande
+dimensionalidade de dados, as RoIs são organizadas na forma de anéis
+concêntricos de energia e, desta forma, tanto compressão como um melhor
+desempenho podem ser obtidos. A informação dos anéis é alimentada em uma rede
+neural sem realimentação (\eng{feedforward}). Esta implementação resulta em
+uma deteção de elétrons em 97\% contra um falso alarme de apenas 3\%. A cadeia
+completa de discriminação é executável em menos de 500~$\mu$s.
+\end{quotation}
+
+\paragraph{Fevereiro de 2006: \eng{Testing on a Large Scale : running
 the ATLAS Data Acquisition and High Level Trigger Software on 700 PC Nodes}}
-Computing In High Energy and Nuclear Physics  CHEP 2006 , Mumbai, India , 13 -
-17 Feb 2006. Referência~\cite{aa:chep-06-01}
+Apresentado no \eng{Computing In High Energy and Nuclear
+Physics}. Referência~\cite{aa:chep-06-01}.
 
 \begin{quotation}
-The ATLAS Data Acquisition (DAQ) and High Level Trigger (HLT) software system
-will be comprised initially of 2000 PC nodes which take part in the control,
-event readout, second level trigger and event filter operations. This high
-number of PCs will only be purchased before data taking in 2007. The large
-CERN IT LXBATCH facility provided the opportunity to run in July 2005 online
-functionality tests over a period of 5 weeks on a stepwise increasing farm
-size from 100 up to 700 PC dual nodes. The interplay between the control and
-monitoring software with the event readout, event building and the trigger
-software has been exercised the first time as an integrated system on this
-large scale. New was also to run algorithms in the online environment for the
-trigger selection and in the event filter processing tasks on a larger
-scale. A mechanism has been developed to package the offline software together
-with the DAQ/HLT software and to distribute it via peer-to-peer software
-efficiently to this large pc cluster. The findings obtained during the tests
-lead to many immediate improvements in the software. Trend analysis allowed
-identifying critical areas. Running an online system on a cluster of 700 nodes
-successfully was found to be especially sensitive to the reliability of the
-farm as well as the DAQ/HLT system itself and the future development will
-concentrate on fault tolerance and stability.
+O Sistema de Filtragem e Aquisição de Dados do ATLAS (TDAQ) terá a sua
+disposição, inicialmente, 2000 PCs assuminido as função de controlar, ler e
+filtrar os dados dos eventos do experimento. Este grande número de nós de
+processamento será adquirido somente em 2007. Em julho de 2005, no entanto, o
+CERN disponibilizou o uso de seu sistema de processamento \eng{batch} durante
+5 semanas para testes em larga escala do elementos do TDAQ. No total, 700 nós
+de processamento foram utilizados no exercício. Este artigo discute os
+diversos aspectos abordados durante o teste, enfatizando um conjunto de
+melhorias que devam ser executadas antes da operação final.
 \end{quotation}
 
-\paragraph{Julho de 2005: \sectioneng{Overview of the High-Level Trigger
-Electron and Photon Selection for the ATLAS Experiment at the LHC}} na 14th
+\paragraph{Outubro de 2005: Discriminação Neural de Elétrons no Segundo Nível
+de Trigger do ATLAS} Apresentado no XXVI Encontro Nacional de Física de
+Partículas e Campos. Referência \cite{aa:enfpc-05a}. 
+
+\begin{quotation}
+Este trabalho apresenta um discriminador neural para o segundo nível de
+filtragem do ATLAS, atuando no problema de separação elétron/jato baseado em
+informações de calorimetria. Para reduzir a alta dimensionalidade dos dados de
+entrada, as regiões de interesse (RoI) identificadas no primeiro nível são
+organizadas em anéis concêntricos de deposição energética. Este tipo de
+pré-processamento dos dados permite eficiente compactação dos sinais e alcança
+elevada capacidade de identificar elétrons. Atualmente, esse sistema vem sendo
+portado para o ambiente de emulação do sistema de trigger ATHENA, de modo a se
+obter uma avaliação realística de seu desempenho. O ambiente tem o objetivo de
+simular o comportamento do sistema de filtragem, ajudando, desta forma, no
+desenvolvimento e validação dos algoritmos. Em caráter comparativo, o sistema
+proposto foi também implementado usando a tecnologia DSP.
+\end{quotation}
+
+\paragraph{Outubro de 2005: Otimização do Sistema de Trigger do Segundo Nível
+do ATLAS Baseado em Calorimetria} Também apresentado no XXVI Encontro Nacional
+de Física de Partículas e Campos. Referência \cite{aa:enfpc-05}.
+
+\begin{quotation}
+Este trabalho apresenta um discriminador neural que opera sobre as quantidades
+calculadas pelo algoritmo T2Calo, responsável pela deteção elétron/jato no
+Segundo Nível de Filtragem do experimento ATLAS. Este sistema de deteção
+melhora a eficiência de deteção em quase 10 pontos percentuais, mantendo um
+nível de desempenho compatível com as restrições operacionais do sistema de
+filtragem.
+\end{quotation}
+
+\begin{quotation}
+Este trabalho apresenta um discriminador neural para o segundo nível de
+filtragem do ATLAS, para o problema de separação elétron/jato baseado em
+informações de calorimetria. Para reduzir a alta dimensionalidade dos dados de
+entrada, as regiões de interesse (RoI) identificadas no primeiro nível são
+organizadas em anéis concêntricos de deposição energética. Esse tipo de
+pré-processamento dos dados permite eficiente compactação dos sinais e alcança
+elevada capacidade de identificar elétrons. Atualmente, esse sistema vem sendo
+portado para o ambiente de emulação do sistema de trigger ATHENA, de modo a se
+obter uma avaliação realística de seu desempenho. O ambiente tem o objetivo de
+simular o comportamento do sistema de filtragem, ajudando, desta forma, no
+desenvolvimento e validação dos algoritmos. A título de comparaçãoo, o sistema
+proposto foi também implementado usando a tecnologia DSP.
+\end{quotation}
+
+\paragraph{Julho de 2005: \eng{Overview of the High-Level Trigger
+Electron and Photon Selection for the ATLAS Experiment at the LHC}}
+apresentado na \eng{14th
 IEEE - NPSS Real Time Conference 2005 Nuclear Plasma Sciences
-Society. Referência~\cite{aa:rt-05-01}
+Society}. Referência~\cite{aa:rt-05-01}.
 
 \begin{quotation}
-The ATLAS experiment at the Large Hadron Collider (LHC) will face the
-challenge of efficiently selecting interesting candidate events in pp
-collisions at 14 TeV center-of-mass energy, whilst rejecting the enormous
-number of background events. The High-Level Trigger (HLT = second level
-trigger and Event Filter), which is a software based trigger will need to
-reduce the level-1 output rate of ~75 kHz to ~200 Hz written out to mass
-storage. In this talk an overview of the current physics and system
-performance of the HLT selection for electrons and photons is given. The
-performance has been evaluated using Monte Carlo simulations and has been
-partly demonstrated in the ATLAS testbeam in 2004. The efficiency for the
-signal channels, the rate expected for the selection, the global data
-preparation and execution times will be highlighted. Furthermore, some physics
-examples will be discussed to demonstrate that the triggers are well adapted
-for the physics programme envisaged at the LHC.
+Os Altos Níveis de Filtragem do experimento ATLAS estão descritos em
+\eng{software}, ao contrário de seu Primeiro Nível, que é baseado em
+\eng{hardware}. Estes sistemas deverão reduzir a taxa de eventos de entrada de
+$~$75~Khz na saída do Primeiro Nível de Filtragem para apenas $~$200~Hz na
+saída do Filtro de Eventos. Os eventos selecionados serão finalmente guardados
+definitivamente em mídia permamente. Este artigo descreve uma visão geral de
+tal sistema. O desempenho é avaliado segundo simulações de Monte Carlo, tendo
+sido parcialmente demonstrado durante a bancada de testes com feixe em 2004. A
+eficiência para os canais com o sinal de interesse, a taxa esperada de
+seleção, o mecanismo de preparação de dados e os tempos de execução são
+discutidos. Alguns casos da Física de interesse que será analisada pelo
+experimento são detalhados.
 \end{quotation}
 
-\paragraph{Julho de 2005: \sectioneng{Configuration of the ATLAS trigger}} na
-14th IEEE - NPSS Real Time Conference 2005 Nuclear Plasma Sciences
-Society. Referência~\cite{aa:rt-05}
+\paragraph{Julho de 2005: \eng{Configuration of the ATLAS trigger}}
+Apresentado no \eng{14th IEEE - NPSS Real Time Conference 2005 Nuclear Plasma
+Sciences Society}. Referência \cite{aa:rt-05}.
 
 \begin{quotation}
-The ATLAS detector at CERN's LHC will be exposed to proton-proton collisions
-at a rate of 40 MHz. In order to reduce the data rate to about 200 Hz, only
-potentially interesting events are selected by a three-level trigger
-system. Its first level is implemented in electronics and firmware whereas the
-higher trigger levels are based on software. To prepare the full trigger chain
-for the online event selection according to a certain strategy, a system is
-being set up that provides the relevant configuration information -
-e.g. values for hardware registers in level-1 or parameters of high-level
-trigger algorithms - and stores the corresponding history. The same
-information is used to configure the offline trigger simulation. In this
-presentation an overview of the ATLAS trigger system is given concentrating on
-the event selection strategy and its description. The technical implementation
-of the configuration system is summarized.
+Este artigo discute um protótipo do sistema de configuração para os Altos
+Níveis de Filtragem do experimento ATLAS (HLT). Tal sistema configurará os
+algoritmos de filtragem no HLT para a deteção de eventos importantes para o
+experimento. Apresenta-se uma visão geral do HLT e a implementação do
+protótipo. Possíveis melhorias e tendências são discutidas no final do artigo.
 \end{quotation}
 
-\paragraph{Setembro de 2004: \sectioneng{Implementation and Performance of the
+\paragraph{Outubro de 2004: Os Filtros de Alto Nível do Experimento ATLAS}
+Apresentado no XXV Encontro Nacional de Física de Partículas e
+Campos. Referência \cite{aa:enfpc-04}.
+
+\begin{quotation}
+O Experimento ATLAS conta com um sistema de Filtragem bastante complexo e
+dividido em 4 grandes sub-sistemas:
+\begin{itemize}
+\item O Primeiro Nível de Filtragem que realiza os primeiros passos da seleção
+de eventos na cadeia de filtragem;
+\item O Software Online, responsável pelas áreas de controle e operação do sistema;
+\item O Sistema de Fluxo de Dados (\eng{Dataflow}) que coordena a transmissão
+e armazenamento dos dados do detetor do experimento;
+\item Os Filtros de Alto Nível, que implementam os algoritmos de
+discriminação, representando o topo da cadeia de seleção de eventos no ATLAS.
+\end{itemize}
+Para aumentar a portabilidade entre os algoritmos de filtragem desenvolvidos
+por toda a comunidade do experimento, os desenvolvedores dos Filtros de Alto
+Nível (ou simplesmente HLT; \eng{High-Level Triggers}) propuseram a
+re-utilização do ambiente de programação \eng{online} Athena dentro do sistema
+que operará em tempo real. Para tal, o HLT utiliza as ferramentas propostas
+pelo sub-sistema de Fluxo de Dados para coordenar as operações da
+transferência de informação para dentro e para fora dos nós de processamento
+sistema. Dentre outras restrições, o produto final deverá ser suficientemente
+rápido e operável em tarefas concorrentes em máquinas multiplamente
+processadas rodando Linux.  Neste trabalho apresentamos alguns dos problemas e
+soluções encontrados pelo grupo no desenvolvimento e teste do conjunto de
+bibliotecas que compõe o HLT.
+\end{quotation}
+
+\paragraph{Setembro de 2004: \eng{Implementation and Performance of the
 High Level Trigger Electron and Photon Selection for the ATLAS Experiment at
-the LHC}}, na conferência Computing in High Energy Physics and Nuclear
-Physics, em Interlaken, na Suíça. Referência~\cite{aa:chep-04-01}
+the LHC}} Apresentado na conferência \eng{Computing in High Energy Physics and
+Nuclear Physics}. Referência~\cite{aa:chep-04-01}.
 
 \begin{quotation}
-The ATLAS experiment at the Large Hadron Collider (LHC) will face the
-challenge of efficiently selecting interesting candidate events in pp
-collisions at 14 TeV center of mass energy, while rejecting the enormous
-number of background events, stemming from an interaction rate of up to $10^9$
-Hz. The First Level trigger will reduce this rate to around O(100
-kHz). Subsequently, the High Level Trigger (HLT), which is comprised of the
-Second Level trigger and the Event Filter, will need to further reduce this
-rate by a factor of O($10^3$). The HLT selection is software based and will be
-implemented on commercial CPUs, using a common framework built on the standard
-ATLAS object oriented software architecture. In this paper an overview of the
-current implementation of the selection for electrons and photons in the HLT
-is given. The performance of this implementation has been evaluated using
-Monte Carlo simulations in terms of the efficiency for the signal channels,
-rate expected for the selection, data preparation times, and algorithm
-execution times. Besides the efficiency and rate estimates, some physics
-examples will be discussed, showing that the triggers are well adapted for the
-physics programme envisaged at LHC. The electron and photon trigger software
-is also being exercised at the ATLAS 2004 Combined Test Beam, where components
-from all ATLAS subdetectors are taking data together along the H8 SPS
-extraction line; from these tests a validation of the selection architecture
-chosen in a real on-line environment is expected.
+Os Altos Níveis de Filtragem do experimento ATLAS (HLT) serão descritos em
+\eng{software} e executados em PCs comercialmente disponíveis. Sua
+implementação é baseada na arquitetura padrão, orientada à objetos, disponível
+para análise \eng{offline} no experimento. Este artigo traz uma visão geral da
+implementação atual da seleção de elétrons e fótons no HLT. Os níveis de
+desempenho desta implementação são avaliados tendo por base simulações de
+Monte Carlo, comparando-se a eficiência para o sinal de interesse, a taxa de
+eventos esperada, tempos de pré-processamento dos dados e para a discriminação
+em si. Alguns exemplos de física são discutidos, assim como a experiência de
+utilização deste sistema na bancada de testes combinada com feixe em 2004.
 \end{quotation}
 
-\paragraph{Junho de 2004: \sectioneng{Algorithms for the ATLAS high-level
-trigger}}. Referência~\cite{aa:tns-04-05}
+\paragraph{Agosto de 2004: \eng{The Second Level Trigger of the ATLAS
+Experiment at CERN's LHC}} Publicado na \eng{IEEE Transactions on Nuclear
+Science}. Referência \cite{aa:tns-2004}.
 
 \begin{quotation}
-Following rigorous software design and analysis methods, an object-based
-architecture has been developed to derive the second- and third-level trigger
-decisions for the future ATLAS detector at the LHC. The functional components
-within this system responsible for generating elements of the trigger
-decisions are algorithms running within the software architecture. Relevant
-aspects of the architecture are reviewed along with concrete examples of
-specific algorithms and their performance in "vertical" slices of various
-physics selection strategies.
+O Sistema de Filtragem do ATLAS reduz a taxa de eventos interesantes a ser
+gravada para análise \eng{offline} em 3 níveis sucessivos de filtragem,
+passando de 40~MHz iniciais a 100~KHz, 2~KHz e, finalmente, 200~Hz. Os Filtros
+de Alto Nível e o Sistema de Aquisição de Dados são projetados para se
+beneficiarem do mercado de computação e interconexão doméstica (PC's sob
+Ethernet) para atingir este nível de desempenho. Neste artigo, discutimos o
+Segundo Nível de Filtragem (LVL2) e a presenta-se resultados de medida de
+desempenho.
 \end{quotation}
 
-\paragraph{Junho de 2004: \sectioneng{The base-line DataFlow system of the ATLAS
-Trigger and DAQ}} Na revista \sectioneng{IEEE Transactions on Nuclear
-Science}, volume 51, número 3. Referência~\cite{aa:tns-2004-3}
+\paragraph{Junho de 2004: \eng{Algorithms for the ATLAS high-level
+trigger}} Publicado na \eng{IEEE Transactions on Nuclear
+Science}. Referência~\cite{aa:tns-04-05}.
 
 \begin{quotation}
-The baseline design and implementation of the ATLAS DAQ DataFlow system is
-described. The main components realizing the DataFlow system, their
-interactions, bandwidths and rates are being discussed and performance
-measurements on a 10\% scale prototype for the final Atlas TDAQ DataFlow
-system are presented. 
-
-This prototype is a combination of custom design components and of
-multi-threaded software applications implemented in C++ and running in a Linux
-environment on commercially available PCs interconnected by a fully switched
-gigabit Ethernet network.
+Seguindo um rigoroso processo de projeto e análise em \eng{software}, uma
+arquitetura baseada em objetos foi desenvolvida para deduzir o Segundo e
+Terceiro Níveis de Filtragem do experimento ATLAS, no LHC. Os componentes
+funcionais neste sistema, responsáveis por gerar as decisões, são algoritmos
+operando dentro desta arquitetura de \eng{software}. Aspectos relevantes deste
+sistema são revistos neste artigo, tal como exemplos de algoritmos específicos
+e seu desempenho em cortes ``verticais'' de várias estratégias de seleção.
 \end{quotation}
 
-\paragraph{Junho de 2004: \sectioneng{ATLAS TDAQ data collection software}} na
-\sectioneng{IEEE Transactions on Nuclear Science}, volume 51, número
-3. \cite{aa:tns-2004-3}.  
+\paragraph{Junho de 2004: \eng{The base-line DataFlow system of the
+ATLAS Trigger and DAQ}} Publicado na revista \eng{IEEE Transactions on Nuclear
+Science}. Referência~\cite{aa:tns-2004-3}
 
 \begin{quotation}
-The DataCollection (DC) is a subsystem of the ATLAS Trigger and DAQ system. It
-is responsible for the movement of event data from the ReadOut subsystem to
-the Second Level Trigger and to the Event Filter. This functionality is
-distributed on several software applications running on Linux PCs
-interconnected with Gigabit Ethernet. For the design and implementation of
-these applications a common approach has been adopted. This approach leads to
-the design and implementation of a common DC software framework providing a
-suite of common services. 10 Refs.
+As linhas de base do projeto e implementação do Sistema de Fluxo de Dados do
+ATLAS é descrito. Os componentes principais, suas interações, banda-passantes
+e taxas são discutidos assim como seu desempenho em um protótipo com 10\% da
+dimensão final do experimento. Este sistema é uma combinação de componentes
+com projeto dedicado e aplicações multi-tarefas implementadas em C++ e rodando
+em PCs num ambiente baseado no Sistema Operacional Linux. Os nós de
+processamento são conectados por uma rede Gigabit-Ethernet padrão.
 \end{quotation}
 
-\paragraph{Outubro de 2003: \sectioneng{The Second Level Trigger of the ATLAS
-Experiment at CERN's LHC}} Este trabalho foi apresentado no \sectioneng{Nucler
-Science Symposium}, sediado em \sectioneng{Portland}, \sectioneng{Oregon},
-EUA. Este trabalho também será publicado na revista \sectioneng{IEEE
-Transactions on Nuclear Science}, volume 51, número 3. A revista será
-publicada em junho de 2004 e, portanto, o número das páginas ainda não está
-disponível. Referência
-\cite{aa:tns-2004}.
+\paragraph{Junho de 2004: \eng{ATLAS TDAQ data collection software}} Publicado
+na revista \eng{IEEE Transactions on Nuclear Science}. Referência
+\cite{aa:tns-04-04}.
 
 \begin{quotation}
-\sectioneng{The ATLAS trigger reduces the rate of interesting events to be
-recorded for off-line analysis in 3 successive levels from 40 MHz to ~100 kHz,
-~2 kHz and ~200 Hz. The High Level Triggers and Data Acquisition System are
-designed to profit from commodity computing and networking components to
-achieve the required performance. In this paper, we discuss Data Flow aspects
-of the design of the Second Level Trigger (LVL2) and present results of
-performance measurements.}
+O Sistema de Coleção de Dados (DC) é um componente do Sistema de Filtragem e
+Aquisição de dados do experimento ATLAS, no LHC. Ele é responsável pela
+movimentação de dados do Sistema de Leitura do Detetor (\eng{Readout System},
+ROS) para o Segundo Nível de Filtragem e para o Filtro de Eventos. Esta
+funcionalidade é distribuída em várias aplicações rodando sobre uma plataforma
+Linux, interconectada por Gigabit-Ethernet. Para o projeto e implementação
+destas aplicações, um enfoque comum foi adotado. Tal enfoque leva a uma
+implentação comum do \eng{software} de DC, provendo uma infraestrutura de
+serviços de base a todas as aplicações deste sub-sistema.
 \end{quotation}
 
-\paragraph{Outubro de 2003: \sectioneng{Architecture of the ATLAS Online
+\paragraph{Outubro de 2003: \eng{Architecture of the ATLAS Online
 Physics-Selection Software at the LHC}.} Este artigo foi apresentado no
-\sectioneng{8th ICATPP Conference Proceedings} em Villa Erba, Como, Itália. 
-Referência \cite{aa:como-2003}.
+ \eng{8\eiro ICATPP}. Referência \cite{aa:como-2003}.
 
 \begin{quotation}
-\sectioneng{Given the extremely high bunch crossing rate foreseen at the Large
-Hadron Collider (LHC) and the general-purpose nature of the ATLAS particle
-physics experiment, after the hardware-based first level trigger, an efficient
-and flexible softwa re is needed for the online selection of physics
-events. This filtering of event s is organized in two levels: the second level
-trigger and the event filter. A c oherent approach to event selection across
-both levels has been taken. Thus a co mmon core software framework has been
-designed to maximise the usage of offline interfaces and software components,
-whilst allowing sufficient flexibility to me et the different interfaces and
-requirements of the two different levels, notabl y those of performance and
-robustness. This paper describes the architecture and high level design of the
-selection software and shows how the implementation me ets the challenges of
-the ATLAS environment.}
+A filtragem de eventos no experimento ATLAS é organizada em dois níveis
+distintos: o Segundo Nível de Filtragem e e Filtro de Eventos. Um enfoque
+unificado para selecionar eventos em ambos os níveis foi escolhido. Desta
+forma, um conjunto de rotinas de base foi projetada para maximizar o
+compartilhamento das interfaces e componentes \eng{offline}, ainda que
+mantendo uma flexibilidade suficientemente grande para atender aos requisitos
+operacionais do Sistema de Filtragem; notavelmente, aqueles relacionados ao
+desempenho e robustez. Este artigo descreve a arquitetura e o projeto do
+sistema de seleção de eventos e mostra como esta implementação é compatível
+com os desafios do experimento.
 \end{quotation}
 
-\paragraph{Outubro de 2003: \sectioneng{Studies for a common Event Selection
-Software: from LVL2 to Offline reconstruction}} Este trabalho foi apresentado
-no \sectioneng{Nucler Science Symposium}, sediado em \sectioneng{Portland},
-\sectioneng{Oregon}, EUA. Este trabalho também será publicado na revista
-\sectioneng{IEEE Transactions on Nuclear Science}, volume 51, número 3. A
-revista será publicada em junho de 2004 e, portanto, o número das páginas
-ainda não está disponível. Referência \cite{aa:tns-2004-2}.
+\paragraph{Outubro de 2003: \eng{Studies for a common Event Selection
+Software: from LVL2 to Offline reconstruction}} Publicado na revista \eng{IEEE
+Transactions on Nuclear Science}. Referência \cite{aa:tns-2004-2}.
 
 \begin{quotation}
-\sectioneng{The ATLAS High Level Trigger's primary function of event selection
-will be accomplished with a Level-2 trigger farm and an Event Filter farm,
-both running software components developed in the ATLAS offline reconstruction
-framework. While this approach provides a unified software framework for event
-selection, it poses strict requirements on offline components critical for the
-Level-2 trigger. A Level-2 decision in ATLAS must typically be accomplished
-within 10 ms and with multiple event processing in concurrent threads. In
-order to address these constraints, prototypes have been developed that
-incorporate elements of the ATLAS Dataflow, High Level Trigger, and
-offline framework software. To realize a homogeneous software environment for
-offline components in the High Level Trigger, the Level-2 Steering Controller
-was developed. With electron/gamma and muon-selection slices it has been shown
-that the required performance can be reached, if the offline components used
-are carefully designed and optimized for the application in the High Level
-Trigger.}
+A função primária dos Filtros de Alto Nível do experimento ATLAS será
+implementada em dois níveis independentes de deteção operando em componentes
+de \eng{software}.  Enquanto este enfoque provê um conjunto de interfaces de
+programação unificado ao sistema de seleção de eventos, também impõe
+requisitos bastante estritos nos componentes \eng{offline} que devem ser
+re-utilizados. A decisão do Segundo Nível de Filtragem do ATLAS devem,
+tipicamente, ser atingida no espaço temporal de 10 milissegundos e conta com
+paralelismo em múltiplas tarefas de processamento. De forma a atender à estas
+restrições, protótipos foram desenvolvidos que incorporam elementos do Sistema
+de Fluxo de Dados do ATLAS, dos Filtros de Alto Nível e do Sistema de Processamento
+\eng{Offline}. De forma a implementar um ambiente homogêneo de programação
+para os Filtros de Alto Nível, um controlador para o sistema de execução do
+Segundo Nível de Filtragem foi desenvolvido. Tanto com fatias do sistema de
+seleção baseado no canal elétron/fóton quanto fatias de seleção de muóns,
+demonstra-se que o desempenho necessário poderá ser atingido, se os
+componentes \eng{offline} são cuidadosamente projetados e otimizados para que
+também sejam aplicáveis aos Altos Níveis de Filtragem do experimento.
 \end{quotation}
 
-\paragraph{Agosto de 2003: \sectioneng{Neural Particle Discrimination for Triggering 
+\paragraph{Agosto de 2003: \eng{Neural Particle Discrimination for Triggering 
 Interesting Physics Channels with Calorimetry Data}} Este artigo foi publicado
-na revista \sectioneng{Nuclear Instruments And Methods In Physics Research A -
-Accelerators, Spectrometers, Detectors And Associated Equipament}, volume 502,
-número 2, páginas 713 a 715. Referência \cite{aa:nima-2003}.
+na revista \eng{Nuclear Instruments And Methods In Physics Research A -
+Accelerators, Spectrometers, Detectors And Associated Equipament}. Referência
+\cite{aa:nima-2003}. 
 
 \begin{quotation}
-\sectioneng{High Energy Physics experiments use on-line event validators
-(triggers) to distinguish known physics from unstudied physics events. This
-article introduces a triggering scheme for high input rate processors, based
-on neural networks. The technique is applied to the Electron/Jet
-discrimination problem, present at the Second Level Trigger of the ATLAS
-experiment, being constructed at CERN, Switzerland. The proposed solution
-outperforms the scheme adopted nowadays at CERN, both in discrimination
-efficiency and performance, becoming a candidate algorithm for implementation
-at the experiment.}
+Experimentos em Física de Altas Energias usa sistemas de validação
+\eng{online} (filtros) para distingüir a Física conhecida de eventos
+interessantes que devam ser analisados. Este artigo introduz um esquema de
+filtragem para processadores com alta taxa de entrada, baseado em redes
+neurais artificiais. A técnica é aplicada ao problema de discriminação
+elétron/jato, presente no Segundo Nível de Filtragem do experimento ATLAS,
+sendo construído no CERN, Suíça. A solução proposta possui um melhor
+desempenho que aquela proposta atualmente no CERN, tanto no caráter
+discriminatório quanto em velocidade, tornando-se um algoritmo candidato para
+implementação no experimento.
 \end{quotation}
 
-\paragraph{Maio de 2003: \sectioneng{The Event Format User Requirements
-Document}} Nota técnica publicada no CERN. O chave de referência é
-\textsf{ATL-DQ-EN-0005}. O documento pode ser permanentemente acessado como
-especificado na referência \cite{aa:ef-urd}.
+%\paragraph{Maio de 2003: \eng{The Event Format User Requirements
+%Document}} Nota técnica publicada no CERN. O chave de referência é
+%\textsf{ATL-DQ-EN-0005}. Referência \cite{aa:ef-urd}.
+
+%\begin{quotation}
+%Este documento contém os requirimentos, restrições e casos de uso para uma
+%biblioteca de formatação de eventos, a ser usada potencialmente por vários
+%sub-sistemas do Sistema de Filtragem e Aquisição de Dados do ATLAS.
+%\end{quotation}
+
+%\paragraph{Maio de 2003: \eng{The Event Format Analysis and Design}}. Nota
+%técnica publicada no CERN. O chave de referência é
+%\textsf{ATL-DQ-EN-0006}. Referência \cite{aa:ef-ooad}.
+
+%\begin{quotation}
+%Este documento descreve a análise e projeto de uma biblioteca de leitura e
+%escrita de eventos para o experimento ATLAS.
+%\end{quotation}
+
+\paragraph{Março de 2003: \eng{ATLAS-TDAQ DataCollection Software}} Este
+trabalho foi publicado na revista \eng{IEEE Transactions on Nuclear
+Sciences}. Referência \cite{aa:rt-2003}.
 
 \begin{quotation}
-\sectioneng{This document includes the requirements, constraints and use-cases
-for a common event format library, to be used potentially by several
-Trigger/DAQ subsystems.}
+O Sistema Coleção de Dados é um sub-sistema do Sistema de Filtragem e
+Aquisição de Dados do experimento ATLAS. Ele é responsável pela movimentação
+dos dados de cada evento, à partir do Sistema de Leitura até o Segundo Nível
+de Filtragem e ao Filtro de Eventos. Esta funcionalidade é distribuída por
+vários componentes de \eng{software} operando sob Linux em PC's
+interconectados por Gigabit Ethernet. Para o projeto e implementação destas
+aplicações, um enfoque comum foi adotado. Este enfoque nos guiou ao projeto e
+implementação de um conjunto de interfaces compartilhadas ao sistema de
+Coleção de Dados, provendo uma suíte de serviços comuns.
 \end{quotation}
 
-\paragraph{Maio de 2003: \sectioneng{The Event Format Analysis and Design}} Nota
-técnica publicada no CERN. O chave de referência é
-\textsf{ATL-DQ-EN-0006}. O documento pode ser permanentemente acessado como
-especificado na referência \cite{aa:ef-ooad}.
+\paragraph{Março de 2003: \eng{The DataFlow System of the ATLAS Trigger and
+DAQ}} Este trabalho foi apresentado no congresso \eng{Computing for
+High-Energy Physics' 2003}. Referência \cite{aa:chep-2003-2}.
 
 \begin{quotation}
-\sectioneng{This document describes the Analysis and Design of a multi-purpose
-library for the ATLAS experiment that can read and write event formatted
-data. Library users are guaranteed to be able to exchange data produced by
-ATLAS detectors, triggers and their equivalent simulation environments.}
+Este artigo apresenta o projeto e implementação de um protótipo do Sistema de
+Fluxo de Dados do experimento ATLAS. Sua decomposição funcional é descrita e
+medidas de desempenho para cada componente individual são mostradas.
 \end{quotation}
 
-\paragraph{Março de 2003: \sectioneng{ATLAS-TDAQ DataCollection Software}} Este
-trabalho foi apresentado no congresso \sectioneng{Real-Time' 2003} e publicado nos
-anais do mesmo. Este trabalho também será publicado na revista
-\sectioneng{IEEE Transactions on Nuclear Sciences}, volume 51, número 3. A revista
-será publicada em junho de 2004 e, portanto, o número das páginas ainda não
-está disponível. Referência \cite{aa:rt-2003}.
-
-\begin{quotation}
-\sectioneng{The DataCollection is a subsystem of the ATLAS Trigger and DAQ
-system. It is responsible for the movement of event data from the ReadOut
-subsystem to the Second Level Trigger and to the Event Filter. This
-functionality is distributed on several software applications running on Linux
-PCs interconnected with Gigabit Ethernet. For the design and implementation of
-these applications a common approach has been adopted. This approach leads to
-the design and implementation of a common DataCollection software framework
-providing a suite of common services.}
-\end{quotation}
-
-\paragraph{Março de 2003: \sectioneng{The DataFlow System of the ATLAS Trigger and
-DAQ}} Este trabalho foi apresentado no congresso \sectioneng{Computing for
-High-Energy Physics' 2003}, em \sectioneng{La Jolla}, Califórnia, EUA. Referência
-\cite{aa:chep-2003-2}.
-
-\begin{quotation}
-\sectioneng{This paper presents the design and prototype implementation of the
-DataFlow system of the ATLAS experiment. Its functional decomposition is
-described and performance measurements for each individual component are
-shown.}
-\end{quotation}
-
-\paragraph{Março de 2003: \sectioneng{Architecture of the ATLAS High Level
+\paragraph{Março de 2003: \eng{Architecture of the ATLAS High Level
 Trigger Event SelectionSoftware}} Este trabalho foi apresentado no congresso
-\sectioneng{Computing for High-Energy Physics' 2003}, em \sectioneng{La
-Jolla}, Califórnia, EUA. Referência \cite{aa:chep-2003-3}
+\eng{Computing for High-Energy Physics' 2003}. Referência
+\cite{aa:chep-2003-3}
 
 \begin{quotation}
-\sectioneng{The ATLAS High Level Trigger (HLT) consists of two selection
-steps: the second l evel trigger and the event filter. Both will be
-implemented in software, running on mostly commodity hardware. Both levels
-have a coherent approach to event sel ection, so a common core software
-framework has been designed to maximise this coherency, while allowing
-sufficient flexibility to meet the different interfaces and requirements of
-the two different levels. The approach is extended further to allow the
-software to run in an off-line simulation and reconstruction enviro nment for
-the purposes of development. This paper will describe the architecture and
-high level design of the software.}
+Os Altos Níveis de Filtragem do experimento ATLAS consiste de dois passos: o
+Segundo Nível e um Filtro de Eventos. Ambos serão implementados em
+\eng{software}, operando, em sua maior parte, sob componentes domésticos. O
+modelo da seleção de eventos em ambos também é unificado, de forma que um
+conjunto de interfaces comuns foi projetado para maximizar a coerência, ainda
+que mantendo bons níveis de flexibilidade para garantir a interoperabilidade
+aos dois níveis. Este enfoque é ainda estendido para permitir que o mesmo
+conjunto de programas e bibliotecas opere \eng{offline}, facilitando o
+desenvolvimento. Este artigo descreve a arquitetura e o projeto deste sistema.
 \end{quotation}
 
-\paragraph{Março de 2003: \sectioneng{Experience with multi-threaded C++ applications
-in the ATLAS DataFlow Software}} Publicado nos anais do congresso
-\sectioneng{Computing for High-Energy Physics' 2003}, após apresentação do trabalho
-no mesmo congresso. O local de apresentação foi \sectioneng{La Jolla}, Califórnia,
-EUA. Referência \cite{aa:chep-2003}.
+\paragraph{Março de 2003: \eng{Experience with multi-threaded C++ applications
+in the ATLAS DataFlow Software}} Apresentado na conferência
+\eng{Computing for High-Energy Physics' 2003}. Referência \cite{aa:chep-2003}.
 
 \begin{quotation}
-\sectioneng{The DataFlow is sub-system of the ATLAS data acquisition responsible for the
-reception, buffering and subsequent movement of partial and full event data to
-the higher level triggers: Level 2 and Event Filter. The design of the
-software is based on OO methodology and its implementation relies heavily on
-the use of posix threads and the Standard Template Library. This article
-presents our experience with Linux, posix threads and the Standard Template
-Library in the real time environment of the ATLAS data flow.}
+O Sistema de Fluxo de Dados do experimento ATLAS é responsável pela recepção,
+estocagem e subseqüente movimentação tanto parcial quanto completa dos dados
+de um evento para os Altos Níveis de Filtragem. O projeto deste conjunto de
+bibliotecas e programas é baseado em uma metodologia orientada à objetos e sua
+implementação baseia-se no uso de Tarefas (\eng{threads}) POSIX e na
+Biblioteca de Modelos-Padrão do C++ (\eng{Standard Template Library}). Este
+artigo apresenta nossa experiência com Linux, Tarefas POSIX e a Biblioteca de
+Modelos-Padrão do C++ no ambiente \eng{online} do Sistema de Fluxo de Dados do
+ATLAS.
 \end{quotation}
 
-\paragraph{Julho de 2002: \sectioneng{ATLAS High-Level Trigger, Data Acquisition and
-Controls Technical Design Report}} Este documento descreve o projeto e
-construção do Sistema de Filtragem do experimento ATLAS. Foi publicado no
-CERN. Referência \cite{hlt-tdr}.
+\paragraph{Julho de 2002: \eng{ATLAS High-Level Trigger, Data
+Acquisition and Controls Technical Design Report}} Este documento descreve o
+projeto e construção do Sistema de Filtragem do experimento ATLAS em si,
+contendo todos os detalhes, medidas de desempenho e operabilidade. Foi
+publicado no CERN. Referência \cite{hlt-tdr}.
 
-\paragraph{Agosto de 1998: \sectioneng{A neural online triggering system based
-on parallel processing}} Publicado na IEEE Transactions on Nuclear Science. 
+\paragraph{Outubro de 2001: Redes Neurais Especialistas para a Separação
+Elétron-Jato usando Calorímetros Multi-camadas e Multi-segmentados}
+Apresentado no XX Encontro Nacional de Física de Partículas e
+Campos. Referência \cite{aa:enfpc-01}.
 
 \begin{quotation}
-The study of a prototype of the second-level triggering system for operation
-at LHC conditions is addressed by means of a parallel machine
-implementation. The 16 node transputer based machine uses a fast digital
-signal processor acting as a coprocessor for optimizing signal processing
-applications. A C-language development environment is used for running all
-applications at ultimate speed. The implementation is based on information
-supplied by four detectors and includes two phases of system operation:
-feature extraction and global decision. Feature extraction for calorimeters
-and global decision processing are performed by means of neural
-networks. Preprocessing and neural network parameters rest in memory and the
-activation function is implemented using a look up table. Simulated data for
-the second-level trigger operation are used for performance evaluation.
+O experimento ATLAS estará operacional no ano de 2006. O objetivo principal
+deste experimento é a deteção do bóson de Higgs, usando entre outros tipos de
+detetores, calorímetros. Um dos canais de deteção mais importantes no
+experimento é o de elétrons com alta energia transversa, representando de 30 a
+40\% do total das assinaturas a serem analisadas pelo Sistema de
+Filtragem. Jatos (de partículas) confundem-se comumente com elétrons pela
+forma que interagem com os calorímetros. Neste trabalho, apresentamos um
+sistema de discriminação elétron-jato baseado em redes neurais especialistas,
+utilizando os dados dos calorímetros do ATLAS. Este sistema, depois de
+treinado, compacta o espaço de variáveis de entrada (células dos calorímetros)
+em um subespaço que mantém os aspectos necessários para uma deteção eficiente
+de elétrons. Os resultados apresentados se mostram melhores que os resultados
+obtidos usando-se técnicas desenvolvidas no CERN, com o mesmo objetivo.
+\end{quotation}
+
+\paragraph{Outubro de 2000: Mapeamento em An\'eis para uma Separa\c{c}\~ao
+Neuronal El\'etron-Jato usando Calor\'imetros Multi-camadas e
+Multi-segmentados} Apresentado no XIX Encontro Nacional de Física de
+Partículas e Campos. Referência \cite{aa:enfpc-00}.
+
+\begin{quotation}
+Prop\~oe-se neste trabalho que a an\'alise conduzida no Segundo N\'{\i}vel de
+Filtragem do Experimento ATLAS, no CERN, seja feita por meio de processamento
+neural sobre a regi\~ao de interesse previamente destacada pelo Primeiro
+N\'{\i}vel nos Calor\'{\i}metros. Por depender do posicionamento da RoI no
+detetor, o n\'umero de camadas, granularides e profundidades das c\'elulas do
+calor\'{\i}metro s\~ao desconhecidas at\'e o momento da chegada do evento ao
+sistema de an\'alise. Ainda assim, estima-se que o n\'umero de c\'elulas para
+an\'alise estar\'a em torno de 1000 por RoI.  As efici\^encias de
+separa\c{c}\~ao obtidas, tempos de execu\c{c}\~ao e uma compara\c{c}\~ao com a
+efici\^encia de outros m\'etodos empregados para a mesma atividade s\~ao
+discutidas.
+\end{quotation}
+
+\paragraph{Outubro de 1999: Integrando Plataformas e Algoritmos para o Segundo
+Nível de Trigger do Experimento ATLAS} Apresentado no XVIII Encontro 
+Nacional de Física de Partículas e Campos. Referência \cite{aa:enfpc-99}.
+
+\begin{quotation}
+Este artigo contém um sumário do trabalho realizado no âmbito dos estudos de
+portabilidade da infraestrutura do fluxo de dados do Sistema de Filtragem,
+originalmente escritos em C e operando em Sistemas Operacionais comerciais
+para uma implementação orientada à objetos baseada em C++ rodando sobre
+Linux. Ele discute as vantanges deste enfoque, tanto em termos de
+mantenabilidade e custo final de projeto.
+\end{quotation}
+
+\paragraph{Outubro de 1998: Um Protótipo do Sistema de Validação de
+Nível 2 para as Condições do LHC} Apresentado no XVII Encontro Nacional de
+Física de Partículas e Campos. Referência \cite{aa:enfpc-98}.
+
+\begin{quotation}
+O experimento ATLAS pretende comprovar a existência do bóson de Higgs. Para
+tal, um grande sistema de deteção e aquisição vem sendo projetado. O sistema
+aquisição tem a função de e separar em tempo real interações originárias do
+decaimento de um Higgs de física ordinária.
+
+A filtragem de eventos no sistema de aquisição é concebida em três níveis de
+complexidade crescente e velocidade decrescente. O segundo nível pretende
+utilizar redes de computadores pessoais (PC's) interconectados por rápidos
+sistemas de rede. A escolha de fabricantes, sistemas operacionais e algorítmos
+de processamento ainda não foi feita, mas esforços em prol desta decisão vem
+sendo realizados. Neste trabalho desenvolve-se uma fração do filtro de segundo
+nível utilizando-se de processamento paralelo, redes neurais artificiais e
+DSP's. Conclusões e resultados são endereçados no final.
+\end{quotation}
+
+\paragraph{Setembro de 1998: \eng{Neural Classifiers Implemented In A
+Transputer Based Parallel Machine}} Apresentado no \eng{International Meeting
+on Vector and Parallel Processing (VECPAR)}. Referência
+\cite{aa:vecpar-1998}.
+
+\begin{quotation}
+O projeto de um protótipo para o Segundo Nível de Filtragem para as condições
+do LHC é realizado através de uma implementação em uma máquina paralela. Este
+computador contém 16 nós de processamento baseados em \eng{transputers} e usa
+processadores digitais de sinais (\eng{DSP's}) como unidades de
+co-processamento para otimizar o processamento de dados. Um ambiente de
+desenvolvimento em C é usado para obter das aplicações, seu máximo
+desempenho. A implementação é baseada na informação provida pelos quatro
+sistemas de deteção do experimento ATLAS em duas fases: extração de
+características e decisão global. A extração de características para
+calorímetros e decisão global são desempenhadas por redes neurais
+artificiais. Os parâmetros de pré-processamento e da rede neural são mantidos
+em memória e a função de ativação da rede é implementada usando uma tabela de
+procura. Dados simulados para o Segundo Nível de Filtragem são utilizados para
+a avaliação do desempenho deste sistema.
 \end{quotation}
 
 \typeout{ *************** End of file published.tex *************** }

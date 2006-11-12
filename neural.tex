@@ -4,55 +4,118 @@
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{Sistema neural de deteção elétron/jato baseado em calorimetria}
+\chapter{Análise multi-variável baseada em calorimetria para a deteção
+elétron/jato} 
 \label{chap:neural}
 
-Neste capítulo, define-se um sistema de extração de característica em anéis de
-deposição energética, associado a um sistema de discriminação neural, para o
-projeto de um classificador de partículas ótimo para o Segundo Nível de
-Filtragem do experimento ATLAS. Este classificador supera significativamente
-em desempenho o sistema clássico de deteção que é usado como base no
-experimento ATLAS. O sistema proposto tem ainda as vantagens de ser modular,
-rápido e de simples manutenção.
+Neste capítulo, analisa-se o modelo de classificação elétron/jato proposto
+atualmente no CERN e desenvolvem-se sistemas de classificação de simples
+treinamento e emprego, baseados em análise multi-variável. Em especial, redes
+neurais artificiais são estudadas em detalhes. Estes classificadores definem
+um patamar de deteção melhor que o sistema atualmente empregado, superando-o
+em robustez e flexibilidade e ainda atingindo níveis de desempenho compatíveis
+com a operação dentro do Segundo Nível do Sistema de Filtragem do experimento
+ATLAS.
 
 \section{Revisão da literatura}
 \label{sec:review}
 
-%\textit{Introduzir um histórico de das diversas técnicas até hoje, emprego de
-%RN em HEP, Hera, D0, LEP. Faltando...}
+Dentre os métodos modernos de análise multi-variável mais empregados em Física
+de Altas Energia, Redes Neurais Artificiais possuem um papel importante ao
+lado de outras técnicas também eficazes como a Análise de Componentes
+Principais e classificadores bayesianos. Nesta seção conduz-se uma revisão
+literária deste tipo de análise, empregada atualmente neste campo da física.
 
-%Perfil:
-
-%\begin{itemize}
-%\item Entre 10-15 páginas máximo;
-%\item[OK] Bruce Demby escreveu um review completo na NIM;
-%\item[OK] Chrss Kiesling implementou RN no Trigger do H1, autor do processo de
-%relevância? 
-%\item Verificar publicações no CERN, Fermilab e Desy (\eng{via} SPIRES?);
-%\item Verificar publicações nos congressos (IEEE, ACAT, ISCAS, de 2000 para
-%cá); 
-%\item[OK] Redes Neurais e mapeamento topológico em calorimetria (Wisconsin);
-%\item Por alto como se fazia no LEP;
-%\item \textbf{Seixas}: coloque aqui outras idéias...
-%\end{itemize}
-
-Os primeiros sistemas de deteção baseados em redes neurais artificiais,
-aplicados à Física de altas energias, surgiram em 1987, na reconstrução de
-partículas carregadas e píons neutros \cite{denby-nim-1997}. Hoje em dia
-\cite{denby-nim-2004}, cerca de 20 anos passados, tais sistemas são empregados
-em praticamente todas as áreas neste campo, desde da concepção de detetores
-\cite{wilk-nim-2006}, filtragem e aquisição de dados
-\cite{denby-nim-2003, kohne-nim-1997, varela-cms-1998},
+Os primeiros sistemas de deteção baseados em análise neural, aplicados à
+Física de altas energias, surgiram em 1987, com o emprego de redes neurais
+artificiais na reconstrução de partículas carregadas e píons neutros
+\cite{denby-nim-1997}. Hoje em dia \cite{denby-nim-2004}, cerca de 20 anos
+passados, tais sistemas são empregados em praticamente todas as áreas neste
+campo, desde da concepção de detetores \cite{wilk-nim-2006}, filtragem e
+aquisição de dados \cite{denby-nim-2003, kohne-nim-1997, varela-cms-1998},
 passando pela reconstrução \eng{offline} \cite{peterson-nim-1988} e análise
-\cite{kiesling-nim-2004}. Nestes ambientes, o reconhecimento de padrões pode
-ocorrer tanto num plano mais elementar, onde deseja-se identificar os
-parâmetros de cada partícula que surge de uma reação sub-atômica, quanto num
-plano mais avançado, onde combina-se as informações detetadas para se tentar
-definir as características globais de um evento.
+\cite{kiesling-nim-2004, bhat-api-1995}. Nestes ambientes, o reconhecimento de
+padrões pode ocorrer tanto num plano mais elementar, onde deseja-se
+identificar os parâmetros de cada partícula que surge de uma reação
+sub-atômica, quanto num plano mais avançado, onde combina-se as informações
+detetadas para se tentar definir as características globais de um evento.
 
-\subsection{Redes neurais para análise e reconstrução \eng{offline}}
+\subsection{Métodos neurais para análise \eng{offline}}
 
-\subsection{Reconstrução de agrupamentos em calorímetros}
+Em análise, o objetivo de classificadores em Física de Altas Energias, é o de
+destacar o sinal de interesse, normalmente embebido em uma massa de eventos
+ordinários de proproções colossais. Em \cite{becks-acat-2001} encontra-se a
+descrição de um sistema nestas características: A produção de pares de bósons
+W pode ser observada através das colisões elétron-pósitron providas pelo LEP e
+detetadas no experimento DELPHI, no CERN. Os pares $W^+W^-$ decaem rapidamente
+em quarks segundo a equação $W^+W^- \rightarrow q\bar{q}q\bar{q}$. Os quarks,
+por sua vez, são detetados por decaimento em jatos com fortes componentes
+hadrôncias, pelos calorímetros do experimento.
+
+Este tipo de processo, característico das observações do DELPHI, estão imersos
+em uma massa de dados contendo outros tipos de evento que se assemelham à
+geração de pares W. Dentre eles, os mais importantes são $e^+e^- \rightarrow
+Z^0/\gamma^{*} \rightarrow q\bar{q}$ e $e^+e^- \rightarrow ZZ \rightarrow
+q\bar{q}q\bar{q}$, sendo o segundo tipo, bastante difícil de deteção, já que
+decai no mesmo tipo de fenômeno que o sistema que se deseja discriminar. Para
+executar esta separação, definiu-se quatro variáveis de interesse: a energia
+no centro de massa da reação detetada, o número de jatos encontrados, a
+quantidade de traços por jato e uma variável combinada que depende dos ângulos
+e energias entre os jatos detetatos. Estas quatro variáveis são submetidas a
+um processo de cortes sucessivos para que se elimine o maior número possível
+eventos-ruído, ainda que mantendo-se um máximo de eventos de interesse.
+
+Para melhorar a taxa de separação, utiliza-se uma rede neural com 13 entradas
+equivalentes às primitivas utilizadas para encontrar as 4 variáveis utilizadas
+para os cortes sucessivos. As 13 entradas são encaminhadas à uma rede neural,
+sem re-alimentação, com 7 neurônios escondidos e apenas um neurônio na camada
+de saída. O sistema é treinado com eventos simulados (\eng{Monte Carlo}) e,
+finalmente, empregado para a deteção de pares W. O resultado final mostra uma
+melhora significativa na deteção deste fenônemo, apontando para uma eficiência
+de 88,74\% contra 85,58\% do método anterior, para um falso-alarme cerca de
+15\% menor.
+
+Em \cite{tentindo-acat-2001}, sugere-se que utilização de redes neurais possa
+aumentar o potencial de descobrimento de bósons de Higgs no experimento D0,
+uma vez que possa aumentar a relação sinal/ruído observada. Neste caso,
+deseja-se observar bósons de Higgs através da reação $H(130 GeV) \rightarrow
+b\bar{b}$, que ocorre com a probabilidade de 85\%, sendo a assinatura
+dominante no contexto do Modelo Padrão atualmente aceito. Desta forma, é
+essencial um método eficiente de deteçao de quarks tipo \eng{bottom}. Neste
+caso, deseja diminuir a quantidade de eventos ruidosos tipo $p\bar{p}
+\rightarrow Wb\bar{b}$, que contaminam o sinal de interesse $p\bar{p}
+\rightarrow WH \rightarrow l \upsilon b\bar{b}$. 
+
+A idéia central deste trabalho é definir um sistema neural especializado nas
+assinaturas de interesse destacadas, que consiga reduzir a taxa de eventos
+ordinários maximamente, diminuindo, por sua vez, a luminosidade necessária
+para a deteção do Higgs. Isto se faz necessário pois o experimento D0
+encontra-se em uma posição limite para o estudo do bóson de Higgs. 
+
+Eventos simulados de bósons de Higgs com massa em 100, 120 e 130~GeV e eventos
+típicos do processo natural de contaminação foram utilizados para treinar um
+processador neural com 3 entradas, 6 neurônios escondidos e apenas um neurônio
+de saída. As três variáveis de entrada escolhidas foram a energia transversa
+de jatos rotulados como provenientes de decaimentos de quarks tipo
+\eng{bottom}, o número de traços associados a este jato e sua largura detetada
+nos calorímetros. Fixando-se um corte na saída da rede, obtém-se cerca de 65\%
+de eficiência na deteção de bósons de Higgs com 100~GeV, 74\% para Higgs a
+120~GeV e 58\% para aqueles com 130~GeV, para uma taxa de falso-alarme de
+24\%. Utilizando-se técnicas tradicionais, a eficiência máxima de deteção é de
+apenas 45\%, para a mesma taxa de falso-alarme.
+
+Ainda em outro trabalho \cite{dudko-acat-2001}, emprega-se redes neurais
+artificiais para a deteção de \eng{top} quarks no mesmo experimento. De forma
+semelhante ao trabalho anteriormente exposto, indentificam-se as assinaturas
+de interesse que contenham quarks deste tipo e sua contaminação natural. À
+partir destes eventos, define-se um conjunto de variáveis que contenham a
+informação de deteção necessária e aplica-se um treinamento à base da
+retro-propagação de erros para atingir uma melhor separação sinal de
+interesse/física ordinária. No caso específico deste trabalho, uma rede neural
+``especialista'' é dedicada a cada tipo de assinatura de interesse, de forma a
+maximizar o potencial discriminante com relação ao \textit{ruído} específico
+daquele canal. As eficiências finais de deteção do \eng{top} quark são
+baseadas nas eficiências acumuladas de cada rede especialista.
 
 \subsection{Redes neurais em sistemas de filtragem}
 
@@ -92,7 +155,7 @@ primeira camada de 96\% (contra 98\% de um sistema de \eng{fitting}
 que $5,7^{o}$ para 93\% (contra 97\% \eng{offline}) para os padrões de
 teste. O tempo total de processamento do sistema é de apenas 8~$\mu$s.
 
-O experimento H1, que utiliza o acelerador HERA no laboratório Desy em
+Já no experimento H1, que se utiliza do acelerador HERA no laboratório Desy em
 Hamburgo, Alemanha, estuda a distribuição do momento dos constituentes de
 prótons e mede a força de acoplamento do glúon aos diferentes quarks. Devido à
 interações tais como as que ocorrem entre o feixe e resíduos no tubo do
@@ -103,7 +166,7 @@ experimento utiliza um sistema de filtragem divido em 4 níveis. O primeiro
 nível de filtragem reduz a taxa de eventos em cerca de 100 vezes. Desta forma,
 o segundo nível de filtragem tem apenas cerca de 10~$\mu$s para tomar uma
 decisão. Este nível deve reduzir a taxa de eventos aproximadamente 10
-vezes. Uma rede neural foi utilizada para resolver este problema
+vezes. Uma rede neural também foi utilizada para resolver este problema
 \cite{kohne-nim-1997}. 
 
 No primeiro nível de filtragem, 16 variáveis são calculadas tais como a
@@ -112,7 +175,7 @@ outras. Este nível de filtragem ignora, no entanto, quaisquer relações entre
 estas variáveis. Cortes mais sofisticados podem ser executados no segundo
 nível adicionado-se à estas variáveis, outras quantidades que somente estão
 disponíveis após o tempo de decisão do primeiro nível e alimentando-se uma
-rede neural tipo MLP. 
+rede neural tipo MLP.
 
 As variáveis selecionadas (somas de energias, número de partículas com carga
 detetadas, etc.) são utilisadas para determinar se o evento em questão advem
@@ -167,13 +230,100 @@ jatos de 71\% para eventos com ruído de fundo equivalente a um ambiente
 simulado de alta luminosidade ($10^{34}\text{cm}^{-2}\text{s}^{-1}$) e 78\%,
 para um ambiente em baixa luminosidade ($10^{33}\text{cm}^{-2}\text{s}^{-1}$).
 
-\subsection{Tendências}
+Em \cite{chakraborty-acat-2001}, sugere-se a utilização de redes neurais
+artificiais para deteção de elétrons na parte central do detetor D0,
+Fermilab. Especificamente, para elétrons com massa superior a 10~GeV, que
+encontram-se normalmente embebidos em uma massa de jatos com fortes
+componentes eletromagnéticas. O conjunto de treinamento disponível consiste de
+cerca de 2.600 elétrons simulados, com energia entre 10 e 100~GeV e cerca de
+1600 jatos, com ao menos um dos dois jatos hadronizando em um estado final
+$\pi^0$, o que confundirá, provavelmente, o sistema de deteção. Um conjunto
+similar de eventos é usado para o teste do sistema.
 
-%Palavras-chave: pré-processamento, baixa latência, encapsulamento de ruído,
-%determinação de parâmetros, MLP
+Sete variáveis que determinam a penetração e largura do objeto observado nos
+calorímetros são abastecidas a um processador neural. Estas variáveis são, em
+sua maioria, valores energéticos, normalizadas pela energia total do
+agrupamento observado. O sistema de deteção neural é composto de 7 entradas,
+16 neurônios escondidos e apenas um neurônio de saída, treinado usando a
+técnica clássica de retro-propagação de erros. Para esta bancada, observa-se
+que para níveis aceitáveis de deteção do sinal, o sistema neural provê uma
+supressão de ruído de fundo 5 a 10 vezes melhor.
 
-%Describe stuff for ATLAS, like \cite{daq11}, \cite{daqnote00-02} and
-%\cite{abramowicz-nim-2004}. 
+A mesma técnica, segundo o artigo, pode ser empregada na deteção de léptons
+tau ($\tau$). Um novo conjunto de 9 variáveis de deteção é determinado,
+exaltando as características da partícula de interesse. As 9 variáveis são
+abstecidas a uma rede neural, treinada para reconhecer este tipo de partícula
+embebido em um ruído de fundo ocasionado mais uma vez por jatos com fortes
+componentes eletromagnéticas. O sistema neural possui 20 nós escondidos e
+apenas um neurônio na camada de saída, tal como o sistema de deteção para
+elétrons descrito. Após ser treinada, a rede mostra, para uma eficiência na
+deteção de \eng{taus} fixa, um nível de rejeição até 2 vezes melhor que o
+método atualmente empregado, baseado em uma análise de compoentes
+principais. Por utilizar uma rede neural, a implementação do sistema de
+deteção é trivial e poderia ser utilizado em substituição ao método atual
+empregado no experimento.
+
+\subsection{Análise multi-variável resumida}
+
+A análise neural vem sendo sugerida como interessante candidata à análise
+bayesiana ou à matriz de correlação (PCA) nos trabalhos revisados. Em muitos
+dos casos, os métodos empregados podem ser simplesmente substituídos pela
+análise neural. Em outros, observa-se uma tendência ao questionamento da
+qualidade das variáveis produzidas pela extração de características, onde o
+autor tenta explorar o espaço original, uma vez que dispõe ferramentas mais
+sofisticas que simples cortes uni ou bi-dimensionais para executar a
+seleção. As variáveis de interesse advém diretamente do detetor, calibradas ou
+a serem calibradas \cite{silva-acat-2001}, ou são definidas através de
+equações simples e normalizadas de acordo a parâmetros do objeto que se deseja
+discriminar.
+
+A análise multi-variável resolve um problema latente em Física de Altas
+Energias, inerente aos avanços na área de deteção e à explosão do tamanho dos
+eventos (veja a Figura~\ref{fig:eventsize}) e por conseqüência do número de
+variáveis que estão disponíveis para o discriminador. Duas fases podem ser bem
+definidas em todos os trabalhos nesta área, como está destacado na
+Figura~\ref{fig:basic-discriminator}:
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.5]{basic-discriminator}
+\end{center}
+\caption{Um sistema de deteção com uma entrada com alta dimensionalidade.}
+\label{fig:basic-discriminator}
+\end{figure}
+
+\begin{enumerate}
+\item A extração de características, onde deseja-se compactar a informação
+disponível para análise em um mínimo de variáveis que consigam extrair toda
+(ou na maior parte) a informação discriminante disponível no evento. Esta fase
+é normalmente essencial uma vez dispõe-se de milhares de variáveis disponíveis
+para cada evento, contando com os elementos de deteção providos pelo
+experimento até variáveis complexas que podem ser acessadas após a
+reconstrução como o número de jatos encontrados ou o ângulo de divergência
+entre léptons;
+\item Classificação ou hipótese, seguindo-se à compressão do espaço original
+de entrada representa a deteção da física de interesse. Observa-se uma
+tendência ao desenvolvimento dos sistemas utilizando-se dados de simulação
+acurados, onde possível, dados provenientes diretamente do detetor. É
+interessante perceber que sistemas desenvolvidos através de simulações ainda
+comportam-se de forma satisfatória ou adaptativa em seu emprego final, com
+dados reais.
+\end{enumerate}
+
+Os métodos propostos possuem maior robustez que sua contrapartida e podem ser
+executados de forma bastante rápida, em muitas instâncias sendo propostos para
+execução em \eng{hardware} especializado. Sistemas especialistas podem ser
+empregados em problemas mais complexos, onde deseja-se dedicar cada porção do
+detetor a uma atividade bem definida, combinando-se ao final as respostas de
+cada sub-sistema para obter um sistema de classificação com uma única saída.
+
+No que se segue deste capítulo, abordaremos sistemas de classificação
+multi-variável que substituem, inicialmente, o classificador autualmente
+empregado na discriminação elétron/jato para o Segundo Nível do Sistema de
+Filtragem do experimento ATLAS. Após estabelecermos os limites do processo de
+compressão estabelecidos pelo extrator de características T2Calo, tentar-se-á
+abordar a discriminação elétron/jato através de outras variáveis que possuam
+um poder discriminante maior que o sistema proposto atualmente no CERN.
 
 \section{Discriminação linear}
 \label{sec:lms}
@@ -181,7 +331,7 @@ para um ambiente em baixa luminosidade ($10^{33}\text{cm}^{-2}\text{s}^{-1}$).
 O discriminador de Fisher \cite{fisher} ou a Análise de Discriminação Linear
 descrevem algoritmos bem definidos para que se maximize a capacidade
 discriminante de um corte no plano com N dimensões, que separa duas classes de
-amostras \cite{duda}. Esta técnica requer que determinadas características nas
+dados \cite{duda}. Esta técnica requer que determinadas características nas
 amostras estejam presentes, entre elas, que os dados apresentem uma
 distribuição gaussiana e que as matrizes de covariância para ambas as classes
 em separado sejam idênticas\footnote{A Análise de Discriminação Quadrática, no
@@ -2080,7 +2230,7 @@ de entrada ao sistema de deteção neural.}
 A informação de relevância estudada até aqui pode ser aproveitada para que
 aplique-se sobre as entradas do discriminador neural, uma poda baseada na
 capacidade discriminante de uma variável. Esta poda pode ser feita
-automaticamente \cite{andre-enfpc2000} em muitos casos, ou manualmente se
+automaticamente \cite{aa:enfpc-00} em muitos casos, ou manualmente se
 existirem restrições no processo de poda.
 
 De fato, a técnica de normalização seqüêncial dos anéis que é proposta nesta
