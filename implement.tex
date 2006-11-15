@@ -38,6 +38,9 @@ também desconsideram a execução do algoritmo de hipótese EGammaHypo. Assume-
 no entanto, que seja desprezível, dado sua simplicidade.
 
 \begin{table}
+\caption{Tempo de processamento médio das diversas fases do algoritmo T2Calo
+em uma máquina com processadores Intel Xeon de 2,4 GHz e 1~Gb de memória RAM.}
+\label{tab:t2calo-performance}
 \begin{center}
 \begin{tabular}{|l|r|r|r|} \hline
 \textbf{Fase} & \textbf{Calib. e Localização} & 
@@ -49,9 +52,6 @@ $\ethad$ & 0,59 & 0,33 & 0,92 \\ \hline
 \textbf{Total} & \textbf{2,08} & \textbf{1,56} & \textbf{3,64} \\ \hline
 \end{tabular}
 \end{center}
-\caption{Tempo de processamento médio das diversas fases do algoritmo T2Calo
-em uma máquina com processadores Intel Xeon de 2,4 GHz e 1~Gb de memória RAM.}
-\label{tab:t2calo-performance}
 \end{table}
 
 Tomando-se por base que um sistema baseado no anelamento e deteção neural terá
@@ -92,6 +92,9 @@ ainda é usada como referência em muitos trabalhos, sendo este o caso das
 medidas do T2Calo apresentadas acima.
 
 \begin{table}
+\caption{Configurações das máquinas utilizadas para o teste de desempenho do
+\eng{NeuralRinger}.}
+\label{tab:machine-comparison}
 \begin{center}
 \begin{tabular}{|l|l|r|r|} \hline
 Processador & \eng{Clock} & \eng{Cache} de L2 & Memória RAM \\ \hline
@@ -100,9 +103,6 @@ AMD Opteron (275) & 2,2~GHz & 1~Mb & 4~Gb \\
 Intel Xeon & 2,4~GHz & 512~kb & 1~Gb \\ \hline
 \end{tabular}
 \end{center}
-\caption{Configurações das máquinas utilizadas para o teste de desempenho do
-\eng{NeuralRinger}.}
-\label{tab:machine-comparison}
 \end{table}
 
 Estas máquinas contém uma instalação completamente funcional do sistema

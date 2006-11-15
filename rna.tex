@@ -1,0 +1,254 @@
+%% Hello emacs, this is -*- latex -*-
+\typeout{ ====================================================================}
+\typeout{ This is file rna.tex, created at 14-Nov-2006 }
+\typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
+\typeout{ ====================================================================}
+
+\chapter{Introdução ao processamento neural}
+\label{ap:rna}
+
+A Figura~\ref{fig:neuron} contém uma modelagem de um neurônio
+genérico. Analogamente ao sistema LMS descrito na Seção~\ref{sec:lms}, os
+elementos processadores de uma rede neural, chamados neurônios ou percéptrons,
+são ativados por um conjunto de entradas $\overrightarrow{x}$, somadas de
+acordo com um sistema linear de ponderação $\overrightarrow{w}$. O diferencial
+entre o sistema linear proposto anteriormente e um neurônio está na função de
+ativação que conduz o campo induzido $v_p =
+\overrightarrow{x}*\overrightarrow{w}_{p}^{T}$ à saída. Enquanto que
+no caso do LMS utiliza-se a função identidade, i.e., $y_p = v_p$, no caso de
+percéptrons, faz-se uso de uma função não-linear, como por exemplo a função
+tangente hiperbólica:
+
+\begin{figure}
+\begin{center}
+\includegraphics{neuron}
+\end{center}
+\caption{Grafo de fluxo de sinal de um neurônio artificial.}
+\label{fig:neuron}
+\end{figure}
+
+\begin{equation}
+tanh(v) = \frac{e^v - e^{-v}}{e^v + e^{-v}} = \frac{e^{2v} - 1}{e^{2v} + 1}
+\label{eq:tanh}
+\end{equation}
+
+Ou a função logística (simplificada):
+
+\begin{equation}
+P(v) = \frac{1}{1 + e^{-v}}
+\label{eq:logf}
+\end{equation}
+
+A razão da escolha de uma função não-linear para a ativação de um campo
+induzido pode ser qualificado a partir da seguinte constatação: se sistema a
+que se deseja classificar aprensenta um comportamento gaussiano, para ambas as
+classes, i.e., os momentos de ordem superior a $2$ para ambas as classes são
+todos iguais a zero, o classificador ótimo (bayesiano) resume-se um sistema
+linear \cite{haykin}. Naturalmente nota-se que seja sempre possível
+\textit{aproximar} ou modelar um sistema não-gaussiano em um desta espécie,
+tendo por conseqüência os erros relativos a esta aproximação. De fato, foi o
+que foi realizado na Seção~\ref{sec:lms-ej}, quando escolhou-se utilizar um
+classificador linear para separar as quatro variáveis definidas pelo T2Calo.
+
+Se o sistema que se deseja resolver apresenta um comportamento não-gaussiano,
+o classificador ótimo não pode ser representando por um classificador
+linear. Neste caso, utiliza-se uma função de ativação não-linear para que se
+aproxime, de alguma forma, o comportamento não-linear do sistema de interesse.
+As funções nas Equações~(\ref{eq:tanh}) e (\ref{eq:logf}) são normalmente
+utilizadas por apresentarem amplitude limitada e possuírem derivada
+trivialmente calculável. A razão de procurar-se funções com derivadas simples
+(e suaves) ficará mais clara adiante, quando se definir o algoritmo de
+treinamento. A amplitude limitada pode rapidamente ser verificada como uma
+característica de interesse observando-se que o treinamento de um sistema que
+trabalha por aprendizado seja muitas vezes executado com a retro-alimentação
+de erros. Neste caso, para evitar oscilações e pontos de ressonância, um
+sistema cuja a saída seja limitada apresenta natural vantagem se comparado a
+outro análogo \cite{haykin}.
+
+Este estudo está focado na utilização de RNA's utilizando percéptrons em
+múltiplas camadas (do inglês \eng{Multi-layer perceptrons} ou MLP),
+completamente conectadas, sem realimentação e com treinamento baseado na
+retropropagação de erros. Introduziremos o processo de treinamento destes
+sistemas à seguir.
+
+\section{Treinamento por retro-propagação de erros}
+
+Para sistemas com apenas uma camada neural, observa-se que, ao buscar-se o
+ponto de mínimo da superfície de erro (quadrático), naturalmente otimiza-se o
+conjunto de pesos de tal forma que o sistema consiga mapear a entrada nos
+alvos de saída. A única restrição do método é que a função de ativação do
+campo induzido do neurônio $\varphi(\cdot)$ seja diferenciável.
+\cite{rosenblatt}. O problema do treinamento de uma rede MLP é um pouco mais
+complexo. Um grafo de fluxo de uma rede MLP completamente conectada pode ser
+visto na Figura~\ref{fig:simple-mlp}. Neste caso considera-se que a rede
+possui apenas uma camada escondida e apenas um neurônio de saída pois se
+identifica intimamente com os casos de uso que abordaremos. Ainda sim, seria
+possível considerar casos com um número maior de neurônios de saída ou com
+mais camadas escondidas generalizando os casos exemplificados aqui.
+
+\begin{figure}
+\begin{center}
+\includegraphics{simple-mlp}
+\end{center}
+\caption{Modelagem de uma rede MLP, totalmente conectada e sem
+retro-propagação de sinal.}
+\label{fig:simple-mlp}
+\end{figure}
+
+Para o sistema em questão, o mecanismo de treinamento para o neurônio de saída
+é idêntico ao treinamento de um percéptron simples, e pode ser facilmente
+definido da seguinte forma:
+
+\begin{align}
+\text{Se define-se o erro como } \mathcal{E}(n) &= \frac{1}{2}e_{k}^{2}(n)
+\label{eq:error-def} \\
+\text{e considerando-se que } \frac{\partial\mathcal{E}(n)}{\partial
+w_{jk}(n)} &= \frac{\partial\mathcal{E}(n)}{\partial e_k(n)} \frac{\partial
+e_k(n)}{\partial y_k(n)} \frac{\partial y_k(n)}{\partial v_k(n)}
+\frac{\partial v_k(n)}{\partial w_{jk}(n)} \label{eq:partials} \\
+\text{ou seja, } \frac{\partial\mathcal{E}(n)}{\partial
+w_{jk}(n)} &= e_k(n)(-1)\varphi_{k}'(v_{k}(n))y_{k}(n)
+\label{eq:partials-solution} \\
+\text{e, resumindo, } \Delta w_{jk}(n) &=
+-\eta\frac{\partial\mathcal{E}(n)}{\partial w_{jk}(n)} = \eta
+e_{k}(n)\varphi_{k}'(v_{k}(n))y_{k}(n)
+\end{align}
+
+Normalmente, define-se:
+
+\begin{align}
+\text{Gradiente local: } \delta_k(n) &= - e_k(n)\varphi_{k}'(v_k(n)) \\
+\text{e desta forma } \Delta w_{jk}(n) &= \eta\delta_k(n)y_{k}(n)
+\label{eq:neural-train}
+\end{align}
+
+Este sistema de equações segue o princípio definido anteriormente para o LMS,
+mas sem assumir nada sobre a função de ativação $\varphi(\cdot)$. Nota-se que
+para uma função de ativação onde $y_k(n) = v_k(n)$, recai-se no algoritmo de
+treinamento do LMS: $\Delta w_{jk}(n) = \eta e_{j}(n)y_{j}(n)$. Desta forma, é
+possível considerar o LMS como um caso especial de uma rede neural com apenas
+uma camada e cuja a função de ativação é a função identidade. Nestas equações,
+$n$ representa a época ou batelada de treinamento.
+
+O segundo caso de interesse acontece quando o neurônio $j$ está localizado em
+uma camada oculta da rede. Neste caso, não existe uma resposta desejada (alvo)
+específica para aquele neurônio. Desta forma, tentar-se-á definir o sinal de
+erro de um neurônio escondido recursivamente, através da retro-propagação do
+erro na saída final da rede em direção ao neurônio desejado. Iniciamos,
+intuitivamente, com a definição do gradiente local do neurônio escondido $j$:
+
+\begin{equation}
+\delta_j(n) = -\frac{\partial\mathcal{E}(n)}{\partial
+v_j(n)} = -\frac{\partial\mathcal{E}(n)}{\partial
+y_j(n)}\frac{\partial y_j(n)}{\partial v_j(n)} =
+-\frac{\partial\mathcal{E}(n)}{\partial y_j(n)}\varphi_{j}'(v_j(n))
+\end{equation}
+
+Tendo em conta, que para o caso específico em análise:
+
+\begin{align}
+\mathcal{E}(n) &= \frac{1}{2}e_{k}^{2}(n) \\
+\text{conclui-se que } \frac{\partial\mathcal{E}(n)}{\partial y_j(n)} &=
+e_{k}\frac{\partial e_k(n)}{\partial y_j(n)} = e_{k}\frac{\partial
+e_k(n)}{\partial v_k(n)}\frac{\partial v_k(n)}{\partial y_j(n)}
+\end{align}
+
+A primeira derivada parcial, $\partial e_k(n)/\partial v_k(n)$, já foi
+calculada para o caso do neurônio de saída, na passagem da
+Equação~(\ref{eq:partials}) para a
+Equação~(\ref{eq:partials-solution}). Utiliza-se a mesma analogia aqui. Para o
+cálculo da segunda derivada parcial, pela Figura~\ref{fig:simple-mlp}
+deduz-se que:
+
+\begin{align}
+v_k(n) &= \sum_{j} w_{jk}(n)y_j(n) \\
+\text{e, portanto: } \frac{\partial v_k(n)}{\partial y_j(n)} &= w_{jk}(n)
+\end{align}
+
+Assim sendo, o gradiente local do neurônio escondido $j$ assim se define:
+
+\begin{equation}
+\delta_j(n) = \varphi_{j}'(v_j(n))\delta_k(n)w_{jk}(n)
+\label{eq:local-gradient-hidden}
+\end{equation}
+
+Substituindo $\delta_j(n)$ na Equação~(\ref{eq:neural-train}), chega-se a
+fórmula de treinamento do neurônio escondido. No caso onde há muitas saídas na
+rede, a Equação~(\ref{eq:local-gradient-hidden}) é trivialmente redefinida da
+seguinte forma: 
+
+\begin{equation}
+\delta_j(n) = \varphi_{j}'(v_j(n))\sum_{k}\delta_k(n)w_{jk}(n)
+\label{eq:local-gradient-hidden-multi}
+\end{equation}
+
+No caso em que existem múltiplas camadas escondidas, propaga-se recursivamente
+o erro em direção à camada de entrada, aplicando-se a
+Equação~(\ref{eq:local-gradient-hidden-multi}). 
+
+\subsection{Funções de ativação} 
+
+A função de ativação $\varphi(\cdot)$ deve ser diferenciável em toda a
+extensão do domínio de interesse. No entanto, para simplificar o cálculo
+computacional dos gradientes locais, é habitual a escolha de funções que
+possuam um cálculo trival de suas derivadas. Como exemplo, foram citadas as
+funções tangente hiperbólica (Equação~\ref{eq:tanh}) e a função logística
+simplificada (Equação~\ref{eq:logf}). No caso da função logística:
+
+\begin{align}
+\varphi(z) &= \frac{1}{1 + e^{-z}} \\
+\text{Daí } \varphi'(z) &= \frac{e^{-z}}{[1+e^{-z}]^2}
+\end{align}
+
+Levando-se em consideração que para um neurônio genérico $y =
+\varphi(v)$. Então:
+
+\begin{equation}
+\varphi'(v) = \frac{e^{-v}}{[1+e^{-v}]^2} = \frac{1+e^{-v}}{[1+e^{-v}]^2} -
+\frac{1}{[1+e^{-v}]^2} = \varphi(v)[1 - \varphi(v)] = y(1-y)
+\end{equation}
+
+No caso da tangente hiperbólica, equivalentemente:
+
+\begin{align}
+\varphi(z) &= \tanh(z) \\
+\varphi'(z) &= \text(sech)^2(z) = 1 - \tanh^2(z) \\
+\varphi'(v(n)) &= 1 - \varphi^2(z) = 1-y^2(n)
+\end{align}
+
+Estas duas funções de ativação permitem um cálculo absolutamente trivial do
+gradiente local e por esta razão são computacionalmente bastante
+eficientes. No decorrer deste estudo utilizaremos a função tangente
+hiperbólica com função de ativação dos percéptrons das redes estudadas.
+
+\subsection{Convergência}
+
+O algoritmo de retropropagação usa uma estimativa instantânea do gradiente da
+superfície de erro no espaço dos pesos. Por esta razão, este sistema possui
+uma inerente natureza estocástica e tende a oscilar ao redor da direção de
+convergência ótima, ao mínimo da função de erro. Isso acontece pois é difícil
+antever se inclinações demasiado bruscas ou suaves em uma das direções da
+superfície de erro não influenciarão excessivamente o deslocamento do
+sistema. Muitas vezes, a utilização de um amortecimento (ou \emph{momento})
+durante o treinamento pode melhorar a resposta do sistema. Utiliza-se esta
+técnica para suavizar a migração das redes em direção ao mínimo da superfície
+de erro. Outra técnica é a normalização dos dados de entrada da rede, de forma
+que se evite que a diferença de magnitude e variabilidade das componentes de
+entrada cause tendências no treinamento neural.
+
+Um problema recorrente no treinamento de redes neurais são mínimos locais, que
+podem fazer com que o sistema fique ``preso'' em uma região que não represente
+o mínimo global da superfície de erro. Esta característica não é somente mais
+uma conseqüência da utilização da estimativa instantânea para definir a
+direção de movimentação dos pesos, mas muitas vezes ocorre por dispor-se de
+uma quantidade limitada de eventos que representem o fenômeno que se deseja
+mapear.
+
+Para que se assegure de que o sistema convirja sempre a um patamar equivalente
+de mínimo, deve se realizar um número de experimentos com os mesmos parâmetros
+de treinamento e teste para todos os casos de estudo. Em cada teste
+inicializa-se os pesos sinápticos a partir de um ponto diferente da superfície
+de erro. Desta forma, será possível detetar e avaliar se o problema em estudo
+estará sujeito a mínimos locais.
+
+\typeout{ *************** End of file rna.tex *************** }

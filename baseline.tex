@@ -21,16 +21,17 @@ também, normalmente, do eixo de dispersão das partículas de interesse.
 Algoritmos de dete\-ção são normalmente concebidos por especialistas em
 Calorimetria que compreendam os diferentes perfis de intera\-ção para a
 Fí\-sica de interesse. O primeiro passo é definir um processo de redu\-ção de
-dimensionalidade, de acordo com a velocidade requerida na deteção. Quanto
-menor o tempo disponível à deteção, maior a compressão a ser realizada de
-forma a simplificar este processo. Este pré-processamento para a compressão
-dos dados ou Extração de Características (do inglês, \eng{Feature Extraction}
-ou FEx) é, em geral, feito com perda de informação do perfil de deposição, mas
-de forma a manter as principais características do objeto que se deseja
-detetar. Em seguida, tendo por base simulações ou dados reais da física de
-interesse, define-se um conjunto de cortes por métodos com conhecimento da
-informação \eng{a priori} que maximizem a probabilidade de deteção das
-partículas interessantes.
+dimensionalidade, de acordo com os processos que se deseja detetar, ainda que
+levando-se em considerção velocidade requerida na deteção. Quanto menor o
+tempo disponível à deteção, maior a compressão a ser realizada de forma a
+simplificar este processo. Este pré-processamento para a compressão dos dados
+ou Extração de Características (do inglês, \eng{Feature Extraction} ou FEx) é,
+em geral, feito com perda de informação do perfil de deposição, mas de forma a
+manter as principais características do objeto que se deseja detetar. Em
+seguida, tendo por base simulações ou dados reais da física de interesse,
+define-se um conjunto de cortes por métodos com conhecimento da informação
+\eng{a priori} que maximizem a probabilidade de deteção das partículas
+interessantes.
 
 O Sistema de Filtragem \eng{online} do experimento ATLAS deverá prover uma
 seleção de eventos muito eficiente e desprovida de tendências, mantendo o
@@ -44,27 +45,41 @@ dos recursos computacionais disponíveis.
 
 Para trazer uma eficiência compatível com este árduo ambiente, o Sistema de
 Filtragem fará uso de um enfoque baseado na \textbf{inclusão} para a seleção
-\eng{online}, garantindo assim um conjunto de
-\eng{triggers} ótimo para a nova Física. O critério da inclusão tem por
-objetivo selecionar um conjunto de fenômenos físicos baseados no ``mínimo
-denominador comum'' entre eles, que ainda seja claramente distinguível dentro
-do ruidoso ambiente produzido pelo acelerador. Com este objetivo, o Sistema de
-Filtragem estará sendo disparado para eventos que contenham assinaturas
-baseadas em objetos simples ou duplos com alto valor de momento
-transverso. Neste contexto, ``objetos com alto valor de momento transverso''
-são, entre outros, \eng{leptons} com carga e com momento transverso acima de
-$\sim$10 GeV \cite{hlt-tdr}.
+\eng{online}, garantindo assim um conjunto de \eng{triggers} ótimo para a nova
+Física. O critério da inclusão tem por objetivo selecionar um conjunto de
+fenômenos físicos baseados no ``mínimo denominador comum'' entre eles, que
+ainda seja claramente distinguível dentro do ruidoso ambiente produzido pelo
+acelerador. Com este objetivo, o Sistema de Filtragem estará sendo disparado
+para eventos que contenham assinaturas baseadas em objetos simples ou duplos
+com alto valor de momento transverso. Neste contexto, ``objetos com alto valor
+de momento transverso'' são, entre outros, \eng{leptons} com carga e com
+momento transverso acima de $\sim$10 GeV \cite{hlt-tdr}.
+
+Neste capítulo, fazemos uma análise do processo de filtragem de elétrons a ser
+conduzido no Sistema de Filtragem do experimento ATLAS. Como em muitos outros
+experimentos em Física de Altas Energias \cite{abolins-calor-2000,
+monteiro-calor-1999}, este sistema é seccionado em níveis que realizam o
+processo de filtragem em passos com complexidade e tempo de execução
+crescentes. O primeiro dos níveis é normalmente implementado em
+\eng{hardware}, para atender as demandas de tempo do feixe, enquanto que os
+demais em \eng{software}, maximizando a flexbilidade. Em particular, atenção
+será dada à definição do funcionamento do Primeiro e Nível de Filtragem (LVL1)
+com relação a deteção de elétrons e, por seguinte, o sistema desenvolvido
+atualmente para o LVL2. Finalmente, uma caracterização dos dados disponíveis
+segundo as premiças desenvolvidas neste capítulo é estabelecida como base de
+comparação ao restando do trabalho.
 
 \section{Objetos de interesse e RoI's}
 
-Foi visto no Capítulo~\ref{chap:trigger} que o LVL1 define, para objetos
-encontrados seja nos Calorímetros ou nos Detetores de Múons, regiões de
-interesse onde objetos relevantes tenham sido observados. Para cada objeto
-interessante, a região aproximada de interação do objeto com o detetor é
-anotada e repassada aos demais níveis de filtragem, no caso da aprovação do
-evento pelo LVL1. Este processo define as Regiões de Interesse ou RoI's (do
-inglês \eng{Regions of Interest}), que guiarão o processo de seleção nos Altos
-Níveis de Filtragem (do inglês, \eng{High-Level Triggers} ou HLT).
+Foi visto no Capítulo~\ref{chap:trigger} que o Primeiro Nível de Filtragem do
+ATLAS define, para objetos encontrados seja nos Calorímetros ou nos Detetores
+de Múons, regiões de interesse onde objetos relevantes tenham sido
+observados. Para cada objeto interessante, a região aproximada de interação do
+objeto com o detetor é anotada e repassada aos demais níveis de filtragem, no
+caso da aprovação do evento pelo LVL1. Este processo define as Regiões de
+Interesse ou RoI's (do inglês \eng{Regions of Interest}), que guiarão o
+processo de seleção nos Altos Níveis de Filtragem (do inglês, \eng{High-Level
+Triggers} ou HLT).
 
 De fato, dadas as condições do feixe provido pelo LHC, múltiplos objetos
 poderão ser detetados a cada evento. Porém, quando um ou mais objetos
@@ -91,6 +106,10 @@ nesta tabela sofrerá alterações tendo em vista a mudança na probabilidade de
 ocorrência de fenômenos mais raros.
 
 \begin{table}
+\caption{Taxas de saídas para as assinaturas reconhecidas pelo LVL1,
+para a luminosidade de pico inicial de $2\times10^{33}cm^{-2}s^{-1}$. Dados
+baseados em uma simulação do LVL1.}
+\label{tab:l1-rates}
 \begin{center}
 \begin{sideways}
 \begin{tabular}{|l|l|r|}
@@ -115,10 +134,6 @@ Total & -- & $\sim$25 \\ \hline
 \end{tabular}
 \end{sideways}
 \end{center}
-\caption{Taxas de saídas para as assinaturas reconhecidas pelo LVL1,
-para a luminosidade de pico inicial de $2\times10^{33}cm^{-2}s^{-1}$. Dados
-baseados em uma simulação do LVL1.}
-\label{tab:l1-rates}
 \end{table}
 
 Nota-se que, aproximadamente 16 dos 25 kHz (i.e. $\sim$65\% das assinaturas)
@@ -221,13 +236,25 @@ reconstrução.
 \section{Deteção de elétrons baseada em calorimetria}
 \label{sec:e-detection}
 
-O \eng{trigger} de elétrons ou fótons conterá forte contaminação de jatos com
-poucas componentes hadrônicas, difícil de deteção observando-se a
-granularidade disponível no LVL1. Somente no LVL2, o Sistema de Filtragem,
-disporá do tempo e da completa granularidade do detetor para executar uma
-seleção mais criteriosa. Estima-se em \cite{daqnote00-02}, que a cada 25.000
-objetos do tipo e.m., aprovados pelo LVL1, apenas 1 será um elétron ou fóton
-verdadeiro. 
+O \eng{trigger} de elétrons ou fótons para o ATLAS conterá forte contaminação
+de jatos com componentes hadrônicas (tipo descrito na Física Quântica
+Cromo-dinâmica, do inglês Quantum Chromodynamics ou QCD), que formam o ruído
+de fundo na deteção de elétrons \cite{nevski-calor-1992}. Estima-se que o
+ruído de contaminação original esteja na ordem de $10^6$. O LVL1 do ATLAS poderá
+excluir grande parte dos jatos QCD, se as conversões hadrônicas forem
+importantes neste objeto, e apenas observando a quantidade de energia
+hadrônica depositada na seção de mesmo nome dos calorímetros, mas terá pouca
+eficiência em conversões com menos componentes hadrônicas. Estima-se em
+\cite{daqnote00-02}, que a cada 25.000 objetos do tipo e.m., aprovados pelo
+LVL1, apenas 1 será um elétron ou fóton verdadeiro. Somente no LVL2, o Sistema
+de Filtragem, disporá do tempo e da completa granularidade do detetor para
+executar uma seleção mais criteriosa, refinando a decisão obtida no LVL1
+\cite{hlt-tdr} (mas originalmente discutida em \cite{ellis-calor-1992}). O
+algoritmo de calorimetria também refina a posição do objeto originalmente
+determinada pelo LVL1, de forma que algoritmos de deteção de traços,
+reconhecidamente menos eficientes, possam reduzir sua área de procura. Por
+estas razões, a correta identificação de elétrons é de suma importância para o
+experimento.
 
 A Figura~\ref{fig:e-shower} mostra a interação de um elétron com um detetor de
 traços (\eng{Cloud Chambers}) e absorvedores de chumbo. Nesta figura, é
@@ -267,10 +294,10 @@ elevada (O(100)-O(1000)), para um conjunto pequeno (O(10)) de variáveis que
 possam ser analisadas mais facilmente.
 
 A questão da dimensionalidade da entrada está intimamente correlacionada com a
-capacidade discriminatória do calorímetro. Quanto mais granular, maior precisão
-pode ser obtida na definição de pontos de impacto e deteção de partículas. O
-revés é o custo - detetores multi-segmentados são mais difíceis e caros de
-serem construídos.
+capacidade discriminatória do calorímetro. Quanto mais granular, maior
+precisão pode ser obtida na definição de pontos de impacto e deteção de
+partículas. O revés é o custo - detetores multi-segmentados são mais difíceis
+e custosos de serem construídos.
 
 No caso do experimento ATLAS (veja a Seção~\ref{sec:atlas-calo} para mais
 detalhes), os calorímetros são segmentados em diversas camadas, e, camada a
@@ -318,10 +345,11 @@ energia total para elétrons (topo) e jatos (baixo).}
 \end{figure}
 
 Em seguida, aplica-se a discriminação da física de interesse. Tipicamente
-\cite{hlt-tdr, zeus-neural}, a deteção é realizada por meio da definição de 
-patamares de separação (também ditos \emph{cortes}) com informação \emph{a
-priori}. Este trabalho é normalmente realizado por um físico experiente, de
-acordo com os canais físicos de maior interesse para o experimento.
+\cite{nevski-calor-1992, guida-calor-1992, palutan-calor-2000}, a deteção é
+realizada por meio da definição de patamares de separação (também ditos
+\emph{cortes}) com informação \emph{a priori}. Este trabalho é normalmente
+realizado por um físico experiente, de acordo com os canais físicos de maior
+interesse para o experimento.
 
 %É importante salientar que o melhor classificador baseado em cortes com
 %informação \emph{a priori} também pode ser atingido iterativamente através de
@@ -889,17 +917,20 @@ parciais entre cada operação de corte. Estes valores podem ser vistos na
 Tabela~\ref{tab:eghypo-partials}. Como é possível avaliar, a partir desta
 tabela, as variáveis \rcore e \eratio são as mais discriminatórias, deixando
 passar apenas cerca de 30 \% e 45 \% dos jatos avaliados, respectivamente. O
-corte em \etem não reduz a taxa de eventos, sendo praticamente irrelevante ao
-processo de discriminação. Este comportamento é esperado para a massa de dados
-sendo avaliada, uma vez que os jatos disponíveis tem energia fixa em 25 GeV e
-que elétrons estão espalhados no espectro de energia. O vazamento de energia
-na seção hadrônica (último corte), ainda conseguirá diminuir a taxa de
+corte em \etem não reduz a taxa de eventos, sendo praticamente irrelevante a
+este processo de discriminação. Este comportamento é esperado para a massa de
+dados sendo avaliada, uma vez que os jatos disponíveis tem energia fixa em 25
+GeV e que elétrons estão espalhados no espectro de energia. O vazamento de
+energia na seção hadrônica (último corte), ainda conseguirá diminuir a taxa de
 falso-alarme na saída do detetor.
 
 %% COMENTÁRIO: SERIA BOM DIZER PORQUE O CORTE EM EM_ET NÃO É TÃO RELEVANTE...
 %% IDÉIAS: ALTA CORRELAÇÃO COM RCORE E ERATIO => PCA?
 
 \begin{table}
+\caption{Valores parciais de deteção e falso-alarme para o detetor baseado no
+algoritmo EGammaHypo.}
+\label{tab:eghypo-partials}
 \begin{center}
 \begin{tabular}{|l|l|r|r|}
 \hline
@@ -911,9 +942,6 @@ falso-alarme na saída do detetor.
 4 & \ethad & 91.8 & 77.4 \\ \hline
 \end{tabular}
 \end{center}
-\caption{Valores parciais de deteção e falso-alarme para o detetor baseado no
-algoritmo EGammaHypo.}
-\label{tab:eghypo-partials}
 \end{table}
 
 As Figuras~\ref{fig:eghypo-eta-scan-test}, \ref{fig:eghypo-phi-scan-test} e
