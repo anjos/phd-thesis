@@ -34,7 +34,7 @@ passados, tais sistemas são empregados em praticamente todas as áreas neste
 campo, desde da concepção de detetores \cite{wilk-nim-2006}, filtragem e
 aquisição de dados \cite{denby-nim-2003, kohne-nim-1997, varela-cms-1998},
 passando pela reconstrução \eng{offline} \cite{peterson-nim-1988} e análise
-\cite{kiesling-nim-2004, bhat-api-1995}. Nestes ambientes, o reconhecimento de
+\cite{kiesling-nim-2004, bhat-aip-1995}. Nestes ambientes, o reconhecimento de
 padrões pode ocorrer tanto num plano mais elementar, onde deseja-se
 identificar os parâmetros de cada partícula que surge de uma reação
 sub-atômica, quanto num plano mais avançado, onde combina-se as informações
@@ -282,10 +282,9 @@ principais do agrupamento são abastecidos à um discriminador neural que
 realiza o papel de deteção
 
 Levando-se em consideração as possibilidades de segmentação da extração
-obteve-se 72,4\% de eficiência na deteção de elétrons contra 39\% de
+se obtém 72,4\% de eficiência na deteção de elétrons contra 39\% de
 falso-alarme para um sistema não segmentado e 98,9\% para apenas 1\% de
-falso-alarme preservando-se a informação de penetração longitudinal do
-objeto.
+falso-alarme preservando-se a informação de penetração longitudinal do objeto.
 
 \subsection{Análise multi-variável resumida}
 
@@ -346,144 +345,39 @@ detetor a uma atividade bem definida, combinando-se ao final as respostas de
 cada sub-sistema para obter um sistema de classificação com uma única saída.
 
 No que se segue deste capítulo, abordaremos sistemas de classificação
-multi-variável que substituem, inicialmente, o classificador autualmente
-empregado na discriminação elétron/jato para o Segundo Nível do Sistema de
-Filtragem do experimento ATLAS. Após estabelecermos os limites do processo de
-compressão estabelecidos pelo extrator de características T2Calo, tentar-se-á
-abordar a discriminação elétron/jato através de outras variáveis que possuam
-um poder discriminante maior que o sistema proposto atualmente no CERN.
+multi-variáveis que substituem, o classificador autualmente empregado na
+discriminação elétron/jato para o Segundo Nível do Sistema de Filtragem do
+experimento ATLAS, introduzindo técnicas automáticas de deteção. Após
+estabelecermos os limites do processo de compressão estabelecidos pelo
+extrator de características T2Calo, tentar-se-á abordar a discriminação
+elétron/jato através de outras variáveis que possuam um poder discriminante
+maior que o sistema proposto atualmente no CERN.
 
-\section{Discriminação linear}
-\label{sec:lms}
+\subsection{Discriminador de Fisher na separação e\-lé\-tron/jato}
+\label{sec:linear}
 
 O discriminador de Fisher \cite{fisher} ou a Análise de Discriminação Linear
-descreve algoritmo para que se maximize a capacidade discriminante de um corte
-num plano com N dimensões, que separa duas classes de dados. O resultado do
-discriminante é ótimo no caso dos dados apresentarem uma distribuição
+descreve um algoritmo para que se maximize a capacidade discriminante de um
+corte num plano com N dimensões, que separa duas classes de dados. O resultado
+do discriminante é ótimo no caso dos dados apresentarem uma distribuição
 gaussiana e que as matrizes de covariância, para ambas as classes em separado,
 sejam idênticas\footnote{A Análise de Discriminação Quadrática, no entanto,
 demonstra que esta característica pode ser relaxada considerando-se que seja
 sempre possível projetar, através de uma transformação linear, o espaço de
 entrada em um outro espaço onde as matrizes de covariância sejam iguais e
-portanto recaindo no caso simples.}. Muitas vezes, na prática, os valores de
-média e a covariância não estão disponíveis e devem ser estimados, o que
-normalmente leva a falhas no cálculo do ponto ótimo de discriminação. Dentre
-as técnicas de estimação da média e covariância, pode-se destacar a estimação
-por máxima verossimilhança ou por máximo a \textit{posteriori} \cite{duda}. O
-discriminante de Fisher maximiza, através de uma transformação linear, a
-distância entre as classes que se deseja detetar, ao mesmo tempo diminuindo a
-distância de elementos intra-classe.
-
-De posse dos valores de média e covariância das classes, o plano de separação
-seria definido da seguinte forma:
-
-\begin{equation}
-\overrightarrow{w} = \Sigma^{-1}(\overrightarrow{\mu}_0 -
-\overrightarrow{\mu}_1) 
-\label{eq:weight-1}
-\end{equation}
-
-O operador $\Sigma$ na Equação~(\ref{eq:weight-1}) representa a covariância ou
-\textit{variância cruzada} das observações do universo de entrada e $\mu$ as
-médias das duas classes de eventos que se deseja separar. Um problema que se
-segue é da inversibilidade de $\Sigma$, que dependerá de quão bem o conjunto
-de amostras representa as classes a serem discriminadas. Por exemplo, se
-$\Sigma$ possui combinações lineares dos dados disponíveis, o \eng{rank} desta
-matriz será inferior ao número de amostras e, portanto, a matriz não será
-inversível. Embora existam maneiras de superar o problema, é possível fazer
-uso de outras técnicas derivadas deste sistema primário para que se maximize a
-discriminação das classes de eventos dado um conjunto de amostras.
-
-Por causa das dificuldades discutidas, muitas técnicas iterativas surgiram
-para que seja possível a definição de um plano ótimo de separação linear à
-partir de amostras de dados reais. Dentre elas, o algoritmo do Mínimo Médio
-Quadrático \cite{widrow} (do inglês \eng{Least Mean Square} ou LMS) é um dos
-mais utilizados. Este método pode ser também implementado por meio de uma rede
-neural totalmente conectada e sem realimentação (veja Seção~\ref{sec:neural}
-para uma discussão mais detalhada), com as seguintes ressalvas:
-
-\begin{itemize}
-\item Há somente um neurônio conectando todas as entradas com a saída da rede;
-\item A função de ativação deste neurônio ($\phi(\dot)$) é a função identidade
-$f(x) = x$.
-\end{itemize}
-
-Para o treinamento, definem-se alvos para as duas classes de eventos e a
-função de erro:
-
-\begin{equation}
-E(\overrightarrow{w}) = \frac{1}{2} e^2(n)
-\label{eq:mse-definition}
-\end{equation}
-
-Nesta equação, $\overrightarrow{w}$ é o vetor de pesos que define o plano de
-separação linear e $e(n)$ é o erro na saída da rede com relação ao alvo para a
-classe escolhida na amostra $n$, ou seja $e(n) = d(n)-y(n)$ ($d(n)$ é o
-alvo). Desta forma, derivando-se esta função de erro com relação aos pesos
-sinápticos $\overrightarrow{w}$, mostra-se que o gradiente de $E$ será:
-
-\begin{equation}
-\frac{\partial E(\overrightarrow{w})}{\partial \overrightarrow{w}} =
--x(n)e(n) 
-\end{equation}
-
-Nesta equação, $x(n)$ representa a n-ésima entrada que leva o neurônio linear
-a uma saída $y(n)$. E, com este resultado, define-se a fórmula de treinamento
-do LMS:
-
-\begin{equation}
-\hat{w}(n+1) = \hat{w}(n) + \alpha x(n)e(n)
-\label{eq:lms}
-\end{equation}
-
-Nesta equação, $\alpha$ representa a taxa de aprendizagem, um parâmetro para a
-suavização da trajetória do treinamento no espaço da função de erro
-$E(\overrightarrow{w})$. A Equação~(\ref{eq:lms}) representa a fórmula
-clássica do treinamento de um classificador LMS, indicando um método
-bem-definido de atualização dos pesos da rede para que se convirja a um erro
-mínimo. Em implementações realísticas de um classificador LMS, é possível
-agrupar a correção dos pesos $\hat{w}$ em bateladas ou épocas de forma que se
-suavize a migração do sistema para o mínimo global. No treinamento em épocas,
-os pesos sinápticos são corrigidos tendo por base a média dos erros para todos
-os eventos de uma época, ao invés da atualização instantânea proposta pela
-Equação~(\ref{eq:lms}).
-
-Como é possível inspecionar diretamente na Equação~(\ref{eq:lms}), os pesos
-são atualizados segundo um produto interno dos erros multiplicados pelas
-respectivas entradas, uma época do treinamento. No caso de existirem grandes
-diferenças de magnitude entre as variáveis de entrada de um sistema LMS, é
-possível que o processo de treinamento se torne tendencioso em função destas
-variáveis \cite{haykin-adaptative}. Para eliminar o risco de tendência no
-treinamento devido a magnitude das componentes da entrada, é também prática
-que cada entrada seja subtraída da sua média e dividida pela sua variância.
-
-Finalmente, a Figura~\ref{fig:lms-flow} mostra o diagrama de blocos do
-discriminador LMS que será empregado neste estudo. O valor da saída $y$ é
-utilizado para definir a R.O.C. do discriminador e escolher, ao invés de
-quatro (como no caso do EGammaHypo), apenas um corte que maximize a capacidade
-discriminante do sistema. Alvos ($t$) para cada uma das classes são escolhidos
-e o sinal de erro é utilizado para corrigir os pesos sinápticos, até que o
-sistema convirja para o erro mínimo.
-
-\begin{figure}
-\begin{center}
-\includegraphics{lms-flow}
-\end{center}
-\caption{O diagrama de fluxo do discriminador LMS que será empregado na
-discriminação elétron-jato.}
-\label{fig:lms-flow}
-\end{figure}
-
-\subsection{Discriminador de Fisher na separação e\-lé\-tron/jato}
-\label{sec:lms-ej}
+portanto recaindo no caso simples.}. Em resumo, o discriminante de Fisher
+maximiza, através de uma transformação linear, a distância entre as classes
+que se deseja detetar, ao mesmo tempo diminuindo a distância de elementos
+intra-classe.
 
 Levando-se em consideração as 4 variáveis definidas pelo T2Calo, é possível
 encontrar o plano quadri-dimensional que defina um discriminador linear ótimo,
-usando-se o algoritmo LMS, como descrito anteriormente. A separação em classes
-de treinamento e teste, como apresentada na Seção~\ref{sec:eghypo}, será
-re-aproveitada aqui, para que seja possível a comparação dos resultados nos
-dois casos. O fluxo de informação deste novo sistema está apresentado na
-Figura~\ref{fig:t2calo-lms-block}. Nesta nova implementação do algoritmo de
+usando-se o algoritmo de retro-propagação resiliente de erros, como descrito
+no Apêndice~\ref{ap:rna}. A separação em classes de treinamento e teste, como
+apresentada na Seção~\ref{sec:eghypo}, será re-aproveitada aqui, para que seja
+possível a comparação dos resultados nos dois casos. O fluxo de informação
+deste novo sistema está apresentado na
+Figura~\ref{fig:t2calo-lms-block}. Nesta nova implementação do algoritmo de 
 filtragem, substitui-se o discriminador por cortes proposto originalmente, por
 um sistema simples de deteção multi-variável.
 
@@ -503,8 +397,8 @@ booch}. Este ambiente, que será re-utilizado em várias partes deste trabalho,
 Figura~\ref{fig:train-flow} contém um diagrama de fluxo com os diversos passos
 do sistema de treinamento implementando. Inicialmente, os bancos de dados
 usados para o treinamento e teste da rede são carregados. Os valores de média
-e variância experimentais, são extraídos do conjunto de treinamento e guardados
-juntos aos pesos $\hat{w}(n)$, para que sejam aplicados durante o
+e variância experimentais, são extraídos do conjunto de treinamento e
+guardados juntos aos pesos $\hat{w}(n)$, para que sejam aplicados durante o
 treinamento\footnote{De fato, seria mais eficiente que os fatores de
 normalização fossem aplicados previamente ao treinamento. No entanto, uma vez
 que deseja-se re-aproveitar a base de código para rodar o discriminador em uma
@@ -525,7 +419,7 @@ treinamento é salva e utilizada como o discriminador treinado.
 \begin{center}
 \includegraphics[scale=0.35]{train-flow}
 \end{center}
-\caption{O fluxo implementado para o treinamento do discriminador LMS.}
+\caption{O fluxo implementado para o treinamento do discriminador linear.}
 \label{fig:train-flow}
 \end{figure}
 
@@ -543,10 +437,10 @@ de evitar um treinamento excessivo da rede (do inglês \eng{overtraining})
 fazendo com que ela se especialize em demasiado nestes dados sem atingir uma
 capacidade de discriminação generalizada. O valor da variação do produto SP, a
 partir do qual considera-se que o sistema esteja estagnado, dependerá do
-problema. Valores típicos estão na ordem de $10^{-3}$, para este problema
-utilizou-se um valor igual a $0,0005$.
+problema. Valores típicos estão na ordem de $10^{-3}$, para o problema
+abordado utilizou-se um valor igual a $0,0001$.
 
-Para este trabalho, optou-se pela a não utilização de um conjunto de testes
+Neste trabalho, optou-se pela a não utilização de um conjunto de testes
 distinto do conjunto de validação. Este conjunto poderia ser utilizado para
 verificar a operação do sistema após o treinamento. No entanto, a física
 disponível para o estudo é limitada devido a natureza de geração de
@@ -569,164 +463,38 @@ analisados.
 %Por outro lado, a física simulada é representativa do tipo de partículas
 %que deseja-se analisar.
 
-\subsection{Resultados da aplicação do LMS na separação e\-lé\-tron-jato}
+\subsection{Resultados para um detetor linear aplicado à separação
+e\-lé\-tron-jato}
 
 Utilizando o sistema descrito anteriormente e a separação dos dados (em
 classes de treinamento e teste) proposta no início do estudo, realizou-se um
-conjunto de testes para a determinação de um discriminador linear ótimo
-baseado nas quatro variáveis extraídas pelo T2Calo. Dois parâmetros foram
-considerados neste exercício:
+conjunto de 5 testes para a verificação de que o mínimo tenha sido atingido
+durante o processo de treinamento. Em cada um dos cinco testes os pesos
+sinápticos são incializados aleatoriamente com um valor dentro do intervalo
+$[-1, +1]$. O tamanho da época é fixado em 22000 (duas vezes o número total de
+elétrons disponíveis para o treinamento), de forma que cada passo de
+treinamento represente a informação contida em toda a massa de dados
+disponível. Como variante do algoritmo de treinamento clássico
 
-\begin{itemize}
-\item O número de elementos na batelada ($N$);
-\item O valor da taxa de treinamento ($\alpha$).
-\end{itemize}
+Dependendo da inicialização, a convergência do sistema (estagnação detetada no
+conjunto de teste a partir do produto SP) poderá demorar de 50 a 70 passos
+para ser estabelecida pelo programa. O valor do EMQ na saída do detetor
+treinado é ligeiramente diferente para os 5 casos, variando entre $0,3818$ e
+$0,3825$. O valor do produto SP no final do treinamento está entre $1,477$ e
+$1,479$, também dependendo do ponto de parada.
 
-Embora seja possível assumir que o sistema convergirá em todas as condições,
-valores muito grandes para a taxa de treinamento (ou pequenos para a
-quantidade de eventos na batelada) poderão tornar o processo de convergência
-instável e disparar erros no sistema de parada automática do
-treinamento. Desta forma, conduziu-se um conjunto de testes para a
-determinação dos parâmetros de treinamento que acarretem em uma migração suave
-ao erro mínimo do discriminador, no menor tempo possível. Os resultados podem
-ser vistos nas Figuras~\ref{fig:lms-lr-analysis} e
-\ref{fig:lms-esize-analysis}. Cada ponto nos gráficos representa a média sobre
-dez treinamentos realizados a partir de um conjunto de pesos iniciais
-sorteados (uniformemente) aleatoriamente no intervalo $[-1, +1]$. O desvio
-padrão com relação à média define o tamanho da barra de erro. Durante o
-experimento, limitou-se o número máximo de passos de treinamento em
-$1.000$. Desta forma, pontos nas curvas próximos a este valor no eixo vertical
-indicam que o treinamento tenha sido provavelmente interrompido de forma
-brusca pelo programa, sem que, necessariamente, o mínimo tenha sido atingido.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.98]{lms/lms-lr-analysis}
-\end{center}
-\caption{Número de passos de treinamento médio para um detetor LMS baseado nas
-4 características extraídas pelo T2Calo, em função da taxa de treinamento.}
-\label{fig:lms-lr-analysis}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.98]{lms/lms-esize-analysis}
-\end{center}
-\caption{Número de passos de treinamento médio para um detetor LMS baseado nas
-4 características extraídas pelo T2Calo, em função do número de eventos por
-época de treinamento.}
-\label{fig:lms-esize-analysis}
-\end{figure}
-
-%\begin{table}
-%\caption{Média de passos de treinamento e máximos de produto SP em função da
-%taxa de aprendizagem e tamanho da época para um classificador LMS elétron/jato
-%baseado nas saídas do T2Calo.}
-%\label{tab:lms-scan}
-%\begin{center}
-%\renewcommand{\baselinestretch}{1.0}
-%{\tiny
-%\begin{tabular}{|r|r|r|r|r|r|} \hline
-%Taxa de treinamento ($\alpha$) & Época & Número de passos & Máximo SP (treino)
-%& Máximo SP (teste) \\ \hline \hline 
-%$0.0010$ & $10$ & $267\pm117.3$ & $1.5024\pm1.4\times 10^{-2}$ & $1.4975\pm1.7\times 10^{-2}$ \\ \hline
-%$0.0010$ & $50$ & $235\pm50.8$ & $1.5045\pm2.1\times 10^{-2}$ & $1.5021\pm2.2\times 10^{-2}$ \\ \hline
-%$0.0010$ & $100$ & $238\pm74.3$ & $1.5159\pm1.9\times 10^{-2}$ & $1.5114\pm1.6\times 10^{-2}$ \\ \hline
-%$0.0010$ & $200$ & $204\pm62.0$ & $1.5193\pm1.6\times 10^{-2}$ & $1.5159\pm1.7\times 10^{-2}$ \\ \hline
-%$0.0010$ & $500$ & $206\pm60.1$ & $1.5126\pm1.6\times 10^{-2}$ & $1.5078\pm1.7\times 10^{-2}$ \\ \hline
-%$0.0010$ & $1000$ & $214\pm61.2$ & $1.5073\pm1.8\times 10^{-2}$ & $1.4996\pm1.7\times 10^{-2}$ \\ \hline
-%$0.0010$ & $2000$ & $236\pm52.3$ & $1.5054\pm1.6\times 10^{-2}$ & $1.5009\pm1.4\times 10^{-2}$ \\ \hline
-%$0.0020$ & $10$ & $216\pm42.7$ & $1.5122\pm1.0\times 10^{-2}$ & $1.5068\pm1.1\times 10^{-2}$ \\ \hline
-%$0.0020$ & $50$ & $179\pm32.3$ & $1.5159\pm1.3\times 10^{-2}$ & $1.5129\pm1.1\times 10^{-2}$ \\ \hline
-%$0.0020$ & $100$ & $151\pm29.4$ & $1.5111\pm1.4\times 10^{-2}$ & $1.5095\pm1.4\times 10^{-2}$ \\ \hline
-%$0.0020$ & $200$ & $182\pm40.4$ & $1.5142\pm1.4\times 10^{-2}$ & $1.5088\pm1.6\times 10^{-2}$ \\ \hline
-%$0.0020$ & $500$ & $160\pm42.0$ & $1.5077\pm2.0\times 10^{-2}$ & $1.5060\pm2.1\times 10^{-2}$ \\ \hline
-%$0.0020$ & $1000$ & $165\pm34.2$ & $1.5089\pm1.7\times 10^{-2}$ & $1.5058\pm1.4\times 10^{-2}$ \\ \hline
-%$0.0020$ & $2000$ & $150\pm35.8$ & $1.5080\pm1.3\times 10^{-2}$ & $1.5037\pm1.1\times 10^{-2}$ \\ \hline
-%$0.0050$ & $10$ & $385\pm267.5$ & $1.5096\pm8.6\times 10^{-3}$ & $1.5053\pm7.6\times 10^{-3}$ \\ \hline
-%$0.0050$ & $50$ & $108\pm33.8$ & $1.5150\pm1.2\times 10^{-2}$ & $1.5113\pm9.0\times 10^{-3}$ \\ \hline
-%$0.0050$ & $100$ & $124\pm35.9$ & $1.5158\pm1.7\times 10^{-2}$ & $1.5096\pm1.5\times 10^{-2}$ \\ \hline
-%$0.0050$ & $200$ & $105\pm23.2$ & $1.5191\pm1.4\times 10^{-2}$ & $1.5154\pm1.4\times 10^{-2}$ \\ \hline
-%$0.0050$ & $500$ & $104\pm21.8$ & $1.5098\pm5.4\times 10^{-3}$ & $1.5066\pm6.3\times 10^{-3}$ \\ \hline
-%$0.0050$ & $1000$ & $119\pm66.2$ & $1.5125\pm8.8\times 10^{-3}$ & $1.5100\pm8.0\times 10^{-3}$ \\ \hline
-%$0.0050$ & $2000$ & $96\pm30.1$ & $1.5148\pm1.2\times 10^{-2}$ & $1.5123\pm1.2\times 10^{-2}$ \\ \hline
-%$0.0100$ & $10$ & $736\pm422.9$ & $1.5153\pm6.9\times 10^{-3}$ & $1.5103\pm6.9\times 10^{-3}$ \\ \hline
-%$0.0100$ & $50$ & $413\pm409.9$ & $1.5183\pm1.3\times 10^{-2}$ & $1.5140\pm1.1\times 10^{-2}$ \\ \hline
-%$0.0100$ & $100$ & $284\pm228.8$ & $1.5116\pm1.0\times 10^{-2}$ & $1.5067\pm5.8\times 10^{-3}$ \\ \hline
-%$0.0100$ & $200$ & $136\pm73.4$ & $1.5156\pm1.5\times 10^{-2}$ & $1.5124\pm1.5\times 10^{-2}$ \\ \hline
-%$0.0100$ & $500$ & $107\pm36.0$ & $1.5145\pm1.2\times 10^{-2}$ & $1.5086\pm1.1\times 10^{-2}$ \\ \hline
-%$0.0100$ & $1000$ & $121\pm46.1$ & $1.5122\pm1.5\times 10^{-2}$ & $1.5083\pm1.2\times 10^{-2}$ \\ \hline
-%$0.0100$ & $2000$ & $94\pm35.7$ & $1.5136\pm1.1\times 10^{-2}$ & $1.5086\pm8.9\times 10^{-3}$ \\ \hline
-%$0.0200$ & $10$ & $999\pm0.0$ & $1.5189\pm1.1\times 10^{-2}$ & $1.5130\pm1.1\times 10^{-2}$ \\ \hline
-%$0.0200$ & $50$ & $993\pm17.4$ & $1.5152\pm1.4\times 10^{-2}$ & $1.5108\pm1.4\times 10^{-2}$ \\ \hline
-%$0.0200$ & $100$ & $908\pm286.5$ & $1.5186\pm1.2\times 10^{-2}$ & $1.5156\pm1.2\times 10^{-2}$ \\ \hline
-%$0.0200$ & $200$ & $736\pm423.5$ & $1.5195\pm1.4\times 10^{-2}$ & $1.5132\pm1.3\times 10^{-2}$ \\ \hline
-%$0.0200$ & $500$ & $338\pm325.4$ & $1.5126\pm1.2\times 10^{-2}$ & $1.5097\pm1.2\times 10^{-2}$ \\ \hline
-%$0.0200$ & $1000$ & $135\pm129.9$ & $1.5173\pm1.1\times 10^{-2}$ & $1.5113\pm1.0\times 10^{-2}$ \\ \hline
-%$0.0200$ & $2000$ & $131\pm75.2$ & $1.5173\pm1.1\times 10^{-2}$ & $1.5128\pm1.2\times 10^{-2}$ \\ \hline
-%$0.0500$ & $10$ & $999\pm0.0$ & $1.5263\pm1.4\times 10^{-2}$ & $1.5188\pm1.3\times 10^{-2}$ \\ \hline
-%$0.0500$ & $50$ & $999\pm0.0$ & $1.5134\pm8.2\times 10^{-3}$ & $1.5117\pm9.3\times 10^{-3}$ \\ \hline
-%$0.0500$ & $100$ & $999\pm0.0$ & $1.5239\pm1.2\times 10^{-2}$ & $1.5206\pm1.2\times 10^{-2}$ \\ \hline
-%$0.0500$ & $200$ & $999\pm0.0$ & $1.5170\pm1.1\times 10^{-2}$ & $1.5113\pm1.1\times 10^{-2}$ \\ \hline
-%$0.0500$ & $500$ & $999\pm0.0$ & $1.5109\pm9.6\times 10^{-3}$ & $1.5057\pm7.8\times 10^{-3}$ \\ \hline
-%$0.0500$ & $1000$ & $999\pm0.0$ & $1.5154\pm1.1\times 10^{-2}$ & $1.5119\pm9.5\times 10^{-3}$ \\ \hline
-%$0.0500$ & $2000$ & $906\pm220.9$ & $1.5122\pm1.2\times 10^{-2}$ & $1.5087\pm1.4\times 10^{-2}$ \\ \hline
-%$0.1000$ & $10$ & $999\pm0.0$ & $1.5332\pm5.5\times 10^{-3}$ & $1.5246\pm8.4\times 10^{-3}$ \\ \hline
-%$0.1000$ & $50$ & $999\pm0.0$ & $1.5256\pm1.4\times 10^{-2}$ & $1.5177\pm1.2\times 10^{-2}$ \\ \hline
-%$0.1000$ & $100$ & $999\pm0.0$ & $1.5229\pm7.5\times 10^{-3}$ & $1.5143\pm4.9\times 10^{-3}$ \\ \hline
-%$0.1000$ & $200$ & $999\pm0.0$ & $1.5174\pm1.3\times 10^{-2}$ & $1.5101\pm1.1\times 10^{-2}$ \\ \hline
-%$0.1000$ & $500$ & $999\pm0.0$ & $1.5072\pm1.0\times 10^{-2}$ & $1.5023\pm7.2\times 10^{-3}$ \\ \hline
-%$0.1000$ & $1000$ & $999\pm0.0$ & $1.5188\pm1.2\times 10^{-2}$ & $1.5149\pm1.2\times 10^{-2}$ \\ \hline
-%$0.1000$ & $2000$ & $999\pm0.0$ & $1.5209\pm8.9\times 10^{-3}$ & $1.5167\pm6.6\times 10^{-3}$ \\ \hline
-%$0.1500$ & $10$ & $999\pm0.0$ & $1.5385\pm8.0\times 10^{-3}$ & $1.5271\pm4.4\times 10^{-3}$ \\ \hline
-%$0.1500$ & $50$ & $999\pm0.0$ & $1.5251\pm9.5\times 10^{-3}$ & $1.5178\pm1.0\times 10^{-2}$ \\ \hline
-%$0.1500$ & $100$ & $999\pm0.0$ & $1.5203\pm1.3\times 10^{-2}$ & $1.5154\pm1.1\times 10^{-2}$ \\ \hline
-%$0.1500$ & $200$ & $999\pm0.0$ & $1.5178\pm1.1\times 10^{-2}$ & $1.5112\pm9.7\times 10^{-3}$ \\ \hline
-%$0.1500$ & $500$ & $999\pm0.0$ & $1.5180\pm1.1\times 10^{-2}$ & $1.5125\pm9.6\times 10^{-3}$ \\ \hline
-%$0.1500$ & $1000$ & $999\pm0.0$ & $1.5150\pm8.5\times 10^{-3}$ & $1.5086\pm8.6\times 10^{-3}$ \\ \hline
-%$0.1500$ & $2000$ & $999\pm0.0$ & $1.5138\pm1.1\times 10^{-2}$ & $1.5076\pm1.0\times 10^{-2}$ \\ \hline
-%$0.2000$ & $10$ & $999\pm0.0$ & $1.5409\pm5.5\times 10^{-3}$ & $1.5329\pm4.8\times 10^{-3}$ \\ \hline
-%$0.2000$ & $50$ & $999\pm0.0$ & $1.5242\pm9.9\times 10^{-3}$ & $1.5182\pm6.7\times 10^{-3}$ \\ \hline
-%$0.2000$ & $100$ & $999\pm0.0$ & $1.5256\pm9.1\times 10^{-3}$ & $1.5149\pm7.1\times 10^{-3}$ \\ \hline
-%$0.2000$ & $200$ & $999\pm0.0$ & $1.5214\pm9.3\times 10^{-3}$ & $1.5143\pm7.5\times 10^{-3}$ \\ \hline
-%$0.2000$ & $500$ & $999\pm0.0$ & $1.5201\pm8.3\times 10^{-3}$ & $1.5140\pm6.7\times 10^{-3}$ \\ \hline
-%$0.2000$ & $1000$ & $999\pm0.0$ & $1.5248\pm1.3\times 10^{-2}$ & $1.5174\pm1.2\times 10^{-2}$ \\ \hline
-%$0.2000$ & $2000$ & $999\pm0.0$ & $1.5133\pm1.1\times 10^{-2}$ & $1.5080\pm1.1\times 10^{-2}$ \\ \hline
-%\end{tabular}
-%}
-%\renewcommand{\baselinestretch}{1.5}
-%\end{center}
-%\end{table}
-
-Uma análise visual nestes gráficos indica que valores de taxa de treinamento
-que minimizam o tempo de treinamento estão na faixa $\alpha < 0,x2$,
-enquanto que para o tamanho da época, em $N \geq 500$. Escolhe-se $N = 500$ e
-$\alpha = 0,01$. Desta forma, depois de cerca de 10 passos, $5000$ eventos
-terão sido apresentados à rede. Com 40 ou 50 passos, o sistema de treinamento
-terá, possivelmente, apresentado todos os dados de treinamento ao menos uma
-vez.\footnote{O sorteio dos eventos de uma batelada é feito de forma aleatória
-seguindo uma distribuição uniforme e não há garantias que todos os eventos
-sejam utilizados ao longo do treinamento, embora seja estatisticamente
-provável que isto aconteça após um certo número de épocas. Esta probabilidade
-aumenta com o número de eventos por época e com o número de épocas de
-treinamento a qual a rede foi submetida.}.
-
-A Figura~\ref{fig:lms-mse-evo} mostra a evolução do EMQ para uma das 10 redes,
-considerando-se $N = 500$ e $\alpha = 0,01$, tanto para o conjunto de
-treinamento quanto para o conjunto de teste. A Figura~\ref{fig:lms-sp-evo}
-mostra um gráfico equivalente, mas para o produto SP, ao invés do EMQ. Como é
-possível verificar pelo valor desta variável, o sistema converge a um valor
-estável depois de pouco menos que 100 passos de treinamento. O produto SP
-aumenta rapidamente no início do treinamento, por cerca de 20 passos,
-permanecendo constante, em aproximadamente 1,5, para o restante do
-treinamento. O mesmo não ocorre para o EMQ que ainda continuará a diminuir,
-significativamente, por mais 60 a 80 passos antes da deteção automática da
-parada. Este comportamento indica que, apesar do sistema conseguir aproximar
-melhor os alvos na saída, sua capacidade discriminatória mantém-se
-praticamente inalterada após os 20 passos iniciais. O perfil de evolução do
-produto SP e minimização do EMQ é seguido pelo conjunto de teste, de forma
-bastante semelhante, indicando que a estatística disponível no conjunto treino
-seja representativa dos dados no conjunto de teste.
+A Figura~\ref{fig:lms-mse-evo} mostra a evolução do EMQ para a melhor das 5
+redes, tanto para o conjunto de treinamento quanto para o conjunto de teste. A
+Figura~\ref{fig:lms-sp-evo} mostra um gráfico equivalente, mas para o produto
+SP, ao invés do EMQ. Como é possível verificar pelo valor desta variável, o
+sistema converge a um valor estável depois de pouco menos que 20 passos de
+treinamento. O produto SP oscila bruscamente no início do treinamento, por
+cerca de 10 passos, e depois se estabiliza, em aproximadamente $1,48$, para o
+restante do treinamento. O mesmo ocorre para o EMQ para um valor de
+aproximadamente $0,38$. O perfil de evolução do produto SP e minimização do
+EMQ é seguido pelo conjunto de teste, de forma bastante semelhante, indicando
+que a estatística disponível no conjunto treino seja representativa dos dados
+no conjunto de teste.
 
 %É interessante notar que após 20 passos de treinamento, $10000$
 %elementos terão sido utilizados no treinamento da rede. Este valor é menor que
@@ -737,10 +505,8 @@ seja representativa dos dados no conjunto de teste.
 \begin{center}
 \includegraphics[scale=0.98]{lms/mse-evolution}
 \end{center}
-\caption{Evolução dos valores do E.M.Q. ao longo do treinamento do detetor
-LMS, para o conjunto de treinamento (topo) e de teste (embaixo). A taxa de
-treinamento para este sistema é $0,01$, equanto que o tamanho da época
-escolhido é $500$.}
+\caption{Evolução dos valores do EMQ ao longo do treinamento do detetor
+linear, para o conjunto de treinamento e de teste.}
 \label{fig:lms-mse-evo}
 \end{figure}
 
@@ -749,68 +515,49 @@ escolhido é $500$.}
 \includegraphics[scale=0.98]{lms/sp-evolution}
 \end{center}
 \caption{Evolução dos valores do produto SP ao longo do treinamento do detetor
-LMS, para o conjunto de treinamento (topo) e de teste (embaixo). A taxa de
-treinamento para este sistema é $0,01$, equanto que o tamanho da época
-escolhido é $500$.}
+linear, para o conjunto de treinamento e de teste.}
 \label{fig:lms-sp-evo}
 \end{figure}
 
 A Figura~\ref{fig:lms-test-output} mostra os histogramas da saída da rede para
-elétrons (alto) e jatos (embaixo), considerando-se o conjunto de teste. O
-ponto ótimo de corte, determinado para que se maximize o produto SP da rede
-para o conjunto de treinamento para este sistema é $-0,0473$. No caso em
-questão, observa-se que, possivelmente, os conjuntos de dados não sejam
-linearmente separáveis, dado que a saída do detetor tanto para elétrons quanto
-para jatos, se superponha em parte do espectro de saída do sistema. Este
-comportamento pode ser originado pelo fato de utilizar-se um sistema de parada
-por um valor discriminatório no lugar da minimização, por exemplo, do
-EMQ. Para se dirimir dúvidas, usando-se o mesmo sistema e sua parametrização,
-treinou-se um detetor neural utilizando-se um critério de parada baseado no
-valor do EMQ, e uma margem de deteção de estagnação de $0,001$. A
-Figura~\ref{fig:lms-test-output-mse} mostra a saída de tal detetor. Para este
-resultado, o sistema de treinamento detetou a estagnação do EMQ em 163 passos
-de treinamento, para um valor de produto SP aproximadamente igual à $1,50$
-(93,13\% de eficiência na deteção de elétrons contra 89,0\% de eficiência para
-jatos). O mesmo tipo de contaminação pode ser observado.
+elétrons e jatos, considerando-se o conjunto de teste. O ponto ótimo de corte,
+determinado para que se maximize o produto SP da rede para o conjunto de
+treinamento para este sistema é $-0,436$. No caso em questão, observa-se que,
+possivelmente, os conjuntos de dados não sejam linearmente separáveis, dado
+que a saída do detetor tanto para elétrons quanto para jatos, se superponha em
+parte do espectro de saída do sistema. Nestas condições, o máximo produto SP
+para o conjunto de teste é 1,48, definido no ponto da curva R.O.C. (veja
+Figura~\ref{fig:lms-test-roc}) onde a eficiência para a deteção de elétrons é
+90,77\% enquanto que a eficiência para a deteção de jatos é de 90,21\%. A
+Figura~\ref{fig:lms-vs-egamma-roc} mostra uma comparativo entre o resultado da
+otimização proposta atualmente no experimento ATLAS contra os resultados
+obtidos para este classificador. Através desta figura é possível observar que
+o discriminador linear praticamente tangencia a parte exterior dos pontos da
+otimização proposta atualmente no experimento. O resultado obtido com este
+sistema de discrimanção, ao invés do longo processo de otimização proposto
+originalmente, é atingido depois de apenas alguns minutos treinamento em um
+computador dotado de um processador AMD 64 com \eng{clock} de 2~GHz e 1~Gb de
+memória RAM. Ademais, tal sistema apresenta uma capacidade discriminatória
+equivalente após apenas 10 passos de treinamentos, isto é, $\approx 25$
+segundos na máquina citada. Esta nova ferramenta oferece algo que o EGammaHypo
+jamais poderá: a atualização dos pesos sinápticos poderá ser feita rapidamente
+para se arcar com a mudança de condições no experimento.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{lms/test-output}
 \end{center}
-\caption{Saída do detetor LMS em estudo para o conjunto de teste.}
+\caption{Saída do discriminador linear (após treinamento) para elétrons e
+jatos.}
 \label{fig:lms-test-output}
 \end{figure}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{lms/test-output-mse}
-\end{center}
-\caption{Saída do detetor LMS em estudo para o conjunto de teste, levando-se
-em consideração uma parada pela estagnação do EMQ.}
-\label{fig:lms-test-output-mse}
-\end{figure}
-
-Nestas condições, o máximo produto SP para o conjunto de teste é 1,51,
-definido no ponto da curva R.O.C. (veja Figura~\ref{fig:lms-test-roc}) onde a
-eficiência para a deteção de elétrons é 91,64\% enquanto que a eficiência para
-a deteção de jatos é de 90,35\%. A Figura~\ref{fig:lms-vs-egamma-roc} mostra
-uma comparativo entre o resultado da otimização proposta atualmente no
-experimento ATLAS contra os resultados obtidos para este
-classificador. Através desta figura é possível observar que o discriminador
-LMS tangencia a parte exterior dos pontos da otimização proposta atualmente no
-experimento. O resultado obtido com o algoritmo LMS, ao invés do longo
-processo de otimização proposto originalmente, é atingido depois de apenas 1
-minuto e 30 segundos de treinamento em um computador dotado de um processador
-AMD 64 com \eng{clock} de 2~GHz e 1~Gb de memória RAM. Ademais, tal sistema
-apresenta uma capacidade discriminatória praticamente ótima após apenas 20
-passos de treinamentos, isto é, $\approx 25$ segundos na máquina citada.
-
-\begin{figure}
-\begin{center}
 \includegraphics[scale=0.98]{lms/test-roc}
 \end{center}
-\caption{Curva R.O.C. para um detetor elétron/jato baseado no algoritmo LMS em
-estudo.}
+\caption{Curva R.O.C. para um detetor linear para elétrons e jatos baseado nas
+4 variáveis do T2Calo, usadas para discriminação pelo EGammaHypo.}
 \label{fig:lms-test-roc}
 \end{figure}
 
@@ -819,40 +566,41 @@ estudo.}
 \includegraphics[scale=0.98]{lms/lms-vs-egamma-roc}
 \end{center}
 \caption{R.O.Cs comparativas entre a otimização atual para o EGammaHypo e um
-algoritmo baseado no LMS.}
+detetor linear.}
 \label{fig:lms-vs-egamma-roc}
 \end{figure}
 
 As Figuras~\ref{fig:lms-test-sp-eta}, \ref{fig:lms-test-sp-phi} e
 \ref{fig:lms-test-sp-emet} mostram, respectivamente, o valor do produto SP segundo
 a distribuição dos dados em $\eta$, $\phi$ e $\etem$. O número anexo ao topo
-de cada barra indica a quantidade de eventos em cada canal e é útil para que
-se considere a importância de um valor parcial no desempenho do
-discriminador. Nota-se que na distribuição por $\eta$, há uma clara perda de
-eficiência na região $|\eta| \approx 1,5$. Esta notável queda no desempenho do
-classificador é devido a um espaço sem elementos de deteção nesta área (também
-conhecido como \eng{gap} ou \eng{crack} dos calorímetros), por onde passam os
-cabos de leitura e manutenção dos detetores internos. A eficiência é
-recuperada logo após esta região. O gráfico de barras para a distribuição
-$\phi$ mostra-se praticamente uniforme, indicando que o sistema funciona sem
-tendências para todos os valores desta variável. Este resultado é esperado, já
-que o detetor é simétrico neste eixo. A análise por $\etem$ demonstra uma
-predominante qualidade de deteção para valores mais baixos de energia que
-valores mais altos. Deve-se levar em conta que, embora a eficiência de deteção
-de elétrons ainda seja máxima nesta última região, como mostra a
-Figura~\ref{fig:lms-test-efficiency-emet}, o falso alarme na deteção de jatos
-também apresenta-se máximo. Uma vez que o produto SP é uma figura de mérito da
-eficiência agregada de ambas as classes de eventos do discriminador, ela
-quantificar-se-á em zero nesta região. Este resultado está, possivelmente,
-associado à baixa estatística de dados disponível na região, como indicado na
-Figura~\ref{fig:em-tenergy}.
+de cada barra indica a quantidade, separadamente, de elétrons e jatos em cada
+canal e é útil para que se considere a importância de um valor parcial no
+desempenho do discriminador. Nota-se que na distribuição por $\eta$, há uma
+clara perda de eficiência na região $|\eta| \approx 1,5$. Esta notável queda
+no desempenho do classificador é devido a um espaço sem elementos de deteção
+nesta área (também conhecido como \eng{gap} ou \eng{crack} dos calorímetros),
+por onde passam os cabos de leitura e manutenção dos detetores internos. A
+eficiência é recuperada logo após esta região. O gráfico de barras para a
+distribuição $\phi$ mostra-se praticamente uniforme, indicando que o sistema
+funciona sem tendências para todos os valores desta variável. Este resultado é
+esperado, já que o detetor é simétrico neste eixo. A análise por $\etem$
+demonstra uma predominante qualidade de deteção para valores mais baixos de
+energia que valores mais altos. Deve-se levar em conta que, embora a
+eficiência de deteção de elétrons ainda seja máxima nesta última região, como
+mostra a Figura~\ref{fig:lms-test-efficiency-emet}, o falso alarme na deteção
+de jatos também apresenta-se máximo. Uma vez que o produto SP é uma figura de
+mérito da eficiência agregada de ambas as classes de eventos do discriminador,
+ela quantificar-se-á em zero nesta região. Este resultado está, possivelmente,
+associado à baixa estatística de dados disponível na região, como indicado no
+texto sob as barras. Desta forma, a análise de valores de eficência de deteção
+para objetos com mais de $~$50 GeV deverá ser tomada com esta ressalva.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{lms/test-sp-eta}
 \end{center}
-\caption{Análise do produto SP do detetor LMS, para os dados do conjunto de
-teste ao longo de $\eta$.}
+\caption{Análise do produto SP para o classificador linear, para os dados do
+conjunto de teste ao longo de $\eta$.}
 \label{fig:lms-test-sp-eta}
 \end{figure}
 
@@ -860,8 +608,8 @@ teste ao longo de $\eta$.}
 \begin{center}
 \includegraphics[scale=0.98]{lms/test-sp-phi}
 \end{center}
-\caption{Análise do produto SP do detetor LMS, para os dados do conjunto de
-teste ao longo de $\phi$.} 
+\caption{Análise do produto SP do classificador linear, para os dados do
+conjunto de teste ao longo de $\phi$.} 
 \label{fig:lms-test-sp-phi}
 \end{figure}
 
@@ -869,8 +617,8 @@ teste ao longo de $\phi$.}
 \begin{center}
 \includegraphics[scale=0.98]{lms/test-sp-emet}
 \end{center}
-\caption{Análise do produto SP do detetor LMS, para os dados do conjunto de
-teste por $\etem$.} 
+\caption{Análise do produto SP do classificador linear, para os dados do
+conjunto de teste por $\etem$.} 
 \label{fig:lms-test-sp-emet}
 \end{figure}
 
@@ -879,142 +627,38 @@ teste por $\etem$.}
 \includegraphics[scale=0.98]{lms/test-efficiency-emet}
 \end{center}
 \caption{Análise da eficiência de deteção de elétrons e falso alarme em jatos
-para o detetor LMS, utilizando os dados do conjunto de teste, por $\etem$.}
+para a classificador linear, utilizando os dados do conjunto de teste, por
+$\etem$.}
 \label{fig:lms-test-efficiency-emet}
 \end{figure}
-
-A Figura~\ref{fig:lms-vs-egamma} mostra um comparativo entre as duas técnicas
-de deteção, por energia transversa na seção e.m.. Distingue-se que os dois
-sistemas possuem respostas bastante próximas. Na primeira (mais à esquerda)
-faixa de energia considerada, o EGammaHypo possui uma resposta melhor enquanto
-que com o aumento da energia transversa o LMS apresenta-se mais eficiente, e
-segue este padrão para quase todas as faixas consideradas, principalmente onde
-há maior concentração de eventos de teste, como é possível determinar a partir
-da Figura~\ref{fig:lms-test-sp-emet}. Embora aparentemente \textit{perdedor},
-em algumas das faixas energéticas estudadas, o sistema baseado em uma projeção
-linear e treinado usando-se o algoritmo LMS, exibe superior qualidade de
-deteção nas áreas de maior estatística, indicando que sua capacidade
-discriminatória esteja melhor adapatada ao processo de deteção
-elétron/jato. Por outro lado, levando-se em consideração a saída do detetor,
-na Figura~\ref{fig:lms-test-output}, compreende-se que este método de deteção
-não apresente a robustez necessária ao experimento. Conclui-se que os objetos
-das duas classes de dados não sejam linearmente separáveis.
 
 \begin{figure}
 \begin{center}
 \includegraphics[scale=0.98]{lms/lms-vs-egamma}
 \end{center}
-\caption{Comparação do produto SP para um classificador baseado no LMS e o
+\caption{Comparação do produto SP para o classificador linear e o
 EGammaHypo por energia transversa na seção e.m..}
 \label{fig:lms-vs-egamma}
 \end{figure}
 
-\subsection{Relevância das características do T2Calo}
+A Figura~\ref{fig:lms-vs-egamma} mostra um comparativo entre as duas técnicas
+de deteção, por energia transversa na seção e.m.. Por inspeção desta figura,
+distingui-se que os dois sistemas possuem respostas bastante próximas. Na
+primeira (mais à esquerda) faixa de energia considerada, o EGammaHypo possui
+uma resposta melhor enquanto que com o aumento da energia transversa o detetor
+linear apresenta-se mais eficiente, e segue este padrão para grande parte das
+faixas onde se diferenciam (15 pontos no total). Na região onde há maior
+concentração de eventos de teste, como é possível determinar a partir da
+Figura~\ref{fig:lms-test-sp-emet}, o desempenho dos detetores é muito
+próxima. Com o aumento da energia, onde a eficiência do EGammaHypo começa a
+cair, o sistema baseado no detetor linear consegue obter bom desempenho
+superando o primeiro.
 
-A técnica da análise de relevância \cite{relevance} tem por objetivo medir a
-importância de cada uma das variáveis de entrada para um classificador. Nesta
-técnica, avalia-se a contribuição da variável à composição da saída
-substituindo-se seu valor, a cada evento, pelo valor médio da variável com
-respeito a todos os eventos disponíveis na entrada do sistema de
-discriminação. Quanto maior a variação, mais relevante é considerada a
-variável. Assim sendo, observando-se a variação da saída, é possível estimar a
-contribuição daquela variável ao processo discriminatório. 
-
-A estimativa de relevância da i-ésima componente de entrada pode, então ser
-calculada pela fórmula:
-
-\begin{equation}
-R_i = \frac{1}{N} \text{ } \overset{N}{\underset{j=1}{\sum}} \text{ }
-[\text{saída}(\overrightarrow{x_j}) -
-\text{saída}(\overrightarrow{x_j}\mid_{x_{j,i} = \overline{x}_i})]^2 
-\label{eq:relevance-mse}
-\end{equation}
-
-Numa segunda interpretação, é possível definir a relevância da variável $x_i$,
-$R_i$, como o EMQ da saída de um discriminador comparada a mesma saída quando
-faz-se a variável assumir o valor de sua média. Nessa equação, $N$ representa
-o número total de eventos (padrões) disponíveis para o classificador. 
-
-A Figura~\ref{fig:relevance-mse} mostra os valores de relevância para cada uma
-das variáveis do classificador em análise. Esta figura mostra, mais uma vez,
-que o conjunto de treino permite generalizar o comportamento do discriminador,
-apresentando valores de relevância, para cada uma de suas variáveis, bastante
-próximos daqueles valores calculados para o conjunto de teste. Esta figura
-também mostra que a variável $\rcore$ é de extrema importância na tarefa de
-discriminação. Quando substituímo-la pelo seu valor médio, o erro na saída
-aumenta significativamente, enquanto que, para as demais variáveis, o impacto
-seja nitidamente menor. Esta figura também indica que a ordem de separação
-proposta pelo EGammaHypo está em acordo com o processo de filtragem definido
-automaticamente pelo LMS, levando-se em consideração a ordem onde os cortes
-são aplicados por aquele algoritmo e a importância das variáveis nesse
-processo de classificação. As variáveis mais importantes são aquelas
-utilizadas pelo especialista nos primeiros cortes e, as variáveis menos
-relevantes, aqueles que, também no EGammaHypo, são consideradas por último.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.98]{lms/relevance-mse}
-\end{center}
-\caption{Os valores de relevância para os conjunto de treino (cinza claro) e
-teste (em cinza escuro), para as 4 variáveis do T2Calo e considerando-se o
-classificador LMS em estudo.}
-\label{fig:relevance-mse}
-\end{figure}
-
-Por outro lado, como foi visto nas análises de evolução do EMQ
-(Figura~\ref{fig:lms-mse-evo}) e do produto SP (Figura~\ref{fig:lms-sp-evo}),
-a capacidade discriminatória da rede reage de forma correlacionada, mas
-ligeiramente diferente do processo de mapeamento da entrada na saída proposto
-pelo LMS. Observa-se que, apesar de notarmos uma contínua migração ao mínimo
-EMQ durante cerca de 100 passos de treinamento, após cerca de apenas 20
-passos, a capacidade discriminatória do sistema já atinge seu máximo e ali
-permanece até o final do treinamento. Este comportamento indica que exista
-alguma diferença entre estes dois parâmetros. Desta forma, propõe-se uma
-variação do cálculo da relevância baseando-se no impacto que a substituição
-por seu valor médio causa à capacidade discriminatória da rede, a ser
-mensurado pela variação do produto SP, da seguinte forma:
-
-\begin{equation}
-R_{d_i} = \max(\text{SP}_{\text{original}}) - \max(\text{SP}(\overrightarrow{x_j}\mid_{x_{j,i} = \overline{x}_i}))
-\label{eq:relevance-sp}
-\end{equation}
-
-Neste caso, define-se a relevância $R_{d_i}$ da variável $i$ como a diferença
-produzida no produto SP máximo no evento da substituição desta variável pelo
-seu valor médio. De fato, espera-se que a maior parte dos valores de
-relevância sejam positivos, indicando uma degradação do desempenho do
-classificador seguindo a neutralização de uma variável. Dada a natureza do
-cálculo, no entanto, é possível que se encontrem valores de relevância de
-discriminação negativos, indicando que uma variável esteja, na verdade,
-atrapalhando o processo de classificação ao invés de melhorá-lo. A
-Figura~\ref{fig:relevance-sp} mostra os valores de $R_d$ para o classificador
-LMS em estudo. Como é possível ver nesta figura, o quadro é apenas
-marginalmente diferente daquele mostrado pela
-Figura~\ref{fig:relevance-mse}. A variável mais importante para o processo
-discriminatório é ainda $\rcore$, seguindo-se de $\eratio$ e $\ethad$. A
-variável $\etem$ é a menos relevante para o processo de classificação de
-elétrons e jatos, o que já era esperado observando-se as tendências com o
-EGammaHypo. Como é possível definir a partir deste gráfico, caso se executasse
-uma poda, esta seria preferencialmente variável $\etem$, ao invés da variável
-$\ethad$, como sugeriria a Figura~\ref{fig:relevance-mse}. No mais, as duas
-figuras são bastante compatíveis e indicam uma tendência importante: a
-minimização do EMQ também maximizará o produto SP. Esta figura também indica
-que a ordem na qual o EGammaHypo considera as variáveis de corte (i.e. $\rcore
-\rightarrow \eratio \rightarrow \etem \rightarrow \ethad$) não se encontre
-otimizado para o conjunto de dados sendo analisado, mesmo que
-marginalmente. Observa-se que seria mais interessante que o corte em $\etem$
-fosse realizado por último ao invés do corte em $\ethad$, pois desta forma o
-processo discriminatório seria mais eficiente e, portanto, mais rápido.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.98]{lms/relevance-sp}
-\end{center}
-\caption{Os valores de relevância de discriminação para os conjunto de treino
-(cinza claro) e teste (em cinza escuro), para as 4 variáveis do T2Calo e
-considerando-se o classificador baseado no algoritmo LMS em estudo.}
-\label{fig:relevance-sp}
-\end{figure}
+Levando-se em consideração a saída do detetor, na
+Figura~\ref{fig:lms-test-output}, compreende-se que este método de deteção não
+apresente a robustez necessária ao experimento. Conclui-se, à partir desta
+saída, que os objetos das duas classes de dados não sejam linearmente
+separáveis.
 
 \section{Métodos neurais de discriminação}
 \label{sec:neural}
@@ -1056,10 +700,6 @@ experimento ATLAS, onde os tempos de processamento e a utilização de recursos
 é bastante reduzida.
 \end{description}
 
-% Falar da revisão da literatura brevemente, introduzir o processamento neural
-% de leve e falar do NeuralRinger, nesta mesma seção. Material de Introdução à
-% RNA's movido para apêndice
-
 RNA's podem ser implementadas de várias maneiras incluindo sistemas com
 percéptrons com apenas uma ou múltiplas camadas (do inglês, \eng{multi-layer
 perceptron}, ou MLP), incluindo sistemas realimentados ou híbridos
@@ -1069,238 +709,163 @@ poderá ser realizado, igualmente, de maneiras distintas. Duas grandes
 sub-categorias são reconhecíveis: métodos supervisionados e
 não-supervisionados.
 
-Na aprendizagem supervisionada, o projetista utiliza-se de uma informação de
-conhecimento \textit{a priori} da função que deseja executar para reprimir ou
-permitir a migração do sistema na direção adequada. Uma das grandes dificuldades
-neste tipo de aprendizagem é a definição de um algoritmo de treinamento que
-convirja de forma adequada ao problema que se deseja atender.
+Na aprendizagem supervisionada, o desenvolvedor utiliza-se de uma informação
+de conhecimento \textit{a priori} da função que deseja executar para reprimir
+ou reforçar a migração do sistema na direção adequada. Uma das grandes
+dificuldades neste tipo de aprendizagem é a definição de um algoritmo de
+treinamento que convirja de forma adequada ao problema que se deseja atender.
 
 Muito algoritmos foram desenvolvidos para as diversas estruturas de rede,
-dentre os quais, a retropropagação de erros parece a mais
+dentre os quais, a retropropagação de erros tornou-se um dos mais populares em
+aplicações ligadas a Física de Altas Energias. No treinamento por
+retropropagação de erros, os sinais de erro são propagados à partir da saída
+da rede, onde são medidos, para os neurônios escondidos através de um
+mecanismo análogo ao algoritmo LMS, para o treinamento do sistema linear
+estudado anteriormente. A retropropagação de erros aplicada a redes neurais
+artificiais é revista com mais detalhes no Apêndice~\ref{ap:rna}. Este método
+possui, no entanto, muitos problemas para a determinação dos parâmetros ótimos
+de treinamento. Como variação dos métodos explorados normalmente em Física de
+Altas Energias, e no intuito de buscar-se um método mais robusto e livre de
+parâmetros de treinamento, utilizaremos uma variante do treinamento por
+retropropagação de erros conhecida como \textit{retropropagação de erros
+resiliente} (do inglês \eng{resilient backpropagation}, rprop)
+\cite{rprop}. Esta técnica também encontra-se descrita no apêndice.
 
-\subsection{Discriminação neural aplicada às saídas do T2Calo}
-
-É possível substituir o discriminador LMS definido na Seção{sec:lms} por um
-discriminador baseado em uma rede neural tipo MLP como a da
-Figura~\ref{fig:simple-mlp}. A implementação desta rede neural encontra-se bem
-detalhada no Apêndice\ref{ap:framework} e é facilmente implementável usando o
-pacote \eng{NeuralRinger} e o fluxo de treinamento detalhado na
-Figura~\ref{fig:train-flow}. A Figura~\ref{fig:t2calo-neural} contém um
-diagrama de blocos que ilustra, de forma simplificada, tal sistema. Os fatores
-de normalização empregados para o sistema de deteção baseado no algoritmo LMS
-não precisam ser substituídos, já que deseja-se empregar o mesmo tipo de
-normalização antes de alimentarmos o sistema neural com os dados disponíveis,
-a fim de evitar qualquer tipo de tendência devida à variância ou média dos
-dados. Os conjuntos de treinamento e teste serão mantidos, o que simplificará
-a comparação das duas técnicas.
+Em específico, o problema da separação elétron/jato como se apresenta ao
+detetor EGammaHypo e ao sistema de deteção linear (treinado pelo LMS), indica
+que correlações não lineares estejam presentes no sistema. De fato, a
+inseparabilidade linear através das variáveis do T2Calo pode ser facilmente
+inspecionada através das distribuições das duas variáveis mais discriminantes
+deste extrator de características, na Figura~\ref{fig:eratio-vs-rcore}.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=1]{t2calo-neural}
+\includegraphics[scale=0.6]{eratio-vs-rcore.pdf}
+\end{center}
+\caption{Gráfico de dispersão mostrando a distribuição das duas variáveis mais
+discriminantes para o T2Calo, para as classes de elétrons e jatos.}
+\label{fig:eratio-vs-rcore}
+\end{figure}
+
+Não obstante, a qualidade da discriminação é comparável ao sistema de deteção
+proposto pelo algoritmo EGammaHypo, não necessitando da intervenção de um
+especialista para seu ajuste. Se por um lado compatíveis, estes dois sistemas
+de deteção mostram-se pouco robustos a mudanças de condição como as serão
+observadas no experimento ATLAS, onde a luminosidade do feixe está sujeita a
+bruscas variações em questão de minutos. Na seção que se segue, analisa-se o
+potencial discriminatório que redes neurais artificiais adicionariam ao
+sistema de filtragem do ATLAS.
+
+Para o treinamento e implementação dos sistemas de dicriminação neural, fez-se
+uso das bibliotecas e programas do \eng{NeuralRinger}. O \eng{NeuralRinger} é
+um pacote totalmente desenvolvido usando o paradigma da orientação à objetos,
+implementado em C++ \cite{stroustrup} e especialmente concebido para executar
+a operação de filtragem de partículas dentro do LVL2. Outras soluções para
+treinamento e execução de redes neurais, tais como o pacote SNNS \cite{snns}
+foram investigadas antes do desenvolvimento deste sistema. Entrentanto, os
+pacotes em questão são normalmente utilizados para uma grande variedade de
+sistemas neurais. Esta flexibilização muito freqüentemente ocorre em
+detrimento do desempenho em casos específicos. Ademais, ao usar um sistema tão
+genérico, se estaría inserindo uma grande quantidade de código dentro do
+sistema de filtragem, o que seria, em sua maior parte, pouco ou não utilizada.
+
+As escolhas do paradigma de programação e da linguaguem de implementação C++
+ocorreram em função do ambiente-alvo para este sistema. Como colocado na
+Seção~\ref{sec:hlt}, o LVL2 de filtragem rodará utilizando como base as
+bibliotecas do Projeto Athena. O Athena é o ambiente padrão para a análise da
+Física dos eventos no ATLAS, tanto no Sistema de Filtragem, como na
+Reconstrução pós-filtragem nas diversas fazendas de análise
+\eng{offline}. Desta forma, a integrabilidade ao Athena constitui-se de um
+passo essencial para a utilização da técnica no LVL2. 
+
+O projeto foi desenvolvido tendo por base as seguintes prerrogativas, em
+ordem:
+
+\begin{enumerate}
+\item Otimização da execução de redes neurais: É importante que o sistema
+tenha um bom desempenho no processamento neural, de tal forma que seja viável
+sua implementação no sistema de filtragem. Preferencialmente, deseja-se que um
+passo de execução da rede não dure mais que alguns milissegundos, já que o
+tempo total de processamento no LVL2 deve ser, em média 10~ms, contando com o
+acesso aos dados;
+\item Interoperabilidade: O treinamento do sistema deve ser executado
+\eng{offline}, dada a disponibilidade dos dados. Portanto, é necessário que o
+sistema opere tanto dentro do ambiente Athena, quanto em modo desacoplado;
+\item Multi-tarefas: Respeitando o projeto do LVL2, o \eng{NeuralRinger} não
+deve ter construções que impossibilitem ou dificultem a sua utilização
+concorrente em múltiplas tarefas;
+\item Configurabilidade: O \eng{NeuralRinger} deve ser, dentro de determinadas
+medidas, configurável e flexível com relação a configuração da rede que será
+usada na deteção dos alvos. O método de treinamento a ser utilizado será a
+retro-propagação de erros resiliente, tendo por base redes totalmente
+conectadas e sem re-alimentação.
+\end{enumerate}
+
+O Apêndice~\ref{ap:framework} traz detalhes do projeto e implementação
+desta ferramenta.
+
+\subsection{Discriminação neural aplicada às saídas do T2Calo}
+
+É possível substituir o discriminador linear definido na Seção{sec:linear} por
+um discriminador baseado em uma rede neural tipo MLP como a da
+Figura~\ref{fig:simple-mlp}. A implementação deste novo sistema utilizando-se
+do pacote \eng{NeuralRinger} e o fluxo de treinamento detalhado na
+Figura~\ref{fig:train-flow}. A Figura~\ref{fig:t2calo-neural} contém um
+diagrama de blocos que ilustra tal sistema. Os conjuntos de treinamento e
+teste serão mantidos, o que simplificará a comparação das duas técnicas.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.9]{t2calo-neural}
 \end{center}
 \caption{Um discriminador neural para as características definidas pelo
 T2Calo.}
 \label{fig:t2calo-neural}
 \end{figure}
 
-Neste novo sistema neural um conjunto maior de parâmetros de treinamento
-estará disponível e torna-se necessária a avaliação destes em função do tempo
-e qualidade de treinamento das redes. Estes parâmetros são:
-
-\begin{itemize}
-\item Taxa de aprendizagem da rede;
-\item Tamanho da época;
-\item Número de neurônios na camada escondida\footnote{Este estudo
-limita-se a utilização de Redes Neurais artificiais com uma única camada
-escondida.};
-\item Momento.
-\end{itemize}
-
-A utilização de um valor de momento tem por objetivo amortecer o treinamento
-de forma que a migração para o mínimo da superfície de erro ocorra de forma
-suave, e será empregado no caso de observarmos que o treinamento comporta-se
-de forma oscilatória. Para cada uma destas variáveis, define-se um conjunto de
-sub-valores de interesse:
-
-\begin{itemize}
-\item Taxa de aprendizagem: $[0,001; 0,002; 0,005; 0,01; 0,02; 0,05; 0,1;
-0,15]$;
-\item Tamanho da época: $[50; 100; 200; 500; 1000; 1500]$;
-\item Neurônios escondidos: $[2; 3; 4; 5; 6]$;
-\item Momento: $[0; 0,01; 0,02; 0,05; 0,1; 0,2]$.
-\end{itemize}
-
-Cada conjunto individual de parâmetros deve ser avaliado em função de um
-número considerável de pontos de inicialização dos pesos sinápticos da rede
-neural. Deseja-se assegurar que as redes convirjam à pontos próximos (se não
-idênticos) na superfície de erro considerada, independentemente de sua
-inicialização. Estipulou-se que o número de testes para cada conjunto de
-parâmetros será 5. Ou seja, para cada ponto no espaço de otimização do
-treinamento, conduziremos 5 testes inicializando os pesos sinápticos com
-valores aleatórios distintos e disparando o treinamento. Considerar-se-á os
-máximos e mínimos obtidos no produto SP do classificador, para o conjunto de
-teste, na avaliação de seu desempenho.
-
-Uma inspeção rápida do número de testes a serem executados mostra que, para
-este conjunto de parâmetros, cerca de ($8\times6\times5\times6\times5$) 
-$7200$ testes devem ser realizados. Embora tentador, este cenário aparenta-se
-mais complexo que o problema inicial da otimização do EGammaHypo, com uma
-desvantagem: o número de parâmetros aumentou. Uma avaliação mais detalhada da
-natureza do espaço de otimização pode ser benéfica a simplificação deste
-processo: 
-
-\begin{itemize}
-\item Numa análise inicial, é possível suprimir a variação do momento, já que
-a contribuição desejada deste parâmetro está no amortecimento do
-treinamento. Seria possível adotar a seguinte estratégia: inicialmente
-identifica-se a melhor taxa de aprendizagem. Em seguida, estuda-se como
-aplicar o momento de forma que o discriminador final seja treinado evitando
-transições abruptas do MSE ou do produto SP;
-
-\item O número de neurônios escondidos poderia ser, inicialmente fixado em 4,
-igualando o número de entradas. Reconhece-se que um sistema com menos
-neurônios escondidos possa apresentar a mesma eficiência ou ainda que um
-sistema com mais, convirja mais suavemente. Ainda sim, espera-se que as
-tendências no tocante aos outros parâmetros de otimização sejam preservadas e
-seja possível identificar o número ótimo de neurônios na camada escondida de
-forma \textit{quasi}-independente ao restante dos valores;
-
-\item O tamanho da época pode ser fixado baseando-se na experiência inicial
-com o discriminador LMS. O valor utilizado para aquele sistema foi de 500
-eventos por época.
-\end{itemize}
-
-Desta forma, propõe-se a seguinte heurística de otimização:
-
-\begin{enumerate}
-\item Fixa-se todos os parâmetros de treinamento, variando-se a taxa de
-aprendizagem em busca de um ótimo para este parâmetro;
-\item De posse da taxa de aprendizagem ótima, varia-se o tamanho da época;
-\item O número de neurônios escondidos ótimo poderá então ser analisado tendo
-em consideração valores ótimos de taxa de aprendizado e o tamanho da época;
-\item Por final, varia-se o momento afim de suavizar ao máximo o treinamento
-do detetor neural. A utilização de momento será necessária, \textbf{se e
-somente se} o treinamento neural se mostrar excessivamente ruidoso.
-\end{enumerate}
-
-\subsubsection{Otimização da taxa de aprendizado}
-
-O primeiro parâmetro a ser otimizado, seguindo a heurística proposta é a taxa
-de treinamento. Neste caso, 8 valores estão sendo considerados. Para cada um
-dos 8 valores, realizou-se 5 testes onde os pesos sinápticos são inicializados
-de forma aleatória e distinta. Para cada conjunto de testes relacionados com
-um valor fixo de taxa de treinamento, encontra-se a média e o desvio padrão do
-produto SP para os conjuntos de treino e teste e do número de passos de
-treinamento. Os resultados desta análise podem ser vistos na
-Tabela~\ref{tab:t2calo-neural-lr-scan}. O tamanho da época está fixo em 500, o
-que indica que, em todos os casos, o sistema teve acesso a um número maior de
-padrões que o total disponível para treinamento (cerca de $14500$ padrões,
-incluindo elétrons e jatos).
+Uma vez que estejamos utilizando o algoritmo de retropropagação resiliente do
+erros, o único parâmetro a ser otimizado é o número de neurônios
+escondidos. Para procedermos com a escolha, a seguinte heurística será
+utilizada: realiza-se 5 testes com um número de neurônios fixo na camada
+escondida. Em seguida, avalia-se o número de passos de treinamento para um
+nível de estabilização fixo do produto SP, o valor final do EMQ e do produto
+SP da rede. A média dos cinco valores é extraída, assim como o desvio-padrão
+destes valores em relação à média. O número de neurônios escondidos a ser
+considerado está no conjunto $[2, 3, 4, 5, 6]$. A
+Tabela~\ref{tab:t2calo-neural-hidden-scan} contém os resultados deste
+estudo. O valor de desvio padrão está anotado após o sinal ``$\pm$'' em cada
+entrada da tabela. Como é possível determinar, com 4 neurônios escondidos o
+sistema tende a treinar em um número menor de passos. Os valores de EMQ e
+produto SP encontram-se em faixas de valores muito próximas, sendo difícil sua
+comparação para fins de escolha. Desta forma, escolhe-se o sistema com 4
+neurônios na camada escondida.
 
 \begin{table}
-\caption{Resultados da otimização da taxa de treinamento para um discriminador
-neural elétron/jato baseado na saída do T2Calo.}
-\label{tab:t2calo-neural-lr-scan}
-\begin{center}
-\begin{tabular}{|r|r|r|r|} \hline
-Tx. de aprendizado & Passos & Prod. SP (treino) & Prod. SP (teste) \\
-\hline 
-0.0010 & $1339\pm248$ & $1.4935\pm0.0162$ & $1.4943\pm0.0178$ \\ \hline
-0.0020 & $1048\pm407$ & $1.4850\pm0.0108$ & $1.4880\pm0.0107$ \\ \hline
-0.0050 & $617\pm229$ & $1.4995\pm0.0163$ & $1.4932\pm0.0147$ \\ \hline
-0.0100 & $335\pm51$ & $1.4943\pm0.0074$ & $1.4918\pm0.0059$ \\ \hline
-0.0200 & $204\pm36$ & $1.5168\pm0.0127$ & $1.5104\pm0.0139$ \\ \hline
-0.0500 & $123\pm21$ & $1.5087\pm0.0123$ & $1.5052\pm0.0134$ \\ \hline
-0.1000 & $80\pm21$ & $1.5150\pm0.0067$ & $1.5101\pm0.0055$ \\ \hline
-0.1500 & $85\pm28$ & $1.5121\pm0.0046$ & $1.5094\pm0.0032$ \\ \hline
-\end{tabular}
-\end{center}
-\end{table}
-
-A tabela mostra que um valor pequeno de taxa de treinamento faz com que a
-duração deste processo se extenda demasiado sem, necessariamente compensar em
-melhores resultados. Em todos os casos, o sistema parece sempre convergir para
-um máximo próximo à 1,50 de produto SP (considerando valores para o conjunto
-de teste). Conforme aumenta-se a taxa de treinamento, o número de passos para
-a estabilização do sistema diminui, chegando, no caso em que a taxa é igual a
-$0,1$, a necessitar apenas de 80 iterações para a convergência. Uma vez que a
-média do produto SP apresenta-se maior para o valor de taxa de treinamento
-igual a $0,02$, utilizaremos este valor como o valor padrão nas próximas
-etapas de otimização.
-
-\subsubsection{Otimização do tamanho da época}
-
-De posse da taxa de aprendizado, é a vez de otimizar-se o tamanho da época,
-inicialmente fixa em 500. Os valores de época para o qual deseja-se
-experimentar são: $[50; 100; 200; 500; 1000; 1500]$. O mesmo procedimento
-utilizado para a otimização da taxa de treinamento será realizado aqui: cinco
-testes são realizados para cada tamanho de época. Os resultados destes testes
-encontram-se na Tabela~\ref{tab:t2calo-neural-epoch-scan}.
-
-\begin{table}
-\caption{Resultados da otimização do tamanho da época para um discriminador
-neural elétron/jato baseado na saída do T2Calo.}
-\label{tab:t2calo-neural-epoch-scan}
-\begin{center}
-\begin{tabular}{|r|r|r|r|} \hline
-Padrões por época & Passos & Prod. SP (treino) & Prod. SP (teste) \\
-\hline 
-50 & $198\pm44$ & $1.5128\pm0.0190$ & $1.5056\pm0.0168$ \\ \hline
-100 & $201\pm53$ & $1.5126\pm0.0070$ & $1.5128\pm0.0138$ \\ \hline
-200 & $219\pm65$ & $1.5017\pm0.0100$ & $1.5004\pm0.0129$ \\ \hline
-500 & $204\pm36$ & $1.5168\pm0.0127$ & $1.5104\pm0.0139$ \\ \hline
-1000 & $212\pm34$ & $1.5202\pm0.0167$ & $1.5188\pm0.0121$ \\ \hline
-1500 & $185\pm52$ & $1.5083\pm0.0142$ & $1.5051\pm0.0184$ \\ \hline
-\end{tabular}
-\end{center}
-\end{table}
-
-Como mostra a tabela, um tamanho de época de $1000$ padrões maximiza a
-capacidade discriminante do sistema. O número de iterações não varia
-significativamente o que indica que o tempo de treinamento do sistema não está
-diretamente correlacionado ao tamanho da época. Utilizar-se-á o valor de
-$1000$ como refência na próxima etapa de otimização.
-
-\subsubsection{Otimização do número de neurônios escondidos}
-
-O número de neurônios na camada escondida é a penúltima ou, possivelmente
-última etapa na otimização do classificador neural proposto. Neste caso,
-utilizaremos os valores pré-estipulados para os dois outros parâmetros: taxa
-de treinamento $=0,02$ e tamanho da época de $1000$ padrões. Os valores de
-teste são 2, 3, 4, 5 ou 6 neurônios na camada escondida. Mais uma vez, 5
-testes são realizados para cada parâmetro e a média e variância do tempo de
-treinamento e dos produtos SP é extraída. A
-Tabela~\ref{tab:t2calo-neural-hidden-scan} contém os resultados destes testes.
-
-\begin{table}
-\caption{Resultados da otimização do número de neurônios na camada escondida
-para um discriminador neural elétron/jato baseado na saída do T2Calo.}
+\caption{Resultados da otimização do número de neurônios escondidos para um
+discriminador neural elétron/jato baseado na saída do T2Calo.}
 \label{tab:t2calo-neural-hidden-scan}
 \begin{center}
-\begin{tabular}{|r|r|r|r|} \hline
-Número de neur. escondidos & Passos & Prod. SP (treino) &
-Prod. SP (teste) \\ \hline 
-2 & $259\pm86$ & $1.5086\pm0.0104$ & $1.5078\pm0.0118$ \\ \hline
-3 & $178\pm21$ & $1.4967\pm0.0039$ & $1.4921\pm0.0043$ \\ \hline
-4 & $212\pm34$ & $1.5202\pm0.0167$ & $1.5188\pm0.0121$ \\ \hline
-5 & $173\pm25$ & $1.4982\pm0.0058$ & $1.4941\pm0.0046$ \\ \hline
-6 & $198\pm98$ & $1.5025\pm0.0121$ & $1.4986\pm0.0168$ \\ \hline
+\begin{tabular}{|r|r|r|r|r|r|} \hline
+N & Passos & EMQ/teste & EMQ/treino & SP/teste & SP/treino \\
+\hline 
+%$1$ & $176\pm63$ & $0,264\pm0,001$ & $0,255\pm0,001$ & $1,546\pm0,002$ & $1,543\pm0,001$ \\
+$2$ & $232\pm54$ & $0,261\pm0,002$ & $0,252\pm0,003$ & $1,543\pm0,004$ & $1,542\pm0,003$ \\
+$3$ & $232\pm66$ & $0,262\pm0,002$ & $0,253\pm0,002$ & $1,543\pm0,002$ & $1,543\pm0,001$ \\
+$4$ & $154\pm42$ & $0,261\pm0,003$ & $0,253\pm0,003$ & $1,541\pm0,002$ & $1,541\pm0,002$ \\
+$5$ & $206\pm130$ & $0,263\pm0,003$ & $0,254\pm0,003$ & $1,545\pm0,001$ & $1,545\pm0,003$ \\
+$6$ & $332\pm138$ & $0,258\pm0,004$ & $0,249\pm0,004$ & $1,545\pm0,001$ & $1,546\pm0,003$ \\
+\hline
 \end{tabular}
 \end{center}
 \end{table}
 
-Desta tabela, concluímos que o número ótimo de neurônios na camada escondida
-deve ser 4. Uma inspeção no desenvolvimento do EMQ e do produto SP nos testes
-com os 3 parâmetros de escolha indica que a migração para o mínimo seja suave
-e, portanto não seja necessário a aplicação de momento ou qualquer outra
-técnica de suavização do treinamento. Em seguida, para confirmar as escolhas,
-treina-se um total de 10 redes com os parâmetros selecionados. Os critérios de
-parada utilizados são mantidos. Para nos assegurarmos da estabilidade da rede,
-deixa-se que a rede treine ainda por cerca de 100 passos depois do ponto de
-estabilidade detetado. A Figura~\ref{fig:best-t2calo-mlp-mse} e a
-Figura~\ref{fig:best-t2calo-mlp-sp} mostram respectivamente o desenvolvimento,
-ao longo do treinamento dos valores EMQ e produto SP para o melhor dos 10
-resultados obtidos.
+Em seguida, treina-se um total de 10 redes com os parâmetros
+selecionados. Para nos assegurarmos da estabilidade da rede, estabelece-se
+como critério de parada, uma variação menor que $0,0001$ para o produto SP,
+por pelo menos 20 passos de treinamento. A
+Figura~\ref{fig:best-t2calo-mlp-mse} e a Figura~\ref{fig:best-t2calo-mlp-sp}
+mostram respectivamente o desenvolvimento, ao longo do treinamento dos valores
+EMQ e produto SP para um dos 10 resultados obtidos.
 
 \begin{figure}
 \begin{center}
@@ -1320,16 +885,16 @@ discriminador elétron/jato neural para as variáveis do T2Calo.}
 \label{fig:best-t2calo-mlp-sp}
 \end{figure}
 
-O sistema estabiliza após cerca de 300 passos, considerando a evolução do
+O sistema estabiliza após cerca de 40 passos, considerando a evolução do
 EMQ. No que tange capacidade discriminante, aferida através do produto SP,
-após cerca de 100 passos, o sistema parece se tornar irrelevante à contínua
-redução do EMQ. A Figura~\ref{fig:best-t2calo-mlp-output} mostra as saídas da
-rede, no final do treinamento, para elétrons (em cima) e jatos (em baixo). A
-saída para elétrons é fixada em $-1$ e para jatos, em $+1$. Nota-se que,
-diferentemente ao sistema LMS, há uma notável separação entre as classes
-proporcionada pelo emprego de um discriminador neural. O ponto ótimo de
-separação pode ser mais facilmente determinado, inclusive por inspeção
-visual. 
+após cerca de 60 passos, a qualidade discriminativa parece estar estável. A
+Figura~\ref{fig:best-t2calo-mlp-output} mostra as saídas da rede, no final do
+treinamento, para elétrons (em cima) e jatos (em baixo). A saída para elétrons
+é fixada em $-1$ e para jatos, em $+1$. Nota-se que, diferentemente ao sistema
+linear, há uma notável separação entre as classes proporcionada pelo emprego
+de um discriminador neural. O ponto ótimo de separação pode ser mais
+facilmente determinado, inclusive por inspeção visual o que torna este sistema
+mais robusto que os propostos anteriormente.
 
 \begin{figure}
 \begin{center}
@@ -1340,32 +905,37 @@ características extraídas pelo T2Calo.}
 \label{fig:best-t2calo-mlp-output}
 \end{figure}
 
-Diferentemente do sistema linear baseado no LMS, uma rede neural poderá traçar
-uma superfície curva no espaço de entrada (número de dimensões $=4$),
-melhorando a separação entre as classes que se deseja detetar. Esta última
-figura mostra o resultado desta capacidade discriminativa. Ainda sim, como é
-possível inspecionar na Figura~\ref{fig:best-t2calo-test-roc}, a capacidade
-discriminante deste algoritmo neural resta bastante próxima à do sistema
-baseado num detetor LMS, chegando, em alguns pontos da R.O.C. a ser inferior.
+Diferentemente do sistema linear, uma rede neural poderá traçar uma superfície
+curva no espaço de entrada (número de dimensões $=4$), melhorando a separação
+entre as classes que se deseja detetar. Esta última figura mostra o resultado
+desta capacidade discriminativa. A Figura~\ref{fig:best-t2calo-test-roc}
+mostra um comparativo entre as técnicas de deteção vistas até aqui. Nota-se
+que o detetor baseado em uma rede neural com 4 neurônios escondidos exibe
+superior poder de deteção comparando-se às outras duas técnicas. A curva para
+este detetor está sempre acima da curva dos outros sistemas, indicando
+superior eficiência de deteção e rejeição de falso alarme.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{t2calo-mlp/mlp-vs-lms-vs-egamma-roc}
+\includegraphics[scale=0.98]{t2calo-mlp/roc-compare}
 \end{center}
 \caption{R.O.C. para o conjunto de teste, do discriminador neural baseado nas
-características extraídas pelo T2Calo, comparado com o detetor baseado no LMS
-e a técnica de otimização baseado algoritmo EGammaHypo.}
+características extraídas pelo T2Calo, comparado com o detetor linear e a
+técnica de otimização baseado algoritmo EGammaHypo.}
 \label{fig:best-t2calo-test-roc}
 \end{figure}
 
 O valor do produto SP máximo na curva para o detetor neural está nas
-coordenadas onde a deteção de elétrons é igual a $93,25\%$ e o falso-alarme em
-jatos é $88,79\%$ ($\approx 2,80$~kHz de falso-alarme). Estes valores
-correspondem a um produto SP de $1,51$, tal qual ao caso do discriminador
+coordenadas onde a deteção de elétrons é igual a $92,38\%$ e o falso-alarme em
+jatos é apenas $9,05\%$ ($\approx 2,20$~kHz de falso-alarme). Estes valores
+correspondem a um produto SP de $1,54$, tal qual ao caso do discriminador
 LMS. Uma verificação das eficiências parcias por região em $\eta$ e em $\phi$
 revelam uma estrutura bastante semelhante aos sistemas de deteção precedentes,
 como mostram as Figuras~\ref{fig:best-t2calo-test-sp-eta} e
-\ref{fig:best-t2calo-test-sp-phi}. 
+\ref{fig:best-t2calo-test-sp-phi}. A única ressalva é a na qualidade de
+deteção no \eng{crack} dos calorímetros, onde o detetor neural mostra-se
+ligeiramente superior, indicando que este sistema consiga recuperar
+informações vital à deteção que os outros dois métodos não conseguem.
 
 \begin{figure}
 \begin{center}
@@ -1387,9 +957,9 @@ baseado nas saídas do T2Calo.}
 
 A Figura~\ref{fig:best-t2calo-test-sp-emet} mostra o valor relativo do produto
 SP for faixa de energia transversa na seção e.m.. Um comparativo entre os 3
-métodos do produto SP por faixas de energia descritos até agora se segue
-na Figura~\ref{fig:best-t2calo-versus-others-emet}. Os dados nesta figura
-correspondem aos do conjunto de teste, para um corte efetuado em $-0.273$ para
+métodos do produto SP por faixas de energia descritos até agora se segue na
+Figura~\ref{fig:best-t2calo-versus-others-emet}. Os dados nesta figura
+correspondem aos do conjunto de teste, para um corte efetuado em $-0,243$ para
 o discriminador neural, e para os melhores resultados obtidos com os outros
 dois sistemas de deteção de forma equivalente.
 
@@ -1404,76 +974,20 @@ neural baseado nas saídas do T2Calo.}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{t2calo-mlp/mlp-vs-lms-vs-egamma-et}
+\includegraphics[scale=0.98]{t2calo-mlp/et-compare}
 \end{center}
 \caption{Comparativo do produto SP para os 3 detetores abordados até aqui, por
 faixa de energia e.m. transversa.}
 \label{fig:best-t2calo-versus-others-emet}
 \end{figure}
 
-É possível notar que o sistema neural ganha nas faixas energéticas onde há
-mais eventos, porém apresenta uma eficiência marginalmente mais baixa conforme
-a energia na seção e.m. aumenta. Num geral, os três sistemas possuem
-características bastante próximas nesta análise, concordando entre si. As
-análises de relevância, tanto baseadas no EMQ quanto no valor máximo do
-produto SP encontram-se nas Figuras~\ref{fig:best-t2calo-mse-relevance} e
-\ref{fig:best-t2calo-sp-relevance}. A primeira análise (EMQ) nota-se que há
-concordãncia, resguardadas as diferenças nos padrões de saída em cada um dos
-casos, na relevância de cada característica neste quesito. O método neural, no
-entanto, acentua a falta de importância da componente hadrônica na saída da
-rede. Na análise de relevância baseada no máximo do produto SP nota-se que a
-ordem de relevância está alterada. Na primeira análise, a variável $\rcore$
-parece ser a mais importante, seguindo-se das variáveis $\eratio$, $\ethad$ e
-finalmente $\etem$. Baseando-se na variação do produto SP, a variável mais
-importante na discriminação é $\eratio$, seguindo-se então de $\rcore$,
-$\ethad$ e $\etem$. Diferentemente do sistema linear, as três mais importantes
-variáveis de discriminação possuem valores de relevância relativamente
-próximos (nos arredores de $0,10$ para $\etem$, $0,15$ para $\rcore$ e $0,20$
-para $\eratio$). No sistema linear, a relevância na deteção é fortemente
-encabeçada pela variável $\rcore$, com as outras variáveis cerca de uma ordem
-de magnitude menos relevantes. 
-
-Um outro ponto observável na análise baseada na variação do produto SP é que,
-para o conjunto de treino, a variável $\etem$ possui relevância de
-discriminação negativa, encontrando-se aproximadamente em $-0,005$. Este
-resultado indica que esta variável estaria atrapalhando o processo de deteção.
-Porém, uma vez que seu valor homólogo para o conjunto de teste tenha valor
-positivo, nas mesmas proporções, assume-se que este resultado advém,
-possivelmente, de uma flutuação estatística e não representa uma real
-tendência da variável em questão. Observando os valores de relevância baseados
-na diferença do produto SP para os outros 9 testes realizados para o mesmo
-conjunto de parâmetros de treinamento, nota-se que esta tendência repete-se em
-apenas alguns dos testes, reforçando a conclusão de que este resultado se
-trataria apenas de uma flutuação estatística.
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.98]{t2calo-mlp/relevance-mse}
-\end{center}
-\caption{Os valores de relevância para os conjunto de treino
-(cinza claro) e teste (em cinza escuro), para as 4 variáveis do T2Calo e
-considerando-se o classificador neural em estudo.}
-\label{fig:best-t2calo-mse-relevance}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[scale=0.98]{t2calo-mlp/relevance-sp}
-\end{center}
-\caption{Os valores de relevância de discriminação para os conjunto de treino
-(cinza claro) e teste (em cinza escuro), para as 4 variáveis do T2Calo e
-considerando-se o classificador neural em estudo.}
-\label{fig:best-t2calo-sp-relevance}
-\end{figure}
-
-Estas análises também indicam que, tendo por base conjunto de variáveis do
-T2Calo, as classes de elétrons e jatos sejam linearmente separáveis. Este
-resultado é bastante natural, dado que este conjunto de características tenha
-sido otimizado para uma análise baseada em cortes definidos por um operador
-experimentado. A Figura~\ref{fig:t2calo-mlp-best-net} mostra uma representação
-discriminador neural discutido até agora, para fins ilustrativos. Na próxima
-seção definiremos um novo tipo de extração de características que terá por
-objetivo maximizar a deteção de elétrons e jatos.
+É possível notar que o sistema neural ganha em praticamente todas as faixas
+energéticas, sobretudo onde hajam maior concentração de eventos ($e_T<50
+GeV$). No final do espectro observa-se que o detetor neural possui eficiência
+de deteção igual a 100\% para ambas as classes de partículas. Como colocado
+anteriormente, este resultado é questionável em virtude da carência de dados
+nesta região. A Figura~\ref{fig:t2calo-mlp-best-net} mostra o estado final da
+rede neural, após o treinamento, a título ilustrativo apenas.
 
 \begin{figure}
 \begin{center}
@@ -1486,33 +1000,412 @@ características do T2Calo como entrada.}
 \label{fig:t2calo-mlp-best-net}
 \end{figure}
 
+\subsection{Adicionando mais variáveis}
+
+Na utilização de discriminação baseada em redes neurais para a Física de Altas
+Energias, observa-se uma tendência à re-análise das características utilizadas
+pelo sistema de deteção. Isto se deve a capacidade que redes neurais possuem
+em extrair correlações de ordem elevanda entre as entradas de um detetor,
+atingindo desempenhos de discriminação superiores a sistemas baseados em
+cortes uni ou bi-dimensionais. Nestes casos, o especilista deve tomar cuidado
+em não popular seu espaço de discriminação com muitas variáveis, o que
+tornaria o processo de decisão demasiado complicado. Uma vez que propõe-se o
+uso de redes neurais como sistema de discriminação, é possível, até certo
+ponto, ignorar esta limitação.
+
+Como sub-produto do cálculo das 4 variáveis utilizadas pelo EGammaHypo, o
+T2Calo também avalia, dentre outras, a energia, camada a camada do
+calorímetro, depositada pela partícula na RoI sendo analisada. Estas
+variáveis, normalmente desprezadas para fins de deteção, podem conter
+informação não originalmente aproveitada pelo EGammaHypo, mas que revelem
+novas informações sobre a natureza da partícula. No total 10 outras variáveis
+estão disponíveis:
+
+\begin{itemize}
+\item Energias parciais nas 4 camadas da seção e.m. dos calorímetros;
+\item Energias parciais nas 4 camadas da seção hadrônica dos calorímetros;
+\item A largura do objeto, medida em função da distribuição energética na
+segunda camada e.m. dos calorímetros;
+\item A relação de deposição energética entre uma região de $3\times7$ na
+direção $\eta\times\phi$ células por $7\times7$ células na segunda camada e.m..
+\end{itemize}
+
+Estas variáveis são usadas normalmente \eng{offline} para a depuração do
+comportamento do T2Calo durante sua execução no sistema de filtragem. Enquanto
+que combinar estas variáveis no algoritmo EGammaHypo seria difícil, o sistema
+de discriminação neural proposto na seção anterior poderia ser re-utilizado
+para montar-se um novo sistema de deteção baseado em um universo de variáveis
+maior e com mais informações. A Figura~\ref{fig:t2calo-14-neural} ilustra este
+novo sistema, em blocos.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.8]{t2calo-14-neural}
+\end{center}
+\caption{Diagrama em blocos de um sistema de deteção utilizando toda a
+informação produzida pelo T2Calo.}
+\label{fig:t2calo-14-neural}
+\end{figure}
+
+Para o treinamento deste novo detetor, faz-se necessária uma nova avaliação do
+número de neurônios ótimos a ser empregado na camada escondida do
+discriminador. A heurística de otimização é usada mais uma vez: treina-se 5
+redes com o mesmo número de neurônios na camada escondida, com seus pesos
+sinápticos inicializados aleatóriamente a cada iteração. O número de neurônios
+escondidos foi variado de 2 a 12 (número de entradas), observando-se a média
+do produto SP, EMQ e o número de passos de treinamento obtida para cada grupo
+de testes. O desvio-padrão dos testes com relação a média do produto SP foi
+utilizada como medida de erro. A Tabela~\ref{tab:t2calo-all-hidden-choice}
+contém os resultados desta heurística de otimização.
+
+\begin{table}
+\caption{Resultados da otimização do número de neurônios escondidos para um
+discriminador neural elétron/jato baseado em todas as variáveis produzidas
+pelo T2Calo.}
+\label{tab:t2calo-all-hidden-choice}
+\begin{center}
+\begin{tabular}{|r|r|r|r|r|r|} \hline
+N & Passos & EMQ/teste & EMQ/treino & SP/teste & SP/treino \\ \hline 
+$2$ & $410\pm217$ & $0,225\pm0,003$ & $0,228\pm0,004$ & $1,598\pm0,004$ & $1,585
+\pm0,008$ \\
+$3$ & $361\pm153$ & $0,221\pm0,003$ & $0,225\pm0,003$ & $1,606\pm0,003$ & $1,592
+\pm0,003$ \\
+$4$ & $541\pm162$ & $0,216\pm0,003$ & $0,218\pm0,002$ & $1,609\pm0,005$ & $1,604
+\pm0,006$ \\
+$5$ & $594\pm111$ & $0,215\pm0,002$ & $0,215\pm0,002$ & $1,612\pm0,003$ & $1,609
+\pm0,004$ \\
+$6$ & $557\pm140$ & $0,214\pm0,004$ & $0,217\pm0,004$ & $1,613\pm0,004$ & $1,607
+\pm0,007$ \\
+$7$ & $566\pm270$ & $0,210\pm0,004$ & $0,211\pm0,004$ & $1,618\pm0,005$ & $1,616
+\pm0,003$ \\
+$8$ & $670\pm133$ & $0,211\pm0,004$ & $0,212\pm0,005$ & $1,621\pm0,007$ & $1,617
+\pm0,013$ \\
+$9$ & $658\pm180$ & $0,211\pm0,003$ & $0,210\pm0,004$ & $1,616\pm0,008$ & $1,619
+\pm0,008$ \\
+$10$ & $567\pm255$ & $0,209\pm0,004$ & $0,210\pm0,004$ & $1,626\pm0,006$ & $1,62
+2\pm0,009$ \\
+$11$ & $654\pm245$ & $0,205\pm0,003$ & $0,206\pm0,002$ & $1,628\pm0,009$ & $1,62
+4\pm0,003$ \\
+$12$ & $683\pm150$ & $0,207\pm0,003$ & $0,209\pm0,004$ & $1,621\pm0,010$ & $1,61
+8\pm0,008$ \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+%\begin{figure}
+%\begin{center}
+%\includegraphics[scale=0.5]{thiago/hidden-choice}
+%\end{center}
+%\caption{Médias e desvios-padrão para testes variando o número de neurônios de
+%um detetor elétron/jato neural baseado nas 14 variáveis produzidas pelo
+%T2Calo.}
+%\label{fig:thiago-hidden-choice}
+%\end{figure}
+
+A partir de 6 neurônios na camada escondida, o sistema apresenta uma superior
+qualidade de deteção. Escolhe-se $N=10$ pois aprensenta melhor relação entre o
+número de passos de treinamento e o produto SP final. Treinou-se 10 redes
+neurais com a seguinte parametrização: 10 neurônios escondidos e 22000 eventos
+por época de aprendizado. A Figura~\ref{fig:t2calo-mlp-all-output} mostra a
+saída do melhor dos dos 10 testes com 10 neurônios na camada escondida. Este
+sistema apresenta uma saída ainda mais próxima do alvo desejado que aquele
+baseado em apenas 4 das variáveis do T2Calo. A evolução (e estagnação) do EMQ
+e do produto SP para a mesma rede pode ser vista nas
+Figuras~\ref{fig:t2calo-mlp-all-sp-evo} e \ref{fig:t2calo-mlp-all-mse-evo} O
+sistema encontra-se completamente treinado após cerca de 1000 passos, quando é
+parado. O valor do produto SP máximo atingido para o conjunto de teste
+($1,63$) é superior àquele para o sistema usando somente 4 das variáveis do
+T2Calo ($1,54$). Para este valor de produto SP, o discriminador possui uma
+eficiência de deteção de elétrons de 94,79\% contra uma taxa de falso-alarme
+de apenas 7,93\%. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{t2calo-mlp-all/test-output}
+\end{center}
+\caption{Saída para o conjunto de teste, do discriminador neural baseado nas
+14 características extraídas pelo T2Calo.}
+\label{fig:t2calo-mlp-all-output}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{t2calo-mlp-all/mse-evolution}
+\end{center}
+\caption{Evolução do EMQ para os conjuntos de treino e teste de um
+discriminador elétron/jato neural para as 14 variáveis extraídas pelo T2Calo.}
+\label{fig:t2calo-mlp-all-mse-evo}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{t2calo-mlp-all/sp-evolution}
+\end{center}
+\caption{Evolução do produto SP para os conjuntos de treino e teste de um
+discriminador elétron/jato neural para as 14 variáveis extraídas pelo T2Calo.}
+\label{fig:t2calo-mlp-all-sp-evo}
+\end{figure}
+
+A Figura~\ref{fig:t2calo-mlp-all-roc-comp} mostra a ROC dos sistemas vistos
+até agora. Como é possível distinguir, o sistema neural utilizando todas as
+variáveis produzidas pelo T2Calo apresenta uma qualidade superior de deteção
+para qualquer valor razoável de eficiência em elétrons (acima de 80\%). Este
+resultado sugere que exista informação importante para o processo de deteção
+que é ignorada por processos de discriminação como o sugerido pelo
+EGammaHypo.  
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{t2calo-mlp-all/roc-compare}
+\end{center}
+\caption{Comparativo das ROC's para os 4 detetores abordados até aqui.}
+\label{fig:t2calo-mlp-all-roc-comp}
+\end{figure}
+
+A Figura~\ref{fig:t2calo-mlp-all-energy-comp} mostra um comparativo do produto
+SP por faixa energética para os dois sistemas neurais e o detetor linear (o
+detetor baseado no EGammaHypo é menos eficiente que o detetor neural baseado
+nas 4 variáveis do T2Calo e portanto não adicionaria informação relevante ao
+gráfico). Como é possível averiguar, este novo sistema apresenta uma qualidade
+de deteção muito superior no início e no final da faixa energética, onde os
+sistemas de deteção anteriores obtinham resultados bastante ruins, ou quase
+nulos. Nas demais faixas energéticas o desempenho do novo sistema continua
+superior aos dos demais detetores ainda que em menor escala. Outra tendência
+que pode ser observada é um aumento substancioso na qualidade de generalização
+do sistema neural, agora dotado de mais informações, conseguindo distinguir
+elétrons de jatos onde outros sistemas falham, como é o caso da região
+energética entre 90 e 120~GeV. Este resultado indica que, a pesar da carência
+de dados na região, a rede conseguiu aprender corretamente como detetar as
+partículas de interesse. Esta característica é de extrama importância para o
+ambiente do ATLAS, onde a Física de interesse poderá apresentar
+características desconhecidas e não-simuláveis utilizando as ferramentas
+disponíveis atualmente.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{t2calo-mlp-all/et-compare}
+\end{center}
+\caption{Comparativo do produto SP máximo por faixa energética para os 2
+detetores neurais abordados até aqui e o detetor linear.}
+\label{fig:t2calo-mlp-all-energy-comp}
+\end{figure}
+
+Embora o sistema de deteção utilizando as 14 variáveis do T2Calo apresente uma
+alternativa com qualidade de deteção superior e não equiparável por nenhum dos
+outros sistemas abordados até aqui, exige que uma grande quantidade de dados
+seja buscada no sistema de leitura do detetor. Os dados de todas as camadas
+dos calorímetros, para a RoI em análise, devem ser carregados no processador
+da L2PU para obter-se as 14 variáveis. Ademais, acredita-se que hajam
+correlações diretas ou de ordem superior entre os valores das variáveis. Por
+exemplo, existe uma correlação entre a energia total na seção e.m. dos
+calorímetros com aquela depositada na segunda camada da seção e.m.. Se fosse
+possível determinar, dado o sistema de deteção empregado, quais variáveis são
+as mais relevantes ao processo de filtragem, seria possível desenvolver um
+detetor mais eficiente.
+
+\subsection{Relevância das 14 características do T2Calo}
+
+A técnica da análise de relevância \cite{relevance} tem por objetivo medir a
+importância de cada uma das variáveis de entrada para um classificador. Nesta
+técnica, avalia-se a contribuição da variável à composição da saída
+substituindo-se seu valor, a cada evento, pelo valor médio da variável com
+respeito a todos os eventos disponíveis na entrada do sistema de
+discriminação. Quanto maior a variação, mais relevante é considerada a
+variável. Assim sendo, observando-se a variação da saída, é possível estimar a
+contribuição daquela variável ao processo discriminatório.
+
+A estimativa de relevância da i-ésima componente de entrada pode, então ser
+calculada pela fórmula:
+
+\begin{equation}
+R_i = \frac{1}{N} \text{ } \overset{N}{\underset{j=1}{\sum}} \text{ }
+[\text{saída}(\overrightarrow{x_j}) -
+\text{saída}(\overrightarrow{x_j}\mid_{x_{j,i} = \overline{x}_i})]^2 
+\label{eq:relevance-mse}
+\end{equation}
+
+Numa segunda interpretação, é possível definir a relevância da variável $x_i$,
+$R_i$, como o EMQ da saída de um discriminador comparada a mesma saída quando
+faz-se a variável assumir o valor de sua média. Nessa equação, $N$ representa
+o número total de eventos (padrões) disponíveis para o classificador.
+
+A Figura~\ref{fig:t2calo-mlp-all-relevance} mostra os valores de relevância
+para cada uma das variáveis do classificador em análise, tendo por base os
+conjuntos de treino e teste. Esta figura mostra, mais uma vez, que o conjunto
+de treino permite generalizar o comportamento do discriminador, apresentando
+valores de relevância, para cada uma de suas variáveis, bastante próximos
+daqueles valores calculados para o conjunto de teste. Esta figura também
+mostra que a variável que mostra a energia total na seção hadrônica
+(\texttt{T2Cahade}) é de extrema importância na tarefa de discriminação, como
+é esperado na discriminação elétron jato. Quando substituímo-la pelo seu valor
+médio, o erro na saída aumenta significativamente, enquanto que, para as
+demais variáveis, o impacto seja nitidamente menor.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{t2calo-mlp-all/relevance-mse}
+\end{center}
+\caption{Os valores de relevância para os conjunto de treino e
+teste, para as 14 variáveis do T2Calo e considerando-se o classificador neural
+em estudo.}
+\label{fig:t2calo-mlp-all-relevance}
+\end{figure}
+
+Aproveitando a figura de mérito utilizada para o critério de parada do
+treinamento, o produto SP, seria possível desenvolver um critério de análise
+de relevância que fosse compatível com o potencial discriminante de um
+detetor. Ao invés de se calcular a variação do EMQ na saída do sistema, ao
+fazermos uma variável assumir seu valor médio, calcula-se a variação do
+produto SP na saída do detetor para as mesmas condições, assim descrita:
+
+\begin{equation}
+R_{d_i} = \max(\text{SP}_{\text{original}}) - \max(\text{SP}(\overrightarrow{x_j}\mid_{x_{j,i} = \overline{x}_i}))
+\label{eq:relevance-sp}
+\end{equation}
+
+Define-se então a relevância $R_{d_i}$ da variável $i$ como a diferença
+produzida no produto SP máximo no evento da substituição desta variável pelo
+seu valor médio. De fato, espera-se que a maior parte dos valores de
+relevância sejam positivos, indicando uma degradação do desempenho do
+classificador seguindo a neutralização de uma variável. Dada a natureza do
+cálculo, no entanto, é possível que se encontrem valores de relevância de
+discriminação negativos, indicando que uma variável esteja, na verdade,
+atrapalhando o processo de classificação ao invés de melhorá-lo. A
+Figura~\ref{fig:t2calo-mlp-all-relevance-disc} mostra os valores de $R_d$ para
+o classificador LMS em estudo. Como é possível ver nesta figura, o quadro é
+apenas marginalmente diferente daquele mostrado pela
+Figura~\ref{fig:t2calo-mlp-all-relevance}. A variável mais importante para o
+processo discriminatório ainda é $\rcore$, seguindo-se de $\eratio$. É
+interessante notar que o processo de análise de relevância, baseado no
+conhecimento do classificador neural de melhor desempenho indique a mesma
+ordem de separação que especialistas determiram para a filtragem baseada no
+EGammaHypo. O que escapa à este sistema de deteção é que exista informação
+relevante para a discriminação escondida em outras variáveis que não são
+contempladas pelo método, como a largura do agrupamento no calorímetro.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{t2calo-mlp-all/relevance-sp}
+\end{center}
+\caption{Os valores de relevância de discriminação para os conjunto de treino e
+teste, para as 14 variáveis do T2Calo e considerando-se o classificador neural
+em estudo.}
+\label{fig:t2calo-mlp-all-relevance-disc}
+\end{figure}
+
+A análise de relevância pode ser utilizada para compactar a informação de
+entrada de um detetor de forma a obter melhores desempenhos tentando-se
+minimizar a perda de informação. Ao mesmo tempo, a análise de relevância pode
+ser usada como medida de robustez de um sistema de deteção: quanto mais
+distribuída a relevância de cada variável, menor a importância individual de
+cada variável ao processo e, portanto, menor será a perda na capacidade
+discriminante no caso da variável ser suprimida. A técnica de poda começa por
+eliminar as variáveis que apresentam menor valor de relevância, seguindo-se
+para aquelas com maior valor até que o desempenho de deteção apresente uma
+degradação inaceitável ao projeto.
+
+Para o caso em estudo, embora as relevâncias baseadas no desvio do EMQ e do
+produto SP concordem, como se espera e em grande parte, na ordem de
+relevância, discordam sobre a importância das variáveis entre si. Por exemplo,
+a variável $\ethad$ (\texttt{had.T} nos gráficos), parece apresentar uma
+importância relativa menor considerando-se a relevância baseada no desvio do
+EMQ do detetor. No caso da análise da relevância discriminativa desta
+variável, nota-se que ela esteja melhor destacada entre as 5 variáveis mais
+relevantes ao processo discriminatório. De fato, uma simples poda por patamar
+de corte nos dois casos, de forma a preservar as 5 variáveis mais relevantes,
+escolherá conjuntos ligeiramente diferentes se nos basearmos em um ou em outro
+método. Para averiguar qual dos métodos gerará um detetor mais eficiente, os
+dois casos são estudados:
+
+\begin{itemize}
+\item Poda baseada na relevância pelo EMQ, preservando 5 variáveis: $\rcore$,
+$\eratio$, lagura do agrupamento, $\etem[0]$, $\etem[1]$;
+\item Poda baseada na relevância discriminativa, preservando 5 variáveis:
+$\rcore$, $\eratio$, lagura do agrupamento, $\etem[1]$, $\ethad$;
+\end{itemize}
+
+Por inspeção visual, uma poda de mais de 5 variáveis começaria a cortar
+variáveis relevantes tanto ao mapeamento da entrada do sistema neural nos
+alvos quanto ao poder discriminante da rede. Treina-se 10 redes neurais para
+cada um dos casos, observando-se os melhores resultados em ambos os casos. A
+Figura~\ref{fig:t2calo-all-relev-cut-compare} mostra curvas ROC para os dados
+de testes dos melhores detetores nos dois casos. Como é possível notar, há uma
+perde de eficiência de deteção do processo quando se podam 9 variáveis das 14
+utilizadas pelo discriminador neural com melhor resultado. No entanto, a poda
+baseada na relevância discriminativa baseada na variação do produto SP produz
+resultados melhores, impedindo substanciosa degradação do desempenho de
+classificação, como é o caso da poda pela relevância clássica. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{t2calo-mlp-all/roc-compare-relev-cut}
+\end{center}
+\caption{Comparativo das ROC's para os 6 detetores abordados até aqui.}
+\label{fig:t2calo-all-relev-cut-compare}
+\end{figure}
+
+O classificador neural com 5 neurônios na camada de entrada, propiciado pela
+poda baseada na relevância de discriminação, atinge um valor máximo para o
+produto SP quando a eficiência de deteção de elétrons é igual a 93,94\% contra
+9,09\% de falso-alarme na deteção de jatos. Este valor está somente cerca de 1
+ponto percentual na classificação elétrons abaixo do valor obtido para um
+classificador baseado nas 14 variáveis, para deixar passar cerca de 1,4 pontos
+percentuais a mais de ruído, embora conte com apenas um terço das variáveis
+orginais.
+
+Das 5 variáveis de entrada selecionadas pela poda baseada na relevância
+discriminativa, 3 correspondem às variáveis utilizadas pelo EGammaHypo,
+escolhidas por especialistas. A análise de relevância indica que a informação
+de largura do agrupamento seja mais importante à deteção que, por exemplo, a
+energia total na seção e.m. dos calorímetros e, portanto, esta variável é
+incluída no processo de classificação no lugar da energia total. A quinta
+variável de interesse é a energia na primeira camada da seção e.m., que ajuda
+a compensar a informação perdida ao removermos a energia total nesta
+seção. Este detetor é quase tão compacto quanto o sistema T2Calo+Rede-Neural
+(4-4-1) e exibe uma qualidade de discriminação compatível ou até superior (se
+consideramos valores de eficiência na deteção de elétrons em patamares
+realísticos, i.e., acima de 80\%) a este sistema. Ainda, poupa o cálculo das
+energias parciais na seção hadrônica e de algumas das camadas na seção
+elétromagnética. Este sistema também evita o carregamento dos dados de energia
+nas camadas 0 e 3 da seção e.m., sendo portanto mais econômico.
+
+Enquanto que a utilização das 14 variáveis do T2Calo aplicadas a um
+processador neural parece elevar o poder de discriminação do processo,
+indicando que existam informações perdidados no processo de deteção
+T2Calo+EGammaHypo, pergunta-se quanta informação é removida durante a
+compatação promovida pelo algoritmo. Por outro lado, tendo-se estabelecido que
+sistemas de discriminação multi-variáveis são melhores classificadores para o
+problema abordado, seria possível explorar o universo de entrada original ao
+T2Calo, ou seja as células que se compõe uma RoI de forma e tentar recuperar
+mais informações sobre a natureza da partícula.
+
+A idéia é a seguinte: expande-se o número de componentes na entrada do detetor
+neural, por um método que será descrito a seguir, diminuindo-se o grau de
+compactação dos dados disponíveis. Observaremos se a capacidade de deteção
+aumentará nestas condições. Caso positivo, utilizaremos um estudo baseado na
+relevância de discriminação para compactar a informação de entrada de tal
+sistema de deteção, a fim de obter um discriminador estruturalmente
+menor, ainda guardando melhor capacidade discriminatória. 
+
 \section{Mapeamento topológico}
 
 O algoritmo T2Calo, durante a análise conduzida no LVL2, compacta a informação
 da RoI representando um candidato à elétron em quatro quantidades altamente
-discrimantes. Tendo estes valores por base obteve-se os seguintes resultados:
-
-\begin{enumerate}
-\item Para o EGammaHypo, $91,85\%$ de eficiência na deteção de elétrons contra
-$10,19\%$ de falso alarme em jatos;
-\item Para detetor LMS, $91,64\%$ para elétrons contra $9,35\%$ de falso alarme;
-\item Para uma rede neural, $93,25\%$ para elétrons contra $11,21\%$ de falso
-alarme.
-\end{enumerate}
-
-Embora as técnicas (LMS e MLP) propostas sejam mais robustas quanto à operação
-e manutenção, a qualidade física da separação não é tão afetada. Isto se deve,
-principalmente, à agressiva compressão nos dados proporcionada pelo algoritmo
-de extração de características. Ainda que não seja viável a deteção de objetos
-usando toda a informação da RoI (cerca de 1300 células), é possível encontrar
-um método que se situe a meio caminho entre este dois extremos.
+discrimantes. Embora as técnicas de deteção linear ou neurais propostas sejam
+mais robustas quanto à operação e manutenção, a qualidade física da separação
+não é menos afetada que desejaríamos. Isto se deve, principalmente, à
+agressiva compressão nos dados proporcionada pelo algoritmo de extração de
+características. Ainda que não seja viável a deteção de objetos usando toda a
+informação da RoI (cerca de 1300 células), é possível encontrar um método que
+se situe a meio caminho entre este dois extremos.
 
 Nesta seção, propõe-se um método de compactação da informação da RoI que
 utiliza a topologia do evento para gerar um conjunto de características que
 pode ser usado para atingir maiores eficiências de deteção de elétrons e
 menores valores de falso-alarme.
 
-\subsection{Topologia de uma RoI e anelamento}
+\subsection{Anelamento dos dados de uma RoI}
 
 Observando-se a interação de elétrons e jatos (enquanto falsos-elétrons) com
 os calorímetros, é possível assumir que estes objetos interagirão de forma
@@ -1539,7 +1432,7 @@ indicam que houve pouca ou nenhuma deposição energética na região.
 \begin{center}
 \includegraphics[scale=0.6]{roi-em2}
 \end{center}
-\caption{Imagem tri-dimensional mostrando o padrão de deposição energética de
+\caption{Imagem tri-dimensional mostrando a deposição energética de
 um elétron simulado na segunda camada e.m. do calorímetro do ATLAS.}
 \label{fig:electron-roi}
 \end{figure}
@@ -1549,7 +1442,7 @@ objeto em análise com os calorímetros define, com boa margem de sucesso o tipo
 do mesmo. Elétrons tendem a um menor espalhamento que jatos, percorrendo
 menores distâncias ao longo do eixo $\eta$. Por outro lado, jatos tendem a
 radializar a deposição energética, formando cones mais largos e possivelmente
-mais profundos.
+mais profundos. 
 
 Levando-se em consideração a formatação dos calorímetros do ATLAS e sua
 granularidade, sugere-se o seguinte algoritmo de compactação:
@@ -1567,12 +1460,22 @@ que de uma célula dentro da camada estudada;
 recaem sobre o seu interior.
 \end{description}
 
-A Figura~\ref{fig:rings} esquematiza tal algoritmo. Nesta figura encontram-se
+Por estar adaptado ao formato da cascata energética, este método de compressão
+preserva a informação da estrutura de um evento, melhor que a compactação
+provida pelo T2Calo. A estrutura segmentada dos calorímetros é preservada, de
+forma que tanto os valores de energia parciais quanto totais poderão ser
+recuperados no final do processamento. Ainda sim, obtém-se um nível de
+compressão de aproximadamente 10 vezes, sem demandar altos tempos de
+processamento, como será visto no Capítulo~\ref{chap:implement}.
+
+A Figura~\ref{fig:rings} esquematiza o algoritmo. Nesta figura, encontram-se
 exemplos de anéis de energia formados em 4 diferentes camadas dos calorímetros
-do detetor ATLAS. Próximo ao centro da RoI, nota-se uma célula que destaca,
-hipoteticamente, o centro de deposição energética que a etapa \ding{182} do
-algoritmo encontraria. Em seguida, as células de cada segmento são somadas
-para a obtenção das ``características'' do objeto a ser discriminado.
+do detetor ATLAS. O processo de anelamento para as outras camadas é feito de
+forma idêntica. Próximo ao centro da RoI, nota-se uma célula que destaca,
+hipoteticamente, o centro de deposição energética conforme a etapa \ding{182}
+do algoritmo viria a encontrar. Em seguida, as células de cada segmento são
+somadas para a obtenção das ``características'' (somas em anel) do objeto a
+ser discriminado.
 
 \begin{figure}
 \begin{center}
@@ -1592,9 +1495,9 @@ faltantes\footnote{Ocorrendo, potencialmente, com a falha de um canal de
 leitura ou do sistema de aquisição de dados.}, uma vez que células que não
 puderem ser lidas apenas não serão contabilizadas. Isto evita procedimentos de
 verificação especiais que poderiam comprometer o desempenho do algoritmo de
-compactação proposto. Através desta figura observa-se igualmente que algumas
+compactação proposto. Através desta figura, observa-se igualmente que algumas
 camadas, devido ao formato não simétrico das células (maiores numa direção que
-na outra), terão anéis abertos ou incompletos. Desta forma, marcou-se
+na outra), terão anéis abertos ou incompletos. Desta forma, marcaram-se os
 segmentos que pertencem ao mesmo anel com um número indicando a que anel
 determinado segmento pertence.
 
@@ -1621,7 +1524,7 @@ hardrônico. Nesta figura este fenômeno pode ser bem observado.
 \begin{center}
 \includegraphics[scale=0.6]{roi-had-9}
 \end{center}
-\caption{Imagem tri-dimensional mostrando o padrão de deposição energética de
+\caption{Imagem tri-dimensional mostrando a deposição energética de
 um elétron simulado na primeria camada hadrônica do calorímetro do ATLAS.}
 \label{fig:roi-had-9}
 \end{figure}
@@ -1633,7 +1536,7 @@ de deposição na segunda camada e.m.. Como já colocado um capítulo anterior
 deste trabalho, a segunda camada e.m. é a mais profunda do sistema de
 calorimetria, concentrando a maior parte da energia dos elétrons que interagem
 com este detetor. Desta forma, se há um pico de deposição energética, este é
-considerado para a formação dos anéis. De outra maneira, um ponto aleatório
+considerado para a formação dos anéis. De outra maneira, um ponto arbitrário
 (aquele com maior energia) dentro da sub-janela definida pelo pico de
 deposição energética na segunda camada e.m. é escolhido.
 
@@ -1641,11 +1544,13 @@ Tomando-se em consideração a granularidade padrão de todas as camadas do
 calorímetro (7 no total, incluindo o pré-irradiador), a configuração sugerida
 para o número de anéis pode ser encontrada na Tabela~\ref{tab:ring-config}. O
 número de anéis em cada camada leva em consideração o número máximo de anéis
-que podem ser formados considerando-se uma sub-região de $0,4 \times 0,4$ no
-plano $\eta\times\phi$. É interessante notar que nem sempre esta região
-cobrirá completamente uma região do mesmo tamanho, já que o posicionamento dos
-anéis depende do centro de deposição energética em cada camada. No entanto,
-como podemos ver no exemplo do T2Calo, uma região de $0,3 \times 0,3$ está
+que podem ser formados, considerando-se uma sub-região de $0,4 \times 0,4$ no
+plano $\eta\times\phi$, uma vez que este é o tamanho padrão da região de
+interesse utilizado pelo T2Calo para a deteção de elétrons. É interessante
+notar que nem sempre a região que estaria demarcada por anéis concêntricos de
+uma largura determinada, excederá uma região com tamanho $0,4\times0,4$, já
+que o posicionamento dos anéis dentro da RoI dependerá do centro de deposição
+energética em cada camada. No entanto, uma região de $0,3\times0,3$ está
 garantida ao redor do pico de energia, o que é suficiente para a análise de
 elétrons \cite{daqnote00-02}.
 
@@ -1669,7 +1574,7 @@ Total & 100 & & \\ \hline
 \end{table}
 
 Um total de $100$ anéis forma o conjunto de entrada para o novo sistema de
-discriminação elétron/jato. Nota-se que o primeiro anel de cada conjunto será
+discriminação elétron/jato. Nota-se que o primeiro anel de cada camada será
 considerado o pico de deposição energética na camada. Para classificar os
 padrões neste espaço de alta dimensionalidade, utilizaremos detetores baseados
 em redes neurais tipo MLP como descrito nas seções anteriores.
@@ -1679,17 +1584,16 @@ em redes neurais tipo MLP como descrito nas seções anteriores.
 Uma vez que estaremos lidando com os diferenciais energéticos dentro da mesma
 camada, por muitas vezes sutis, faz-se necessário que a normalização aplicada
 aos conjuntos de anéis seja compatível com a deteção destas
-diferenças. Ademais, outros estudos \cite{vassali-acat-2001} já demonstraram que a
-informação periférica dentro de cada camada de uma RoI é tão ou mais
-importante à discriminação que a quantidade de energia depositada no pico. Por
-estas razões, neste trabalho propomos um sistema de normalização dos dados da
-RoI baseado em um conjunto de razões cujo o denominador diminui, de forma
-relacionada a energia na camada, do centro para as bordas da região de
-interesse. Desta forma, o pico de deposição energética na camada (ou
-``primeiro anel'') teria um fator de normalização maior que o segundo anel,
-que seria por sua vez maior que o fator de normalização aplicado ao terceiro
-anel e, assim, sucessivamente. O algoritmo está descrito matematicamente na
-Tabela~\ref{tab:seq}.
+diferenças. Ademais, outros estudos \cite{vassali-acat-2001} já demonstraram
+que a informação periférica dentro de cada camada de uma RoI é tão ou mais
+importante à discriminação que a informação de energia no centro da RoI. Por
+estas razões se propõe um sistema de normalização dos dados da RoI baseado em
+um conjunto de razões cujo o denominador diminui, de forma relacionada a
+energia na camada, do centro para as bordas da região de interesse. Desta
+forma, o pico de deposição energética na camada (ou ``primeiro anel'') teria
+um fator de normalização maior que o segundo anel, que seria por sua vez maior
+que o fator de normalização aplicado ao terceiro anel e, assim,
+sucessivamente. O algoritmo está anotado na Tabela~\ref{tab:seq}.
 
 \begin{table}
 \renewcommand{\baselinestretch}{1.5}
@@ -1698,7 +1602,7 @@ Tabela~\ref{tab:seq}.
 \renewcommand{\baselinestretch}{1}
 \begin{center}
 \begin{tabular}{>{\bfseries}l r r}
-Anel & Normalização & Soma em anel \\ \hline
+Anel & Fator de Normalização & Soma em anel \\ \hline
 1 & $E$ (total da camada) & $E_1$\\
 2 & $E - E_1$ & $E_2$ \\
 3 & $E - E_1 - E_2$ & $E_3$\\
@@ -1706,9 +1610,9 @@ Anel & Normalização & Soma em anel \\ \hline
 \dots  & \dots \\
 N-4 & $E - E_1 - E_2 - ... - E_{N-5}$ & $E_{N-4}$ \\
 N-3 & $E - E_1 - E_2 - ... - E_{N-5} - E_{N-4}$ & $E_{N-3}$ \\
-N-2 & $E - E_1 - E_2 - ... - E_{N-5} - E_{N-4}$ & $E_{N-2}$ \\
-N-1 & $E - E_1 - E_2 - ... - E_{N-5} - E_{N-4}$ & $E_{N-1}$ \\
-N & $E - E_1 - E_2 - ... - E_{N-5} - E_{N-4}$ & $E_N$ \\
+N-2 & $E - E_1 - E_2 - ... - E_{N-4} - E_{N-3}$ & $E_{N-2}$ \\
+N-1 & $E - E_1 - E_2 - ... - E_{N-3} - E_{N-2}$ & $E_{N-1}$ \\
+N & $E - E_1 - E_2 - ... - E_{N-2} - E_{N-1}$ & $E_N$ \\
 \end{tabular}
 \end{center}
 \end{table}
@@ -1723,38 +1627,38 @@ algoritmo de ``Normalização Seqüencial''.
 
 Nota-se que este tipo de normalização poderá amplificar em demasiado os
 valores periféricos. Isto é desejável para os anéis que se sucedem ao pico de
-energia na camada, porém nem tanto para os anéis da periferia da RoI, onde a
-relação sinal-ruído é praticamente nula. Desta forma, propõe-se que, a partir
-de um determinado limiar de energia, o fator de normalização torne-se
-constante. Desta forma evita-se que o sinal ruidoso das bordas influencie o
-sistema de discriminação de maneira significativa.
+energia na camada, porém nem tanto para os anéis da periferia da RoI, mais
+distantes, onde a relação sinal-ruído é praticamente nula. Desta forma,
+propõe-se que, a partir de um determinado limiar de energia, o fator de
+normalização torne-se constante. Desta forma evita-se que o sinal ruidoso das
+bordas influencie o sistema de discriminação de maneira significativa.
 
 O sub-pacote \texttt{rbuild} do \eng{NeuralRinger} contém a implementação de
-referência para este processo de anelamento descrito. Ademais, este pacote
-pode ser re-configurado de forma a definir a largura dos aneis de cada camada
-ou o número máximo de anéis por camada. Assim, o sistema de anelamento torna-se
-independente do tamanho real da RoI e, portanto, independente de quão completo
-são os dados recebidos pelo processador do LVL2. Anéis sem dados recebem o
-valor \eng{default} que é igual a zero. O formato do arquivo de configuração é
-também em XML, o que simplifica a leitura e escrita dentro do contexto do
-projeto.
+referência para este processo de anelamento descrito (ver
+Apêndice~\ref{ap:framework}. Ademais, este pacote pode ser re-configurado de
+forma a definir a largura dos aneis de cada camada ou o número máximo de anéis
+por camada. Assim, o sistema de anelamento torna-se independente do tamanho
+real da RoI e, portanto, independente de quão completo são os dados recebidos
+pelo processador do LVL2. Anéis sem dados recebem o valor \eng{default} que é
+igual a zero. O formato do arquivo de configuração é também em XML, o que
+simplifica a leitura e escrita dentro do contexto do trabalho.
 
 \subsubsection{Dados}
 
-Os dados utilizados nas seções anteriores não podem ser re-utilizados para
-esta porção do projeto, uma vez que é necessita-se do acesso aos dados
-``brutos'' da RoI. Em outras palavras, deseja-se acesso aos mesmos dados
-utilizados pelo T2Calo para a operação de extração de características que este
-algoritmo realiza. De posse destes dados, é possível definir a operação de
-compactção topológica proposta. A Figura~\ref{fig:datagen} mostra o sistema
-que foi utilizado para a obtenção dos dados. Para cada RoI que é analisada
-pelo T2Cal, um conjunto de células é carregado dos arquivos de dados
-iniciais. Em seguida, os valores das células são calibrados e mapeados na
-geometria do detetor de forma que possam ser mais facilmente acessados pelo
-algoritmo de extração de características. A partir deste ponto, o T2Calo tem
-acesso aos dados e, é exatamente neste ponto que inserimos um \eng{patch}, que
-permite que os valores das células ``vistas'' pelo algoritmo sejam guardadas
-em um arquivo separado.
+Os dados em seu formato utilizado nas seções anteriores não podem ser
+re-aproveitados para esta porção do projeto, uma vez que necessita-se do
+acesso aos dados ``brutos'' da RoI. Em outras palavras, deseja-se acesso aos
+mesmos dados utilizados pelo T2Calo para a operação de extração de
+características que este algoritmo realiza. De posse destes dados, será
+possível definir a operação de compactação topológica proposta. A
+Figura~\ref{fig:datagen} mostra o sistema que foi utilizado para a obtenção
+dos dados. Para cada RoI que é analisada pelo T2Calo, um conjunto de células é
+carregado dos arquivos de dados iniciais. Em seguida, os valores das células
+são calibrados e mapeados na geometria do detetor de forma que possam ser mais
+facilmente acessados pelo algoritmo de extração de características. A partir
+deste ponto, o T2Calo tem acesso aos dados e, é exatamente neste ponto que
+inserimos um \eng{patch}, que permite que os valores das células ``vistas''
+pelo algoritmo sejam guardadas em um arquivo separado.
 
 \begin{figure}
 \begin{center}
@@ -1775,147 +1679,114 @@ proveniência e características dos eventos analisados até o momento.
 
 \subsection{Discriminação baseada em anelamento}
 
-O processo de anelamento reduz o espaço de dados de entrada em uma RoI (cerca
-de 1300 células) para 100 valores correspondes aos anéis formados com os dados
-das 7 camadas dos calorímetros. Sería difícil conceber um sistema de
-discriminação simples como o proposto para o EGammaHypo neste caso, uma vez
-que a possibilidade de combinações é muito grande. Neste caso, adota-se um
-sistema de discriminação neural, conectado à saída do sistema de anelamento
-que executará o processo de deteção.
+A Figura~\ref{fig:ringer-neural} mostra o diagrama de blocos do novo sistema
+de deteção elétron/jato proposto. Neste caso, substitui-se o bloco de extração
+de características pelo extrator em anéis. O processo de anelamento reduz o
+espaço de dados de entrada em uma RoI (cerca de 1300 células) para 100 valores
+correspondes aos anéis formados com os dados das 7 camadas dos
+calorímetros. Sería difícil conceber um sistema de discriminação simples como
+o proposto pelo EGammaHypo neste caso, uma vez que a possibilidade de
+combinações é muito grande. Neste caso, adota-se um sistema de discriminação
+neural, conectado à saída do sistema de anelamento que executará o processo de
+deteção.
 
-Tal qual nos sistemas anteriores, executou-se uma rápida análise do espaço dos
-parâmetros de treinamento neural. A Tabela~\ref{tab:ringer-param-optimization}
-resume os resultados e indica os valores de taxa de treinamento, tamanho da
-época e número de neurônios escondidos utilizados. Para cada tripla destes
-parâmetros, 5 testes foram executados e o resultado exposto na tabela
-representa a média e desvio padrões levando-se em consideração estas 5
-instâncias.
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.8]{ringer-neural}
+\end{center}
+\caption{Diagrama em blocos de um sistema de deteção utilizando o anelador
+como extrator de características e um detetor neural.}
+\label{fig:ringer-neural}
+\end{figure}
+
+Tal qual nos sistemas anteriores, executou-se uma análise do número de
+neurônios ótimo para a camada escondida. Um cuidado deve ser tomado: com o
+aumento de neurônios no nó de entrada do discriminador neural, o número de
+parâmetros livres que deseja sintonizar aumenta bruscamente. Finalmente, deve
+ser levando em consideração que se possui cerca de 3500 jatos para treinamento
+do sistema. Considerando-se $N$ o número de neurônios na camada escondida do
+discriminador neural o número de parâmetros livres ($K$) a serem treinados
+pode ser computado da seguinte forma:
+
+\begin{align}
+K &= (100 \times N) + N \text{(polarização)} + N 
+\text{(con. saída)} + 1 \text{(pol. saída)} \\
+&= (102 \times N) + 1
+\end{align}
+
+Desta forma, para, por exemplo, 12 neurônios na camada escondida, o número de
+parâmetros livres é 1225; para 11, 1123 e para 10, 1003. Estes números estão
+próximos de um limite sensível para o treinamento do sistema e, desta forma,
+nos limitaremos a este patamar (12 neurônios escondidos). Portanto, varia-se o
+número de neurônios escondidos entre 2 e 12. A
+Tabela~\ref{tab:ringer-param-optimization} resume os resultados, indicando o
+número de neurônios escondidos utilizados e os resultados para cada agrumento
+de teste.
 
 \begin{table}
 \caption{Análise dos parâmetros de treinamento para um detetor neural cuja a
 entrada são os 100 anéis resultantes do processamento de uma RoI.}
 \label{tab:ringer-param-optimization}
 \begin{center}
-\renewcommand{\baselinestretch}{1.0}
-{\tiny
-\begin{tabular}{|l|l|l|r|r|r|} \hline
-\rottext{Tx. de Aprendizado} & \rottext{Tamanho da Época} & \rottext{Neurônios escondidos} & \rottext{Número de iterações} & \rottext{Produto SP (treino)} & \rottext{Produto SP (teste)} \\ \hline \hline
-
-0.0100 & 100 & 4 & $356\pm78$ & $1.6329\pm0.0149$ & $1.6199\pm0.0156$ \\ \hline
-0.0100 & 100 & 6 & $372\pm88$ & $1.6237\pm0.0247$ & $1.6202\pm0.0183$ \\ \hline
-0.0100 & 100 & 8 & $280\pm39$ & $1.5987\pm0.0210$ & $1.6017\pm0.0215$ \\ \hline
-0.0100 & 100 & 10 & $337\pm58$ & $1.6263\pm0.0385$ & $1.6137\pm0.0320$ \\ \hline
-0.0100 & 200 & 4 & $366\pm43$ & $1.6119\pm0.0335$ & $1.5986\pm0.0302$ \\ \hline
-0.0100 & 200 & 6 & $299\pm33$ & $1.5961\pm0.0236$ & $1.5945\pm0.0264$ \\ \hline
-0.0100 & 200 & 8 & $340\pm62$ & $1.6246\pm0.0250$ & $1.6144\pm0.0221$ \\ \hline
-0.0100 & 200 & 10 & $287\pm75$ & $1.5994\pm0.0444$ & $1.5968\pm0.0342$ \\ \hline
-0.0100 & 500 & 4 & $285\pm64$ & $1.5914\pm0.0211$ & $1.5880\pm0.0225$ \\ \hline
-0.0100 & 500 & 6 & $296\pm53$ & $1.6061\pm0.0251$ & $1.5998\pm0.0200$ \\ \hline
-0.0100 & 500 & 8 & $254\pm56$ & $1.5981\pm0.0165$ & $1.5937\pm0.0156$ \\ \hline
-0.0100 & 500 & 10 & $343\pm68$ & $1.6177\pm0.0273$ & $1.6120\pm0.0225$ \\ \hline
-0.0100 & 1000 & 4 & $250\pm44$ & $1.5974\pm0.0215$ & $1.5897\pm0.0183$ \\ \hline
-0.0100 & 1000 & 6 & $260\pm24$ & $1.5999\pm0.0307$ & $1.5998\pm0.0201$ \\ \hline
-0.0100 & 1000 & 8 & $267\pm41$ & $1.6024\pm0.0175$ & $1.5934\pm0.0193$ \\ \hline
-0.0100 & 1000 & 10 & $271\pm46$ & $1.5876\pm0.0182$ & $1.5863\pm0.0164$ \\ \hline
-
-0.0200 & 100 & 4 & $460\pm106$ & $1.7245\pm0.0227$ & $1.6928\pm0.0200$ \\ \hline
-0.0200 & 100 & 6 & $347\pm57$ & $1.7056\pm0.0141$ & $1.6774\pm0.0176$ \\ \hline
-0.0200 & 100 & 8 & $421\pm78$ & $1.7215\pm0.0163$ & $1.6920\pm0.0149$ \\ \hline
-0.0200 & 100 & 10 & $366\pm80$ & $1.7120\pm0.0208$ & $1.6888\pm0.0179$ \\ \hline
-0.0200 & 200 & 4 & $265\pm67$ & $1.6716\pm0.0333$ & $1.6549\pm0.0265$ \\ \hline
-0.0200 & 200 & 6 & $315\pm72$ & $1.6893\pm0.0192$ & $1.6688\pm0.0147$ \\ \hline
-0.0200 & 200 & 8 & $283\pm57$ & $1.6870\pm0.0154$ & $1.6627\pm0.0156$ \\ \hline
-0.0200 & 200 & 10 & $301\pm58$ & $1.6903\pm0.0268$ & $1.6662\pm0.0197$ \\ \hline
-0.0200 & 500 & 4 & $351\pm42$ & $1.7028\pm0.0094$ & $1.6774\pm0.0098$ \\ \hline
-0.0200 & 500 & 6 & $348\pm61$ & $1.6941\pm0.0202$ & $1.6688\pm0.0125$ \\ \hline
-0.0200 & 500 & 8 & $298\pm69$ & $1.6793\pm0.0194$ & $1.6570\pm0.0216$ \\ \hline
-0.0200 & 500 & 10 & $260\pm23$ & $1.6789\pm0.0076$ & $1.6551\pm0.0041$ \\ \hline
-0.0200 & 1000 & 4 & $226\pm58$ & $1.6568\pm0.0287$ & $1.6468\pm0.0176$ \\ \hline
-0.0200 & 1000 & 6 & $280\pm68$ & $1.6850\pm0.0162$ & $1.6672\pm0.0144$ \\ \hline
-0.0200 & 1000 & 8 & $281\pm65$ & $1.6955\pm0.0212$ & $1.6700\pm0.0194$ \\ \hline
-0.0200 & 1000 & 10 & $263\pm47$ & $1.6812\pm0.0218$ & $1.6632\pm0.0214$ \\ \hline
-
-0.0500 & 100 & 4 & $3416\pm655$ & $1.8302\pm0.0144$ & $1.7872\pm0.0091$ \\ \hline
-0.0500 & 100 & 6 & $2173\pm1092$ & $1.8095\pm0.0192$ & $1.7755\pm0.0121$ \\ \hline
-0.0500 & 100 & 8 & $2263\pm1887$ & $1.8103\pm0.0308$ & $1.7727\pm0.0215$ \\ \hline
-0.0500 & 100 & 10 & $2284\pm1657$ & $1.8143\pm0.0278$ & $1.7784\pm0.0166$ \\ \hline
-0.0500 & 200 & 4 & $1283\pm324$ & $1.7947\pm0.0028$ & $1.7668\pm0.0036$ \\ \hline
-0.0500 & 200 & 6 & $760\pm601$ & $1.7773\pm0.0202$ & $1.7478\pm0.0197$ \\ \hline
-0.0500 & 200 & 8 & $705\pm712$ & $1.7730\pm0.0176$ & $1.7473\pm0.0166$ \\ \hline
-0.0500 & 200 & 10 & $520\pm273$ & $1.7741\pm0.0155$ & $1.7455\pm0.0154$ \\ \hline
-0.0500 & 500 & 4 & $532\pm321$ & $1.7731\pm0.0167$ & $1.7431\pm0.0167$ \\ \hline
-0.0500 & 500 & 6 & $382\pm95$ & $1.7654\pm0.0114$ & $1.7386\pm0.0138$ \\ \hline
-0.0500 & 500 & 8 & $291\pm74$ & $1.7577\pm0.0101$ & $1.7292\pm0.0136$ \\ \hline
-0.0500 & 500 & 10 & $291\pm54$ & $1.7572\pm0.0095$ & $1.7284\pm0.0105$ \\ \hline
-0.0500 & 1000 & 4 & $277\pm45$ & $1.7542\pm0.0071$ & $1.7284\pm0.0094$ \\ \hline
-0.0500 & 1000 & 6 & $248\pm52$ & $1.7497\pm0.0065$ & $1.7191\pm0.0135$ \\ \hline
-0.0500 & 1000 & 8 & $244\pm50$ & $1.7464\pm0.0132$ & $1.7197\pm0.0142$ \\ \hline
-0.0500 & 1000 & 10 & $250\pm48$ & $1.7460\pm0.0194$ & $1.7220\pm0.0166$ \\ \hline
-
-0.1000 & 100 & 4 & $4962\pm82$ & $1.8549\pm0.0102$ & $1.7948\pm0.0065$ \\ \hline
-0.1000 & 100 & 6 & $4951\pm63$ & $1.8767\pm0.0093$ & $1.8018\pm0.0059$ \\ \hline
-\textbf{0.1000} & \textbf{100} & \textbf{8} & \textbf{$4892\pm99$} & \textbf{$1.8852\pm0.0088$} & \textbf{$1.8070\pm0.0048$} \\ \hline
-0.1000 & 100 & 10 & $4972\pm27$ & $1.8841\pm0.0120$ & $1.8042\pm0.0054$ \\ \hline
-
-% missing tests with epoch size = 200
-
-0.1000 & 500 & 4 & $2866\pm1435$ & $1.8466\pm0.0285$ & $1.7884\pm0.0143$ \\ \hline
-0.1000 & 500 & 6 & $2089\pm421$ & $1.8416\pm0.0133$ & $1.7908\pm0.0057$ \\ \hline
-0.1000 & 500 & 8 & $1286\pm868$ & $1.8160\pm0.0322$ & $1.7770\pm0.0156$ \\ \hline
-0.1000 & 500 & 10 & $1296\pm652$ & $1.8156\pm0.0316$ & $1.7705\pm0.0204$ \\ \hline
-0.1000 & 1000 & 4 & $738\pm607$ & $1.7988\pm0.0283$ & $1.7624\pm0.0205$ \\ \hline
-0.1000 & 1000 & 6 & $977\pm408$ & $1.8098\pm0.0139$ & $1.7757\pm0.0080$ \\ \hline
-0.1000 & 1000 & 8 & $815\pm285$ & $1.8010\pm0.0078$ & $1.7706\pm0.0034$ \\ \hline
-0.1000 & 1000 & 10 & $272\pm116$ & $1.7778\pm0.0160$ & $1.7498\pm0.0148$ \\ \hline
-
-\end{tabular}}
-\renewcommand{\baselinestretch}{1.0}
+\begin{tabular}{|r|r|r|r|r|r|} \hline
+N & Passos & EMQ/teste & EMQ/treino & SP/teste & SP/treino \\ \hline 
+$2$ & $242\pm59$ & $0,133\pm0,002$ & $0,098\pm0,002$ & $1,763\pm0,005$ &
+$1,821\pm0,008$ \\ 
+$3$ & $473\pm128$ & $0,129\pm0,003$ & $0,089\pm0,004$ & $1,764\pm0,006$ & $1,840
+\pm0,011$ \\
+$4$ & $654\pm283$ & $0,123\pm0,004$ & $0,079\pm0,002$ & $1,781\pm0,011$ & $1,861
+\pm0,007$ \\
+$5$ & $531\pm124$ & $0,124\pm0,006$ & $0,077\pm0,005$ & $1,774\pm0,012$ & $1,864
+\pm0,011$ \\
+$6$ & $808\pm220$ & $0,124\pm0,003$ & $0,070\pm0,004$ & $1,776\pm0,007$ & $1,877
+\pm0,012$ \\
+$7$ & $898\pm217$ & $0,124\pm0,003$ & $0,065\pm0,004$ & $1,777\pm0,008$ & $1,890
+\pm0,006$ \\
+$8$ & $910\pm340$ & $0,122\pm0,005$ & $0,063\pm0,004$ & $1,777\pm0,012$ & $1,894
+\pm0,008$ \\
+$9$ & $930\pm207$ & $0,120\pm0,004$ & $0,060\pm0,003$ & $1,780\pm0,010$ & $1,900
+\pm0,006$ \\
+$10$ & $1426\pm453$ & $0,120\pm0,002$ & $0,054\pm0,002$ & $1,782\pm0,009$ & $1,9
+10\pm0,002$ \\
+$11$ & $990\pm343$ & $0,120\pm0,002$ & $0,055\pm0,002$ & $1,782\pm0,006$ & $1,90
+8\pm0,004$ \\
+$12$ & $930\pm240$ & $0,116\pm0,004$ & $0,050\pm0,003$ & $1,785\pm0,007$ & $1,91
+8\pm0,006$ \\
+\hline
+\end{tabular}
 \end{center}
 \end{table}
 
-Os testes realizados sugerem que uma combinação entre a taxa de treinamento
-igual à $0,01$, o tamanho da época de treinamento igual à $100$ e o número de
-neurônios escondidos igual à $8$ maximizem o potencial discriminante do
-sistema, que já se apresenta superior aos testes usando as características do
-T2Calo. Uma análise da tabela indica que a utilização de taxas de treinamento
-muito pequenas, para este sistema, é prejudicial. Isto pode ocorrer seja
-quando a superfície de erro não possui uma inclinação relativamente acentuada
-que faça o sistema convergir de forma suficiente rápida, seja pela existência
-de mínimos locais, ou ainda, uma combinação destas duas
-características. Realizou-se, igualmente, testes com taxas de aprendizado
-maior que $0,01$. Estes testes demonstraram grande instabilidade na fase de
-treinamento e foram descartados como possibilidade para o sistema final.
-
-O número de neurônios escondidos ideal aparenta estar entre 8 e 10. Os testes
-indicam que exista pouca diferença estatítisca entre as duas opções e portanto
-escolhe-se 8. Esta escolha se traduz em um sistema de deteção menos complexo,
-o que é positivo em geral. O tamanho ideal da época de treinamento, ou
-batelada parece ter uma correlação bastante forte com a qualidade do
-discriminador final. Quanto maior a época, menor a eficiência do detetor, em
-média, tendo-se por vista os valores de produto SP destacados. Mais uma vez,
-realizou-se testes com valores para o tamanho da época menores que 100. Estes
-testes demonstraram maior instabilidade no treinamento sem que houvesse um
-aumento no valor médio do produto SP para o conjunto de testes. Desta forma,
-concluiu-se que os valores escolhidos da
-Tabela~\ref{tab:ringer-param-optimization} representem um bom compromisso 
-dentre os parâmetros de treinamento que se deseja otimizar para este detetor.
+Através desta tabela, nota-se que o número mínimo de neurônios na camada
+escondida deve ser maior ou igual a 4, já que a partir deste número o
+desempenho da rede melhora tanto com relação ao mapeamento da entrada nos
+alvos de treinamento (EMQ menor) quanto com relação ao poder
+discriminante. Quando $N=12$ o sistema aparenta atingir um máximo, registrando
+a menor média para o EMQ do conjunto de testes, com baixo desvio assim como
+bons patamares de deteção. O número de épocas de treinamento é maior a partir
+de $N=6$, chegando a ser bem maior que 1000 quando $N=10$. Desta forma,
+escolhe-se $N=12$.
 
 \subsubsection{Resultados para o \eng{NeuralRinger}}
 
-Baseando-se nos parâmetros destacados acima, treinou-se dez redes que tiveram
-seus pesos sinápticos iniciais fixados em valores aleatórios e diferentes para
-cada uma destas iterações. A Figura~\ref{fig:ringer-mlp-mse} mostra a evolução
-do EMQ de uma destas redes. A Figura~\ref{fig:ringer-mlp-sp} mostra um gráfico
+Baseando-se número de neurônios destacado anteriormente, treinaram-se dez
+redes que tiveram seus pesos sinápticos iniciais fixados em valores aleatórios
+(no intervalo $[-1,+1]$) e diferentes para cada uma destas iterações. A
+Figura~\ref{fig:ringer-mlp-mse} mostra a evolução do EMQ da rede com melhor
+desempenho discriminatório. A Figura~\ref{fig:ringer-mlp-sp} mostra um gráfico
 equivalente para a evolução do produto SP ao longo do treinamento da
-rede. Como é possível distinguir, após cerca de 3000 passos de treinamento,
-apesar do EMQ continuar a apresentar declínio, a capacidade discriminante da
-rede parece pouco influenciada. A capacidade discriminante no que tange o
-conjunto de treinamento, apesar da constatação de estagnação do conjunto de
-teste, ainda continua a aumentar após os 3000 passos. É interessante observar,
-no entanto, que a capacidade discriminante da rede, para o conjunto de teste,
-resta inalterada não indicando a ocorrência do fenômeno de
-\eng{overtraining}. O mesmo comportamento pode ser observado com a evolução do
-EMQ.
+rede. Como é possível distinguir, após cerca de 100 passos de treinamento a
+capacidade discriminante da rede para o conjunto de teste estagna. A
+capacidade de mapeamento nos alvos (medido pelo EMQ) da rede, com relação ao
+conjunto de treinamento, apesar da estagnação do conjunto de teste, ainda
+continua a melhorar após os 100 passos, chegando, no momento onde treinamento
+é automaticamente interrompido, a um valor de pouco menor que $0,05$,
+indicando um produto SP de $1,91$. Ainda sim, não se observa, para o sistema
+em análise (também levando em consideração os outros 9 testes), o fenômeno
+conhecido como \eng{overtrainning}, onde a capacidade de generalização da rede
+é penalizada por uma excessiva especialização no conjunto de treino,
+normalmente fazendo com que ocorra um aumento no EMQ do discriminador para o
+conjunto de teste. 
 
 \begin{figure}
 \begin{center}
@@ -1937,13 +1808,18 @@ discriminador elétron/jato neural para as variáveis do anelador.}
 
 A Figura~\ref{fig:ringer-mlp-output} contém a saída da rede após o treinamento
 do detetor neural. Diferentemente aos casos anteriores, o sistema parece
-identificar com bastante precisão elétrons e jatos. Um corte em $+0,0302$
+identificar com bastante precisão elétrons e jatos. Um corte em $-0,07$
 estabele o máximo do produto SP (conjunto de teste) para esta rede, com uma
-eficiência de $96,55$\% na deteção de elétrons contra apenas $3,12$\% de
-falso-alarme em jatos. O produto SP para estes valores é $\approx 1,81$,
+eficiência de $96,21$\% na deteção de elétrons contra apenas $3,44$\% de
+falso-alarme em jatos. O produto SP para estes valores é $\approx 1,79$,
 representando o melhor valor para este índice obtido até o momento. Este valor
-está $0,3$ pontos acima do valor obtido para as saídas do T2Calo usando um
-detetor neural ou baseado no algoritmo LMS!
+está $0,16$ pontos acima do valor obtido para um detetor neural baseado em
+todas as características extraídas pelo T2Calo, $0,25$ pontos acima do valor
+obtido para as 4 saídas (de discriminação) do T2Calo usando um detetor neural
+e $0,31$ pontos (do produto SP) para um detetor baseado no algoritmo LMS! Em
+termos de rejeição de ruído, este novo sistema apresenta-se cerca de 6 vezes
+melhor que o proposto pela combinação do T2Calo aliado à discriminação
+utilizando o algoritmo EGammaHypo.
 
 \begin{figure}
 \begin{center}
@@ -1963,31 +1839,30 @@ anelador aprovará apenas cerca de 400~Hz em jatos ao passo que o sistema
 baseado na solução atual (EGammaHypo) para o LVL2, cerca de 2,4~kHz. Por outro
 ângulo este resultado traz que, para uma mesma capacidade de aprovar elétrons,
 um sistema baseado no anelamento e redes neurais poupará 6 vezes mais o
-terceiro nível de filtragem do experimento ATLAS. Se, por outro lado deseja-se
+terceiro nível de filtragem do experimento ATLAS. Se, por outro lado, deseja-se
 aumentar a eficiência na deteção de elétrons, o anelador consegue, até cerca
-de $97$\% de eficiência, manter uma taxa de falso-alarme igual ou inferior a
+de $96$\% de eficiência, manter uma taxa de falso-alarme igual ou inferior a
 1~kHz. Para o sistema atual baseado no EGammaHypo, para uma eficiência na
 deteção de elétrons de $97$\%, $100$\% dos jatos deveria ser aprovados, o que
 seria inviável.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{ringer-mlp/mlp-vs-lms-vs-egamma-roc}
+\includegraphics[scale=0.98]{ringer-mlp/roc-compare}
 \end{center}
-\caption{R.O.C. para o conjunto de teste, do discriminador neural baseado nas
-características extraídas pelo anelador, comparado com os resultados obtidos
-para o T2Calo.}
+\caption{R.O.C. comparativa dos diversos sistemas de filtragem abordados até agora.}
 \label{fig:ringer-test-roc}
 \end{figure}
 
 As Figuras~\ref{fig:ringer-test-sp-eta} e \ref{fig:ringer-test-sp-phi} mostram
 os valores do produto SP por intervalo em $\eta$ e em $\phi$,
-respectivamente. Observa-se, tal qual como nos sistemas anteriores, que a
-eficiência de deteção é menor próxima à região do \eng{crack}, no entanto,
-maior que nos outros casos. Na parte central do detetor, onde maior parte dos
-eventos de interesse se concentrarão, o valor do produto SP é bastante alto,
-chegando, em alguns pontos, a aproximar-se de $2,0$. O gráfico equivalente em
-$\phi$ mostra a homogenidade esperada.
+respectivamente. Observa-se neste caso que a recuperação do sinal perdido na
+região do \eng{crack} é excelente, sendo difícil notar onde realmente ocorre,
+o que pode ser facilmente percebido nos outros métodos. Na parte central do
+detetor, onde maior parte dos eventos de interesse se concentrarão, o valor do
+produto SP é bastante alto, chegando, em alguns pontos, a aproximar-se de
+$2,0$. O gráfico equivalente em $\phi$ mostra a homogenidade esperada para
+todo o espectro.
 
 \begin{figure}
 \begin{center}
@@ -2009,14 +1884,18 @@ baseado nas saídas do anelador.}
 
 A Figura~\ref{fig:ringer-test-sp-emet} contém uma análise do produto SP por
 intervalo em $\etem$. A eficiência de deteção neste caso apresenta-se
-constante, ou aproximadamente constante, até a faixa de energia em torno de
-100~GeV, caido abruptamente. Os número no topo de cada barra indicam a
-quantidade de RoI's analisadas no intervalo e servem como uma medida da
+aproximadamente constante, até a faixa de energia em torno de 100~GeV, caindo
+abruptamente em seguida. Os números no topo de cada barra indicam a quantidade
+de elétrons e jatos analisadas no intervalo e servem como uma medida da
 significância do resultado. Para valores de energia acima de $\approx
 100$~GeV, o número de eventos disponíveis para treino e análise cai
 significativamente, devido à natureza dos eventos estudados. Por esta razão,
-acredita-se que os resultados para altos valores energéticos devam ser
-interpretados com maior cuidado.
+os resultados para altos valores energéticos devem ser considerados com esta
+ressalva. A Figura~\ref{fig:ringer-et-compare} traz um comparativo da
+capacidade discriminativa deste novo sistema, com os métodos de discriminação
+neurais baseados na saída do T2Calo (parcial, com 4 variáveis e completa com
+14 variáveis). Este novo sistema possui melhor discriminação nas faixas de
+energia com mais eventos, superando em muitos pontos os outros dois detetores.
 
 \begin{figure}
 \begin{center}
@@ -2027,29 +1906,45 @@ neural baseado nas saídas do anelador.}
 \label{fig:ringer-test-sp-emet}
 \end{figure}
 
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{ringer-mlp/et-compare}
+\end{center}
+\caption{Gráfico comparativo do produto SP ao longo de $E^{e.m.}_T$ para os
+discriminador neurais baseados nas saídas do anelador, parcial e completa do
+T2Calo.}
+\label{fig:ringer-et-compare}
+\end{figure}
+
 As Figuras~\ref{fig:ringer-mse-relevance} e \ref{fig:ringer-sp-relevance}
 trazem as análises de relevância para o conjunto de teste, das 100 variáveis
 do anelador, tendo em vista a variação do EMQ e do produto SP
 respectivamente. Os dois gráficos parecem indicar, igualmente, uma grande
 importância nos primeiros anéis de cada camada (veja
-Tabela~\ref{tab:ringer-position}). A importância de cada anel diminui com o
-afastamento do centro, onde pressupõe-se que a relação sinal ruído seja
-inferior. A importância relativa entre os anéis mais importantes e aqueles de
-menor importância parece ser menor da perspectiva da relevância de baseada no
-produto SP que da relevância clássica. Outra informação que pode ser aferida é
-sobre a importância da informação na primeira camada e.m.. Para a relevância
-clássica, as variáveis desta camada constituem uma informação essencial na
-determinação da saída, estando ao menos uma ordem de magnitude acima da
-relevância dos dados de outras camadas. Na avaliação baseada na capacidade
-discriminante do sistema, a parte hadrônica é a mais importante. A importância
-relativa entre os dados da primeira e segunda camadas e.m. e da primeira
-camada hadrônica também difere. Na análise da relevância utilizando a
-discriminação, estas três camadas parecem exercer um papel igualmente
-importante na deteção de elétrons e jatos.
+Tabela~\ref{tab:ringer-position}). A importância de cada anel diminui, num
+geral, com o afastamento do centro, onde pressupõe-se que a relação sinal
+ruído seja inferior. A importância relativa entre os anéis mais importantes e
+aqueles de menor importância parece ser menor da perspectiva da relevância de
+baseada no produto SP que da relevância clássica, como também observado na
+análise das 14 variáveis produzidas pelo T2Calo. Outra informação que pode ser
+aferida é sobre a importância da informação na primeira camada e.m.. Para a
+relevância clássica, as variáveis desta camada constituem uma informação
+essencial na determinação da saída, indicando ser duas vezes mais relevantes
+que os dados de outras camadas. Na avaliação baseada na capacidade
+discriminante do sistema, a parte hadrônica é a mais importante, sobretudo a
+primeira camada indica ser a mais relevante. É interessante notar mais uma vez
+que a informação de relevância está ligada diretamente ao caráter físico do
+evento: para a discriminação, os valores mais relevantes na deteção
+elétron/jato são, sem dúvida, a informação de depósito de energia ao longo das
+camadas e, em especial, a existência de energia na primeira camada hadrônica,
+indicando que o evento contenha componentes desta natureza (aumentando a
+probabilidade de não ser um elétron). O detetor baseado nos anéis de deposição
+energética ``aprende'' este conceito através da análise do conjunto de dados,
+sem a necessidade da intervenção de um especialista.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{ringer-mlp/test-mse-relevance}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-mse}
 \end{center}
 \caption{Os valores de relevância para os conjunto de teste, para as 100
 variáveis do anelador e considerando-se o classificador neural em estudo.}
@@ -2058,7 +1953,7 @@ variáveis do anelador e considerando-se o classificador neural em estudo.}
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{ringer-mlp/test-sp-relevance}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-sp}
 \end{center}
 \caption{Os valores de relevância de discriminação para os conjunto de teste,
 para as 100 variáveis do anelador e considerando-se o classificador neural em
@@ -2085,50 +1980,224 @@ Pré-irradiador & 8 & 1 & 8 \\
 \end{center}
 \end{table}
 
-\subsection{Compressão baseada na relevância}
+\subsection{Compactação baseada na relevância}
 
 A informação de relevância estudada até aqui pode ser aproveitada para que
 aplique-se sobre as entradas do discriminador neural, uma poda baseada na
 capacidade discriminante de uma variável. Esta poda pode ser feita
-automaticamente \cite{aa:enfpc-00} em muitos casos, ou manualmente se
-existirem restrições no processo de poda.
+automaticamente \cite{aa:enfpc-00} em muitos casos, ou manualmente se forem
+necessárias otimizações no processo de poda.
 
-De fato, a técnica de normalização seqüêncial dos anéis que é proposta nesta
-seção assume a disponbilidade da energia total camada a camada para o cálculo
-do fator de normalização para cada anel. Ademais, para calcular o fator de
-normalização para o anel $N+1$ em uma mesma camada, necessita-se do valor de
-energia do anel $N$. Portanto, se deseja-se manter o anel $N+1$ de uma camada,
-é necessário que se mantenha o anel $N$, ao menos para o cálculo do fator de
-normalização. De fato, como veremos mais a frente, esta última sugestão seria
-uma prática que recompensaria em pouco, visto que a maior parte do tempo de
-processamento não está na discriminação neural e sim na aquisição dos
-dados. Por outro lado, seria possível considerar que uma poda sempre seria
-positiva no que tange a complexidade do discriminador neural que segue o
-sistema de anelamento. Ao retirar uma variável da entrada, ao menos 8 conexões
-sinápticas do detetor final seriam removidas simultaneamente, levando-se em
-consideração a configuração exemplificada anteriormente. 
+Um fator interessante e novo até o momento é o aparecimento de valores
+negativos de relevância, como havia sido prevista possibilidade
+anteriormente. Esta informação indica que existam variáveis que ``atrapalhem''
+o treinamento da rede e, por conseqüência, o processo de discriminação
+proporcionado pela combinação anelador $+$ redes neurais. Para testarmos esta
+possibilidade, elimina-se do conjunto de treinamento e testes, as variáveis
+com relevância de discriminação negativas, aplicando-se um patamar de poda em
+$0,0$. Neste modo, 62 variáveis sobrevivem ao corte, como indicado na
+Tabela~\ref{tab:cut-negative-relev}.
 
-Observando-se mais uma vez o gráfico da Figura~\ref{fig:ringer-sp-relevance},
-podemos concluir que o grau de importância dos anéis diminui, num geral, do
-pico de deposição energética ($N = 0$) para as bordas da RoI. Desta forma o
-problema da otimização deste sistema, numa primeira aproximação, poderia se
-resumir à poda de elementos da periferia, de acordo com a relevância de
-discriminação observada naquele gráfico.
+\begin{table}
+\caption{Anéis sobreviventes de uma poda baseada na relevância de discriminação.}
+\label{tab:cut-negative-relev}
+\begin{center}
+\begin{tabular}{|l|r|r|r|r|} \hline
+\textbf{Camada} & \textbf{Número de anéis} & \textbf{Primeiro} &
+\textbf{Último} & \textbf{Anéis removidos}\\ \hline
+Pré-irradiador & 6 & 1 & 6 & 2\\
+% REM: 4, 8
+% STAY: 1, 2, 3, 5, 6, 7 (6)
+1\eira e.m. & 36 & 7 & 42 & 28\\
+% REM: 14,16,22,33-36,38,40-45,47,50,51,54,58,61,64,65,67-72, TOTAL = 28
+% STAY: 9-13 (5), 15, 17-21 (5), 23-32 (10), 37, 39, 46, 48, 49, 52, 53, 
+% 55-57(3), 59, 60, 62, 63, 66, TOTAL = 36
+2\eira e.m. & 5 & 43 & 47 & 3 \\
+% REM: 76-78 (3)
+% STAY: 72-75, 79 (5)
+3\eira e.m. & 5 & 48 & 52 & 3 \\
+% REM: 85-87 (3)
+% STAY: 80-84 (5)
+1\eira hadrônica & 4 & 53 & 56 & 0\\
+% REMAINS THE SAME
+2\eira hadrônica & 3 & 57 & 59 & 1\\ 
+% REM: 93 (1)
+% STAY: 94-96 (3)
+3\eira hadrônica & 3 & 60 & 62 & 1\\ \hline
+% REM: 97 (1)
+% STAY: 98-100 (3)
+\end{tabular}
+\end{center}
+\end{table}
+
+Nota-se que a camada que teve mais cortes foi a 1\eira camada e.m.. Esta
+camada tem uma geometria de células muito particular: 4 vezes mais compridas
+ao longo da variável $\phi$ e 8 vezes mais finas ao longo de $\eta$,
+comparativamente à 2\eira camada e.m.. Ela é utilizada para detetar a
+multiplicidade da cascata, indicando a presença de muitas partículas ao invés
+de apenas uma. Esta é uma valiosa informação na deteção elétron/jato. Por ser
+muito estreita na direção de $\eta$ o número de anéis neste camada é
+especialmente grande. A informação relevante no entanto, não está tão
+espalhada, devendo se concentrar nas regiões centrais desta camada: se o
+objeto for um elétron, se observará um pico próximo ao centro da RoI ao passo
+que se for um jato, picos espalhados de deposição energética nos arredores do
+centro, igualmente. A análise de relevância de discriminação, neste caso, está
+enfatizando que esta é uma estratégia melhor, e indicando que a informação
+extra nesta camada está apenas confundindo o detetor. 
+
+No caso das outras camadas, as informações da periferia mais distante são
+consideradas menos relevantes, como é de se esperar. Isto não quer dizer, em
+absoluto, que a informação periférica não seja importante. Quer dizer,
+simplesmente que, quando se afasta muito do centro, chega-se a um ponto onde
+não há mais interação da partícula com o detetor, e portanto a informação
+contida nesta região não ajuda a discriminação.
+
+De posse dos 62 anéis que sobreviveram ao corte de discriminação treina-se 10
+redes neurais, ainda com 12 neurônios escondidos, partindo-se de inicializões
+distintas. Observa-se a variabilidade de parâmetros como o número de épocas
+necessárias ao treinamento (espera-se que convirja mais rápido) e os valores
+finais de EMQ e produto SP, que se espera, sejam maiores que no caso anterior,
+utilizando os 100 anéis. Em média, este novo sistema toma cerca de 552 passos
+de treinamento para atingir a estagnação do produto SP. O desvio-padrão para o
+número de passos de treinamento é de, apenas, 130 passos, indicando boa
+concordância entre os detetores destes últimos testes no que tange este
+aspecto; sobretudo em comparação ao sistema anterior, onde obteve-se
+$930\pm240$ passos de treinamento. O EMQ do conjunto de teste cai
+ligeiramente, na média, passando de $0,116\pm0,004$ para $0,110\pm0,002$. O
+produto SP de teste aumenta 0,032 pontos, passando de $1,785\pm0,007$ para
+$1,807\pm0,004$. O produto SP máximo determina uma eficência na deteção de
+elétrons de 96,64\% contra apenas 3,17\% de falso-alarme. A
+Figura~\ref{fig:ringer-mlp-relev-cut-0-roc} mostra um comparativo das ROC's de
+alguns do discriminadores analisados até o momento.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{ringer-mlp/roc-compare-relev-cut-0}
+\end{center}
+\caption{Comparativo entre as ROCs de alguns dos sistemas de discriminação
+abordados até aqui. Em destaque, a ROC do melhor discriminador (linha cheia),
+determinado a partir da análise de relevância.}
+\label{fig:ringer-mlp-relev-cut-0-roc}
+\end{figure}
+
+A Figura~\ref{fig:ringer-mlp-relev-cut-0-relev} traz, mais uma vez, a análise
+de relevância de discriminação do sistema baseado em 62 dos 100 anéis
+originais. Como é possível determinar, ainda existem cerca de 14 componentes
+que apresentam relevância negativa. Um segundo corte baseado nesta observação
+será realizado. A Tabela~\ref{tab:cut-negative-relev-1} contém a informação
+dos anéis sobreviventes. Após reajustar os pesos sinápticos, o discriminador
+neural, mais uma vez tende a remover anéis excedentes da periferia da 1\eira
+camada e.m.. O número total de anéis neste momento é menor que metade dos
+anéis originais.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-sp-cut-0}
+\end{center}
+\caption{Os valores de relevância de discriminação para os conjunto de treino
+e teste, para as 62 variáveis que sobreviveram a uma poda baseada na
+relevância de discriminação.}
+\label{fig:ringer-mlp-relev-cut-0-relev}
+\end{figure}
+
+\begin{table}
+\caption{Anéis sobreviventes de uma segunda poda baseada na relevância de
+discriminação.} 
+\label{tab:cut-negative-relev-1}
+\begin{center}
+\begin{tabular}{|l|r|r|r|r|} \hline
+\textbf{Camada} & \textbf{Número de anéis} & \textbf{Primeiro} &
+\textbf{Último} & \textbf{Anéis removidos}\\ \hline
+Pré-irradiador & 6 & 1 & 6 & 0\\ %0
+% REMAINS THE SAME AS THE PREVIOUS CUT
+1\eira e.m. & 25 & 7 & 31 & 11\\ %11 7-42
+% REM[0]: 14,16,22,33-36,38,40-45,47,50,51,54,58,61,64,65,67-72, TOTAL = 28
+% REM[1]: 25, 28-30 (3), 32, 48, 49, 52, 57, 62, 66, TOTAL = 11, CUM = 39
+% STAY: 9-13 (5), 15, 17-21 (5), 23, 24, 26, 27, 31, 37, 39, 46, 53, 
+% 55-56(2), 59, 60, 63, TOTAL = 25
+2\eira e.m. & 3 & 32 & 34 & 2 \\ %13 43-47
+% REM[0]: 76-78 (3)
+% REM[1]: 75,79 (2)
+% STAY: 72-74 (3)
+3\eira e.m. & 4 & 35 & 38 & 1 \\ %14 48-52
+% REM[0]: 85-87 (3)
+% REM[1]: 84 (1)
+% STAY: 80-83 (4)
+1\eira hadrônica & 4 & 39 & 42 & 0\\
+2\eira hadrônica & 3 & 43 & 45 & 0\\
+3\eira hadrônica & 3 & 46 & 48 & 0\\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Um novo conjunto de 10 testes é executado para se determinar se a poda é
+revertida em benefício ao processo de treinamento. Para estes novos testes, o
+número médio de passos de treinamento para a rede neural cai, de 552 passos
+para 426, com desvio padrão aproximadamente igual ($127$ para estes 10
+testes). A capacidade discriminante da rede para o conjunto de testes sob,
+marginalmente, de $1,807\pm0,004$ para $1,817\pm0,003$, indicando, mais uma
+vez que a poda tenha sido benéfica ao processo de discriminação a que se
+destina o classificador neural. O melhor dos detetores consegue identificar
+corretamente 96,89\% dos elétrons contra 2,93\% de falso-alarme (o produto SP
+é 1,82). A Figura~\ref{fig:ringer-mlp-relev-cut-1} mostra um comparativo deste
+classificador com outros, também baseados em redes neurais obtidos até o
+momento. Como é possível determinar por inspeção desta figura, o comportamento
+deste detetor é quase idêntico ao detetor baseado em 62 dos 100 anéis, o
+superando em alguns pontos. A Figura~\ref{fig:cut-1-relevance-sp} mostra os
+resultados de relevância de discriminação para este último discriminador.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{ringer-mlp/roc-compare-relev-cut-1}
+\end{center}
+\caption{Comparativo entre as ROCs de alguns dos sistemas de discriminação
+abordados até aqui. Em destaque, a ROC do melhor discriminador (linha cheia),
+determinado a partir de uma segunda análise de relevância.}
+\label{fig:ringer-mlp-relev-cut-1}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-sp-cut-1}
+\end{center}
+\caption{Os valores de relevância de discriminação para os conjunto de treino
+e teste, para as 62 variáveis que sobreviveram a uma poda baseada na
+relevância de discriminação.}
+\label{fig:cut-1-relevance-sp}
+\end{figure}
+
+Até o presente momento, a poda está sendo realizada sem nenhuma consideração
+ao processo de normalização, ainda que exista uma dependência.  De fato, a
+técnica de normalização seqüêncial dos anéis que é proposta neste trabalho
+assume a disponibilidade de um valor de energia total associado a cada camada
+para o cálculo do fator de normalização de cada anel. Ademais, para calcular o
+fator de normalização para o anel $N+1$ em uma mesma camada, necessita-se do
+valor de energia do anel $N$. Portanto, se deseja-se manter o anel $N+1$ de
+uma camada, é necessário que se mantenha o anel $N$, ao menos para o cálculo
+do fator de normalização. De fato, como veremos mais a frente, esta última
+sugestão seria uma prática que recompensaria em pouco, visto que a maior parte
+do tempo de processamento não está na discriminação neural e sim na aquisição
+e preparação dos dados (calibração). Por outro lado, seria possível considerar
+que uma poda sempre seria positiva no que tange a complexidade do
+discriminador neural que segue o sistema de anelamento. Ao retirar uma
+variável da entrada, ao menos 12 conexões sinápticas do detetor final seriam
+removidas simultaneamente, levando-se em consideração a configuração
+exemplificada anteriormente.
 
 Outra técnica que empregaremos será a combinação de camadas menos relevantes,
 reduzindo o número de entradas do processador neural, sem que se perca,
 necessariamente, a informação de energia presente nos anéis removidos. Uma
 outra forma de manter a informação de energia, mas compactando ainda mais a
 entrada seria a utilização de anéis cuja a largura dependesse da relevância
-dos dados naquela região. Este estudo, reservaremos a um outro projeto. Tendo
-em vista a discussão nos parâgrafos anteriores, propõe-se a seguinte variante
-do processo de anelamento, baseando-se na relevância de discriminação da
-Figura~\ref{fig:ringer-sp-relevance}
+dos dados naquela região. Este estudo pode vir a ser realizado no
+futuro. Tendo em vista a discussão nos parâgrafos anteriores, propõe-se a
+seguinte variante do processo de poda, baseando-se na relevância de
+discriminação da Figura~\ref{fig:ringer-sp-relevance}.
 
 \begin{enumerate}
-\item \textbf{Pré-irradiador}: utilizar apenas 4 ao invés de 8 anéis, com a
+\item \textbf{Pré-irradiador}: utilizar apenas 4 ao invés de 8 anéis podados, com a
 mesma granularidade anterior;
-\item \textbf{1\eira\ camada e.m.}: utilizar apenas 12 dos 64 anéis iniciais, com a
+\item \textbf{1\eira\ camada e.m.}: utilizar apenas 12 dos 64 anéis podados, com a
 mesma granularidade anterior;
 \item \textbf{2\eira\ camada e.m.}: utilizar apenas 6 dos 8 anéis iniciais, com a
 mesma granularidade anterior;
@@ -2139,37 +2208,32 @@ mesma granularidade anterior;
 ``camada'' virtual, mantendo a granularidade anterior.
 \end{enumerate} 
 
-Um novo total de 34 anéis é calculado da massa de dados originais. Em seguida,
-cinco testes mantendo a mesma parametrização do sistema anterior foram
-conduzidos. A R.O.C. do melhor destes testes, junto àquelas dos testes
-anteriores, pode ser vista na Figura~\ref{fig:relev-cut1-roc}. A figura mostra
-que o sistema podado se comporta tão bem quanto o sistema original com o 100
-anéis, o superando em alguns pontos. Este novo sistema possui apenas a
-terceira parte do número de anéis do sistema anterior, mas tem um desempenho
-marginalmente melhor. O discriminador neural tem $66 \times 8 = 528$ menos
-conexões sinápticas, somando um total de $289$ sinapses. O máximo do produto
-SP ($1,82$) é atingido para uma eficiência na deteção de elétrons de $96,6$\%
-contra um falso-alarme em jatos de apenas $2,94$\% (735~Hz).
+Um novo total de 34 anéis são extraídos da massa de dados originais, com a
+preocupação da eliminação das variáveis menos relevantes (ou com relevância
+negativa), sem que se crie ``buracos'' entre os anéis. Em seguida, dez testes,
+mantendo a mesma parametrização do sistema anterior, foram conduzidos. A
+R.O.C. do melhor destes testes, junto àquelas dos testes anteriores, pode ser
+vista na Figura~\ref{fig:relev-cut1-roc}. A figura mostra que o sistema podado
+se comporta, aproximadamente, tão bem quanto o sistema original com 100 anéis
+ou um dos sistemas otimizados com 62 ou 48 anéis, os superando em alguns
+pontos. Este novo sistema possui apenas a terça parte do número de anéis do
+sistema original, mas praticamente mantém o desempenho do sistema
+discriminador com 100 anéis, seguindo a linha dos sistemas esculpidos pela
+relevância de discriminação. O discriminador neural, neste caso, tem $66
+\times 12 = 792$ menos conexões sinápticas, somando um total de $433$
+sinapses. O máximo do produto SP ($1,81$) é atingido para uma eficiência na
+deteção de elétrons de $96,64$\% contra um falso-alarme em jatos de apenas
+$3,09$\% (aproximadamente 770~Hz de ruído de fundo).
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{ringer-mlp/relevance-cut1-roc}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-cut2-roc}
 \end{center}
 \caption{R.O.C. comparativa entre os sistemas de deteção de elétrons e jatos
 analisados até agora e o novo sistema de deteção gerado a partir da poda dos
 canais de entrada baseada na relevância.}
 \label{fig:relev-cut1-roc}
 \end{figure}
-
-A Figura~\ref{fig:relevance-cut1-sp-relevance} contém os valores de relevância
-de discriminação para o detetor em questão. A
-Tabela~\ref{tab:ringer-position-relevance-cut1} contém a posição relativa de
-cada anel dentro do conjunto. A relação de relevância entre os anéis mudou
-para este sistema. Anteriormente, os anéis da parte hadrônica eram os mais
-relevantes ao processo discriminativo, a passo que neste novo sistema, os
-anéis da primeira camada e.m. se mostram mais importantes. Dentro desta
-camada, a ordem de importância não decresce com a distância ao pico de
-deposição energética, apresentando um padrão menos estruturado.
 
 A primeira camada e.m., como mostra a Figura~\ref{fig:lar-detail} no
 Capítulo~\ref{chap:atlas}, é uma camada mais fina, originalmente concebida
@@ -2181,14 +2245,14 @@ $\eratio$ do T2Calo assume exatamente este papel, como explicado no início do
 Capítulo~\ref{chap:baseline}. Por esta razão, é bastante intuitivo que os
 dados na primeira camada e.m. apresentem um padrão de relevância distinto aos
 das demais camadas. De fato, o mesmo fenômeno pode também ser observado na
-Figura`\ref{fig:ringer-sp-relevance}, embora neste contexto a informação
-esteja menos evidente dado o contraste entre valores de relevância baixos para
+Figura`\ref{fig:ringer-sp-relevance}; embora, neste contexto, a informação
+esteja menos evidente, dado o contraste entre valores de relevância baixos para
 os outros aneís. Para as outras camadas, a relevância parece ser maior para o
 segundo anel que para o primeiro, caindo à medida que se afasta do centro.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{ringer-mlp/relevance-cut1-sp-relevance-test}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-cut-2-sp}
 \end{center}
 \caption{Relevâncias de discriminação para o detetor neural baseado em 34 (dos
 100) anéis resultantes da poda por relev\^{a}ncia.}
@@ -2218,7 +2282,8 @@ Pré-irradiador & 4 & 1 & 4 \\
 %utiliza uma área cerca 
 
 Uma vez que a eficiência deste novo sistema de deteção não foi afetada pela
-poda, propõe-se uma segunda poda com a seguinte configuração:
+poda e, que observa-se a existência de relevâncias de discriminação negativas,
+propõe-se uma quarta estratégia de poda com a seguinte configuração:
 
 \begin{enumerate}
 \item \textbf{Pré-irradiador}: não se utilizará os dados desta camada;
@@ -2227,43 +2292,54 @@ com a mesma granularidade anterior;
 \item \textbf{2\eira\ camada e.m.}: utilizar apenas 4 dos 8 anéis iniciais,
 com a mesma granularidade anterior;
 \item \textbf{3\eira\ camada e.m.}: não se utilizará os dados desta camada;
-\item \textbf{1\eira\ camada hadrônica, 2\eira\ e 3\eira\ camadas hadrônica}: aglutinar em uma mesma ``camada'' virtual, mantendo a granularidade anterior.
+\item \textbf{1\eira\ camada hadrônica, 2\eira\ e 3\eira\ camadas hadrônica}:
+aglutinar em uma mesma ``camada'' virtual, mantendo a granularidade anterior.
 \end{enumerate} 
 
-Um total de 14 anéis restam nesta nova configuração. Mantém-se os parâmetros
-de treinamento e o número de neurônios na camada escondida do detetor neural
-inicial. A Figura~\ref{fig:relev-cut2-roc} mostra a curva R.O.C. de um dos 5
-testes realizados, junto à curva R.O.C. dos outros detetores. Mais uma vez o
-sistema não apresenta perda no desempenho comparado ao sistema original com
-100 anéis. O ponto de máximo do produto SP ocorre quando a eficiência na
-deteção de elétrons é de $96,89$\% contra um falso-alarme de $2,72$\%
-(680~Hz).
+Um total de 14 anéis restam nesta nova configuração. Este número de variáveis
+é idêntica à situação de melhores resultados com as características extraídas
+pelo T2Calo. Mantém-se os parâmetros de treinamento e o número de neurônios na
+camada escondida do detetor neural inicial. A Figura~\ref{fig:relev-cut-3-roc}
+mostra a curva R.O.C. de um dos 10 testes realizados, junto à curva R.O.C. de
+outros detetores. Mais uma vez o sistema não apresenta perda no desempenho
+comparado ao sistema original com 100 anéis. O ponto de máximo do produto SP
+(impressionantes $1,83$!) ocorre quando a eficiência na deteção de elétrons é
+de $97,24$\% contra um falso-alarme de apenas $2,93$\% (730~Hz).
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{ringer-mlp/relevance-cut2-roc}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-cut-3-roc}
 \end{center}
-\caption{R.O.C. comparativa entre os sistemas de deteção de elétrons e jatos
+\caption{R.O.C. comparativa entre alguns dos sistemas de deteção de elétrons e jatos
 analisados até agora e o novo sistema de deteção baseado na poda da
 relevância, com apenas 14 (dos 100) anéis.}
-\label{fig:relev-cut2-roc}
+\label{fig:relev-cut-3-roc}
 \end{figure}
 
-A Figura~\ref{fig:relevance-cut2-sp-relevance} contém os valores de relevância
+A Figura~\ref{fig:relevance-cut3-sp-relevance} contém os valores de relevância
 de discriminação para a segunda poda baseada no critério da relevância de
 discriminação. A Tabela~\ref{tab:ringer-position-relevance-cut2} mostra a
-relação entre os números naquele gráfico. Neste novo sistema, a parte
-hadrônica re-adquire a importância do sistema baseado nos 100 anéis,
-recuperando, possivelmente, a falta de dados para a terceira camada e.m., que
-foi suprimida nesta avaliação.
+relação entre os números neste gráfico e a informação dos anéis. Neste novo
+sistema, a parte hadrônica assume uma importância secundária. A informação
+periférica na segunda camada e.m. parecer ser a mais relevante para este
+último classificador, que também teve o melhor desempenho até o momento. Como
+colocado em várias partes do texto, espera-se que a informação de deteção
+esteja realmente na periferia da RoI e, neste exemplo, é possível distinguir
+este efeito de forma bastante evidente. Não mais se vê um níveis de relevância
+de discriminação negativos, o que indica que estejamos no limite do que se é
+possível com esta configuração de anéis. Ademais nota-se que a maior parte da
+informação de interesse está na periferia do objeto considerado. Por exemplo,
+o anel 5 é o mais relevante na 1\eira camada e.m., o anel 10, o mais relevante
+na 2\eira camada e.m. e, finalmente, os anéis 13 e 14 para a seção hadrônica
+combinada.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{ringer-mlp/relevance-cut2-sp-relevance-test}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-cut-3-sp}
 \end{center}
 \caption{Relevâncias de discriminação para o detetor neural baseado em 14 (dos
 100) anéis resultantes da poda por relevância.}
-\label{fig:relevance-cut2-sp-relevance}
+\label{fig:relevance-cut3-sp-relevance}
 \end{figure}
 
 \begin{table}
@@ -2281,5 +2357,55 @@ apenas 14 (dos 100) anéis.}
 \end{tabular}
 \end{center}
 \end{table}
+
+Desta forma, uma otimização que remova as componentes menos relevantes,
+desvinculando-se do problema de recuperação dos dados do sistema de leitura, e
+assumindo-se que os dados para os 14 anéis serão recuperados de qualquer
+maneira, não parece interessante. Ademais, como a análise de relevância
+indica, haverá possível perda de eficiência. Em troco, eliminar-se-á algumas
+poucas conexões sinápticas que, finalmente, como iremos ver no
+Capítulo~\ref{chap:implement}, não impactará fundamentalmente no tempo de
+execução do algoritmo. Por outro lado espera-se que, preservando anéis menos
+relevantes, construiremos um detetor fundamentalmente mais robusto. Para
+averiguarmos se a informação de anéis relevantes pode extraída de outros anéis
+menos relevantes, artificialmente podamos a variável mais importante (de
+número 10 na Figura~\ref{fig:relevance-cut3-sp-relevance}), representando o
+anel mais periférico na segunda camada e.m.. 
+
+Treina-se novamente um conjunto de 10 redes neurais com base nas 13 entrada
+menos relevantes. O resultado é como esperado: este novo sistema consegue
+recuperar o sinal perdido da variável mais relevante apresentando, no melhor
+dos casos, uma eficiência na deteção de elétrons de 97,59\% para um
+falso-alarme na deteção de jatos de 3,22\% (SP=$1,84$). A
+Figura~\ref{fig:anti-relev-cut-3-sp} mostra o gráfico da relevância de
+discriminação deste novo detetor. A ordem de importância das relevâncias se
+mantém aproximadamente igual, resguardado o fato de que se perdeu a informação
+do 4\eiro anel da 2\eira camada e.m..
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{ringer-mlp/anti-relevance-cut-3-sp}
+\end{center}
+\caption{Relevâncias de discriminação para o detetor neural baseado em 13 (dos
+14) anéis menos relevantes do último detetor.}
+\label{fig:anti-relev-cut-3-sp}
+\end{figure}
+
+Desta forma conclui-se que o sistema baseado em 14 dos 100 anéis seja mais que
+o necessário para implementar um discriminador elétron/jato mais eficiente que
+a técnica atualmente proposta no CERN (T2Calo+EGammaHypo). Este sistema possui
+uma capacidade de discriminação com quase 98\% de acerto em elétrons para uma
+taxa de falso-alarme de pouco mais que 3\%. Estes valores representam uma
+redução na taxa de ruído de fundo melhor que 3 vezes e, desta forma,
+economizando tempo de processamento para atividades inexoravelmente mais
+complexas, como a deteção de traços ou a \eng{quasi}-reconstrução executada no
+Filtro de Eventos do experimento ATLAS.
+
+Este sistema contém elementos de que garantam sua robustez à falhas de leitura
+e processamento dos dados do detetor e, como veremos mais à diante, é
+extremamente veloz. A técnica de análise por relevância de discriminação
+permitiu a busca de tal sistema de deteção, fornecendo um conjunto de medidas
+que otimizam a poda de variáveis pouco interessantes ou que atrapalhem o
+processo de seleção.
 
 \typeout{ *************** End of file neural.tex *************** }

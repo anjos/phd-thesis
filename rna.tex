@@ -7,8 +7,130 @@
 \chapter{Introdução ao processamento neural}
 \label{ap:rna}
 
+O treinamento de redes neurais teve seu início através do desenvolvimento de
+técnicas para o treinamento de sistemas mais simples, como detetores lineares.
+O discriminador de Fisher \cite{fisher} ou a Análise de Discriminação Linear
+descreve algoritmo para que se maximize a capacidade discriminante de um corte
+num plano com N dimensões, que separa duas classes de dados. O resultado do
+discriminante é ótimo no caso dos dados apresentarem uma distribuição
+gaussiana e que as matrizes de covariância, para ambas as classes em separado,
+sejam idênticas\footnote{A Análise de Discriminação Quadrática, no entanto,
+demonstra que esta característica pode ser relaxada considerando-se que seja
+sempre possível projetar, através de uma transformação linear, o espaço de
+entrada em um outro espaço onde as matrizes de covariância sejam iguais e
+portanto recaindo no caso simples.}. Muitas vezes, na prática, os valores de
+média e a covariância não estão disponíveis e devem ser estimados, o que
+normalmente leva a falhas no cálculo do ponto ótimo de discriminação. Dentre
+as técnicas de estimação da média e covariância, pode-se destacar a estimação
+por máxima verossimilhança ou por máximo a \textit{posteriori} \cite{duda}. O
+discriminante de Fisher maximiza, através de uma transformação linear, a
+distância entre as classes que se deseja detetar, ao mesmo tempo diminuindo a
+distância de elementos intra-classe.
+
+De posse dos valores de média e covariância das classes, o plano de separação
+seria definido da seguinte forma:
+
+\begin{equation}
+\overrightarrow{w} = \Sigma^{-1}(\overrightarrow{\mu}_0 -
+\overrightarrow{\mu}_1) 
+\label{eq:weight-1}
+\end{equation}
+
+O operador $\Sigma$ na Equação~(\ref{eq:weight-1}) representa a covariância ou
+\textit{variância cruzada} das observações do universo de entrada e $\mu$ as
+médias das duas classes de eventos que se deseja separar. Um problema que se
+segue é da inversibilidade de $\Sigma$, que dependerá de quão bem o conjunto
+de amostras representa as classes a serem discriminadas. Por exemplo, se
+$\Sigma$ possui combinações lineares dos dados disponíveis, o \eng{rank} desta
+matriz será inferior ao número de amostras e, portanto, a matriz não será
+inversível. Embora existam maneiras de superar o problema, é possível fazer
+uso de outras técnicas derivadas deste sistema primário para que se maximize a
+discriminação das classes de eventos dado um conjunto de amostras.
+
+Por causa das dificuldades discutidas, muitas técnicas iterativas surgiram
+para que seja possível a definição de um plano ótimo de separação linear à
+partir de amostras de dados reais. Dentre elas, o algoritmo do Mínimo Médio
+Quadrático \cite{widrow} (do inglês \eng{Least Mean Square} ou LMS) é um dos
+mais utilizados. Este método pode ser também implementado por meio de uma rede
+neural totalmente conectada e sem realimentação (veja Seção~\ref{sec:neural}
+para uma discussão mais detalhada), com as seguintes ressalvas:
+
+\begin{itemize}
+\item Há somente um neurônio conectando todas as entradas com a saída da rede;
+\item A função de ativação deste neurônio ($\phi(\dot)$) é a função identidade
+$f(x) = x$.
+\end{itemize}
+
+Para o treinamento, definem-se alvos para as duas classes de eventos e a
+função de erro:
+
+\begin{equation}
+E(\overrightarrow{w}) = \frac{1}{2} e^2(n)
+\label{eq:mse-definition}
+\end{equation}
+
+Nesta equação, $\overrightarrow{w}$ é o vetor de pesos que define o plano de
+separação linear e $e(n)$ é o erro na saída da rede com relação ao alvo para a
+classe escolhida na amostra $n$, ou seja $e(n) = d(n)-y(n)$ ($d(n)$ é o
+alvo). Desta forma, derivando-se esta função de erro com relação aos pesos
+sinápticos $\overrightarrow{w}$, mostra-se que o gradiente de $E$ será:
+
+\begin{equation}
+\frac{\partial E(\overrightarrow{w})}{\partial \overrightarrow{w}} =
+-x(n)e(n) 
+\end{equation}
+
+Nesta equação, $x(n)$ representa a n-ésima entrada que leva o neurônio linear
+a uma saída $y(n)$. E, com este resultado, define-se a fórmula de treinamento
+do LMS:
+
+\begin{equation}
+\hat{w}(n+1) = \hat{w}(n) + \alpha x(n)e(n)
+\label{eq:lms}
+\end{equation}
+
+Nesta equação, $\alpha$ representa a taxa de aprendizagem, um parâmetro para a
+suavização da trajetória do treinamento no espaço da função de erro
+$E(\overrightarrow{w})$. A Equação~(\ref{eq:lms}) representa a fórmula
+clássica do treinamento de um classificador LMS, indicando um método
+bem-definido de atualização dos pesos da rede para que se convirja a um erro
+mínimo. Em implementações realísticas de um classificador LMS, é possível
+agrupar a correção dos pesos $\hat{w}$ em bateladas ou épocas de forma que se
+suavize a migração do sistema para o mínimo global. No treinamento em épocas,
+os pesos sinápticos são corrigidos tendo por base a média dos erros para todos
+os eventos de uma época, ao invés da atualização instantânea proposta pela
+Equação~(\ref{eq:lms}).
+
+Como é possível inspecionar diretamente na Equação~(\ref{eq:lms}), os pesos
+são atualizados segundo um produto interno dos erros multiplicados pelas
+respectivas entradas, uma época do treinamento. No caso de existirem grandes
+diferenças de magnitude entre as variáveis de entrada de um sistema LMS, é
+possível que o processo de treinamento se torne tendencioso em função destas
+variáveis \cite{haykin-adaptative}. Para eliminar o risco de tendência no
+treinamento devido a magnitude das componentes da entrada, é também prática
+que cada entrada seja subtraída da sua média e dividida pela sua variância.
+
+Finalmente, a Figura~\ref{fig:lms-flow} mostra o diagrama de blocos de um
+discriminador LMS. O valor da saída $y$ é utilizado para definir a R.O.C. do
+discriminador e escolher, ao invés de quatro (como no caso do EGammaHypo),
+apenas um corte que maximize a capacidade discriminante do sistema. Alvos
+($t$) para cada uma das classes são escolhidos e o sinal de erro é utilizado
+para corrigir os pesos sinápticos, até que o sistema convirja para o erro
+mínimo.
+
+\begin{figure}
+\begin{center}
+\includegraphics{lms-flow}
+\end{center}
+\caption{O diagrama de fluxo do discriminador LMS que será empregado na
+discriminação elétron-jato.}
+\label{fig:lms-flow}
+\end{figure}
+
+\section{Processamento Neural}
+
 A Figura~\ref{fig:neuron} contém uma modelagem de um neurônio
-genérico. Analogamente ao sistema LMS descrito na Seção~\ref{sec:lms}, os
+genérico. Analogamente ao sistema LMS descrito na Seção~\ref{sec:linear}, os
 elementos processadores de uma rede neural, chamados neurônios ou percéptrons,
 são ativados por um conjunto de entradas $\overrightarrow{x}$, somadas de
 acordo com um sistema linear de ponderação $\overrightarrow{w}$. O diferencial
@@ -47,7 +169,7 @@ todos iguais a zero, o classificador ótimo (bayesiano) resume-se um sistema
 linear \cite{haykin}. Naturalmente nota-se que seja sempre possível
 \textit{aproximar} ou modelar um sistema não-gaussiano em um desta espécie,
 tendo por conseqüência os erros relativos a esta aproximação. De fato, foi o
-que foi realizado na Seção~\ref{sec:lms-ej}, quando escolhou-se utilizar um
+que foi realizado na Seção~\ref{sec:linear}, quando escolhou-se utilizar um
 classificador linear para separar as quatro variáveis definidas pelo T2Calo.
 
 Se o sistema que se deseja resolver apresenta um comportamento não-gaussiano,
@@ -67,11 +189,13 @@ outro análogo \cite{haykin}.
 
 Este estudo está focado na utilização de RNA's utilizando percéptrons em
 múltiplas camadas (do inglês \eng{Multi-layer perceptrons} ou MLP),
-completamente conectadas, sem realimentação e com treinamento baseado na
-retropropagação de erros. Introduziremos o processo de treinamento destes
-sistemas à seguir.
+completamente conectadas, sem realimentação e com treinamento baseado na tanto
+na retropropagação de erros simples (do inglês \eng{back-propagation}) ou na
+retropropagação resiliente (do inglês \eng{resilient
+back-propagation}). Introduziremos o processo de treinamento destes sistemas à
+seguir.
 
-\section{Treinamento por retro-propagação de erros}
+\subsection{Treinamento por retro-propagação de erros simples}
 
 Para sistemas com apenas uma camada neural, observa-se que, ao buscar-se o
 ponto de mínimo da superfície de erro (quadrático), naturalmente otimiza-se o
@@ -186,6 +310,102 @@ No caso em que existem múltiplas camadas escondidas, propaga-se recursivamente
 o erro em direção à camada de entrada, aplicando-se a
 Equação~(\ref{eq:local-gradient-hidden-multi}). 
 
+\subsubsection{Convergência}
+
+O algoritmo de retropropagação usa uma estimativa do gradiente da superfície
+de erro no espaço dos pesos. Por esta razão, este sistema possui uma inerente
+natureza estocástica e tende a oscilar ao redor da direção de convergência
+ótima, ao mínimo da função de erro. Isso acontece pois é difícil antever se
+inclinações demasiado bruscas ou suaves em uma das direções da superfície de
+erro não influenciarão excessivamente o deslocamento do sistema. Muitas vezes,
+a utilização de um amortecimento (ou \emph{momento}) durante o treinamento
+pode melhorar a resposta do sistema. Utiliza-se esta técnica para suavizar a
+migração das redes em direção ao mínimo da superfície de erro. Outra técnica é
+a normalização dos dados de entrada da rede, de forma que se evite que a
+diferença de magnitude e variabilidade das componentes de entrada cause
+tendências no treinamento neural.
+
+Um problema recorrente no treinamento de redes neurais são mínimos locais, que
+podem fazer com que o sistema fique ``preso'' em uma região que não represente
+o mínimo global da superfície de erro. Esta característica não é somente mais
+uma conseqüência da utilização da estimativa instantânea para definir a
+direção de movimentação dos pesos, mas muitas vezes ocorre por dispor-se de
+uma quantidade limitada de eventos que representem o fenômeno que se deseja
+mapear.
+
+Para que se assegure de que o sistema convirja sempre a um patamar equivalente
+de mínimo, deve se realizar um número de experimentos com os mesmos parâmetros
+de treinamento e teste para todos os casos de estudo. Em cada teste
+inicializa-se os pesos sinápticos a partir de um ponto diferente da superfície
+de erro. Desta forma, será possível detetar e avaliar se o problema em estudo
+estará sujeito a mínimos locais.
+
+\subsection{Treinamento por retro-propagação de erros resiliente}
+
+Embora a retro-propagação de erros clássica seja um dos mais amplamente
+utilizados algoritmos para o treinamento de redes neurais, apresenta problemas
+fundamentais ligados a sua implementação, dentre os quais, a difícil escolha
+dos parâmetros de treinamento. Esta parametrização é fortemente dependente do
+problema abordado e requer normalmente um certo empirismo para seu ajuste. A
+técnica de retro-propagação de erros resiliente (originalmente descrita em
+\cite{rprop}), descreve uma forma de atualizar os pesos sinápticos de uma rede
+neural sem retro-alimentação que praticamente remove a necessidade de
+parametrização do treinamento. Neste método de treinamento, a atualização do
+pesos sinápticos é feita de forma independente do sinal de erro
+retro-propagado, dependendo somente da direção do gradiente. Com esta técnica,
+o processo de atualização dos pesos sinápticos torna-se independente do valor
+do erro retro-propagado, o que, segundo os autores, melhora a dinâmica de
+treinamento. O trecho de pseudo-código abaixo descreve o algoritmo:
+
+\begin{alltt}
+\textit{Para todos os pesos} \{
+  \textit{se} (GradErro(t-1) * GradErro(t) > 0) \textit{então} \{
+    Taxa(t) = mínimo(Taxa(t-1) * Incentivo, TaxaMáxima)
+    Atualização(t) = -sinal(GradErro(t)) * Taxa(t)
+  \}
+  \textit{de outra forma, se} (GradErro(t-1) * GradErro(t) < 0) \textit{então} \{
+    Taxa(t) = máximo(Taxa(t-1) * Repressão, TaxaMínima)
+    Atualização(t) = -Atualização(t-1)
+    GradErro(t) = 0
+  \}
+  \textit{de outra forma, se} (GradErro(t-1) * GradErro(t) = 0) \textit{então} \{
+    Atualização(t) = -sinal(GradErro(t)) * Taxa(t-1)
+  \}
+  Peso(t+1) = Peso(t) + Atualização(t)
+\}
+\end{alltt}
+
+Atualização funciona, \eng{grosso modo}, da seguinte forma: 
+
+\begin{enumerate}
+\item Se o gradiente do erro mantiver o mesmo sinal entre duas
+atualizações consecutivas da taxa de aprendizado, significa que se encontra em
+uma descida na superfície de error e, para aumentar a velocidade,
+multiplica-se a taxa de aprendizado (\texttt{\textit{Taxa(t)}}) por um fator
+de incentivo. O valor do fator de incentivo é normalmente igual à $1,2$,
+funcionando bem para vários tipos de problema;
+\item Se o gradiente do erro muda de sinal entre duas atualizações, então
+perde-se o ponto de mínimo e deve-se:
+\begin{enumerate}
+\item Retroceder a sinapse do valor do último ajuste (já que foi demasiado);
+\item Reprimir a taxa de aprendizado, fazendo com que o próximo passo seja
+menos longo, para atingir-se o mínimo. O valor de repressão é normalmente
+fixo, igual à $0,5$;
+\item Força-se o valor do gradiente a ser zero, de tal forma que na próxima
+atualização, o sistema recaia no último caso, onde a atualização do peso não
+terá um incentivo;
+\end{enumerate}
+\item Se o gradiente do erro for zero, então é porque o último passo falhou
+o mínimo (zero forçado) e portanto deve-se simplesmente avançar, mantendo-se a
+mesma taxa de aprendizagem.
+\end{enumerate}
+
+Para evitar \eng{overflows} e \eng{underflows}, institui-se um mínimo e um
+máximo para a taxa de aprendizado, em $10^{-6}$ e $50$, respectivamente. A
+escolha de fatores de incentivo e repressão dependem, naturalmente, da
+superfície de erro na qual se está trabalhando. Superfícies com mais mínimos
+locais podem requer valores de incentivo maiores.
+
 \subsection{Funções de ativação} 
 
 A função de ativação $\varphi(\cdot)$ deve ser diferenciável em toda a
@@ -220,35 +440,5 @@ Estas duas funções de ativação permitem um cálculo absolutamente trivial do
 gradiente local e por esta razão são computacionalmente bastante
 eficientes. No decorrer deste estudo utilizaremos a função tangente
 hiperbólica com função de ativação dos percéptrons das redes estudadas.
-
-\subsection{Convergência}
-
-O algoritmo de retropropagação usa uma estimativa instantânea do gradiente da
-superfície de erro no espaço dos pesos. Por esta razão, este sistema possui
-uma inerente natureza estocástica e tende a oscilar ao redor da direção de
-convergência ótima, ao mínimo da função de erro. Isso acontece pois é difícil
-antever se inclinações demasiado bruscas ou suaves em uma das direções da
-superfície de erro não influenciarão excessivamente o deslocamento do
-sistema. Muitas vezes, a utilização de um amortecimento (ou \emph{momento})
-durante o treinamento pode melhorar a resposta do sistema. Utiliza-se esta
-técnica para suavizar a migração das redes em direção ao mínimo da superfície
-de erro. Outra técnica é a normalização dos dados de entrada da rede, de forma
-que se evite que a diferença de magnitude e variabilidade das componentes de
-entrada cause tendências no treinamento neural.
-
-Um problema recorrente no treinamento de redes neurais são mínimos locais, que
-podem fazer com que o sistema fique ``preso'' em uma região que não represente
-o mínimo global da superfície de erro. Esta característica não é somente mais
-uma conseqüência da utilização da estimativa instantânea para definir a
-direção de movimentação dos pesos, mas muitas vezes ocorre por dispor-se de
-uma quantidade limitada de eventos que representem o fenômeno que se deseja
-mapear.
-
-Para que se assegure de que o sistema convirja sempre a um patamar equivalente
-de mínimo, deve se realizar um número de experimentos com os mesmos parâmetros
-de treinamento e teste para todos os casos de estudo. Em cada teste
-inicializa-se os pesos sinápticos a partir de um ponto diferente da superfície
-de erro. Desta forma, será possível detetar e avaliar se o problema em estudo
-estará sujeito a mínimos locais.
 
 \typeout{ *************** End of file rna.tex *************** }

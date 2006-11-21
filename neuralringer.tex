@@ -4,54 +4,8 @@
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{\textit{NeuralRinger}: Projeto e implementação}
+\chapter{\eng{NeuralRinger}: Projeto e implementação}
 \label{ap:framework}
-
-O \eng{NeuralRinger} é um pacote totalmente desenvolvido usando o paradigma da
-orientação à objetos, implementado em C++ \cite{stroustrup} e especialmente
-concebido para executar a operação de filtragem de partículas dentro do
-LVL2. Outras soluções para treinamento e execução de redes neurais, tais como
-o pacote SNNS \cite{snns} foram investigadas antes do desenvolvimento deste
-sistema. Entrentanto, os pacotes em questão são normalmente utilizados para
-uma grande variedade de sistemas neurais. Esta flexibilização muito
-freqüentemente ocorre em detrimento do desempenho em casos
-específicos. Ademais, ao usar um sistema tão genérico, se estaría inserindo
-uma grande quantidade de código dentro do sistema de filtragem, o que seria,
-em sua maior parte, pouco ou não utilizada.
-
-As escolhas do paradigma de programação e da linguaguem de implementação C++
-ocorreram em função do ambiente-alvo para este sistema. Como colocado na
-Seção~\ref{sec:hlt}, o LVL2 de filtragem rodará utilizando como base as
-bibliotecas do Projeto Athena. O Athena é o ambiente padrão para a análise da
-Física dos eventos no ATLAS, tanto no Sistema de Filtragem, como na
-Reconstrução pós-filtragem nas diversas fazendas de análise
-\eng{offline}. Desta forma, a integrabilidade ao Athena
-constitui-se de um passo essencial para a utilização da técnica no LVL2.
-
-O projeto foi desenvolvido tendo por base as seguintes prerrogativas, em
-ordem:
-
-\begin{enumerate}
-\item Otimização do passo de execução de redes: É importante que o sistema
-tenha o menor tempo possível para a execuação do processamento neural, de tal
-forma que seja viável a execução no sistema de filtragem. Preferencialmente,
-deseja-se que 1 passo de execução da rede não dure mais que alguns
-milissegundos, já que o tempo total de processamento no LVL2 deva ser, em
-média 10~ms, contando com o acesso aos dados;
-\item Interoperabilidade: O treinamento do sistema deve ser executado
-\eng{offline}, dada a disponibilidade dos dados. Portanto, é necessário que o
-sistema opere tanto dentro do ambiente Athena, quanto em modo desacoplado;
-\item Multi-tarefas: Respeitando o projeto do LVL2, o \eng{NeuralRinger} não
-deve ter construções que impossibilitem ou dificultem a sua utilização
-concorrente em múltiplas tarefas;
-\item Configurabilidade: O \eng{NeuralRinger} deve ser, dentro de determinadas
-medidas, configurável e flexível com relação ao treinamento dos pesos
-sinápticos e a configuração da rede que será usada na deteção dos alvos. O
-método de treinamento a ser utilizado será a retro-propagação de erros, tendo
-por base redes totalmente conectadas e sem re-alimentação.
-\end{enumerate}
-
-\subsubsection{Projeto}
 
 O projeto do \eng{NeuralRinger} está dividido em quatro sub-pacotes que
 executam funções bem-definidas para o interfaceamento, configuração e execução
@@ -72,19 +26,19 @@ mostrando a relação de dependência entre estes pacotes.
 dependências e não depende de nenhum outro. Este pacote inclui ferramentas
 para a manipulação de arquivos no formato XML (do inglês
 \eng{eXtensible Markup Language}, \cite{xml}) e um sistema básico para
-o relatório de erros. A escolha da linguagem XML como formato de troca de
-dados e valores de configuração sucede-se da grande quantidade de
-interpretadores (\eng{parsers}) disponíveis livremente na \eng{internet}, já
+o relatório de erros. A escolha da linguagem XML, como formato de troca de
+dados e valores de configuração, sucede-se da grande quantidade de
+interpretadores (\eng{parsers}) disponíveis livremente na \eng{Internet}, já
 que é um padrão bastante difundido. O suporte a XML disponível atualmente
 inclui, mas não se limita a verificações de sintaxe automatizadas (via
 \eng{XML schemas}) e transformações para que se adicione informação ou seja
-possível a visualização de forma adequada do conteúdo de uma base de dados
+possível a visualização, de forma adequada, do conteúdo de uma base de dados
 XML.
 
 A Figura~\ref{fig:sys-uml} traz uma visão geral dos componentes e seu
-relacionamento dentro deste pacote. Na parte central do diagrama encontra-se o
+relacionamento dentro deste pacote. Na parte central do diagrama, encontra-se o
 tipo \texttt{Reporter} que define uma interface para o relatório de
-erros. Objetos deste tipo contém uma implementação específica do sistema de
+erros. Objetos deste tipo contêm uma implementação específica do sistema de
 relatório de erros. Inicialmente, somente a implementação baseada em
 arquivos-padrão tais como \texttt{std::cout} e \texttt{std::cerr}
 \cite{web:gcc-stl} foi desenvolvida. 
@@ -127,7 +81,7 @@ executar a reportagem de erros, lançamento de exceções ou a leitura de
 arquivos XML. A implementação das primitivas neste pacote utiliza elementos
 otimizados da biblioteca GSL (\eng{GNU Scientific Library}, \cite{gsl}) para a
 manipulação de valores contidos em matrizes e vetores. A
-Figura~\ref{fig:data-uml} contém um diagrama mostrando a relação das classes
+Figura~\ref{fig:data-uml} mostra um diagrama indicando a relação das classes
 dentro do pacote \texttt{data}.
 
 \begin{figure}
@@ -142,9 +96,9 @@ dentro do pacote \texttt{data}.
 O elemento central deste pacote chama-se \texttt{PatternSet}. Ele representa
 um conjunto de vetores ou padrões formando uma matriz de dados. Esta matriz é
 representada internamente por um objeto tipo matriz GSL
-(\texttt{gsl$\_$matrix}). Para o armazenamento dos dados utilizou-se a seguinte
-estratégia: cada evento do fenômeno observado será guardado em uma linha da
-matriz. Neste caso, cada coluna representará uma característica (ou
+(\texttt{gsl$\_$matrix}). Para o armazenamento dos dados, utilizou-se a
+seguinte estratégia: cada evento do fenômeno observado será guardado em uma
+linha da matriz. Neste caso, cada coluna representará uma característica (ou
 \eng{Feature} no inglês) do dado. A biblioteca GSL permite acesso rápido tanto
 aos padrões (linhas) como características (colunas) da matriz de dados. 
 
@@ -155,14 +109,14 @@ disco, mistura dos padrões, manipulação de campos específicos e cópia. O
 formato de escrita em disco escolhido utiliza o padrão XML. O banco de dados
 básico contém um cabeçalho com as informações do autor e dos dados, indicando
 a data de criação e última atualização. Dentro do arquivo, os dados podem ser
-dividos em classes. Cada classe é dividida por sua vez em padrões, que contém
+dividos em classes. Cada classe é dividida por sua vez em padrões, que contêm
 um número opcional de atributos.
 
 Para o caso específico do processamento de dados de RoIs, uma classe é
 derivada da implementação de base de um \texttt{PatternSet}, chamada
 \texttt{RoIPatternSet}. Esta classe implementa, adicionalmente à classe de
 base, métodos para a salva-guarda, leitura e manipulação de campos
-especificamente relacionados a uma RoI assim como os identificadores do
+especificamente relacionados a uma RoI, assim como os identificadores do
 primeiro nível de filtragem e os valores das coordenadas $\eta$ e $\phi$.
 Desta forma, é possível correlacionar os resultados obtidos com outros testes
 ou com relação ao posicionamento da região de interesse. Exemplos de conjuntos
@@ -179,7 +133,7 @@ conjuntos de padrões de um problema.
 
 Operadores (\texttt{PatternOperator}s no diagrama), são elementos que podem
 modificar um padrão e são usados para extrair a média, variância ou aplicar
-normalizações dos mais diferentes critérios nos dados disponíveis. Na figura
+normalizações dos mais diferentes critérios nos dados disponíveis. Na figura,
 mostra-se o mais relevante dos operadores na biblioteca, chamado
 \eng{NormalizationOperator}, que é inicializado à partir de uma base de dados
 e pode, quando aplicado a um padrão, remover a média e desvio padrão da base
@@ -190,13 +144,13 @@ GSL são utilizadas para que a eficiência do processo seja maximizada.
 
 \paragraph{\texttt{NETWORK}:} Neste pacote contém a definição de
 neurônios, sinapses e redes formadas à partir destes elementos. A
-Figura~\ref{fig:network-uml} contém um diagrama UML dos tipos neste
+Figura~\ref{fig:network-uml} apresenta um diagrama UML dos tipos neste
 sub-sistema. No topo deste diagrama está o tipo \texttt{Network} (Rede), que
 representa, de forma abstrata, um conjunto de neurônios (tipo \texttt{Neuron})
 interconectados via objetos do tipo sinapse (tipo \texttt{Synapse}). Uma rede
 pode ser executada utilizando-se um dos métodos \texttt{run()} e treinada
 usando-se uma das variantes de \texttt{train()}. De fato, objetos do tipo
-\texttt{Network} não contém nenhuma informação direta sobre a topologia da
+\texttt{Network} não contêm nenhuma informação direta sobre a topologia da
 rede que executam, funcionando apenas como agentes delegadores de
 responsabilidade. O sistema funciona da seguinte forma:
 
@@ -307,7 +261,7 @@ precede o círculo.
 \includegraphics[scale=0.35]{lms-best2}
 \end{center}
 \caption{Exemplo de uma gráfico de fluxo produzido pelo método \texttt{dot()}
-para uma rede LMS, tal qual utilizada para os testes na Seção~\ref{sec:lms}.}
+para uma rede LMS, tal qual utilizada para os testes na Seção~\ref{sec:linear}.}
 \label{fig:lms-dot-example}
 \end{figure}
 
