@@ -398,16 +398,31 @@ apenas $2,93$\%. Este foi, muito a frente, o melhor resultado obtido até o
 momento. O sistema, no entanto, é apenas um pouco mais complexo do que aqueles
 que foram propostos utilizando o mecanismo de compactação provido pelo T2Calo,
 melhorando em até 3 vezes a rejeição de ruído ao mesmo tempo que aumentando 7
-pontos percentuais a deteção de sinal.
+pontos percentuais a deteção de sinal. A Figura~\ref{fig:roc-all} mostra um
+resumo dos métodos e avanços na separação obtidos com o emprego da análise
+multi-variável no problema da discriminação elétron/jato, no ATLAS.
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.98]{roc-all}
+\end{center}
+\caption{Comparativo das curvas R.O.C. para os métodos de separação
+elétron/jato baseados em análise multi-variável em comparação com o sistema
+atualmente proposto no CERN.}
+\label{fig:roc-all}
+\end{figure}
 
 Observando-se a análise de relevância deste último sistema baseado em 14
 anéis, nota-se que as variáveis na periferia de cada região sejam as mais
-importantes, como havia sido originalmente previsto. A mais relevante é então
-artificialmente podada de forma a se observar se este detetor conseguiria
-recuperar a informação perdida através dos outros anéis sobreviventes. Os
-resultados são positivos: o novo detetor, formado dos 13 anéis menos
-relevantes obtém 97,59\% de eficiência na deteção de elétrons para um
-falso-alarme na deteção de jatos de 3,22\% (SP=$1,83$).
+importantes, como havia sido originalmente previsto. Como teste de robustez, o
+mais relevante dos anéis é então artificialmente removido do conjunto de dados
+de forma a se observar se um detetor baseado num espaço de entrada reduzido
+conseguiria recuperar a informação perdida através dos outros anéis
+sobreviventes. Os resultados são positivos: o novo detetor, formado dos 13
+anéis menos relevantes obtém 97,59\% de eficiência na deteção de elétrons para
+um falso-alarme na deteção de jatos de 3,22\% (SP=$1,83$), sendo apenas
+marginalmente pior que aquele com 14 anéis. Este resultado indica que o
+sistema possua algum nível de robustez.
 
 \section{Implementação do detetor no ambiente de filtragem do ATLAS}
 
@@ -469,17 +484,89 @@ algoritmo, incluindo acesso à dados, é de 3,8 milissegundos, que é compatíve
 com o tempo de execução atual do T2Calo, de 3,64 milissegundos, para obter uma
 eficiência de classificação melhor, com 3 vezes maior nível de rejeição.
 
-%\section{Conclusões gerais}
+\section{Conclusões finais}
 
-% FALTANDO
+Com base em simulações mais realísticas do sistema de deteção e da Física que
+ocorrerá dentro no experimento ATLAS, que procura a existência do bóson de
+Higgs, foi possível desenvolver esquemas de deteção elétron/jato muito mais
+eficientes e robustos que o atualmente proposto no CERN. Este sistema é
+flexível e compactável (de 1300 células para 14 anéis apenas) através de um
+processo simples, baseado no poder de discriminação do próprio detetor, que
+maximiza o poder de discriminação e miniza as perdas de compactação. Os
+detetores são projetados utilizando-se técnicas modernas de análise
+estatística, introduzindo um novo conjunto de ferramentas dentro do campo de
+Física de Altas Energias.
 
-% Mencionar os seguintes pontos:
-% * Redes neurais foram empregadas para determinar o algoritmo de compressao
-% (relevância)  e de deteção! Portanto são também uma forma de
-% pré-processamento. 
+A informação para a discriminação encontra-se geometricamente segmentada,
+possuindo, em diferentes casos, variações de granularidade importantes que
+foram consideradas pelos métodos de deteção. As simulações disponíveis
+continham, dentre outras, a informação de ruído tal qual estará presente
+durante o experimento. O sistema desenvolvido utiliza técnicas modernas de
+deteção multi-variável, podendo ser implementado e ajustado para as diversas
+fases de operação do experimento, sem necessitar a intervenção de um
+especialista. Este sistema foi implementado dentro da pilha de \eng{software}
+do ATLAS, demonstrando que poderia ser executado em limites de tempo cabíveis
+para operação no Segundo Nível de Filtragem, segundo vários critérios.
 
-% Ponto importante a questão do encapsulamento do ruído, levantar a bola que
-% isso é possível com nosso enfoque, aumento a taxa de deteção de jatos. Ainda
-% sim colocar que o processo é bem compreendido e não haveria "perigo".
+\section{Linhas de pesquisa}
+
+A Análise de Componentes Principais, aplicada ao problema da separação
+elétron/jato através dos dados de uma RoI ou através da informação de anéis,
+foi abordada em uma tese de doutorado \cite{herman}, com bons
+resultados. Nesta análise, desejou-se obter um sistema de compactação da
+informação contida em RoIs através da aplicação direta da análise de
+componentes principais sob as células na região de interesse ou sob a soma em
+anéis desenvolvidas neste trabalho. Esta abordagem tenta, através da
+transformação linear que descorrelaciona as diversas variáveis de entrada de
+um detetor, encontrar traços das componentes físicas originárias de uma
+partícula, que a caracterizem eficientemente.
+
+A Análise de Componentes Independentes representa uma extensão da Análise de
+Componentes Principais \cite{oja-ica}. Desta vez, no lugar de se procurar uma
+transformação linear que descorrelacione o espaço transformado, deseja-se
+computar a transformação linear na qual as variáveis do espaço transformado
+tornem-se independentes. Esta é uma premissa muito mais forte que a simples
+descorrelação, pois implica que a estatística que relacione quaisquer duas
+variáveis do conjunto transformado será nula, para todos os graus
+estatísticos.
+
+Uma das pré-condições para que seja Análise de Componentes Independentes (ACI)
+é de que o ruído introduzido pelo sistema no sinal de análise seja branco e
+gaussiano. Esta é, no entanto, uma hipótese bastante razoável em experimentos
+de física de altas energias \cite{knoll, leo}. A ACI pode ser conduzida
+utilizando-se diversos métodos, que deverão ser avaliados com relação a sua
+velocidade e qualidade.
+
+O conjunto de componentes extraídas não poderá ser organizado, \textit{a
+priori}, como acontece no caso da Análise de Componentes Principais, já que
+não há uma correlação evidente entre os coeficientes da transformação e sua
+importância. Neste caso, outros métodos, como o método da relevância de
+discriminação introduzido neste trabalho, poderão ser explorados para que se
+atinja a compactação dos dados de entrada.
+
+Espera-se que a ACI possa relevar informações no padrão de interação das
+partículas com os calorímetros do ATLAS, que estão mascarados nas varíaveis de
+entrada, aumentando assim a qualidade da discriminação conduzida no LVL2.
+
+Métodos de treinamento mais sofisticados podem ser também introduzidos no
+sistema atual de deteção neural, aumentando a qualidade do treinamento, tempo
+de convergência e a robustez do sistema de discriminação final. Em especial,
+técnicas mais modernas como redes neurais qüânticas \cite{qnns} ou menos
+exploradas neste contexto, como máquinas de vetor de suporte \cite{haykin}
+podem ser pensadas como alternativas interessantes.
+
+A compactação baseada na soma em anéis de deposição energética pode ser
+explorada de forma a ser maximizada. Novas combinações devem ser exploradas
+tendo em vistas a quantidade de dados que devam ser lidas do sistema de
+leitura do detetor e o fator de compactação propriamente dito. Especificamente,
+a técnica de normalização dos dados poderia ser ajustada tendo em vistas os
+resultados da análise de relevância.
+
+Finalmente, a deteção baseada em anéis pode também ser utilizada para análise
+e reconstrução \eng{offline}. O sistema de deteção desenvolvido neste trabalho
+deve ser re-adaptado para trabalhar neste ambiente e comparativos diretos com
+as técnicas atuais de reconstrução podem ser utilizados. Métodos
+multi-variável são bastante utilizados atualmente nesta sub-área da Física de
+Altas Energias.
 
 \typeout{ *************** End of file conclusao.tex *************** }

@@ -604,4 +604,79 @@ sistema de filtragem e aquisição do ATLAS.}
 \label{fig:ringer-screenshot}
 \end{figure}
 
+\section{Implementação em um DSP}
+
+In digital signal processing applications, one can use any kind of digital
+device. However, some consideration must be taken into account before choosing
+the right device. For instance, a general purpose processor (PC), although
+fast and easy to program, is expensive and demand too much power. A FPGA
+(\emph{field programmable gate array}) \cite{LIVRO_FPGA} is fast, compact, but
+very complex to program for high complexity problems.
+
+In digital signal processing, there are algorithms which are very common, like
+multiply and accumulate, circular buffer access and strong iterative
+processes. In order to efficiently execute those operations, an special
+digital device was developed and named DSP (digital signal processors)
+\cite{DSP_FIRST}. The DSP exploits inherent features of the digital signal
+processing in order to achieve high execution rates in fewer clock cycles. In
+Figure~\ref{FIG:DSP_INNER_STRUCTURE}, one can see some of the main differences
+of an general use processor and the DSP. While general purpose microprocessors
+have only one ALU with one single bus for transporting instruction and data
+(Von Neuman architecture~\cite{REAL_TIME_SIGNAL_PROCESSING}), the DSP has, in
+addition to the ALU, a hardware implemented multiplier, all that connected to
+an internal memory connected with multiple buses (Harvard architecture (Von
+Neuman architecture~\cite{REAL_TIME_SIGNAL_PROCESSING})). In addition, the DSP
+has other independent devices for I/O and efficient data access, in order to
+maintain the computational units focused only on the data processing.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{general_dsp_block_diagram}
+\caption{General overview of the DSP inner structure.}
+\label{FIG:DSP_INNER_STRUCTURE}
+\end{center}
+\end{figure}
+
+\section{Results Using DSP}
+
+The DSP chosen was a floating point, 32-bit, SHARC ADSP-21160 from Analog
+Devices with 100 MHz clock, 4 Mbits of internal memory and duplicated
+computational units for SIMD \cite{ADSP_21160_MANUAL} operation. For the
+proposed electron/jet discrimination problem, performed by a neural network
+with 100 rings as input signal, an execution time of $4.692 \pm 1.108$ $ms$
+per event was achieved.
+
+In Figure~\ref{FIG:DSP_CUMULATIVE_TIME}, is presented the cumulative time
+distribution functions for each phase of the discrimination process. One can
+note that the rings generation step is the most time consuming, due to the
+high conditional code used to generate the rings, which takes little
+advantages from the DSP inner structure. Although, the discrimination step,
+due to the high amount of inner product operations, was capable of fully
+exploit the DSP features, being able to perform the pattern recognition task
+in only $10.429 \pm 0.465$ $\mu s$ per event, while a Pentium 4 @ 2.8 GHz
+performed the same task in approximately $125$ $\mu s$. Finally, the execution
+time can be further reduced by simply choosing a DSP with higher clock cycle
+within the same family, for full compatibility. In
+Figure~\ref{FIG:DSP_CLOCK_TIME}, is presented the total execution time for
+different clock cycles for SHARC family DSPs, which show the full scalability
+of these devices. The execution time was obtained by dividing the number of
+instructions executed in the algorithm (since this family executes every
+instruction in one single clock cycle) by the DSP's clock cycle.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{dsp_cumulative_time_distribution}
+\caption{Cumulative time distribution function for each part of the algorithm.}
+\label{FIG:DSP_CUMULATIVE_TIME}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{clock_scaling}
+\caption{Total execution time for different clock cycles for SHARC family DSPs.}
+\label{FIG:DSP_CLOCK_TIME}
+\end{center}
+\end{figure}
+
 \typeout{ *************** End of file implement.tex *************** }
