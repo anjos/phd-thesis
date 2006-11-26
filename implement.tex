@@ -606,76 +606,93 @@ sistema de filtragem e aquisição do ATLAS.}
 
 \section{Implementação em um DSP}
 
-In digital signal processing applications, one can use any kind of digital
-device. However, some consideration must be taken into account before choosing
-the right device. For instance, a general purpose processor (PC), although
-fast and easy to program, is expensive and demand too much power. A FPGA
-(\emph{field programmable gate array}) \cite{LIVRO_FPGA} is fast, compact, but
-very complex to program for high complexity problems.
+As bibliotecas de anelamento e processamento neural, desenvolvidas no contexto
+do \eng{NeuralRinger} (veja Apêndice~\ref{ap:framework}), são extremamente
+portáteis e podem ser utilizadas em plataformas domésticas ou
+especialistas. Nesta seção, descrevemos uma implementação do
+\eng{NeuralRinger}, baseada em DSP's (do inglês \eng{Digital Signal
+Processors}), que pode ser utilizada como plataforma de desenvolvimento de
+sistemas de anelamento e detetores neurais para operarem no Sistema de
+Filtragem do ATLAS.
 
-In digital signal processing, there are algorithms which are very common, like
-multiply and accumulate, circular buffer access and strong iterative
-processes. In order to efficiently execute those operations, an special
-digital device was developed and named DSP (digital signal processors)
-\cite{DSP_FIRST}. The DSP exploits inherent features of the digital signal
-processing in order to achieve high execution rates in fewer clock cycles. In
-Figure~\ref{FIG:DSP_INNER_STRUCTURE}, one can see some of the main differences
-of an general use processor and the DSP. While general purpose microprocessors
-have only one ALU with one single bus for transporting instruction and data
-(Von Neuman architecture~\cite{REAL_TIME_SIGNAL_PROCESSING}), the DSP has, in
-addition to the ALU, a hardware implemented multiplier, all that connected to
-an internal memory connected with multiple buses (Harvard architecture (Von
-Neuman architecture~\cite{REAL_TIME_SIGNAL_PROCESSING})). In addition, the DSP
-has other independent devices for I/O and efficient data access, in order to
-maintain the computational units focused only on the data processing.
+DSP's são dispositivos que implementam, de forma bastante eficaz, operações
+vetoriais como somas e multiplicações seguidas de acumulação, \eng{buffers}
+circulares sendo bastante eficientes em processos iterativos, como restrições
+de operação em tempo-real \cite{dsp-first}. A Figura~\ref{fig:dsp-inner}
+mostra algumas das diferenças fundamentais entre processadores de uso genérico
+(abordados até aqui) e DSP's. Enquanto processadores genéricos possuem apenas
+uma unidade lógica aritmética, com apenas um barramento para transportar
+instruções e dados \cite{rt-signal-proc}, DSP's contêm, adicionalmente, um
+sistema de multiplicação implementado em \eng{hardware}, conectado diretamente
+à memória interna através de múltiplos barramentos. Ademais, DSP's são
+normalmente dotados de dispositivos para entrada e saída dedicados,
+adicionados para se obter acesso eficiente aos dados e de forma a manter as
+unidades computacionais focadas somente no processamento lógico e aritmético.
+Em específico para este estudo, o DSP utilizado foi um SHARC ADSP-21160 da
+\eng{Analog Devices}, operando em ponto-flutuante, com 100 MHz de \eng{clock},
+4 Mbits de memória interna e unidades aritméticas duplicadas para operação em
+modo SIMD (do inglês \eng{Single-Instruction, Multiple Data})
+\cite{adsp-21160-manual}. 
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=0.45\textwidth]{general_dsp_block_diagram}
-\caption{General overview of the DSP inner structure.}
-\label{FIG:DSP_INNER_STRUCTURE}
+\includegraphics[width=\textwidth]{general_dsp_block_diagram}
+\end{center}
+\caption{Visão geral da estrutura interna de um DSP.}
+\label{fig:dsp-inner}
+\end{figure}
+
+Desta forma, a parte central de computação do anelamento e deteção neural do
+\eng{NeuralRinger} foi extraída, formando uma sub-estrutura de código 
+diretamente focada no Sistema de Filtragem. Este código foi, sem maiores
+modificações, re-compilado utilizando-se as ferramentas providas pelo
+fabricante do DSP e operado dentro desta plataforma. 
+
+Para a separação elétron/jato baseada em 100 anéis de deposição energética,
+esta plataforma atinge um tempo de processamento de $4,692 \pm 1,108$
+milissegundos por evento, que é compatível com os tempos de processamento
+obtidos para execução dentro da pilha de \eng{software} do experimento, em
+máquinas hipoteticamente 30 vezes mais rápidas. A Figura~\ref{fig:dsp-cumul}
+mostra o tempo cumulativo (integral do histograma de distribuição dos tempos
+de processamento) para este sistema, dividido em sub-fases do processamento. É
+possível notar que a geração dos anéis seja, computacionalmente, a fase mais
+importante do processamento, consumindo mais de 90\% do tempo total. Isto se
+deve ao grande número de condições que rege a geração de anéis, nos afastando
+do propósito operacional desta plataforma: multiplicações e acumulações
+vetoriais, precedidas do pré-carregamento em, normalmente grandes
+\eng{pipelines}. A fase de determinação do pico de deposição energética é a
+segunda fase que mais consome tempo de processamento, por motivos idênticos
+àqueles do anelamento. A normalização, juntamente com a deteção por métodos
+neurais são as partes mais rápidas. A rede neural leva apenas, em média,
+$10,43\pm0,47$ microssegundos por evento processado.
+
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{dsp_cumulative_time_distribution}
+\caption{Função de distribuição cumulativa para os tempos de processamento,
+subdivididos por fase de processamento, para implementação do
+\eng{NeuralRinger} em um DSP SHARC 21160 da \eng{Analog Devices}.}
+\label{fig:dsp-cumul}
 \end{center}
 \end{figure}
 
-\section{Results Using DSP}
-
-The DSP chosen was a floating point, 32-bit, SHARC ADSP-21160 from Analog
-Devices with 100 MHz clock, 4 Mbits of internal memory and duplicated
-computational units for SIMD \cite{ADSP_21160_MANUAL} operation. For the
-proposed electron/jet discrimination problem, performed by a neural network
-with 100 rings as input signal, an execution time of $4.692 \pm 1.108$ $ms$
-per event was achieved.
-
-In Figure~\ref{FIG:DSP_CUMULATIVE_TIME}, is presented the cumulative time
-distribution functions for each phase of the discrimination process. One can
-note that the rings generation step is the most time consuming, due to the
-high conditional code used to generate the rings, which takes little
-advantages from the DSP inner structure. Although, the discrimination step,
-due to the high amount of inner product operations, was capable of fully
-exploit the DSP features, being able to perform the pattern recognition task
-in only $10.429 \pm 0.465$ $\mu s$ per event, while a Pentium 4 @ 2.8 GHz
-performed the same task in approximately $125$ $\mu s$. Finally, the execution
-time can be further reduced by simply choosing a DSP with higher clock cycle
-within the same family, for full compatibility. In
-Figure~\ref{FIG:DSP_CLOCK_TIME}, is presented the total execution time for
-different clock cycles for SHARC family DSPs, which show the full scalability
-of these devices. The execution time was obtained by dividing the number of
-instructions executed in the algorithm (since this family executes every
-instruction in one single clock cycle) by the DSP's clock cycle.
+O tempo total de processamento encontrado neste exercício pode ser reduzido
+considerando-se DSP's que operem com \eng{clocks} de freqüências mais altas. A
+Figura~\ref{fig:dsp-clock-time} mostra os tempos totais de processamento que
+poderiam ser atingidos com DSP's mais velozes da mesma família do sistema
+atualmente empregado (SHARC). O tempo de execução nesta figura é obtido,
+simplesmente, dividindo-se o número de instruções executadas no algoritmo (uma
+vez que DSP's desta família executam instruções em apenas um ciclo do
+\eng{clock}) pela freqüência do novo DSP. Como é possível ver, com um DSP de
+400~MHz, o tempo total de processamento seria de apenas cerca de 1~ms.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=0.45\textwidth]{dsp_cumulative_time_distribution}
-\caption{Cumulative time distribution function for each part of the algorithm.}
-\label{FIG:DSP_CUMULATIVE_TIME}
-\end{center}
-\end{figure}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=0.45\textwidth]{clock_scaling}
-\caption{Total execution time for different clock cycles for SHARC family DSPs.}
-\label{FIG:DSP_CLOCK_TIME}
+\includegraphics[width=\textwidth]{clock_scaling}
+\caption{Tempo total de execução para o anelador e detetor neural para
+diferentes DSP's da família SHARC, da \eng{Analog Devices}.}
+\label{fig:dsp-clock-time}
 \end{center}
 \end{figure}
 
