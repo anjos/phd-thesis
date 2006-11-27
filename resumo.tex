@@ -40,20 +40,19 @@ Programa: Engenharia Elétrica
 \hspace{0.8cm}O experimento ATLAS no CERN, Suíça, contará com um Sistema de
 Filtragem que deverá separar a Física ordinária dos eventos que possam
 representar decaimentos do raro bóson de Higgs. O Segundo Nível deste Sistema
-de Filtragem, em específico, será constituído de cerca de 1.000 computadores
-ligados em rede, processando cada um evento completo aprovado pelo Primeiro
-Nível. Cada evento terá em média 10 milissegundos para ser processado.  Neste
-nível, operará um conjunto de algoritmos descritos em \eng{software} que
-executará a seleção de eventos. Dentre esses, algoritmos de discriminação
-elétron/jato têm papel fundamental na eficiência da aquisição de dados, uma
-vez que a ocorrência de elétrons pode representar a Física de interesse. Neste
-trabalho apresentamos resultados obtidos para sistemas de discriminação mais
-eficientes, baseados em análise multi-variável e um sistema de compactação
-de dados que se beneficia do perfil de deposição energético de elétrons e
-jatos em calorímetros para alcançar melhor eficiência de classificação. Os
-resultados sugerem que a utilização de ferramentas de processamento de sinais
-como a Análise de Componentes Principais e Componentes Independentes, poderá
-melhorar ainda mais a qualidade da análise executada neste nível de filtragem.
+de Filtragem será constituído de cerca de 1.000 computadores ligados em rede,
+processando cada evento aprovado pelo Primeiro Nível em não mais que 10
+milissegundos. Neste nível, operará um conjunto de algoritmos descritos em
+\eng{software} que executará a seleção de eventos. Dentre estes, algoritmos de
+deteção de elétrons têm papel fundamental na eficiência da aquisição de dados,
+uma vez que a ocorrência destas partículas pode representar a Física de
+interesse. Neste trabalho, apresentamos algoritmos de discriminação mais
+eficientes baseados em análise multi-variável e um sistema de compactação de
+dados que se beneficia do perfil de deposição energético destas partículas em
+calorímetros, alcançando uma eficiência de classificação de 97,6\% em elétrons
+para apenas 3,2\% de falso-alarme em jatos. Este algoritmo de deteção é
+implementado dentro da complexa infraestrutura de \eng{software} do
+experimento, podendo ser executado em apenas 125 microssegundos.
 \end{summary}
 
 \clearpage
@@ -85,20 +84,18 @@ Department: Electrical Enginnering
 
 \begin{summary}{1.2}
 \hspace{0.8cm}The ATLAS experiment at CERN, Switzerland, will count on a
-Trigger System that separates the ordinary Physics from that which represents
-decays of the rare Higgs boson. This system was initially designed to operate
-in 3 levels cascade-conneted, with higher complexity, detection quality and
-operation time per event. The Second Level Trigger, specifically, will be made
-out of 1,000 commodity computers interconnected forming a network, processing
-each a full single event approved by the First Level. Each event shall have an
-averaged processing time of 10 miliseconds.
-
-At the second level of this system, operates a set of algorithms described in
-software, that will execute the event selection. Among those, electron/jet
-discriminators play a fundamental role for the overall efficiency, since
-electrons may represent interesting Physics. This work presents results
-obtained for more efficient discriminating systems, based on multivariate
-analysis. The results suggest that the use of signal processing tools like
-Principal Component Analysis or Independent Components may improve even more
-the analysis quality executed at this trigger level.
+Trigger System that separates the ordinary physics from that which represents
+decays of the rare Higgs boson. The Second Level of such a Trigger System will
+be composed 1,000 computers connected by commodity networks, processing each
+event approved the the First Level in no more than 10 milliseconds. A set of
+algorithms described in software will operate in this filtering level. Between
+them, electron detection systems play a fundamental role to the data
+acquisition since the existence of these particles can represent interesting
+physics. In this work, we present more efficient discrimination algorithms
+based on multi-variate analysis and a compaction system which benefits from
+the energy deposit profiles of these particles in calorimeters, reaching a
+classification efficiency of 97.6\% for electrons for a false-alarm of only
+3.2\% in jets. This detection algorithm is implemented as part of the
+experiment's complex software infraestructure and can be executed in only 125
+microseconds.
 \end{summary}
