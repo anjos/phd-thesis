@@ -110,21 +110,19 @@ utilizará colisões próton-próton, numa taxa de 40 milhões por segundo para
 conseguir obter algumas dezenas destes bósons por dia de operação. As colisões
 serão providas pelo Grande Colisionador de Hádrons (do inglês \eng{Large
 Hadron Collider}, LHC), que será, quando estiver operacional, em 2007, o mais
-potente no mundo, podendo colidir prótons com 14 TeV no centro de massa.
+potente no mundo, podendo colidir prótons com 14 TeV no centro de massa. Uma
+vez que cada evento no ATLAS consumirá cerca de 1,5 \eng{megabytes} de espaço
+em memória, um dos problemas do projeto e construção do experimento está na
+articulação de um sistema de filtragem de eventos que seja capaz de fazer uma
+seleção \eng{online} dos eventos que representem a Física de interesse.
 
-Uma vez que cada evento no ATLAS consumirá cerca de 1,5 \eng{megabytes} de
-espaço em memória, um dos problemas do projeto e construção do experimento
-está na articulação de um sistema de filtragem de eventos que seja capaz de
-fazer uma seleção \eng{online} dos eventos que representem a Física de
-interesse.
-
-O Sistema de Filtragem do ATLAS foi inicialmente projetado para operar em três
-níveis conectados em cascata com complexidade, qualidade de deteção e tempo de
-operação por evento, crescentes. O Segundo Nível de Filtragem (LVL2),
-especificamente, será constituído de cerca de 1.000 unidades de processamento
-ligadas em rede, processando cada candidato aprovado pelo Primeiro Nível
-(LVL1). No LVL2 cada evento-candidato terá, em média, aproximadamente 10
-milissegundos para ser processado (latência).
+O Sistema de Filtragem do ATLAS foi inicialmente projetado para
+operar em três níveis conectados em cascata com complexidade, qualidade de
+deteção e tempo de operação por evento, crescentes. O Segundo Nível de
+Filtragem (LVL2), especificamente, será constituído de cerca de 1.000 unidades
+de processamento ligadas em rede, processando cada candidato aprovado pelo
+Primeiro Nível (LVL1). No LVL2 cada evento-candidato terá, em média,
+aproximadamente 10 milissegundos para ser processado (latência).
 
 O LVL2 coordena um conjunto de algoritmos descritos em \eng{software} que
 executa a seleção de eventos. Dentre esses, algoritmos de deteção de elétrons
@@ -141,7 +139,7 @@ filtragem, disponível em cada unidade de processamento dentro do LVL2. Os
 dados para cada candidato à elétron são formados por células de deteção de um
 calorímetro\footnote{Calorímetros são detetores especializados em amostrar a
 energia das partículas que interagem com seu volume. Estes detetores serão
-especificados e discutidos mais a frente no texto.}, segmentadas tanto da
+especificados e discutidos mais a frente no texto.}, segmentadas tanto na
 direção de penetração da partícula, quanto no plano de interseção. Este
 sistema forma uma malha de elementos que contém amostras da energia de
 interação da parícula de sendo discriminada com o sistema de deteção, ao longo
@@ -155,13 +153,13 @@ incluem defeitos no eletrônica do sistema de leitura do detetor ou transporte
 dos dados até as unidades de processamento.
 
 O processo de discriminação de cada objeto em si é dividido em duas etapas bem
-definidas: a extração de características ou pré-processamento e a deteção
-propriamente dita, como mostra a Figura~\ref{fig:intro-disc}. A extração de
-características visa a compactação do sinal a ser detetado de forma que se
-realcem as propriedades necessárias a deteção e reduza-se o espaço de
-entrada. A deteção propriamente dita, neste caso, deverá ser simples e robusta
-de forma que o canal de interesse se exprima claramente mesmo que embebido no
-rúido de fundo.
+definidas: a extração de características ou pré-processamento (fase 1) e a
+deteção propriamente dita (fase 2), como mostra a
+Figura~\ref{fig:intro-disc}. A extração de características visa a compactação
+do sinal a ser detetado de forma que se realcem as propriedades necessárias a
+deteção e reduza-se o espaço de entrada. A deteção propriamente dita, neste
+caso, deverá ser simples e robusta de forma que o canal de interesse se
+exprima claramente mesmo que embebido no rúido de fundo.
 
 \begin{figure}
 \begin{center}
@@ -176,17 +174,17 @@ Energias.}
 
 O experimento ATLAS foi iniciado em 1994 com a publicação de um relatório
 técnico indicando o objetivo de sua existência (deteção do bóson de Higgs) e
-sua complexa arquitetura em linhas gerais de operação. Desde este momento até
-o dia atual, as arquiteturas de todos os sub-sistemas deste experimento foram
-modificadas adaptando-se às novas tecnologias e aos desafios que surgiram com
-sua manufatura, planejamento de transporte e construção. Algumas áreas
-sofreram mudanças bastante radicais, como o sistema de filtragem, onde
-decidiu-se pela utilização pioneira de computadores (PC's) e redes (ethernet)
-de tipo doméstico atuando como unidades de processamento e interconexão desta
-parte do experimento. Outras áreas foram afetadas de forma menos drástica,
-ainda que bastante significativas, como no caso dos detetores, que tiveram
-suas geometrias modificadas para aumentar a resolução na deteção das
-partículas de interesse ou para remediar problemas relacionados à instalação.
+sua complexa arquitetura em linhas gerais de operação. Desde então, as
+arquiteturas de todos os sub-sistemas deste experimento foram modificadas
+adaptando-se às novas tecnologias e aos desafios que surgiram com sua
+manufatura, planejamento de transporte e construção. Algumas áreas sofreram
+mudanças bastante radicais, como o sistema de filtragem, onde decidiu-se pela
+utilização pioneira de computadores (PC's) e redes (ethernet) de tipo
+doméstico atuando como unidades de processamento e interconexão desta parte do
+experimento. Outras áreas foram afetadas de forma menos drástica, ainda que
+bastante significativas, como no caso dos detetores, que tiveram suas
+geometrias modificadas para aumentar a resolução na deteção das partículas de
+interesse ou para remediar problemas relacionados à instalação.
 
 Uma vez que os dados realísticos provenientes do ATLAS dependem de sua
 instalação, áreas como o sistema de filtragem tiveram que ser desenvolvidos
@@ -338,29 +336,99 @@ diferenças entre os dois sistemas.
 
 \section{As contribuições deste trabalho}
 
-Embora os estudos que culminaram na dissertação de mestrado tenham sido
-baseados em uma massa de dados menos realística com relação às condições
-finais do experimento, desenvolveu-se a base de um sistema de deteção bastante
-eficaz que é re-utilizado neste trabalho para propor um sistema completo de
-discriminação elétron/jato que atendesse a todos os pré-requisitos do complexo
-sistema de filtragem do ATLAS. Neste duro ambiente, os recursos computacionais
-são extremamente limitados, pois cada evento no LVL2 deve ser executado em
-média, em um tempo inferior a 10~milissegundos. Este tempo de processamento
-encompassa tanto o acesso aos dados localizados do outro lado de uma rede
-Ethernet, no sistema de leitura do detetor, quanto o processamento dos dados
-em si, incluindo o pré-processamento dos elementos de deteção (calibração e
-organização dos dados), a extração de características e a deteção propriamente
-dita. Múltiplos algoritmos serão executados neste espaço de tempo, caso o
-evento seja aprovado e, portanto, o tempo disponível para cada algoritmo é
-normalmente definido como ``o menor possível''. O sistema deve ainda ser
-programado em uma linguagem de alto-nível (C++), o que torna o problema ainda
-mais complexo, tendo em vistas os tempos de processamento-alvos.
+Este trabalho desenvolve e emprega métodos de análise multi-variável na
+deteção de elétrons no Segundo Nível de Filtragem do experimento ATLAS. Isto é
+feito tendo por base o modelo apresentado na Figura~\ref{fig:intro-disc}, onde
+os métodos de extração de características (fase 1) são analisados tendo por
+base sistemas de discriminação (fase 2) baseados em corte uni-dimensionais
+sucessivos, detetores lineares, baseados na Análise de Componentes Principais
+e Redes Neurais Artificiais. Os diversos sistemas são apresentados seguindo a
+modelagem do processamento dentro do LVL2, como indica a figura.
 
-O trabalho foi desenvolvido tanto CERN e na UFRJ, no contexto da colaboração
-internacional entre estes dois centros de pesquisa. Dentro desta colaboração,
-contribuiu-se com o desenvolvimento e construção de boa parte do Segundo Nível
-de Filtragem e sua infrastrutura. Dentre as contribuições mais significativas,
-podemos destacar:
+Utiliza-se como base, o novo conjunto de simulações mais realísticas do
+detetor e dos eventos que ocorrerão no ATLAS. Esta nova base de dados contém
+um estrutura de eventos com granularidade variante e com muitos dos detalhes
+operacionais do sistema de deteção final para o experimento. Estudos
+detalhados de tendências estatísticas, para as diversas combinações de
+compactadores e discriminadores, foram realizados levando-se em consideração a
+energia das partículas ou sua localização no detetor (plano $\eta\times\phi$).
+
+Inicialmente, levando-se em conta a massa de dados disponível, determinou-se a
+eficiência de discriminação, que poderia ser obtida pelo sistema atualmente
+empregado no CERN (fase 1 $+$ fase 2). Este sistema baseia-se na determinação
+de 4 variáveis altamente discriminantes (algoritmo T2Calo, fase 1), seguido de
+um processo de discriminação utilizando cortes unidimensionais (algoritmo
+EGammaHypo, fase 2). Determina-se sua eficiência em $91,85\%$ para a deteção
+elétrons contra um falso-alarme de $10,19\%$ em jatos.
+
+Com base nestes ``valores canônicos de deteção'', observados com a análise
+deste sistema de discriminação elétron/jato, desenvolve-se um detetor linear
+para as 4 variáveis especialistas, substituindo-se o sistema de discriminação
+\eng{ad-hoc} empregado no CERN. Este novo detetor tem um resultado
+equivalente ao sistema anterior, indicando uma inseparabilidade linear,
+inerente as variáveis no espaço compactado provido pelo algoritmo
+T2Calo. Desenvolvemos então um detetor neural que atenda os critérios da
+filtragem de elétrons, combinado a este algoritmo de extração de
+características. Este novo sistema de discriminação apresenta uma eficiência
+de classificação superior e também maior robustez na separação elétron/jato,
+atingido $92,38\%$ na deteção de elétrons contra $9,05\%$ de falso-alarme.
+
+Seguindo as tendências atuais de processamento neural aplicadas à Física de
+Altas Energias, consideramos variáveis normalmente desprezadas para fins de
+separação elétron/jato, mas produzidas durante o processo de compactação do
+T2Calo, na criação de um novo sistema de discriminação mais eficiente. Este
+novo sistema, utilizando 14 variáveis, obtém 94,79\% de eficiência na deteção
+de elétrons contra uma taxa de falso-alarme de apenas 7,93\%, apresentando-se
+ainda mais robusto que o sistema T2Calo (4 variáveis) $+$ detetor
+neural. Neste momento conduzimos uma análise de relevância das variáveis que
+revela que utilizando apenas 5 das 14 variáveis iniciais é possível
+desenvolver um detetor tão eficiente quanto aquele usando as 14 variáveis.
+Observando-se as correlações existentes entre as 14 variáveis, conduzimos uma
+Análise de Componentes Principais no objetivo de remover correlações no espaço
+de entrada do detetor neural, aumentando desta forma, o nível de compactação
+que poderia ser obtido.
+
+Conduz-se então uma análise baseada no pré-processamento em anéis. Para esta
+análise, um novo sistema de mapeamento das informações do detetor em anéis foi
+elaborado, levando-se em consideração vários aspectos que ainda não haviam
+sido abordados: a problemática dos dados faltantes, a introdução de ruído
+proveniente da eletrônica, a variação de granularidade dentro da camada e
+camada a camada. Com base neste pré-processamento, 100 variáveis
+correspondentes aos anéis são extraídas de cada objeto a ser analisado. Um
+detetor neural é elaborado para a fase de deteção propriamente dita,
+levando-se em consideração uma otimização do espaço de parâmetros para seu
+treinamento. Este novo sistema obtém uma eficiência de classificação de
+elétrons de $96,55$\% contra apenas $3,12$\% de falso-alarme. Uma análise de
+relevância baseada das variáveis de entrada (anéis) ao detetor neural é
+conduzida tendo em vistas seu poder de discriminação. Finalmente, um detetor é
+desenvolvido baseando-se em apenas 14 dos 100 anéis iniciais é definido,
+baseando-se na relevância discriminativa dos anéis de deposição energética,
+atingindo $97,59$\% na deteção de elétrons contra um falso alarme de
+$3,22$\%.
+
+Atualmente, algoritmos candidatos ao Sistema de Filtragem devem suprir não
+somente condições de eficiência, mas também de tempo de execução, se
+integrando perfeitamente à pilha de \eng{software} do ATLAS. Uma vez tendo
+desenvolvido o sistema de deteção, o integramos a esta infraestrutura de
+processamento completamente, de forma a verificar sua portabilidade, tempo de
+processamento e acuidade, enquanto embebido no inóspito ambiente de deteção do
+ATLAS. Testes de velocidade e exatidão são conduzidos em várias plataformas,
+donde se conclui que o sistema baseado em análise multi-variável seja viável
+para implementação no segundo nível de filtragem do experimento. Enquanto o
+sistema atual empregado no CERN consome cerca de 3,64 milissegundos para ser
+executado, o sistema baseado na extração em anéis e deteção neural, mais que 3
+vezes mais eficiente na rejeição de falsos-positivos, é executado em 3,8
+milissegundos dentro da mesma infraestrutura de base, apenas cerca de 150
+microssegundos de diferença em média. Finalmente, uma implementação baseada em
+DSP's é derivada, indicando uma nova plataforma de desenvolvimento e a
+portabilidade desejada ao sistema.
+
+Este trabalho foi desenvolvido com o objetivo de avaliar novas técnicas de
+deteção para o experimento ATLAS, no contexto da colaboração internacional
+entre o CERN e UFRJ. As contribuições deste trabalho também incluem o
+desenvolvimento e construção de boa parte do Segundo Nível de Filtragem e sua
+infrastrutura \eng{online}, que serão narradas como um contínuo no decorrer do
+texto. Dentre as mais significativas, podemos destacar:
 
 \begin{enumerate}
 \item Desenvolvimento e aplicação da Unidade Central de Processamento no
@@ -376,53 +444,6 @@ L2PU e a suíte de processamento \eng{offline} Athena;
 com ou sem a utilização de algoritmos de discriminação.
 \end{enumerate}
 
-O sistema de deteção propriamente dito foi desenvolvido em seguida. Para tal,
-utilizou-se o conjunto de dados de perfil complexo descrito anteriormente. Com
-base nesta massa, conduziu-se uma análise detalhada do comportamento dos
-algoritmos de extração de características (compactação da informação de
-entrada) e de deteção propriamente dita, atualmente empregado no LVL2 para a
-análise elétron/jato. Este algoritmo de compactação e deteção é baseado no
-conhecimento especialista, que determina variáveis altamente discriminantes
-tendo por base a Física de interesse que se deseja observar.
-
-Nesta análise, e levando-se em conta a massa de dados disponível,
-determinou-se a eficiência de discriminação em 91,85\% para elétrons para um
-falso-alarme de 10,19\% em jatos. Uma análise mais apurada das variáveis
-produzidas por este sistema indica que as variáveis especialistas são
-altamente descorrelacionadas e altamente relevantes à deteção. Com base no
-valor canônico de deteção observado com a análise do sistema atual de
-discriminação, desenvolve-se um detetor neural para as variáveis
-especialistas. Este detetor neural tem um resultado equivalente ao sistema de
-deteção atualmente empregado no ATLAS. Uma análise de componentes
-independentes também mostra que as variáveis usadas para discriminação são,
-praticamente, ortogonais entre si.
-
-Conduz-se então uma análise baseada no pré-processamento em anéis. Para esta
-análise, um novo sistema de mapeamento das informações do detetor em anéis foi
-elaborado, levando-se em consideração dois aspectos que ainda não haviam sido
-abordados: a problemática dos dados faltantes e a introdução de ruído
-proveniente da eletrônica. Com base neste pré-processamento, 100 variáveis
-correspondentes aos anéis são extraídas de cada objeto a ser analisado. Um
-detetor neural é elaborado para a fase de deteção propriamente dita,
-levando-se em consideração uma otimização do espaço de parâmetros para seu
-treinamento. Este novo sistema obtém uma eficiência de classificação de
-elétrons de $96,55$\% contra apenas $3,12$\% de falso-alarme. Uma análise de
-relevância baseada das variáveis de entrada (anéis) ao detetor neural é
-conduzida tendo em vistas seu poder discriminante ao invés de baseado em
-variações do erro médio quadrático, como em trabalhos anteriores.
-
-Finalmente, e para que possa ser operado dentro do sistema de filtragem do
-ATLAS, descreve-se uma implementação completamente compatível com a atual
-infra-estrutura. Testes de performance e exatidão são conduzidos em várias
-plataformas, donde se conclui que o sistema baseado em anelamento e deteção
-neural seja viável para implementação no segundo nível de filtragem do
-experimento. Enquanto o sistema atual empregado no CERN consome cerca de 3,64
-milissegundos para ser executado, o sistema baseado na extração em anéis e
-deteção neural, mais que 3 vezes mais eficiente na rejeição de
-falsos-positivos, é executado em 3,8 milissegundos dentro da mesma
-infraestrutura de base, apenas cerca de 150 microssegundos de diferença em
-média.
-
 \section{Organização do Texto}
 
 O Capítulo~\ref{chap:introducao} traz uma visão geral da Física de Partículas
@@ -430,7 +451,7 @@ atual. Este capítulo inicia-se sumarizando fatos histórios que culminaram na
 formulação do Modelo Padrão para a descrição das interações sub-atômicas. Em
 seguida, é feita uma revisão das técnicas de aceleração e deteção de
 partículas mais comuns em experimentos nesta área. Na
-Seção~\ref{sec:calorimetria} descrevem-se detetores conhecidos como 
+Seção~\ref{sec:calorimetria} descrevem-se detetores conhecidos como
 \textit{calorímetros} em maiores detalhes. Aqui, discutem-se as partículas de
 interesse para o trabalho e a forma como interagem com este tipo de detetor. O
 capítulo termina introduzindo noções gerais sobre os sistemas de filtragem que
@@ -448,7 +469,8 @@ Capítulo~\ref{chap:trigger}. Este capítulo descreve todos os sub-sistemas que
 compõem o Sistema de Filtragem do experimento, desde o Primeiro Nível de
 Filtragem até chegar à gravação de um evento selecionado em mídia
 permanente. É neste ambiente que são executados os algoritmos de filtragem
-abordados neste trabalho. O Segundo Nível de Filtragem é detalhado a partir da
+abordados neste trabalho. O Segundo Nível de Filtragem e algumas das
+contribuições deste trabalho são detalhados a partir da
 Seção~\ref{sec:lvl2arch}. Resultados obtidos durante simulações do
 comportamento desta parte do sistema são apresentados na
 Seção~\ref{sec:lvl2work}. O final deste capítulo é dedicado ao ambiente de
@@ -456,18 +478,39 @@ processamento de dados Athena e sua interação com o Sistema de Filtragem do
 ATLAS. Neste capítulo descreve-se em detalhes os componentes de infraestrutura
 produzidos no contexto da colaboração entre o CERN e a UFRJ.
 
-%\textit{[ Faltando material relativo à re-organização dos capítulos 5, 6 (e futuro) 7 ]}
+O Capítulo~\ref{chap:baseline} apresenta os aspectos da filtragem elétron/jato
+conduzida no experimento ATLAS, partindo do LVL1 até que os eventos estejam
+disponíveis no LVL2. O algoritmo de deteção de elétrons nestes dois níveis de
+filtragem são avaliados em detalhes. O capítulo termina com uma análise
+completa do algoritmo do LVL2, tendo por base os dados utilizados durante este
+trabalho de tese.
 
-O Capítulo~\ref{chap:conclusions} traz uma conclusão dos estudos realizados
-até o momento presente e apresenta extensões de estudo para este trabalho.
+O Capítulo~\ref{chap:neural} começa trazendo uma revisão das as técnicas de
+análise multi-variável que são atualmente empregadas em experimentos em Física
+de Altas Energias, especialmente focado no emprego de redes neurais em
+calorimetria. O texto continua desenvolvendo os diversos sistemas de
+discriminação propostos. Na primeira parte, com sistemas baseados na
+re-utilização do algoritmo de extração de características T2Calo e, numa
+segunda, utilizando um processamento baseado em anéis de deposição energética
+re-modelado e melhorado.
+
+O Capítulo~\ref{chap:implement} adentra pelo emprego do sistema desenvolvido
+no capítulo anterior, dentro do Sistema de Filtragem do ATLAS. Demonstra-se
+que seja possível construir e executar sistemas de deteção neural dentro deste
+complexo ambiente. Testes de acuidade e velocidade são conduzidos e analisados
+em diversas plataformas. Este capítulo termina com a descrição de uma
+implementação do sistema de anelamento e deteção neural em DSP's.
+
+O Capítulo~\ref{chap:conclusions} traz uma conclusão dos estudos realizados e
+apresenta extensões de estudo para este trabalho.
 
 Para a melhor compreensão dos termos utilizados na descrição da geometria dos
 objetos estudados neste trabalho, o Apêndice~\ref{ap:coord} introduz o sistema
-de coordenadas do ATLAS. O Apêndice~\ref{ap:published} traz um resumo da
-produção científica no período e projetos que integram o corpo deste estudo. O
-Apêndice~\ref{ap:framework} sumariza os detalhes de implementação do
-pacote de \eng{software} \texttt{Neuralringer}, utilizado para as medidas de
-eficiência, relevância e que foi transplantado para operação dentro do sistema
-de filtragem do experimento.
+de coordenadas do ATLAS. O Apêndice~\ref{ap:framework} sumariza os detalhes de
+implementação do pacote de \eng{software} \texttt{Neuralringer}, utilizado
+para as medidas de eficiência, relevância e que foi transplantado para
+operação dentro do Sistema de Filtragem do experimento. Finalmente, o
+Apêndice~\ref{ap:published} traz um resumo da produção científica durante o
+período.
 
 \typeout{ *************** End of file prefacio.tex *************** }
