@@ -1,6 +1,6 @@
 %% Define um ambiente para o resumo, mais compacto e que dá mais texto
 \newenvironment{summary}[1]{%
-\begin{minipage}{\linewidth}%
+\begin{minipage}{\textwidth}%
 \newcommand{\saveparameter}{\baselinestretch}% guarda o valor default
 \renewcommand{\baselinestretch}{#1}%
 \normalsize}%
@@ -36,7 +36,7 @@ Orientador: José Manoel de Seixas
 Programa: Engenharia Elétrica
 \vspace{2cm}
 
-\begin{summary}{1.2}
+\noindent \begin{summary}{1.2}
 \hspace{0.8cm}O experimento ATLAS no CERN, Suíça, contará com um Sistema de
 Filtragem que deverá separar a Física ordinária dos eventos que possam
 representar decaimentos do raro bóson de Higgs. O Segundo Nível deste Sistema
@@ -82,7 +82,7 @@ Advisor: José Manoel de Seixas
 Department: Electrical Enginnering
 \vspace{2cm}
 
-\begin{summary}{1.2}
+\noindent \begin{summary}{1.2}
 \hspace{0.8cm}The ATLAS experiment at CERN, Switzerland, will count on a
 Trigger System that separates the ordinary physics from that which represents
 decays of the rare Higgs boson. The Second Level of such a Trigger System will

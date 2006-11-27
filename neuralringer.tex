@@ -135,7 +135,7 @@ Operadores (\texttt{PatternOperator}s no diagrama), são elementos que podem
 modificar um padrão e são usados para extrair a média, variância ou aplicar
 normalizações dos mais diferentes critérios nos dados disponíveis. Na figura,
 mostra-se o mais relevante dos operadores na biblioteca, chamado
-\eng{NormalizationOperator}, que é inicializado à partir de uma base de dados
+\eng{NormalizationOperator}, que é inicializado a partir de uma base de dados
 e pode, quando aplicado a um padrão, remover a média e desvio padrão da base
 de dados. Este operador é utilizado em todos os testes neste trabalho como
 forma de normalização dos dados de entrada de classificadores LMS ou Redes
@@ -143,7 +143,7 @@ Neurais. Quando um operator é aplicado a um padrão, primitivas da biblioteca
 GSL são utilizadas para que a eficiência do processo seja maximizada.
 
 \paragraph{\texttt{NETWORK}:} Neste pacote contém a definição de
-neurônios, sinapses e redes formadas à partir destes elementos. A
+neurônios, sinapses e redes formadas a partir destes elementos. A
 Figura~\ref{fig:network-uml} apresenta um diagrama UML dos tipos neste
 sub-sistema. No topo deste diagrama está o tipo \texttt{Network} (Rede), que
 representa, de forma abstrata, um conjunto de neurônios (tipo \texttt{Neuron})
@@ -225,7 +225,7 @@ função linear (utilizada para redes tipo LMS), a função logística
 simplificada, definida na Equação~(\ref{eq:logf}) e a função tangente
 hiperbólica, definida na Equação~(\ref{eq:tanh}).
 
-Métodos para salva-guardar e restaurar uma rede à partir de um arquivo es\-tão
+Métodos para salva-guardar e restaurar uma rede a partir de um arquivo es\-tão
 implementados. A salva-guarda é implementada através de um processo iterativo
 de delegação de responsabilidades onde cada neurônio e sinapse involvido na
 rede se auto-descreve no arquivo de saída. O formato escolhido é XML, uma vez
