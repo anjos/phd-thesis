@@ -73,7 +73,7 @@ A complexidade de execução do método baseado no anelador e deteção neural �
 variável de acordo com dois parâmetros principais:
 
 \begin{enumerate}
-\item Com o número de aneís que se deseja extrair: neste caso, quanto mais
+\item Com o número de anéis que se deseja extrair: neste caso, quanto mais
 anéis deseja-se extrair dos dados, maior o tempo de execução que será
 necessário para cumprir o processo de anelamento. Ademais, com o aumento do
 número de anéis aumenta-se igualmente o tamanho da entrada do discriminador
@@ -85,7 +85,7 @@ tempo de execução do discriminador.
 
 Para determinar a viabilidade em termos desempenho, para o algoritmo proposto
 por este trabalho, executou-se a aplicação \texttt{ringer-run} em um conjunto
-de máquinas de refência ao experimento ATLAS. A
+de máquinas de referência ao experimento ATLAS. A
 Tabela~\ref{tab:machine-comparison} resume as características destas
 máquinas. A primeira das máquinas listadas está sendo utilizada em uma
 avaliação de arquiteturas para o sistema de filtragem e aquisição de dados do
@@ -137,10 +137,10 @@ a aplicação tivesse um desempenho abaixo do esperado para o experimento.
 
 As Figuras~\ref{fig:timings-histo-full}, \ref{fig:timings-histo-cut1} e
 \ref{fig:timings-histo-cut2} contém os resultados dos 3 testes com 100, 34 e
-14 anéis respectivamente nas três arquitecturas. Das três arquiteturas
+14 anéis respectivamente nas três arquiteturas. Das três arquiteturas
 escolhidas, a máquina da pré-série parece ser a mais rápida, apresentando um
 tempo de processamento de apenas $445$ microssegundos para o mais complexo dos
-testes, utilizando 100 anéis. Em seguida, o sistema baseado no processor
+testes, utilizando 100 anéis. Em seguida, o sistema baseado no processador
 Opteron-275, cerca de 8\% mais lento para o mesmo teste. A máquina de testes
 do sistema de filtragem é a mais lenta de todas as plataformas, apresentando
 um tempo médio de processamento de $542$ microssegundos para cada RoI. O
@@ -150,7 +150,7 @@ desvio padrão está na faixa dos 10\% indicando uniformidade nos resultados.
 \begin{center}
 \includegraphics[scale=0.98]{ringer-mlp/compare-test-full-rings}
 \end{center}
-\caption{Tempos totais de executação do \eng{NeuralRinger} em três plataformas
+\caption{Tempos totais de execução do \eng{NeuralRinger} em três plataformas
 distintas, utilizando 100 anéis.}
 \label{fig:timings-histo-full}
 \end{figure}
@@ -159,7 +159,7 @@ distintas, utilizando 100 anéis.}
 \begin{center}
 \includegraphics[scale=0.98]{ringer-mlp/compare-test-cut1-rings}
 \end{center}
-\caption{Tempos totais de executação do \eng{NeuralRinger} em três plataformas
+\caption{Tempos totais de executava do \eng{NeuralRinger} em três plataformas
 distintas, utilizando 34 anéis.}
 \label{fig:timings-histo-cut1}
 \end{figure}
@@ -168,7 +168,7 @@ distintas, utilizando 34 anéis.}
 \begin{center}
 \includegraphics[scale=0.98]{ringer-mlp/compare-test-cut2-rings}
 \end{center}
-\caption{Tempos totais de executação do \eng{NeuralRinger} em três plataformas
+\caption{Tempos totais de execração do \eng{NeuralRinger} em três plataformas
 distintas, utilizando apenas 14 anéis.}
 \label{fig:timings-histo-cut2}
 \end{figure}
@@ -185,7 +185,7 @@ Ao compararmos os resultados dos testes com 100 anéis ao tempo de referência
 do T2Calo (1,56~ms) para a mesma plataforma, observa-se que o sistema proposto
 executa em apenas um-terço do tempo requerido para o T2Calo nesta
 arquitetura. Esta análise não leva em conta o acesso aos dados e sua
-calibração e localização dentro das bibliotecas de infrastrutura do LVL2. No
+calibração e localização dentro das bibliotecas de infraestrutura do LVL2. No
 entanto, por inspeção à Tabela~\ref{tab:t2calo-performance}, nota-se que cerca
 de 57\% do tempo total do processamento de uma RoI, isto é, aproximadamente
 2,1~ms é devido a esta parte dos dados. Desta forma, conclui-se que o sistema
@@ -302,7 +302,7 @@ afirmativa, neste exemplo, tentar-se-á encontrar um traço relativo ao objeto
 nos detetores de traço. Caso isto falhe, o objeto será rejeitado como indica a
 figura. Se, finalmente, nenhuma das fases de processamento conseguir rejeitar
 o objeto, ele será rotulado como um elétron, os valores extraídos das
-características do objeto serão apendicionadas a este novo elemento e o evento
+características do objeto serão adicionados a este novo elemento e o evento
 será aprovado.
 
 \begin{figure}
@@ -350,7 +350,7 @@ baseado na entrada, a saída de cada passo, para um conjunto de eventos. Para
 tal, utilizou-se uma base de dados com eventos simulados tipo $Z \rightarrow
 e^- + e^-$ que estava disponível no formato adequado. Uma configuração de
 anelamento utilizando 100 anéis conforme descritos anteriormente, e uma rede
-neural com 100 entradas, 8 neurônios escondidos e um neurónio na camada de
+neural com 100 entradas, 8 neurônios escondidos e um neurônio na camada de
 saída. Cerca de 850 RoI's foram selecionadas pela simulação do LVL1 indicando
 objetos a serem averiguados no LVL2. Roda-se o sistema Athena, configurado
 para utilizar os algoritmos de anelamento e deteção neural extraindo-se 3
@@ -370,7 +370,7 @@ Athena ou ao Sistema de Filtragem) do \eng{NeuralRinger}, executam-se os mesmos
 processos:
 
 \begin{enumerate}
-\item Basedo nos valores originais das células provida pelo Athena, calculam-se
+\item Baseado nos valores originais das células provida pelo Athena, calculam-se
 a soma de anéis; 
 \item Baseado na saída dos anéis provida pelo Athena, calculam-se a saída da
 rede neural.
@@ -402,7 +402,7 @@ são truncados a partir da sexta casa decimal.
 
 Para completar a análise, roda-se o processo completo de extração e
 classificação neural, baseando-se nos valores das células, comparando a saída
-deste procecedimento à saída provida pelo sistema neural acoplado ao ambiente
+deste procedimento à saída provida pelo sistema neural acoplado ao ambiente
 Athena. A Figura~\ref{fig:athena-vs-nr-full} mostra um gráfico de correlação
 das saídas dos dois sistemas para as configurações de anelamento e rede neural
 descritas anteriormente. Neste caso, onde não há escrita em disco entre os
@@ -491,7 +491,7 @@ valor representa um acréscimo de cerca de 56\% do tempo total calculado
 anteriormente. Uma parte do tempo adicional é gasto na criação de estruturas
 de dados que sejam repassáveis entre os algoritmos, passo necessário no
 ambiente Athena e que foi suprimido na execução desacoplada. Uma outra parte
-advém da utilização da infrastrutura de acesso à dados e relatório de erros
+advém da utilização da infraestrutura de acesso à dados e relatório de erros
 disponível no ambiente Athena, que é mais lenta que no ambiente desacoplado.
 
 O tempo total de processamento do algoritmo integrado é de cerca de
@@ -500,7 +500,7 @@ diversas configurações de anéis e detetores neurais das
 Figuras~\ref{fig:timings-histo-full}, \ref{fig:timings-histo-cut1} e
 \ref{fig:timings-histo-cut2} observa-se uma relação aproximadamente constante
 de cerca de 10 a 15\% de diferença entre as plataformas AMD Opteron-275 e
-Intel Xeon, dependendo do número de aneís utilizados. Escalando o valor de
+Intel Xeon, dependendo do número de anéis utilizados. Escalando o valor de
 tempo observado considerando-se a diferença máxima de 15\%, chega-se a um
 valor de $\approx 3,8$ milissegundos. Este valor é comparável ao tempo total
 de processamento do T2Calo, na Tabela~\ref{tab:t2calo-performance}, de $3,64$
@@ -548,7 +548,7 @@ verificação a ser feita é se a utilização dos novos algoritmos não introdu
 erros para os demais.
 
 Executou-se a aplicação AthenaMT incluindo uma configuração para a deteção de
-objetos tipo e.m. (T2Calo e algoritmos de deteteção de traços) junto ao
+objetos tipo e.m. (T2Calo e algoritmos de deteção de traços) junto ao
 sistema baseado no anelamento e deteção neural. Observou-se o consumo de
 memória enquanto executava-se a aplicação para que possíveis vazamentos possam
 ser rastreados. Não foram observados problemas em nenhum aspecto.

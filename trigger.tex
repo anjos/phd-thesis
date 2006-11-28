@@ -28,7 +28,7 @@ Trigger}, LVL1) deverá reduzir a taxa de eventos do LHC para cerca de 100 kHz
 apenas, através de técnicas simples de filtragem codificadas em hardware
 dedicado. O \idx{Segundo Nível} de filtragem (do inglês
 \idxeng{Second-Level Trigger}, LVL2) reduzirá a taxa de saída do LVL1 para
-aproximadamente 1 kHz utlizando aplicações codificadas em software para
+aproximadamente 1 kHz utilizando aplicações codificadas em software para
 computadores do tipo PC, tão comuns quanto os disponíveis para aplicações
 domésticas. O \idx{Terceiro Nível} de filtragem ou
 \idx{Filtro de Eventos} (do inglês \idxeng{Event Filter}, EF) estará baseado
@@ -70,7 +70,7 @@ requisitado.
 Para gerar os sinais de filtragem necessários ao LVL1, o sistema de leitura de
 dados dos calorímetros é equipado com somadores rápidos \cite{seixas:adder,
 lar-tdr} que aglomeram o sinal de 2 ou mais células destes detetores para
-gerar macrocélulas de filtragem denominadas \idx{torres de filtragem} (do
+gerar macro-células de filtragem denominadas \idx{torres de filtragem} (do
 inglês \idxeng{Trigger Towers}, TT). O sistema de múons também possui
 circuitos equivalentes que determinam a ocorrência de traços com altos valores
 de $p_T$ naquele subdetetor.
@@ -203,7 +203,7 @@ infraestrutura experimental comum a todos os outros sistemas. O DCS também se
 comunica com sistemas externos, como a infraestrutura de serviços do CERN e,
 mais notavelmente, com o acelerador LHC.
 
-Aspectos de seguranção são tratados pelo DCS somente no nível de menor
+Aspectos de segurança são tratados pelo DCS somente no nível de menor
 severidade. Este trabalho tange principalmente questões ligadas ao
 seqüenciamento de operações ou à requisição onde prevaleçam condições
 específicas, antes de permitir que outros procedimentos sejam
@@ -238,8 +238,8 @@ pode ser custosa em tempo, fundos ou desempenho do sistema global. Portanto, a
 supervisão do sistema de deteção é necessária constantemente. Por outro lado,
 o DAQ é somente necessário durante a aquisição de dados ou durante \eng{runs}
 de monitoração, calibração ou teste. Assim sendo, o DCS precisa ter completa
-independência funcional, ainda que, ao mesmo tempo, este quesito não deva
-imperativamente acarretar em limites operacionais com o DAQ.
+independência funcional, ainda que, ao mesmo tempo, este quesito não deva,
+imperativamente, acarretar em limites operacionais com o DAQ.
 
 \subsection{O sistema \textit{online}}
 \label{sec:online}
@@ -268,7 +268,7 @@ detetar problemas de maneira precoce e eficiente. Bancos de dados com a
 configuração do sistema são fornecidos contendo um grande número de parâmetros
 que descrevem a topologia do sistema, os componentes de
 \eng{hardware} e \eng{software} assim como os modos e ordem de
-execução. Durante a aquisição, componentes especilizados capturam e servem
+execução. Durante a aquisição, componentes especializados capturam e servem
 informação relacionadas à monitoração dos diversos processos do experimento,
 como dados estatísticos, histogramas ou parâmetros de rejeição, assim como
 mensagens de erro e diagnóstico enviadas pelas diversas aplicações. Interfaces
@@ -281,7 +281,7 @@ de vários sub-sistemas durante um \eng{run}.
 \index{online}
 
 O projeto do sistema \eng{online} é baseado numa arquitetura de componentes,
-que respeitam o modelo cliente-servidor. Os componentes podem ser dividos em 3
+que respeitam o modelo cliente-servidor. Os componentes podem ser divididos em 3
 grupos, que incluem um conjunto de pacotes cada um. Cada um dos pacotes está
 associado a um grupo de funções para este sistema e provê um conjunto definido
 de serviços. Os serviços possuem interfaces bem definidas e são desacoplados
@@ -470,7 +470,7 @@ aplicativos utilizando o Sistema \eng{Online};
 
 \item Ferramentas para controle e relatório de erros: permitem o envio de
 mensagens de erro e depuração para os nós de controle da cadeia de
-aquisição. Este conjunto de ferramentas também imbute os aplicativos, nos
+aquisição. Este conjunto de ferramentas também inclui os aplicativos, nos
 moldes da máquina de estados apresentada na Figura~\ref{fig:online-fsm}.
 \end{itemize}
 
@@ -625,7 +625,7 @@ Os fragmentos de RoI (e também do detetor) que são carregados pela L2PU são
 armazenados e transmitidos em um formato particular e uma biblioteca de
 codificação e decodificação \cite{aa:ef-urd, aa:ef-ooad} está disponível para
 este propósito. Os dados não são somente decodificados, mas também
-rearranjados e calibrados antes do uso, o que pode consumir grande parte do
+re-arranjados e calibrados antes do uso, o que pode consumir grande parte do
 tempo de processamento (10 ms) no LVL2.
 
 O L2R juntamente com a decisão do LVL2 são enviados diretamente das tarefas
@@ -662,7 +662,7 @@ desenvolvimento de \eng{drivers} especializados para atividades específicas.
 Para maximizar a operabilidade e diminuir o custo, pretende-se adquirir
 máquinas duplamente ou quadruplamente processadas com memória compartilhada
 (arquitetura SMP, do inglês \eng{Symmetric Multi-Processor}). Esta arquitetura
-apresenta várias vantegens:
+apresenta várias vantagens:
 
 \begin{itemize}
 \item Para cada 2 ou 4 processadores, somente 1 disco e 2 interfaces de rede
@@ -710,7 +710,7 @@ L2PU, através de parâmetros de configuração disponíveis ao operador do
 experimento. Esta estratégia permite que o sistema de fluxo de dados seja
 testado independentemente dos algoritmos de filtragem, paralelizando o
 desenvolvimento \cite{aa:tns-2004-2} e reduzindo significativamente as
-possibilidades de falha devido a componentes que não relevem a natureza dos
+possibilidades de falha devido a componentes que não sejam relevantes a natureza dos
 testes. Para os processos descritos nesta seção, foram utilizados emuladores
 dos componentes de discriminação, que podem simular a aquisição de dados de
 RoI's e até o tempo de processamento entre cada tomada de dados, possivelmente
@@ -756,7 +756,7 @@ do tempo-morto despendido durante a aquisição de dados e do número de
 processadores disponível em cada máquina. Em máquinas duplamente processadas,
 por exemplo, o número ótimo de tarefas processadoras deve estar entre 3 e 4,
 já que o uso de um número menor deste tipo de tarefas implicará na
-subutilização do poder de processamento de cada nó.
+sub-utilização do poder de processamento de cada nó.
 
 Medidas foram realizadas variando-se parâmetros críticos para o desempenho da
 coleção de dados para RoI's. A contribuição gerada pela coleção de dados para
@@ -865,7 +865,7 @@ com ROB's, gerando um total de 48 ROB's para este teste. Para cada requisição,
 a L2PU escolhe um dos 48 ROB's aleatoriamente e um número de ROB's com
 numeração consecutiva. Por exemplo, no caso em que cada RoI consista de 6
 ROB's, a L2PU seleciona o primeiro aleatoriamente e completa o pedido com
-outros 5 ROB's, cuja a numeração sucede o primero ROB. Se o último ROB fosse
+outros 5 ROB's, cuja a numeração sucede o primeiro ROB. Se o último ROB fosse
 selecionado, o algoritmo voltaria ao primeiro ROB disponível
 (\eng{wrap-around}).
 
@@ -914,7 +914,7 @@ Observa-se na Figura~\ref{fig:tns-7fig} a taxa sustentada por um L2SV em
 função do número de L2PU's sob seu controle. Nesta bancada, o nó de
 processamento rodando o L2SV está conectado através de uma chave \eng{gigabit}
 ethernet, com um número de outras máquinas rodando o código da L2PU sem
-algorítmos de discriminação carregados e sem coletar dados dos ROS's. Este é
+algoritmos de discriminação carregados e sem coletar dados dos ROS's. Este é
 portanto um teste extremo, visto que as L2PU's vão responder o mais rápido
 possível a cada requisição de processamento de eventos feita pelo L2SV. Como
 pode ser visto pela figura, um único L2SV pode sustentar a taxa de 32 kHz
@@ -957,7 +957,7 @@ EDM). Durante o processamento, os dados gerados são guardados e acessados
 através de um Gerente de Dados (do inglês, \eng{Data Manager}, DM). Isto
 permite transparência às escolhas de plataforma de armazenamento e tecnologia
 utilizadas para executar as operações de filtragem. Os algoritmos do HLT
-propriamente ditos reconstróem quantidades relativas aos eventos ou confirmam
+propriamente ditos reconstroem quantidades relativas aos eventos ou confirmam
 hipóteses através de quantidades previamente calculadas. A
 Figura~\ref{fig:hlt-arch} ilustra o relacionamento entre estes macrossistemas
 do HLT com alguns exemplos de classes representativas.
@@ -986,7 +986,7 @@ Uma vez que o Filtro de Eventos provê um ambiente de computação praticamente
 igual ao ambiente \eng{offline}, o conjunto de rotinas do HLT é naturalmente
 baseado no ambiente de análise \eng{offline}, Athena, que por sua vez é
 baseado na infraestrutura de análise física Gaudi \cite{athena:home-page,
-athena:devel-guide}. Esta estratégia permite a reutilização do Gerente de
+athena:devel-guide}. Esta estratégia permite a re-utilização do Gerente de
 Dados, do EDM, da descrição dos detetores e de muitos algoritmos que já se
 encontram desenvolvidos por esta comunidade. Apenas o Gerente do HLT
 (\eng{Steering}) e determinados algoritmos restam como desenvolvimentos
@@ -999,7 +999,7 @@ no desempenho), eles utilizam o mesmo EDM e descrição do detetor presentes no
 EF e \eng{offline}. A utilização transparente de tais componentes é possível e
 uma implementação comum da infraestrutura do HLT para ambos o LVL2 e o EF pode
 ser realizada se a mesma interface estiver disponível para o LVL2. Esta
-comunalidade é provida pelo Gerente do HLT no LVL2 (\eng{LVL2 Steering
+funcionalidade é provida pelo Gerente do HLT no LVL2 (\eng{LVL2 Steering
 Controller}, L2SC).
 
 \subsubsection{O L2SC}
@@ -1008,7 +1008,7 @@ O L2SC é componente de \eng{software} que faz a interface entre a L2PU, que
 provê acesso aos dados do detetor através dos ROS's e dos ROB's, e os
 componentes do HLT. O propósito do L2SC está em 3 aspectos: permitir que a
 L2PU seja hospedeira do \eng{software} do HLT e sua controladora primária;
-permitir a reutilização do mesmo conjunto de componentes (algoritmos, EDM,
+permitir a re-utilização do mesmo conjunto de componentes (algoritmos, EDM,
 etc) entre o LVL2, o EF e \eng{offline}; prover um mecanismo de transmissão
 dos resultados do LVL1 e do LVL2 entre o DAQ e \eng{software} de seleção de
 eventos. Por esta razão, da mesma forma que a L2PU, o L2SC deve seguir a
@@ -1053,7 +1053,7 @@ ciclo de desenvolvimento para produzir código seguro ao acesso concorrente (do
 inglês \eng{thread-safe}) ou serviços compatíveis com a criação automática de
 múltiplas cópias na L2PU. Não deve ser necessário utilizar trancas
 (\eng{locks}) ou \eng{mutexes} para adaptar o código a este ambiente
-multi-tarefas. Para respeitar as retrições no tempo de execução para o LVL2, o
+multi-tarefas. Para respeitar as restrições no tempo de execução para o LVL2, o
 número e o tipo de serviços disponíveis estão restritos ao mínimo necessário,
 sendo este um subconjunto do serviços disponíveis no EF e \eng{offline}. Desta
 forma é sempre possível mover um componente do LVL2 para executar no EF ou até
@@ -1075,7 +1075,7 @@ manusear quando operando com e sem o L2SC e executando um algoritmo simples
 mostra a taxa de processamento obtida quando, adicionalmente, o resultado do
 LVL1 é transferido para o Gerente de Dados. O valor de \eng{overhead}
 mencionado inclui toda a infraestrutura Athena para agendar e executar os
-algoritmos e os serviços básicos. Estes valores são basedos em execuções de,
+algoritmos e os serviços básicos. Estes valores são baseados em execuções de,
 no mínimo, 100.000 eventos. Escalonamento quase perfeito da latência medida
 foi observado quando o tempo de execução dos algoritmos era variada com um
 ciclo de processamento fictício de 0 a 8 milissegundos em configurações
