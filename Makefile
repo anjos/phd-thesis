@@ -16,6 +16,7 @@
 
 TEXFILE=main.tex
 PACKNAME=$(shell basename `pwd`)
+COLORPAGES=44 58 212 245 249 276
 
 # FIM DA SEÇÃO NOMES
 
@@ -65,6 +66,9 @@ BIBFILES=$(shell if [ -d biblio ]; then find biblio -name "*.bib"; fi)
 	pdflatex $(@:%.pdf=%.tex)
 
 all: $(PDFFILE) #$(PSFILE)
+
+color.pdf: $(PDFFILE)
+	pdftk $? cat $(COLORPAGES) output $@
 
 $(PDFFILE): $(shell find . -name "*.tex")
 
