@@ -2323,7 +2323,8 @@ seria inviável.
 \begin{center}
 \includegraphics[scale=0.98]{ringer-mlp/roc-compare}
 \end{center}
-\caption{R.O.C. comparativa dos diversos sistemas de filtragem abordados até agora.}
+\caption{Comparação da R.O.C. dos diversos sistemas de filtragem abordados até
+agora com o sistema neural baseado em anéis de deposição energética.} 
 \label{fig:ringer-test-roc}
 \end{figure}
 
@@ -2715,20 +2716,19 @@ negativa), sem que se crie ``buracos'' entre os anéis. Em seguida, dez testes,
 mantendo a mesma parametrização do sistema anterior, foram conduzidos. A
 R.O.C. do melhor destes testes, junto àquelas dos testes anteriores, pode ser
 vista na Figura~\ref{fig:relev-cut1-roc}. A figura mostra que o sistema podado
-se comporta, aproximadamente, tão bem quanto o sistema original com 100 anéis
-ou um dos sistemas otimizados com 62 ou 48 anéis, os superando em alguns
-pontos. Este novo sistema possui apenas a terça parte do número de anéis do
-sistema original, mas praticamente mantém o desempenho do sistema
-discriminador com 100 anéis, seguindo a linha dos sistemas esculpidos pela
-relevância de discriminação. O discriminador neural, neste caso, tem $66
-\times 12 = 792$ menos conexões sinápticas, somando um total de $433$
-sinapses. O máximo do produto SP ($1,81$) é atingido para uma eficiência na
-deteção de elétrons de $96,64$\% contra um falso-alarme em jatos de apenas
-$3,09$\% (aproximadamente 770~Hz de ruído de fundo).
+se comporta, melhor que o sistema original com 100 anéis ou tal como um dos
+sistemas otimizados com 62 ou 48 anéis. Este novo sistema possui apenas a
+terça parte do número de anéis do sistema original, mas praticamente mantém o
+desempenho do sistema discriminador com 100 anéis, seguindo a linha dos
+sistemas esculpidos pela relevância de discriminação. O discriminador neural,
+neste caso, tem $66 \times 12 = 792$ menos conexões sinápticas, somando um
+total de $433$ sinapses. O máximo do produto SP ($1,81$) é atingido para uma
+eficiência na deteção de elétrons de $96,64$\% contra um falso-alarme em jatos
+de apenas $3,09$\% (aproximadamente 770~Hz de ruído de fundo).
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.98]{ringer-mlp/relevance-cut2-roc}
+\includegraphics[scale=0.98]{ringer-mlp/relevance-cut-2-roc}
 \end{center}
 \caption{R.O.C. comparativa entre os sistemas de deteção de elétrons e jatos
 analisados até agora e o novo sistema de deteção gerado a partir da poda dos
