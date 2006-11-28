@@ -4,18 +4,17 @@
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{Análise multi-variável baseada em calorimetria para a deteção
+\chapter{Análise neural baseada em calorimetria para a deteção
 elétron/jato} 
 \label{chap:neural}
 
 Neste capítulo analisa-se o modelo de classificação elétron/jato proposto
 atualmente no CERN e desenvolvem-se sistemas de classificação de simples
-treinamento e emprego, baseados em análise multi-variável. Em especial, redes
-neurais artificiais são estudadas em detalhes. Estes classificadores definem
-um patamar de deteção melhor que o sistema discutido no capítulo anterior,
-superando-o em robustez e flexibilidade e ainda atingindo uma velocidade de
-execução compatível com a operação dentro do Segundo Nível do Sistema de
-Filtragem do experimento ATLAS.
+treinamento e emprego, baseados em redes neurais artificais. Estes
+classificadores definem um patamar de deteção melhor que o sistema discutido
+no capítulo anterior, superando-o em robustez e flexibilidade e ainda
+atingindo uma velocidade de execução compatível com a operação dentro do
+Segundo Nível do Sistema de Filtragem do experimento ATLAS.
 
 \section{Revisão da literatura}
 \label{sec:review}
@@ -286,7 +285,7 @@ se obtém 72,4\% de eficiência na deteção de elétrons contra 39\% de
 falso-alarme para um sistema não segmentado e 98,9\% para apenas 1\% de
 falso-alarme preservando-se a informação de penetração longitudinal do objeto.
 
-\subsection{Análise multi-variável resumida}
+\subsection{Análise neural resumida}
 
 A análise neural vem sendo sugerida como interessante candidata à análise
 bayesiana clássica ou à análise da matriz de correlação (PCA) nos trabalhos
@@ -300,7 +299,7 @@ detetor, calibradas ou a serem calibradas \cite{silva-acat-2001}, ou são
 definidas através de equações ou transformações simples e normalizadas de
 acordo a parâmetros do objeto que se deseja discriminar.
 
-A análise multi-variável resolve um problema latente em Física de Altas
+Redes neurais artificiais resolvem um problema latente em Física de Altas
 Energias, inerente aos avanços na área de deteção e à explosão do tamanho dos
 eventos (veja a Figura~\ref{fig:eventsize}) e por conseqüência do número de
 variáveis que estão disponíveis para o discriminador. Por outro lado, fornecem
@@ -344,14 +343,14 @@ empregados em problemas mais complexos, onde deseja-se dedicar cada porção do
 detetor a uma atividade bem definida, combinando-se ao final as respostas de
 cada sub-sistema para obter um sistema de classificação com uma única saída.
 
-No que se segue deste capítulo, abordaremos sistemas de classificação
-multi-variáveis que substituem, o classificador atualmente empregado na
-discriminação elétron/jato para o Segundo Nível do Sistema de Filtragem do
-experimento ATLAS, introduzindo técnicas automáticas de deteção. Após
-estabelecermos os limites do processo de compressão estabelecidos pelo
-extrator de características T2Calo, tentar-se-á abordar a discriminação
-elétron/jato através de outras variáveis que possuam um poder discriminante
-maior que o sistema proposto atualmente no CERN.
+No que se segue deste capítulo, abordaremos sistemas de classificação que
+substituem o classificador atualmente empregado na discriminação elétron/jato
+para o Segundo Nível do Sistema de Filtragem do experimento ATLAS,
+introduzindo técnicas automáticas de deteção. Após estabelecermos os limites
+do processo de compressão estabelecidos pelo extrator de características
+T2Calo, tentar-se-á abordar a discriminação elétron/jato através de outras
+variáveis que possuam um poder discriminante maior que o sistema proposto
+atualmente no CERN.
 
 \subsection{Discriminador de Fisher na separação e\-lé\-tron/jato}
 \label{sec:linear}
@@ -377,9 +376,9 @@ no Apêndice~\ref{ap:rna}. A separação em classes de treinamento e teste, como
 apresentada na Seção~\ref{sec:eghypo}, será re-aproveitada aqui, para que seja
 possível a comparação dos resultados nos dois casos. O fluxo de informação
 deste novo sistema está apresentado na
-Figura~\ref{fig:t2calo-lms-block}. Nesta nova implementação do algoritmo de 
+Figura~\ref{fig:t2calo-lms-block}. Nesta nova implementação do algoritmo de
 filtragem, substitui-se o discriminador por cortes proposto originalmente, por
-um sistema simples de deteção multi-variável.
+um sistema simples de deteção linear.
 
 \begin{figure}
 \begin{center}
@@ -1837,10 +1836,10 @@ processador neural parece elevar o poder de discriminação do LVL2, indicando
 que existam informações perdidas no processo de deteção T2Calo+EGammaHypo,
 pergunta-se quanta informação é removida durante a compactação promovida pelo
 algoritmo. Por outro lado, tendo-se estabelecido que sistemas de discriminação
-multi-variáveis são melhores classificadores para o problema abordado, seria
-possível explorar o universo de entrada original ao T2Calo, ou seja as células
-que se compõe uma RoI, de forma e se tentar recuperar mais informações sobre a
-natureza da partícula.
+com mais variáveis são melhores classificadores para o problema abordado,
+seria possível explorar o universo de entrada original ao T2Calo, ou seja as
+células que se compõe uma RoI, de forma e se tentar recuperar mais informações
+sobre a natureza da partícula.
 
 A idéia desenvolvida nesta seção segue a seguinte linha: expande-se o número
 de componentes na entrada do detetor neural, por um método que será descrito a

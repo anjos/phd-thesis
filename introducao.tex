@@ -336,11 +336,11 @@ diferenças entre os dois sistemas.
 
 \section{As contribuições deste trabalho}
 
-Este trabalho desenvolve e emprega métodos de análise multi-variável na
-deteção de elétrons no Segundo Nível de Filtragem do experimento ATLAS. Isto é
-feito tendo por base o modelo apresentado na Figura~\ref{fig:intro-disc}, onde
-os métodos de extração de características (fase 1) são analisados tendo por
-base sistemas de discriminação (fase 2) baseados em corte uni-dimensionais
+Este trabalho desenvolve e emprega métodos de análise neural na deteção de
+elétrons no Segundo Nível de Filtragem do experimento ATLAS. Isto é feito
+tendo por base o modelo apresentado na Figura~\ref{fig:intro-disc}, onde os
+métodos de extração de características (fase 1) são analisados tendo por base
+sistemas de discriminação (fase 2) baseados em corte uni-dimensionais
 sucessivos, detetores lineares, baseados na Análise de Componentes Principais
 e Redes Neurais Artificiais. Os diversos sistemas são apresentados seguindo a
 modelagem do processamento dentro do LVL2, como indica a figura.
@@ -413,9 +413,9 @@ desenvolvido o sistema de deteção, o integramos a esta infraestrutura de
 processamento completamente, de forma a verificar sua portabilidade, tempo de
 processamento e acuidade, enquanto embebido no inóspito ambiente de deteção do
 ATLAS. Testes de velocidade e exatidão são conduzidos em várias plataformas,
-donde se conclui que o sistema baseado em análise multi-variável seja viável
-para implementação no segundo nível de filtragem do experimento. Enquanto o
-sistema atual empregado no CERN consome cerca de 3,64 milissegundos para ser
+donde se conclui que o sistema baseado em análise neural seja viável para
+implementação no segundo nível de filtragem do experimento. Enquanto o sistema
+atual empregado no CERN consome cerca de 3,64 milissegundos para ser
 executado, o sistema baseado na extração em anéis e deteção neural, mais que 3
 vezes mais eficiente na rejeição de falsos-positivos, é executado em 3,8
 milissegundos dentro da mesma infraestrutura de base, apenas cerca de 150
@@ -486,8 +486,8 @@ completa do algoritmo do LVL2, tendo por base os dados utilizados durante este
 trabalho de tese.
 
 O Capítulo~\ref{chap:neural} começa trazendo uma revisão das técnicas de
-análise multi-variáveis que são atualmente empregadas em experimentos em Física
-de Altas Energias, especialmente focado no emprego de redes neurais em
+análise neural que são atualmente empregadas em experimentos em Física de
+Altas Energias, especialmente focado no emprego de redes neurais em
 calorimetria. O texto continua desenvolvendo os diversos sistemas de
 discriminação propostos. Na primeira parte, com sistemas baseados na
 re-utilização do algoritmo de extração de características T2Calo e, numa

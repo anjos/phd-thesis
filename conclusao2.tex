@@ -4,215 +4,215 @@
 \typeout{ Maintained by Andre Anjos <Andre.dos.Anjos@cern.ch> }
 \typeout{ ====================================================================}
 
-\chapter{Conclusões}
+\chapter{ConclusÃµes}
 \label{chap:conclusions}
 
 O Sistema de Filtragem do experimento ATLAS, no CERN, oferece um ambiente
-desafiador a seus sistemas de deteção. A taxa de eventos na entrada do LVL2 é
-bastante alta, na ordem de 100 mil por segundo. O sinal de interesse é um
-canal raro, apresentando-se escondido em um massa de eventos ordinários também
-bastante alta, na ordem de 1 para 10^9. O sistema é construído de forma
-altamente distribuída. Os dados utilizados na deteção são transferidos através
-de uma rede às unidades de processamento que, por sua vez, devem rapidamente
-($10$ ms) responder com um sinal de rejeição, na maioria dos casos, ou
-aceitação.
+desafiador a seus sistemas de deteÃ§Ã£o. A taxa de eventos na entrada do LVL2 Ã©
+bastante alta, na ordem de 100 mil por segundo. O sinal de interesse Ã© um
+canal raro, apresentando-se escondido em um massa de eventos ordinÃ¡rios tambÃ©m
+bastante alta, na ordem de 1 para $10^9$. O sistema Ã© construÃ­do de forma
+altamente distribuÃ­da. Os dados utilizados na deteÃ§Ã£o sÃ£o transferidos atravÃ©s
+de uma rede Ã s unidades de processamento que, por sua vez, devem rapidamente
+($10$ ms) responder com um sinal de rejeiÃ§Ã£o, na maioria dos casos, ou
+aceitaÃ§Ã£o.
 
-A deteção elétron/jato representa um dos canais mais importantes de decaimento
-da rara Física do bóson de Higgs. O processo de discriminação de elétrons é
-conduzido, inicialmente, por uma confirmação baseada em calorimetria. Os dados
-de cada região de interesse (RoI) destacada pelo Primeiro Nível de Filtragem
-são (lentamente) descarregados e tratados nas Unidades de Processamento do
-LVL2, deixando pouco tempo de processamento para a operação dos algoritmos de
-deteção propriamente ditos. O formato dos dados na RoI é altamente granular e
-segmentado, favorecendo a deteção através da análise do perfil de deposição
-energética da partícula ao longo de sua trajetória. A granularidade, segmento
-a segmento, varia ao longo dos eixos do detetor, podendo cruzar regiões
-totalmente desprovidas de células de deteção. Cada RoI, em média, é composta
-de mais de 1.000 células.
+A deteÃ§Ã£o elÃ©tron/jato representa um dos canais mais importantes de decaimento
+da rara FÃ­sica do bÃ³son de Higgs. O processo de discriminaÃ§Ã£o de elÃ©trons Ã©
+conduzido, inicialmente, por uma confirmaÃ§Ã£o baseada em calorimetria. Os dados
+de cada regiÃ£o de interesse (RoI) destacada pelo Primeiro NÃ­vel de Filtragem
+sÃ£o (lentamente) descarregados e tratados nas Unidades de Processamento do
+LVL2, deixando pouco tempo de processamento para a operaÃ§Ã£o dos algoritmos de
+deteÃ§Ã£o propriamente ditos. O formato dos dados na RoI Ã© altamente granular e
+segmentado, favorecendo a deteÃ§Ã£o atravÃ©s da anÃ¡lise do perfil de deposiÃ§Ã£o
+energÃ©tica da partÃ­cula ao longo de sua trajetÃ³ria. A granularidade, segmento
+a segmento, varia ao longo dos eixos do detetor, podendo cruzar regiÃµes
+totalmente desprovidas de cÃ©lulas de deteÃ§Ã£o. Cada RoI, em mÃ©dia, Ã© composta
+de mais de 1.000 cÃ©lulas.
 
 A Unidade de Processamento do LVL2 foi desenvolvida tendo por base a
-maximização da utilização dos recursos computacionais pelos algoritmos de
-deteção, funcionando em múltiplas tarefas de processamento. Uma interface de
+maximizaÃ§Ã£o da utilizaÃ§Ã£o dos recursos computacionais pelos algoritmos de
+deteÃ§Ã£o, funcionando em mÃºltiplas tarefas de processamento. Uma interface de
 ``cola'' entre o universo \eng{online}, onde eventos fluem pela rede do
-Sistema de Filtragem e são controlados de forma estrita e o universo
-\eng{offline} onde os algoritmos são desenvolvidos e testados, foi
+Sistema de Filtragem e sÃ£o controlados de forma estrita e o universo
+\eng{offline} onde os algoritmos sÃ£o desenvolvidos e testados, foi
 criada. Este sistema foi testado para sua robustez e confiabilidade, tendo
-passado os diversos critérios necessários a seu emprego no Sistema de
-Filtragem. Testes apontam que seja possível um modelo de desenvolvimento de
-algoritmos baseado nestes preceitos: criação \eng{offline}, aplicação
+passado os diversos critÃ©rios necessÃ¡rios a seu emprego no Sistema de
+Filtragem. Testes apontam que seja possÃ­vel um modelo de desenvolvimento de
+algoritmos baseado nestes preceitos: criaÃ§Ã£o \eng{offline}, aplicaÃ§Ã£o
 \eng{online}. Neste ambiente, os diversos algoritmos que devem ser executados
-no Sistema de Filtragem são desenvolvidos de forma desacoplada e re-acoplados
-durante a execução combinada do sistema.
+no Sistema de Filtragem sÃ£o desenvolvidos de forma desacoplada e re-acoplados
+durante a execuÃ§Ã£o combinada do sistema.
 
-A execução dentro dos Altos Níveis de Filtragem é modelada sempre
-distinguindo-se a fase de Extração de Características (Fase 1) e Hipótese
-(Fase 2), que tem sua execução agendada, uma após a outra, se complementando,
-mas guardando sua independência. O algoritmo T2Calo é provido atualmente como
-implementação de referência para a Fase 1. Este sistema altamente depurado ao
-longo de muitos anos de desenvolvimento compacta a dimensão de entrada ao
-detetor elétron/jato em apenas 4 variáveis altamente discriminantes. As
-variáveis deste sistema não são linearmente separáveis, mas apresentam bom
-grau de classificação quando utiliza-se classificadores baseados em cortes
+A execuÃ§Ã£o dentro dos Altos NÃ­veis de Filtragem Ã© modelada sempre
+distinguindo-se a fase de ExtraÃ§Ã£o de CaracterÃ­sticas (Fase 1) e HipÃ³tese
+(Fase 2), que tem sua execuÃ§Ã£o agendada, uma apÃ³s a outra, se complementando,
+mas guardando sua independÃªncia. O algoritmo T2Calo Ã© provido atualmente como
+implementaÃ§Ã£o de referÃªncia para a Fase 1. Este sistema altamente depurado ao
+longo de muitos anos de desenvolvimento compacta a dimensÃ£o de entrada ao
+detetor elÃ©tron/jato em apenas 4 variÃ¡veis altamente discriminantes. As
+variÃ¡veis deste sistema nÃ£o sÃ£o linearmente separÃ¡veis, mas apresentam bom
+grau de classificaÃ§Ã£o quando utiliza-se classificadores baseados em cortes
 uni-dimensionais sucessivos (sinal $91,85\%/10,19\%$ falso alarme) ou lineares
-(sinal $90,77\%/9,79\%$ falso alarme). A adição de mais variáveis à saída do
-T2Calo tende a melhorar a qualidade de deteção que pode ser obtida com este
-método de compactação.
+(sinal $90,77\%/9,79\%$ falso alarme). A adiÃ§Ã£o de mais variÃ¡veis Ã  saÃ­da do
+T2Calo tende a melhorar a qualidade de deteÃ§Ã£o que pode ser obtida com este
+mÃ©todo de compactaÃ§Ã£o.
 
-A compactação por anéis de deposição energética é uma implementação
-alternativa para o processo de Extração de Características (Fase 1). Esta
-técnica aproveita-se do perfil de deposição energética das partículas que
-trata com calorímetros. Esta técnica evoluiu com o experimento, suas
-modificações e a melhoria de sua simulação, mantendo-se simples e
-eficaz. Desenvolvemos uma implementação de referência para a extração baseada
-em anéis que é suficientemente rápida (podendo ser executada em até 125 $\mu$s
-de forma desacoplada), resolvendo os problemas de variação de granularidade,
-dados faltantes e carência de sensores nas regiões de \eng{crack} de forma
-igualmente eficiente e flexível. Ao passo que simplifica a Fase 1 do
-processamento das RoI's de candidatos a elétrons, esta técnica introduz um
-conjunto de variáveis (25 vezes) maior que aquele provido pelo T2Calo.
+A compactaÃ§Ã£o por anÃ©is de deposiÃ§Ã£o energÃ©tica Ã© uma implementaÃ§Ã£o
+alternativa para o processo de ExtraÃ§Ã£o de CaracterÃ­sticas (Fase 1). Esta
+tÃ©cnica aproveita-se do perfil de deposiÃ§Ã£o energÃ©tica das partÃ­culas que
+trata com calorÃ­metros. Esta tÃ©cnica evoluiu com o experimento, suas
+modificaÃ§Ãµes e a melhoria de sua simulaÃ§Ã£o, mantendo-se simples e
+eficaz. Desenvolvemos uma implementaÃ§Ã£o de referÃªncia para a extraÃ§Ã£o baseada
+em anÃ©is que Ã© suficientemente rÃ¡pida (podendo ser executada em atÃ© 125 $\mu$s
+de forma desacoplada), resolvendo os problemas de variaÃ§Ã£o de granularidade,
+dados faltantes e carÃªncia de sensores nas regiÃµes de \eng{crack} de forma
+igualmente eficiente e flexÃ­vel. Ao passo que simplifica a Fase 1 do
+processamento das RoI's de candidatos a elÃ©trons, esta tÃ©cnica introduz um
+conjunto de variÃ¡veis (25 vezes) maior que aquele provido pelo T2Calo.
 
-A técnica de compactação por anéis é desenvolvida baseando-se no pico de
-deposição energética obtido no LVL2 e portanto é independente da precisão de
-deteção do LVL1. O critério de normalização empregado varia com a energia do
+A tÃ©cnica de compactaÃ§Ã£o por anÃ©is Ã© desenvolvida baseando-se no pico de
+deposiÃ§Ã£o energÃ©tica obtido no LVL2 e portanto Ã© independente da precisÃ£o de
+deteÃ§Ã£o do LVL1. O critÃ©rio de normalizaÃ§Ã£o empregado varia com a energia do
 objeto analisado, apresentando-se muito eficaz em praticamente todo o espectro
 de energia considerado, como nos mostra a
 Figura~\ref{fig:ringer-efficiency-et}.
 
-A segunda fase do processamento de uma RoI é a deteção do objeto analisado,
-sendo realizada após a compactação. A implementação de referência do ATLAS é
-baseada em uma análise de cortes uni-dimensionais (EGammaHypo), de difícil (e
-longa) calibração, requerendo a intervenção especialista freqüentemente. Em
-contra-partida, se propõe a utilização de Redes Neurais Artificiais (RNA's)
-como forma de se melhorar a eficiência de deteção de elétrons no LVL2. O
-emprego de classificadores que tentem procurar por correlações de ordens mais
-elevadas é necessária neste ambiente uma vez que:
+A segunda fase do processamento de uma RoI Ã© a deteÃ§Ã£o do objeto analisado,
+sendo realizada apÃ³s a compactaÃ§Ã£o. A implementaÃ§Ã£o de referÃªncia do ATLAS Ã©
+baseada em uma anÃ¡lise de cortes uni-dimensionais (EGammaHypo), de difÃ­cil (e
+longa) calibraÃ§Ã£o, requerendo a intervenÃ§Ã£o especialista freqÃ¼entemente. Em
+contra-partida, se propÃµe a utilizaÃ§Ã£o de Redes Neurais Artificiais (RNA's)
+como forma de se melhorar a eficiÃªncia de deteÃ§Ã£o de elÃ©trons no LVL2. O
+emprego de classificadores que tentem procurar por correlaÃ§Ãµes de ordens mais
+elevadas Ã© necessÃ¡ria neste ambiente uma vez que:
 
 \begin{enumerate}
-\item O problema se apresente de uma forma linearmente inseparável;
-\item O nível de correlação entre as 4 variáveis utilizadas para deteção é
+\item O problema se apresente de uma forma linearmente inseparÃ¡vel;
+\item O nÃ­vel de correlaÃ§Ã£o entre as 4 variÃ¡veis utilizadas para deteÃ§Ã£o Ã©
 baixo.
 \end{enumerate}
 
-Redes neurais podem ser empregadas tanto acopladas às saídas do T2Calo quanto
-às somas em anéis proposta, permitindo maiores níveis de eficiência na deteção
-de elétrons em ambos os casos. Quando empregadas à compactação provida pelo
+Redes neurais podem ser empregadas tanto acopladas Ã s saÃ­das do T2Calo quanto
+Ã s somas em anÃ©is proposta, permitindo maiores nÃ­veis de eficiÃªncia na deteÃ§Ã£o
+de elÃ©trons em ambos os casos. Quando empregadas Ã  compactaÃ§Ã£o provida pelo
 T2Calo aos dados de uma RoI, RNA's podem melhorar o desempenho de
-classificação comparado à sistemas lineares de classificação, atingindo
-92,38\% de deteção contra 9,05\% de falso-alarme. Considerando-se as demais
-saídas disponíveis neste algoritmo de compactação, é possível atingir níveis
-ainda mais altos: 94,79\% de deteção contra apenas 7,93\% de falso-alarme. Um
-estudo da ortogonalidade deste conjunto de 14 variáveis (Análise de
-Componentes Principais) revela que não haja correlação direta que seja
-importante ao sistema de deteção.
+classificaÃ§Ã£o comparado Ã  sistemas lineares de classificaÃ§Ã£o, atingindo
+92,38\% de deteÃ§Ã£o contra 9,05\% de falso-alarme. Considerando-se as demais
+saÃ­das disponÃ­veis neste algoritmo de compactaÃ§Ã£o, Ã© possÃ­vel atingir nÃ­veis
+ainda mais altos: 94,79\% de deteÃ§Ã£o contra apenas 7,93\% de falso-alarme. Um
+estudo da ortogonalidade deste conjunto de 14 variÃ¡veis (AnÃ¡lise de
+Componentes Principais) revela que nÃ£o haja correlaÃ§Ã£o direta que seja
+importante ao sistema de deteÃ§Ã£o.
 
-Quando associadas ao compactador utilizando anéis de deposição energética,
-RNA's conseguem melhorar a relação sinal-ruído substanciosamente, podendo
-atingir uma eficiência de classificação de 96,89\% contra apenas 2,93\% de
-falso-alarme. Comparativamente à dupla T2Calo/EGammaHypo, estes números
-representam um decréscimo de 3 vezes na taxa de jatos que seria aprovada ao
-demais níveis de filtragem. Um conjunto de análises apoia os resultados de
-eficiência, demonstrando que a utilização desta versão desenvolvida da soma em
-anéis à classificadores neurais, esteja livre de tendências com relação a
-localização do objeto ou seu valor energético, apresentando-se igualmente
+Quando associadas ao compactador utilizando anÃ©is de deposiÃ§Ã£o energÃ©tica,
+RNA's conseguem melhorar a relaÃ§Ã£o sinal-ruÃ­do substanciosamente, podendo
+atingir uma eficiÃªncia de classificaÃ§Ã£o de 96,89\% contra apenas 2,93\% de
+falso-alarme. Comparativamente Ã  dupla T2Calo/EGammaHypo, estes nÃºmeros
+representam um decrÃ©scimo de 3 vezes na taxa de jatos que seria aprovada ao
+demais nÃ­veis de filtragem. Um conjunto de anÃ¡lises apoia os resultados de
+eficiÃªncia, demonstrando que a utilizaÃ§Ã£o desta versÃ£o desenvolvida da soma em
+anÃ©is Ã  classificadores neurais, esteja livre de tendÃªncias com relaÃ§Ã£o a
+localizaÃ§Ã£o do objeto ou seu valor energÃ©tico, apresentando-se igualmente
 eficaz em uma multitude de intervalos.
 
-Uma Análise de Relevância baseada do poder de classificação dos detetores
-(produto SP), ao invés do desvio no EMQ, é também desenvolvida. Esta análise
+Uma AnÃ¡lise de RelevÃ¢ncia baseada do poder de classificaÃ§Ã£o dos detetores
+(produto SP), ao invÃ©s do desvio no EMQ, Ã© tambÃ©m desenvolvida. Esta anÃ¡lise
 pode ser utilizada como uma ferramenta de poda, para gerar classificadores
 mais compactos ou como um simples teste de robustez para sistemas de
-deteção. Comparamo-na com sua análoga baseada no EMQ, tendo se apresentado
-mais poderosa na escolha de variáveis que, pela poda, minimizem o impacto na
-classificação.
+deteÃ§Ã£o. Comparamo-na com sua anÃ¡loga baseada no EMQ, tendo se apresentado
+mais poderosa na escolha de variÃ¡veis que, pela poda, minimizem o impacto na
+classificaÃ§Ã£o.
 
-Em alguns casos, esta análise também indica elementos que estejam prejudicando
-o poder classificatório de um detetor. Resultados (marginalmente) melhores na
-classificação, na ordem de alguns pontos percentuais, puderam ser obtidos
-baseando-se em podas conduzidas através da relevância de discriminação.
+Em alguns casos, esta anÃ¡lise tambÃ©m indica elementos que estejam prejudicando
+o poder classificatÃ³rio de um detetor. Resultados (marginalmente) melhores na
+classificaÃ§Ã£o, na ordem de alguns pontos percentuais, puderam ser obtidos
+baseando-se em podas conduzidas atravÃ©s da relevÃ¢ncia de discriminaÃ§Ã£o.
 
 Finalmente, demonstrou-se que a metodologia proposta para o Sistema de
-Filtragem (desenvolvimento \eng{offline}, aplicação \eng{online}) funciona
-adequadamente, caso o desenvolvedor mantenha-se estrito em critérios como
-tempo de execução e uso de recursos computacionais. Pacotes que implementam as
-Fase 1 e 2 de deteção elétron/jato, baseada em anéis e RNA's foram migrados
-para dentro do ambiente Athena. Enquanto que, de forma desacoplada, é possível
-executar a deteção em tempos que variam de 100 a 500 microssegundos,
-dependendo da configuração dos anéis e das plataformas de execução, quando
+Filtragem (desenvolvimento \eng{offline}, aplicaÃ§Ã£o \eng{online}) funciona
+adequadamente, caso o desenvolvedor mantenha-se estrito em critÃ©rios como
+tempo de execuÃ§Ã£o e uso de recursos computacionais. Pacotes que implementam as
+Fase 1 e 2 de deteÃ§Ã£o elÃ©tron/jato, baseada em anÃ©is e RNA's foram migrados
+para dentro do ambiente Athena. Enquanto que, de forma desacoplada, Ã© possÃ­vel
+executar a deteÃ§Ã£o em tempos que variam de 100 a 500 microssegundos,
+dependendo da configuraÃ§Ã£o dos anÃ©is e das plataformas de execuÃ§Ã£o, quando
 incorporados ao pesado ambiente de desenvolvimento do ATLAS, as mesmas
-instruções são executadas em cerca de 4 milissegundos.
+instruÃ§Ãµes sÃ£o executadas em cerca de 4 milissegundos.
 
-Estes tempos de processamento são compatíveis com outros sistemas atualmente
+Estes tempos de processamento sÃ£o compatÃ­veis com outros sistemas atualmente
 empregados no LVL2, inclusive com a dupla T2Calo/EGammaHypo, que consegue
 processar RoIs em um tempo equivalente, aproximadamente 3,6 milissegundos. A
-implementação baseada na infraestrura do Sistema de Filtragem pode ser
+implementaÃ§Ã£o baseada na infraestrura do Sistema de Filtragem pode ser
 executada tanto \eng{offline} quanto \eng{online}, totalmente conectada ao
 sistema de leitura do detetor e de controle do experimento.
 
-Uma implementação do sistema de anelamento e deteção neural, baseada em DSP's
-SHARC da Analog Devices, é derivada das mesmas bibliotecas como plataforma de
-desenvolvimento adicional. Esta implementação indica a portabilidade do
+Uma implementaÃ§Ã£o do sistema de anelamento e deteÃ§Ã£o neural, baseada em DSP's
+SHARC da Analog Devices, Ã© derivada das mesmas bibliotecas como plataforma de
+desenvolvimento adicional. Esta implementaÃ§Ã£o indica a portabilidade do
 algoritmo, que pode ser executado, igualmente, em cerca de 4 milissegundos
 dentro desta plataforma.
 
 \section{Linhas de Pesquisa}
 
-A Análise de Componentes Principais (ACP), aplicada ao problema da separação
-elétron/jato através dos dados de uma RoI ou através da informação de anéis,
+A AnÃ¡lise de Componentes Principais (ACP), aplicada ao problema da separaÃ§Ã£o
+elÃ©tron/jato atravÃ©s dos dados de uma RoI ou atravÃ©s da informaÃ§Ã£o de anÃ©is,
 foi abordada em uma tese de doutorado \cite{herman}, com bons resultados. Este
-sistema propõe um compactador (Fase 1) baseado na correlação entre os valores
-de energia de cada célula de uma RoI ou, ainda, entre seus anéis de deposição
-energética. Resultados indicam que a utilização de uma grande quantidade de
-sensores dificulte a análise estatística devido ao grande número de graus de
-liberdade na formulação do compactador. A ACP, quando extraída diretamente dos
-anéis de deposição energética, mostra-se mais eficiente e de simples
-aplicação.
+sistema propÃµe um compactador (Fase 1) baseado na correlaÃ§Ã£o entre os valores
+de energia de cada cÃ©lula de uma RoI ou, ainda, entre seus anÃ©is de deposiÃ§Ã£o
+energÃ©tica. Resultados indicam que a utilizaÃ§Ã£o de uma grande quantidade de
+sensores dificulte a anÃ¡lise estatÃ­stica devido ao grande nÃºmero de graus de
+liberdade na formulaÃ§Ã£o do compactador. A ACP, quando extraÃ­da diretamente dos
+anÃ©is de deposiÃ§Ã£o energÃ©tica, mostra-se mais eficiente e de simples
+aplicaÃ§Ã£o.
 
-A Análise de Componentes Independentes (ACI) representa uma extensão da
-Análise de Componentes Principais \cite{oja-ica}. Desta vez, no lugar de se
-procurar uma transformação linear que descorrelacione o espaço transformado,
-deseja-se computar a transformação linear na qual as variáveis do espaço
-transformado tornem-se independentes. Esta é uma premissa muito mais forte que
-a simples descorrelação.
+A AnÃ¡lise de Componentes Independentes (ACI) representa uma extensÃ£o da
+AnÃ¡lise de Componentes Principais \cite{oja-ica}. Desta vez, no lugar de se
+procurar uma transformaÃ§Ã£o linear que descorrelacione o espaÃ§o transformado,
+deseja-se computar a transformaÃ§Ã£o linear na qual as variÃ¡veis do espaÃ§o
+transformado tornem-se independentes. Esta Ã© uma premissa muito mais forte que
+a simples descorrelaÃ§Ã£o.
 
-Uma das pré-condições para a ACI é de que o ruído introduzido pelo sistema no
-sinal de análise seja branco e gaussiano. Esta é, no entanto, uma hipótese
-bastante razoável em experimentos de Física de Altas Energias \cite{knoll,
-leo}. A ACI pode ser conduzida utilizando-se diversos métodos, que deverão ser
-avaliados com relação a sua velocidade e qualidade. Espera-se que esta técnica
-possa relevar informações no padrão de interação das partículas com os
-calorímetros do ATLAS, que estão mascarados nos anéis de deposição energética,
-aumentando assim a qualidade da discriminação conduzida no LVL2.
+Uma das prÃ©-condiÃ§Ãµes para a ACI Ã© de que o ruÃ­do introduzido pelo sistema no
+sinal de anÃ¡lise seja branco e gaussiano. Esta Ã©, no entanto, uma hipÃ³tese
+bastante razoÃ¡vel em experimentos de FÃ­sica de Altas Energias \cite{knoll,
+leo}. A ACI pode ser conduzida utilizando-se diversos mÃ©todos, que deverÃ£o ser
+avaliados com relaÃ§Ã£o a sua velocidade e qualidade. Espera-se que esta tÃ©cnica
+possa relevar informaÃ§Ãµes no padrÃ£o de interaÃ§Ã£o das partÃ­culas com os
+calorÃ­metros do ATLAS, que estÃ£o mascarados nos anÃ©is de deposiÃ§Ã£o energÃ©tica,
+aumentando assim a qualidade da discriminaÃ§Ã£o conduzida no LVL2.
 
-O conjunto de componentes extraídas não poderá ser organizado, \textit{a
-priori}, como acontece no caso da Análise de Componentes Principais, já que
-não há uma correlação evidente entre os coeficientes da transformação e sua
-importância. Neste caso, outros métodos, como o método da relevância de
-discriminação introduzido neste trabalho, poderão ser explorados para que se
-atinja a compactação dos dados de entrada.
+O conjunto de componentes extraÃ­das nÃ£o poderÃ¡ ser organizado, \textit{a
+priori}, como acontece no caso da AnÃ¡lise de Componentes Principais, jÃ¡ que
+nÃ£o hÃ¡ uma correlaÃ§Ã£o evidente entre os coeficientes da transformaÃ§Ã£o e sua
+importÃ¢ncia. Neste caso, outros mÃ©todos, como o mÃ©todo da relevÃ¢ncia de
+discriminaÃ§Ã£o introduzido neste trabalho, poderÃ£o ser explorados para que se
+atinja a compactaÃ§Ã£o dos dados de entrada.
 
-Na mesma linha de pesquisa, a utilização de uma ACP não-linear pode também
-revelar correlações não-lineares que não puderam ser observadas neste trabalho
+Na mesma linha de pesquisa, a utilizaÃ§Ã£o de uma ACP nÃ£o-linear pode tambÃ©m
+revelar correlaÃ§Ãµes nÃ£o-lineares que nÃ£o puderam ser observadas neste trabalho
 ou em \cite{herman}.
 
-Métodos de treinamento mais sofisticados podem ser também introduzidos no
-sistema atual de deteção (Fase 2), aumentando a qualidade do treinamento,
-tempo de convergência e a robustez do sistema de discriminação final. Em
-especial, técnicas mais modernas como redes neurais qüânticas \cite{qnns} ou
-menos exploradas neste contexto, como máquinas de vetor de suporte
+MÃ©todos de treinamento mais sofisticados podem ser tambÃ©m introduzidos no
+sistema atual de deteÃ§Ã£o (Fase 2), aumentando a qualidade do treinamento,
+tempo de convergÃªncia e a robustez do sistema de discriminaÃ§Ã£o final. Em
+especial, tÃ©cnicas mais modernas como redes neurais qÃ¼Ã¢nticas \cite{qnns} ou
+menos exploradas neste contexto, como mÃ¡quinas de vetor de suporte
 \cite{haykin} podem ser pensadas como alternativas interessantes, oferecendo
-melhor robustez ao ruído e a casos de empilhamento (\eng{pile-up}).
+melhor robustez ao ruÃ­do e a casos de empilhamento (\eng{pile-up}).
 
-A compactação baseada na soma em anéis de deposição energética pode ser
-explorada de forma a ser maximizada. Novas combinações devem ser exploradas
+A compactaÃ§Ã£o baseada na soma em anÃ©is de deposiÃ§Ã£o energÃ©tica pode ser
+explorada de forma a ser maximizada. Novas combinaÃ§Ãµes devem ser exploradas
 tendo em vista a quantidade de dados que devam ser lidas do sistema de
-leitura do detetor e o fator de compactação propriamente dito. Especificamente,
-a técnica de normalização dos dados poderia ser ajustada tendo em vista os
-resultados da análise de relevância.
+leitura do detetor e o fator de compactaÃ§Ã£o propriamente dito. Especificamente,
+a tÃ©cnica de normalizaÃ§Ã£o dos dados poderia ser ajustada tendo em vista os
+resultados da anÃ¡lise de relevÃ¢ncia.
 
-Finalmente, a deteção baseada em anéis pode também ser utilizada para análise
-e reconstrução \eng{offline}. O sistema de deteção desenvolvido neste trabalho
+Finalmente, a deteÃ§Ã£o baseada em anÃ©is pode tambÃ©m ser utilizada para anÃ¡lise
+e reconstruÃ§Ã£o \eng{offline}. O sistema de deteÃ§Ã£o desenvolvido neste trabalho
 deve ser re-adaptado para trabalhar neste ambiente e comparativos diretos com
-as técnicas atuais de reconstrução podem ser utilizados. Métodos de análise
-estocástica são bastante difundidos e utilizados atualmente nesta sub-área da
-Física de Altas Energias.
+as tÃ©cnicas atuais de reconstruÃ§Ã£o podem ser utilizados. MÃ©todos de anÃ¡lise
+estocÃ¡stica sÃ£o bastante difundidos e utilizados atualmente nesta sub-Ã¡rea da
+FÃ­sica de Altas Energias.
 
 \typeout{ *************** End of file conclusao2.tex *************** }
