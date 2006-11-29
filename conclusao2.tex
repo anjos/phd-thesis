@@ -10,7 +10,7 @@
 O Sistema de Filtragem do experimento ATLAS, no CERN, oferece um ambiente
 desafiador a seus sistemas de deteção. A taxa de eventos na entrada do LVL2 é
 bastante alta, na ordem de 100 mil por segundo. O sinal de interesse é um
-canal raro, apresentando-se escondido em um massa de eventos ordinários também
+canal raro, apresentando-se escondido em uma massa de eventos ordinários também
 bastante alta, na ordem de 1 para $10^9$. O sistema é construído de forma
 altamente distribuída. Os dados utilizados na deteção são transferidos através
 de uma rede às unidades de processamento que, por sua vez, devem rapidamente
@@ -33,29 +33,29 @@ de mais de 1.000 células.
 A Unidade de Processamento do LVL2 foi desenvolvida tendo por base a
 maximização da utilização dos recursos computacionais pelos algoritmos de
 deteção, funcionando em múltiplas tarefas de processamento. Uma interface de
-``cola'' entre o universo \eng{online}, onde eventos fluem pela rede do
-Sistema de Filtragem e são controlados de forma estrita e o universo
-\eng{offline} onde os algoritmos são desenvolvidos e testados, foi
-criada. Este sistema foi testado para sua robustez e confiabilidade, tendo
-passado os diversos critérios necessários a seu emprego no Sistema de
-Filtragem. Testes apontam que seja possível um modelo de desenvolvimento de
-algoritmos baseado nestes preceitos: criação \eng{offline}, aplicação
+``cola'' foi criada entre o universo \eng{online}, onde eventos fluem pela
+rede do Sistema de Filtragem e o universo
+\eng{offline}, onde os algoritmos são desenvolvidos e testados. Esse sistema
+foi testado com relação a sua robustez e confiabilidade, tendo passado aos diversos
+critérios necessários a seu emprego no Sistema de Filtragem. Testes apontam
+que seja possível um modelo de desenvolvimento de algoritmos baseado nestes
+preceitos: criação \eng{offline}, aplicação
 \eng{online}. Neste ambiente, os diversos algoritmos que devem ser executados
 no Sistema de Filtragem são desenvolvidos de forma desacoplada e re-acoplados
 durante a execução combinada do sistema.
 
 A execução dentro dos Altos Níveis de Filtragem é modelada sempre
 distinguindo-se a fase de Extração de Características (Fase 1) e Hipótese
-(Fase 2), que tem sua execução agendada, uma após a outra, se complementando,
+(Fase 2), que tem sua execução agendada, uma após a outra, complementando-se,
 mas guardando sua independência. O algoritmo T2Calo é provido atualmente como
-implementação de referência para a Fase 1. Este sistema altamente depurado ao
+implementação de referência para a Fase 1. Esse sistema altamente depurado ao
 longo de muitos anos de desenvolvimento compacta a dimensão de entrada ao
 detetor elétron/jato em apenas 4 variáveis altamente discriminantes. As
-variáveis deste sistema não são linearmente separáveis, mas apresentam bom
-grau de classificação quando utiliza-se classificadores baseados em cortes
+variáveis desse sistema não são linearmente separáveis, mas apresentam bom
+grau de classificação quando utilizam-se classificadores baseados em cortes
 uni-dimensionais sucessivos (sinal $91,85\%/10,19\%$ falso alarme) ou lineares
 (sinal $90,77\%/9,79\%$ falso alarme). A adição de mais variáveis à saída do
-T2Calo tende a melhorar a qualidade de deteção que pode ser obtida com este
+T2Calo tende a melhorar a qualidade de deteção que pode ser obtida com esse
 método de compactação.
 
 A compactação por anéis de deposição energética é uma implementação
@@ -68,11 +68,11 @@ em anéis que é suficientemente rápida (podendo ser executada em até 125 $\mu
 de forma desacoplada), resolvendo os problemas de variação de granularidade,
 dados faltantes e carência de sensores nas regiões de \eng{crack} de forma
 igualmente eficiente e flexível. Ao passo que simplifica a Fase 1 do
-processamento das RoI's de candidatos a elétrons, esta técnica introduz um
+processamento das RoI's de candidatos a elétrons, essa técnica introduz um
 conjunto de variáveis (25 vezes) maior que aquele provido pelo T2Calo.
 
 A técnica de compactação por anéis é desenvolvida baseando-se no pico de
-deposição energética obtido no LVL2 e portanto é independente da precisão de
+deposição energética obtido no LVL2 e, portanto, é independente da precisão de
 deteção do LVL1. O critério de normalização empregado varia com a energia do
 objeto analisado, apresentando-se muito eficaz em praticamente todo o espectro
 de energia considerado, como nos mostra a
@@ -82,10 +82,10 @@ A segunda fase do processamento de uma RoI é a deteção do objeto analisado,
 sendo realizada após a compactação. A implementação de referência do ATLAS é
 baseada em uma análise de cortes uni-dimensionais (EGammaHypo), de difícil (e
 longa) calibração, requerendo a intervenção especialista freqüentemente. Em
-contra-partida, se propõe a utilização de Redes Neurais Artificiais (RNA's)
+contrapartida, se propõe a utilização de Redes Neurais Artificiais (RNA's)
 como forma de se melhorar a eficiência de deteção de elétrons no LVL2. O
-emprego de classificadores que tentem procurar por correlações de ordens mais
-elevadas é necessária neste ambiente uma vez que:
+emprego de classificadores, que tentem procurar por correlações de ordens mais
+elevadas, é necessária nesse ambiente uma vez que:
 
 \begin{enumerate}
 \item O problema se apresente de uma forma linearmente inseparável;
@@ -102,7 +102,7 @@ classificação comparado à sistemas lineares de classificação, atingindo
 saídas disponíveis neste algoritmo de compactação, é possível atingir níveis
 ainda mais altos: 94,79\% de deteção contra apenas 7,93\% de falso-alarme. Um
 estudo da ortogonalidade deste conjunto de 14 variáveis (Análise de
-Componentes Principais) revela que não haja correlação direta que seja
+Componentes Principais) revela que não há correlação direta que seja
 importante ao sistema de deteção.
 
 Quando associadas ao compactador utilizando anéis de deposição energética,
@@ -112,7 +112,7 @@ falso-alarme. Comparativamente à dupla T2Calo/EGammaHypo, estes números
 representam um decréscimo de 3 vezes na taxa de jatos que seria aprovada ao
 demais níveis de filtragem. Um conjunto de análises apoia os resultados de
 eficiência, demonstrando que a utilização desta versão desenvolvida da soma em
-anéis à classificadores neurais, esteja livre de tendências com relação a
+anéis à classificadores neurais, está livre de tendências com relação à
 localização do objeto ou seu valor energético, apresentando-se igualmente
 eficaz em uma multitude de intervalos.
 
@@ -120,8 +120,8 @@ Uma Análise de Relevância baseada do poder de classificação dos detetores
 (produto SP), ao invés do desvio no EMQ, é também desenvolvida. Esta análise
 pode ser utilizada como uma ferramenta de poda, para gerar classificadores
 mais compactos ou como um simples teste de robustez para sistemas de
-deteção. Comparamo-na com sua análoga baseada no EMQ, tendo se apresentado
-mais poderosa na escolha de variáveis que, pela poda, minimizem o impacto na
+deteção. De acordo com uma comparação a sua análoga baseada no EMQ, apresentou-se
+mais poderosa na escolha de variáveis que, pela poda, minimizam o impacto na
 classificação.
 
 Em alguns casos, esta análise também indica elementos que estejam prejudicando
@@ -168,19 +168,19 @@ aplicação.
 
 A Análise de Componentes Independentes (ACI) representa uma extensão da
 Análise de Componentes Principais \cite{oja-ica}. Desta vez, no lugar de se
-procurar uma transformação linear que descorrelacione o espaço transformado,
+procurar uma transformação linear que descorrelacione os dados no novo espaço,
 deseja-se computar a transformação linear na qual as variáveis do espaço
-transformado tornem-se independentes. Esta é uma premissa muito mais forte que
+transformado sejam independentes. Esta é uma premissa muito mais forte que
 a simples descorrelação.
 
 Uma das pré-condições para a ACI é de que o ruído introduzido pelo sistema no
 sinal de análise seja branco e gaussiano. Esta é, no entanto, uma hipótese
 bastante razoável em experimentos de Física de Altas Energias \cite{knoll,
-leo}. A ACI pode ser conduzida utilizando-se diversos métodos, que deverão ser
+leo}. A ACI pode ser conduzida utilizando-se diversos métodos que deverão ser
 avaliados com relação a sua velocidade e qualidade. Espera-se que esta técnica
 possa relevar informações no padrão de interação das partículas com os
 calorímetros do ATLAS, que estão mascarados nos anéis de deposição energética,
-aumentando assim a qualidade da discriminação conduzida no LVL2.
+aumentando, assim, a qualidade da discriminação conduzida no LVL2.
 
 O conjunto de componentes extraídas não poderá ser organizado, \textit{a
 priori}, como acontece no caso da Análise de Componentes Principais, já que
@@ -196,8 +196,8 @@ ou em \cite{herman}.
 Métodos de treinamento mais sofisticados podem ser também introduzidos no
 sistema atual de deteção (Fase 2), aumentando a qualidade do treinamento,
 tempo de convergência e a robustez do sistema de discriminação final. Em
-especial, técnicas mais modernas como redes neurais qüânticas \cite{qnns} ou
-menos exploradas neste contexto, como máquinas de vetor de suporte
+especial, técnicas mais modernas, como redes neurais qüânticas \cite{qnns} ou
+menos exploradas neste contexto, como máquinas de vetor de suporte,
 \cite{haykin} podem ser pensadas como alternativas interessantes, oferecendo
 melhor robustez ao ruído e a casos de empilhamento (\eng{pile-up}).
 
@@ -210,8 +210,8 @@ resultados da análise de relevância.
 
 Finalmente, a deteção baseada em anéis pode também ser utilizada para análise
 e reconstrução \eng{offline}. O sistema de deteção desenvolvido neste trabalho
-deve ser re-adaptado para trabalhar neste ambiente e comparativos diretos com
-as técnicas atuais de reconstrução podem ser utilizados. Métodos de análise
+deve ser readaptado para trabalhar neste ambiente. Comparativos diretos com
+as técnicas atuais de reconstrução poderão ser feitos. Métodos de análise
 estocástica são bastante difundidos e utilizados atualmente nesta sub-área da
 Física de Altas Energias.
 
