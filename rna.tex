@@ -10,9 +10,9 @@
 O treinamento de redes neurais teve seu início através do desenvolvimento de
 técnicas para o treinamento de sistemas mais simples, como detetores lineares.
 O discriminador de Fisher \cite{fisher} ou a Análise de Discriminação Linear
-descreve algoritmo para que se maximize a capacidade discriminante de um corte
-num plano com N dimensões, que separa duas classes de dados. O resultado do
-discriminante é ótimo no caso dos dados apresentarem uma distribuição
+descreve um algoritmo para que se maximize a capacidade discriminante de um
+corte num plano com N dimensões, que separa duas classes de dados. O resultado
+do discriminante é ótimo no caso dos dados apresentarem uma distribuição
 gaussiana e que as matrizes de covariância, para ambas as classes em separado,
 sejam idênticas\footnote{A Análise de Discriminação Quadrática, no entanto,
 demonstra que esta característica pode ser relaxada considerando-se que seja
@@ -48,7 +48,7 @@ uso de outras técnicas derivadas deste sistema primário para que se maximize a
 discriminação das classes de eventos dado um conjunto de amostras.
 
 Por causa das dificuldades discutidas, muitas técnicas iterativas surgiram
-para que seja possível a definição de um plano ótimo de separação linear à
+para que seja possível a definição de um plano ótimo de separação linear a
 partir de amostras de dados reais. Dentre elas, o algoritmo do Mínimo Médio
 Quadrático \cite{widrow} (do inglês \eng{Least Mean Square} ou LMS) é um dos
 mais utilizados. Este método pode ser também implementado por meio de uma rede
@@ -162,18 +162,18 @@ P(v) = \frac{1}{1 + e^{-v}}
 \end{equation}
 
 A razão da escolha de uma função não-linear para a ativação de um campo
-induzido pode ser qualificado a partir da seguinte constatação: se sistema a
-que se deseja classificar aprensenta um comportamento gaussiano, para ambas as
+induzido pode ser qualificado a partir da seguinte constatação: se o sistema
+que se deseja classificar apresenta um comportamento gaussiano, para ambas as
 classes, i.e., os momentos de ordem superior a $2$ para ambas as classes são
-todos iguais a zero, o classificador ótimo (bayesiano) resume-se um sistema
-linear \cite{haykin}. Naturalmente nota-se que seja sempre possível
+todos iguais a zero, o classificador ótimo (bayesiano) resume-se a um sistema
+linear \cite{haykin}. Naturalmente nota-se que é sempre possível
 \textit{aproximar} ou modelar um sistema não-gaussiano em um desta espécie,
-tendo por conseqüência os erros relativos a esta aproximação. De fato, foi o
-que foi realizado na Seção~\ref{sec:linear}, quando escolhou-se utilizar um
+tendo por conseqüência os erros relativos a esta aproximação. De fato, isto
+foi realizado na Seção~\ref{sec:linear}, quando escolheu-se utilizar um
 classificador linear para separar as quatro variáveis definidas pelo T2Calo.
 
 Se o sistema que se deseja resolver apresenta um comportamento não-gaussiano,
-o classificador ótimo não pode ser representando por um classificador
+o classificador ótimo não pode ser representado por um classificador
 linear. Neste caso, utiliza-se uma função de ativação não-linear para que se
 aproxime, de alguma forma, o comportamento não-linear do sistema de interesse.
 As funções nas Equações~(\ref{eq:tanh}) e (\ref{eq:logf}) são normalmente
@@ -189,8 +189,8 @@ outro análogo \cite{haykin}.
 
 Este estudo está focado na utilização de RNA's utilizando percéptrons em
 múltiplas camadas (do inglês \eng{Multi-layer perceptrons} ou MLP),
-completamente conectadas, sem realimentação e com treinamento baseado na tanto
-na retropropagação de erros simples (do inglês \eng{back-propagation}) ou na
+completamente conectadas, sem realimentação e com treinamento baseado tanto na
+retropropagação de erros simples (do inglês \eng{back-propagation}) ou na
 retropropagação resiliente (do inglês \eng{resilient
 back-propagation}). Introduziremos o processo de treinamento destes sistemas à
 seguir.
@@ -224,7 +224,7 @@ Para o sistema em questão, o mecanismo de treinamento para o neurônio de saíd
 definido da seguinte forma:
 
 \begin{align}
-\text{Se define-se o erro como } \mathcal{E}(n) &= \frac{1}{2}e_{k}^{2}(n)
+\text{Definindo o erro como } \mathcal{E}(n) &= \frac{1}{2}e_{k}^{2}(n)
 \label{eq:error-def} \\
 \text{e considerando-se que } \frac{\partial\mathcal{E}(n)}{\partial
 w_{jk}(n)} &= \frac{\partial\mathcal{E}(n)}{\partial e_k(n)} \frac{\partial
@@ -343,11 +343,12 @@ estará sujeito a mínimos locais.
 \subsection{Treinamento por retro-propagação de erros resiliente}
 
 Embora a retro-propagação de erros clássica seja um dos mais amplamente
-utilizados algoritmos para o treinamento de redes neurais, apresenta problemas
-fundamentais ligados a sua implementação, dentre os quais, a difícil escolha
-dos parâmetros de treinamento. Esta parametrização é fortemente dependente do
-problema abordado e requer normalmente um certo empirismo para seu ajuste. A
-técnica de retro-propagação de erros resiliente (originalmente descrita em
+utilizados algoritmos para o treinamento de redes neurais, ela apresenta
+problemas fundamentais ligados a sua implementação, dentre os quais, a difícil
+escolha dos parâmetros de treinamento. Esta parametrização é fortemente
+dependente do problema abordado e requer normalmente um certo empirismo para
+seu ajuste. A técnica de retro-propagação de erros resiliente (originalmente
+descrita em
 \cite{rprop}), descreve uma forma de atualizar os pesos sinápticos de uma rede
 neural sem retro-alimentação que praticamente remove a necessidade de
 parametrização do treinamento. Neste método de treinamento, a atualização do
@@ -380,10 +381,10 @@ Atualização funciona, \eng{grosso modo}, da seguinte forma:
 \begin{enumerate}
 \item Se o gradiente do erro mantiver o mesmo sinal entre duas
 atualizações consecutivas da taxa de aprendizado, significa que se encontra em
-uma descida na superfície de error e, para aumentar a velocidade,
+uma descida na superfície de erro e, para aumentar a velocidade,
 multiplica-se a taxa de aprendizado (\texttt{\textit{Taxa(t)}}) por um fator
 de incentivo. O valor do fator de incentivo é normalmente igual à $1,2$,
-funcionando bem para vários tipos de problema;
+funcionando bem para vários tipos de problemas;
 \item Se o gradiente do erro muda de sinal entre duas atualizações, então
 perde-se o ponto de mínimo e deve-se:
 \begin{enumerate}
@@ -438,7 +439,7 @@ No caso da tangente hiperbólica, equivalentemente:
 
 Estas duas funções de ativação permitem um cálculo absolutamente trivial do
 gradiente local e por esta razão são computacionalmente bastante
-eficientes. No decorrer deste estudo utilizaremos a função tangente
+eficientes. No contexto deste trabalho utilizaremos a função tangente
 hiperbólica com função de ativação dos percéptrons das redes estudadas.
 
 \typeout{ *************** End of file rna.tex *************** }

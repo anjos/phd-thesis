@@ -18,7 +18,7 @@ processadores do LVL2 seja dedicada à eventos interessantes.
 Levando-se em consideração que o tempo de acesso aos dados no sistema de
 leitura está na ordem de 1~ms, como descrito no Capítulo~\ref{chap:trigger},
 deseja-se minimizar o tempo de processamento despendido no algoritmo. Desta
-forma, medidas de desempenho são normalmente executadas nos candidatos à
+forma, medidas de desempenho são normalmente executadas nos candidatos a
 algoritmos ao sistema de filtragem, de modo a determinar seu tempo de execução
 e possíveis pontos a serem otimizados. O correto balanço entre a rejeição
 prematura de um evento e o número de requisições de dados deve ser feita, de
@@ -45,8 +45,9 @@ também desconsideram a execução do algoritmo de hipótese EGammaHypo. Assume-
 no entanto, que seja desprezível, dado sua simplicidade.
 
 \begin{table}
-\caption{Tempo de processamento médio das diversas fases do algoritmo T2Calo
-em uma máquina com processadores Intel Xeon de 2,4 GHz e 1~Gb de memória RAM.}
+\caption{Tempo de processamento médio (em milissegundos) das diversas fases do
+algoritmo T2Calo em uma máquina com processadores Intel Xeon de 2,4 GHz e 1~Gb
+de memória RAM.}
 \label{tab:t2calo-performance}
 \begin{center}
 \begin{tabular}{|l|r|r|r|} \hline
@@ -83,7 +84,7 @@ processamento;
 tempo de execução do discriminador.
 \end{enumerate}
 
-Para determinar a viabilidade em termos desempenho, para o algoritmo proposto
+Para determinar a viabilidade em termos de desempenho, para o algoritmo proposto
 por este trabalho, executou-se a aplicação \texttt{ringer-run} em um conjunto
 de máquinas de referência ao experimento ATLAS. A
 Tabela~\ref{tab:machine-comparison} resume as características destas
@@ -95,7 +96,7 @@ máquina de teste é um modelo com dois núcleos (\eng{dual-core}). A arquitetur
 desta máquina está sendo considerada como opção às máquinas atualmente
 empregadas nas pré-séries, sendo este modelo de processador o mais recente
 disponibilizado pelo fabricante. A terceira e última máquina faz parte de um
-conjunto de máquinas dedicada a estudos do sistema de filtragem. Embora possua
+conjunto de máquinas dedicado a estudos do sistema de filtragem. Embora possua
 uma arquitetura mais antiga, ainda é usada como referência em muitos
 trabalhos, sendo este o caso das medidas do T2Calo apresentadas acima.
 
@@ -114,7 +115,7 @@ Intel Xeon & 2,4~GHz & 512~kb & 1~Gb \\ \hline
 \end{table}
 
 Estas máquinas contêm uma instalação completamente funcional do sistema
-operacional atualmente empregado no CERN, o SLC3 \cite{cern-linx}. Embora
+operacional atualmente empregado no CERN, o SLC3 \cite{cern-linux}. Embora
 alguns dos processadores possam operar em 64-bits (assim como o
 \eng{NeuralRinger}), estas máquinas são operadas em modo de compatibilidade
 para 32-bits, já que grande parte do \eng{software} do ATLAS ainda não opera
@@ -293,7 +294,7 @@ exemplo que pode ser reproduzido no LVL2: um objeto tipo e.m. é encontrado no
 resultado do LVL1 passado ao \eng{Steering}. Este objeto causa o agendamento
 de um algoritmo que possa tratá-lo. A primeira fase do processamento é a
 extração de características do objeto. Neste exemplo, a primeira extração de
-característica considerada é a extração dos anéis. O passo seguinte a extração
+característica considerada é a extração dos anéis. No passo seguinte a extração
 é a hipótese (neural). Se o objeto atender às características de um elétron, o
 \eng{Steering} irá agendar o passo seguinte. Caso, não, a hipótese de que o
 objeto seja um objeto tipo e.m. é rejeitada e o processamento é parado,
@@ -316,9 +317,9 @@ operando no LVL2, baseado em uma RoI tipo E.M..}
 
 Para atender à alta complexidade do experimento, muitas seqüências como a
 descrita na Figura~\ref{fig:simple-menu} podem co-existir dentro do
-\eng{Steering}. Cabe a este sistema de agendamento escolher apropriadamente
-a seqüência de passos e combinações de objetos apropriadas para que se possa
-analisar o evento adequadamente.
+\eng{Steering}. Cabe a este sistema de agendamento escolher a seqüência de
+passos e combinações de objetos apropriadas para que se possa analisar o
+evento adequadamente.
 
 Para a integração do \eng{NeuralRinger} e observando-se a estrutura de
 processamento \eng{online}, divide-se o anelamento e a decisão neural em dois
@@ -432,12 +433,12 @@ executados no ambiente desacoplado, deseja-se estimar o impacto que estas
 novas atividades causariam ao emprego do anelamento e discriminação neural no
 Sistema de Filtragem. Por outro lado, obtém-se com este estudo um conjunto de
 valores comparativos mais justos a outros métodos de deteção, tais como o
-sistema proposto pelo T2Calo$+$EGammaHypo. Isto acontece pois estaremos sendo
-coordenados e se comunicará com as diversas partes da infraestrutura de
-processamento do Sistema de Filtragem da mesma forma. Por questões de
-praticidade ligadas à disponibilidade dos dados e quantidade de memória
-disponível, escolhe-se a máquina baseada no processador AMD Opteron $275$
-utilizada anteriormente, para realização dos testes.
+sistema proposto pelo T2Calo$+$EGammaHypo. Isto acontece pois estaremos
+interfaceando com as diversas partes da infraestrutura de processamento do
+Sistema de Filtragem da mesma forma. Por questões de praticidade ligadas à
+disponibilidade dos dados e quantidade de memória disponível, escolhe-se a
+máquina baseada no processador AMD Opteron $275$ utilizada anteriormente, para
+realização dos testes.
 
 \paragraph{Serviço de Temporização do Athena:} O serviço de temporização do
 Athena (no pacote \eng{TrigTimeSvc}) utiliza a função \texttt{gettimeofday}
@@ -455,7 +456,7 @@ processador. É portanto provável que processos que estejam parados, neste
 contexto, sejam mais rapidamente agendados. Desta forma, o tempo final
 observado será uma mistura de tempos de execução reais, somados aos tempos de
 parada e re-agendamento. Estes tempos não são normalmente significativos para
-longos processos, mas pode facilmente afetar a percepção de processos mais
+longos processos, mas podem facilmente afetar a percepção de processos mais
 curtos. Para evitar que estes tipos de evento ocorram com freqüência durante a
 medida de tempo, ajustou-se a prioridade de execução do processo Athena de
 forma a minimizar o tempo que o processo estaria parado ou em transição de
@@ -536,12 +537,12 @@ características no ambiente Athena.}
 \subsection{\eng{NeuralRinger} e o sistema de aquisição}
 
 O último passo da integração é a demonstração da viabilidade do sistema de
-filtragem em um protótipo do sistema de aquisição, junto à outros algoritmos
+filtragem em um protótipo do sistema de aquisição, junto a outros algoritmos
 de filtragem. Neste caso, inicialmente validamos o funcionamento do algoritmo
 no contexto de uma configuração mais complexa baseada na aplicação AthenaMT
 \cite{aa:tns-2004-2}, que simula, ainda que de modo \eng{offline}, o ambiente
 de aquisição tal qual será encontrado pelos algoritmos do HLT
-\eng{online}. Este é um passo simples, dado que re-utiliza-se o mesmo conjunto
+\eng{online}. Este é um passo simples, dado que reutiliza-se o mesmo conjunto
 de bibliotecas usadas para o ambiente Athena, sem necessitar de
 recompilação. A vantagem é que o sistema já encontra-se depurado e a única
 verificação a ser feita é se a utilização dos novos algoritmos não introduz

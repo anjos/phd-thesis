@@ -73,16 +73,16 @@ lar-tdr} que aglomeram o sinal de 2 ou mais células destes detetores para
 gerar macro-células de filtragem denominadas \idx{torres de filtragem} (do
 inglês \idxeng{Trigger Towers}, TT). O sistema de múons também possui
 circuitos equivalentes que determinam a ocorrência de traços com altos valores
-de $p_T$ naquele subdetetor.
+de momento transverso ($p_T$) naquele subdetetor.
 
 Os eventos selecionados pelo LVL1 são lidos a partir da eletrônica específica
-de cada dos detetor por meio de \eng{drivers} denominados \idxeng{ReadOut
-Drivers} ou \idx{ROD}'s. Cerca de 1.600 ROD's serão necessários para ler todos
-os dados do detetor, ou seja, aproximadamente $10^7$ canais
-independentes. Vários canais de leitura são multiplexados em cada ROD. Bancos
-de memória primários, chamados de \idxeng{derandomizers}, garantem um fluxo
-contínuo dos dados aos ROD's, apesar da irregularidade da aceitação de eventos
-proporcionada pelo LVL1.
+de cada detetor por meio de \eng{drivers} denominados \idxeng{ReadOut Drivers}
+ou \idx{ROD}'s. Cerca de 1.600 ROD's serão necessários para ler todos os dados
+do detetor, ou seja, aproximadamente $10^7$ canais independentes. Vários
+canais de leitura são multiplexados em cada ROD. Bancos de memória primários,
+chamados de \idxeng{derandomizers}, garantem um fluxo contínuo dos dados aos
+ROD's, apesar da irregularidade da aceitação de eventos proporcionada pelo
+LVL1.
 
 Os dados completos de eventos selecionados são guardados momentaneamente em
 bancos de memória denominados \idxeng{ReadOut Buffers} (ROB's) até que o
@@ -181,7 +181,7 @@ será abordado somente em caráter introdutório;
 
 \item \textbf{\idxeng{Online}}: é responsável por todos os aspectos de
 operação e controle durante a aquisição de dados do experimento e durante
-\eng{runs} de teste e calibração;
+operações (\eng{runs}) de teste e calibração;
 
 \item \textbf{\idx{Fluxo de dados} ou \idxeng{Dataflow}}: este sistema é
 responsável por receber os dados do detetor, servir um subconjunto destes
@@ -204,7 +204,7 @@ comunica com sistemas externos, como a infraestrutura de serviços do CERN e,
 mais notavelmente, com o acelerador LHC.
 
 Aspectos de segurança são tratados pelo DCS somente no nível de menor
-severidade. Este trabalho tange principalmente questões ligadas ao
+severidade. Este sistema cuida principalmente de questões ligadas ao
 seqüenciamento de operações ou à requisição onde prevaleçam condições
 específicas, antes de permitir que outros procedimentos sejam
 executados. Ferramentas para a construção de interdependências, tanto em
@@ -226,7 +226,7 @@ maquinário. O DCS também será capaz de acionar procedimentos automáticos par
 trazer o sistema de deteção para um estado seguro, se necessário for.
 
 No que tange à operação do experimento, a interação com o sistema de aquisição
-de dados é de importância primária. A boa qualidade da Física gravada em mídia
+de dados é de grande importância. A boa qualidade da Física gravada em mídia
 permanente depende de uma sincronização absoluta entre o DAQ e o DCS; ambos os
 sistemas são complementares. O DAQ lida com eventos caracterizados por números
 e o DCS guarda o estado operacional do detetor enquanto os dados estão sendo
@@ -269,12 +269,12 @@ configuração do sistema são fornecidos contendo um grande número de parâmet
 que descrevem a topologia do sistema, os componentes de
 \eng{hardware} e \eng{software} assim como os modos e ordem de
 execução. Durante a aquisição, componentes especializados capturam e servem
-informação relacionadas à monitoração dos diversos processos do experimento,
-como dados estatísticos, histogramas ou parâmetros de rejeição, assim como
-mensagens de erro e diagnóstico enviadas pelas diversas aplicações. Interfaces
-(gráficas) aos operadores permitem configurar e controlar diversas
-funcionalidades do experimento. Estas interfaces fornecem visões simplificadas
-de vários sub-sistemas durante um \eng{run}.
+dados relacionados à monitoração dos diversos processos do experimento, tais
+como histogramas e parâmetros de rejeição, assim como mensagens de erro e
+diagnóstico enviadas pelas diversas aplicações. Interfaces (gráficas) aos
+operadores permitem configurar e controlar diversas funcionalidades do
+experimento. Estas interfaces fornecem visões simplificadas de vários
+sub-sistemas durante um \eng{run}.
 
 \subsubsection{Arquitetura do sistema \eng{online}}
 \label{sec:online-arch}
@@ -292,8 +292,8 @@ aquisição, filtragem e deteção. Os pacotes de controle existem para propicia
 ao TDAQ capacidades de inicialização e finalização, distribuição de comandos,
 sincronização, manuseio de erros e verificação do sistema.
 
-O sistema de controle de dispositivos e aplicações do \eng{online} é baseado
-em uma \idx{máquina de estados finitos} global mostrada na
+O sistema de controle de dispositivos e aplicações do sistema \eng{online} é
+baseado em uma \idx{máquina de estados finitos} global mostrada na
 figura~\ref{fig:online-fsm}. Todos os dispositivos do sistema devem
 obedecê-la, enviando avisos e erros caso falhem em cumprir as ordens do
 operador.
@@ -339,9 +339,7 @@ chegar a dezenas de megabytes em sua versão final, uma vez que englobará a
 configuração de milhares de componentes. Atualmente, somente uma das
 interfaces de operação a banco de dados está disponível e é baseada na
 utilização de arquivos locais, uma vez que o código para o acesso remoto de
-bancos de dados não está implementado ainda. Os arquivos de configuração são
-descritos em XML (\eng{eXtended Markup Language}) e podem ser manipulados
-diretamente por usuários experientes.
+bancos de dados não está implementado ainda.
 
 \paragraph{Compartilhamento de informação:} contém pacotes para o
 compartilhamento de informação no TDAQ. Os componentes destes pacotes podem
@@ -474,8 +472,8 @@ aquisição. Este conjunto de ferramentas também inclui os aplicativos, nos
 moldes da máquina de estados apresentada na Figura~\ref{fig:online-fsm}.
 \end{itemize}
 
-Para aumentar a qualidade dos programas desenvolvidos e a manutenção a
-longo prazo (o experimento deve operar por 10 anos), optou-se por utilizar
+Para aumentar a qualidade dos programas desenvolvidos e a manutenção a longo
+prazo (o experimento deve operar por 10 anos ou mais), optou-se por utilizar
 técnicas de orientação à objetos (OO) aplicadas sobre C++. Alguns problemas,
 e.g. ineficiência da utilização dos \eng{containers}-padrão da biblioteca
 padrão (\eng{Standard Template Libraries}, STL) C++ em ambientes multi-tarefa,
@@ -490,10 +488,10 @@ C++.
 \subsection{Fluxo de dados e a arquitetura no LVL2}
 \label{sec:lvl2arch}
 
-Em específico para este trabalho, a arquitetura e \eng{modus operandi} do
-segundo nível de filtragem do experimento são de especial atenção. É possível
-observar na Figura~\ref{fig:lvl2arch} um esquema da troca de mensagens das
-aplicações no LVL2, como anteriormente indicado na área acinzentada da
+Especificamente para este trabalho, a arquitetura e o funcionamento do segundo
+nível de filtragem do experimento são de especial atenção. É possível observar
+na Figura~\ref{fig:lvl2arch} um esquema da troca de mensagens das aplicações
+no LVL2, como anteriormente indicado na área acinzentada da
 Figura~\ref{fig:dfbasic}. Nesta figura, as linhas tracejadas indicam mensagens
 de controle do sistema e as linhas cheias, as mensagens que carregam dados do
 detetor ou resultados da operação de filtragem. Inicialmente, o Supervisor do
@@ -758,11 +756,11 @@ por exemplo, o número ótimo de tarefas processadoras deve estar entre 3 e 4,
 já que o uso de um número menor deste tipo de tarefas implicará na
 sub-utilização do poder de processamento de cada nó.
 
-Medidas foram realizadas variando-se parâmetros críticos para o desempenho da
-coleção de dados para RoI's. A contribuição gerada pela coleção de dados para
-uma RoI, ao tempo de processamento de uma L2PU em função do tamanho da RoI e o
-número de ROS's na qual a RoI está distribuída, é mostrada na
-Figura~\ref{fig:tns-4fig}. Estes testes foram executados em uma bancada com
+Medidas foram realizadas no CERN, variando-se parâmetros críticos para o
+desempenho da coleção de dados para RoI's. A contribuição gerada pela coleção
+de dados para uma RoI, ao tempo de processamento de uma L2PU em função do
+tamanho da RoI e o número de ROS's na qual a RoI está distribuída, é mostrada
+na Figura~\ref{fig:tns-4fig}. Estes testes foram executados em uma bancada com
 apenas um L2SV, doze ROS's e uma L2PU. Todos os nós nesta bancada de teste são
 PC's duplamente processados com Intel/Xeon's de 2,2 GHz e 1 \eng{gigabyte} de
 memória RAM, interconectados por uma chave padrão \eng{gigabit} ethernet. Na
@@ -850,12 +848,12 @@ coleção de RoI's não degrada de forma inaceitável.
 Para este teste, L2PU's não equipadas de algoritmos de filtragem reais foram
 usadas novamente e, por esta razão, deve ser notado que a taxa de envio de
 mensagens de cada um destes nós estará operando num patamar bastante acima do
-que o sistema real necessitará. Para estes testes, cada L2PU estará gerando
-\textbf{10 vezes} mais tráfego que o esperado no sistema final. De forma
-análoga e aditiva, o número de ROS's do sistema também não é ideal, devido a
-baixa disponibilidade de equipamento para testes. É, portanto, necessário
-garantir que a taxa de requisições de dados para cada ROS não exceda um valor
-limite que mascararia quaisquer resultados obtidos.
+que o sistema real necessitará. Para estes testes, cada L2PU estará gerando 10
+vezes mais tráfego que o esperado no sistema final. De forma análoga e
+aditiva, o número de ROS's do sistema também não é ideal, devido a baixa
+disponibilidade de equipamento para testes. É, portanto, necessário garantir
+que a taxa de requisições de dados para cada ROS não exceda um valor limite
+que mascararia quaisquer resultados obtidos.
 
 Estes testes foram executados em uma bancada com três L2SV's, quatro ROS's e
 até onze L2PU's. Todos os nós nesta bancada de teste são PC's, na mesma
@@ -865,7 +863,7 @@ com ROB's, gerando um total de 48 ROB's para este teste. Para cada requisição,
 a L2PU escolhe um dos 48 ROB's aleatoriamente e um número de ROB's com
 numeração consecutiva. Por exemplo, no caso em que cada RoI consista de 6
 ROB's, a L2PU seleciona o primeiro aleatoriamente e completa o pedido com
-outros 5 ROB's, cuja a numeração sucede o primeiro ROB. Se o último ROB fosse
+outros 5 ROB's, cuja numeração sucede o primeiro ROB. Se o último ROB fosse
 selecionado, o algoritmo voltaria ao primeiro ROB disponível
 (\eng{wrap-around}).
 
@@ -1004,13 +1002,13 @@ Controller}, L2SC).
 
 \subsubsection{O L2SC}
 
-O L2SC é componente de \eng{software} que faz a interface entre a L2PU, que
+O L2SC é o componente de \eng{software} que faz a interface entre a L2PU, que
 provê acesso aos dados do detetor através dos ROS's e dos ROB's, e os
 componentes do HLT. O propósito do L2SC está em 3 aspectos: permitir que a
 L2PU seja hospedeira do \eng{software} do HLT e sua controladora primária;
 permitir a re-utilização do mesmo conjunto de componentes (algoritmos, EDM,
 etc) entre o LVL2, o EF e \eng{offline}; prover um mecanismo de transmissão
-dos resultados do LVL1 e do LVL2 entre o DAQ e \eng{software} de seleção de
+dos resultados do LVL1 e do LVL2 entre o DAQ e o \eng{software} de seleção de
 eventos. Por esta razão, da mesma forma que a L2PU, o L2SC deve seguir a
 máquina de estados descrita na Figura~\ref{fig:online-fsm}, ativando seus
 múltiplos estágios de configuração e processamento conforme requerido pelo
@@ -1057,19 +1055,19 @@ multi-tarefas. Para respeitar as restrições no tempo de execução para o LVL2
 número e o tipo de serviços disponíveis estão restritos ao mínimo necessário,
 sendo este um subconjunto do serviços disponíveis no EF e \eng{offline}. Desta
 forma é sempre possível mover um componente do LVL2 para executar no EF ou até
-\eng{offline}. A movimentação de componentes no sentido oposto, no entanto,
-deve observar as restrições de operação no LVL2. 
+\eng{offline}. A movimentação de algoritmos no sentido oposto, no entanto,
+deve observar as restrições de operação no LVL2.
 
 \subsubsection{Desempenho do HLT}
 
-Após integrar o L2SC com o Sistema de Fluxo de Dados, testes de desempenho e
-robustez form conduzidos em uma máquina duplamente processada com AMD/Athon's
-de 1,533 GHz. O L2SC rodou por mais de 50 horas com três tarefas
+Após integrar, o L2SC com o Sistema de Fluxo de Dados, testes de desempenho e
+robustez form conduzidos no CERN em uma máquina duplamente processada com
+AMD/Athon's de 1,533 GHz. O L2SC rodou por mais de 50 horas com três tarefas
 processadoras. O protótipo executou sem problemas aparentes (\eng{dead-locks},
 vazamentos de memória, etc.) em nós simples ou duplamente processados,
 mostrando a segurança ao acesso concorrente. Medidas do desempenho desta
 infraestrutura exibiram um \eng{overhead} de 13 $\mu$s por evento. Este valor
-foi estimado comparando-se o número de eventos por segundo uma L2PU pode
+foi estimado comparando-se o número de eventos por segundo que uma L2PU pode
 manusear quando operando com e sem o L2SC e executando um algoritmo simples
 (primeira e segunda linhas da Tabela~\ref{tab:l2sc}). Esta tabela também
 mostra a taxa de processamento obtida quando, adicionalmente, o resultado do
@@ -1077,7 +1075,7 @@ LVL1 é transferido para o Gerente de Dados. O valor de \eng{overhead}
 mencionado inclui toda a infraestrutura Athena para agendar e executar os
 algoritmos e os serviços básicos. Estes valores são baseados em execuções de,
 no mínimo, 100.000 eventos. Escalonamento quase perfeito da latência medida
-foi observado quando o tempo de execução dos algoritmos era variada com um
+foi observado quando o tempo de execução dos algoritmos era variado com um
 ciclo de processamento fictício de 0 a 8 milissegundos em configurações
 distintas, indicando que o \eng{overhead} por evento introduzido pelo L2SC
 seja independente do tempo de execução observado.

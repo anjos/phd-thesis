@@ -8,13 +8,12 @@
 elétron/jato} 
 \label{chap:neural}
 
-Neste capítulo analisa-se o modelo de classificação elétron/jato proposto
-atualmente no CERN e desenvolvem-se sistemas de classificação de simples
-treinamento e emprego, baseados em redes neurais artificais. Estes
-classificadores definem um patamar de deteção melhor que o sistema discutido
-no capítulo anterior, superando-o em robustez e flexibilidade e ainda
-atingindo uma velocidade de execução compatível com a operação dentro do
-Segundo Nível do Sistema de Filtragem do experimento ATLAS.
+Neste capítulo desenvolvem-se sistemas de classificação de simples treinamento
+e emprego, baseados em redes neurais artificais. Estes classificadores definem
+um patamar de deteção melhor que o sistema discutido no capítulo anterior,
+superando-o em robustez e flexibilidade e ainda atingindo uma velocidade de
+execução compatível com a operação dentro do Segundo Nível do Sistema de
+Filtragem do experimento ATLAS.
 
 \section{Revisão da literatura}
 \label{sec:review}
@@ -27,12 +26,13 @@ literária deste tipo de análise, empregada atualmente neste campo da física.
 
 Os primeiros sistemas de deteção baseados em análise neural, aplicados à
 Física de altas energias, surgiram em 1987, com o emprego de redes neurais
-artificiais na reconstrução de partículas carregadas e píons neutros
-\cite{denby-nim-1997}. Hoje em dia \cite{denby-nim-2004}, cerca de 20 anos
-passados, tais sistemas são empregados em praticamente todas as áreas neste
-campo, desde da concepção de detetores \cite{wilk-nim-2006}, filtragem e
-aquisição de dados \cite{denby-nim-2003, kohne-nim-1997, varela-cms-1998},
-passando pela reconstrução \eng{offline} \cite{peterson-nim-1988} e análise
+artificiais na reconstrução de partículas carregadas e píons neutros, como
+está bem resumido em \cite{denby-nim-1997}. Hoje em dia \cite{denby-nim-2004},
+cerca de 20 anos passados, tais sistemas são empregados em praticamente todas
+as áreas neste campo, desde da concepção de detetores \cite{wilk-nim-2006},
+filtragem e aquisição de dados \cite{denby-nim-2003, kohne-nim-1997,
+varela-cms-1998}, passando pela reconstrução \eng{offline}
+\cite{peterson-nim-1988} e análise
 \cite{kiesling-nim-2004, bhat-aip-1995}. Nestes ambientes, o reconhecimento de
 padrões pode ocorrer tanto num plano mais elementar, onde deseja-se
 identificar os parâmetros de cada partícula que surge de uma reação
@@ -55,7 +55,7 @@ Este tipo de processo, característico das observações do DELPHI, estão imers
 em uma massa de dados contendo outros tipos de evento que se assemelham à
 geração de pares W. Dentre eles, os mais importantes são $e^+e^- \rightarrow
 Z^0/\gamma^{*} \rightarrow q\bar{q}$ e $e^+e^- \rightarrow ZZ \rightarrow
-q\bar{q}q\bar{q}$, sendo o segundo tipo, bastante difícil de deteção, já que
+q\bar{q}q\bar{q}$, sendo o segundo tipo, bastante difícil de detetar, já que
 decai no mesmo tipo de fenômeno que o sistema que se deseja discriminar. Para
 executar esta separação, definiu-se quatro variáveis de interesse: a energia
 no centro de massa da reação detetada, o número de jatos encontrados, a
@@ -85,11 +85,11 @@ caso, deseja diminuir a quantidade de eventos ruidosos tipo $p\bar{p}
 \rightarrow Wb\bar{b}$, que contaminam o sinal de interesse $p\bar{p}
 \rightarrow WH \rightarrow l \upsilon b\bar{b}$. 
 
-A idéia central deste trabalho é definir um sistema neural especializado nas
+A idéia central desse trabalho é definir um sistema neural especializado nas
 assinaturas de interesse destacadas, que consiga reduzir a taxa de eventos
 ordinários maximamente, diminuindo, por sua vez, a luminosidade necessária
 para a deteção do Higgs. Isto se faz necessário pois o experimento D0
-encontra-se em uma posição limite para o estudo do bóson de Higgs. 
+encontra-se em uma posição limite para o estudo do bóson de Higgs.
 
 Eventos simulados de bósons de Higgs com massa em 100, 120 e 130~GeV e eventos
 típicos do processo natural de contaminação foram utilizados para treinar um
@@ -106,7 +106,7 @@ apenas 45\%, para a mesma taxa de falso-alarme.
 Ainda em outro trabalho \cite{dudko-acat-2001}, emprega-se redes neurais
 artificiais para a deteção de \eng{top} quarks no mesmo experimento. De forma
 semelhante ao trabalho anteriormente exposto, identificam-se as assinaturas
-de interesse que contenham quarks deste tipo e sua contaminação natural. À
+de interesse que contenham quarks deste tipo e sua contaminação natural. A
 partir destes eventos, define-se um conjunto de variáveis que contenham a
 informação de deteção necessária e aplica-se um treinamento à base da
 retro-propagação de erros para atingir uma melhor separação sinal de
@@ -118,7 +118,7 @@ baseadas nas eficiências acumuladas de cada rede especialista.
 
 \subsection{Redes neurais em sistemas de filtragem}
 
-A taxa de falsos-positivos em um experimento em física de altas energias pode
+O número de falsos-positivos em um experimento em física de altas energias pode
 ser bastante grande, chegando muitas vezes a ser ordens de magnitude mais
 elevadas que o sinal que se deseja detetar. Somado a este fator, incluem-se as
 restrições de tempo de processamento de um sistema de filtragem que deva
@@ -136,7 +136,7 @@ múon com a célula de deteção.
 
 Levando-se em consideração os valores de atraso em cada célula e que a
 partícula atravessará todas as camadas do detetor, é possível calcular o ponto
-de impacto aproximado e ângulo da trajetória da partícula. Para tal, uma
+de impacto aproximado e o ângulo da trajetória da partícula. Para tal, uma
 rede neural tipo MLP com 64 neurônios escondidos e 64 saídas, baseada em
 \eng{hardware} especializado (chip Intel ETANN), é treinada levando-se em
 consideração os sinais de interação de cerca de 10.000 múons com este
@@ -154,22 +154,22 @@ primeira camada de 96\% (contra 98\% de um sistema de \eng{fitting}
 que $5,7^{o}$ para 93\% (contra 97\% \eng{offline}) para os padrões de
 teste. O tempo total de processamento do sistema é de apenas 8~$\mu$s.
 
-Já no experimento H1, que se utiliza do acelerador HERA no laboratório Desy em
-Hamburgo, Alemanha, estuda a distribuição do momento dos constituintes de
-prótons e mede a força de acoplamento do glúon aos diferentes quarks. Devido à
-interações tais como as que ocorrem entre o feixe e resíduos no tubo do
-acelerador, a taxa de eventos que constituem ruído de fundo chega a uma ordem
-de $10^5$ comparada à ocorrência de física interessante. Para filtrar a taxa
-de eventos inicial de cerca 10 milhões por segundo para apenas 100, este
-experimento utiliza um sistema de filtragem divido em 4 níveis. O primeiro
-nível de filtragem reduz a taxa de eventos em cerca de 100 vezes. Desta forma,
-o segundo nível de filtragem tem apenas cerca de 10~$\mu$s para tomar uma
+Já no experimento H1, no acelerador HERA, do laboratório DESY em Hamburgo,
+Alemanha, estuda a distribuição do momento dos constituintes de prótons e mede
+a força de acoplamento do glúon aos diferentes quarks. Devido à interações
+tais como as que ocorrem entre o feixe e resíduos no tubo do acelerador, a
+taxa de eventos que constituem ruído de fundo chega a uma ordem de $10^5$
+comparada à ocorrência de física interessante. Para filtrar a taxa de eventos
+inicial de cerca de 10 milhões por segundo para apenas 100, este experimento
+utiliza um sistema de filtragem divido em 4 níveis. O primeiro nível de
+filtragem reduz a taxa de eventos em cerca de 100 vezes. Desta forma, o
+segundo nível de filtragem tem apenas cerca de 10~$\mu$s para tomar uma
 decisão. Este nível deve reduzir a taxa de eventos aproximadamente 10
 vezes. Uma rede neural também foi utilizada para resolver este problema
 \cite{kohne-nim-1997}. 
 
 No primeiro nível de filtragem, 16 variáveis são calculadas tais como a
-energia total, transversal e na parte centrais do calorímetro, dentre
+energia total, transversal e nas partes centrais do calorímetro, dentre
 outras. Este nível de filtragem ignora, no entanto, quaisquer relações entre
 estas variáveis. Cortes mais sofisticados podem ser executados no segundo
 nível adicionado-se à estas variáveis, outras quantidades que somente estão
@@ -211,7 +211,7 @@ um conjunto de células provenientes dos cristais do calorímetro e.m.. Este
 conjunto define um ``quadrado'' de aproximadamente 7 por 7 células deste
 detetor, cobrindo uma área de aproximadamente $0,1 \times 0,1$ no plano $\eta
 \times \phi$. O algoritmo escolhido inicia o processamento localizando o pico
-de deposição energética na região. Em seguida, de forma a tornar o processo de
+de deposição de energia na região. Em seguida, de forma a tornar o processo de
 deteção independente da energia, normaliza-se o valor de deposição energética
 em cada célula pelo valor de energia na célula mais energética. Para
 amplificar os valores de deposição energética nas bordas da região em análise,
@@ -280,24 +280,26 @@ sistema. Os resultados destes sub-espaços definidos pelas componentes
 principais do agrupamento são abastecidos à um discriminador neural que
 realiza o papel de deteção
 
-Levando-se em consideração as possibilidades de segmentação da extração
-se obtém 72,4\% de eficiência na deteção de elétrons contra 39\% de
-falso-alarme para um sistema não segmentado e 98,9\% para apenas 1\% de
-falso-alarme preservando-se a informação de penetração longitudinal do objeto.
+Levando-se em consideração as possibilidades de segmentação da extração, se
+obtém 72,4\% de eficiência na deteção de elétrons contra 39\% de falso-alarme
+para uma análise não segmentada e 98,9\% para apenas 1\% de falso-alarme
+preservando-se a informação de penetração longitudinal do objeto, ou seja,
+extraindo-se as componentes principais camada a camada.
 
 \subsection{Análise neural resumida}
 
-A análise neural vem sendo sugerida como interessante candidata à análise
-bayesiana clássica ou à análise da matriz de correlação (PCA) nos trabalhos
-revisados. Em muitos dos casos, os métodos empregados podem ser simplesmente
-substituídos pela análise neural. Em outros, observa-se uma tendência ao
-questionamento da qualidade das variáveis produzidas pela extração de
-características, onde o autor tenta explorar o espaço original, uma vez que
-dispõe ferramentas mais sofisticas que simples cortes uni ou bi-dimensionais
-para executar a seleção. As variáveis de interesse advém diretamente do
-detetor, calibradas ou a serem calibradas \cite{silva-acat-2001}, ou são
-definidas através de equações ou transformações simples e normalizadas de
-acordo a parâmetros do objeto que se deseja discriminar.
+A análise neural, como indicado anteriormente, vem sendo sugerida como
+interessante candidata à análise bayesiana clássica ou à análise da matriz de
+correlação (PCA) nos trabalhos revisados. Em muitos dos casos, os métodos
+empregados podem ser simplesmente substituídos pela análise neural. Em outros,
+observa-se uma tendência ao questionamento da qualidade das variáveis
+produzidas pela extração de características, onde o autor tenta explorar o
+espaço original, uma vez que dispõe de ferramentas mais sofisticas que simples
+cortes uni ou bi-dimensionais para executar a seleção. As variáveis de
+interesse advém diretamente do detetor, calibradas ou a serem calibradas
+\cite{silva-acat-2001}, ou são definidas através de equações ou transformações
+simples e normalizadas de acordo a parâmetros do objeto que se deseja
+discriminar.
 
 Redes neurais artificiais resolvem um problema latente em Física de Altas
 Energias, inerente aos avanços na área de deteção e à explosão do tamanho dos
@@ -322,14 +324,13 @@ trabalhos nesta área, como indica a Figura~\ref{fig:basic-discriminator}:
 \item A \textbf{extração de características}, onde deseja-se compactar a
 informação disponível para análise em um mínimo de variáveis que consigam
 extrair toda (ou na maior parte) a informação discriminante disponível no
-evento. Esta fase é normalmente essencial uma vez dispõe-se de milhares de
-variáveis disponíveis para cada evento, contando com os elementos de deteção
-providos pelo experimento até variáveis complexas que podem ser acessadas após
-a reconstrução como o número de jatos encontrados ou o ângulo de divergência
-entre léptons;
+evento. Esta fase é normalmente essencial uma vez que dispõe-se de milhares de
+variáveis para cada evento, contando com os elementos de deteção providos pelo
+experimento até variáveis complexas que podem ser acessadas após a
+reconstrução como o número de jatos encontrados ou o ângulo entre léptons;
 \item A \textbf{classificação ou hipótese}, seguindo-se à compressão do espaço
-original de entrada representa a deteção da física de interesse. Observa-se uma
-tendência ao desenvolvimento dos sistemas utilizando-se dados de simulação
+original de entrada representa a deteção da física de interesse. Observa-se
+uma tendência ao desenvolvimento dos sistemas utilizando-se dados de simulação
 acurados, onde possível, dados provenientes diretamente do detetor. É
 interessante perceber que sistemas desenvolvidos através de simulações ainda
 comportam-se de forma satisfatória ou adaptativa em seu emprego final, com
@@ -346,7 +347,7 @@ cada sub-sistema para obter um sistema de classificação com uma única saída.
 No que se segue deste capítulo, abordaremos sistemas de classificação que
 substituem o classificador atualmente empregado na discriminação elétron/jato
 para o Segundo Nível do Sistema de Filtragem do experimento ATLAS,
-introduzindo técnicas automáticas de deteção. Após estabelecermos os limites
+introduzindo técnicas automáticas de deteção. Após definirmos os limites
 do processo de compressão estabelecidos pelo extrator de características
 T2Calo, tentar-se-á abordar a discriminação elétron/jato através de outras
 variáveis que possuam um poder discriminante maior que o sistema proposto
@@ -444,20 +445,20 @@ distinto do conjunto de validação. Este conjunto poderia ser utilizado para
 verificar a operação do sistema após o treinamento. No entanto, a física
 disponível para o estudo é limitada devido a natureza de geração de
 eventos. Para se realizar uma análise baseada no LVL2, elétrons e jatos que
-passem a um corte do LVL1 devem ser simulados, uma vez que o LHC ainda não
-encontra-se operacional. Desta forma, os termos \textit{conjunto de teste} e
-\textit{conjunto de validação} serão utilizados de forma intercambiável no
-contexto deste trabalho.
+sejam selecionados por um corte do LVL1 devem ser simulados, uma vez que o LHC
+ainda não encontra-se operacional. Desta forma, os termos \textit{conjunto de
+teste} e \textit{conjunto de validação} serão utilizados de forma
+intercambiável no contexto deste trabalho.
 
 A taxa de redução do LVL1 é bastante expressiva, atingindo uma redução de
 aproximadamente 1000 vezes na taxa de contaminação de elétrons. Desta forma,
-para produzir 1000 jatos que passariam a um corte do LVL1 é necessário que se
-produza cerca de 1 milhão de eventos deste tipo. Cada simulação de um evento
-pode durar muitos minutos, às vezes horas de processamento do poder de
-computação disponível. Por outro lado, dada a natureza da geração dos eventos
-(simulação por processos de Monte Carlo), a estatística contida no conjunto é
-tida como suficiente para expressar bem, as características do tipos de evento
-analisados.
+para produzir 1000 jatos que seriam selecionados por um corte do LVL1 é
+necessário que se produza cerca de 1 milhão de eventos deste tipo. Cada
+simulação de um evento pode durar muitos minutos, às vezes horas de
+processamento do poder de computação disponível. Por outro lado, dada a
+natureza da geração dos eventos (simulação por processos de Monte Carlo), a
+estatística contida no conjunto é tida como suficiente para expressar bem, as
+características do tipos de evento analisados.
 
 %Por outro lado, a física simulada é representativa do tipo de partículas
 %que deseja-se analisar.
@@ -467,13 +468,13 @@ e\-lé\-tron-jato}
 
 Utilizando o sistema descrito anteriormente e a separação dos dados (em
 classes de treinamento e teste) proposta no início do estudo, realizou-se um
-conjunto de 5 testes para a verificação de que o mínimo tenha sido atingido
-durante o processo de treinamento. Em cada um dos cinco testes os pesos
-sinápticos são inicializados aleatoriamente com um valor dentro do intervalo
-$[-1, +1]$. O tamanho da época é fixado em 22000 (duas vezes o número total de
-elétrons disponíveis para o treinamento), de forma que cada passo de
-treinamento represente a informação contida em toda a massa de dados
-disponível. Como variante do algoritmo de treinamento clássico
+conjunto de 5 testes, com a finalidade de verificar que o mínimo tenha sido
+atingido durante o processo de treinamento. Em cada um dos cinco testes os
+pesos sinápticos são inicializados aleatoriamente com um valor dentro do
+intervalo $[-1, +1]$. O tamanho da época é fixado em 22000 (duas vezes o
+número total de elétrons disponíveis para o treinamento), de forma que cada
+passo de treinamento represente a informação contida em toda a massa de dados
+disponível. 
 
 Dependendo da inicialização, a convergência do sistema (estagnação detetada no
 conjunto de teste a partir do produto SP) poderá demorar de 50 a 70 passos
@@ -490,7 +491,7 @@ sistema converge a um valor estável depois de pouco menos que 20 passos de
 treinamento. O produto SP oscila bruscamente no início do treinamento, por
 cerca de 10 passos, e depois se estabiliza, em aproximadamente $1,48$, para o
 restante do treinamento. O mesmo ocorre para o EMQ para um valor de
-aproximadamente $0,38$. O perfil de evolução do produto SP e minimização do
+aproximadamente $0,38$. O perfil de evolução do produto SP e a minimização do
 EMQ é seguido pelo conjunto de teste, de forma bastante semelhante, indicando
 que a estatística disponível no conjunto treino seja representativa dos dados
 no conjunto de teste.
@@ -528,13 +529,13 @@ parte do espectro de saída do sistema. Nestas condições, o máximo produto SP
 para o conjunto de teste é 1,48, definido no ponto da curva R.O.C. (veja
 Figura~\ref{fig:lms-test-roc}) onde a eficiência para a deteção de elétrons é
 90,77\% enquanto que a eficiência para a deteção de jatos é de 90,21\%. A
-Figura~\ref{fig:lms-vs-egamma-roc} mostra uma comparativo entre o resultado da
-otimização proposta atualmente no experimento ATLAS contra os resultados
+Figura~\ref{fig:lms-vs-egamma-roc} mostra um comparativo entre o resultado da
+otimização proposto atualmente no experimento ATLAS contra os resultados
 obtidos para este classificador. Através desta figura é possível observar que
 o discriminador linear praticamente tangencia a parte exterior dos pontos da
 otimização proposta atualmente no experimento. O resultado obtido com este
 sistema de discriminação, ao invés do longo processo de otimização proposto
-originalmente, é atingido depois de apenas alguns minutos treinamento em um
+originalmente, é atingido depois de apenas alguns minutos de treinamento em um
 computador dotado de um processador AMD 64 com \eng{clock} de 2~GHz e 1~Gb de
 memória RAM. Ademais, tal sistema apresenta uma capacidade discriminatória
 equivalente após apenas 10 passos de treinamentos, isto é, $\approx 25$
@@ -586,7 +587,7 @@ de elétrons. Isto acontece pois elétrons desenvolvem uma cascata de deposiçã
 energética tipicamente mais fina e de pouca penetração, estando,
 adicionalmente, sujeitos à interação com os cabos do detetor. Jatos, por sua
 vez, tenderão a penetrar mais no detetor e se radializar, o que facilita a
-recuperação da informação mesmo em regiões mais dificultadas, com no
+recuperação da informação mesmo em regiões mais dificultadas, como no
 \eng{crack}.
 
 \begin{figure}
@@ -637,21 +638,22 @@ base os dados do conjunto de teste.}
 %\label{fig:lms-test-efficiency-eta}
 %\end{figure}
 
-A eficiência é recuperada logo após a região de \eng{crack}. O gráfico de
+A eficiência é recuperada logo após a região do \eng{crack}. O gráfico de
 barras para a distribuição $\phi$ mostra-se praticamente uniforme, indicando
 que o sistema funciona sem tendências para todos os valores desta
 variável. Este resultado é esperado, já que o detetor é simétrico neste
 eixo. A análise por $\etem$ demonstra uma predominante qualidade de deteção
-para valores mais baixos de energia que valores mais altos. Deve-se levar em
-conta que, embora a eficiência de deteção de elétrons ainda seja máxima nesta
-última região, como mostra a Figura~\ref{fig:lms-test-efficiency-et}(a), o falso
-alarme na deteção de jatos também apresenta-se máximo. Uma vez que o produto
-SP é uma figura de mérito da eficiência agregada de ambas as classes de
-eventos do discriminador, ela quantificar-se-á em zero nesta região. Este
-resultado está, possivelmente, associado à baixa estatística de dados
-disponível na região, como indicado no texto sob as barras. Desta forma, a
-análise de valores de eficiência de deteção para objetos com mais de $~$50 GeV
-deverá ser tomada com esta ressalva.
+para valores mais baixos de energia do que para valores mais altos. Deve-se
+levar em conta que, embora a eficiência de deteção de elétrons ainda seja
+máxima nesta última região, como mostra a
+Figura~\ref{fig:lms-test-efficiency-et}(a), o falso alarme na deteção de jatos
+também apresenta-se máximo. Uma vez que o produto SP é uma figura de mérito da
+eficiência agregada de ambas as classes de eventos do discriminador, ela
+quantificar-se-á em zero nesta região. Este resultado está, possivelmente,
+associado à baixa estatística de dados disponível na região, como indicado no
+texto sob as barras. Desta forma, a análise de valores de eficiência de
+deteção para objetos com mais de $~$50 GeV deverá ser tomada com esta
+ressalva.
 
 A Figura~\ref{fig:lms-vs-egamma} mostra um comparativo entre as duas técnicas
 de deteção, por energia transversa na seção e.m.. Por inspeção desta figura,
@@ -662,7 +664,7 @@ linear apresenta-se mais eficiente, e segue este padrão para grande parte das
 faixas onde se diferenciam (15 pontos no total). Na região onde há maior
 concentração de eventos de teste, como é possível determinar a partir da
 Figura~\ref{fig:lms-test-efficiency-et}, o desempenho dos detetores é muito
-próxima. Com o aumento da energia, onde a eficiência do EGammaHypo começa a
+próximo. Com o aumento da energia, onde a eficiência do EGammaHypo começa a
 cair, o sistema baseado no detetor linear consegue obter bom desempenho
 superando o primeiro.
 
@@ -711,7 +713,7 @@ uma grande quantidade de ruído e portanto poderão detetar canais físicos não
 simuláveis no caso de exibirem propriedades equivalente àquelas para o qual
 foram treinadas. Num ambiente de descobertas, como é o experimento ATLAS, esta
 característica torna-se fundamental uma vez que a Física de interesse possa se
-apresentar de num formato pouco evidente a sistemas clássicos de deteção;
+apresentar num formato pouco evidente a sistemas clássicos de deteção;
 
 \item[Simples implementação] RNA's podem ser facilmente descritas em
 linguagens de programação convencionais, atingindo desempenhos satisfatórios
@@ -771,7 +773,7 @@ discriminantes para o T2Calo, para as classes de elétrons e jatos.}
 Não obstante, a qualidade da discriminação é comparável ao sistema de deteção
 proposto pelo algoritmo EGammaHypo, não necessitando da intervenção de um
 especialista para seu ajuste. Se por um lado compatíveis, estes dois sistemas
-de deteção mostram-se pouco robustos a mudanças de condição como as serão
+de deteção mostram-se pouco robustos a mudanças de condição como as que serão
 observadas no experimento ATLAS, onde a luminosidade do feixe está sujeita a
 bruscas variações em questão de minutos. Na seção que se segue, analisa-se o
 potencial discriminatório que redes neurais artificiais adicionariam ao
@@ -779,7 +781,7 @@ sistema de filtragem do ATLAS.
 
 Para o treinamento e implementação dos sistemas de discriminação neural, fez-se
 uso das bibliotecas e programas do \eng{NeuralRinger}. O \eng{NeuralRinger} é
-um pacote totalmente desenvolvido usando o paradigma da orientação à objetos,
+um pacote totalmente desenvolvido usando o paradigma da orientação a objetos,
 implementado em C++ \cite{stroustrup} e especialmente concebido para executar
 a operação de filtragem de partículas dentro do LVL2. Outras soluções para
 treinamento e execução de redes neurais, tais como o pacote SNNS \cite{snns}
@@ -795,9 +797,9 @@ ocorreram em função do ambiente-alvo para este sistema. Como colocado na
 Seção~\ref{sec:hlt}, o LVL2 de filtragem rodará utilizando como base as
 bibliotecas do Projeto Athena. O Athena é o ambiente padrão para a análise da
 Física dos eventos no ATLAS, tanto no Sistema de Filtragem, como na
-Reconstrução pós-filtragem nas diversas fazendas de análise
-\eng{offline}. Desta forma, a integrabilidade ao Athena constitui-se de um
-passo essencial para a utilização da técnica no LVL2. 
+Reconstrução pós-filtragem nas diversas \eng{farms} de análise
+\eng{offline}. Desta forma, a integrabilidade ao Athena constitui-se um
+passo essencial para a utilização da técnica no LVL2.
 
 O projeto foi desenvolvido tendo por base as seguintes prerrogativas, em
 ordem:
@@ -807,7 +809,7 @@ ordem:
 tenha um bom desempenho no processamento neural, de tal forma que seja viável
 sua implementação no sistema de filtragem. Preferencialmente, deseja-se que um
 passo de execução da rede não dure mais que alguns milissegundos, já que o
-tempo total de processamento no LVL2 deve ser, em média 10~ms, contando com o
+tempo total de processamento no LVL2 deve ser em média 10~ms, contando com o
 acesso aos dados;
 \item Interoperabilidade: O treinamento do sistema deve ser executado
 \eng{offline}, dada a disponibilidade dos dados. Portanto, é necessário que o
@@ -830,10 +832,11 @@ desta ferramenta.
 É possível substituir o discriminador linear definido na
 Seção~\ref{sec:linear} por um discriminador baseado em uma rede neural tipo
 MLP como a da Figura~\ref{fig:simple-mlp}. A implementação deste novo sistema
-utilizando-se do pacote \eng{NeuralRinger} e o fluxo de treinamento detalhado
-na Figura~\ref{fig:train-flow}. A Figura~\ref{fig:t2calo-neural} contém um
-diagrama de blocos que ilustra tal sistema. Os conjuntos de treinamento e
-teste serão mantidos, o que simplificará a comparação das duas técnicas.
+utilizando-se do pacote \eng{NeuralRinger} e o fluxo de treinamento foi
+detalhado na Figura~\ref{fig:train-flow}. A Figura~\ref{fig:t2calo-neural}
+contém um diagrama de blocos que ilustra tal sistema. Os conjuntos de
+treinamento e teste serão mantidos, o que simplificará a comparação das duas
+técnicas.
 
 \begin{figure}
 \begin{center}
@@ -844,20 +847,20 @@ T2Calo.}
 \label{fig:t2calo-neural}
 \end{figure}
 
-Uma vez que estejamos utilizando o algoritmo de retropropagação resiliente do
+Uma vez que estejamos utilizando o algoritmo de retropropagação resiliente dos
 erros, o único parâmetro a ser otimizado é o número de neurônios
 escondidos. Para procedermos com a escolha, a seguinte heurística será
-utilizada: realiza-se 5 testes com um número de neurônios fixo na camada
+utilizada: realiza-se 5 testes com um número fixo de neurônios na camada
 escondida. Em seguida, avalia-se o número de passos de treinamento para um
 nível de estabilização fixo do produto SP, o valor final do EMQ e do produto
-SP da rede. A média dos cinco valores é extraída, assim como o desvio-padrão
+SP da rede. A média dos cinco valores é extraída, assim como o desvio padrão
 destes valores em relação à média. O número de neurônios escondidos a ser
 considerado está no conjunto $[2, 3, 4, 5, 6]$. A
 Tabela~\ref{tab:t2calo-neural-hidden-scan} contém os resultados deste
-estudo. O valor de desvio padrão está anotado após o sinal ``$\pm$'' em cada
-entrada da tabela. Como é possível determinar, com 4 neurônios escondidos o
-sistema tende a treinar em um número menor de passos. Os valores de EMQ e
-produto SP encontram-se em faixas de valores muito próximas, sendo difícil sua
+estudo. O valor do desvio padrão está anotado após o sinal ``$\pm$'' em cada
+entrada da tabela. Como é possível observar, com 4 neurônios escondidos o
+sistema tende a ser treinado em um número menor de passos. Os valores de EMQ e
+o produto SP encontram-se em faixas de valores muito próximas, sendo difícil sua
 comparação para fins de escolha. Desta forma, escolhe-se o sistema com 4
 neurônios na camada escondida.
 
@@ -883,10 +886,10 @@ $6$ & $332\pm138$ & $0,258\pm0,004$ & $0,249\pm0,004$ & $1,545\pm0,001$ & $1,546
 Em seguida, treina-se um total de 10 redes com os parâmetros
 selecionados. Para nos assegurarmos da estabilidade da rede, estabelece-se
 como critério de parada, uma variação menor que $0,0001$ para o produto SP,
-por pelo menos 20 passos de treinamento. A
-Figura~\ref{fig:best-t2calo-mlp-mse} e a Figura~\ref{fig:best-t2calo-mlp-sp}
-mostram respectivamente o desenvolvimento, ao longo do treinamento dos valores
-EMQ e produto SP para um dos 10 resultados obtidos.
+por pelo menos 20 passos de treinamento. As
+Figuras~\ref{fig:best-t2calo-mlp-mse} e \ref{fig:best-t2calo-mlp-sp} mostram,
+respectivamente, o desenvolvimento ao longo do treinamento dos valores EMQ e
+do produto SP para um dos 10 resultados obtidos.
 
 \begin{figure}
 \begin{center}
@@ -907,14 +910,14 @@ discriminador elétron/jato neural para as variáveis do T2Calo.}
 \end{figure}
 
 O sistema estabiliza após cerca de 40 passos, considerando a evolução do
-EMQ. No que tange capacidade discriminante, aferida através do produto SP,
+EMQ. No que tange a capacidade discriminante, aferida através do produto SP,
 após cerca de 60 passos, a qualidade discriminativa parece estar estável. A
 Figura~\ref{fig:best-t2calo-mlp-output} mostra as saídas da rede, no final do
 treinamento, para elétrons (em cima) e jatos (em baixo). A saída para elétrons
-é fixada em $-1$ e para jatos, em $+1$. Nota-se que, diferentemente ao sistema
-linear, há uma notável separação entre as classes proporcionada pelo emprego
+é fixada em $-1$ e para jatos, em $+1$. Nota-se que, diferente do sistema
+linear, há uma notável separação entre as classes, proporcionada pelo emprego
 de um discriminador neural. O ponto ótimo de separação pode ser mais
-facilmente determinado, inclusive por inspeção visual o que torna este sistema
+facilmente determinado, inclusive por inspeção visual, o que torna este sistema
 mais robusto que os propostos anteriormente.
 
 \begin{figure}
@@ -928,13 +931,14 @@ características extraídas pelo T2Calo.}
 
 Diferentemente do sistema linear, uma rede neural poderá traçar uma superfície
 curva no espaço de entrada (número de dimensões $=4$), melhorando a separação
-entre as classes que se deseja detetar. Esta última figura mostra o resultado
-desta capacidade discriminativa. A Figura~\ref{fig:best-t2calo-test-roc}
-mostra um comparativo entre as técnicas de deteção vistas até aqui. Nota-se
-que o detetor baseado em uma rede neural com 4 neurônios escondidos exibe
-superior poder de deteção comparando-se às outras duas técnicas. A curva para
-este detetor está sempre acima da curva dos outros sistemas, indicando
-superior eficiência de deteção e rejeição de falso alarme.
+entre as classes que se deseja detetar. A
+Figura~\ref{fig:best-t2calo-mlp-output} mostra o resultado desta capacidade
+discriminativa. Na Figura~\ref{fig:best-t2calo-test-roc} vemos um comparativo
+entre as técnicas de deteção vistas até aqui. Nota-se que o detetor baseado em
+uma rede neural com 4 neurônios escondidos exibe superior poder de deteção
+comparando-se às outras duas técnicas. A curva para este detetor está sempre
+acima da curva dos outros sistemas, indicando superior eficiência de deteção e
+rejeição de falso alarme.
 
 \begin{figure}
 \begin{center}
@@ -942,7 +946,7 @@ superior eficiência de deteção e rejeição de falso alarme.
 \end{center}
 \caption{R.O.C. para o conjunto de teste, do discriminador neural baseado nas
 características extraídas pelo T2Calo, comparado com o detetor linear e a
-técnica de otimização baseado algoritmo EGammaHypo.}
+técnica de otimização baseado no algoritmo EGammaHypo.}
 \label{fig:best-t2calo-test-roc}
 \end{figure}
 
@@ -955,7 +959,7 @@ revelam uma estrutura bastante semelhante aos sistemas de deteção precedentes,
 como mostra a Figura~\ref{fig:best-t2calo-eta-phi}. A única ressalva é a na
 qualidade de deteção no \eng{crack} dos calorímetros, onde o detetor neural
 mostra-se ligeiramente superior, indicando que este sistema consiga recuperar
-informações vital à deteção que os outros dois métodos não conseguem.
+informações vitais à deteção que os outros dois métodos não conseguem.
 
 \begin{figure}
 \begin{center}
@@ -1055,7 +1059,7 @@ ponto, ignorar esta limitação.
 Como sub-produto do cálculo das 4 variáveis utilizadas pelo EGammaHypo, o
 T2Calo também avalia, dentre outras, a energia, camada a camada do
 calorímetro, depositada pela partícula na RoI sendo analisada. Estas
-variáveis, normalmente desprezadas para fins de deteção, podem conter
+variáveis, normalmente desprezadas para fins de filtragem, podem conter
 informação não originalmente aproveitada pelo EGammaHypo, mas que revelem
 novas informações sobre a natureza da partícula. No total 10 outras variáveis
 estão disponíveis:
@@ -1071,11 +1075,11 @@ direção $\eta\times\phi$ células por $7\times7$ células na segunda camada e.
 
 Estas variáveis são usadas normalmente \eng{offline} para a depuração do
 comportamento do T2Calo durante sua execução no sistema de filtragem. Enquanto
-que combinar estas variáveis no algoritmo EGammaHypo seria difícil, o sistema
-de discriminação neural proposto na seção anterior poderia ser re-utilizado
-para montar-se um novo sistema de deteção baseado em um universo de variáveis
-maior e com mais informações. A Figura~\ref{fig:t2calo-14-neural} ilustra este
-novo sistema, em blocos.
+combinar estas variáveis no algoritmo EGammaHypo seria difícil, o sistema de
+discriminação neural proposto na seção anterior poderia ser re-utilizado para
+montar-se um novo sistema de deteção baseado em um universo de variáveis maior
+e com mais informações. A Figura~\ref{fig:t2calo-14-neural} ilustra este novo
+sistema, em blocos.
 
 \begin{figure}
 \begin{center}
@@ -1091,10 +1095,10 @@ número de neurônios ótimos a ser empregado na camada escondida do
 discriminador. A heurística de otimização é usada mais uma vez: treina-se 5
 redes com o mesmo número de neurônios na camada escondida, com seus pesos
 sinápticos inicializados aleatoriamente a cada iteração. O número de neurônios
-escondidos foi variado de 2 a 12 (número de entradas), observando-se a média
-do produto SP, EMQ e o número de passos de treinamento obtida para cada grupo
+escondidos foi variado de 2 a 12 (número de entradas), observando-se à média
+do produto SP, EMQ e o número de passos de treinamento obtido para cada grupo
 de testes. O desvio-padrão dos testes com relação a média do produto SP foi
-utilizada como medida de erro. A Tabela~\ref{tab:t2calo-all-hidden-choice}
+utilizado como medida de erro. A Tabela~\ref{tab:t2calo-all-hidden-choice}
 contém os resultados desta heurística de otimização.
 
 \begin{table}
@@ -1141,7 +1145,7 @@ saída do melhor dos dos 10 testes com 10 neurônios na camada escondida. Este
 sistema apresenta uma saída ainda mais próxima do alvo desejado que aquele
 baseado em apenas 4 das variáveis do T2Calo. A evolução (e estagnação) do EMQ
 e do produto SP para a mesma rede pode ser vista nas
-Figuras~\ref{fig:t2calo-mlp-all-sp-evo} e \ref{fig:t2calo-mlp-all-mse-evo} O
+Figuras~\ref{fig:t2calo-mlp-all-mse-evo} e \ref{fig:t2calo-mlp-all-sp-evo} O
 sistema encontra-se completamente treinado após cerca de 1000 passos, quando é
 parado. O valor do produto SP máximo atingido para o conjunto de teste
 ($1,63$) é superior àquele para o sistema usando somente 4 das variáveis do
@@ -1199,7 +1203,7 @@ sistema recupera, quase que completamente, a perda de informação na região de
 anteriores (veja novamente as Figuras~\ref{fig:eghypo-eta-scan-test},
 \ref{fig:lms-test-eta-phi} e \ref{fig:best-t2calo-eta-phi}). Isto indica que
 a introdução de mais variáveis na deteção elétron/jato seja benéfica no que
-tange a recuperação de informação, mesmo em regiões onde exista pouca
+tange à recuperação de informação, mesmo em regiões onde exista pouca
 informação disponível ou onde haja descontinuidades no sistema de deteção.
 
 \begin{figure}
@@ -1237,7 +1241,7 @@ dos demais detetores ainda que em menor escala. Outra tendência que pode ser
 observada é um aumento substancioso na qualidade de generalização do sistema
 neural, agora dotado de mais informações, conseguindo distinguir elétrons de
 jatos onde outros sistemas falham, como é o caso da região energética entre 90
-e 120~GeV. Este resultado indica que, a pesar da carência de dados na região,
+e 120~GeV. Este resultado indica que, apesar da carência de dados na região,
 a rede conseguiu aprender corretamente como detetar as partículas de
 interesse. Esta característica é de extrema importância para o ambiente do
 ATLAS, onde a Física de interesse poderá apresentar características
@@ -1274,9 +1278,10 @@ importância de cada uma das variáveis de entrada para um classificador. Nesta
 técnica, avalia-se a contribuição da variável à composição da saída
 substituindo-se seu valor, a cada evento, pelo valor médio da variável com
 respeito a todos os eventos disponíveis na entrada do sistema de
-discriminação. Quanto maior a variação, mais relevante é considerada a
-variável. Assim sendo, observando-se a variação da saída, é possível estimar a
-contribuição daquela variável ao processo discriminatório.
+discriminação. Quanto maior a variação (maior é o valor absoluto da medida de
+relevância), mais relevante é considerada a variável. Assim sendo,
+observando-se a variação da saída, é possível estimar a contribuição daquela
+variável ao processo discriminatório.
 
 A estimativa de relevância da i-ésima componente de entrada pode, então ser
 calculada pela fórmula:
@@ -1299,11 +1304,11 @@ conjuntos de treino e teste. Esta figura mostra, mais uma vez, que o conjunto
 de treino permite generalizar o comportamento do discriminador, apresentando
 valores de relevância, para cada uma de suas variáveis, bastante próximos
 daqueles valores calculados para o conjunto de teste. Esta figura também
-mostra que a variável que mostra a energia total na seção hadrônica
+indica que a variável que contém a energia total na seção hadrônica
 (\texttt{T2Cahade}) é de extrema importância na tarefa de discriminação, como
 é esperado na discriminação elétron jato. Quando substituímo-la pelo seu valor
 médio, o erro na saída aumenta significativamente, enquanto que, para as
-demais variáveis, o impacto seja nitidamente menor.
+demais variáveis, o impacto é nitidamente menor.
 
 \begin{figure}
 \begin{center}
@@ -1343,7 +1348,7 @@ processo discriminatório ainda é $\rcore$, seguindo-se de $\eratio$. É
 interessante notar que o processo de análise de relevância, baseado no
 conhecimento do classificador neural de melhor desempenho, indique a mesma
 ordem de separação que especialistas determinam para a filtragem baseada no
-EGammaHypo. O que escapa à este sistema de deteção é que exista informação
+EGammaHypo. O que escapa a este sistema de deteção é que exista informação
 relevante para a discriminação escondida em outras variáveis que não são
 contempladas pelo método, como a largura do agrupamento no calorímetro.
 
@@ -1382,10 +1387,10 @@ método. Para averiguar qual dos métodos gerará um detetor mais eficiente, os
 dois casos são estudados:
 
 \begin{itemize}
-\item Poda baseada na relevância pelo EMQ, preservando 5 variáveis: $\rcore$,
-$\eratio$, largura do agrupamento, $\etem[0]$, $\etem[1]$;
+\item Poda baseada na relevância pelo EMQ, preservando 5 variáveis: Rcore,
+$\eratio$, largura do chuveiro (\eng{Width}), $\etem[0]$, $\etem[1]$; 
 \item Poda baseada na relevância discriminativa, preservando 5 variáveis:
-$\rcore$, $\eratio$, largura do agrupamento, $\etem[1]$, $\ethad$;
+Rcore, $\eratio$, largura do chuveiro (\eng{Width}), $\etem[1]$, $\ethad$;
 \end{itemize}
 
 Por inspeção visual, uma poda de mais de 5 variáveis começaria a cortar
@@ -1525,7 +1530,7 @@ P\text{cov}[Y] = PP^T\text{cov}(X)P = \text{cov}[X]P
 \label{eq:pca-almost}
 \end{equation}
 
-\noindent donde finalmente, por inspeção, nota-se que, se $\text{cov}[Y]$ é
+\noindent de onde finalmente, por inspeção, nota-se que, se $\text{cov}[Y]$ é
 uma matriz diagonal, como se requer, então a Equação~\ref{eq:pca-almost}
 assemelha-se a definição de auto-valores e auto-vetores:
 
@@ -1540,7 +1545,7 @@ então tem-se que a matriz de auto-vetores de $\text{cov}[X]$ seja a procurada
 KLT. 
 
 Para projetar uma observação (linha) do conjunto de dados $Z$, remove-se,
-desta observação, o valor médio de das variáveis de $Z$, em seguida
+desta observação, o valor médio das variáveis de $Z$, em seguida
 multiplicando-se o resultado pelos auto-vetores de $\text{cov}[X]$. Os
 auto-valores de $\text{cov}[Y]$ são utilizados para organizar os auto-vetores
 de $\text{cov}[X]$ do mais (maior auto-valor) para o menos energético,
@@ -1624,11 +1629,11 @@ $12$ & $381\pm102$ & $0,204\pm0,002$ & $0,205\pm0,002$ & $1,641\pm0,013$ & $1,63
 \end{center}
 \end{table}
 
-a partir desta tabela observa-se que o número de neurônios ótimo está entre 10
+A partir desta tabela, observa-se que o número de neurônios ótimo está entre 10
 e 12. Também nota-se que, comparativamente aos resultados da
 Tabela~\ref{tab:t2calo-all-hidden-choice}, as médias de deteção estão
 ligeiramente mais altas, atingindo $1,641$ no máximo, comparado à $1,628$ no
-caso das variáveis originais do T2Calo. Escolhe-se $N=12$ treinando-se 10
+caso das variáveis originais do T2Calo. Escolhe-se $N=12$, treinando-se 10
 redes neurais para testarmos se estas tendências são mantidas. Este exercício
 é realizado com sucesso.
 
@@ -1670,7 +1675,7 @@ este momento e incluindo a deteção baseada em PCA.}
 O ponto onde o produto SP é máximo ($=1,64$), no caso do detetor em estudo,
 apresenta uma eficiência para a deteção de elétrons de $94,75$\% contra
 $7,59$\% de falso-alarme. Este novo sistema de deteção possui uma
-característica de deteção bastante próxima ao sistema baseado diretamente na
+característica de deteção bastante próxima do sistema baseado diretamente na
 saída do T2Calo, usando 14 variáveis. A Figura~\ref{fig:pca-eta-phi} mostra
 uma varredura da eficiência de deteção e do falso-alarme por $\eta$ e
 $\phi$. Neste novo sistema, volta-se a perceber uma ligeira queda de
@@ -1736,12 +1741,12 @@ possíveis ganhos na compactabilidade do espaço das novas 14 variáveis. A
 Figura~\ref{fig:pca-charge}, mostrada anteriormente, contém a curva de carga
 em energia das componentes geradas por PCA. Um fato interessante é que, com o
 aumento do índice da componente, a quantidade de acréscimo em energia decai,
-finalmente chegando a zero, esperançosamente, em algum antes do último
-índice. 
+finalmente chegando a zero, esperançosamente, em algum ponto antes do último
+índice.
 
 A análise de relevância conduzida em seções anteriores também nos oferece um
 método de compactação do espaço de entrada ao sistema de deteção. Se nos
-referirmos a análise de relevância de discriminação deste detetor, na
+referirmos à análise de relevância de discriminação deste detetor, na
 Figura~\ref{fig:pca-relevance-sp}, observaremos que, embora haja uma tendência
 a haver uma diminuição da relevância com o aumento do índice da componente, a
 primeira componente, que é a mais energética, é determinada como sendo uma das
@@ -1764,7 +1769,7 @@ tendências da relevância de discriminação neste caso, inclusive na ordem das
 variáveis.}:
 
 \begin{itemize}
-\item Podar 3 variáveis, resultando em aproximadamente 0\% de perda em energia
+\item Podar 3 variáveis, resultando em praticamente nenhuma perda em energia
 segundo a PCA;
 \item Podar 7 variáveis, resultando em aproximadamente 10\% de perda em energia
 segundo a PCA;
@@ -1789,7 +1794,7 @@ apresentam tendências no que tange a eficiência final de deteção bastante
 próximas, exceto para a última (e mais dura) poda. Neste caso, detetores
 baseados na poda por relevância de discriminação apresentam resultados
 nitidamente melhores. Os detetores baseados na poda por relevância também
-treinam mais rapidamente, num geral. Esta tendência fica evidenciada com o
+treinam mais rapidamente, em geral. Esta tendência fica evidenciada com o
 aumento do número de variáveis podadas. A
 Figura~\ref{fig:roc-pca-compare-cuts} traz um comparativo das diversas ROC's
 dos seis sistemas podados e do sistema de classificação baseado nas 14
@@ -1831,15 +1836,15 @@ da aplicação da KLT nas 14 variáveis disponíveis na saída do T2Calo.}
 
 \section{Mapeamento topológico}
 
-Enquanto que a utilização das 14 variáveis do T2Calo aplicadas a um
-processador neural parece elevar o poder de discriminação do LVL2, indicando
-que existam informações perdidas no processo de deteção T2Calo+EGammaHypo,
-pergunta-se quanta informação é removida durante a compactação promovida pelo
+Enquanto a utilização das 14 variáveis do T2Calo aplicadas a um processador
+neural parece elevar o poder de discriminação do LVL2, indicando que existam
+informações perdidas no processo de deteção T2Calo+EGammaHypo, pergunta-se
+quanta informação é removida durante a compactação promovida pelo
 algoritmo. Por outro lado, tendo-se estabelecido que sistemas de discriminação
 com mais variáveis são melhores classificadores para o problema abordado,
 seria possível explorar o universo de entrada original ao T2Calo, ou seja as
-células que se compõe uma RoI, de forma e se tentar recuperar mais informações
-sobre a natureza da partícula.
+células que se compõe uma RoI, e se tentar recuperar mais informações sobre a
+natureza da partícula.
 
 A idéia desenvolvida nesta seção segue a seguinte linha: expande-se o número
 de componentes na entrada do detetor neural, por um método que será descrito a
@@ -1851,10 +1856,10 @@ deteção, a fim de obter um discriminador estruturalmente menor, ainda
 guardando melhor capacidade discriminatória.
 
 O algoritmo T2Calo, durante a análise conduzida no LVL2, compacta a informação
-da RoI representando um candidato à elétron em quatro quantidades altamente
+da RoI representando um candidato a elétron em quatro quantidades altamente
 discriminantes. Embora as técnicas de deteção linear ou neurais propostas sejam
 mais robustas quanto à operação e manutenção, a qualidade física da separação
-é menos afetada que desejaríamos. Isto se deve, principalmente, à agressiva
+é menos afetada do que desejaríamos. Isto se deve, principalmente, à agressiva
 compressão nos dados proporcionada pelo algoritmo de extração de
 características. Ainda que não seja viável a deteção de objetos usando toda a
 informação da RoI (cerca de 1300 células), é possível encontrar um método que
@@ -1900,7 +1905,7 @@ um elétron simulado na segunda camada e.m. do calorímetro do ATLAS.}
 Como colocado na Seção~\ref{sec:e-detection}, a topologia da interação do
 objeto em análise com os calorímetros define, com boa margem de sucesso o tipo
 do mesmo. Elétrons tendem a um menor espalhamento que jatos, percorrendo
-menores distâncias ao longo do eixo $\eta$. Por outro lado, jatos tendem a
+menores distâncias ao longo de $\eta$. Por outro lado, jatos tendem a
 radializar a deposição energética, formando cones mais largos e possivelmente
 mais profundos. 
 
@@ -1964,15 +1969,15 @@ determinado segmento pertence.
 Um problema recorrente nos algoritmos de filtragem do ATLAS é a região de
 \eng{wrap-around} da variável $\phi$, já que o detetor tem formato
 cilíndrico. Um cuidado especial deve ser tomado na confecção dos anéis,
-levando-se em consideração que, por exemplo, a região com $\phi = 6,18$ está
-bastante próxima a região com $\phi = 0,1$, apesar da diferença
-numérica. Outro problema encontrado é que diferentes partes do sistema de
-localização dos dados dentro do Athena identificam a região do detetor onde
-$\phi > \pi$ de maneiras distintas. Para parte do código (relativa à seção
-e.m.), o detetor se encontra na área entre $[-\pi, \pi]$ enquanto que para
-outra (parte hadrônica), o detetor se encontra na área entre $[0, 2\pi]$. Para
-resolver este problema, implementou-se um algoritmo que normaliza as
-diferenças em ambos os casos.
+levando-se em consideração que, por exemplo, a região com $\phi = 6,18$
+radianos está bastante próxima a região com $\phi = 0,1$ radianos, apesar da
+diferença numérica. Outro problema encontrado é que diferentes partes do
+sistema de localização dos dados dentro do Athena identificam a região do
+detetor onde $\phi > \pi$ de maneiras distintas. Para parte do código
+(relativa à seção e.m.), o detetor se encontra na área entre $[-\pi, \pi]$
+enquanto para a outra (parte hadrônica), o detetor se encontra na área entre
+$[0, 2\pi]$. Para resolver este problema, implementou-se um algoritmo que
+normaliza as diferenças em ambos os casos.
 
 Ademais, por se tratar de elétrons ou jatos na qualidade de falsos-elétrons, é
 bastante provável que a relação sinal-ruído seja pequena nas camadas traseiras
@@ -1992,7 +1997,7 @@ um elétron simulado na primeira camada hadrônica do calorímetro do ATLAS.}
 Para evitar que o ruído inerente à eletrônica do detetor possa interferir com
 a determinação do centro de deposição energética, a procura do pico em uma
 camada está restrita a uma região de $\eta=0,1\times\phi=0,1$ ao redor do pico
-de deposição na segunda camada e.m.. Como já colocado um capítulo anterior
+de deposição na segunda camada e.m.. Como já colocado em um capítulo anterior
 deste trabalho, a segunda camada e.m. é a mais profunda do sistema de
 calorimetria, concentrando a maior parte da energia dos elétrons que interagem
 com este detetor. Desta forma, se há um pico de deposição energética, este é
@@ -2020,7 +2025,8 @@ $\eta = 0,4 \times \phi = 0,4$.}
 \label{tab:ring-config}
 \begin{center}
 \begin{tabular}{>{\bfseries}l r r r}
-Camada & Número de Anéis & Larg. do anel ($\eta$) & Larg. do anel ($\phi$) \\ \hline
+Camada & Número de Anéis & Larg. do anel ($\eta$) & Larg. do anel ($\phi$,
+rad) \\ \hline
 Pré-irradiador & 8 & $0,025$ & $\frac{\pi}{32} \approx 0,098174$ \\ 
 1\eira\ e.m. & 64 & $0,0031245$ & $\frac{\pi}{32} \approx 0,098174$ \\ 
 2\eira\ e.m. & 8 & $0,025$ & $\frac{\pi}{128} \approx 0,024544$ \\ 
@@ -2048,7 +2054,7 @@ diferenças. Ademais, outros estudos \cite{vassali-acat-2001} já demonstraram
 que a informação periférica dentro de cada camada de uma RoI é tão ou mais
 importante à discriminação que a informação de energia no centro da RoI. Por
 estas razões se propõe um sistema de normalização dos dados da RoI baseado em
-um conjunto de razões cujo o denominador diminui, de forma relacionada a
+um conjunto de razões cujo o denominador diminui, de forma relacionada à
 energia na camada, do centro para as bordas da região de interesse. Desta
 forma, o pico de deposição energética na camada (ou ``primeiro anel'') teria
 um fator de normalização maior que o segundo anel, que seria por sua vez maior
@@ -2095,7 +2101,7 @@ bordas influencie o sistema de discriminação de maneira significativa.
 
 O sub-pacote \texttt{rbuild} do \eng{NeuralRinger} contém a implementação de
 referência para este processo de anelamento descrito (ver
-Apêndice~\ref{ap:framework}. Ademais, este pacote pode ser re-configurado de
+Apêndice~\ref{ap:framework}). Ademais, este pacote pode ser re-configurado de
 forma a definir a largura dos anéis de cada camada ou o número máximo de anéis
 por camada. Assim, o sistema de anelamento torna-se independente do tamanho
 real da RoI e, portanto, independente de quão completo são os dados recebidos
@@ -2144,11 +2150,8 @@ de deteção elétron/jato proposto. Neste caso, substitui-se o bloco de extraç
 de características pelo extrator em anéis. O processo de anelamento reduz o
 espaço de dados de entrada em uma RoI (cerca de 1300 células) para 100 valores
 correspondes aos anéis formados com os dados das 7 camadas dos
-calorímetros. Seria difícil conceber um sistema de discriminação simples como
-o proposto pelo EGammaHypo neste caso, uma vez que a possibilidade de
-combinações é muito grande. Neste caso, adota-se um sistema de discriminação
-neural, conectado à saída do sistema de anelamento que executará o processo de
-deteção.
+calorímetros. Adota-se um sistema de discriminação neural, conectado à saída
+do sistema de anelamento, que executará o processo de deteção.
 
 \begin{figure}
 \begin{center}
@@ -2162,11 +2165,11 @@ como extrator de características e um detetor neural.}
 Tal qual nos sistemas anteriores, executou-se uma análise do número de
 neurônios ótimo para a camada escondida. Um cuidado deve ser tomado: com o
 aumento de neurônios no nó de entrada do discriminador neural, o número de
-parâmetros livres que deseja sintonizar aumenta bruscamente. Finalmente, deve
-ser levando em consideração que se possui cerca de 3500 jatos para treinamento
-do sistema. Considerando-se $N$ o número de neurônios na camada escondida do
-discriminador neural o número de parâmetros livres ($K$) a serem treinados
-pode ser computado da seguinte forma:
+parâmetros livres, que se deseja sintonizar, aumenta bruscamente. Finalmente,
+deve ser levando em consideração que cerca de 3500 jatos são usados para
+treinamento do sistema. Considerando-se $N$, o número de neurônios na camada
+escondida do discriminador neural, o número de parâmetros livres ($K$) a serem
+treinados pode ser computado da seguinte forma:
 
 \begin{align}
 K &= (100 \times N) + N \text{(polarização)} + N 
@@ -2229,9 +2232,9 @@ escolhe-se $N=12$.
 
 \subsubsection{Resultados para o \eng{NeuralRinger}}
 
-Baseando-se número de neurônios destacado anteriormente, treinou-se dez redes
-que tiveram seus pesos sinápticos iniciais fixados em valores aleatórios (no
-intervalo $[-1,+1]$) e diferentes para cada uma destas iterações. A
+Baseando-se no número de neurônios destacado anteriormente, treinou-se dez
+redes que tiveram seus pesos sinápticos iniciais fixados em valores aleatórios
+(no intervalo $[-1,+1]$) e diferentes para cada uma destas iterações. A
 Figura~\ref{fig:ringer-mlp-mse} mostra a evolução do EMQ da rede com melhor
 desempenho discriminatório. A Figura~\ref{fig:ringer-mlp-sp} mostra um gráfico
 equivalente para a evolução do produto SP ao longo do treinamento da
@@ -2239,9 +2242,9 @@ rede. Como é possível distinguir, após cerca de 100 passos de treinamento a
 capacidade discriminante da rede para o conjunto de teste estagna. A
 capacidade de mapeamento nos alvos (medido pelo EMQ) da rede, com relação ao
 conjunto de treinamento, apesar da estagnação do conjunto de teste, ainda
-continua a melhorar após os 100 passos, chegando, no momento onde treinamento
+continua a melhorar após os 100 passos, chegando, no momento onde o treinamento
 é automaticamente interrompido, a um valor de pouco menor que $0,05$,
-indicando um produto SP de $1,91$. Ainda sim, não se observa, para o sistema
+indicando um produto SP de $1,91$. Ainda assim, não se observa, para o sistema
 em análise (também levando em consideração os outros 9 testes), o fenômeno
 conhecido como \eng{overtrainning}, onde a capacidade de generalização da rede
 é penalizada por uma excessiva especialização no conjunto de treino,
@@ -2267,7 +2270,7 @@ discriminador elétron/jato neural para as variáveis do anelador.}
 \end{figure}
 
 A Figura~\ref{fig:ringer-mlp-output} contém a saída da rede após o treinamento
-do detetor neural. Diferentemente aos casos anteriores, o sistema parece
+do detetor neural. Diferente dos casos anteriores, o sistema parece
 identificar com bastante precisão elétrons e jatos, mostrando nítidas
 ``torres'' de concentração de eventos nos pólos do gráfico. Um corte em
 $-0,07$ estabelece o máximo do produto SP (conjunto de teste) para esta rede,
@@ -2304,7 +2307,7 @@ terceiro nível de filtragem do experimento ATLAS. Se, por outro lado, deseja-se
 aumentar a eficiência na deteção de elétrons, o anelador consegue, até cerca
 de $96$\% de eficiência, manter uma taxa de falso-alarme igual ou inferior a
 1~kHz. Para o sistema atual baseado no EGammaHypo, para uma eficiência na
-deteção de elétrons de $97$\%, $100$\% dos jatos deveria ser aprovados, o que
+deteção de elétrons de $97$\%, $100$\% dos jatos deveriam ser aprovados, o que
 seria inviável.
 
 \begin{figure}
@@ -2320,7 +2323,7 @@ A Figura~\ref{fig:ringer-eta-phi} mostra os valores do produto SP por
 intervalo em $\eta$ e em $\phi$. Observa-se neste caso que a recuperação do
 sinal perdido na região do \eng{crack} é excelente, sendo difícil notar onde
 realmente ocorre, o que pode ser facilmente percebido nos outros métodos. Na
-parte central do detetor, onde maior parte dos eventos de interesse se
+parte central do detetor, onde a maior parte dos eventos de interesse se
 concentrarão, o valor do produto SP é bastante alto, chegando, em alguns
 pontos, a aproximar-se de $2,0$. A eficiência de deteção para elétrons é de
 praticamente 100\% nesta região. O gráfico equivalente em $\phi$ mostra a
@@ -2406,7 +2409,7 @@ importância nos primeiros anéis de cada camada (veja
 Tabela~\ref{tab:ringer-position}). A importância de cada anel diminui, num
 geral, com o afastamento do centro, onde pressupõe-se que a relação sinal
 ruído seja inferior. A importância relativa entre os anéis mais importantes e
-aqueles de menor importância parece ser menor da perspectiva da relevância de
+aqueles de menor importância parece ser menor da perspectiva da relevância
 baseada no produto SP que da relevância clássica, como também observado na
 análise das 14 variáveis produzidas pelo T2Calo. Outra informação que pode ser
 aferida é sobre a importância da informação na primeira camada e.m.. Para a
@@ -2429,7 +2432,8 @@ sem a necessidade da intervenção de um especialista.
 \includegraphics[scale=0.98]{ringer-mlp/relevance-mse}
 \end{center}
 \caption{Os valores de relevância para os conjunto de teste, para as 100
-variáveis do anelador e considerando-se o classificador neural em estudo.}
+variáveis do anelador e considerando-se o classificador neural em estudo, como
+indica a Tabela~\ref{tab:ringer-position}.} 
 \label{fig:ringer-mse-relevance}
 \end{figure}
 
@@ -2439,7 +2443,7 @@ variáveis do anelador e considerando-se o classificador neural em estudo.}
 \end{center}
 \caption{Os valores de relevância de discriminação para os conjunto de teste,
 para as 100 variáveis do anelador e considerando-se o classificador neural em
-estudo.}
+estudo, como indica a Tabela~\ref{tab:ringer-position}.}
 \label{fig:ringer-sp-relevance}
 \end{figure}
 
@@ -2471,7 +2475,7 @@ automaticamente \cite{aa:enfpc-00} em muitos casos, ou manualmente se forem
 necessárias otimizações no processo de poda.
 
 Um fator interessante e novo até o momento é o aparecimento de valores
-negativos de relevância, como havia sido prevista possibilidade
+negativos de relevância, cuja possibilidade havia sido prevista
 anteriormente. Esta informação indica que existam variáveis que dificultem o
 treinamento da rede e, por conseqüência, o processo de discriminação
 proporcionado pela combinação anelador $+$ redes neurais. Para validarmos esta
@@ -2532,7 +2536,7 @@ No caso das outras camadas, as informações da periferia mais distante são
 consideradas menos relevantes, como é de se esperar. Isto não quer dizer, em
 absoluto, que a informação periférica não seja importante. Quer dizer,
 simplesmente que, quando se afasta muito do centro, chega-se a um ponto onde
-não exista mais interação da partícula com o detetor, e portanto a informação
+não existe mais interação da partícula com o detetor, e portanto a informação
 contida nesta região não ajuda a discrimina\c{c}ão.
 
 De posse dos 62 anéis que sobreviveram ao corte de discriminação treina-se 10
@@ -2617,7 +2621,7 @@ Um novo conjunto de 10 testes é executado para se determinar se a poda é
 revertida em benefício ao processo de treinamento. Para estes novos testes, o
 número médio de passos de treinamento para a rede neural cai, de 552 passos
 para 426, com desvio padrão aproximadamente igual ($127$ para estes 10
-testes). A capacidade discriminante da rede para o conjunto de testes sob,
+testes). A capacidade discriminante da rede para o conjunto de testes sobe,
 marginalmente, de $1,807\pm0,004$ para $1,817\pm0,003$, indicando, mais uma
 vez que a poda tenha sido benéfica ao processo de discriminação a que se
 destina o classificador neural. O melhor dos detetores consegue identificar
@@ -2657,17 +2661,17 @@ técnica de normalização seqüêncial dos anéis que é proposta neste trabalh
 assume a disponibilidade de um valor de energia total associado a cada camada
 para o cálculo do fator de normalização de cada anel. Ademais, para calcular o
 fator de normalização para o anel $N+1$ em uma mesma camada, necessita-se do
-valor de energia do anel $N$. Portanto, se deseja-se manter o anel $N+1$ de
-uma camada, é necessário que se mantenha o anel $N$, ao menos para o cálculo
-do fator de normalização. De fato, como veremos mais a frente, esta última
+valor de energia do anel $N$. Portanto, para manter o anel $N+1$ de uma
+camada, é necessário que se mantenha o anel $N$, ao menos para o cálculo do
+fator de normalização. De fato, como veremos mais a frente, esta última
 sugestão seria uma prática que recompensaria em pouco, visto que a maior parte
 do tempo de processamento não está na discriminação neural e sim na aquisição
 e preparação dos dados (calibração). Por outro lado, seria possível considerar
-que uma poda sempre seria positiva no que tange a complexidade do
+que uma poda sempre seria positiva no que tange à complexidade do
 discriminador neural que segue o sistema de anelamento. Ao retirar uma
 variável da entrada, ao menos 12 conexões sinápticas do detetor final seriam
 removidas simultaneamente, levando-se em consideração a configuração
-exemplificada anteriormente. 
+exemplificada anteriormente.
 
 Nesta seção proporemos uma técnica híbrida de compactação do anelador, que
 observa as informações de relevância levando em conta a continuidade dos anéis
@@ -2786,7 +2790,7 @@ com a mesma granularidade anterior;
 \end{enumerate} 
 
 Um total de 14 anéis restam nesta nova configuração. Este número de variáveis
-é idêntica à situação de melhores resultados com as características extraídas
+é idêntico à situação de melhores resultados com as características extraídas
 pelo T2Calo. Mantém-se os parâmetros de treinamento e o número de neurônios na
 camada escondida do detetor neural inicial. A Figura~\ref{fig:relev-cut-3-roc}
 mostra a curva R.O.C. de um dos 10 testes realizados, junto à curva R.O.C. de
@@ -2814,8 +2818,8 @@ periférica na segunda camada e.m. parecer ser a mais relevante para este
 último classificador, que também teve o melhor desempenho até o momento. Como
 colocado em várias partes do texto, espera-se que a informação de deteção
 esteja realmente na periferia da RoI e, neste exemplo, é possível distinguir
-este efeito de forma bastante evidente. Não mais se vê um níveis de relevância
-de discriminação negativos, o que indica que estejamos no limite do que se é
+este efeito de forma bastante evidente. Não mais se vê níveis de relevância de
+discriminação negativos, o que indica que estejamos no limite do que é
 possível com esta configuração de anéis. Ademais nota-se que a maior parte da
 informação de interesse está na periferia do objeto considerado. Por exemplo,
 o anel 5 é o mais relevante na 1\eira camada e.m., o anel 10, o mais relevante
@@ -2856,10 +2860,10 @@ poucas conexões sinápticas que, finalmente, como iremos ver no
 Capítulo~\ref{chap:implement}, não impactará fundamentalmente no tempo de
 execução do algoritmo. Por outro lado espera-se que, preservando anéis menos
 relevantes, construiremos um detetor fundamentalmente mais robusto. Para
-averiguarmos se a informação de anéis relevantes pode extraída de outros anéis
-menos relevantes, artificialmente podamos a variável mais importante (de
+averiguarmos se a informação de anéis relevantes pode ser extraída de outros
+anéis menos relevantes, artificialmente podamos a variável mais importante (de
 número 10 na Figura~\ref{fig:relevance-cut3-sp-relevance}), representando o
-anel mais periférico na segunda camada e.m.. 
+anel mais periférico na segunda camada e.m..
 
 Treina-se novamente um conjunto de 10 redes neurais com base nas 13 entrada
 menos relevantes. O resultado é como esperado: este novo sistema consegue
@@ -2885,13 +2889,13 @@ o necessário para implementar um discriminador elétron/jato mais eficiente que
 a técnica atualmente proposta no CERN (T2Calo+EGammaHypo). Este sistema possui
 uma capacidade de discriminação com quase 98\% de acerto em elétrons para uma
 taxa de falso-alarme de pouco mais que 3\%. Estes valores representam uma
-redução na taxa de ruído de fundo melhor que 3 vezes e, desta forma,
-economizando tempo de processamento para atividades inexoravelmente mais
-complexas, como a deteção de traços ou a \eng{quasi}-reconstrução executada no
-Filtro de Eventos do experimento ATLAS.
+redução na taxa de ruído de fundo 3 vezes maior e, desta forma, economizando
+tempo de processamento para atividades inexoravelmente mais complexas, como a
+deteção de traços ou a \eng{quasi}-reconstrução executada no Filtro de Eventos
+do experimento ATLAS.
 
-Este sistema contém elementos de que garantam sua robustez à falhas de leitura
-e processamento dos dados do detetor e, como veremos mais à diante, pode ser
+Este sistema contém elementos que garantem sua robustez à falhas de leitura e
+processamento dos dados do detetor e, como veremos mais adiante, pode ser
 implementado de forma extremamente veloz. A técnica de análise por relevância
 de discriminação permitiu a busca de tal sistema de deteção, fornecendo um
 conjunto de medidas que otimizam a poda de variáveis pouco interessantes ou

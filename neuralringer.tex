@@ -27,10 +27,10 @@ dependências e não depende de nenhum outro. Este pacote inclui ferramentas
 para a manipulação de arquivos no formato XML (do inglês
 \eng{eXtensible Markup Language}, \cite{xml}) e um sistema básico para
 o relatório de erros. A escolha da linguagem XML, como formato de troca de
-dados e valores de configuração, sucede-se da grande quantidade de
-interpretadores (\eng{parsers}) disponíveis livremente na \eng{Internet}, já
-que é um padrão bastante difundido. O suporte a XML disponível atualmente
-inclui, mas não se limita a verificações de sintaxe automatizadas (via
+dados e valores de configuração, vem da grande quantidade de interpretadores
+(\eng{parsers}) disponíveis livremente na \eng{Internet}, já que é um padrão
+bastante difundido. O suporte a XML disponível atualmente inclui, mas não se
+limita a verificações de sintaxe automatizadas (via
 \eng{XML schemas}) e transformações para que se adicione informação ou seja
 possível a visualização, de forma adequada, do conteúdo de uma base de dados
 XML.
@@ -51,10 +51,10 @@ C++ \cite{xerces-c}, do grupo Apache e libxml2 \cite{libxml2}, do grupo Gnome
 estão presentes na implementação atual. O interpretador XML utiliza-se do
 sistema de relatório de erros para relatar problemas na leitura ou escrita de
 arquivos de forma unificada. Uma caixa de ferramentas, baseada no tipo
-abstrato \texttt{XMLProcessor} provê um conjunto primitivas para facilitar a
-escrita e leitura de parâmetros e trechos de texto. No evento de erros fatais,
-uma exceção baseada no tipo \texttt{Exception} será lançada pela parte afetada
-do código.
+abstrato \texttt{XMLProcessor} provê um conjunto de primitivas para facilitar
+a escrita e a leitura de parâmetros e trechos de texto. No evento de erros
+fatais, uma exceção baseada no tipo \texttt{Exception} será lançada pela parte
+afetada do código.
 
 \begin{figure}
 \begin{center}
@@ -67,7 +67,7 @@ do código.
 
 O pacote \texttt{sys} também fornece um sistema para a interpretação de opções
 de linha de comando, baseado no interpretador \texttt{popt}. Este tipo imbute
-um sistema de atribuição automática e checagem de valores, conectando as
+um sistema de atribuição automática e verificação de valores, conectando as
 opções na linha de comando diretamente com o contexto onde as opções serão
 utilizadas dentro do programa. Seguindo a filosofia dos interpretadores XML,
 este tipo também faz uso do sistema central de relatório de erros para
@@ -108,9 +108,9 @@ manipulação dos dados, tais como acesso simplificado, leitura e escrita em
 disco, mistura dos padrões, manipulação de campos específicos e cópia. O
 formato de escrita em disco escolhido utiliza o padrão XML. O banco de dados
 básico contém um cabeçalho com as informações do autor e dos dados, indicando
-a data de criação e última atualização. Dentro do arquivo, os dados podem ser
-dividos em classes. Cada classe é dividida por sua vez em padrões, que contêm
-um número opcional de atributos.
+a data de criação e a última atualização. Dentro do arquivo, os dados podem
+ser dividos em classes. Cada classe é dividida por sua vez em padrões, que
+contêm um número opcional de atributos.
 
 Para o caso específico do processamento de dados de RoIs, uma classe é
 derivada da implementação de base de um \texttt{PatternSet}, chamada
@@ -142,7 +142,7 @@ forma de normalização dos dados de entrada de classificadores LMS ou Redes
 Neurais. Quando um operator é aplicado a um padrão, primitivas da biblioteca
 GSL são utilizadas para que a eficiência do processo seja maximizada.
 
-\paragraph{\texttt{NETWORK}:} Neste pacote contém a definição de
+\paragraph{\texttt{NETWORK}:} Este pacote contém a definição de
 neurônios, sinapses e redes formadas a partir destes elementos. A
 Figura~\ref{fig:network-uml} apresenta um diagrama UML dos tipos neste
 sub-sistema. No topo deste diagrama está o tipo \texttt{Network} (Rede), que
@@ -172,15 +172,15 @@ correlacionando os dados do usuário com as posições relativas do neurônio da
 camada de entrada. Opcionalmente, se existirem neurônios de polarização
 (\texttt{BiasNeuron}s), o mesmo será feito para cada um destes neurônios. Cada
 neurônio de entrada e polarização é responsável por propagar seu sinal aos
-neurônios a que está conectado, através das sinapses (objetos do tipo
+neurônios ao qual está conectado, através das sinapses (objetos do tipo
 \texttt{Synapse}). As sinapses irão multiplicar o valor de suas entradas pelo
 seu próprio peso e propagar o sinal ao neurônio destino. Este último, após
-receber todas as entradas relativas as sinapses que estão conectadas a si,
+receber todas as entradas relativas às sinapses que estão conectadas a si,
 executará o mesmo procedimento até que o sinal chegue ao neurônio de saída da
 rede.
 
 \item \textbf{Para treinar a rede}: O sistema de treinamento funciona de 
-modo equivalente. Uma vez calculado o sinal de erro, ou a \textit{lição} à
+modo equivalente. Uma vez calculado o sinal de erro, ou a \textit{lição} a
 partir da técnica que convier, este sinal é injetado ao neurônio de saída, que
 retropropagará o sinal até o neurônio de entrada.
 \end{itemize}
@@ -189,8 +189,8 @@ Os tipos de neurônio são divididos nas seguintes classes:
 
 \begin{itemize}
 \item Entrada (\texttt{InputNeuron}): são neurônios que recebem a entrada
-rede, opcionalmente aplicando um fator de normalização aos dados e propagará o
-sinal para neurônios escondidos ou de saída. Como estão no início da rede,
+rede, opcionalmente aplicando um fator de normalização aos dados e propagando
+o sinal para neurônios escondidos ou de saída. Como estão no início da rede,
 estes neurônios não podem retropropagar sinais recebidos em suas saídas para
 fins de treinamento. Uma vez que atingem estes neurônios, os sinais de erro
 retropropagados são apagados da memória e o passo de treinamento é considerado
@@ -205,7 +205,7 @@ sinapses de conexão, aos neurônios de saída ou escondidos;
 \item Escondido (\texttt{HiddenNeuron}): são neurônios que estão entre os
 neurônios de entrada e/ou polarização, conectando a entrada à saída. São
 opcionais, já que é possível desenvolver redes sem neurônios desta
-classe. Neurônios escondidos transmitem os dados recebidos em suas entradas à
+classe. Neurônios escondidos transmitem os dados recebidos em suas entradas a
 seus neurônios de saída, aplicando uma operação de soma dos valores de
 entrada, seguida, opcionalmente de uma função de ativação configurável;
 
@@ -219,7 +219,7 @@ A execução da rede e treinamento das sinapses é regido por dois parâmetros q
 estão atrelados a estes elementos: as estratégias. Estratégias para neurônios
 (objetos da classe \texttt{NeuronStrategy}) definem de que forma os neurônios
 propagaram os sinais de erro quando são injetados na saída rede, para correção
-dos valores sinápticos. No momento, somente há um tipo de stratégia possível:
+dos valores sinápticos. No momento, somente há um tipo de estratégia possível:
 a retropropagação de erros. Três funções de ativação estão implementadas: a
 função linear (utilizada para redes tipo LMS), a função logística
 simplificada, definida na Equação~(\ref{eq:logf}) e a função tangente
@@ -227,7 +227,7 @@ hiperbólica, definida na Equação~(\ref{eq:tanh}).
 
 Métodos para salva-guardar e restaurar uma rede a partir de um arquivo es\-tão
 implementados. A salva-guarda é implementada através de um processo iterativo
-de delegação de responsabilidades onde cada neurônio e sinapse involvido na
+de delegação de responsabilidades onde cada neurônio e sinapse envolvido na
 rede se auto-descreve no arquivo de saída. O formato escolhido é XML, uma vez
 que as bibliotecas de base do pacote \texttt{sys} já implementam as primitivas
 de leitura e escrita neste formato. Um segundo método (chamado \texttt{dot()})
@@ -236,10 +236,10 @@ escrita em disco de uma descrição da rede no formato \texttt{dot}
 \cite{graphviz}, que permite a visualização dos pesos e interconexões da rede
 de forma gráfica. Exemplos de uma rede LMS e uma rede MLP encontram-se nas
 Figuras~\ref{fig:lms-dot-example} e ~\ref{fig:mlp-dot-example}
-respectivamente. As caixas em verde na parte esquerda da figura representam o
-fator de normalização aplicado às entradas. Os círculos azuis, seguindo o
-caminho de propagação do sinal representam os neurônios de entrada. Cada
-neurônio possui uma numeração única, que o distingue dos outros. Este número
+respectivamente. As caixas na parte esquerda da figura representam o fator de
+normalização aplicado às entradas. Os círculos à esquerda, seguindo o caminho
+de propagação do sinal representam os neurônios de entrada. Cada neurônio
+possui uma numeração única, que o distingue dos outros. Este número
 corresponde ao identificador usado dentro das aplicações do
 \eng{NeuralRinger}. 
 
@@ -251,9 +251,9 @@ indica que as entradas deste neurônio serão somadas antes da aplicação da
 função de ativação, definida na parte esquerda. Nós de polarização são
 mostrados junto ao neurônio a que estão conectados. Os diversos neurônios são
 conectados por retas que apontam na direção da propagação do sinal de entrada
-da rede. A saída da rede é mostrada usando-se um círculo vermelho e localizada
-na extrema direita da figura. O número dentro deste círculo corresponde ao
-identificar do neurônio de saída e casa com o número indicado no retângulo que
+da rede. A saída da rede é mostrada usando-se um círculo e localizada na
+extrema direita da figura. O número dentro deste círculo corresponde ao
+identificador do neurônio de saída e casa com o número indicado no retângulo que
 precede o círculo.
 
 \begin{figure}
@@ -274,9 +274,9 @@ para uma rede MLP.}
 \label{fig:mlp-dot-example}
 \end{figure}
 
-\paragraph{\texttt{CONFIG}:} Este pacote implementa a leitura e escrita de
+\paragraph{\texttt{CONFIG}:} Este pacote implementa a leitura e a escrita de
 parâmetros de redes a um arquivo XML. É um pacote que depende da
-infrasestrutura provida pelo pacote \texttt{sys} e provê suporte a
+infraestrutura provida pelo pacote \texttt{sys} e provê suporte à
 configuração das redes definidas no pacote \texttt{network}.
 
 \paragraph{Outros pacotes:} O \eng{NeuralRinger} contém, ainda, 3 outros
@@ -371,7 +371,7 @@ um padrão de normalização, os anéis de energia que serão utilizados mais a
 frente no trabalho. A saída deste programa é uma base de dados no formato XML
 padrão do \eng{NeuralRinger};
 
-\item \textbf{ringer-run}: Este programa executa extração e discriminação de
+\item \textbf{ringer-run}: Este programa executa a extração e a discriminação de
 elétrons e jatos baseado na técnica do anelamento a ser descrita nas próximas
 seções. Ele pode ser utilizado para o cálculo do desempenho do algoritmo de
 filtragem \eng{offline} e permite uma otimização da execução antes da
@@ -386,10 +386,10 @@ XML padrão do \eng{NeuralRinger} em uma representação no formato texto, que
 pode ser lido por programas que não suportem XML.
 \end{itemize}
 
-Cada um dos programas responde ao command \texttt{--help} que imprime na tela
+Cada um dos programas responde ao comando \texttt{--help} que imprime na tela
 o conjunto de opções e valores padrões disponíveis. Um conjunto de scripts de
-análise é embarcado junto com o pacote permitindo ao usuário a automação do
-treinamento e análise dos resultados considerando-se figuras de mérito padrão
-para a análise baseada em calorimetria no ATLAS.
+análise é embarcado junto com o pacote, permitindo ao usuário a automação do
+treinamento e a análise dos resultados considerando-se figuras de mérito
+padrão para a análise baseada em calorimetria no ATLAS.
 
 \typeout{ *************** End of file neuralringer.tex *************** }

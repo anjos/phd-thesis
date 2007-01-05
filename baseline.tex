@@ -15,20 +15,20 @@ estes detetores, tanto de forma radial quanto longitudinal
 \cite{wigmans-book}. Cada segmento ou célula de um calorímetro contém a
 informação de energia depositada por uma par\-tí\-cula ou conjunto de
 par\-tí\-culas que interagiu com o detetor naquela área espe\-cí\-fica. A
-seg\-men\-ta\-ção destes instrumentos dependerá da física do experimento e
+seg\-men\-ta\-ção destes instrumentos dependerá da Física do experimento e
 também, normalmente, do eixo de dispersão das partículas de interesse.
 
 Algoritmos de dete\-ção são normalmente concebidos por especialistas em
 Calorimetria que compreendam os diferentes perfis de intera\-ção para a
 Fí\-sica de interesse. O primeiro passo é definir um processo de redu\-ção de
 dimensionalidade, de acordo com os processos que se deseja detetar, ainda que
-levando-se em consideração velocidade requerida na deteção. Quanto menor o
+levando-se em consideração à velocidade requerida na deteção. Quanto menor o
 tempo disponível à deteção, maior a compressão a ser realizada de forma a
 simplificar este processo. Este pré-processamento para a compressão dos dados
 ou Extração de Características (do inglês, \eng{Feature Extraction} ou FEx) é,
 em geral, feito com perda de informação do perfil de deposição, mas de forma a
 manter as principais características do objeto que se deseja detetar. Em
-seguida, tendo por base simulações ou dados reais da física de interesse,
+seguida, tendo por base simulações ou dados reais da Física de interesse,
 define-se um conjunto de cortes por métodos com conhecimento da informação
 \eng{a priori} que maximizem a probabilidade de deteção das partículas
 interessantes.
@@ -37,23 +37,23 @@ O Sistema de Filtragem \eng{online} do experimento ATLAS deverá prover uma
 seleção de eventos muito eficiente e desprovida de tendências, mantendo o
 potencial de descoberta do detetor. Deve ser extremamente flexível, de forma a
 operar no ambiente desafiador do LHC, com até 23 colisões inelásticas por
-interação, 14~TeV no centro de impacto e apenas 25~ns (40~MHz) entre colisões
-sucessivas. Além disso, deve prover critérios de seleção robustos e, onde
-possível, redundantes. É altamente desejável a rejeição de canais ruidosos,
-não interessantes ou falsos o mais rápido possível, de forma a otimizar o uso
-dos recursos computacionais disponíveis.
+interação, 14~TeV de energia no centro de massa e apenas 25~ns (40~MHz) entre
+colisões sucessivas. Além disso, deve prover critérios de seleção robustos e,
+onde possível, redundantes. É altamente desejável a rejeição de canais
+ruidosos, não interessantes ou falsos o mais rápido possível, de forma a
+otimizar o uso dos recursos computacionais disponíveis.
 
 Para trazer uma eficiência compatível com este árduo ambiente, o Sistema de
 Filtragem fará uso de um enfoque baseado na \textbf{inclusão} para a seleção
 \eng{online}, garantindo assim um conjunto de \eng{triggers} ótimo para a nova
 Física. O critério da inclusão tem por objetivo selecionar um conjunto de
-fenômenos físicos baseados no ``mínimo denominador comum'' entre eles, que
-ainda seja claramente distinguível dentro do ruidoso ambiente produzido pelo
+fenômenos físicos baseados em características comuns entre eles, que ainda
+sejam claramente distinguíveis dentro do ruidoso ambiente produzido pelo
 acelerador. Com este objetivo, o Sistema de Filtragem estará sendo disparado
 para eventos que contenham assinaturas baseadas em objetos simples ou duplos
-com alto valor de momento transverso. Neste contexto, ``objetos com alto valor
-de momento transverso'' são, entre outros, \eng{léptons} com carga e com
-momento transverso acima de $\sim$10 GeV \cite{hlt-tdr}.
+com alto valor de momento transverso. Neste contexto, objetos com alto valor
+de momento transverso são, entre outros, \eng{léptons} com carga e com momento
+transverso acima de $\sim$10 GeV \cite{hlt-tdr}.
 
 Neste capítulo, fazemos uma análise do processo de filtragem de elétrons a ser
 conduzido no Sistema de Filtragem do experimento ATLAS. Como em muitos outros
@@ -64,7 +64,7 @@ crescentes. O primeiro dos níveis é normalmente implementado em
 \eng{hardware}, para atender as demandas de tempo do feixe, enquanto que os
 demais em \eng{software}, maximizando a flexibilidade. Em particular, atenção
 será dada à definição do funcionamento do Primeiro e Nível de Filtragem (LVL1)
-com relação a deteção de elétrons e, por seguinte, o sistema desenvolvido
+com relação a deteção de elétrons e, em seguida, o sistema desenvolvido
 atualmente para o LVL2. Finalmente, uma caracterização dos dados disponíveis
 segundo as premiças desenvolvidas neste capítulo é estabelecida como base de
 comparação ao restando do trabalho.
@@ -77,9 +77,8 @@ de Múons, regiões de interesse onde objetos relevantes tenham sido
 observados. Para cada objeto interessante, a região aproximada de interação do
 objeto com o detetor é anotada e repassada aos demais níveis de filtragem, no
 caso da aprovação do evento pelo LVL1. Este processo define as Regiões de
-Interesse ou RoI's (do inglês \eng{Regions of Interest}), que guiarão o
-processo de seleção nos Altos Níveis de Filtragem (do inglês, \eng{High-Level
-Triggers} ou HLT).
+Interesse ou RoI's, que guiarão o processo de seleção nos Altos Níveis de
+Filtragem (do inglês, \eng{High-Level Triggers} ou HLT).
 
 De fato, dadas as condições do feixe provido pelo LHC, múltiplos objetos
 poderão ser detetados a cada evento. Porém, quando um ou mais objetos
@@ -136,7 +135,7 @@ Total & -- & $\sim$25 \\ \hline
 \end{center}
 \end{table}
 
-Nota-se que, aproximadamente 16 dos 25 kHz (i.e. $\sim$65\% das assinaturas)
+Nota-se que, aproximadamente, 16 dos 25 kHz (i.e. $\sim$65\% das assinaturas)
 entregues pelo LVL1 conterão objetos tipo e.m.. Estes objetos são assim
 classificados por representarem elétrons \textbf{ou} fótons, que interagem com
 os detetores a partir de interações eletromagnéticas ao invés das componentes
@@ -184,9 +183,9 @@ de tratar de um evento interessante, uma mensagem contendo a localização dos
 objetos encontrados por este nível de filtragem e variáveis indicando as
 assinaturas pelo qual o evento foi aprovado, é repassada ao LVL2
 (mensagem \ding{185}). Esta mensagem é chamada de Resultado do LVL1 (do inglês
-\eng{LVL1 Result}) ou L1R, como visto na Seção~\ref{sec:lvl2arch}. Cabe-se
-notar que o L1R pode conter múltiplas assinaturas em um único evento, no caso
-deste conter elementos que confirmem mais de uma das linhas da
+\eng{LVL1 Result}) ou L1R, como visto na Seção~\ref{sec:lvl2arch}. Nota-se que
+o L1R pode conter múltiplas assinaturas em um único evento, no caso deste
+conter elementos que confirmem mais de uma das linhas da
 Tabela~\ref{tab:l1-rates}. Ademais, múltiplas RoI's secundárias podem estar
 presentes na lista de objetos na mensagem. Em paralelo ao envio da mensagem em
 direção ao LVL2, o LVL1 indica ao sistema de aquisição de dados (marcado na
@@ -220,8 +219,8 @@ evento. De fato, espera-se que eventos de interesse utilizem mais tempo de
 processamento, enquanto que eventos pouco ou nada interessantes sejam
 rapidamente descartados. Neste contexto, entende-se que, quanto menor o tempo
 necessário e maior a qualidade da deteção dos diversos componentes do sistema
-de filtragem, mais tempo computacional será despendido com a física de
-interesse e menos recursos com eventos que representem física ordinária.
+de filtragem, mais tempo computacional será despendido com a Física de
+interesse e menos recursos com eventos que representem Física ordinária.
 
 Diferentemente do LVL2, a análise no EF começa com 100\% dos dados do evento e
 os resultados dos nível precedentes (L1R e L2R) já disponíveis na
@@ -230,21 +229,20 @@ entre as diferentes RoI's, e uma análise mais depurada do evento poderá ser
 conduzida. Por exemplo, é possível fazer uso das RoI's secundárias para
 atingir maior redução da taxa de eventos a ser registrada em mídia
 permanente. Se aprovado, o evento é guardado, devidamente ``etiquetado'' e
-repassado às fazendas de processamento \eng{offline} para posterior
-reconstrução.
+repassado às fazendas (\eng{farms}) de processamento \eng{offline} para
+posterior reconstrução.
 
 \section{Deteção de elétrons baseada em calorimetria}
 \label{sec:e-detection}
 
 O \eng{trigger} de elétrons ou fótons para o ATLAS conterá forte contaminação
-de jatos com componentes hadrônicas (tipo descrito na Física Quântica
-Cromo-dinâmica, do inglês Quantum Chromodynamics ou QCD), que formam o ruído
-de fundo na deteção de elétrons \cite{nevski-calor-1992}. Estima-se que o
-ruído de contaminação original esteja na ordem de $10^6$. O LVL1 do ATLAS poderá
-excluir grande parte dos jatos QCD, se as conversões hadrônicas forem
-importantes neste objeto, e apenas observando a quantidade de energia
-hadrônica depositada na seção de mesmo nome dos calorímetros, mas terá pouca
-eficiência em conversões com menos componentes hadrônicas. Estima-se em
+de jatos com componentes hadrônicas, que formam o ruído de fundo na deteção de
+elétrons \cite{nevski-calor-1992}. Estima-se que o ruído de contaminação
+original esteja na ordem de $10^6$. O LVL1 do ATLAS poderá excluir grande
+parte dos jatos QCD, se as conversões hadrônicas forem importantes neste
+objeto, e apenas observando a quantidade de energia hadrônica depositada na
+seção de mesmo nome dos calorímetros, mas terá pouca eficiência em conversões
+com menos componentes hadrônicas. Estima-se em
 \cite{daqnote00-02}, que a cada 25.000 objetos do tipo e.m., aprovados pelo
 LVL1, apenas 1 será um elétron ou fóton verdadeiro. Somente no LVL2, o Sistema
 de Filtragem, disporá do tempo e da completa granularidade do detetor para
@@ -344,7 +342,7 @@ energia total para elétrons (topo) e jatos (baixo).}
 \label{fig:e-jet-deposit}
 \end{figure}
 
-Em seguida, aplica-se a discriminação da física de interesse. Tipicamente
+Em seguida, aplica-se a discriminação da Física de interesse. Tipicamente
 \cite{nevski-calor-1992, guida-calor-1992, palutan-calor-2000}, a deteção é
 realizada por meio da definição de patamares de separação (também ditos
 \emph{cortes}) com informação \emph{a priori}. Este trabalho é normalmente
@@ -428,11 +426,11 @@ priori}. As RoI's que são utilizadas para a decisão de aprovação são rotula
 e secundárias) é repassado, através do \eng{RoI Builder} ao LVL2.
 \end{enumerate}
 
-O Segundo Nível de Filtragem do experimento ATLAS é a primeira vez onde o
-evento será analisado tendo por base a granularidade máxima do detetor. O
+A primeira vez onde o evento será analisado tendo por base a granularidade
+máxima do detetor é no Segundo Nível de Filtragem do experimento ATLAS. O
 objetivo deste nível de filtragem, de uma forma geral, é a confirmação das
-informações do LVL1 e eventual depuração e extensão. Aproveitando-se de toda
-a granularidade disponibilizada pelo sistema de leitura do detetor, o LVL2
+informações do LVL1 e eventual depuração e extensão. Aproveitando-se de toda a
+granularidade disponibilizada pelo sistema de leitura do detetor, o LVL2
 começa analisando o evento através das RoI's classificadas como primárias pelo
 LVL1.
 
@@ -450,12 +448,12 @@ deteção veloz baseado em calorimetria pode ser sub-dividido nas seguintes part
 
 \begin{enumerate}
 \item Compactação do sinal de entrada;
-\item Deteção da física de interesse baseada no espaço comprimido.
+\item Deteção da Física de interesse baseada no espaço comprimido.
 \end{enumerate}
 
 Para o ATLAS, a fase de compactação irá mapear o espaço de entrada definido
 pelas células da RoI sendo tratada em 4 variáveis com alto poder
-discriminatório, baseado na percepção da física de interesse e da contaminação
+discriminatório, baseado na percepção da Física de interesse e da contaminação
 esperada. No caso de elétrons, espera-se que haja forte contaminação de jatos
 com muitas componentes e.m.. Desta forma, a compactação da informação de entrada
 tentará realçar informações como a dispersão do objeto na RoI ou a
@@ -481,7 +479,7 @@ seguintes.
 Em seguida, ainda utilizando-se dos dados da segunda camada e.m., calcula-se a
 soma dos valores de deposição energética numa região de tamanho
 $\Delta_\eta=0,075\times\Delta_\phi=0,175$ e numa região de tamanho
-$\Delta_\eta=0,075\times\Delta_\phi=0,175$, ao redor do centro de impacto
+$\Delta_\eta=0,175\times\Delta_\phi=0,175$, ao redor do centro de impacto
 encontrado anteriormente. De posse destes valores, a primeira característica
 será extraída:
 
@@ -622,7 +620,7 @@ seguindo-se da análise de dados na seção hadrônica.
 \subsection{Ajuste fino para cada canal}
 
 Para cada uma das assinaturas de interesse aprovadas pelo LVL1, o segundo
-nível contará com algoritmos e sistemas de hipótese adequados àquela física. É
+nível contará com algoritmos e sistemas de hipótese adequados àquela Física. É
 interessante notar que, mesmo para os canais similares, e.g. (veja a
 Tabela~\ref{tab:l1-rates}) \texttt{EM25i} e \texttt{EM15i}, os cortes impostos
 pelo algoritmo de hipótese serão otimizados para estas categorias de energia.
@@ -640,12 +638,15 @@ associado, o EGammaHypo, os seguintes grupamentos de dados foram
 considerados:
 
 \begin{itemize}
-\item Cerca de 23.000 elétrons simulados via Monte Carlo, proveniente de
-interações tipo $H (130 \text{GeV})\rightarrow ZZ \rightarrow 4e^-$ e 
-$H (130 \text{GeV})\rightarrow ZZ \rightarrow 2e^- + 2\mu$. Os elétrons de
-cada evento simulado interagem com diferentes regiões do detetor;
-\item Cerca de 250.000 jatos-duplos, simulados via Monte Carlo, com energia total,
-fixa em 25 GeV, também interagindo com várias partes do detetor.
+\item Cerca de 23.000 elétrons simulados via Monte Carlo para o \eng{Data
+Challenge} 1, no CERN, proveniente de interações tipo $H (130
+\text{GeV})\rightarrow ZZ
+\rightarrow 4e^-$ e $H (130 \text{GeV})\rightarrow ZZ \rightarrow 2e^- +
+2\mu$. Os elétrons de cada evento simulado interagem com diferentes regiões do
+detetor;
+\item Cerca de 250.000 jatos-duplos, simulados via Monte Carlo (\eng{Pythia})
+para o \eng{Data Challenge} 1, no CERN, com energia total, fixa em 25 GeV,
+também interagindo com várias partes do detetor.
 \end{itemize}
 
 Nos dois casos, considerou-se simulações com ruído, proveniente da eletrônica,
@@ -707,7 +708,7 @@ retida na seção e.m., enquanto que, para jatos, observa-se algum vazamento de
 energia na seção hadrônica. Embora o corte realizado pelo LVL1 tenha sido em
 2~GeV para o vazamento de energia nesta seção, observa-se uma quantidade não
 desprezível de eventos com energia hadrônica além deste valor. Por outro lado,
-a energia total neste seção decai rapidamente e assume-se que a existência
+a energia total nesta seção decai rapidamente e assume-se que a existência
 desta cauda esteja relacionada a (baixa) qualidade da calibração dos dados
 utilizada no LVL1.
 
@@ -803,7 +804,7 @@ tal, dividiu-se o conjunto de dados em 2 metades com aproximadamente o mesmo
 número de RoI's. A primeira metade será utilizada para o ``treinamento'' ou
 otimização dos cortes, enquanto que a segunda será utilizada para o teste dos
 cortes de forma que seja possível testar se, para uma massa de dados jamais
-apresentada ao sistema, a eficiência de deteção está de acordo com aquele
+apresentada ao sistema, a eficiência de deteção está de acordo com aquela
 encontrada durante a determinação dos cortes. Desta forma, saberemos se o
 detetor está demasiado especializado nos dados presentes no conjunto de
 treinamento ou pode ser utilizado \emph{genericamente} para a deteção de
@@ -826,9 +827,9 @@ possibilidades).
 
 Para cada corte, a totalidade da massa de dados de treinamento do método é
 avaliada e as RoI's que \textit{sobrevivem} ao corte são levadas à próxima
-etapa. As eficiências relativas e a quantidade de dados utilizadas para o teste
-da fase seguinte são acumulados para posterior análise. Levando-se em
-consideração o número combinações dadas as possibilidades do problema de
+etapa. As eficiências relativas e a quantidade de dados utilizadas para o
+teste da fase seguinte são acumulados para posterior análise. Levando-se em
+consideração o número de combinações dadas as possibilidades do problema de
 otimização e considerando-se que a superfície de erro não possua um único
 mínimo, há de se tentar $41 \times 41 \times 51 \times 9 = 771579$ diferentes
 combinações, neste caso, antes de qualquer conclusão.
@@ -837,7 +838,7 @@ Está claro que uma varredura completa do espaço de parâmetros,
 i.e. buscando-se todo o espaço de possibilidades ao invés dos sub-conjunto
 utilizados, estaria fora de questão para uma utilização em condições que
 possam variar em questão de horas, como é o caso do experimento ATLAS. Desta
-forma, seja uma antecipação para os cortes seria necessária ou uma redução do
+forma, uma antecipação para os cortes é necessária ou uma redução do
 espaço de busca permitindo uma otimização mais rápida. A utilização de
 programas especialmente codificados para a tarefa também poderia diminuir o
 tempo de teste, tornando o método mais atraente para uma utilização prática.
@@ -956,7 +957,7 @@ homogênea para a eficiência de deteção de elétrons e jatos, apesar da baixa
 estatística para jatos em alguns intervalos em $\phi$ (muitos canais possuem
 apenas 30 a 40 jatos, como é possível observar na
 Figura~\ref{fig:transverse-energy}). A varredura por \etem indica que o método
-seja bastante robusto na deteção de elétrons, aumentando sua eficiência
+é bastante robusto na deteção de elétrons, aumentando sua eficiência
 suavemente com o valor de energia da RoI. Este comportamento é esperado pois
 sabe-se que a resolução em energia de um calorímetro aumenta com a energia do
 objeto \cite{wigmans-book} e, portanto, a capacidade discriminante do
@@ -964,7 +965,7 @@ sistema. Por outro lado, jatos mais energéticos tendem a penetrar ainda mais
 no calorímetro, fazendo com que a deteção de elétrons se torne mais fácil. O
 falso-alarme em jatos também aumenta com a energia do objeto analisado, embora
 seja difícil estimar com precisão a qualidade do valor de falso-alarme
-determinado, uma vez que a estatística para jatos acima de 50 GeV seja
+determinado, uma vez que a estatística para jatos acima de 50 GeV é
 praticamente inexistente.
 
 \begin{figure}

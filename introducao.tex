@@ -15,7 +15,7 @@ submetidos a uma conversão analógico-digital e processados por \eng{hardware}
 especializado, programas rodando em computadores genéricos, sistemas dedicados
 contendo DSP's, FPGA's ou misturas de todas essas tecnologias.
 
-O número de sensores utilizados em cada nova situação varia de acordo com
+O número de sensores utilizados em cada nova situação varia de acordo com o
 problema abordado, podendo passar de alguns poucos (por exemplo, um microfone)
 a uma quantidade gigantesca (o número de pixels em câmeras fotográficas
 digitais). A informação pode se encontrar segmentada ou contida em um único
@@ -73,13 +73,12 @@ gigaelétron-volts para cima, a taxa de eventos que representa canais
 desinteressantes contra a de eventos que possam interessar pode estar na
 proporção de 10$^9$ para 1. Desta forma, as interações de interesse aparecem
 escondidas no meio de bilhões de outras reações ordinárias, ou que representam
-apenas ruído. Ademais, para que se consiga apreciar a Física de interesse,
-milhões de eventos são gerados por base de tempo para que se colete
-estatística suficiente para a comprovação do canal estudado. O volume de dados
-associados a cada evento vem aumentando, junto com a ambição dos
-experimentos. Novos sistemas de deteção exigem alguns \eng{megabytes} para
-cada evento registrado, o que representa uma dificuldade extra na realização
-desses experimentos.
+apenas ruído. Ademais, para que se consiga tais interações, milhões de eventos
+são gerados por base de tempo para que se colete estatística suficiente para a
+comprovação do canal estudado. O volume de dados associados a cada evento vem
+aumentando, junto com a ambição dos experimentos. Novos sistemas de deteção
+exigem alguns \eng{megabytes} para cada evento registrado, o que representa
+uma dificuldade extra na realização desses experimentos.
 
 Para resolver esse problema, introduzem-se sistemas eletrônicos de filtragem
 que podem selecionar, de forma \eng{online}, os eventos de interesse dos
@@ -97,7 +96,7 @@ classificação como também excelentes níveis de velocidade de processamento.
 
 \section{O experimento ATLAS e o bóson de Higgs}
 
-A deteção do bóson de Higgs é um dos grandes expoentes da Física de Altas
+A deteção do bóson de Higgs é uma das grandes ``vedetes'' da Física de Altas
 Energias atual. Esta partícula, se existir, possui uma massa bastante elevada
 (centenas de gigaelétron-volts) e se apresenta como um canal bastante raro e
 de difícil reprodução laboratorial. A descoberta dessa partícula confirmará
@@ -114,7 +113,7 @@ potente no mundo, podendo colidir prótons com 14 TeV no centro de massa. Uma
 vez que cada evento no ATLAS consumirá cerca de 1,5 \eng{megabytes} de espaço
 em memória, um dos problemas do projeto e construção do experimento está na
 articulação de um sistema de filtragem de eventos que seja capaz de fazer uma
-seleção \eng{online} dos eventos que representem a Física de interesse.
+seleção \eng{online} dos eventos que representem a física de interesse.
 
 O Sistema de Filtragem do ATLAS foi inicialmente projetado para
 operar em três níveis conectados em cascata com complexidade, qualidade de
@@ -155,11 +154,12 @@ dos dados até as unidades de processamento.
 O processo de discriminação de cada objeto em si é dividido em duas etapas bem
 definidas: a extração de características ou pré-processamento (fase 1) e a
 deteção propriamente dita (fase 2), como mostra a
-Figura~\ref{fig:intro-disc}. A extração de características visa a compactação
-do sinal a ser detetado de forma que se realcem as propriedades necessárias à
-deteção e reduza-se o espaço de entrada. A deteção propriamente dita, neste
-caso, deverá ser simples e robusta de forma que o canal de interesse se
-exprima claramente mesmo que embebido no ruído de fundo.
+Figura~\ref{fig:intro-disc}. A extração de características tem por objetivo a
+compactação do sinal a ser detetado de forma que se realcem as propriedades
+discriminantes e, ao mesmo tempo, reduza-se a dimensionalidade do espaço de
+entrada. A deteção propriamente dita que se segue, será simples e robusta de
+forma que o canal de interesse se exprima claramente mesmo que embebido no
+ruído de fundo.
 
 \begin{figure}
 \begin{center}
@@ -198,14 +198,14 @@ anos. Só atualmente é possível contar, por exemplo, com efeitos colaterais qu
 estarão presentes no experimento como ruído eletrônico ou o empilhamento de
 informação (do inglês, \eng{pile-up}), causado pela sucessiva ocorrência de
 colisões no interior do sistema de deteção. A geometria dos detetores na
-simulação foi atualizada para casar com descrição do sistema (que já se
+simulação foi atualizada para casar com a descrição do sistema (que já se
 encontra instalado!), assim como os parâmetros de luminosidade que serão
 esperados quando o LHC entrar em operação.
 
 O trabalho discutido neste documento tem suas origens em 1995 com o Projeto
 Final de graduação ``Sistema de classificação baseado em uma máquina com
 sistema distribuído'', por este autor, apresentado em setembro de 1997
-\cite{aa:projeto-final}. Os sistemas de deteção ainda estava sendo
+\cite{aa:projeto-final}. Os sistemas de deteção ainda estavam sendo
 desenvolvidos e poucas áreas tinham atingido um bom nível de maturidade. A
 arquitetura do Sistema de Filtragem se encontrava, igualmente, em vias de
 desenvolvimento.
@@ -265,25 +265,26 @@ granularidade e variação de energia.
 
 A partir deste conjunto de dados, desenvolveu-se um sistema de discriminação
 neural que pudesse operar dentro do Segundo Nível de Filtragem do ATLAS. Este
-discriminador utilizava um pré-processamento em forma de anéis que se
-aproveita do padrão de interação de elétrons com o detetor. Ao invés de
-compactar o sinal da interação de elétrons com o detetor formando apenas 4
-variáveis, como sugeria o sistema empregado no CERN naquela época, 58 variáveis
-(anéis) eram produzidas. Um sistema de normalização simplificado, baseado na
-energia total do objeto, foi empregado de forma que se removesse qualquer
-tendência estatística provocada pela faixa estreita de energia presente nos
-dados disponíveis.
+discriminador utilizava um pré-processamento formando ``anéis" de deposição
+energética ao redor do ponto de impacto do objeto em estudo, se aproveitando
+do padrão de interação das partículas com as células de calorímetros. Ao invés
+de compactar o sinal da interação de elétrons com o detetor formando apenas 4
+variáveis, como sugeria o sistema empregado no CERN naquela época, 58
+variáveis (anéis) eram produzidas. Um sistema de normalização desta saída de
+dimensão 58, simplificado, baseado na energia total do objeto, foi empregado
+de forma que o processo de deteção se tornasse independente da energia da
+partícula sendo analisada.
 
-O resultado da extração de anéis, normalizado, era utilizado como entrada para
-um detetor neural com 58 neurônios de entrada, 5 neurônios na camada escondida
-e apenas uma saída que indicava se o objeto na entrada era ou não um
-elétron. A rede neural era treinada de forma supervisionada (usando-se o
-método de retro-propagação clássica), utilizando-se metade do conjunto de
-dados disponível. Neste caso, obteve-se 95\% de eficiência na deteção de jatos
-contra 97\% para a deteção de elétrons. Este resultado foi comparado com uma
-análise simplificada do sistema de deteção desenvolvido no CERN, que apontava
-uma capacidade de discriminação de 95\% para elétrons para um falso-alarme de
-11,6\% para jatos.
+O resultado desta \textit{extração de anéis} baseada nas células dos
+calorímetros, normalizado, era utilizado como entrada para um detetor neural
+com 58 neurônios de entrada, 5 neurônios na camada escondida e apenas uma
+saída que indicava se o objeto na entrada era ou não um elétron. A rede neural
+era treinada de forma supervisionada (usando-se o método de retro-propagação
+clássica), utilizando-se metade do conjunto de dados disponível. Neste caso,
+obteve-se 95\% de eficiência na deteção de jatos contra 97\% para a deteção de
+elétrons. Este resultado foi comparado com uma análise simplificada do sistema
+de deteção desenvolvido no CERN, que apontava uma capacidade de discriminação
+de 95\% para elétrons para um falso-alarme de 11,6\% para jatos.
 
 Uma análise baseada no impacto de cada um dos 58 anéis na saída da rede neural
 (análise de relevância) revelou que era possível utilizar apenas 20 dos 58
@@ -345,9 +346,9 @@ sucessivos, detetores lineares, baseados na Análise de Componentes Principais
 e Redes Neurais Artificiais. Os diversos sistemas são apresentados seguindo a
 modelagem do processamento dentro do LVL2, como indica a figura.
 
-Utiliza-se como base, o novo conjunto de simulações mais realísticas do
+Utiliza-se, como base, um novo conjunto de simulações mais avançadas do
 detetor e dos eventos que ocorrerão no ATLAS. Esta nova base de dados contém
-um estrutura de eventos com granularidade variante e com muitos dos detalhes
+uma estrutura de eventos com granularidade variante e com muitos dos detalhes
 operacionais do sistema de deteção final para o experimento. Estudos
 detalhados de tendências estatísticas, para as diversas combinações de
 compactadores e discriminadores, foram realizados levando-se em consideração a
@@ -359,7 +360,7 @@ empregado no CERN (fase 1 $+$ fase 2). Este sistema baseia-se na determinação
 de 4 variáveis altamente discriminantes (algoritmo T2Calo, fase 1), seguido de
 um processo de discriminação utilizando cortes unidimensionais (algoritmo
 EGammaHypo, fase 2). Determina-se sua eficiência em $91,85\%$ para a deteção
-elétrons contra um falso-alarme de $10,19\%$ em jatos.
+de elétrons contra um falso-alarme de $10,19\%$ em jatos.
 
 Com base nestes ``valores canônicos de deteção'', observados com a análise
 deste sistema de discriminação elétron/jato, desenvolve-se um detetor linear
@@ -371,7 +372,7 @@ T2Calo. Desenvolvemos então um detetor neural que atenda aos critérios da
 filtragem de elétrons combinado a esse algoritmo de extração de
 características. Esse novo sistema de discriminação apresenta uma eficiência
 de classificação superior e também maior robustez na separação elétron/jato,
-atingido $92,38\%$ na deteção de elétrons contra $9,05\%$ de falso-alarme.
+atingindo $92,38\%$ na deteção de elétrons contra $9,05\%$ de falso-alarme.
 
 Seguindo as tendências atuais de processamento neural aplicadas à Física de
 Altas Energias, consideramos variáveis normalmente desprezadas para fins de
@@ -506,11 +507,12 @@ apresenta extensões de estudo para este trabalho.
 
 Para a melhor compreensão dos termos utilizados na descrição da geometria dos
 objetos estudados neste trabalho, o Apêndice~\ref{ap:coord} introduz o sistema
-de coordenadas do ATLAS. O Apêndice~\ref{ap:framework} sumariza os detalhes de
-implementação do pacote de \eng{software} \texttt{Neuralringer}, utilizado
-para as medidas de eficiência, relevância e que foi transplantado para
-operação dentro do Sistema de Filtragem do experimento. Finalmente, o
-Apêndice~\ref{ap:published} traz um resumo da produção científica durante o
-período.
+de coordenadas do ATLAS. O Apêndice~\ref{ap:rna} contém a descrição da base
+matemática de Redes Neurais Artificiais que foram utilizadas neste trabalho. O
+Apêndice~\ref{ap:framework} sumariza os detalhes de implementação do pacote de
+\eng{software} \texttt{Neuralringer}, utilizado para as medidas de eficiência,
+relevância e que foi transplantado para operação dentro do Sistema de
+Filtragem do experimento. Finalmente, o Apêndice~\ref{ap:published} traz um
+resumo da produção científica durante o período.
 
 \typeout{ *************** End of file prefacio.tex *************** }

@@ -10,39 +10,38 @@
 O Sistema de Filtragem do experimento ATLAS, no CERN, oferece um ambiente
 desafiador a seus sistemas de deteção. A taxa de eventos na entrada do LVL2 é
 bastante alta, na ordem de 100 mil por segundo. O sinal de interesse é um
-canal raro, apresentando-se escondido em uma massa de eventos ordinários também
-bastante alta, na ordem de 1 para $10^9$. O sistema é construído de forma
-altamente distribuída. Os dados utilizados na deteção são transferidos através
-de uma rede às unidades de processamento que, por sua vez, devem rapidamente
-($10$ ms) responder com um sinal de rejeição, na maioria dos casos, ou
-aceitação.
+evento raro, apresentando-se escondido em uma massa de eventos ordinários
+também bastante alta, na ordem de 1 para $10^9$. O sistema é construído de
+forma altamente distribuída. Os dados utilizados na deteção são transferidos
+através de uma rede às unidades de processamento que, por sua vez, devem
+rapidamente ($10$ ms) responder com um sinal de rejeição, na maioria dos
+casos, ou aceitação.
 
-A deteção elétron/jato representa um dos canais mais importantes de decaimento
-da rara Física do bóson de Higgs. O processo de discriminação de elétrons é
-conduzido, inicialmente, por uma confirmação baseada em calorimetria. Os dados
-de cada região de interesse (RoI) destacada pelo Primeiro Nível de Filtragem
-são (lentamente) descarregados e tratados nas Unidades de Processamento do
-LVL2, deixando pouco tempo de processamento para a operação dos algoritmos de
-deteção propriamente ditos. O formato dos dados na RoI é altamente granular e
-segmentado, favorecendo a deteção através da análise do perfil de deposição
-energética da partícula ao longo de sua trajetória. A granularidade, segmento
-a segmento, varia ao longo dos eixos do detetor, podendo cruzar regiões
-totalmente desprovidas de células de deteção. Cada RoI, em média, é composta
-de mais de 1.000 células.
+A deteção elétron/jato representa um dos estudos mais importantes de
+decaimento da rara Física do bóson de Higgs. O processo de discriminação de
+elétrons é conduzido, inicialmente, por uma confirmação baseada em
+calorimetria. Os dados de cada região de interesse (RoI) destacada pelo
+Primeiro Nível de Filtragem são (lentamente) descarregados e tratados nas
+Unidades de Processamento do LVL2, deixando pouco tempo de processamento para
+a operação dos algoritmos de deteção propriamente ditos. Os dados de uma RoI
+estão organizados de forma altamente granular e segmentada, favorecendo a
+deteção através da análise do perfil de deposição energética da partícula ao
+longo de sua trajetória. A granularidade, segmento a segmento, varia ao longo
+dos eixos do detetor, podendo cruzar regiões totalmente desprovidas de células
+de deteção. Cada RoI, em média, é composta de mais de 1.000 células.
 
 A Unidade de Processamento do LVL2 foi desenvolvida tendo por base a
 maximização da utilização dos recursos computacionais pelos algoritmos de
 deteção, funcionando em múltiplas tarefas de processamento. Uma interface de
-``cola'' foi criada entre o universo \eng{online}, onde eventos fluem pela
-rede do Sistema de Filtragem e o universo
-\eng{offline}, onde os algoritmos são desenvolvidos e testados. Esse sistema
-foi testado com relação a sua robustez e confiabilidade, tendo passado aos diversos
-critérios necessários a seu emprego no Sistema de Filtragem. Testes apontam
-que seja possível um modelo de desenvolvimento de algoritmos baseado nestes
-preceitos: criação \eng{offline}, aplicação
-\eng{online}. Neste ambiente, os diversos algoritmos que devem ser executados
-no Sistema de Filtragem são desenvolvidos de forma desacoplada e re-acoplados
-durante a execução combinada do sistema.
+``cola'' foi criada entre o ambiente \eng{online}, onde eventos fluem pela
+rede do Sistema de Filtragem e o ambiente \eng{offline}, onde os algoritmos
+são desenvolvidos e testados. Essa unidade foi testada com relação a sua
+robustez e confiabilidade, tendo passado aos diversos critérios necessários a
+seu emprego no Sistema de Filtragem. Testes apontam que seja possível um
+modelo de desenvolvimento de algoritmos baseado nestes preceitos: criação
+\eng{offline}, aplicação \eng{online}. Neste ambiente, os diversos algoritmos
+que devem ser executados no Sistema de Filtragem são desenvolvidos de forma
+desacoplada e re-acoplados durante a execução combinada do sistema.
 
 A execução dentro dos Altos Níveis de Filtragem é modelada sempre
 distinguindo-se a fase de Extração de Características (Fase 1) e Hipótese
@@ -59,14 +58,14 @@ T2Calo tende a melhorar a qualidade de deteção que pode ser obtida com esse
 método de compactação.
 
 A compactação por anéis de deposição energética é uma implementação
-alternativa para o processo de Extração de Características (Fase 1). Esta
-técnica aproveita-se do perfil de deposição energética das partículas que
-trata com calorímetros. Esta técnica evoluiu com o experimento, suas
-modificações e a melhoria de sua simulação, mantendo-se simples e
-eficaz. Desenvolvemos uma implementação de referência para a extração baseada
-em anéis que é suficientemente rápida (podendo ser executada em até 125 $\mu$s
-de forma desacoplada), resolvendo os problemas de variação de granularidade,
-dados faltantes e carência de sensores nas regiões de \eng{crack} de forma
+alternativa para o processo de Extração de Características (Fase 1) que
+aproveita-se do perfil de deposição energética das partículas que interagem
+com calorímetros. Esta técnica evoluiu com o experimento, suas modificações e
+a melhoria de sua simulação, mantendo-se simples e eficaz. Desenvolvemos uma
+implementação de referência para a extração baseada em anéis que é
+suficientemente rápida (podendo ser executada em até 125 $\mu$s de forma
+desacoplada), resolvendo os problemas de variação de granularidade, dados
+faltantes e carência de sensores nas regiões de \eng{crack} de forma
 igualmente eficiente e flexível. Ao passo que simplifica a Fase 1 do
 processamento das RoI's de candidatos a elétrons, essa técnica introduz um
 conjunto de variáveis (25 vezes) maior que aquele provido pelo T2Calo.
@@ -84,7 +83,7 @@ baseada em uma análise de cortes uni-dimensionais (EGammaHypo), de difícil (e
 longa) calibração, requerendo a intervenção especialista freqüentemente. Em
 contrapartida, se propõe a utilização de Redes Neurais Artificiais (RNA's)
 como forma de se melhorar a eficiência de deteção de elétrons no LVL2. O
-emprego de classificadores, que tentem procurar por correlações de ordens mais
+emprego de classificadores, que tentam encontrar correlações de ordens mais
 elevadas, é necessária nesse ambiente uma vez que:
 
 \begin{enumerate}
@@ -95,9 +94,9 @@ baixo.
 
 Redes neurais podem ser empregadas tanto acopladas às saídas do T2Calo quanto
 às somas em anéis proposta, permitindo maiores níveis de eficiência na deteção
-de elétrons em ambos os casos. Quando empregadas à compactação provida pelo
+de elétrons em ambos os casos. Quando associadas à compactação provida pelo
 T2Calo aos dados de uma RoI, RNA's podem melhorar o desempenho de
-classificação comparado à sistemas lineares de classificação, atingindo
+classificação comparado a sistemas lineares de classificação, atingindo
 92,38\% de deteção contra 9,05\% de falso-alarme. Considerando-se as demais
 saídas disponíveis neste algoritmo de compactação, é possível atingir níveis
 ainda mais altos: 94,79\% de deteção contra apenas 7,93\% de falso-alarme. Um
@@ -116,12 +115,12 @@ anéis à classificadores neurais, está livre de tendências com relação à
 localização do objeto ou seu valor energético, apresentando-se igualmente
 eficaz em uma multitude de intervalos.
 
-Uma Análise de Relevância baseada do poder de classificação dos detetores
-(produto SP), ao invés do desvio no EMQ, é também desenvolvida. Esta análise
-pode ser utilizada como uma ferramenta de poda, para gerar classificadores
-mais compactos ou como um simples teste de robustez para sistemas de
-deteção. De acordo com uma comparação a sua análoga baseada no EMQ, apresentou-se
-mais poderosa na escolha de variáveis que, pela poda, minimizam o impacto na
+Uma Análise de Relevância baseada no poder de classificação dos detetores
+(produto SP), ao invés do desvio no EMQ, é também conduzida. Esta análise pode
+ser utilizada como uma ferramenta de poda, para gerar classificadores mais
+compactos ou como um simples teste de robustez para sistemas de deteção. De
+acordo com uma comparação a sua análoga baseada no EMQ, apresentou-se mais
+poderosa na escolha de variáveis que, pela poda, minimizam o impacto na
 classificação.
 
 Em alguns casos, esta análise também indica elementos que estejam prejudicando
@@ -131,14 +130,14 @@ baseando-se em podas conduzidas através da relevância de discriminação.
 
 Finalmente, demonstrou-se que a metodologia proposta para o Sistema de
 Filtragem (desenvolvimento \eng{offline}, aplicação \eng{online}) funciona
-adequadamente, caso o desenvolvedor mantenha-se estrito em critérios como
-tempo de execução e uso de recursos computacionais. Pacotes que implementam as
-Fase 1 e 2 de deteção elétron/jato, baseada em anéis e RNA's foram migrados
-para dentro do ambiente Athena. Enquanto que, de forma desacoplada, é possível
-executar a deteção em tempos que variam de 100 a 500 microssegundos,
-dependendo da configuração dos anéis e das plataformas de execução, quando
-incorporados ao pesado ambiente de desenvolvimento do ATLAS, as mesmas
-instruções são executadas em cerca de 4 milissegundos.
+adequadamente, caso o desenvolvedor respeite critérios como tempo de execução
+e uso de recursos computacionais. Pacotes que implementam as Fase 1 e 2 de
+deteção elétron/jato, baseada em anéis e RNA's foram migrados para dentro do
+ambiente Athena. Enquanto, de forma desacoplada, é possível executar a
+deteção em tempos que variam de 100 a 500 microssegundos, dependendo da
+configuração dos anéis e das plataformas de execução, quando incorporados ao
+pesado ambiente de desenvolvimento do ATLAS, as mesmas instruções são
+executadas em cerca de 4 milissegundos.
 
 Estes tempos de processamento são compatíveis com outros sistemas atualmente
 empregados no LVL2, inclusive com a dupla T2Calo/EGammaHypo, que consegue
@@ -208,11 +207,16 @@ leitura do detetor e o fator de compactação propriamente dito. Especificamente
 a técnica de normalização dos dados poderia ser ajustada tendo em vista os
 resultados da análise de relevância.
 
-Finalmente, a deteção baseada em anéis pode também ser utilizada para análise
-e reconstrução \eng{offline}. O sistema de deteção desenvolvido neste trabalho
-deve ser readaptado para trabalhar neste ambiente. Comparativos diretos com
-as técnicas atuais de reconstrução poderão ser feitos. Métodos de análise
+A deteção baseada em anéis pode também ser utilizada para análise e
+reconstrução \eng{offline}. O sistema de deteção desenvolvido neste trabalho
+deve ser readaptado para trabalhar neste ambiente. Comparativos diretos com as
+técnicas atuais de reconstrução poderão ser feitos. Métodos de análise
 estocástica são bastante difundidos e utilizados atualmente nesta sub-área da
 Física de Altas Energias.
+
+Finalmente, seria possível expandir a utilização da técnica de anelamento para
+outras assinaturas interessantes, filtráveis por uma análise calorimétrica,
+tais como $H \rightarrow \gamma + \gamma$ ou, ainda, na separação
+$\gamma/\pi^0$, tanto \eng{online} como \eng{offline}.
 
 \typeout{ *************** End of file conclusao2.tex *************** }
