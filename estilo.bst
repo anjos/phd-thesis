@@ -335,8 +335,8 @@ FUNCTION {format.edition}
 { edition empty$
     { "" }
     { output.state mid.sentence =
-	{ edition "l" change.case$ " edition" * }
-	{ edition "t" change.case$ " edition" * }
+	{ edition "l" change.case$ " edi\c{c}\~{a}o" * }
+	{ edition "t" change.case$ " edi\c{c}\~{a}o" * }
       if$
     }
   if$

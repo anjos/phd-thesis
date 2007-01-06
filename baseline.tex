@@ -66,7 +66,7 @@ demais em \eng{software}, maximizando a flexibilidade. Em particular, atenção
 será dada à definição do funcionamento do Primeiro e Nível de Filtragem (LVL1)
 com relação a deteção de elétrons e, em seguida, o sistema desenvolvido
 atualmente para o LVL2. Finalmente, uma caracterização dos dados disponíveis
-segundo as premiças desenvolvidas neste capítulo é estabelecida como base de
+segundo as premissas desenvolvidas neste capítulo é estabelecida como base de
 comparação ao restando do trabalho.
 
 \section{Objetos de interesse e RoI's}
@@ -138,7 +138,7 @@ Total & -- & $\sim$25 \\ \hline
 Nota-se que, aproximadamente, 16 dos 25 kHz (i.e. $\sim$65\% das assinaturas)
 entregues pelo LVL1 conterão objetos tipo e.m.. Estes objetos são assim
 classificados por representarem elétrons \textbf{ou} fótons, que interagem com
-os detetores a partir de interações eletromagnéticas ao invés das componentes
+os detetores a partir de interações eletromagnéticas em vez das componentes
 hadrônicas presentes em outros casos. Em algumas das assinaturas, exige-se que
 o objeto seja \emph{isolado}. Isto quer dizer que a quantidade de energia no
 centro do objeto deverá manter uma razão mínima com relação a energia
@@ -149,7 +149,7 @@ depositada em sua periferia, como ficará claro mais a frente.
 A Figura~\ref{fig:trigger-physics} apresenta um diagrama esquemático que
 despreza as interfaces em \eng{hardware} propostas pela construção do Sistema
 de Filtragem e tenta enfocar melhor o problema do ponto de vista da análise
-dos canais físicos. De cima para baixo, indica-se o tráfico de mensagens até a
+dos canais físicos. De cima para baixo, indica-se o tráfego de mensagens até a
 completa aceitação de um evento por parte do Sistema de Filtragem.
 
 \begin{figure}
@@ -227,7 +227,7 @@ os resultados dos nível precedentes (L1R e L2R) já disponíveis na
 memória. Neste nível de filtragem, correlações mais complexas podem ser feitas
 entre as diferentes RoI's, e uma análise mais depurada do evento poderá ser
 conduzida. Por exemplo, é possível fazer uso das RoI's secundárias para
-atingir maior redução da taxa de eventos a ser registrada em mídia
+atingir maior redução da taxa de eventos a serem registrados em mídia
 permanente. Se aprovado, o evento é guardado, devidamente ``etiquetado'' e
 repassado às fazendas (\eng{farms}) de processamento \eng{offline} para
 posterior reconstrução.
@@ -263,7 +263,8 @@ partículas, já que há uma grande probabilidade de espalhamento múltiplo (do
 inglês \eng{Multiple Scattering}) causado pelas componentes hadrônicas do
 conjunto de partículas. A distância de penetração é diretamente proporcional à
 energia do objeto em análise \cite{leo, knoll}, ainda que, para os mesmos
-valores energéticos, jatos tendam a penetrar mais profundamente nos aparatos.
+valores energéticos, jatos tendam a penetrar mais profundamente nos
+dispositivos.
 
 \begin{figure}
 \begin{center}
@@ -316,7 +317,7 @@ tamanho da torre de filtragem) $N_{\eta} \times N_{\phi}$ aplicado ao processo
 de agrupamento necessário ao pré-processamento antes da análise feita pelo
 LVL1.
 
-A seção hadrônica dos calorímetro é bastante menos granular. O tamanho padrão
+A seção hadrônica do calorímetro é bastante menos granular. O tamanho padrão
 da célula ($0,1\times0,1$ no espaço $\eta\times\phi$) foi otimizado para
 detetar hádrons. Esta classe de partículas penetra mais profundamente na
 matéria e desenvolve complexas cascatas ao longo da penetração, normalmente
@@ -369,7 +370,7 @@ e.m. (elétrons e fótons), o algoritmo pode ser resumido da seguinte forma:
 em macro-células chamadas Torres de Filtragem (do inglês \eng{Trigger Towers},
 TT). A taxa de agrupamento não é uniforme, mas, em geral, forma TT's com
 $0,1\times0,1$ no plano $\eta\times\phi$ para a seção eletromagnética do
-calorímetro e $0,1\times0,1$ na seção hadrônica;
+calorímetro e $0,2\times0,2$ na seção hadrônica;
 
 \item Os sinais somados das TT's são disponibilizados para a
 lógica de leitura do LVL1;
@@ -436,9 +437,9 @@ LVL1.
 
 Ao receber as informações das RoI's o \eng{Steering} ativará o passo de
 decodificação do resultado do LVL1 e, em seguida, selecionará a próxima fase
-de análise, que dependerá diretamente do tipo RoI's primárias do evento. No
-caso de RoI's do tipo e.m., um algoritmo de deteção de elétrons (e fótons)
-será ativado.
+de análise, que dependerá diretamente do tipo das RoI's primárias do
+evento. No caso de RoI's do tipo e.m., um algoritmo de deteção de elétrons (e
+fótons) será ativado.
 
 \section{Deteção de elétrons no LVL2 do ATLAS}
 \label{sec:classic-detection}
@@ -460,7 +461,7 @@ tentará realçar informações como a dispersão do objeto na RoI ou a
 profundidade de interação do objeto com as diversas camadas do detetor.
 
 O nome do algoritmo usado para a FEx de RoI's primárias tipo e.m. é
-\emph{T2Calo}, uma variação das palavras \eng{Trigger}, LVL2 e
+\emph{T2Calo}, uma abreviação composta das palavras \eng{Trigger}, LVL2 e
 Calorimetria. As variáveis extraídas do \eng{cluster} definido pela RoI do
 LVL1, por este algoritmo, estão descritas a seguir. Cada uma destas variáveis
 define uma etapa ou mais etapas do processamento do T2Calo que está
@@ -709,7 +710,7 @@ energia na seção hadrônica. Embora o corte realizado pelo LVL1 tenha sido em
 2~GeV para o vazamento de energia nesta seção, observa-se uma quantidade não
 desprezível de eventos com energia hadrônica além deste valor. Por outro lado,
 a energia total nesta seção decai rapidamente e assume-se que a existência
-desta cauda esteja relacionada a (baixa) qualidade da calibração dos dados
+desta cauda esteja relacionada à (baixa) qualidade da calibração dos dados
 utilizada no LVL1.
 
 \begin{figure}
@@ -838,8 +839,8 @@ Está claro que uma varredura completa do espaço de parâmetros,
 i.e. buscando-se todo o espaço de possibilidades ao invés dos sub-conjunto
 utilizados, estaria fora de questão para uma utilização em condições que
 possam variar em questão de horas, como é o caso do experimento ATLAS. Desta
-forma, uma antecipação para os cortes é necessária ou uma redução do
-espaço de busca permitindo uma otimização mais rápida. A utilização de
+forma, seria necessária uma antecipação para os cortes ou uma redução do
+espaço de busca, permitindo uma otimização mais rápida. A utilização de
 programas especialmente codificados para a tarefa também poderia diminuir o
 tempo de teste, tornando o método mais atraente para uma utilização prática.
 
@@ -861,7 +862,7 @@ assume uma forma angular. Ao redor do ponto de flexão, na parte exterior da
 massa de resultados, encontraremos as melhores relações de eficiência
 \textit{versus} falso-alarme para este discriminador. O ponto destacado nesta
 figura representa o conjunto de cortes que maximiza a multiplicação da soma
-eficiências de deteção pelo produto entre elas, ou seja:
+das eficiências de deteção pelo produto entre elas, ou seja:
 
 \begin{equation}
 SP = (\text{efic.}_{classe_1} + \text{efic.}_{classe_2}) \times
@@ -879,11 +880,11 @@ ponto determina a melhor relação de deteção entre as duas classes de eventos
 para o classificador.
 
 À medida que a curva R.O.C. se aproxima, em detrimento de uma melhora na
-eficiência de deteção, dos eixo vertical para
-$\text{Prob.}_\text{falso-alarme} = 0$ e do eixo horizontal para
-$\text{Prob.}_\text{deteção} = 1,0$ o máximo da Equação~\ref{eq:sp-product}
-aumentará. Por esta razão utilizar-se-á o valor máximo produto SP de um
-detetor como uma figura de mérito de sua eficiência de classificação.
+eficiência de deteção, do eixo vertical para $\text{Prob.}_\text{falso-alarme}
+= 0$ e do eixo horizontal para $\text{Prob.}_\text{deteção} = 1,0$, o máximo
+da Equação~\ref{eq:sp-product} aumentará. Por esta razão utilizar-se-á o valor
+máximo produto SP de um detetor como uma figura de mérito de sua eficiência de
+classificação.
 
 No caso específico em análise, o ponto onde produto SP atinge seu máximo
 determina uma eficiência de deteção de elétrons de 91,85\% contra 10,19\% de
@@ -914,12 +915,12 @@ Aplicando-se estes cortes ao conjunto de teste, de forma análoga, obtém-se
 ($SP = 1,49$). Este resultado indica também que os dois sub-conjuntos de dados
 (treino e teste) são estatisticamente semelhantes. Durante a busca exaustiva
 deste resultado, acumularam-se os resultados de eficiência e falso-alarme
-parciais entre cada operação de corte. Estes valores podem ser vistos na
+parciais entre operações de corte. Estes valores podem ser vistos na
 Tabela~\ref{tab:eghypo-partials}. Como é possível avaliar, a partir desta
 tabela, as variáveis \rcore e \eratio são as mais discriminatórias, deixando
 passar apenas cerca de 30 \% e 45 \% dos jatos avaliados, respectivamente. O
 corte em \etem não reduz a taxa de eventos, sendo praticamente irrelevante a
-este processo de discriminação. Este comportamento é esperado para a massa de
+este processo de discriminação. Este comportamento é esperado, para a massa de
 dados sendo avaliada, uma vez que os jatos disponíveis tem energia fixa em 25
 GeV e que elétrons estão espalhados no espectro de energia. O vazamento de
 energia na seção hadrônica (último corte), ainda conseguirá diminuir a taxa de

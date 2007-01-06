@@ -13,7 +13,7 @@ que o tempo médio de processamento para cada evento, incluindo acesso aos
 dados no sistema de leitura, seja de 10 milissegundos. No entanto, espera-se
 que o sistema opere rejeitando eventos ordinários o mais rápido possível, de
 tal forma que, estatisticamente, a maior parte do tempo despendida nos
-processadores do LVL2 seja dedicada à eventos interessantes.
+processadores do LVL2 seja dedicada a eventos interessantes.
 
 Levando-se em consideração que o tempo de acesso aos dados no sistema de
 leitura está na ordem de 1~ms, como descrito no Capítulo~\ref{chap:trigger},
@@ -27,7 +27,7 @@ existe uma dependência direta entre os dois parâmetros a serem considerados: o
 número de requisições de dados interrompe o processamento para se aguardar a
 informação requisitada. Quanto mais informação, mais processamento deverá ser
 realizado para o tratamento dos dados. Deseja-se, desta forma, minimizar o
-acesso à dados e maximizar a capacidade discriminativa do sistema.
+acesso a dados e maximizar a capacidade discriminativa do sistema.
 
 Nossa referência, o algoritmo do T2Calo, foi completamente descrita na
 Seção~\ref{sec:lvl2-detect-electron}. Neste algoritmo, inicia-se o
@@ -138,14 +138,14 @@ a aplicação tivesse um desempenho abaixo do esperado para o experimento.
 
 As Figuras~\ref{fig:timings-histo-full}, \ref{fig:timings-histo-cut1} e
 \ref{fig:timings-histo-cut2} contém os resultados dos 3 testes com 100, 34 e
-14 anéis respectivamente nas três arquiteturas. Das três arquiteturas
+14 anéis, respectivamente, nas três arquiteturas. Das três arquiteturas
 escolhidas, a máquina da pré-série parece ser a mais rápida, apresentando um
 tempo de processamento de apenas $445$ microssegundos para o mais complexo dos
 testes, utilizando 100 anéis. Em seguida, o sistema baseado no processador
 Opteron-275, cerca de 8\% mais lento para o mesmo teste. A máquina de testes
 do sistema de filtragem é a mais lenta de todas as plataformas, apresentando
 um tempo médio de processamento de $542$ microssegundos para cada RoI. O
-desvio padrão está na faixa dos 10\% indicando uniformidade nos resultados.
+desvio-padrão está na faixa dos 10\%, indicando uniformidade nos resultados.
 
 \begin{figure}
 \begin{center}
@@ -428,7 +428,7 @@ O segundo passo é a confirmação dos tempos de operação destacados ao longo 
 texto. Neste caso, deseja-se averiguar se a migração não acarretou algum
 impacto ao desempenho do sistema, uma vez que uma infraestrutura maior de
 suporte à execução está sendo utilizada. Ademais, uma vez que se estará
-executando acesso remoto aos dados e calibração, processos que não são
+realizando acesso remoto aos dados e calibração, processos que não são
 executados no ambiente desacoplado, deseja-se estimar o impacto que estas
 novas atividades causariam ao emprego do anelamento e discriminação neural no
 Sistema de Filtragem. Por outro lado, obtém-se com este estudo um conjunto de
@@ -449,8 +449,8 @@ que 10~milissegundos (fornecida pela função \texttt{clock}).
 
 Um dos inconvenientes da função \texttt{gettimeofday} é que o valor obtido em
 uma chamada é uma medida absoluta do tempo. Como um processo Unix está sujeito
-à interrupções de sua execução (dado o compartilhamento da máquina por outros
-processos e agentes), o tempo parado também será contado
+a interrupções de sua execução (dado o compartilhamento da máquina por outros
+processos e agentes), o tempo parado também será contado,
 eventualmente. Ademais, máquinas modernas possuem normalmente mais de um
 processador. É portanto provável que processos que estejam parados, neste
 contexto, sejam mais rapidamente agendados. Desta forma, o tempo final
@@ -490,9 +490,9 @@ forma, o tempo total, comparável àquele da
 Figura~\ref{fig:timings-histo-full}, é de $526+259=785$ microssegundos. Este
 valor representa um acréscimo de cerca de 56\% do tempo total calculado
 anteriormente. Uma parte do tempo adicional é gasto na criação de estruturas
-de dados que sejam repassáveis entre os algoritmos, passo necessário no
+de dados que sejam transportáveis entre os algoritmos, passo necessário no
 ambiente Athena e que foi suprimido na execução desacoplada. Uma outra parte
-advém da utilização da infraestrutura de acesso à dados e relatório de erros
+advém da utilização da infraestrutura de acesso a dados e relatório de erros
 disponível no ambiente Athena, que é mais lenta que no ambiente desacoplado.
 
 O tempo total de processamento do algoritmo integrado é de cerca de
@@ -542,7 +542,7 @@ de filtragem. Neste caso, inicialmente validamos o funcionamento do algoritmo
 no contexto de uma configuração mais complexa baseada na aplicação AthenaMT
 \cite{aa:tns-2004-2}, que simula, ainda que de modo \eng{offline}, o ambiente
 de aquisição tal qual será encontrado pelos algoritmos do HLT
-\eng{online}. Este é um passo simples, dado que reutiliza-se o mesmo conjunto
+\eng{online}. Este é um passo simples, dado que se reutiliza o mesmo conjunto
 de bibliotecas usadas para o ambiente Athena, sem necessitar de
 recompilação. A vantagem é que o sistema já encontra-se depurado e a única
 verificação a ser feita é se a utilização dos novos algoritmos não introduz

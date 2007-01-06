@@ -7,16 +7,16 @@
 \chapter{O Sistema de filtragem e aquisição de dados do ATLAS}
 \label{chap:trigger}
 
-O \idx{sistema de filtragem} do experimento ATLAS tem o encargo de separar, de
-forma \eng{online}, a Física considerada como ordinária segundo o experimento,
-dos raros eventos de interesse. A taxa de eventos produzida pelo LHC será de
-40 milhões por segundo, ou 40 MHz, em bateladas que durarão cerca de 10 horas
+O \idx{sistema de filtragem} do experimento ATLAS tem o encargo de separar
+\eng{online} a Física considerada como ordinária segundo o experimento, dos
+raros eventos de interesse. A taxa de eventos produzida pelo LHC será de 40
+milhões por segundo, ou 40 MHz, em bateladas que durarão cerca de 10 horas
 (este período é comumente referido como \eng{run}). Cada evento poderá
 produzir uma colisão favorável à Física de interesse, embora a grande maioria,
 mais de 99,9999\%, represente canais físicos já bastante estudados em
 experimentos anteriores, ainda que a luminosidade do sistema seja tão
 elevada. Ademais, cada evento detetado pelo ATLAS produzirá cerca de 1,5
-Megabytes em dados, o que torna o problema da filtragem bastante difícil, já
+Megabyte em dados, o que torna o problema da filtragem bastante difícil, já
 que o fluxo de dados que deve ser analisado por base de tempo está acima da
 capacidade de qualquer tecnologia de transporte de dados atual.
 
@@ -25,10 +25,10 @@ seqüenciais (veja a Figura~\ref{fig:trigger-sketch}). Cada nível que se sucede
 refina a decisão do nível anterior através da aquisição de mais dados do
 detetor. O \idx{Primeiro Nível} de filtragem (do inglês \idxeng{First-Level
 Trigger}, LVL1) deverá reduzir a taxa de eventos do LHC para cerca de 100 kHz
-apenas, através de técnicas simples de filtragem codificadas em hardware
+apenas, através de técnicas simples de filtragem codificadas em \eng{hardware}
 dedicado. O \idx{Segundo Nível} de filtragem (do inglês
 \idxeng{Second-Level Trigger}, LVL2) reduzirá a taxa de saída do LVL1 para
-aproximadamente 1 kHz utilizando aplicações codificadas em software para
+aproximadamente 1 kHz utilizando aplicações codificadas em \eng{software} para
 computadores do tipo PC, tão comuns quanto os disponíveis para aplicações
 domésticas. O \idx{Terceiro Nível} de filtragem ou
 \idx{Filtro de Eventos} (do inglês \idxeng{Event Filter}, EF) estará baseado
@@ -56,7 +56,7 @@ O Primeiro Nível de Filtragem (LVL1) realiza uma seleção inicial de candidato
 fornecidas por um subconjunto dos detetores do ATLAS, os calorímetros e os
 detetores de múons \cite{l1-tdr}. Múons com altos valores de \idx{momento
 transverso} ($p_T$) são identificados a partir das câmaras de trigger
-conectadas ao Spectrômetro de Múons (veja a Seção~\ref{sec:atlas-muon}) na
+conectadas ao Espectrômetro de Múons (veja a Seção~\ref{sec:atlas-muon}) na
 região do barril e da tampa. As seleções baseadas em calorimetria utilizam uma
 segmentação reduzida das seções e.m. e hadrônica no barril e na tampa. Os
 objetos procurados usando-se calorímetros no LVL1 são elétrons com altos
@@ -128,7 +128,7 @@ específicos para os sinais provenientes dos detetores. Um \idx{processador
 central de filtragem} (marcado na figura como \idxeng{Central Trigger
 Processor}) é responsável pela decisão final e pela emissão do sinal para o
 LVL2 e para o sistema de distribuição de tempo, disparo e controle (indicado
-como \idxeng{Timming, Trigger and Control distribution}, ou TTC), que gera,
+como \idxeng{Timing, Trigger and Control distribution}, ou TTC), que gera,
 finalmente, o sinal para a leitura dos dados do detetor. Dentre os componentes
 do TTC está o \idx{Construtor de RoI's} (do inglês \idxeng{RoI Builder}, RoIB)
 que monta o mapa de RoI's destacadas pelo LVL1 e comunica, através de uma
@@ -152,7 +152,7 @@ O \idx{sistema de aquisição de dados} do ATLAS (do inglês \idxeng{Data
 Acquisition System}, \idx{DAQ}) é composto por processadores que estão
 encarregados da transmissão e manipulação dos dados produzidos pelo detetor
 \cite{hlt-tdr}. O DAQ trabalha em cooperação com os diversos níveis de
-filtragem e controle do experimento de forma a garantir a correção dos dados
+filtragem e controle do experimento, de forma a garantir a correção dos dados
 transmitidos e a minimização do tempo morto despendido no tráfego de
 informação pelo sistema. A cadeia de operação do DAQ é iniciada por um disparo
 do LVL1 para a leitura de dados executada nos ROD's. Cada ROD é ligado,
@@ -174,7 +174,7 @@ pode ser subdividido em 4 partes:
 \begin{itemize}
 \item \textbf{\idx{Sistema de controle do detetor} ou \idxeng{Detector Control
 System}, \idx{DCS}}: responsável pela operação coerente e segura (no que tange
-radiação, controle de altas tensões, etc.) do detetor ATLAS e pelo
+a radiação, controle de altas tensões, etc.) do detetor ATLAS e pelo
 interfaceamento com sistemas externos e serviços incluindo o acelerador
 LHC. Uma vez que este tópico não está diretamente envolvido neste trabalho,
 será abordado somente em caráter introdutório;
@@ -197,7 +197,7 @@ classificação de todos os eventos aceitos.
 \subsection{O sistema de controle do detetor}
 \label{sec:dcs}
 
-O DCS supervisa todos os componentes de \eng{hardware} do arranjo
+O DCS supervisiona todos os componentes de \eng{hardware} do arranjo
 experimental, incluindo todos os sistemas de deteção do ATLAS e a
 infraestrutura experimental comum a todos os outros sistemas. O DCS também se
 comunica com sistemas externos, como a infraestrutura de serviços do CERN e,
@@ -250,7 +250,7 @@ inglês \eng{Trigger and Data Acquisition}, TDAQ), excluindo o gerenciamento,
 processamento e transporte de dados físicos. É um conjunto personalizável de
 ferramentas que provê a ``cola'' que une entradas e saídas dos outros
 sistemas. O sistema \eng{online} não contém elementos que sejam específicos
-aos detetores pois é também utilizado por todos os sistemas de instrumentação
+aos detetores, pois é também utilizado por todos os sistemas de instrumentação
 da aquisição de dados de forma transparente. Ele coopera com outros
 sub-sistemas e interfaces para a leitura do detetor, DCS, LVL1,
 \eng{Dataflow}, HLT, \eng{Offline} e o interfaceamento com operadores dos
@@ -261,13 +261,13 @@ o TDAQ na sua inicialização e finalização, de forma que os aplicativos
 executem de maneira ordenada. Este sistema é responsável pela sincronização
 dos estados de um \eng{run} para todo o sistema de filtragem, aquisição e
 supervisão. Os procedimentos de ligamento e desligamento são projetados para
-se alcançar o menor tempo possível, reduzindo tempos-mortos pois isto afeta
+se alcançar o menor tempo possível, reduzindo tempos-mortos, pois isto afeta
 diretamente a quantidade de dados que podem ser adquiridos em um período de
 funcionamento do LHC. Ferramentas de verificação e diagnóstico ajudam a
 detetar problemas de maneira precoce e eficiente. Bancos de dados com a
 configuração do sistema são fornecidos contendo um grande número de parâmetros
 que descrevem a topologia do sistema, os componentes de
-\eng{hardware} e \eng{software} assim como os modos e ordem de
+\eng{hardware} e \eng{software}, assim como os modos e ordem de
 execução. Durante a aquisição, componentes especializados capturam e servem
 dados relacionados à monitoração dos diversos processos do experimento, tais
 como histogramas e parâmetros de rejeição, assim como mensagens de erro e
@@ -283,7 +283,7 @@ sub-sistemas durante um \eng{run}.
 O projeto do sistema \eng{online} é baseado numa arquitetura de componentes,
 que respeitam o modelo cliente-servidor. Os componentes podem ser divididos em 3
 grupos, que incluem um conjunto de pacotes cada um. Cada um dos pacotes está
-associado a um grupo de funções para este sistema e provê um conjunto definido
+associado a um grupo de funções para este sistema, e provê um conjunto definido
 de serviços. Os serviços possuem interfaces bem definidas e são desacoplados
 entre si.
 
@@ -309,8 +309,8 @@ TDAQ e detetores do ATLAS.}
 
 Este pacote também provê uma interface gráfica, escrita em Java, para o
 acionamento e verificação de todas as partes do sistema de filtragem e
-aquisição de dados, indicando prontamente problemas ou encaminhando avisos ao
-operador do \eng{run}. 
+aquisição de dados, indicando prontamente problemas, ou encaminhando avisos ao
+operador do \eng{run}.
 
 %Na Figura~\ref{fig:playdaq} é possível ver algumas
 %imagens desta interface. A imagem na parte superior mostra a janela de
@@ -329,7 +329,7 @@ operador do \eng{run}.
 \paragraph{Bancos de dados:} contêm pacotes para a \idx{configuração} do TDAQ e
 detetores. Os pacotes de configuração existem para propiciar parâmetros de
 configuração do sistema, sua descrição e acesso e registro operacional de
-informações durante a aquisição de dados. Há também componentes que provêm
+informações durante a aquisição de dados. Há também componentes que provêem
 acesso de leitura e escrita a bancos de dados que descrevem as condições do
 feixe provido pelo LHC e do detetor.
 
@@ -370,7 +370,7 @@ a menor quantidade de tempo morto possível, dentro das expectativas do
 experimento \cite{aa:chep-2003-2, aa:rt-2003, aa:tns-2004-3}. A
 Figura~\ref{fig:dfbasic} define os componentes deste sub-sistema. Os sinais de
 entrada, como podem ser observados nesta figura, são providos pelo LVL1 e
-ROD's. Nesta figura, as caixas representam processadores enquanto as linhas
+ROD's. Nesta figura, as caixas representam processadores, enquanto as linhas
 conectando-os representam conexões de rede (neste caso, \eng{gigabit} ou
 \eng{10-gigabit} ethernet). Próximo aos nós de processamento, há uma
 estimativa da quantidade destes tipos de processadores que serão necessárias
@@ -395,15 +395,15 @@ foram recentemente alocados para processamento. O L2SV localiza a L2PU com
 menos eventos atribuídos e envia a mensagem do LVL1 para este processador.
 
 A L2PU decodifica a mensagem enviada pelo L2SV e analisa as regiões do detetor
-de que precisará para processar o evento. O tamanho e a quantidade de dados
-que a L2PU necessitará para processar o evento depende dos algoritmos que são
+de que precisará para processar o evento. O tamanho e a quantidade de dados de
+que a L2PU necessitará para processar o evento dependem dos algoritmos que são
 lá executados e, portanto, este processador tem livre arbítrio na quantidade e
 qualidade dos dados que irá requisitar. Para coletar os dados, a L2PU computa
-o número e a localização dos ROB's que são necessários e encaminha um pedido
+o número e a localização dos ROB's que são necessários, e encaminha um pedido
 de dados prontamente ao Sistema de Leitura do Detetor (do inglês, \idxeng{Read
 Out System}, ROS). Os ROS's afetados respondem com os dados dos ROB's
-relevantes e, desta forma, a L2PU poderá classificar o evento. Após algum
-intervalo de tempo necessário a análise da Física do evento, a L2PU responde
+relevantes e, desta forma a L2PU poderá classificar o evento. Após algum
+intervalo de tempo necessário à análise da Física do evento, a L2PU responde
 ao L2SV com um valor binário, indicando rejeição ou aceitação do evento. Se o
 evento for aceito, a L2PU também envia um diagnóstico do que foi encontrado no
 evento para dentro de um pseudo-ROS (pROS), que permitirá a anexação desta
@@ -414,13 +414,13 @@ iniciada por uma mensagem do L2SV ao Gerente do Fluxo de Dados (do inglês,
 \eng{Dataflow Manager}, DFM), indicando o destino de todos os eventos até
 então aprovados pelo LVL1. No caso de um determinado evento ser
 desconsiderado, o DFM envia uma mensagem para o ROS indicando que este deverá
-apagá-lo dos \eng{buffers} ou, caso contrário, enviará uma mensagem indicando
-ao processador de construção de eventos (\eng{SubFarm Input}, SFI) que deverá
-coletar os fragmentos do evento. O SFI então envia mensagens a cada um dos
-ROS's no sistema e requer todas as informações disponíveis para o evento de
-interesse. O objetivo do SFI é aglutinar todas as partes do evento em um único
-espaço de memória, liberando as partes anteriores do sistema do encargo do
-gerenciamento deste mesmo espaço.
+apagá-lo dos \eng{buffers}, ou em caso contrário enviará uma mensagem
+indicando ao processador de construção de eventos (\eng{SubFarm Input}, SFI)
+que deverá coletar os fragmentos do evento. O SFI então envia mensagens a cada
+um dos ROS's no sistema e requer todas as informações disponíveis para o
+evento de interesse. O objetivo do SFI é aglutinar todas as partes do evento
+em um único espaço de memória, liberando as partes anteriores do sistema do
+encargo do gerenciamento deste mesmo espaço.
 
 Uma vez construído, o evento é guardado em uma pilha lógica dentro do SFI que
 aguarda um pedido de um Gerente do Filtro de Eventos (do inglês, \eng{Event
@@ -429,8 +429,8 @@ mais um evento. Este evento é transferido integralmente para o EFD neste
 momento. O EFD, de forma análoga ao L2SV, verificará a Unidade de
 Processamento (\eng{Processing Task}, PT) disponível e a alocará para tratar
 as informações deste evento. Neste momento, todo o evento (com seus dados) é
-disponibilizado à PT que poderá levar mais tempo processando o evento que sua
-análoga no LVL2, dado a taxa reduzida de eventos remanescentes. Se aprovado, o
+disponibilizado à PT, que poderá levar mais tempo processando o evento que sua
+análoga no LVL2, dada a taxa reduzida de eventos remanescentes. Se aprovado, o
 evento é encaminhado a um processador de saída (\eng{SubFarm Output}, SFO),
 que coopera com o sistema de gravação de dados na disponibilização dos eventos
 colhidos pelo DAQ.
@@ -457,13 +457,13 @@ tarefas (para ambientes multi-tarefa), relógios e primitivas como filas
 protegidas. Esta camada de funções também isola, dentro do possível, variações
 no sistema operacional de alterações no código das aplicações do DF;
 
-\item Ferramentas para troca de mensagem: provêm uma interface simples para a
+\item Ferramentas para troca de mensagem: provêem uma interface simples para a
 troca de mensagens entre aplicações. Os canais de comunicação são
-configuráveis permitindo o tráfego (transparente) de dados diretamente sobre
+configuráveis, permitindo o tráfego (transparente) de dados diretamente sobre
 pacotes \eng{ethernet}, UDP ou TCP. Este pacote também engloba ferramentas
 para a codificação e decodificação dos dados provenientes dos detetores.
 
-\item Ferramentas para configuração: provêm interfaces para a configuração dos
+\item Ferramentas para configuração: provêem interfaces para a configuração dos
 aplicativos utilizando o Sistema \eng{Online};
 
 \item Ferramentas para controle e relatório de erros: permitem o envio de
@@ -474,13 +474,13 @@ moldes da máquina de estados apresentada na Figura~\ref{fig:online-fsm}.
 
 Para aumentar a qualidade dos programas desenvolvidos e a manutenção a longo
 prazo (o experimento deve operar por 10 anos ou mais), optou-se por utilizar
-técnicas de orientação à objetos (OO) aplicadas sobre C++. Alguns problemas,
+técnicas de orientação a objetos (OO) aplicadas sobre C++. Alguns problemas,
 e.g. ineficiência da utilização dos \eng{containers}-padrão da biblioteca
 padrão (\eng{Standard Template Libraries}, STL) C++ em ambientes multi-tarefa,
 advieram desta decisão \cite{aa:chep-2003}. De fato, a alocação de memória
 implementada pelos compiladores da linha GCC \cite{web:gcc, web:gcc-stl} visa
 a otimização da alocação de memória por processo enquanto em ambientes
-multi-tarefas (do inglês \eng{multi-threading}) é necessário a utilização de
+multi-tarefas (do inglês \eng{multi-threading}) é necessária a utilização de
 pilhas separadas para cada tarefa. A solução neste caso foi a adoção de
 alocadores mais eficientes para este propósito, que não fazem parte do padrão
 C++.
@@ -531,7 +531,7 @@ processamento. Nota-se aqui que eventos interessantes terão maior tempo de
 processamento que eventos ordinários, já que os últimos serão rejeitados assim
 que possível, enquanto que os primeiros terão que ser aprovados por todos os
 critérios de processamento no LVL2. O processamento como um todo continua
-requisitando dados à medida do necessário, aos diversos ROS's, até que a L2PU
+requisitando dados, conforme a necessidade, aos diversos ROS's, até que a L2PU
 possa concluir, com baixíssima probabilidade de erro, se o evento deve ser
 aprovado ou rejeitado.
 
@@ -576,7 +576,7 @@ Figura~\ref{fig:l2puarch}, onde é possível observar três componentes
 primários:
 
 \begin{itemize}
-\item Tarefa de Entrada (\eng{input thread}): Canaliza o recebimento de dados
+\item Tarefa de Entrada (\eng{input thread}): Centraliza o recebimento de dados
 dentro da L2PU. Cada tipo de mensagem recebida está associada a um manuseador
 (\eng{handler}) distinto que especifica o destino a ser dado à mensagem
 recebida. Por exemplo, mensagens do L2SV indicando resultados do LVL1 são
@@ -602,8 +602,8 @@ passo do processamento de um evento.
 Ao receber um L1R do Supervisor, a tarefa de entrada irá colocá-lo numa pilha
 tipo FIFO (\eng{First In First Out}) protegida ao acesso concorrente da cada
 uma das tarefas processadoras. As tarefas concorrem na aquisição de um L1R
-para iniciar o processamento e, caso sucedam, saem do modo de espera, onde
-praticamente não consomem a CPU do sistema hospedeiro, e iniciam a
+para iniciar o processamento e, caso tenham sucesso, saem do modo de espera,
+onde praticamente não consomem a CPU do sistema hospedeiro, e iniciam a
 discriminação do evento. Para isso, requisitam dados aos ROS's disponíveis que
 enviarão, dentro de suas possibilidades, os fragmentos da RoI equivalentes ao
 subdetetor de interesse. É possível que determinados ROS's não consigam
@@ -614,13 +614,13 @@ cadeia de aquisição, passando pela eletrônica de aquisição acoplada ao
 detetor, os ROB's e finalmente os ROS's, podem apresentar inúmeros tipos de
 falhas que resultarão na perda dos dados analisados pela L2PU, total ou
 parcialmente. Os algoritmos de discriminação devem estar preparados para estas
-anomalias de funcionamento e devem ser construídos para consumir o mínimo
-possível de dados, já que além da maior probabilidade de falhas, mais dados
+anomalias de funcionamento, e devem ser construídos para consumir o mínimo
+possível de dados, já que, além da maior probabilidade de falhas, mais dados
 também significam maior banda passante necessária à rede que interliga estes
 dois nós de processamento.
 
 Os fragmentos de RoI (e também do detetor) que são carregados pela L2PU são
-armazenados e transmitidos em um formato particular e uma biblioteca de
+armazenados e transmitidos em um formato particular, e uma biblioteca de
 codificação e decodificação \cite{aa:ef-urd, aa:ef-ooad} está disponível para
 este propósito. Os dados não são somente decodificados, mas também
 re-arranjados e calibrados antes do uso, o que pode consumir grande parte do
@@ -645,7 +645,7 @@ operar, de forma cômoda, o experimento por 10 anos;
 
 \item Operacionais: O equipamento deve ter sua operabilidade maximizada. Deve
 ser relativamente fácil repor componentes ou realizar atualizações que não
-impliquem na reposição de toda a cadeia de aquisição. A manutenção e operação
+impliquem a reposição de toda a cadeia de aquisição. A manutenção e operação
 dos programas deve ser acessível a novos usuários.
 \end{itemize}
 
@@ -694,7 +694,7 @@ próxima ao início de operação do detetor. Por outro lado, a transferência n
 data de compra também possibilita a aquisição de processadores mais potentes
 pelo mesmo custo. Desta forma, as \eng{testbeds} disponíveis para teste, ainda
 que representando o estado da arte dos equipamentos escolhidos, são de tamanho
-reduzido se comparadas ao sistema final.
+reduzido, se comparadas ao sistema final.
 
 De forma a qualificar a avaliação de cada componente, faz-se necessário criar
 condições de operação que satisfaçam o modelo de operação final. Com relação
@@ -708,12 +708,12 @@ L2PU, através de parâmetros de configuração disponíveis ao operador do
 experimento. Esta estratégia permite que o sistema de fluxo de dados seja
 testado independentemente dos algoritmos de filtragem, paralelizando o
 desenvolvimento \cite{aa:tns-2004-2} e reduzindo significativamente as
-possibilidades de falha devido a componentes que não sejam relevantes a natureza dos
-testes. Para os processos descritos nesta seção, foram utilizados emuladores
-dos componentes de discriminação, que podem simular a aquisição de dados de
-RoI's e até o tempo de processamento entre cada tomada de dados, possivelmente
-em múltiplos passos. Este bloco emulador é sintonizado para caracterizar os
-parâmetros normais de operação do LVL2.
+possibilidades de falha devido a componentes que não sejam relevantes para a
+natureza dos testes. Para os processos descritos nesta seção, foram utilizados
+emuladores dos componentes de discriminação, que podem simular a aquisição de
+dados de RoI's e até o tempo de processamento entre tomadas de dados,
+possivelmente em múltiplos passos. Este bloco emulador é sintonizado para
+caracterizar os parâmetros normais de operação do LVL2.
 
 \subsubsection{Parâmetros críticos do sistema de leitura}
 
@@ -726,7 +726,7 @@ dependerá diretamente dos valores discriminantes que devem ser
 encontrados. Algumas modalidades de algoritmos podem requerer mais dados e,
 portanto, aumentar significativamente o tráfego de dados na rede. Algoritmos
 mais eficientes tenderão a consumir dados em pequenas parcelas, minimizando o
-tempo de rejeição necessária para cada evento do ruído de fundo. É possível,
+tempo de rejeição necessário para cada evento do ruído de fundo. É possível,
 em todos os casos, adquirir pequenas parcelas de dados inicialmente e aumentar
 o campo de atuação do algoritmo à medida que o evento não é rejeitado. Por
 outro lado, também é possível compartimentalizar a aquisição de dados por
@@ -751,7 +751,7 @@ desempenho nesta área indicam melhores geometrias para a interconexão do
 sistema de leitura do detetor e a rede que liga o LVL2. Por outro lado, o
 número ótimo de tarefas processadoras operando dentro de cada L2PU dependerá
 do tempo-morto despendido durante a aquisição de dados e do número de
-processadores disponível em cada máquina. Em máquinas duplamente processadas,
+processadores disponíveis em cada máquina. Em máquinas duplamente processadas,
 por exemplo, o número ótimo de tarefas processadoras deve estar entre 3 e 4,
 já que o uso de um número menor deste tipo de tarefas implicará na
 sub-utilização do poder de processamento de cada nó.
@@ -764,17 +764,18 @@ na Figura~\ref{fig:tns-4fig}. Estes testes foram executados em uma bancada com
 apenas um L2SV, doze ROS's e uma L2PU. Todos os nós nesta bancada de teste são
 PC's duplamente processados com Intel/Xeon's de 2,2 GHz e 1 \eng{gigabyte} de
 memória RAM, interconectados por uma chave padrão \eng{gigabit} ethernet. Na
-figura, o eixo vertical é possível observar a taxa de processamento inversa de
-um L2SV com uma única L2PU sob seu controle. Este parâmetro representa o tempo
-médio que cada evento levou para ser inteiramente processado pelo LVL2, ou
-seja:
+figura, no eixo vertical é possível observar a taxa de processamento inversa
+de um L2SV com uma única L2PU sob seu controle. Este parâmetro representa o
+tempo médio que cada evento levou para ser inteiramente processado pelo LVL2,
+ou seja:
 
 \begin{figure}
 \begin{center}
 \includegraphics{tns/4fig}
 \end{center}
 \caption{Desempenho da coleção de dados de RoI para várias combinações de
-tamanhos de RoI (em bytes) e tarefas processadoras.}
+tamanhos de RoI (em bytes) e tarefas processadoras. Extraída de
+\cite{aa:tns-2004}.}
 \label{fig:tns-4fig}
 \end{figure}
 
@@ -783,7 +784,7 @@ tamanhos de RoI (em bytes) e tarefas processadoras.}
 \item A aquisição do resultado pela tarefa processadora;
 \item O mapeamento da RoI nos ROB's de interesse;
 \item A aquisição dos dados dos ROS's;
-\item A resposta para o L2SV indicando aceitação ou rejeição.
+\item A resposta para o L2SV, indicando aceitação ou rejeição.
 \end{enumerate}
 
 Neste caso, o tempo de processamento para os dados foi ajustado para zero. A
@@ -796,14 +797,14 @@ apresentado nesta figura corresponde a valores de tamanhos de RoI realísticos
 para dados partindo da seção e.m. do calorímetro, representando este o pior
 dos casos. Para este sub-detetor, estima-se que a RoI para os dados de todas
 as três camadas do detetor encontre-se espalhada por 13 a 16 ROB's e tenha um
-tamanho total, em média, de 16 \eng{kilobytes}. É possível notar, através
+tamanho total, em média, de 16 quilobytes. É possível notar, através
 deste gráfico, que o tempo de coleção de dados contribui, no pior dos casos,
-em apenas 10\% do tempo de processamento médio estimado para cada evento no
+com apenas 10\% do tempo de processamento médio estimado para cada evento no
 LVL2 (10 milissegundos).
 
 Podemos também notar que o aumento no número de tarefas processadoras de 1
 para 4 modifica significativamente o perfil do tempo-morto gasto na aquisição
-de dados, já que não haverá esperas espontâneas no sistema como colocado
+de dados, já que não haverá esperas espontâneas no sistema, como colocado
 anteriormente neste texto. No caso de 4 tarefas processadoras, o tempo de
 coleção de dados está na ordem de 600 microssegundos. Podemos também observar
 que com maior distribuição de dados no sistema (mais ROS's), o tempo de
@@ -813,15 +814,15 @@ ROS's é portanto desejável para um tempo-morto menor.
 
 Na Figura~\ref{fig:tns-5fig} observa-se o desempenho de uma única L2PU contra
 a taxa de operação de um L2SV invertida para um número variável de tarefas
-processadoras. Neste teste o tamanho da RoI está fixo em 16
-\eng{kilobytes}. As diferentes curvas representam a mesma RoI sendo coletada
-de 2, 4, 8 ou 16 ROS's. Por exemplo, a curva superior representa os resultados
-para coletar uma RoI de 16 \eng{kilobytes} de 16 ROS's (1 \eng{kilobyte} por
-ROS). O resultado indica que o número ótimo de tarefas processadoras para esta
-bancada de testes (sistemas duplamente processados) é de, aproximadamente,
-três e é independente do número de ROS's dos quais os dados da RoI estão sendo
-coletados. Ademais, os resultados mostram que, para as condições deste teste,
-e para 3 tarefas processadoras, a coleção de dados contribui com menos de 10
+processadoras. Neste teste o tamanho da RoI está fixo em 16 quilobytes. As
+diferentes curvas representam a mesma RoI sendo coletada de 2, 4, 8 ou 16
+ROS's. Por exemplo, a curva superior representa os resultados para coletar uma
+RoI de 16 quilobytes de 16 ROS's (1 quilobyte por ROS). O resultado
+indica que o número ótimo de tarefas processadoras para esta bancada de testes
+(sistemas duplamente processados) é de, aproximadamente, três e é independente
+do número de ROS's dos quais os dados da RoI estão sendo coletados. Ademais,
+os resultados mostram que, para as condições deste teste, e para 3 tarefas
+processadoras, a coleção de dados contribui com menos de 10
 \% do tempo de processamento médio esperado no LVL2 de 10 ms. Isto concorda
 com o estudo anterior.
 
@@ -830,7 +831,8 @@ com o estudo anterior.
 \includegraphics[scale=0.9]{tns/5fig}
 \end{center}
 \caption{A taxa inversa em um L2SV para uma única L2PU funcionando com
-diferentes números de tarefas processadoras.}
+diferentes números de tarefas processadoras. Extraída de
+\cite{aa:tns-2004}.}
 \label{fig:tns-5fig}
 \end{figure}
 
@@ -850,7 +852,7 @@ usadas novamente e, por esta razão, deve ser notado que a taxa de envio de
 mensagens de cada um destes nós estará operando num patamar bastante acima do
 que o sistema real necessitará. Para estes testes, cada L2PU estará gerando 10
 vezes mais tráfego que o esperado no sistema final. De forma análoga e
-aditiva, o número de ROS's do sistema também não é ideal, devido a baixa
+aditiva, o número de ROS's do sistema também não é ideal, devido à baixa
 disponibilidade de equipamento para testes. É, portanto, necessário garantir
 que a taxa de requisições de dados para cada ROS não exceda um valor limite
 que mascararia quaisquer resultados obtidos.
@@ -863,14 +865,14 @@ com ROB's, gerando um total de 48 ROB's para este teste. Para cada requisição,
 a L2PU escolhe um dos 48 ROB's aleatoriamente e um número de ROB's com
 numeração consecutiva. Por exemplo, no caso em que cada RoI consista de 6
 ROB's, a L2PU seleciona o primeiro aleatoriamente e completa o pedido com
-outros 5 ROB's, cuja numeração sucede o primeiro ROB. Se o último ROB fosse
+outros 5 ROB's cuja numeração sucede o primeiro ROB. Se o último ROB fosse
 selecionado, o algoritmo voltaria ao primeiro ROB disponível
 (\eng{wrap-around}).
 
 A Figura~\ref{fig:tns-6fig} traz os resultados sintetizados desta
 bancada. Nesta figura é possível observar a taxa de eventos média tratados em
 cada L2PU em função do número de L2PU's usadas no teste para uma RoI
-distribuída por 1, 6 ou 24 ROB's (com cerca de 1,5 \eng{kilobytes} por
+distribuída por 1, 6 ou 24 ROB's (com cerca de 1,5 quilobyte por
 ROB). Observa-se na figura que a taxa por L2PU diminui quando o número de
 L2PU's aumenta, por aproximadamente 20\% para 1 ROB por RoI e aproximadamente
 40\% para 24 ROB's por RoI. Entretanto, com 11 L2PU's configurados na bancada,
@@ -886,7 +888,8 @@ por RoI indicados.
 \end{center}
 \caption{A taxa de eventos média para cada L2PU em função do número de
 L2PU's no sistema para diferentes números de ROB's por RoI. Cada ROB contribui
-com um montante igual dos dados da RoI.}
+com um montante igual dos dados da RoI. Extraída de
+\cite{aa:tns-2004}.}
 \label{fig:tns-6fig}
 \end{figure}
 
@@ -904,7 +907,8 @@ condições do DAQ.
 \includegraphics[scale=0.7]{tns/scale-1msburn}
 \end{center}
 \caption{A taxa de eventos média para cada L2PU em função do número de L2PU's
-no sistema. O tempo de processamento emulado para cada evento é de 1 ms.}
+no sistema. O tempo de processamento emulado para cada evento é de 1
+ms. Extraída de \cite{aa:tns-2004}.}
 \label{fig:tns-scale-burn} 
 \end{figure}
 
@@ -915,8 +919,8 @@ ethernet, com um número de outras máquinas rodando o código da L2PU sem
 algoritmos de discriminação carregados e sem coletar dados dos ROS's. Este é
 portanto um teste extremo, visto que as L2PU's vão responder o mais rápido
 possível a cada requisição de processamento de eventos feita pelo L2SV. Como
-pode ser visto pela figura, um único L2SV pode sustentar a taxa de 32 kHz
-enquanto distribuindo L1R's para apenas uma das L2PU's sob seu controle e a
+pode ser visto pela figura, um único L2SV pode sustentar a taxa de 32~kHz
+enquanto distribuindo L1R's para apenas uma das L2PU's sob seu controle, e a
 dependência no número de L2PU's está na ordem de 1\%. Desta forma, tomando-se
 como ponto de partida a implementação do sistema de fluxo de dados e as
 máquinas, cerca de 10 L2SV's seriam capazes de suprir a taxa de entrada do
@@ -929,7 +933,8 @@ contar com a presença de 30 a 50 L2SV's no sistema final.
 \begin{center}
 \includegraphics[scale=0.8]{tns/7fig}
 \end{center}
-\caption{A taxa sustentada por L2SV com o aumento de L2PU's no sistema.}
+\caption{A taxa sustentada por L2SV com o aumento de L2PU's no
+sistema. Extraída de \cite{aa:tns-2004}.}
 \label{fig:tns-7fig}
 \end{figure}
 
@@ -946,7 +951,7 @@ finalmente aprovados se torna duvidosa.
 
 A infraestrutura de seleção de eventos dos Altos Níveis de Filtragem constitui
 o ambiente de processamento para os algoritmos de discriminação do DAQ. Esta
-infraestrutura é comum ao LVL2 e ao EF e é composta de 4 partes distintas. O
+infraestrutura é comum ao LVL2 e ao EF, e é composta de 4 partes distintas. O
 Gerente do HLT (ou, do inglês, \eng{Steering}) agenda os algoritmos do HLT
 correspondentes ao tipo de evento que está sendo analisado. Informações sobre
 quantidades físicas específicas a um evento são trocadas através de
@@ -997,8 +1002,8 @@ no desempenho), eles utilizam o mesmo EDM e descrição do detetor presentes no
 EF e \eng{offline}. A utilização transparente de tais componentes é possível e
 uma implementação comum da infraestrutura do HLT para ambos o LVL2 e o EF pode
 ser realizada se a mesma interface estiver disponível para o LVL2. Esta
-funcionalidade é provida pelo Gerente do HLT no LVL2 (\eng{LVL2 Steering
-Controller}, L2SC).
+funcionalidade é provida pelo Guia ou Gerente do HLT no LVL2 (\eng{LVL2
+Steering Controller}, L2SC).
 
 \subsubsection{O L2SC}
 
@@ -1031,7 +1036,7 @@ que ocorrem em tarefas processadoras (concorrentes).
 \includegraphics[scale=0.55]{tns2/2fig}
 \end{center}
 \caption{A seqüência de interações do L2SC com o L2PU e o \eng{software} de
-seleção de eventos.}
+seleção de eventos. Extraída de \cite{aa:tns-2004-2}.}
 \label{fig:l2sc-interaction}
 \end{figure}
 
@@ -1078,7 +1083,7 @@ no mínimo, 100.000 eventos. Escalonamento quase perfeito da latência medida
 foi observado quando o tempo de execução dos algoritmos era variado com um
 ciclo de processamento fictício de 0 a 8 milissegundos em configurações
 distintas, indicando que o \eng{overhead} por evento introduzido pelo L2SC
-seja independente do tempo de execução observado.
+é independente do tempo de execução observado.
 
 \begin{table}
 \caption{Taxas de processamento em um sistema duplamente processado AMD-Athlon 1,533 GHz.}
@@ -1117,8 +1122,8 @@ toda a infraestrutura disponível mencionada anteriormente. Para este teste, 95
 simulada de jatos duplos (\eng{di-jets}) em baixa luminosidade, para um
 tamanho de RoI de $\Delta\eta \times \Delta\phi = 0,3 \times 0,3$. A
 Figura~\ref{fig:l2sc-mu} exibe resultados similares para uma fatia completa de
-seleção para múons. Nesta figura é possível ver que as contribuições, em ordem
-decrescente, para o tempo de processamento total de cada evento são
+seleção para múons. Nesta figura é possível, ver que as contribuições, em
+ordem decrescente, para o tempo de processamento total de cada evento são
 pré-processamento dos dados e sua conversão para o EDM, os \eng{overheads} da
 infraestrutura provida pelo HLT (\eng{Steering}), processamento do algoritmo
 de extração de características (denotado por \texttt{muFast} na figura) e o
@@ -1135,7 +1140,7 @@ observado na caverna do ATLAS em sua disposição final.
 \end{center}
 \caption{As principais contribuições para o tempo de processamento mostradas
 como integrais para a fatia completa do sistema de seleção para RoI's de
-múons.}
+múons. Extraída de \cite{hlt-tdr}.}
 \label{fig:l2sc-mu}
 \end{figure}
 
