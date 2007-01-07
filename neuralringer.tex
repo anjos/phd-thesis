@@ -30,7 +30,7 @@ o relatório de erros. A escolha da linguagem XML, como formato de troca de
 dados e valores de configuração, vem da grande quantidade de interpretadores
 (\eng{parsers}) disponíveis livremente na \eng{Internet}, já que é um padrão
 bastante difundido. O suporte a XML disponível atualmente inclui, mas não se
-limita a verificações de sintaxe automatizadas (via
+limita a, verificações de sintaxe automatizadas (via
 \eng{XML schemas}) e transformações para que se adicione informação ou seja
 possível a visualização, de forma adequada, do conteúdo de uma base de dados
 XML.
@@ -47,14 +47,14 @@ arquivos-padrão tais como \texttt{std::cout} e \texttt{std::cerr}
 interface (abstrata) é utilizada como base para implementações específicas
 baseadas em interpretadores habitualmente encontrados nos sistemas
 operacionais correntes. Especificamente, implementações para o sistema Xerces
-C++ \cite{xerces-c}, do grupo Apache e libxml2 \cite{libxml2}, do grupo Gnome
+C++ \cite{xerces-c}, do grupo Apache e libxml2 \cite{libxml2}, do grupo GNOME,
 estão presentes na implementação atual. O interpretador XML utiliza-se do
 sistema de relatório de erros para relatar problemas na leitura ou escrita de
-arquivos de forma unificada. Uma caixa de ferramentas, baseada no tipo
-abstrato \texttt{XMLProcessor} provê um conjunto de primitivas para facilitar
-a escrita e a leitura de parâmetros e trechos de texto. No evento de erros
-fatais, uma exceção baseada no tipo \texttt{Exception} será lançada pela parte
-afetada do código.
+arquivos de forma unificada. Uma caixa de ferramentas baseada no tipo abstrato
+\texttt{XMLProcessor} provê um conjunto de primitivas para facilitar a escrita
+e a leitura de parâmetros e trechos de texto. No evento de erros fatais, uma
+exceção baseada no tipo \texttt{Exception} será lançada pela parte afetada do
+código.
 
 \begin{figure}
 \begin{center}
@@ -115,7 +115,7 @@ contêm um número opcional de atributos.
 Para o caso específico do processamento de dados de RoIs, uma classe é
 derivada da implementação de base de um \texttt{PatternSet}, chamada
 \texttt{RoIPatternSet}. Esta classe implementa, adicionalmente à classe de
-base, métodos para a salva-guarda, leitura e manipulação de campos
+base, métodos para a salvaguarda, leitura e manipulação de campos
 especificamente relacionados a uma RoI, assim como os identificadores do
 primeiro nível de filtragem e os valores das coordenadas $\eta$ e $\phi$.
 Desta forma, é possível correlacionar os resultados obtidos com outros testes
@@ -126,14 +126,14 @@ Uma coleção de um ou mais conjuntos de padrões é chamada \texttt{Database}, 
 banco de dados. Um banco de dados reúne os diferentes conjuntos de padrões que
 se deseja processar através de um mapa. Para cada conjunto de padrões, o
 usuário pode atribuir um nome, mapeando os dados propriamente ditos a um valor
-legível a uma outra pessoa. Usando um objeto da classe \texttt{Database}, é
+legível por uma outra pessoa. Usando um objeto da classe \texttt{Database}, é
 possível manipular os conjuntos de padrões de uma forma unificada, por
 exemplo, quando deseja-se extrair a média ou desvio padrão global dos
 conjuntos de padrões de um problema.
 
 Operadores (\texttt{PatternOperator}s no diagrama), são elementos que podem
 modificar um padrão e são usados para extrair a média, variância ou aplicar
-normalizações dos mais diferentes critérios nos dados disponíveis. Na figura,
+normalizações segundo diferentes critérios nos dados disponíveis. Na figura,
 mostra-se o mais relevante dos operadores na biblioteca, chamado
 \eng{NormalizationOperator}, que é inicializado a partir de uma base de dados
 e pode, quando aplicado a um padrão, remover a média e desvio padrão da base
@@ -166,7 +166,7 @@ responsabilidade. O sistema funciona da seguinte forma:
 \begin{itemize}
 \item \textbf{Para executar a rede}: Neste modo, o usuário irá iniciar o
 processo aplicando à entrada da rede um padrão ou conjunto de padrões. O
-objeto do tipo \texttt{Network} irá então, para cada coluna da matriz de dados
+objeto do tipo \texttt{Network} irá, então, para cada coluna da matriz de dados
 de entrada, chamar o método \texttt{run()} dos neurônios de entrada,
 correlacionando os dados do usuário com as posições relativas do neurônio da
 camada de entrada. Opcionalmente, se existirem neurônios de polarização
@@ -189,12 +189,12 @@ Os tipos de neurônio são divididos nas seguintes classes:
 
 \begin{itemize}
 \item Entrada (\texttt{InputNeuron}): são neurônios que recebem a entrada
-rede, opcionalmente aplicando um fator de normalização aos dados e propagando
-o sinal para neurônios escondidos ou de saída. Como estão no início da rede,
-estes neurônios não podem retropropagar sinais recebidos em suas saídas para
-fins de treinamento. Uma vez que atingem estes neurônios, os sinais de erro
-retropropagados são apagados da memória e o passo de treinamento é considerado
-como executado;
+da rede, opcionalmente aplicando um fator de normalização aos dados e
+propagando o sinal para neurônios escondidos ou de saída. Como estão no início
+da rede, estes neurônios não podem retropropagar sinais recebidos em suas
+saídas para fins de treinamento. Uma vez que atingem estes neurônios, os
+sinais de erro retropropagados são apagados da memória e o passo de
+treinamento é considerado como executado;
 
 \item Polarização (\texttt{BiasNeuron}): este tipo herda suas 
 caracte\-rís\-ticas da classe \texttt{In\-put\-Neuron}, mas não permite que o
@@ -206,7 +206,7 @@ sinapses de conexão, aos neurônios de saída ou escondidos;
 neurônios de entrada e/ou polarização, conectando a entrada à saída. São
 opcionais, já que é possível desenvolver redes sem neurônios desta
 classe. Neurônios escondidos transmitem os dados recebidos em suas entradas a
-seus neurônios de saída, aplicando uma operação de soma dos valores de
+seus neurônios de saída, aplicando uma operação de soma aos valores de
 entrada, seguida, opcionalmente de uma função de ativação configurável;
 
 \item Saída (\texttt{OutputNeuron}): são os neurônios que estão na saída da
@@ -219,23 +219,23 @@ A execução da rede e treinamento das sinapses é regido por dois parâmetros q
 estão atrelados a estes elementos: as estratégias. Estratégias para neurônios
 (objetos da classe \texttt{NeuronStrategy}) definem de que forma os neurônios
 propagaram os sinais de erro quando são injetados na saída rede, para correção
-dos valores sinápticos. No momento, somente há um tipo de estratégia possível:
+dos valores sinápticos. No momento, há somente um tipo de estratégia possível:
 a retropropagação de erros. Três funções de ativação estão implementadas: a
 função linear (utilizada para redes tipo LMS), a função logística
 simplificada, definida na Equação~(\ref{eq:logf}) e a função tangente
 hiperbólica, definida na Equação~(\ref{eq:tanh}).
 
-Métodos para salva-guardar e restaurar uma rede a partir de um arquivo es\-tão
-implementados. A salva-guarda é implementada através de um processo iterativo
-de delegação de responsabilidades onde cada neurônio e sinapse envolvido na
-rede se auto-descreve no arquivo de saída. O formato escolhido é XML, uma vez
+Métodos para salvaguardar e restaurar uma rede a partir de um arquivo es\-tão
+implementados. A salvaguarda é implementada através de um processo iterativo
+de delegação de responsabilidades, em que cada neurônio e sinapse envolvidos na
+rede se auto-descrevem no arquivo de saída. O formato escolhido é XML, uma vez
 que as bibliotecas de base do pacote \texttt{sys} já implementam as primitivas
 de leitura e escrita neste formato. Um segundo método (chamado \texttt{dot()})
 está disponível para objetos do tipo rede. Este método implementa a
 escrita em disco de uma descrição da rede no formato \texttt{dot}
 \cite{graphviz}, que permite a visualização dos pesos e interconexões da rede
 de forma gráfica. Exemplos de uma rede LMS e uma rede MLP encontram-se nas
-Figuras~\ref{fig:lms-dot-example} e ~\ref{fig:mlp-dot-example}
+Figuras~\ref{fig:lms-dot-example} e ~\ref{fig:mlp-dot-example},
 respectivamente. As caixas na parte esquerda da figura representam o fator de
 normalização aplicado às entradas. Os círculos à esquerda, seguindo o caminho
 de propagação do sinal representam os neurônios de entrada. Cada neurônio
@@ -244,7 +244,7 @@ corresponde ao identificador usado dentro das aplicações do
 \eng{NeuralRinger}. 
 
 Neurônios escondidos e aqueles pertencentes à camada de saída são
-representados por um retângulo com as bordas arredondadas. Neste retângulo, o
+representados por uma caixa com as bordas arredondadas. Nesta caixa, o
 identificador do neurônio está representado na parte superior esquerda. Na
 parte inferior desta região, abaixo do identificador, um sinal de adição ($+$)
 indica que as entradas deste neurônio serão somadas antes da aplicação da
@@ -260,7 +260,7 @@ precede o círculo.
 \begin{center}
 \includegraphics[scale=0.35]{lms-best2}
 \end{center}
-\caption{Exemplo de uma gráfico de fluxo produzido pelo método \texttt{dot()}
+\caption{Exemplo de um gráfico de fluxo produzido pelo método \texttt{dot()}
 para uma rede LMS, tal qual utilizada para os testes na Seção~\ref{sec:linear}.}
 \label{fig:lms-dot-example}
 \end{figure}
@@ -292,9 +292,9 @@ separar dados para uma análise menos criteriosa. Para o filtro de referência,
 
 \item \texttt{roiformat}: define o formato de intercâmbio entre o sistema de
 calorimetria implementado no Athena e o \eng{NeuralRinger}, possibilitando que
-os dados disponíveis no primeiro, possam ser facilmente escritos em disco e
+os dados disponíveis no primeiro possam ser facilmente escritos em disco e
 lidos por versões do \eng{NeuralRinger} não acompladas ao Athena. Isso
-normalmente diminui o tempo de desenvolvimento e teste e é aconselhável;
+normalmente diminui o tempo de desenvolvimento e teste, e é aconselhável;
 
 \item \texttt{rbuild}: este pacote contém primitivas para a construções de
 anéis baseados nos dados brutos das RoI disponíveis. Este método de deteção é
@@ -325,7 +325,7 @@ pelo LVL1, que está disponível nas bases de dado XML;
 \texttt{roiformat} para inspeção por um programa externo;
 
 \item \textbf{lms-train}: Implementa um sistema completo de treinamento 
-de uma rede LMS. O sistema é extremamente configurável quanto aos parâmetros de
+de uma rede LMS. O sistema é configurável quanto aos parâmetros de
 treinamento, permitindo a especificação da taxa de treinamento, tamanho da
 época, critério de parada, tempo de parada abrupta e os nomes dos arquivos de
 entrada e saída;
@@ -342,8 +342,6 @@ primeiro nível:
 \item Isolamento eletromagnético;
 \end{itemize}
 
-Assim como está definido na Seção~\ref{sec:lvl2-detect-electron};
-
 \item \textbf{merge}: Este programa pode aglutinar múltiplas bases de dados
 XML em um único arquivo de saída; 
 
@@ -356,7 +354,7 @@ de saída com os resultados;
 
 \item \textbf{mlp-train}: Implementa um sistema completo de treinamento de 
 uma rede MLP. De forma análoga ao programa \texttt{lms-train}, esta aplicação
-é extremamente configurável quanto aos parâmetros de treinamento, permitindo a
+é configurável quanto aos parâmetros de treinamento, permitindo a
 especificação da taxa de treinamento, tamanho da época, critério de parada,
 tempo de parada abrupta e os nomes dos arquivos de entrada e saída;
 
@@ -364,7 +362,7 @@ tempo de parada abrupta e os nomes dos arquivos de entrada e saída;
 colunas de uma matriz de dados, baseando-se na análise da relevância e um
 parâmetro de corte. Com este programa também é possível reduzir o espaço de
 entrada de um discriminador, minimizando as perdas na classificação, como será
-mostrado mais a frente;
+mostrado mais à frente;
 
 \item \textbf{ringer}: Este programa pode calcular, levando-se em consideração
 um padrão de normalização, os anéis de energia que serão utilizados mais a
@@ -372,13 +370,13 @@ frente no trabalho. A saída deste programa é uma base de dados no formato XML
 padrão do \eng{NeuralRinger};
 
 \item \textbf{ringer-run}: Este programa executa a extração e a discriminação de
-elétrons e jatos baseado na técnica do anelamento a ser descrita nas próximas
+elétrons e jatos baseado na técnica do anelamento, a ser descrita nas próximas
 seções. Ele pode ser utilizado para o cálculo do desempenho do algoritmo de
 filtragem \eng{offline} e permite uma otimização da execução antes da
 implementação no ambiente Athena;
 
 \item \textbf{xml2dot}: Escreve a representação de uma rede no formato
-\texttt{dot} para que seja possível a visualização tal qual o exemplo das
+\texttt{dot} para que seja possível a visualização tal qual no exemplo das
 Figuras~\ref{fig:lms-dot-example} e \ref{fig:mlp-dot-example};
 
 \item \textbf{xml2text}: Este programa converte uma base de dados no formato
@@ -386,10 +384,10 @@ XML padrão do \eng{NeuralRinger} em uma representação no formato texto, que
 pode ser lido por programas que não suportem XML.
 \end{itemize}
 
-Cada um dos programas responde ao comando \texttt{--help} que imprime na tela
-o conjunto de opções e valores padrões disponíveis. Um conjunto de scripts de
-análise é embarcado junto com o pacote, permitindo ao usuário a automação do
-treinamento e a análise dos resultados considerando-se figuras de mérito
-padrão para a análise baseada em calorimetria no ATLAS.
+Cada um dos programas responde ao comando \texttt{--help}, que imprime na tela
+o conjunto de opções e valores padrões disponíveis. Um conjunto de
+\eng{scripts} de análise encontra-se no pacote, permitindo ao usuário
+a automação do treinamento e a análise dos resultados considerando-se figuras
+de mérito padrão para a análise baseada em calorimetria no ATLAS.
 
 \typeout{ *************** End of file neuralringer.tex *************** }

@@ -25,12 +25,13 @@ partir de sua infraestrutura.
 
 O CERN surgiu em 1952 quando, depois de várias reuniões, 11 Estados europeus
 aceitaram organizar um Conselho Europeu para a Pesquisa Nuclear (do francês
-\idxfr{Centre Européen pour la Recherche Nucléaire}) Provisório, com sede
+\idxfr{Conséil Européen pour la Recherche Nucléaire}) Provisório, com sede
 prevista em um local próximo à Genebra, na Suíça. Dois anos após a ratificação
-de uma convenção por seus \idx{Estados-Membros}, no dia 29 de maio de 1954, o
+de uma convenção por seus \idx{Estados-Membros}, no dia 29 de maio de 1954, um
 centro foi inaugurado. Embora o termo ``Provisório'' tenha sido banido do nome
-do laboratório, a sigla CERN continuou a ser empregada.
- 
+do laboratório, a sigla CERN continuou a ser empregada, tendo o significado da
+letra \textit{C} passado a \textit{Centro} ao invés de \textit{Conselho}.
+
 O primeiro acelerador do CERN\index{CERN!primeiro acelerador}, um
 \idxeng{Synchro-Cyclotron} de prótons a 600 MeV, começou a operar em
 1957. Este acelerador foi responsável pela obtenção do primeiro resultado
@@ -194,10 +195,10 @@ físico a que se destinam.
 \index{ATLAS}
 
 Um dos objetivos principais do experimento ATLAS é descobrir e estudar o
-\idx{bóson de Higgs}. Esta partícula tem importância crítica na teoria das
-partículas, como destacado no Capítulo~\ref{chap:introducao}, pois está
-diretamente ligada ao conceito de ``massa''\index{conceito de massa} e,
-portanto, das partículas.
+\idx{bóson de Higgs}. Esta partícula tem importância crítica para o Modelo
+Padrão, como destacado no Capítulo~\ref{chap:introducao}, uma vez que a
+interação de outras partículas com bósons desta natureza, induz a existência
+de massa.
 
 \paragraph{A massa} É interessante notar que um conceito tão
 familiar como a massa não era entendido até a proposição do \idx{Modelo
@@ -221,7 +222,7 @@ tornando-se uma das maiores descobertas físicas de todos os tempos.
 \section{O Detetor ATLAS}
 
 O detetor ATLAS é um dispositivo em formato cilíndrico, capaz de registrar os
-subprodutos de colisões próton-antipróton a 40 MHz. A
+subprodutos de colisões próton-próton a 40 MHz. A
 Figura~\ref{fig:atlas-scheme} mostra um esquema do detetor. Repare na parte
 inferior à direita, em escala, o tamanho proporcional das pessoas.
 
@@ -246,12 +247,13 @@ posição do feixe com relação ao detetor também está destacada na figura.
 \index{detetores de traços}
 \label{sec:atlas-id}
 
-O papel do \idx{Detetor Interno} (do inglês \idxeng{Inner Detector}, ID) é
-reconstruir traços e vértices de um evento com alta eficiência juntamente com
-o calorímetro (veja a Seção~\ref{sec:atlas-calo}) e os detetores de múons
-(veja a Seção~\ref{sec:atlas-muon}), para o reconhecimento de elétrons, fótons
-e múons, e suprindo assinaturas extras para vértices provenientes de partículas
-que decaem rapidamente \cite{atlas-id-tdr}. Sua aceitação cobre a região de
+O papel do \idx{Detetor Interno} (do inglês \idxeng{Inner Detector},
+\gls{glos:id}) é reconstruir traços e vértices de um evento com alta
+eficiência juntamente com o calorímetro (veja a Seção~\ref{sec:atlas-calo}) e
+os detetores de múons (veja a Seção~\ref{sec:atlas-muon}), para o
+reconhecimento de elétrons e múons, e suprindo assinaturas extras para
+vértices provenientes de partículas que decaem rapidamente
+\cite{atlas-id-tdr}. Sua aceitação cobre a região de
 \idx{pseudo-rapidez} (veja o Apêndice~\ref{ap:coord}) de $[-2,5; 2,5]$,
 igualando, em alcance, o restante dos sistemas do detetor ATLAS.
 
@@ -272,7 +274,7 @@ Os alvos de momento e resolução de vértices requerem que medições de alta
 precisão sejam feitas com detetores de alta segmentação, dada a grande
 densidade de traços esperada em experimentos ao redor do LHC. \idx{Detetores
 de traços baseados em semi-condutores} (do inglês, \idxeng{Semi-Conductor
-Tracker}, \idx{SCT}), usando pastilhas\index{SCT!pastilhas} e
+Tracker}, \gls{glos:sct}), usando pastilhas\index{SCT!pastilhas} e
 pontos\index{SCT!pontos} (ou \idxeng{pixels}) microscópicos de silício
 oferecem estas características e, portanto, esta tecnologia é utilizada na
 parte mais interior do ID. Entretanto, o número total de camadas de precisão
@@ -283,12 +285,12 @@ de pastilhas e 3 camadas com sensores em pontos de silício.
 
 Um grande número de pontos da trajetória (tipicamente 36 por traço) será
 detetado por um \idx{Detetor de traços em microtubos} (do inglês,
-\idxeng{Straw Tube Tracker}, \idx{TRT}) que possibilita o
+\idxeng{Straw Tube Tracker}, \gls{glos:trt}) que possibilita o
 acompanhamento das trajetórias em modo contínuo com uma quantidade muito menor
 de material por ponto e baixo custo. A combinação destas duas técnicas
 propicia um reconhecimento de trajetórias bastante robusto e com alta
 precisão, tanto em $\phi$ como em $z$ (veja a definição completa no
-Apêndice~\ref{ap:coord}. A sensibilização dos microtubos na parte exterior do
+Apêndice~\ref{ap:coord}). A sensibilização dos microtubos na parte exterior do
 detetor contribuirá para a deteção do momento da partícula, onde a baixa
 precisão do sistema, se comparado com o SCT, é compensada pelo grande número
 de pontos medidos numa maior seção do espaço.
@@ -309,15 +311,15 @@ arquiteturalmente. Funcionalmente é possível classificar os calorímetros do
 ATLAS em:
 
 \begin{itemize}
-\item \textbf{Eletromagnético ou e.m.} (\eng{EM Accordion Calorimeters}): Para
-a deteção de partículas que desenvolvem cascatas e.m. como elétrons ou fótons,
-situando-se na parte mais interior da estrutura;
+\item \textbf{Eletromagnético ou \gls{glos:em}} (\eng{EM Accordion
+Calorimeters}): Para a deteção de partículas que desenvolvem cascatas
+e.m. como elétrons ou fótons, situando-se na parte mais interior da estrutura;
 
 \item \textbf{Hadrônico} (\eng{Hadronic Tile Calorimeter} e \eng{Hadronic LAr
 End Cap Calorimeter}): Para a deteção de partículas ou jatos que desenvolvam
 cascatas baseadas em hádrons, como nêutrons, prótons e píons.
 
-\item \textbf{\idx{Avançado} ou \idxeng{Forward}} (\eng{Foward LAr
+\item \textbf{\idx{Avançado} ou \idxeng{Forward}} (\eng{Foward \gls{glos:lar}
 Calorimeters}): Para a deteção de partículas próximas ao eixo do feixe de
 colisão. Estes dispositivos tendem a ser menos precisos. Este calorímetro não
 será abordado neste trabalho, em nenhum de seus níveis, uma vez que é
@@ -356,7 +358,7 @@ ATLAS, indicando as partes mencionadas.
 \label{fig:calo-general}
 \end{figure}
 
-\subsubsection{A Seção E.M.}
+\subsubsection{A Seção e.m.}
 
 A seção e.m. do calorímetro do ATLAS é divida em 3 camadas, das quais a
 segunda é a mais profunda. Cada camada possui uma segmentação\footnote{A

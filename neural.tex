@@ -264,9 +264,9 @@ empregado no experimento.
 
 No caso em questão, a análise neural é sugerida como forma de substituição de
 uma análise por Componentes Principais (do inglês, \eng{Principal Component
-Analysis}, PCA), que aplicada ao mesmo problema resulta em um resultado
-inferior, indicando a possível existência de correlações de ordem superior a
-2. 
+Analysis}, \gls{glos:pca}), que aplicada ao mesmo problema resulta em um
+resultado inferior, indicando a possível existência de correlações de ordem
+superior a 2.
 
 Ao invés de estabelecer um conjunto de variáveis que acentuem o poder
 discriminatório da rede, \cite{vassali-acat-2001} sugere que as informações de
@@ -430,10 +430,10 @@ estado no qual as alterações sinápticas não o modificam significativamente
 (levando-se em consideração uma margem de erro configurável e obtida
 empiricamente), e por um número de iterações, o treinamento é automaticamente
 encerrado. O estado final do discriminador é recarregado. Um estudo dos
-valores de Erro Médio Quadrático (EMQ, do inglês \eng{Mean-square error}, MSE)
-é feito para os conjuntos de treinamento e teste. O produto SP máximo também é
-avaliado para os dois conjuntos de dados. Esta técnica tem o objetivo de
-evitar um treinamento excessivo da rede (do inglês
+valores de Erro Médio Quadrático (\gls{glos:emq}, do inglês \eng{Mean-square
+error}, MSE) é feito para os conjuntos de treinamento e teste. O produto SP
+máximo também é avaliado para os dois conjuntos de dados. Esta técnica tem o
+objetivo de evitar um treinamento excessivo da rede (do inglês
 \eng{overtraining}) fazendo com que ela se especialize em demasiado nestes
 dados sem atingir uma capacidade de discriminação generalizada. O valor da
 variação do produto SP, a partir do qual considera-se que o sistema esteja
@@ -725,7 +725,7 @@ são bastante reduzidos.
 
 RNA's podem ser implementadas de várias maneiras, incluindo sistemas com
 percéptrons com apenas uma ou múltiplas camadas (do inglês, \eng{multi-layer
-perceptron}, ou MLP), incluindo sistemas realimentados ou híbridos
+perceptron}, ou \gls{glos:mlp}), incluindo sistemas realimentados ou híbridos
 \cite{haykin}. O processo de aprendizagem ou aproximação da resposta à saída
 desejada no sistema é conduzido normalmente por uma fase de treinamento, que
 poderá ser realizado, igualmente, de maneiras distintas. Duas grandes
@@ -751,7 +751,7 @@ de treinamento. Como variação dos métodos explorados normalmente em Física d
 Altas Energias, e no intuito de buscar-se um método mais robusto e livre de
 parâmetros de treinamento, utilizaremos uma variante do treinamento por
 retropropagação de erros conhecida como \textit{retropropagação de erros
-resiliente} (do inglês \eng{resilient backpropagation}, rprop)
+resiliente} (do inglês \eng{resilient backpropagation}, \gls{glos:rprop})
 \cite{rprop}. Esta técnica também encontra-se descrita no apêndice.
 
 Em específico, o problema da separação elétron/jato como se apresenta ao
@@ -779,18 +779,19 @@ sujeita a bruscas variações em questão de minutos. Na seção que se segue,
 analisa-se o potencial discriminatório que redes neurais artificiais
 adicionariam ao sistema de filtragem do ATLAS.
 
-Para o treinamento e implementação dos sistemas de discriminação neural, fez-se
-uso das bibliotecas e programas do \eng{NeuralRinger}. O \eng{NeuralRinger} é
-um pacote totalmente desenvolvido usando o paradigma da orientação a objetos,
-implementado em C++ \cite{stroustrup} e especialmente concebido para executar
-a operação de filtragem de partículas dentro do LVL2. Outras soluções para
-treinamento e execução de redes neurais, tais como o pacote SNNS \cite{snns}
-foram investigadas antes do desenvolvimento deste sistema. Entretanto, os
-pacotes em questão são normalmente utilizados para uma grande variedade de
-sistemas neurais. Esta flexibilização muito freqüentemente ocorre em
-detrimento do desempenho em casos específicos. Ademais, ao usar um sistema tão
-genérico, estaria-se inserindo uma grande quantidade de código dentro do
-sistema de filtragem, que seria, em sua maior parte, pouco ou não utilizada.
+Para o treinamento e implementação dos sistemas de discriminação neural,
+fez-se uso das bibliotecas e programas do \eng{NeuralRinger}. O
+\eng{NeuralRinger} é um pacote totalmente desenvolvido usando o paradigma da
+orientação a objetos, implementado em C++ \cite{stroustrup, booch} e
+especialmente concebido para executar a operação de filtragem de partículas
+dentro do LVL2. Outras soluções para treinamento e execução de redes neurais,
+tais como o pacote SNNS \cite{snns} foram investigadas antes do
+desenvolvimento deste sistema. Entretanto, os pacotes em questão são
+normalmente utilizados para uma grande variedade de sistemas neurais. Esta
+flexibilização muito freqüentemente ocorre em detrimento do desempenho em
+casos específicos. Ademais, ao usar um sistema tão genérico, estaria-se
+inserindo uma grande quantidade de código dentro do sistema de filtragem, que
+seria, em sua maior parte, pouco ou não utilizada.
 
 As escolhas do paradigma de programação e da linguagem de implementação C++
 ocorreram em função do ambiente-alvo para este sistema. Como colocado na
@@ -997,7 +998,7 @@ de teste ao longo de $\eta$ em (a) e (c) e por $\phi$, em (b) e (d).}
 %\end{figure}
 
 A Figura~\ref{fig:best-t2calo-test-efficiency-et} mostra o valor relativo do
-produto SP for faixa de energia transversa na seção e.m.. Uma comparação entre
+produto SP por faixa de energia transversa na seção e.m.. Uma comparação entre
 os 3 métodos do produto SP por faixas de energia descritos até agora se segue
 na Figura~\ref{fig:best-t2calo-versus-others-emet}. Os dados nesta figura
 correspondem aos do conjunto de teste, para um corte efetuado em $-0,243$ para
@@ -1460,9 +1461,9 @@ possuem, por sua própria natureza, uma correlação bastante elevada. Por
 exemplo, há correlação entre os valores de energia totais e em cada camada de
 uma determinada seção do calorímetro. Tentando aproveitar este conhecimento, é
 possível encontrar, uma transformação linear (denotada por Transformação de
-Kharhunen-Loève ou KLT) que projeta um conjunto de variáveis em um segundo
-espaço onde cada componente seja descorrelacionada de cada uma das outra
-\cite{haykin}. Espera-se que operando sob o espaço transformado, onde as
+Kharhunen-Loève ou \gls{glos:klt}) que projeta um conjunto de variáveis em um
+segundo espaço onde cada componente seja descorrelacionada de cada uma das
+outra \cite{haykin}. Espera-se que operando sob o espaço transformado, onde as
 variáveis são descorrelacionadas, processadores neurais consigam apresentar
 melhor qualidade de separação elétron/jato e que a compactabilidade deste novo
 sistema esteja mais evidente. A Figura~\ref{fig:t2calo-pca} mostra o diagrama

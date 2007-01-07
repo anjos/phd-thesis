@@ -25,11 +25,12 @@ dimensionalidade, de acordo com os processos que se deseja detetar, ainda que
 levando-se em consideração à velocidade requerida na deteção. Quanto menor o
 tempo disponível à deteção, maior a compressão a ser realizada de forma a
 simplificar este processo. Este pré-processamento para a compressão dos dados
-ou Extração de Características (do inglês, \eng{Feature Extraction} ou FEx) é,
-em geral, feito com perda de informação do perfil de deposição, mas de forma a
-manter as principais características do objeto que se deseja detetar. Em
-seguida, tendo por base simulações ou dados reais da Física de interesse,
-define-se um conjunto de cortes por métodos com conhecimento da informação
+ou Extração de Características (do inglês, \eng{Feature Extraction} ou
+\gls{glos:fex}) é, em geral, feito com perda de informação do perfil de
+deposição, mas de forma a manter as principais características do objeto que
+se deseja detetar. Em seguida, tendo por base simulações ou dados reais da
+Física de interesse, define-se um conjunto de cortes por métodos com
+conhecimento da informação
 \eng{a priori} que maximizem a probabilidade de deteção das partículas
 interessantes.
 
@@ -77,8 +78,7 @@ de Múons, regiões de interesse onde objetos relevantes tenham sido
 observados. Para cada objeto interessante, a região aproximada de interação do
 objeto com o detetor é anotada e repassada aos demais níveis de filtragem, no
 caso da aprovação do evento pelo LVL1. Este processo define as Regiões de
-Interesse ou RoI's, que guiarão o processo de seleção nos Altos Níveis de
-Filtragem (do inglês, \eng{High-Level Triggers} ou HLT).
+Interesse ou RoI's, que guiarão o processo de seleção no \gls{glos:hlt}.
 
 De fato, dadas as condições do feixe provido pelo LHC, múltiplos objetos
 poderão ser detetados a cada evento. Porém, quando um ou mais objetos
@@ -170,26 +170,27 @@ fará com que o Sistema de Leitura do LVL1 registre o evento (mensagem
 No caso dos Calorímetros, somadores rápidos \cite{seixas:adder} agrupam as
 informações das células dos calorímetros e.m. e hadrônicos, formando, para
 cada seção, uma matriz de dados com granularidade reduzida
-\cite{l1-tdr}. Estas macro-células ou ``torres'' de filtragem (do inglês,
-\eng{Trigger Towers}, ou TT) agrupam os dados formando elementos com tamanho
-igual a $0,1\times0,1$ no plano $\eta\times\phi$. Estes dois planos com
-granularidade minimizada são varridos pelos diversos processadores do LVL1 e
-os objetos de interesse, ou seja RoI's, localizados no detetor. Um processo
-análogo é conduzido tendo por base os detetores de múons, com o objetivo de
-encontrar objetos deste tipo (mensagem \ding{184}).
+\cite{l1-tdr}. Estas macro-células ou ``torres'' de filtragem (TT's) agrupam
+os dados formando elementos com tamanho igual a $0,1\times0,1$ no plano
+$\eta\times\phi$. Estes dois planos com granularidade minimizada são varridos
+pelos diversos processadores do LVL1 e os objetos de interesse, ou seja RoI's,
+localizados no detetor. Um processo análogo é conduzido tendo por base os
+detetores de múons, com o objetivo de encontrar objetos deste tipo (mensagem
+\ding{184}).
 
 No final do processamento pelo LVL1, rapidamente depois da colisão, e no caso
 de tratar de um evento interessante, uma mensagem contendo a localização dos
 objetos encontrados por este nível de filtragem e variáveis indicando as
 assinaturas pelo qual o evento foi aprovado, é repassada ao LVL2
 (mensagem \ding{185}). Esta mensagem é chamada de Resultado do LVL1 (do inglês
-\eng{LVL1 Result}) ou L1R, como visto na Seção~\ref{sec:lvl2arch}. Nota-se que
-o L1R pode conter múltiplas assinaturas em um único evento, no caso deste
-conter elementos que confirmem mais de uma das linhas da
-Tabela~\ref{tab:l1-rates}. Ademais, múltiplas RoI's secundárias podem estar
-presentes na lista de objetos na mensagem. Em paralelo ao envio da mensagem em
-direção ao LVL2, o LVL1 indica ao sistema de aquisição de dados (marcado na
-figura como \eng{Read Out}) que carregue todos os dados do detetor em seus
+\eng{LVL1 Result}) ou \gls{glos:l1r}, como visto na
+Seção~\ref{sec:lvl2arch}. Nota-se que o L1R pode conter múltiplas assinaturas
+em um único evento, no caso deste conter elementos que confirmem mais de uma
+das linhas da Tabela~\ref{tab:l1-rates}. Ademais, múltiplas RoI's secundárias
+podem estar presentes na lista de objetos na mensagem. Em paralelo ao envio da
+mensagem em direção ao LVL2, o LVL1 indica ao sistema de aquisição de dados
+(marcado na figura como \eng{Read Out}) que carregue todos os dados do detetor
+em seus
 \eng{buffers}.
 
 O processamento no LVL2 é seqüencial. Ao receber um L1R, o Coordenador de
@@ -199,17 +200,17 @@ transferir, do sistema de leitura do detetor, a quantidade de dados que achar
 necessária, ao redor da RoI, de forma a processá-la (mensagem \ding{186}). Se
 não for possível rejeitar a assinatura do LVL1, o \eng{Steering} poderá chamar
 mais e mais algoritmos até que o evento seja rejeitado ou definitivamente
-aprovado ao Terceiro Nível de Filtragem ou Filtro de Eventos (do inglês
-\eng{Event Filter} ou EF). Neste último caso, de forma equivalente à relação
-entre o LVL1 e o LVL2, o LVL2 enviará um sumário indicando a razão da
-aceitação do evento ao EF (mensagem \ding{187}). Este sumário contém valores
-refinados de energia, momento e localização dos objetos explorados no contexto
-LVL2. Analogamente ao resultado do LVL1, o resultado do LVL2 é chamado L2R (do
-inglês {LVL2 Result}). Espera-se que o LVL2 atinja uma redução da taxa de
-eventos de aproximadamente 25 vezes, de forma que o EF possa operar a uma taxa
-de apenas alguns (1 ou 2)~kHz. O tempo médio de processamento para o LVL2 deve
-estar na ordem dos 10~ms e para o EF, na ordem de alguns segundos, levando-se
-em consideração o número de processadores disponíveis nestes níveis de
+aprovado ao Terceiro Nível de Filtragem ou Filtro de Eventos (EF). Neste
+último caso, de forma equivalente à relação entre o LVL1 e o LVL2, o LVL2
+enviará um sumário indicando a razão da aceitação do evento ao EF (mensagem
+\ding{187}). Este sumário contém valores refinados de energia, momento e
+localização dos objetos explorados no contexto LVL2. Analogamente ao resultado
+do LVL1, o resultado do LVL2 é chamado \gls{glos:l2r} (do inglês {LVL2
+Result}). Espera-se que o LVL2 atinja uma redução da taxa de eventos de
+aproximadamente 25 vezes, de forma que o EF possa operar a uma taxa de apenas
+alguns (1 ou 2)~kHz. O tempo médio de processamento para o LVL2 deve estar na
+ordem dos 10~ms e para o EF, na ordem de alguns segundos, levando-se em
+consideração o número de processadores disponíveis nestes níveis de
 filtragem. No caso do evento ser aprovado pelo EF, é armazenado em mídia
 permanente (mensagem
 \ding{188}).
@@ -367,10 +368,10 @@ e.m. (elétrons e fótons), o algoritmo pode ser resumido da seguinte forma:
 
 \begin{enumerate}
 \item Os sinais analógicos provenientes das células do detetor são agrupados
-em macro-células chamadas Torres de Filtragem (do inglês \eng{Trigger Towers},
-TT). A taxa de agrupamento não é uniforme, mas, em geral, forma TT's com
-$0,1\times0,1$ no plano $\eta\times\phi$ para a seção eletromagnética do
-calorímetro e $0,2\times0,2$ na seção hadrônica;
+em macro-células chamadas Torres de Filtragem (TT). A taxa de agrupamento não
+é uniforme, mas, em geral, forma TT's com $0,1\times0,1$ no plano
+$\eta\times\phi$ para a seção eletromagnética do calorímetro e $0,2\times0,2$
+na seção hadrônica;
 
 \item Os sinais somados das TT's são disponibilizados para a
 lógica de leitura do LVL1;
@@ -847,7 +848,7 @@ tempo de teste, tornando o método mais atraente para uma utilização prática.
 A Figura~\ref{fig:eghypo-best-sp-train} mostra os resultados da busca
 exaustiva definida anteriormente. Esta figura de mérito, normalmente chamada
 de \textit{Característica de Operação do Receptor} (do inglês,
-\eng{Receiver Operating Characteristics}, ROC \cite{vantrees}), contém os
+\eng{Receiver Operating Characteristics}, \gls{glos:roc} \cite{vantrees}), contém os
 resultados de cada ponto de operação do algoritmo EGammaHypo. O eixo vertical
 denota a eficiência na deteção do sinal de interesse (elétrons), enquanto o
 eixo horizontal, a taxa de falso-alarme (erro em jatos) naquele ponto de

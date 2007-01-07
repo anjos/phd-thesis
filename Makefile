@@ -27,7 +27,6 @@ COLORPAGES=44 58 212 245 249 276
 THUMBPDFOPTS=
 DVIPSOPTS=-ta4
 TAROPT_PACK=--use-compress-program=$(shell which bzip2) -cvf
-MAKEINDEXOPTS=-c
 
 # FIM DA SEÇÃO PROGRAMAS
 
@@ -54,14 +53,14 @@ BIBFILES=$(shell if [ -d biblio ]; then find biblio -name "*.bib"; fi)
 	latex $(@:%.dvi=%.tex)
 
 %.pdf: %.tex
-	@if [ ! -e $(@:%.dvi=%.aux) ]; then \
+	@if [ ! -e $(@:%.pdf=%.aux) ]; then \
 	 pdflatex $(@:%.pdf=%.tex); \
 	 fi
 	@if [ -e references.bib ]; then \
 	 bibtex $(@:%.pdf=%); \
 	 pdflatex $(@:%.pdf=%.tex); \
 	fi
-#	makeindex $(MAKEINDEXOPTS) $(@:%.pdf=%.idx)
+	makeindex -s $(@:%.pdf=%.ist) -t $(@:%.pdf=%.glg) -o $(@:%.pdf=%.gls) $(@:%.pdf=%.glo)
 #	thumbpdf $(THUMBPDFOPTS) $@
 	pdflatex $(@:%.pdf=%.tex)
 
@@ -130,7 +129,7 @@ clean:
 deepclean:
 	@rm -vf $(GARBAGE)
 	@rm -vf *.lo[gtfa] *.toc *.idx *.inc *.ilg *.ind *.bbl *.blg
-	@rm -vf *.aux *.glo *.dvi *.ps *.pdf *.out *.brf
+	@rm -vf *.aux *.glo *.gls *.glg *.dvi *.ps *.pdf *.out *.brf *.ist
 	@rm -rvf html
 	@if [ -d biblio ]; then rm -fv references.bib; fi
 	@if [ -d figures ]; then $(MAKE) -C figures clean; fi

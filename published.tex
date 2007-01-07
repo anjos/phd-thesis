@@ -65,12 +65,13 @@
 \chapter{Publicações}
 \label{ap:published}
 
-Durante a execução deste estudo, um conjunto de trabalhos foi publicados na
-forma de artigos e notas técnicas. Este apêndice traz uma descrição deste
-material em ordem cronológica reversa. Os artigos mais recentes incluem a
-atuação durante o estudo culminando nesta tese de doutoramente, enquanto que
-os mais antigos (anteriores ao ano de 2001), foram publicados durante a
-elaboração da dissertação do mestrado e da tese de graduação.
+Durante a execução deste estudo, um conjunto de trabalhos foi publicado, com a
+participação do autor, na forma de artigos e notas técnicas. Este apêndice
+traz uma descrição deste material em ordem cronológica reversa. Os artigos
+mais recentes incluem a atuação durante o estudo que culmina nesta tese de
+doutoramento, enquanto que os mais antigos (anteriores ao ano de 2001), foram
+publicados durante a elaboração da dissertação do mestrado e da tese de
+graduação.
 
 \paragraph{Agosto de 2006: \eng{Deployment of the ATLAS High-Level
 Trigger}} Publicado na \eng{IEEE Transactions on Nuclear
@@ -92,8 +93,8 @@ Instrumentation}. Referência~\cite{aa:jinst-06}.
 \begin{quotation}
 Este artigo descreve o sistema a ser empregado para a configuração dos Filtros
 de Alto Nível do experimento ATLAS. Tal sistema provê ao Sistema de Filtragem
-toso os parâmetros necessários a tomada de decisões e para a salva-guarda de
-seu histórico. O mesmo sistema reconfigura a reconstrução de eventos, a
+todos os parâmetros necessários à tomada de decisões e para a salvaguarda de
+seu histórico. O mesmo sistema reconfigura a reconstrução de eventos, as
 simulações de Monte Carlo e a análise de dados. Ferramentas para acessar e
 manipular este sistema também são discutidas.
 \end{quotation}
@@ -119,12 +120,12 @@ Apresentado no \eng{Computing In High Energy and Nuclear
 Physics}. Referência~\cite{aa:chep-06-01}.
 
 \begin{quotation}
-O Sistema de Filtragem e Aquisição de Dados do ATLAS (TDAQ) terá a sua
+O Sistema de Filtragem e Aquisição de Dados do ATLAS (TDAQ) terá à sua
 disposição, inicialmente, 2000 PCs assuminido as função de controlar, ler e
 filtrar os dados dos eventos do experimento. Este grande número de nós de
 processamento será adquirido somente em 2007. Em julho de 2005, no entanto, o
 CERN disponibilizou o uso de seu sistema de processamento \eng{batch} durante
-5 semanas para testes em larga escala do elementos do TDAQ. No total, 700 nós
+5 semanas para testes em larga escala dos elementos do TDAQ. No total, 700 nós
 de processamento foram utilizados no exercício. Este artigo discute os
 diversos aspectos abordados durante o teste, enfatizando um conjunto de
 melhorias que devam ser executadas antes da operação final.
@@ -142,7 +143,7 @@ entrada, as regiões de interesse (RoI) identificadas no primeiro nível são
 organizadas em anéis concêntricos de deposição energética. Este tipo de
 pré-processamento dos dados permite eficiente compactação dos sinais e alcança
 elevada capacidade de identificar elétrons. Atualmente, esse sistema vem sendo
-portado para o ambiente de emulação do sistema de trigger ATHENA, de modo a se
+portado para o ambiente de emulação do sistema de filtragem ATHENA, de modo a se
 obter uma avaliação realística de seu desempenho. O ambiente tem o objetivo de
 simular o comportamento do sistema de filtragem, ajudando, desta forma, no
 desenvolvimento e validação dos algoritmos. Em caráter comparativo, o sistema
@@ -162,32 +163,16 @@ nível de desempenho compatível com as restrições operacionais do sistema de
 filtragem.
 \end{quotation}
 
-\begin{quotation}
-Este trabalho apresenta um discriminador neural para o segundo nível de
-filtragem do ATLAS, para o problema de separação elétron/jato baseado em
-informações de calorimetria. Para reduzir a alta dimensionalidade dos dados de
-entrada, as regiões de interesse (RoI) identificadas no primeiro nível são
-organizadas em anéis concêntricos de deposição energética. Esse tipo de
-pré-processamento dos dados permite eficiente compactação dos sinais e alcança
-elevada capacidade de identificar elétrons. Atualmente, esse sistema vem sendo
-portado para o ambiente de emulação do sistema de trigger ATHENA, de modo a se
-obter uma avaliação realística de seu desempenho. O ambiente tem o objetivo de
-simular o comportamento do sistema de filtragem, ajudando, desta forma, no
-desenvolvimento e validação dos algoritmos. A título de comparaçãoo, o sistema
-proposto foi também implementado usando a tecnologia DSP.
-\end{quotation}
-
 \paragraph{Julho de 2005: \eng{Overview of the High-Level Trigger
-Electron and Photon Selection for the ATLAS Experiment at the LHC}}
-apresentado na \eng{14th
-IEEE - NPSS Real Time Conference 2005 Nuclear Plasma Sciences
-Society}. Referência~\cite{aa:rt-05-01}.
+Electron and Photon Selection for the ATLAS Experiment at the LHC}.}
+Apresentado na \eng{14th IEEE - NPSS Real Time Conference 2005 Nuclear Plasma
+Sciences Society}. Referência~\cite{aa:rt-05-01}.
 
 \begin{quotation}
 Os Altos Níveis de Filtragem do experimento ATLAS estão descritos em
 \eng{software}, ao contrário de seu Primeiro Nível, que é baseado em
 \eng{hardware}. Estes sistemas deverão reduzir a taxa de eventos de entrada de
-$~$75~Khz na saída do Primeiro Nível de Filtragem para apenas $~$200~Hz na
+$~$75~kHz na saída do Primeiro Nível de Filtragem para apenas $~$200~Hz na
 saída do Filtro de Eventos. Os eventos selecionados serão finalmente guardados
 definitivamente em mídia permamente. Este artigo descreve uma visão geral de
 tal sistema. O desempenho é avaliado segundo simulações de Monte Carlo, tendo
@@ -220,7 +205,8 @@ dividido em 4 grandes sub-sistemas:
 \begin{itemize}
 \item O Primeiro Nível de Filtragem que realiza os primeiros passos da seleção
 de eventos na cadeia de filtragem;
-\item O Software Online, responsável pelas áreas de controle e operação do sistema;
+\item O \eng{Software Online}, responsável pelas áreas de controle e operação
+do sistema; 
 \item O Sistema de Fluxo de Dados (\eng{Dataflow}) que coordena a transmissão
 e armazenamento dos dados do detetor do experimento;
 \item Os Filtros de Alto Nível, que implementam os algoritmos de
@@ -229,7 +215,7 @@ discriminação, representando o topo da cadeia de seleção de eventos no ATLAS
 Para aumentar a portabilidade entre os algoritmos de filtragem desenvolvidos
 por toda a comunidade do experimento, os desenvolvedores dos Filtros de Alto
 Nível (ou simplesmente HLT; \eng{High-Level Triggers}) propuseram a
-re-utilização do ambiente de programação \eng{online} Athena dentro do sistema
+reutilização do ambiente de programação \eng{online} Athena dentro do sistema
 que operará em tempo real. Para tal, o HLT utiliza as ferramentas propostas
 pelo sub-sistema de Fluxo de Dados para coordenar as operações da
 transferência de informação para dentro e para fora dos nós de processamento
@@ -263,13 +249,13 @@ Experiment at CERN's LHC}} Publicado na \eng{IEEE Transactions on Nuclear
 Science}. Referência \cite{aa:tns-2004}.
 
 \begin{quotation}
-O Sistema de Filtragem do ATLAS reduz a taxa de eventos interesantes a ser
+O Sistema de Filtragem do ATLAS reduz a taxa de eventos interessantes a ser
 gravada para análise \eng{offline} em 3 níveis sucessivos de filtragem,
-passando de 40~MHz iniciais a 100~KHz, 2~KHz e, finalmente, 200~Hz. Os Filtros
+passando de 40~MHz iniciais a 100~kHz, 2~kHz e, finalmente, 200~Hz. Os Filtros
 de Alto Nível e o Sistema de Aquisição de Dados são projetados para se
 beneficiarem do mercado de computação e interconexão doméstica (PC's sob
 Ethernet) para atingir este nível de desempenho. Neste artigo, discutimos o
-Segundo Nível de Filtragem (LVL2) e a presenta-se resultados de medida de
+Segundo Nível de Filtragem (LVL2) e apresentam-se resultados de medida de
 desempenho.
 \end{quotation}
 
@@ -293,7 +279,7 @@ Science}. Referência~\cite{aa:tns-2004-3}
 
 \begin{quotation}
 As linhas de base do projeto e implementação do Sistema de Fluxo de Dados do
-ATLAS é descrito. Os componentes principais, suas interações, banda-passantes
+ATLAS é descrito. Os componentes principais, suas interações, bandas-passantes
 e taxas são discutidos assim como seu desempenho em um protótipo com 10\% da
 dimensão final do experimento. Este sistema é uma combinação de componentes
 com projeto dedicado e aplicações multi-tarefas implementadas em C++ e rodando
@@ -318,8 +304,8 @@ serviços de base a todas as aplicações deste sub-sistema.
 \end{quotation}
 
 \paragraph{Outubro de 2003: \eng{Architecture of the ATLAS Online
-Physics-Selection Software at the LHC}.} Este artigo foi apresentado no
- \eng{8\eiro ICATPP}. Referência \cite{aa:como-2003}.
+Physics-Selection Software at the LHC}.} Apresentado no \eng{8\eiro
+ICATPP}. Referência \cite{aa:como-2003}.
 
 \begin{quotation}
 A filtragem de eventos no experimento ATLAS é organizada em dois níveis
@@ -328,7 +314,7 @@ unificado para selecionar eventos em ambos os níveis foi escolhido. Desta
 forma, um conjunto de rotinas de base foi projetada para maximizar o
 compartilhamento das interfaces e componentes \eng{offline}, ainda que
 mantendo uma flexibilidade suficientemente grande para atender aos requisitos
-operacionais do Sistema de Filtragem; notavelmente, aqueles relacionados ao
+operacionais do Sistema de Filtragem, notavelmente aqueles relacionados ao
 desempenho e robustez. Este artigo descreve a arquitetura e o projeto do
 sistema de seleção de eventos e mostra como esta implementação é compatível
 com os desafios do experimento.
@@ -344,28 +330,28 @@ implementada em dois níveis independentes de deteção operando em componentes
 de \eng{software}.  Enquanto este enfoque provê um conjunto de interfaces de
 programação unificado ao sistema de seleção de eventos, também impõe
 requisitos bastante estritos nos componentes \eng{offline} que devem ser
-re-utilizados. A decisão do Segundo Nível de Filtragem do ATLAS devem,
+re-utilizados. A decisão do Segundo Nível de Filtragem do ATLAS deve,
 tipicamente, ser atingida no espaço temporal de 10 milissegundos e conta com
-paralelismo em múltiplas tarefas de processamento. De forma a atender à estas
-restrições, protótipos foram desenvolvidos que incorporam elementos do Sistema
-de Fluxo de Dados do ATLAS, dos Filtros de Alto Nível e do Sistema de Processamento
-\eng{Offline}. De forma a implementar um ambiente homogêneo de programação
-para os Filtros de Alto Nível, um controlador para o sistema de execução do
-Segundo Nível de Filtragem foi desenvolvido. Tanto com fatias do sistema de
-seleção baseado no canal elétron/fóton quanto fatias de seleção de muóns,
-demonstra-se que o desempenho necessário poderá ser atingido, se os
+paralelismo em múltiplas tarefas de processamento. De forma a atender a estas
+restrições, foram desenvolvidos protótipos que incorporam elementos do Sistema
+de Fluxo de Dados do ATLAS, dos Filtros de Alto Nível e do Sistema de
+Processamento \eng{Offline}. De forma a implementar um ambiente homogêneo de
+programação para os Filtros de Alto Nível, um controlador para o sistema de
+execução do Segundo Nível de Filtragem foi desenvolvido. Tanto com fatias do
+sistema de seleção baseado no canal elétron/fóton quanto fatias de seleção de
+múons, demonstra-se que o desempenho necessário poderá ser atingido se os
 componentes \eng{offline} são cuidadosamente projetados e otimizados para que
 também sejam aplicáveis aos Altos Níveis de Filtragem do experimento.
 \end{quotation}
 
 \paragraph{Agosto de 2003: \eng{Neural Particle Discrimination for Triggering 
-Interesting Physics Channels with Calorimetry Data}} Este artigo foi publicado
+Interesting Physics Channels with Calorimetry Data}}. Publicado
 na revista \eng{Nuclear Instruments And Methods In Physics Research A -
 Accelerators, Spectrometers, Detectors And Associated Equipament}. Referência
 \cite{aa:nima-2003}. 
 
 \begin{quotation}
-Experimentos em Física de Altas Energias usa sistemas de validação
+Experimentos em Física de Altas Energias usam sistemas de validação
 \eng{online} (filtros) para distingüir a Física conhecida de eventos
 interessantes que devam ser analisados. Este artigo introduz um esquema de
 filtragem para processadores com alta taxa de entrada, baseado em redes
@@ -396,9 +382,9 @@ implementação no experimento.
 %escrita de eventos para o experimento ATLAS.
 %\end{quotation}
 
-\paragraph{Março de 2003: \eng{ATLAS-TDAQ DataCollection Software}} Este
-trabalho foi publicado na revista \eng{IEEE Transactions on Nuclear
-Sciences}. Referência \cite{aa:rt-2003}.
+\paragraph{Março de 2003: \eng{ATLAS-TDAQ DataCollection Software}}. Publicado
+na revista \eng{IEEE Transactions on Nuclear Sciences}. Referência
+\cite{aa:rt-2003}.
 
 \begin{quotation}
 O Sistema Coleção de Dados é um sub-sistema do Sistema de Filtragem e
@@ -413,8 +399,8 @@ Coleção de Dados, provendo uma suíte de serviços comuns.
 \end{quotation}
 
 \paragraph{Março de 2003: \eng{The DataFlow System of the ATLAS Trigger and
-DAQ}} Este trabalho foi apresentado no congresso \eng{Computing for
-High-Energy Physics' 2003}. Referência \cite{aa:chep-2003-2}.
+DAQ}}. Apresentado no congresso \eng{Computing for High-Energy Physics'
+2003}. Referência \cite{aa:chep-2003-2}.
 
 \begin{quotation}
 Este artigo apresenta o projeto e implementação de um protótipo do Sistema de
@@ -423,12 +409,12 @@ medidas de desempenho para cada componente individual são mostradas.
 \end{quotation}
 
 \paragraph{Março de 2003: \eng{Architecture of the ATLAS High Level
-Trigger Event SelectionSoftware}} Este trabalho foi apresentado no congresso
+Trigger Event SelectionSoftware}}. Apresentado no congresso
 \eng{Computing for High-Energy Physics' 2003}. Referência
 \cite{aa:chep-2003-3}
 
 \begin{quotation}
-Os Altos Níveis de Filtragem do experimento ATLAS consiste de dois passos: o
+Os Altos Níveis de Filtragem do experimento ATLAS consistem de dois passos: o
 Segundo Nível e um Filtro de Eventos. Ambos serão implementados em
 \eng{software}, operando, em sua maior parte, sob componentes domésticos. O
 modelo da seleção de eventos em ambos também é unificado, de forma que um
@@ -492,8 +478,8 @@ Prop\~oe-se neste trabalho que a an\'alise conduzida no Segundo N\'{\i}vel de
 Filtragem do Experimento ATLAS, no CERN, seja feita por meio de processamento
 neural sobre a regi\~ao de interesse previamente destacada pelo Primeiro
 N\'{\i}vel nos Calor\'{\i}metros. Por depender do posicionamento da RoI no
-detetor, o n\'umero de camadas, granularides e profundidades das c\'elulas do
-calor\'{\i}metro s\~ao desconhecidas at\'e o momento da chegada do evento ao
+detetor, os números de camadas, granularides e profundidades das c\'elulas do
+calor\'{\i}metro s\~ao desconhecidos at\'e o momento da chegada do evento ao
 sistema de an\'alise. Ainda assim, estima-se que o n\'umero de c\'elulas para
 an\'alise estar\'a em torno de 1000 por RoI.  As efici\^encias de
 separa\c{c}\~ao obtidas, tempos de execu\c{c}\~ao e uma compara\c{c}\~ao com a
@@ -509,9 +495,9 @@ Nacional de Física de Partículas e Campos. Referência \cite{aa:enfpc-99}.
 Este artigo contém um sumário do trabalho realizado no âmbito dos estudos de
 portabilidade da infraestrutura do fluxo de dados do Sistema de Filtragem,
 originalmente escritos em C e operando em Sistemas Operacionais comerciais
-para uma implementação orientada à objetos baseada em C++ rodando sobre
-Linux. Ele discute as vantanges deste enfoque, tanto em termos de
-mantenabilidade e custo final de projeto.
+para uma implementação orientada a objetos baseada em C++ rodando sobre
+Linux. Ele discute as vantagens deste enfoque, tanto em termos de
+mantenibilidade quanto do custo final de projeto.
 \end{quotation}
 
 \paragraph{Outubro de 1998: Um Protótipo do Sistema de Validação de
@@ -521,17 +507,17 @@ Física de Partículas e Campos. Referência \cite{aa:enfpc-98}.
 \begin{quotation}
 O experimento ATLAS pretende comprovar a existência do bóson de Higgs. Para
 tal, um grande sistema de deteção e aquisição vem sendo projetado. O sistema
-aquisição tem a função de e separar em tempo real interações originárias do
+aquisição tem a função de separar em tempo real interações originárias do
 decaimento de um Higgs de física ordinária.
 
-A filtragem de eventos no sistema de aquisição é concebida em três níveis de
+A filtragem de eventos no sistema de aquisição é concebida em três níveis, de
 complexidade crescente e velocidade decrescente. O segundo nível pretende
 utilizar redes de computadores pessoais (PC's) interconectados por rápidos
-sistemas de rede. A escolha de fabricantes, sistemas operacionais e algorítmos
-de processamento ainda não foi feita, mas esforços em prol desta decisão vem
+sistemas de rede. A escolha de fabricantes, sistemas operacionais e algoritmos
+de processamento ainda não foi feita, mas esforços em prol desta decisão vêm
 sendo realizados. Neste trabalho desenvolve-se uma fração do filtro de segundo
 nível utilizando-se de processamento paralelo, redes neurais artificiais e
-DSP's. Conclusões e resultados são endereçados no final.
+DSP's.
 \end{quotation}
 
 \paragraph{Setembro de 1998: \eng{Neural Classifiers Implemented In A
@@ -545,13 +531,13 @@ do LHC é realizado através de uma implementação em uma máquina paralela. Es
 computador contém 16 nós de processamento baseados em \eng{transputers} e usa
 processadores digitais de sinais (\eng{DSP's}) como unidades de
 co-processamento para otimizar o processamento de dados. Um ambiente de
-desenvolvimento em C é usado para obter das aplicações, seu máximo
+desenvolvimento em C é usado para obter das aplicações seu máximo
 desempenho. A implementação é baseada na informação provida pelos quatro
 sistemas de deteção do experimento ATLAS em duas fases: extração de
 características e decisão global. A extração de características para
 calorímetros e decisão global são desempenhadas por redes neurais
 artificiais. Os parâmetros de pré-processamento e da rede neural são mantidos
-em memória e a função de ativação da rede é implementada usando uma tabela de
+em memória, e a função de ativação da rede é implementada usando uma tabela de
 procura. Dados simulados para o Segundo Nível de Filtragem são utilizados para
 a avaliação do desempenho deste sistema.
 \end{quotation}
