@@ -44,17 +44,17 @@ onde possível, redundantes. É altamente desejável a rejeição de canais
 ruidosos, não interessantes ou falsos o mais rápido possível, de forma a
 otimizar o uso dos recursos computacionais disponíveis.
 
-Para trazer uma eficiência compatível com este árduo ambiente, o Sistema de
+Para trazer uma eficiência compatível com este ambiente, o Sistema de
 Filtragem fará uso de um enfoque baseado na \textbf{inclusão} para a seleção
 \eng{online}, garantindo assim um conjunto de \eng{triggers} ótimo para a nova
 Física. O critério da inclusão tem por objetivo selecionar um conjunto de
 fenômenos físicos baseados em características comuns entre eles, que ainda
 sejam claramente distinguíveis dentro do ruidoso ambiente produzido pelo
 acelerador. Com este objetivo, o Sistema de Filtragem estará sendo disparado
-para eventos que contenham assinaturas baseadas em objetos simples ou duplos
-com alto valor de momento transverso. Neste contexto, objetos com alto valor
-de momento transverso são, entre outros, \eng{léptons} com carga e com momento
-transverso acima de $\sim$10 GeV \cite{hlt-tdr}.
+para eventos que contenham assinaturas baseadas em objetos (partículas)
+simples ou duplos com alto valor de momento transverso. Neste contexto,
+objetos com alto valor de momento transverso são, entre outros, \eng{léptons}
+com carga e com momento transverso acima de $\sim$10 GeV \cite{hlt-tdr}.
 
 Neste capítulo, fazemos uma análise do processo de filtragem de elétrons a ser
 conduzido no Sistema de Filtragem do experimento ATLAS. Como em muitos outros
@@ -68,7 +68,7 @@ será dada à definição do funcionamento do Primeiro e Nível de Filtragem (LV
 com relação a deteção de elétrons e, em seguida, o sistema desenvolvido
 atualmente para o LVL2. Finalmente, uma caracterização dos dados disponíveis
 segundo as premissas desenvolvidas neste capítulo é estabelecida como base de
-comparação ao restando do trabalho.
+comparação para o restante do trabalho.
 
 \section{Objetos de interesse e RoI's}
 
@@ -87,7 +87,7 @@ distinguindo este objeto como primário, em contraste com aqueles que também
 foram detetados, mas não fizeram objeto da aceitação deste nível de
 filtragem. O processo de deteção no LVL2 começa por uma confirmação dos
 objetos primários detetados pelo LVL1, utilizando-se da granularidade
-completada do detetor ao redor da RoI. Em seguida, o processo de filtragem
+completa do detetor ao redor da RoI. Em seguida, o processo de filtragem
 poderá, eventualmente, ser refinado ainda neste nível de filtragem ou mais a
 frente, no EF, complementando-se a análise com base em RoIs secundárias. Este
 sistema de filtragem \eng{online} baseado em RoIs é um elemento de
@@ -205,7 +205,7 @@ aprovado ao Terceiro Nível de Filtragem ou Filtro de Eventos (EF). Neste
 enviará um sumário indicando a razão da aceitação do evento ao EF (mensagem
 \ding{187}). Este sumário contém valores refinados de energia, momento e
 localização dos objetos explorados no contexto LVL2. Analogamente ao resultado
-do LVL1, o resultado do LVL2 é chamado \gls{glos:l2r} (do inglês {LVL2
+do LVL1, o resultado do LVL2 é chamado \gls{glos:l2r} (do inglês \eng{LVL2
 Result}). Espera-se que o LVL2 atinja uma redução da taxa de eventos de
 aproximadamente 25 vezes, de forma que o EF possa operar a uma taxa de apenas
 alguns (1 ou 2)~kHz. O tempo médio de processamento para o LVL2 deve estar na
@@ -333,11 +333,11 @@ de GeV até 90 GeV interagindo com os calorímetros do ATLAS. Os eventos
 selecionados passaram uma simulação realística do LVL1 e portanto representam,
 todos, eventos que seriam classificados como elétrons por este nível de
 filtragem. Observa-se que para jatos há uma probabilidade maior de depósito na
-seção hadrônica que na seção e.m..
+seção hadrônica que para elétrons.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.95]{em-had-percent}
+\includegraphics[scale=0.98]{em-had-percent}
 \end{center}
 \caption{Exemplo da relação de deposição energética na seção hadrônica e
 energia total para elétrons (topo) e jatos (baixo).}
@@ -554,10 +554,10 @@ camada, em uma área equivalente a $\Delta_\eta=0,075\times\Delta_\phi=0,175$.}
 Hadrônica}_{\Delta_\eta=0,2\times\Delta_\phi=0,2}$}: Calcula-se a energia
 total numa região $\Delta_\eta=0,2\times\Delta_\phi=0,2$, centrado no pico de
 deposição energética na segunda camada e.m.. Este procedimento é executado
-para cada camada na seção hadrônica, e depois uma somatório do total
-transverso é executado. Para elétrons, a quantidade de energia depositada na
-camada hadrônica deve ser próxima de zero, enquanto que, para jatos, espera-se
-que seja diferente de zero.
+para cada camada na seção hadrônica, e depois um somatório do total transverso
+é executado. Para elétrons, a quantidade de energia depositada na camada
+hadrônica deve ser próxima de zero, enquanto que, para jatos, espera-se que
+seja diferente de zero.
 
 \begin{figure}
 \begin{center}
@@ -609,15 +609,15 @@ possível. Por outro lado, deseja-se que o sistema de deteção preliminar,
 baseado em calorimetria, seja o mais rápido possível, e mantenha bons níveis
 de discriminação, como já discutido.
 
-Uma das estratégias em consideração atualmente, pondera sobre a utilização dos
-diversos estágios de hipótese de forma seqüencial, durante a extração de
-característica. Neste caso, após interagir com a segunda camada e.m., o T2Calo
-seria brevemente suspenso e a primeira das hipóteses verificada, criando
-recursos para uma rejeição mais antecipada. Em seguida, os dados da RoI para a
-primeira camada e.m. seriam carregados no processador, a segunda variável
-seria calculada e mais uma rodada de decisão seria tomada. As próximas etapas
-seriam a carga dos dados da terceira camada e.m. e do pré-irradiador,
-seguindo-se da análise de dados na seção hadrônica.
+Uma das estratégias em consideração atualmente \cite{t2calo-wiki}, pondera
+sobre a utilização dos diversos estágios de hipótese de forma seqüencial,
+durante a extração de característica. Neste caso, após interagir com a segunda
+camada e.m., o T2Calo seria brevemente suspenso e a primeira das hipóteses
+verificada, criando recursos para uma rejeição mais antecipada. Em seguida, os
+dados da RoI para a primeira camada e.m. seriam carregados no processador, a
+segunda variável seria calculada e mais uma rodada de decisão seria tomada. As
+próximas etapas seriam a carga dos dados da terceira camada e.m. e do
+pré-irradiador, seguindo-se da análise de dados na seção hadrônica.
 
 \subsection{Ajuste fino para cada canal}
 
@@ -637,7 +637,7 @@ pelo algoritmo de hipótese serão otimizados para estas categorias de energia.
 
 Para a caracterização de operação do T2Calo e do algoritmo de hipótese
 associado, o EGammaHypo, os seguintes grupamentos de dados foram
-considerados:
+considerados \cite{egamma-dc1-samples, validation-dc1-samples}:
 
 \begin{itemize}
 \item Cerca de 23.000 elétrons simulados via Monte Carlo para o \eng{Data
@@ -660,7 +660,9 @@ ambiente de simulação.
 Esta massa original de dados foi submetida a uma simulação do LVL1, que
 implementa o algoritmo discutido na Seção~\ref{sec:lvl2-detect-electron},
 aceitando todos os eventos com objetos tipo EM com as seguintes
-características:
+características\footnote{Os cortes utilizados neste trabalho são
+``relaxados'', no sentido que deixariam passar mais candidatos a elétrons que
+os cortes tipo \texttt{e25i} ou, ainda, \texttt{e30i}.}:
 
 \begin{itemize}
 \item ao menos 10 GeV numa região de $2\times2$ torres de filtragem na seção

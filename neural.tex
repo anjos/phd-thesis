@@ -9,7 +9,7 @@ elétron/jato}
 \label{chap:neural}
 
 Neste capítulo desenvolvem-se sistemas de classificação de simples treinamento
-e emprego, baseados em redes neurais artificais. Estes classificadores definem
+e emprego, baseados em redes neurais artificiais. Estes classificadores definem
 um patamar de deteção melhor que o sistema discutido no capítulo anterior,
 superando-o em robustez e flexibilidade e ainda atingindo uma velocidade de
 execução compatível com a operação dentro do Segundo Nível do Sistema de
@@ -21,8 +21,8 @@ Filtragem do experimento ATLAS.
 Dentre os métodos modernos de análise multi-variável mais empregados em Física
 de Altas Energia, Redes Neurais Artificiais possuem um papel importante ao
 lado de outras técnicas também eficazes como a Análise de Componentes
-Principais e classificadores bayesianos. Nesta seção conduz-se uma revisão
-literária deste tipo de análise, empregada atualmente neste campo da física.
+Principais e classificadores bayesianos. Nesta seção, conduz-se uma revisão da
+literatura deste tipo de análise, empregada atualmente neste campo da física.
 
 Os primeiros sistemas de deteção baseados em análise neural, aplicados à
 Física de altas energias, surgiram em 1987, com o emprego de redes neurais
@@ -231,7 +231,7 @@ para um ambiente em baixa luminosidade ($10^{33}\text{cm}^{-2}\text{s}^{-1}$).
 
 Em \cite{chakraborty-acat-2001}, sugere-se a utilização de redes neurais
 artificiais para deteção de elétrons na parte central do detetor D0,
-Fermilab. Especificamente, para elétrons com massa superior a 10~GeV, que
+Fermilab. Especificamente, para elétrons com energia superior a 10~GeV, que
 encontram-se normalmente embebidos em uma massa de jatos com fortes
 componentes eletromagnéticas. O conjunto de treinamento disponível consiste de
 cerca de 2.600 elétrons simulados, com energia entre 10 e 100~GeV e cerca de
@@ -323,15 +323,15 @@ trabalhos nesta área, como indica a Figura~\ref{fig:basic-discriminator}:
 \begin{enumerate}
 \item A \textbf{extração de características}, onde deseja-se compactar a
 informação disponível para análise em um mínimo de variáveis que consigam
-extrair toda (ou na maior parte) a informação discriminante disponível no
-evento. Esta fase é normalmente essencial uma vez que dispõe-se de milhares de
+extrair toda (ou na maior parte) a informação discriminante disponível na
+RoI. Esta fase é normalmente essencial uma vez que dispõe-se de milhares de
 variáveis para cada evento, contando com os elementos de deteção providos pelo
 experimento até variáveis complexas que podem ser acessadas após a
 reconstrução como o número de jatos encontrados ou o ângulo entre léptons;
 \item A \textbf{classificação ou hipótese}, seguindo-se à compressão do espaço
-original de entrada representa a deteção da física de interesse. Observa-se
+original de entrada, representa a deteção da física de interesse. Observa-se
 uma tendência ao desenvolvimento dos sistemas utilizando-se dados de simulação
-acurados, onde possível, dados provenientes diretamente do detetor. É
+acurados, mas onde possível, dados provenientes diretamente do detetor. É
 interessante perceber que sistemas desenvolvidos através de simulações ainda
 comportam-se de forma satisfatória ou adaptativa em seu emprego final, com
 dados reais.
@@ -383,7 +383,7 @@ um sistema simples de deteção linear.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.5]{t2calo-lms-block}
+\includegraphics[scale=0.7]{t2calo-lms-block}
 \end{center}
 \caption{Diagrama de blocos de um sistema de deteção elétron/jato baseado no
 Discriminador de Fisher associado ao extrator de características T2Calo.}
@@ -411,8 +411,8 @@ disparado. Para cada época ou batelada\footnote{Os termos \textit{época} e
 \textit{batelada} serão usados indistintamente no contexto deste trabalho.}
 de treinamento, um conjunto de elétrons e jatos é escolhido aleatoriamente à
 partir dos bancos-de-dados disponíveis. Os valores de erro são calculados e
-sua média é aplicada para a correção dos pesos sinápticos, considerando a taxa
-de aprendizagem $\alpha$. A rede resultante no final do processo de
+seu valor médio é aplicado para a correção dos pesos sinápticos, considerando
+a taxa de aprendizagem $\alpha$. A rede resultante no final do processo de
 treinamento é salva e utilizada como o discriminador treinado.
 
 \begin{figure}
@@ -959,7 +959,7 @@ LMS. Uma verificação das eficiências parciais por região em $\eta$ e em $\ph
 revelam uma estrutura bastante semelhante aos sistemas de deteção precedentes,
 como mostra a Figura~\ref{fig:best-t2calo-eta-phi}. A única ressalva é a na
 qualidade de deteção no \eng{crack} dos calorímetros, onde o detetor neural
-mostra-se ligeiramente superior, indicando que este sistema consiga recuperar
+mostra-se ligeiramente superior, indicando que este sistema consegue recuperar
 informações vitais à deteção que os outros dois métodos não conseguem.
 
 \begin{figure}
@@ -1308,7 +1308,7 @@ valores de relevância, para cada uma de suas variáveis, bastante próximos
 daqueles valores calculados para o conjunto de teste. Esta figura também
 indica que a variável que contém a energia total na seção hadrônica
 (\texttt{T2Cahade}) é de extrema importância na tarefa de discriminação, como
-é esperado na discriminação elétron jato. Quando a substituímos pelo seu valor
+é esperado na discriminação elétron/jato. Quando a substituímos pelo seu valor
 médio, o erro na saída aumenta significativamente, enquanto que, para as
 demais variáveis, o impacto é nitidamente menor.
 
@@ -2306,12 +2306,12 @@ anelador aprovará apenas cerca de 400~Hz em jatos ao passo que o sistema
 baseado na solução atual (EGammaHypo) para o LVL2, cerca de 2,4~kHz. Por outro
 ângulo este resultado traz que, para uma mesma capacidade de aprovar elétrons,
 um sistema baseado no anelamento e redes neurais poupará 6 vezes mais o
-terceiro nível de filtragem do experimento ATLAS. Se, por outro lado, deseja-se
-aumentar a eficiência na deteção de elétrons, o anelador consegue, até cerca
-de $96$\% de eficiência, manter uma taxa de falso-alarme igual ou inferior a
-1~kHz. Para o sistema atual baseado no EGammaHypo, para uma eficiência na
-deteção de elétrons de $97$\%, $100$\% dos jatos deveriam ser aprovados, o que
-seria inviável.
+terceiro nível de filtragem do experimento ATLAS. Se, por outro lado,
+deseja-se aumentar a eficiência na deteção de elétrons, o anelador consegue,
+até cerca de $96$\% de eficiência, manter uma taxa de falso-alarme igual ou
+inferior a 1~kHz. Para o sistema atual baseado no EGammaHypo, para uma
+eficiência na deteção de elétrons de $97$\%, $100$\% dos jatos deveriam ser
+aprovados (como elétrons), o que seria inviável.
 
 \begin{figure}
 \begin{center}
@@ -2426,9 +2426,11 @@ evento: para a discriminação, os valores mais relevantes na deteção
 elétron/jato são, sem dúvida, a informação de depósito de energia ao longo das
 camadas e, em especial, a existência de energia na primeira camada hadrônica,
 indicando que o evento contenha componentes desta natureza (aumentando a
-probabilidade de não ser um elétron). O detetor baseado nos anéis de deposição
-energética ``aprende'' este conceito através da análise do conjunto de dados,
-sem a necessidade da intervenção de um especialista.
+probabilidade de não ser um elétron\footnote{Elétrons com energia superior a
+90~GeV podem vir a interagir com a seção hadrônica dos calorímetros.}). O
+detetor baseado nos anéis de deposição energética ``aprende'' este conceito
+através da análise do conjunto de dados, sem a necessidade da intervenção de
+um especialista.
 
 \begin{figure}
 \begin{center}

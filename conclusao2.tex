@@ -52,10 +52,10 @@ longo de muitos anos de desenvolvimento compacta a dimensão de entrada ao
 detetor elétron/jato em apenas 4 variáveis altamente discriminantes. As
 variáveis desse sistema não são linearmente separáveis, mas apresentam bom
 grau de classificação quando utilizam-se classificadores baseados em cortes
-uni-dimensionais sucessivos (sinal $91,85\%/10,19\%$ falso alarme) ou lineares
-(sinal $90,77\%/9,79\%$ falso alarme). A adição de mais variáveis à saída do
-T2Calo tende a melhorar a qualidade de deteção que pode ser obtida com esse
-método de compactação.
+uni-dimensionais sucessivos (sinal $91,85\%/10,19\%$ falso alarme ou 2,55~kHz)
+ou lineares (sinal $90,77\%/9,79\%$ falso alarme ou 2,45~kHz). A adição de
+mais variáveis à saída do T2Calo tende a melhorar a qualidade de deteção que
+pode ser obtida com esse método de compactação.
 
 A compactação por anéis de deposição energética é uma implementação
 alternativa para o processo de Extração de Características (Fase 1) que
@@ -97,23 +97,23 @@ Redes neurais podem ser empregadas tanto acopladas às saídas do T2Calo quanto
 de elétrons em ambos os casos. Quando associadas à compactação provida pelo
 T2Calo aos dados de uma RoI, RNA's podem melhorar o desempenho de
 classificação comparado a sistemas lineares de classificação, atingindo
-92,38\% de deteção contra 9,05\% de falso-alarme. Considerando-se as demais
-saídas disponíveis neste algoritmo de compactação, é possível atingir níveis
-ainda mais altos: 94,79\% de deteção contra apenas 7,93\% de falso-alarme. Um
-estudo da ortogonalidade deste conjunto de 14 variáveis (Análise de
-Componentes Principais) revela que não há correlação direta que seja
-importante ao sistema de deteção.
+92,38\% de deteção contra 9,05\% de falso-alarme (2,26~kHz). Considerando-se
+as demais saídas disponíveis neste algoritmo de compactação, é possível
+atingir níveis ainda mais altos: 94,79\% de deteção contra apenas 7,93\% de
+falso-alarme (1,98~kHz). Um estudo da ortogonalidade deste conjunto de 14
+variáveis (Análise de Componentes Principais) revela que não há correlação
+direta que seja importante ao sistema de deteção.
 
 Quando associadas ao compactador utilizando anéis de deposição energética,
 RNA's conseguem melhorar a relação sinal-ruído substanciosamente, podendo
 atingir uma eficiência de classificação de 96,89\% contra apenas 2,93\% de
-falso-alarme. Comparativamente à dupla T2Calo/EGammaHypo, estes números
-representam um decréscimo de 3 vezes na taxa de jatos que seria aprovada ao
-demais níveis de filtragem. Um conjunto de análises apoia os resultados de
-eficiência, demonstrando que a utilização desta versão desenvolvida da soma em
-anéis à classificadores neurais, está livre de tendências com relação à
-localização do objeto ou seu valor energético, apresentando-se igualmente
-eficaz em uma multitude de intervalos.
+falso-alarme (0,73~kHz). Comparativamente à dupla T2Calo/EGammaHypo, estes
+números representam um decréscimo de 3 vezes na taxa de jatos que seria
+aprovada ao demais níveis de filtragem. Um conjunto de análises apoia os
+resultados de eficiência, demonstrando que a utilização desta versão
+desenvolvida da soma em anéis à classificadores neurais, está livre de
+tendências com relação à localização do objeto ou seu valor energético,
+apresentando-se igualmente eficaz em uma multitude de intervalos.
 
 Uma Análise de Relevância baseada no poder de classificação dos detetores
 (produto SP), ao invés do desvio no EMQ, é também conduzida. Esta análise pode
@@ -150,7 +150,13 @@ Uma implementação do sistema de anelamento e deteção neural, baseada em DSP'
 SHARC da Analog Devices, é derivada das mesmas bibliotecas como plataforma de
 desenvolvimento adicional. Esta implementação indica a portabilidade do
 algoritmo, que pode ser executado, igualmente, em cerca de 4 milissegundos
-dentro desta plataforma.
+dentro desta plataforma. Nesta implementação observa-se que a fase do
+processamento que mais leva tempo é a fase de extração dos anéis. Isto
+acontece pois este processamento é altamente condicional e, desta forma, não é
+possível tirar proveito da capacidade computacional (vetorial) desta
+plataforma. O tempo de processamento poderia ser melhorado utilizando-se DSP's
+mais rápidos, como indica a Figura~\ref{fig:dsp-clock-time}, para se obter
+valores totais próximos a 1 milissegundo.
 
 \section{Linhas de Pesquisa}
 
@@ -211,12 +217,16 @@ A deteção baseada em anéis pode também ser utilizada para análise e
 reconstrução \eng{offline}. O sistema de deteção desenvolvido neste trabalho
 deve ser readaptado para trabalhar neste ambiente. Comparativos diretos com as
 técnicas atuais de reconstrução poderão ser feitos. Métodos de análise
-estocástica são bastante difundidos e utilizados atualmente nesta sub-área da
+estocástica são bastante difundidos e utilizados atualmente nessa sub-área da
 Física de Altas Energias.
 
 Finalmente, seria possível expandir a utilização da técnica de anelamento para
 outras assinaturas interessantes, filtráveis por uma análise calorimétrica,
 tais como $H \rightarrow \gamma + \gamma$ ou, ainda, na separação
-$\gamma/\pi^0$, tanto \eng{online} como \eng{offline}.
+$\gamma/\pi^0$, tanto \eng{online} como \eng{offline}. Para aumentar a
+velocidade do processamento, seria possível segmentá-lo, executando a
+filtragem baseada em camadas mais discriminantes (tais como a segunda e.m.)
+primeiramente, e seguindo-se para as demais. Desta forma, somente RoI's de
+mais difícil deteção sobreviveriam até o final do processamento.
 
 \typeout{ *************** End of file conclusao2.tex *************** }

@@ -220,9 +220,9 @@ que operará em tempo real. Para tal, o HLT utiliza as ferramentas propostas
 pelo sub-sistema de Fluxo de Dados para coordenar as operações da
 transferência de informação para dentro e para fora dos nós de processamento
 sistema. Dentre outras restrições, o produto final deverá ser suficientemente
-rápido e operável em tarefas concorrentes em máquinas multiplamente
-processadas rodando Linux.  Neste trabalho apresentamos alguns dos problemas e
-soluções encontrados pelo grupo no desenvolvimento e teste do conjunto de
+rápido e operável em tarefas concorrentes em máquinas (SMP) com vários
+processadores rodando Linux.  Neste trabalho apresentamos alguns dos problemas
+e soluções encontrados pelo grupo no desenvolvimento e teste do conjunto de
 bibliotecas que compõe o HLT.
 \end{quotation}
 
@@ -279,12 +279,13 @@ Science}. Referência~\cite{aa:tns-2004-3}
 
 \begin{quotation}
 As linhas de base do projeto e implementação do Sistema de Fluxo de Dados do
-ATLAS é descrito. Os componentes principais, suas interações, bandas-passantes
-e taxas são discutidos assim como seu desempenho em um protótipo com 10\% da
-dimensão final do experimento. Este sistema é uma combinação de componentes
-com projeto dedicado e aplicações multi-tarefas implementadas em C++ e rodando
-em PCs num ambiente baseado no Sistema Operacional Linux. Os nós de
-processamento são conectados por uma rede Gigabit-Ethernet padrão.
+ATLAS são descritas. Os componentes principais, suas interações,
+bandas-passantes e taxas são discutidos assim como seu desempenho em um
+protótipo com 10\% da dimensão final do experimento. Este sistema é uma
+combinação de componentes com projeto dedicado e aplicações multi-tarefas
+implementadas em C++ e rodando em PCs num ambiente baseado no Sistema
+Operacional Linux. Os nós de processamento são conectados por uma rede
+Gigabit-Ethernet padrão.
 \end{quotation}
 
 \paragraph{Junho de 2004: \eng{ATLAS TDAQ data collection software}} Publicado
@@ -292,7 +293,7 @@ na revista \eng{IEEE Transactions on Nuclear Science}. Referência
 \cite{aa:tns-04-04}.
 
 \begin{quotation}
-O Sistema de Coleção de Dados (DC) é um componente do Sistema de Filtragem e
+O Sistema de Coleta de Dados (DC) é um componente do Sistema de Filtragem e
 Aquisição de dados do experimento ATLAS, no LHC. Ele é responsável pela
 movimentação de dados do Sistema de Leitura do Detetor (\eng{Readout System},
 ROS) para o Segundo Nível de Filtragem e para o Filtro de Eventos. Esta

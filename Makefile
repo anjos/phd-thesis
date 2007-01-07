@@ -1,6 +1,5 @@
 # Dear emacs, this is -*- makefile -*-
 # André Rabello <Andre.dos.Anjos@cern.ch>
-# $Id$
 
 # Este makefile, constrói os alvos do latex para este diretório
 # no diretório atual. O arquivo principal deve se chamar main.tex
@@ -10,114 +9,40 @@
 # a indicada. O restante não deve ser mudado, a não ser que você 
 # saiba o que está fazendo.
 
-# ------------
-# SEÇÃO: NOMES (mude os nomes dos arquivos)
-# ------------
-
+# NOMES
 TEXFILE=main.tex
 PACKNAME=$(shell basename `pwd`)
 COLORPAGES=44 58 212 245 249 276
+ORIGINALPAGES=
 
-# FIM DA SEÇÃO NOMES
-
-# ----------------
-# SEÇÃO: PROGRAMAS (sintonize o que você acha necessário)
-# ----------------
-
-THUMBPDFOPTS=
-DVIPSOPTS=-ta4
-TAROPT_PACK=--use-compress-program=$(shell which bzip2) -cvf
-
-# FIM DA SEÇÃO PROGRAMAS
-
-# -------------
-# SEÇÃO: REGRAS (procure não alterar daqui para baixo)
-# -------------
-
-DVIFILE=$(TEXFILE:%.tex=%.dvi)
-PSFILE=$(TEXFILE:%.tex=%.ps)
+# REGRAS
 PDFFILE=$(TEXFILE:%.tex=%.pdf)
-BIBFILES=$(shell if [ -d biblio ]; then find biblio -name "*.bib"; fi)
 
-# Esta regra implícita define como fazer um .dvi de um .tex
+all: $(PDFFILE)
 
-%.dvi: %.tex
-	@if [ ! -e $(@:%.dvi=%.aux) ]; then \
-	 latex $(@:%.dvi=%.tex); \
-	 fi
-	@if [ -e references.bib ]; then \
-	 bibtex $(@:%.dvi=%); \
-	 latex $(@:%.dvi=%.tex); \
-	fi
-#	makeindex $(MAKEINDEXOPTS) $(@:%.dvi=%.idx)
-	latex $(@:%.dvi=%.tex)
-
+# Esta regra implícita define como fazer um .pdf de um .tex
 %.pdf: %.tex
-	@if [ ! -e $(@:%.pdf=%.aux) ]; then \
-	 pdflatex $(@:%.pdf=%.tex); \
-	 fi
-	@if [ -e references.bib ]; then \
-	 bibtex $(@:%.pdf=%); \
-	 pdflatex $(@:%.pdf=%.tex); \
-	fi
-	makeindex -s $(@:%.pdf=%.ist) -t $(@:%.pdf=%.glg) -o $(@:%.pdf=%.gls) $(@:%.pdf=%.glo)
-#	thumbpdf $(THUMBPDFOPTS) $@
 	pdflatex $(@:%.pdf=%.tex)
-
-all: $(PDFFILE) #$(PSFILE)
+	bibtex $(@:%.pdf=%)
+	makeindex -s $(@:%.pdf=%.ist) -t $(@:%.pdf=%.glg) -o $(@:%.pdf=%.gls) $(@:%.pdf=%.glo)
+	pdflatex $(@:%.pdf=%.tex)
+	pdflatex $(@:%.pdf=%.tex)
 
 color.pdf: $(PDFFILE)
 	pdftk $? cat $(COLORPAGES) output $@
 
 $(PDFFILE): $(shell find . -name "*.tex")
 
-$(PSFILE): $(DVIFILE)
-	dvips $(DVIPSOPTS) $(DVIFILE) -o $(PSFILE)
-
-references.bib: $(BIBFILES)
-	@if [ -d biblio ]; then \
-		@echo '[latex.mak] Building you bibliographic database...';\
-		$(MAKE) -C biblio all-bib DOCUMENT_ROOT=`pwd`;\
-		latex $(TEXFILE);\
-		$(MAKE) -C biblio simple-bib DOCUMENT_ROOT=`pwd`;\
-	 fi
-
-# HTML file creation
-html: html-doc html-adjust
-
-html-doc: $(DVIFILE)
-	latex2html main.tex
-
-html-adjust:
-	@if [ ! -d html ]; then \
-		$(MAKE) html; \
-	 fi
-	@echo '[latex.mak] Changing HTML defaults.'
-	@for htmlfile in `ls --color=no html/*.html`; do\
-		gawk -f html-adjust.awk	$$htmlfile > $$htmlfile.tmp;\
-		mv -f $$htmlfile.tmp $$htmlfile;\
-	 done
-
-.PHONY: clean pack web-pack-init web-pack web-clean
+.PHONY: clean pack
 
 # for packing your document nicely
-pack: clean
+pack: deepclean
 	@echo '[latex.mak] Builds a package of the current directory'
-	rm -f *.ps *.pdf
+	rm -f *.pdf
 	cd ..; \
-		tar $(TAROPT_PACK) $(PACKNAME:%=%.tar.bz2) $(PACKNAME); \
-		mv $(PACKNAME:%=%.tar.bz2) $(PACKNAME); cd $(PACKNAME);
+		tar --use-compress-program=$(shell which bzip2) -cvf $(PACKNAME:%=%.tar.bz2) $(PACKNAME); \
+		mv $(PACKNAME:%=%.tar.bz2) $(PACKNAME); cd -;
 	@echo '[latex.mak] A package of the current directory is ready.'
-
-web-pack-init: web-clean ps html
-	@mkdir web;
-	@mv html web;
-	@mv $(PSFILE) $(PACKNAME:%=web/%.ps);
-	@gzip $(PACKNAME:%=web/%.ps);
-
-web-pack: web-pack-init pack
-	@mv $(PACKNAME:%=%.tar.bz2) web;
-	@echo '[latex.mak] Your web pack is ready.'
 
 GARBAGE = $(shell find . -name "*~")
 
@@ -134,8 +59,4 @@ deepclean:
 	@if [ -d biblio ]; then rm -fv references.bib; fi
 	@if [ -d figures ]; then $(MAKE) -C figures clean; fi
 
-web-clean: 
-	@rm -rvf web
-
-# FIM DA SEÇÃO REGRAS
 

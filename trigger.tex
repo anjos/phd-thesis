@@ -965,7 +965,7 @@ representativas.
 
 \begin{figure}
 \begin{center}
-\includegraphics[scale=0.8,angle=90]{hlt-arch}
+\includegraphics[scale=0.8]{hlt-arch}
 \end{center}
 \caption[Relação entre os macrossistemas do HLT.]{Relação entre os
 macrossistemas do HLT. Extraído de \cite{hlt-tdr}.}
@@ -996,12 +996,12 @@ torna-se mais complexo, já que o processo de seleção ocorre em múltiplas
 tarefas concorrentes às unidades de processamento disponíveis e restrições
 mais severas tornam-se necessárias. Ainda que os algoritmos destinados ao LVL2
 sejam especialmente desenvolvidos para esta plataforma (devido às restrições
-no desempenho), eles utilizam o mesmo EDM e descrição do detetor presentes no
-EF e \eng{offline}. A utilização transparente de tais componentes é possível e
-uma implementação comum da infraestrutura do HLT para ambos o LVL2 e o EF pode
-ser realizada se a mesma interface estiver disponível para o LVL2. Esta
-funcionalidade é provida pelo Guia ou Gerente do HLT no LVL2 (\eng{LVL2
-Steering Controller}, \gls{glos:l2sc}).
+no desempenho), eles utilizam derivações simplificadas do EDM e da descrição
+do detetor presentes no EF e \eng{offline}. A utilização transparente de tais
+componentes é possível e uma implementação comum da infraestrutura do HLT para
+ambos o LVL2 e o EF pode ser realizada se a mesma interface estiver disponível
+para o LVL2. Esta funcionalidade é provida pelo Guia ou Gerente do HLT no LVL2
+(\eng{LVL2 Steering Controller}, \gls{glos:l2sc}).
 
 \subsubsection{O L2SC}
 
@@ -1123,11 +1123,12 @@ tamanho de RoI de $\Delta\eta \times \Delta\phi = 0,3 \times 0,3$. A
 Figura~\ref{fig:l2sc-mu} exibe resultados similares para uma fatia completa de
 seleção para múons. Nesta figura é possível, ver que as contribuições, em
 ordem decrescente, para o tempo de processamento total de cada evento são
-pré-processamento dos dados e sua conversão para o EDM, os \eng{overheads} da
-infraestrutura provida pelo HLT (\eng{Steering}), processamento do algoritmo
-de extração de características (denotado por \texttt{muFast} na figura) e o
-tempo de acesso dos dados pela rede. As curvas mostram que, neste exemplo, o
-processamento termina, para 95 \% dos eventos, em menos de 2 milissegundos. A
+pré-processamento dos dados e sua conversão para o EDM (\eng{Data
+conversion}), os \eng{overheads} da infraestrutura provida pelo HLT
+(\eng{Steering}), processamento do algoritmo de extração de características
+(denotado por \texttt{muFast} na figura) e o tempo de acesso dos dados pela
+rede (\eng{Network latency}). As curvas mostram que, neste exemplo, o
+processamento termina, para 95\% dos eventos, em menos de 2 milissegundos. A
 amostra de dados analisada consiste de múons com massa de 200 GeV em um
 ambiente de alta luminosidade do feixe. Esta amostra, que é simulada através
 de processos de Monte Carlo, inclui um ruído de fundo equivalente ao que será
